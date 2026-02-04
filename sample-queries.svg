@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" font-family="Arial, sans-serif">
+  <defs>
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#9334e6"/>
+      <stop offset="100%" style="stop-color:#7b1fa2"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="900" fill="#f8f9fa"/>
+  
+  <!-- Title Header -->
+  <rect x="0" y="0" width="1200" height="70" fill="url(#headerGrad)"/>
+  <text x="600" y="32" text-anchor="middle" fill="white" font-size="24" font-weight="bold">GCP Cost Monitoring Agent — Sample Queries</text>
+  <text x="600" y="55" text-anchor="middle" fill="#e1bee7" font-size="14">32 Examples Across 6 Categories | Natural Language Interface</text>
+  
+  <!-- Query Categories Overview -->
+  <rect x="50" y="90" width="1100" height="100" rx="10" fill="white" stroke="#dadce0" stroke-width="1" filter="url(#shadow)"/>
+  <text x="600" y="115" text-anchor="middle" font-weight="bold" font-size="16" fill="#5f6368">QUERY CATEGORIES</text>
+  
+  <!-- Category boxes -->
+  <rect x="70" y="130" width="160" height="45" rx="6" fill="#e8f0fe" stroke="#4285f4" stroke-width="2"/>
+  <text x="150" y="150" text-anchor="middle" font-weight="bold" font-size="11" fill="#4285f4">Cost Queries</text>
+  <text x="150" y="167" text-anchor="middle" font-size="10" fill="#5f6368">8 examples • Low</text>
+  
+  <rect x="245" y="130" width="160" height="45" rx="6" fill="#fef7e0" stroke="#fbbc04" stroke-width="2"/>
+  <text x="325" y="150" text-anchor="middle" font-weight="bold" font-size="11" fill="#e37400">Budget &amp; Alerts</text>
+  <text x="325" y="167" text-anchor="middle" font-size="10" fill="#5f6368">5 examples • Medium</text>
+  
+  <rect x="420" y="130" width="160" height="45" rx="6" fill="#e6f4ea" stroke="#34a853" stroke-width="2"/>
+  <text x="500" y="150" text-anchor="middle" font-weight="bold" font-size="11" fill="#34a853">Optimization</text>
+  <text x="500" y="167" text-anchor="middle" font-size="10" fill="#5f6368">6 examples • Medium</text>
+  
+  <rect x="595" y="130" width="160" height="45" rx="6" fill="#fce8e6" stroke="#ea4335" stroke-width="2"/>
+  <text x="675" y="150" text-anchor="middle" font-weight="bold" font-size="11" fill="#ea4335">Anomaly Detection</text>
+  <text x="675" y="167" text-anchor="middle" font-size="10" fill="#5f6368">4 examples • High</text>
+  
+  <rect x="770" y="130" width="160" height="45" rx="6" fill="#f3e8fd" stroke="#9334e6" stroke-width="2"/>
+  <text x="850" y="150" text-anchor="middle" font-weight="bold" font-size="11" fill="#9334e6">Resource Mgmt</text>
+  <text x="850" y="167" text-anchor="middle" font-size="10" fill="#5f6368">5 examples • High</text>
+  
+  <rect x="945" y="130" width="160" height="45" rx="6" fill="#fce4ec" stroke="#f538a0" stroke-width="2"/>
+  <text x="1025" y="150" text-anchor="middle" font-weight="bold" font-size="11" fill="#f538a0">Multi-Step</text>
+  <text x="1025" y="167" text-anchor="middle" font-size="10" fill="#5f6368">4 examples • High</text>
+  
+  <!-- Cost Queries Section -->
+  <rect x="50" y="210" width="550" height="200" rx="10" fill="white" stroke="#4285f4" stroke-width="2" filter="url(#shadow)"/>
+  <rect x="50" y="210" width="550" height="30" rx="10" fill="#4285f4"/>
+  <rect x="50" y="232" width="550" height="8" fill="#4285f4"/>
+  <text x="325" y="232" text-anchor="middle" fill="white" font-weight="bold" font-size="12">COST QUERIES (8 Examples)</text>
+  
+  <text x="70" y="265" font-size="11" fill="#5f6368">"How much did I spend on GCP last month?"</text>
+  <text x="70" y="285" font-size="11" fill="#5f6368">"Which services am I spending the most on?"</text>
+  <text x="70" y="305" font-size="11" fill="#5f6368">"Show me costs for the prod-api project"</text>
+  <text x="70" y="325" font-size="11" fill="#5f6368">"Compare this month's spending to last month"</text>
+  <text x="70" y="345" font-size="11" fill="#5f6368">"What did I spend between Jan 10 and Jan 20?"</text>
+  <text x="70" y="365" font-size="11" fill="#5f6368">"How much in us-central1 vs europe-west1?"</text>
+  <text x="70" y="385" font-size="11" fill="#5f6368">"What will I spend by end of month at this rate?"</text>
+  <text x="70" y="400" font-size="9" fill="#999">MCP Tool: get_cost_summary()</text>
+  
+  <!-- Budget Section -->
+  <rect x="620" y="210" width="530" height="200" rx="10" fill="white" stroke="#fbbc04" stroke-width="2" filter="url(#shadow)"/>
+  <rect x="620" y="210" width="530" height="30" rx="10" fill="#fbbc04"/>
+  <rect x="620" y="232" width="530" height="8" fill="#fbbc04"/>
+  <text x="885" y="232" text-anchor="middle" fill="white" font-weight="bold" font-size="12">BUDGET &amp; ALERTS (5 Examples)</text>
+  
+  <text x="640" y="265" font-size="11" fill="#5f6368">"Am I close to my budget limit?"</text>
+  <text x="640" y="285" font-size="11" fill="#5f6368">"Create a $5000 monthly budget with alerts"</text>
+  <text x="640" y="305" font-size="11" fill="#5f6368">"What alerts have triggered this month?"</text>
+  <text x="640" y="325" font-size="11" fill="#5f6368">"Set up a budget for the ml-training project"</text>
+  <text x="640" y="345" font-size="11" fill="#5f6368">"Show all my budgets"</text>
+  
+  <rect x="640" y="365" width="490" height="35" rx="4" fill="#fef7e0"/>
+  <text x="885" y="387" text-anchor="middle" font-size="10" fill="#e37400">MCP Tools: get_budget_status(), create_budget(), list_budgets()</text>
+  
+  <!-- Optimization Section -->
+  <rect x="50" y="430" width="550" height="200" rx="10" fill="white" stroke="#34a853" stroke-width="2" filter="url(#shadow)"/>
+  <rect x="50" y="430" width="550" height="30" rx="10" fill="#34a853"/>
+  <rect x="50" y="452" width="550" height="8" fill="#34a853"/>
+  <text x="325" y="452" text-anchor="middle" fill="white" font-weight="bold" font-size="12">OPTIMIZATION &amp; RECOMMENDATIONS (6 Examples)</text>
+  
+  <text x="70" y="485" font-size="11" fill="#5f6368">"How can I reduce my GCP costs?"</text>
+  <text x="70" y="505" font-size="11" fill="#5f6368">"Are there any idle resources I should stop?"</text>
+  <text x="70" y="525" font-size="11" fill="#5f6368">"Which VMs should I rightsize?"</text>
+  <text x="70" y="545" font-size="11" fill="#5f6368">"Should I buy committed use discounts?"</text>
+  <text x="70" y="565" font-size="11" fill="#5f6368">"Show me the top 5 saving opportunities"</text>
+  <text x="70" y="585" font-size="11" fill="#5f6368">"Implement the idle VM recommendation"</text>
+  
+  <rect x="70" y="595" width="510" height="25" rx="4" fill="#e6f4ea"/>
+  <text x="325" y="612" text-anchor="middle" font-size="10" fill="#34a853">MCP Tools: get_recommendations(), implement_recommendation()</text>
+  
+  <!-- Anomaly Section -->
+  <rect x="620" y="430" width="530" height="200" rx="10" fill="white" stroke="#ea4335" stroke-width="2" filter="url(#shadow)"/>
+  <rect x="620" y="430" width="530" height="30" rx="10" fill="#ea4335"/>
+  <rect x="620" y="452" width="530" height="8" fill="#ea4335"/>
+  <text x="885" y="452" text-anchor="middle" fill="white" font-weight="bold" font-size="12">ANOMALY DETECTION (4 Examples)</text>
+  
+  <text x="640" y="485" font-size="11" fill="#5f6368">"Why did my costs spike this week?"</text>
+  <text x="640" y="505" font-size="11" fill="#5f6368">"Is my spending pattern normal?"</text>
+  <text x="640" y="525" font-size="11" fill="#5f6368">"What caused the 40% cost increase?"</text>
+  <text x="640" y="545" font-size="11" fill="#5f6368">"Show me any unusual charges"</text>
+  
+  <rect x="640" y="570" width="490" height="50" rx="4" fill="#fce8e6"/>
+  <text x="885" y="590" text-anchor="middle" font-size="10" fill="#ea4335">MCP Tool: detect_anomalies(sensitivity=medium)</text>
+  <text x="885" y="610" text-anchor="middle" font-size="9" fill="#5f6368">Sensitivity: LOW (3σ) | MEDIUM (2σ) | HIGH (1.5σ)</text>
+  
+  <!-- Resource Management Section -->
+  <rect x="50" y="650" width="550" height="130" rx="10" fill="white" stroke="#9334e6" stroke-width="2" filter="url(#shadow)"/>
+  <rect x="50" y="650" width="550" height="30" rx="10" fill="#9334e6"/>
+  <rect x="50" y="672" width="550" height="8" fill="#9334e6"/>
+  <text x="325" y="672" text-anchor="middle" fill="white" font-weight="bold" font-size="12">RESOURCE MANAGEMENT (5 Examples)</text>
+  
+  <text x="70" y="705" font-size="11" fill="#5f6368">"Stop the idle VM in project ml-training"</text>
+  <text x="70" y="725" font-size="11" fill="#5f6368">"What resources were created this week?"</text>
+  <text x="70" y="745" font-size="11" fill="#5f6368">"Show me the circuit breaker status"</text>
+  <text x="70" y="765" font-size="11" fill="#5f6368">"Enable cost protection for production"</text>
+  
+  <!-- Multi-Step Section -->
+  <rect x="620" y="650" width="530" height="130" rx="10" fill="white" stroke="#f538a0" stroke-width="2" filter="url(#shadow)"/>
+  <rect x="620" y="650" width="530" height="30" rx="10" fill="#f538a0"/>
+  <rect x="620" y="672" width="530" height="8" fill="#f538a0"/>
+  <text x="885" y="672" text-anchor="middle" fill="white" font-weight="bold" font-size="12">MULTI-STEP WORKFLOWS (4 Examples)</text>
+  
+  <text x="640" y="705" font-size="11" fill="#5f6368">"Our bill doubled. Help me understand why and fix it."</text>
+  <text x="640" y="725" font-size="11" fill="#5f6368">"I need to reduce my bill by 30% this month"</text>
+  <text x="640" y="745" font-size="11" fill="#5f6368">"Set up monitoring for a new project"</text>
+  <text x="640" y="765" font-size="11" fill="#5f6368">"Generate a monthly cost review for executives"</text>
+  
+  <!-- Example Response -->
+  <rect x="50" y="800" width="1100" height="80" rx="10" fill="#f3e8fd" stroke="#9334e6" stroke-width="1"/>
+  <text x="600" y="825" text-anchor="middle" font-weight="bold" font-size="12" fill="#9334e6">EXAMPLE RESPONSE FORMAT</text>
+  <text x="100" y="850" font-size="11" fill="#5f6368">📊 Your GCP spend for the last 30 days is $12,450.67</text>
+  <text x="450" y="850" font-size="11" fill="#5f6368">📈 Trending: +15% vs previous month</text>
+  <text x="750" y="850" font-size="11" fill="#5f6368">💡 Recommendation: Review idle resources</text>
+  <text x="1050" y="850" font-size="11" fill="#1a73e8">[Get details]</text>
+  
+  <!-- Footer -->
+  <text x="600" y="895" text-anchor="middle" font-size="10" fill="#9aa0a6">Sample Queries Document — Use for testing, validation, and user training | 32 total examples</text>
+</svg>

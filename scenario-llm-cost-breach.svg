@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 950" font-family="Arial, sans-serif">
+  <defs>
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#ea4335"/>
+      <stop offset="100%" style="stop-color:#c5221f"/>
+    </linearGradient>
+    <linearGradient id="costGrad" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" style="stop-color:#34a853"/>
+      <stop offset="25%" style="stop-color:#fbbc04"/>
+      <stop offset="50%" style="stop-color:#ea4335"/>
+      <stop offset="100%" style="stop-color:#c5221f"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-opacity="0.15"/>
+    </filter>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#5f6368"/>
+    </marker>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="950" fill="#f8f9fa"/>
+  
+  <!-- Title Header -->
+  <rect x="0" y="0" width="1200" height="70" fill="url(#headerGrad)"/>
+  <text x="600" y="30" text-anchor="middle" fill="white" font-size="22" font-weight="bold">Scenario: Vertex AI (LLM) Cost Threshold Breach</text>
+  <text x="600" y="55" text-anchor="middle" fill="#ffcdd2" font-size="14">Infinite Loop Bug → Circuit Breaker Response → Recovery</text>
+  
+  <!-- Scenario Context Box -->
+  <rect x="50" y="85" width="400" height="100" rx="8" fill="white" stroke="#dadce0" stroke-width="1" filter="url(#shadow)"/>
+  <text x="250" y="108" text-anchor="middle" font-weight="bold" font-size="13" fill="#5f6368">SCENARIO CONTEXT</text>
+  <text x="70" y="130" font-size="11" fill="#5f6368">Company: Mid-size Fintech</text>
+  <text x="70" y="148" font-size="11" fill="#5f6368">Normal Vertex AI spend: ~$250/day</text>
+  <text x="70" y="166" font-size="11" fill="#5f6368">Bug: Infinite loop calling Gemini Pro API</text>
+  <text x="250" y="130" font-size="11" fill="#5f6368">Monthly budget: $50,000</text>
+  <text x="250" y="148" font-size="11" fill="#5f6368">Uses: Customer chatbot, Doc processing</text>
+  <text x="250" y="166" font-size="11" fill="#ea4335">Impact: 50x normal API calls</text>
+  
+  <!-- Threshold Configuration -->
+  <rect x="470" y="85" width="680" height="100" rx="8" fill="white" stroke="#dadce0" stroke-width="1" filter="url(#shadow)"/>
+  <text x="810" y="108" text-anchor="middle" font-weight="bold" font-size="13" fill="#5f6368">VERTEX AI THRESHOLD CONFIGURATION</text>
+  
+  <rect x="490" y="120" width="150" height="55" rx="4" fill="#fff3e0" stroke="#fbbc04" stroke-width="2"/>
+  <text x="565" y="140" text-anchor="middle" font-weight="bold" font-size="11" fill="#e37400">WARNING</text>
+  <text x="565" y="156" text-anchor="middle" font-size="10" fill="#5f6368">$500/day</text>
+  <text x="565" y="170" text-anchor="middle" font-size="9" fill="#999">Alert only</text>
+  
+  <rect x="655" y="120" width="150" height="55" rx="4" fill="#fff3e0" stroke="#ff9800" stroke-width="2"/>
+  <text x="730" y="140" text-anchor="middle" font-weight="bold" font-size="11" fill="#ef6c00">ELEVATED</text>
+  <text x="730" y="156" text-anchor="middle" font-size="10" fill="#5f6368">$1,000/day</text>
+  <text x="730" y="170" text-anchor="middle" font-size="9" fill="#999">Alert + PagerDuty P2</text>
+  
+  <rect x="820" y="120" width="150" height="55" rx="4" fill="#fce8e6" stroke="#ea4335" stroke-width="2"/>
+  <text x="895" y="140" text-anchor="middle" font-weight="bold" font-size="11" fill="#ea4335">CRITICAL</text>
+  <text x="895" y="156" text-anchor="middle" font-size="10" fill="#5f6368">$2,500/day</text>
+  <text x="895" y="170" text-anchor="middle" font-size="9" fill="#999">Stop non-prod</text>
+  
+  <rect x="985" y="120" width="150" height="55" rx="4" fill="#c5221f" stroke="#b71c1c" stroke-width="2"/>
+  <text x="1060" y="140" text-anchor="middle" font-weight="bold" font-size="11" fill="white">EMERGENCY</text>
+  <text x="1060" y="156" text-anchor="middle" font-size="10" fill="white">$5,000/day</text>
+  <text x="1060" y="170" text-anchor="middle" font-size="9" fill="#ffcdd2">Stop ALL</text>
+  
+  <!-- Timeline Section -->
+  <text x="600" y="215" text-anchor="middle" font-weight="bold" font-size="16" fill="#5f6368">INCIDENT TIMELINE</text>
+  
+  <!-- Cost Graph Background -->
+  <rect x="50" y="230" width="700" height="280" rx="8" fill="white" stroke="#dadce0" stroke-width="1" filter="url(#shadow)"/>
+  
+  <!-- Y-Axis Labels -->
+  <text x="70" y="255" font-size="10" fill="#999">$5,000</text>
+  <line x1="110" y1="250" x2="720" y2="250" stroke="#ffcdd2" stroke-width="1" stroke-dasharray="4,2"/>
+  
+  <text x="70" y="295" font-size="10" fill="#999">$2,500</text>
+  <line x1="110" y1="290" x2="720" y2="290" stroke="#fce8e6" stroke-width="1" stroke-dasharray="4,2"/>
+  
+  <text x="70" y="345" font-size="10" fill="#999">$1,000</text>
+  <line x1="110" y1="340" x2="720" y2="340" stroke="#fff3e0" stroke-width="1" stroke-dasharray="4,2"/>
+  
+  <text x="70" y="395" font-size="10" fill="#999">$500</text>
+  <line x1="110" y1="390" x2="720" y2="390" stroke="#fff8e1" stroke-width="1" stroke-dasharray="4,2"/>
+  
+  <text x="70" y="485" font-size="10" fill="#999">$0</text>
+  <line x1="110" y1="480" x2="720" y2="480" stroke="#e0e0e0" stroke-width="1"/>
+  
+  <!-- X-Axis (Time) -->
+  <text x="130" y="500" font-size="9" fill="#999">9 AM</text>
+  <text x="230" y="500" font-size="9" fill="#999">11 AM</text>
+  <text x="330" y="500" font-size="9" fill="#999">1 PM</text>
+  <text x="430" y="500" font-size="9" fill="#999">3 PM</text>
+  <text x="530" y="500" font-size="9" fill="#999">5 PM</text>
+  <text x="630" y="500" font-size="9" fill="#999">7 PM</text>
+  <text x="700" y="500" font-size="9" fill="#999">9 PM</text>
+  
+  <!-- Cost Line (showing increase then plateau after fix) -->
+  <path d="M130 475 
+           L180 470 
+           L230 430 
+           L280 390 
+           L330 350 
+           L380 310 
+           L430 280 
+           L480 260 
+           L530 250 
+           L580 255 
+           L630 258 
+           L680 260 
+           L720 260" 
+        stroke="#ea4335" stroke-width="3" fill="none"/>
+  
+  <!-- Event Markers on Graph -->
+  <!-- Bug Deployed -->
+  <circle cx="130" cy="475" r="6" fill="#5f6368"/>
+  <line x1="130" y1="481" x2="130" y2="510" stroke="#5f6368" stroke-width="1"/>
+  
+  <!-- WARNING -->
+  <circle cx="280" cy="390" r="8" fill="#fbbc04" stroke="white" stroke-width="2"/>
+  <line x1="280" y1="398" x2="280" y2="510" stroke="#fbbc04" stroke-width="1"/>
+  
+  <!-- ELEVATED -->
+  <circle cx="380" cy="340" r="8" fill="#ff9800" stroke="white" stroke-width="2"/>
+  <line x1="380" y1="348" x2="380" y2="510" stroke="#ff9800" stroke-width="1"/>
+  
+  <!-- CRITICAL - Circuit Breaker Trips -->
+  <circle cx="480" cy="290" r="10" fill="#ea4335" stroke="white" stroke-width="2"/>
+  <line x1="480" y1="300" x2="480" y2="510" stroke="#ea4335" stroke-width="2"/>
+  
+  <!-- Bug Fixed -->
+  <circle cx="560" cy="252" r="6" fill="#34a853"/>
+  <line x1="560" y1="258" x2="560" y2="510" stroke="#34a853" stroke-width="1"/>
+  
+  <!-- Legend for Graph -->
+  <rect x="550" y="240" width="160" height="50" rx="4" fill="white" stroke="#e0e0e0" stroke-width="1"/>
+  <circle cx="565" cy="255" r="4" fill="#ea4335"/>
+  <text x="575" y="259" font-size="9" fill="#5f6368">Daily Cost</text>
+  <circle cx="565" cy="275" r="4" fill="#34a853"/>
+  <text x="575" y="279" font-size="9" fill="#5f6368">Bug Fixed</text>
+  
+  <!-- Timeline Events (Right Side) -->
+  <rect x="770" y="230" width="380" height="280" rx="8" fill="white" stroke="#dadce0" stroke-width="1" filter="url(#shadow)"/>
+  <text x="960" y="255" text-anchor="middle" font-weight="bold" font-size="13" fill="#5f6368">EVENTS &amp; ACTIONS</text>
+  
+  <!-- Event 1: Bug Deployed -->
+  <rect x="790" y="270" width="340" height="40" rx="4" fill="#f5f5f5"/>
+  <circle cx="805" cy="290" r="8" fill="#5f6368"/>
+  <text x="805" y="294" text-anchor="middle" font-size="8" fill="white">1</text>
+  <text x="825" y="285" font-weight="bold" font-size="10" fill="#5f6368">9:00 AM — Bug Deployed</text>
+  <text x="825" y="300" font-size="9" fill="#999">Infinite loop begins, costs start climbing</text>
+  
+  <!-- Event 2: WARNING -->
+  <rect x="790" y="315" width="340" height="40" rx="4" fill="#fff8e1"/>
+  <circle cx="805" cy="335" r="8" fill="#fbbc04"/>
+  <text x="805" y="339" text-anchor="middle" font-size="8" fill="white">2</text>
+  <text x="825" y="330" font-weight="bold" font-size="10" fill="#e37400">11:30 AM — WARNING ($500)</text>
+  <text x="825" y="345" font-size="9" fill="#999">Slack + Email alert sent, team sees but waits</text>
+  
+  <!-- Event 3: ELEVATED -->
+  <rect x="790" y="360" width="340" height="40" rx="4" fill="#fff3e0"/>
+  <circle cx="805" cy="380" r="8" fill="#ff9800"/>
+  <text x="805" y="384" text-anchor="middle" font-size="8" fill="white">3</text>
+  <text x="825" y="375" font-weight="bold" font-size="10" fill="#ef6c00">2:15 PM — ELEVATED ($1,000)</text>
+  <text x="825" y="390" font-size="9" fill="#999">PagerDuty P2, CTO notified, investigation starts</text>
+  
+  <!-- Event 4: CRITICAL -->
+  <rect x="790" y="405" width="340" height="45" rx="4" fill="#fce8e6"/>
+  <circle cx="805" cy="427" r="8" fill="#ea4335"/>
+  <text x="805" y="431" text-anchor="middle" font-size="8" fill="white">4</text>
+  <text x="825" y="420" font-weight="bold" font-size="10" fill="#ea4335">4:45 PM — CRITICAL ($2,500)</text>
+  <text x="825" y="435" font-size="9" fill="#c5221f">⚡ CIRCUIT BREAKER TRIPS</text>
+  <text x="825" y="448" font-size="9" fill="#999">Staging endpoint auto-stopped</text>
+  
+  <!-- Event 5: Bug Fixed -->
+  <rect x="790" y="455" width="340" height="40" rx="4" fill="#e8f5e9"/>
+  <circle cx="805" cy="475" r="8" fill="#34a853"/>
+  <text x="805" y="479" text-anchor="middle" font-size="8" fill="white">5</text>
+  <text x="825" y="470" font-weight="bold" font-size="10" fill="#34a853">6:00 PM — Bug Fixed</text>
+  <text x="825" y="485" font-size="9" fill="#999">Hotfix deployed, new requests normal</text>
+  
+  <!-- Circuit Breaker State Diagram -->
+  <rect x="50" y="530" width="550" height="180" rx="8" fill="white" stroke="#ea4335" stroke-width="2" filter="url(#shadow)"/>
+  <text x="325" y="555" text-anchor="middle" font-weight="bold" font-size="13" fill="#ea4335">CIRCUIT BREAKER STATE TRANSITIONS</text>
+  
+  <!-- States -->
+  <circle cx="130" cy="630" r="35" fill="#e6f4ea" stroke="#34a853" stroke-width="2"/>
+  <text x="130" y="627" text-anchor="middle" font-weight="bold" font-size="10" fill="#34a853">CLOSED</text>
+  <text x="130" y="642" text-anchor="middle" font-size="8" fill="#5f6368">9AM-4:44PM</text>
+  
+  <circle cx="325" cy="630" r="35" fill="#fce8e6" stroke="#ea4335" stroke-width="3"/>
+  <text x="325" y="627" text-anchor="middle" font-weight="bold" font-size="10" fill="#ea4335">OPEN</text>
+  <text x="325" y="642" text-anchor="middle" font-size="8" fill="#5f6368">4:45PM-10:45PM</text>
+  
+  <circle cx="500" cy="630" r="35" fill="#e6f4ea" stroke="#34a853" stroke-width="2"/>
+  <text x="500" y="627" text-anchor="middle" font-weight="bold" font-size="10" fill="#34a853">CLOSED</text>
+  <text x="500" y="642" text-anchor="middle" font-size="8" fill="#5f6368">After cooldown</text>
+  
+  <!-- Arrows -->
+  <path d="M165 630 L290 630" stroke="#ea4335" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="227" y="620" text-anchor="middle" font-size="8" fill="#ea4335">$2,500 breach</text>
+  
+  <path d="M360 630 L465 630" stroke="#34a853" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="412" y="620" text-anchor="middle" font-size="8" fill="#34a853">6hr cooldown</text>
+  
+  <!-- Action taken -->
+  <rect x="250" y="680" width="150" height="25" rx="4" fill="#fce8e6"/>
+  <text x="325" y="697" text-anchor="middle" font-size="9" fill="#ea4335">✓ Staging STOPPED</text>
+  
+  <!-- What Was Stopped / Protected -->
+  <rect x="620" y="530" width="530" height="180" rx="8" fill="white" stroke="#dadce0" stroke-width="1" filter="url(#shadow)"/>
+  <text x="885" y="555" text-anchor="middle" font-weight="bold" font-size="13" fill="#5f6368">AUTOMATIC ACTIONS TAKEN</text>
+  
+  <!-- Stopped -->
+  <rect x="640" y="575" width="240" height="60" rx="4" fill="#fce8e6" stroke="#ea4335" stroke-width="1"/>
+  <text x="760" y="595" text-anchor="middle" font-weight="bold" font-size="11" fill="#ea4335">🛑 STOPPED</text>
+  <text x="760" y="615" text-anchor="middle" font-size="10" fill="#5f6368">gemini-pro-endpoint-staging</text>
+  <text x="760" y="630" text-anchor="middle" font-size="9" fill="#999">Savings: ~$132/day</text>
+  
+  <!-- Protected -->
+  <rect x="895" y="575" width="240" height="60" rx="4" fill="#e8f5e9" stroke="#34a853" stroke-width="1"/>
+  <text x="1015" y="595" text-anchor="middle" font-weight="bold" font-size="11" fill="#34a853">🛡️ PROTECTED</text>
+  <text x="1015" y="615" text-anchor="middle" font-size="10" fill="#5f6368">gemini-pro-endpoint-prod</text>
+  <text x="1015" y="630" text-anchor="middle" font-size="9" fill="#999">Label: environment=production</text>
+  
+  <!-- Notifications sent -->
+  <rect x="640" y="645" width="495" height="55" rx="4" fill="#e8f0fe"/>
+  <text x="887" y="665" text-anchor="middle" font-weight="bold" font-size="10" fill="#1a73e8">NOTIFICATIONS SENT</text>
+  <text x="720" y="685" text-anchor="middle" font-size="9" fill="#5f6368">📱 Slack #cloud-costs</text>
+  <text x="850" y="685" text-anchor="middle" font-size="9" fill="#5f6368">📧 Engineering team</text>
+  <text x="1000" y="685" text-anchor="middle" font-size="9" fill="#5f6368">🚨 PagerDuty P1</text>
+  
+  <!-- Final Summary -->
+  <rect x="50" y="725" width="1100" height="100" rx="8" fill="white" stroke="#5f6368" stroke-width="2" filter="url(#shadow)"/>
+  <text x="600" y="750" text-anchor="middle" font-weight="bold" font-size="14" fill="#5f6368">INCIDENT SUMMARY</text>
+  
+  <rect x="80" y="765" width="200" height="45" rx="4" fill="#fce8e6"/>
+  <text x="180" y="785" text-anchor="middle" font-weight="bold" font-size="12" fill="#ea4335">$3,456.78</text>
+  <text x="180" y="802" text-anchor="middle" font-size="10" fill="#5f6368">Total Day Spend</text>
+  
+  <rect x="300" y="765" width="200" height="45" rx="4" fill="#fff3e0"/>
+  <text x="400" y="785" text-anchor="middle" font-weight="bold" font-size="12" fill="#e37400">$3,206.78</text>
+  <text x="400" y="802" text-anchor="middle" font-size="10" fill="#5f6368">Excess Cost</text>
+  
+  <rect x="520" y="765" width="200" height="45" rx="4" fill="#e8f5e9"/>
+  <text x="620" y="785" text-anchor="middle" font-weight="bold" font-size="12" fill="#34a853">~$1,500</text>
+  <text x="620" y="802" text-anchor="middle" font-size="10" fill="#5f6368">Saved by Circuit Breaker</text>
+  
+  <rect x="740" y="765" width="200" height="45" rx="4" fill="#e8f0fe"/>
+  <text x="840" y="785" text-anchor="middle" font-weight="bold" font-size="12" fill="#1a73e8">6 hours</text>
+  <text x="840" y="802" text-anchor="middle" font-size="10" fill="#5f6368">Time to Fix</text>
+  
+  <rect x="960" y="765" width="170" height="45" rx="4" fill="#f3e8fd"/>
+  <text x="1045" y="785" text-anchor="middle" font-weight="bold" font-size="12" fill="#9334e6">✓ Recovered</text>
+  <text x="1045" y="802" text-anchor="middle" font-size="10" fill="#5f6368">No prod outage</text>
+  
+  <!-- Key Takeaways -->
+  <rect x="50" y="840" width="1100" height="90" rx="8" fill="#e8f5e9" stroke="#34a853" stroke-width="1"/>
+  <text x="600" y="865" text-anchor="middle" font-weight="bold" font-size="13" fill="#34a853">KEY TAKEAWAYS</text>
+  <text x="250" y="890" text-anchor="middle" font-size="11" fill="#5f6368">✓ Gradual escalation gave team time to react</text>
+  <text x="600" y="890" text-anchor="middle" font-size="11" fill="#5f6368">✓ Production protected, only staging stopped</text>
+  <text x="950" y="890" text-anchor="middle" font-size="11" fill="#5f6368">✓ Automatic cooldown prevented thrashing</text>
+  <text x="400" y="915" text-anchor="middle" font-size="11" fill="#5f6368">✓ Full audit trail for post-incident review</text>
+  <text x="800" y="915" text-anchor="middle" font-size="11" fill="#5f6368">✓ Circuit breaker saved ~$1,500 in potential additional spend</text>
+</svg>

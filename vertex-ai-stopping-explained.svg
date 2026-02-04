@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" font-family="Arial, sans-serif">
+  <defs>
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#9334e6"/>
+      <stop offset="100%" style="stop-color:#7b1fa2"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-opacity="0.15"/>
+    </filter>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#5f6368"/>
+    </marker>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="900" fill="#f8f9fa"/>
+  
+  <!-- Title Header -->
+  <rect x="0" y="0" width="1200" height="70" fill="url(#headerGrad)"/>
+  <text x="600" y="30" text-anchor="middle" fill="white" font-size="22" font-weight="bold">How to Stop Vertex AI / Gemini LLM Calls</text>
+  <text x="600" y="55" text-anchor="middle" fill="#e1bee7" font-size="14">Understanding the difference between Custom Endpoints vs. Gemini API</text>
+  
+  <!-- Two Types of Vertex AI -->
+  <text x="600" y="100" text-anchor="middle" font-weight="bold" font-size="16" fill="#5f6368">TWO TYPES OF VERTEX AI USAGE</text>
+  
+  <!-- Type 1: Custom Endpoints -->
+  <rect x="50" y="120" width="530" height="200" rx="10" fill="white" stroke="#34a853" stroke-width="2" filter="url(#shadow)"/>
+  <rect x="50" y="120" width="530" height="35" rx="10" fill="#34a853"/>
+  <rect x="50" y="147" width="530" height="8" fill="#34a853"/>
+  <text x="315" y="145" text-anchor="middle" fill="white" font-weight="bold" font-size="13">TYPE 1: Custom Deployed Endpoints</text>
+  
+  <text x="70" y="180" font-size="11" fill="#5f6368">Your models deployed on Vertex AI infrastructure:</text>
+  <rect x="70" y="190" width="490" height="25" rx="4" fill="#e8f5e9"/>
+  <text x="315" y="207" text-anchor="middle" font-size="10" fill="#2e7d32" font-family="monospace">projects/my-project/endpoints/my-custom-model</text>
+  
+  <text x="70" y="240" font-weight="bold" font-size="12" fill="#34a853">✅ CAN BE STOPPED AUTOMATICALLY</text>
+  <text x="70" y="260" font-size="10" fill="#5f6368">• endpoint.undeploy_all() — Remove deployed models</text>
+  <text x="70" y="278" font-size="10" fill="#5f6368">• endpoint.delete() — Delete the endpoint</text>
+  <text x="70" y="296" font-size="10" fill="#5f6368">• Stop underlying Compute Engine VMs</text>
+  
+  <!-- Type 2: Gemini API -->
+  <rect x="620" y="120" width="530" height="200" rx="10" fill="white" stroke="#ea4335" stroke-width="2" filter="url(#shadow)"/>
+  <rect x="620" y="120" width="530" height="35" rx="10" fill="#ea4335"/>
+  <rect x="620" y="147" width="530" height="8" fill="#ea4335"/>
+  <text x="885" y="145" text-anchor="middle" fill="white" font-weight="bold" font-size="13">TYPE 2: Gemini API (Foundation Models)</text>
+  
+  <text x="640" y="180" font-size="11" fill="#5f6368">Google-managed API calls to Gemini Pro, Ultra, Flash:</text>
+  <rect x="640" y="190" width="490" height="25" rx="4" fill="#fce8e6"/>
+  <text x="885" y="207" text-anchor="middle" font-size="10" fill="#c5221f" font-family="monospace">model = GenerativeModel("gemini-1.5-pro")</text>
+  
+  <text x="640" y="240" font-weight="bold" font-size="12" fill="#ea4335">⚠️ CANNOT BE STOPPED DIRECTLY</text>
+  <text x="640" y="260" font-size="10" fill="#5f6368">• No "endpoint" to undeploy — it's Google's infrastructure</text>
+  <text x="640" y="278" font-size="10" fill="#5f6368">• API calls go directly to Google's servers</text>
+  <text x="640" y="296" font-size="10" fill="#5f6368">• Must use alternative methods (see below)</text>
+  
+  <!-- Options to Stop Gemini API -->
+  <text x="600" y="350" text-anchor="middle" font-weight="bold" font-size="16" fill="#ea4335">HOW TO STOP GEMINI API CALLS</text>
+  
+  <!-- Option 1: Disable API -->
+  <rect x="50" y="370" width="270" height="150" rx="8" fill="white" stroke="#c5221f" stroke-width="2" filter="url(#shadow)"/>
+  <rect x="50" y="370" width="270" height="28" rx="8" fill="#c5221f"/>
+  <text x="185" y="390" text-anchor="middle" fill="white" font-weight="bold" font-size="11">Option 1: Disable API</text>
+  <text x="185" y="390" text-anchor="middle" fill="white" font-weight="bold" font-size="11">Option 1: Disable API</text>
+  
+  <text x="65" y="420" font-size="9" fill="#5f6368" font-family="monospace">gcloud services disable</text>
+  <text x="65" y="435" font-size="9" fill="#5f6368" font-family="monospace">  aiplatform.googleapis.com</text>
+  
+  <text x="65" y="460" font-size="10" fill="#ea4335">❌ ALL Vertex AI fails</text>
+  <text x="65" y="478" font-size="10" fill="#ea4335">❌ All apps break</text>
+  <text x="65" y="496" font-size="10" fill="#34a853">✅ Spending stops instantly</text>
+  <text x="185" y="515" text-anchor="middle" font-size="9" fill="#999">Nuclear Option</text>
+  
+  <!-- Option 2: Revoke IAM -->
+  <rect x="340" y="370" width="270" height="150" rx="8" fill="white" stroke="#ff9800" stroke-width="2" filter="url(#shadow)"/>
+  <rect x="340" y="370" width="270" height="28" rx="8" fill="#ff9800"/>
+  <text x="475" y="390" text-anchor="middle" fill="white" font-weight="bold" font-size="11">Option 2: Revoke IAM</text>
+  
+  <text x="355" y="420" font-size="9" fill="#5f6368" font-family="monospace">gcloud projects</text>
+  <text x="355" y="435" font-size="9" fill="#5f6368" font-family="monospace">  remove-iam-policy-binding</text>
+  
+  <text x="355" y="460" font-size="10" fill="#ff9800">⚠️ Specific SA blocked</text>
+  <text x="355" y="478" font-size="10" fill="#34a853">✅ Other SAs still work</text>
+  <text x="355" y="496" font-size="10" fill="#34a853">✅ More surgical</text>
+  <text x="475" y="515" text-anchor="middle" font-size="9" fill="#999">Targeted Option</text>
+  
+  <!-- Option 3: Quota -->
+  <rect x="630" y="370" width="270" height="150" rx="8" fill="white" stroke="#fbbc04" stroke-width="2" filter="url(#shadow)"/>
+  <rect x="630" y="370" width="270" height="28" rx="8" fill="#fbbc04"/>
+  <text x="765" y="390" text-anchor="middle" fill="white" font-weight="bold" font-size="11">Option 3: Reduce Quota</text>
+  
+  <text x="645" y="420" font-size="9" fill="#5f6368">Set Vertex AI quota to 0</text>
+  <text x="645" y="435" font-size="9" fill="#5f6368">via Cloud Console</text>
+  
+  <text x="645" y="460" font-size="10" fill="#fbbc04">⚠️ Calls rate-limited</text>
+  <text x="645" y="478" font-size="10" fill="#34a853">✅ Existing calls complete</text>
+  <text x="645" y="496" font-size="10" fill="#34a853">✅ Easily reversible</text>
+  <text x="765" y="515" text-anchor="middle" font-size="9" fill="#999">Soft Limit</text>
+  
+  <!-- Option 4: App Circuit Breaker (Recommended) -->
+  <rect x="920" y="370" width="230" height="150" rx="8" fill="white" stroke="#34a853" stroke-width="3" filter="url(#shadow)"/>
+  <rect x="920" y="370" width="230" height="28" rx="8" fill="#34a853"/>
+  <text x="1035" y="390" text-anchor="middle" fill="white" font-weight="bold" font-size="11">Option 4: App-Level ⭐</text>
+  
+  <text x="935" y="420" font-size="9" fill="#5f6368">Circuit breaker in YOUR</text>
+  <text x="935" y="435" font-size="9" fill="#5f6368">application code</text>
+  
+  <text x="935" y="460" font-size="10" fill="#34a853">✅ Instant response</text>
+  <text x="935" y="478" font-size="10" fill="#34a853">✅ Graceful degradation</text>
+  <text x="935" y="496" font-size="10" fill="#34a853">✅ No GCP changes</text>
+  <text x="1035" y="515" text-anchor="middle" font-size="9" fill="#34a853" font-weight="bold">RECOMMENDED</text>
+  
+  <!-- Multi-Layer Protection -->
+  <rect x="50" y="540" width="1100" height="200" rx="10" fill="white" stroke="#1a73e8" stroke-width="2" filter="url(#shadow)"/>
+  <text x="600" y="565" text-anchor="middle" font-weight="bold" font-size="14" fill="#1a73e8">RECOMMENDED: MULTI-LAYER PROTECTION</text>
+  
+  <!-- Layer 1 -->
+  <rect x="80" y="585" width="320" height="70" rx="6" fill="#e8f5e9" stroke="#34a853" stroke-width="2"/>
+  <text x="240" y="605" text-anchor="middle" font-weight="bold" font-size="11" fill="#34a853">LAYER 1: Application Circuit Breaker</text>
+  <text x="240" y="625" text-anchor="middle" font-size="10" fill="#5f6368">Track tokens in real-time, block when limit hit</text>
+  <text x="240" y="642" text-anchor="middle" font-size="9" fill="#34a853">Response: INSTANT (milliseconds)</text>
+  
+  <path d="M400 620 L440 620" stroke="#5f6368" stroke-width="2" marker-end="url(#arrow)"/>
+  
+  <!-- Layer 2 -->
+  <rect x="440" y="585" width="320" height="70" rx="6" fill="#fff3e0" stroke="#ff9800" stroke-width="2"/>
+  <text x="600" y="605" text-anchor="middle" font-weight="bold" font-size="11" fill="#ef6c00">LAYER 2: GCP Budget Alerts</text>
+  <text x="600" y="625" text-anchor="middle" font-size="10" fill="#5f6368">Pub/Sub alerts trigger webhooks to your app</text>
+  <text x="600" y="642" text-anchor="middle" font-size="9" fill="#ff9800">Response: Minutes-Hours (billing delay)</text>
+  
+  <path d="M760 620 L800 620" stroke="#5f6368" stroke-width="2" marker-end="url(#arrow)"/>
+  
+  <!-- Layer 3 -->
+  <rect x="800" y="585" width="320" height="70" rx="6" fill="#fce8e6" stroke="#ea4335" stroke-width="2"/>
+  <text x="960" y="605" text-anchor="middle" font-weight="bold" font-size="11" fill="#ea4335">LAYER 3: GCP API Disable</text>
+  <text x="960" y="625" text-anchor="middle" font-size="10" fill="#5f6368">Disable API entirely (last resort)</text>
+  <text x="960" y="642" text-anchor="middle" font-size="9" fill="#ea4335">Response: Seconds (but breaks everything)</text>
+  
+  <!-- Flow explanation -->
+  <rect x="80" y="670" width="1040" height="55" rx="4" fill="#e8f0fe"/>
+  <text x="600" y="692" text-anchor="middle" font-weight="bold" font-size="11" fill="#1a73e8">HOW IT WORKS TOGETHER</text>
+  <text x="600" y="712" text-anchor="middle" font-size="10" fill="#5f6368">App tracks spend → At $500, starts throttling → At $1K, blocks non-essential → At $2.5K, blocks all → At $5K, GCP disables API</text>
+  
+  <!-- What Happens to Users -->
+  <rect x="50" y="760" width="1100" height="120" rx="10" fill="white" stroke="#5f6368" stroke-width="1" filter="url(#shadow)"/>
+  <text x="600" y="785" text-anchor="middle" font-weight="bold" font-size="14" fill="#5f6368">WHAT HAPPENS TO YOUR USERS?</text>
+  
+  <!-- With App Circuit Breaker -->
+  <rect x="80" y="800" width="500" height="60" rx="6" fill="#e8f5e9"/>
+  <text x="330" y="820" text-anchor="middle" font-weight="bold" font-size="11" fill="#34a853">WITH App-Level Circuit Breaker</text>
+  <text x="330" y="840" text-anchor="middle" font-size="10" fill="#5f6368">"I'm sorry, our AI assistant is temporarily unavailable.</text>
+  <text x="330" y="855" text-anchor="middle" font-size="10" fill="#5f6368">Please try again later or contact support."</text>
+  
+  <!-- Without (API Disabled) -->
+  <rect x="620" y="800" width="500" height="60" rx="6" fill="#fce8e6"/>
+  <text x="870" y="820" text-anchor="middle" font-weight="bold" font-size="11" fill="#ea4335">WITHOUT (API Disabled at GCP)</text>
+  <text x="870" y="840" text-anchor="middle" font-size="10" fill="#5f6368">"Error 403: Forbidden - API aiplatform.googleapis.com</text>
+  <text x="870" y="855" text-anchor="middle" font-size="10" fill="#5f6368">is not enabled for project my-project"</text>
+  
+  <!-- Footer -->
+  <text x="600" y="895" text-anchor="middle" font-size="10" fill="#9aa0a6">Key Insight: The most effective protection happens at your APPLICATION layer, with GCP controls as a safety net</text>
+</svg>
