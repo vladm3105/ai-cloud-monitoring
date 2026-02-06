@@ -25,6 +25,32 @@ The platform is designed to run on Google Cloud Platform using Cloud Run:
 > [!NOTE]
 > Currently optimized for GCP deployment (per [ADR-002](docs/adr/002-gcp-only-first.md)). Multi-cloud expansion planned for future phases.
 
+### Home Cloud vs Monitored Clouds
+
+**Important Architectural Distinction:**
+
+- **Home Cloud (Primary Cloud)**: GCP - Where the platform itself runs
+  - Hosts the frontend (Next.js on Cloud Run)
+  - Hosts the backend orchestrator (FastAPI on Cloud Run)
+  - Hosts the database (Cloud SQL PostgreSQL)
+  - Hosts the cache (Cloud Memorystore Redis)
+  - Infrastructure managed via Terraform
+
+- **Monitored Clouds**: AWS, Azure, GCP, Kubernetes - What the platform analyzes
+  - The platform connects to these clouds via APIs
+  - Retrieves cost data, resource inventories, recommendations
+  - Can execute remediation actions (with approval)
+  - GCP appears in both roles (home cloud + monitored cloud)
+
+**Why This Matters:**
+
+The platform is **cloud-agnostic in monitoring** but **cloud-specific in deployment**. You can monitor AWS, Azure, and Kubernetes costs while the platform itself runs entirely on GCP. This separation allows:
+
+- **Predictable operational costs** - Home cloud costs are fixed and manageable
+- **No lock-in concerns** - The platform can monitor any cloud, including competitors
+- **Simplified operations** - Single cloud to manage for infrastructure
+- **Future flexibility** - Could be deployed to Azure/AWS if needed (with infrastructure changes)
+
 ---
 
 ## 🌟 Key Features
