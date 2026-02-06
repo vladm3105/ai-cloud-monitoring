@@ -2,7 +2,7 @@
 
 ## Architecture Diagram
 
-![System Architecture](./system-architecture.svg)
+![System Architecture](system-architecture.svg)
 
 ## Overview
 
