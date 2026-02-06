@@ -257,8 +257,10 @@ Both UIs query the **same data sources** (BigQuery for metrics, Cloud SQL for me
   - Currently: GCP Secret Manager (auto-rotation, HA, IAM integration)
   - If home cloud changes: AWS Secrets Manager or Azure Key Vault
   - Stores cloud credentials for monitored accounts (never in database)
-- **JWT/OIDC** - Token-based authentication
-- **RBAC** - Role-based access control
+- **RBAC (optional)** - Role-based access control
+  - Not required for single-tenant MVP (all authenticated users trusted)
+  - Required for multi-tenant mode (tenant isolation, admin vs viewer roles)
+  - Can be added later as needed
 
 ### Data Layer
 - **Cloud SQL PostgreSQL 16** - Relational data with Row-Level Security
