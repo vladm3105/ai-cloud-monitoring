@@ -107,7 +107,7 @@ The root entity. One tenant = one customer organization.
 | provider | Enum | aws / azure / gcp / kubernetes |
 | account_identifier | String | AWS Account ID / Azure Subscription ID / GCP Project ID / K8s Cluster Name |
 | display_name | String | Human-friendly label |
-| credential_path | String | OpenBao secret path (e.g., `secret/tenants/{id}/aws`) |
+| credential_path | String | Secret Manager path (e.g., GCP: `projects/{project}/secrets/tenant-{id}-aws`) |
 | status | Enum | active / disconnected / error / pending_verification |
 | last_sync_at | Timestamp | Last successful data sync |
 | config | JSONB | Provider-specific settings (regions to monitor, excluded services, etc.) |
@@ -115,7 +115,7 @@ The root entity. One tenant = one customer organization.
 
 **Business Rules:**
 - One tenant can have multiple accounts per provider (e.g., 5 AWS accounts)
-- `credential_path` points to OpenBao — actual credentials never stored in PostgreSQL
+- `credential_path` points to home cloud Secret Manager — actual credentials never stored in PostgreSQL
 - `status` updated by scheduled sync jobs; `error` triggers notification
 - `config.regions` controls which regions the Cloud Agent queries
 
@@ -407,7 +407,7 @@ Every table with `tenant_id` has RLS policies enforced at the database level:
 | **TimescaleDB RLS** | Same policy on hypertables | Applied to cost_metrics and aggregates |
 | **Redis Namespacing** | Key prefix `tenant:{id}:*` | Application-level, enforced by MCP servers |
 | **Object Storage** | Path isolation `/{tenant_id}/` | Bucket policy per tenant prefix |
-| **OpenBao** | Path isolation `secret/tenants/{id}/*` | ACL policy per tenant path |
+| **Secret Manager** | Path/name isolation (cloud-specific) | IAM/RBAC policy per tenant |
 
 **The guarantee:** Even if application code has a bug, the database will not return another tenant's data.
 

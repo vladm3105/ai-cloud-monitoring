@@ -34,8 +34,8 @@ Every MCP tool call follows this credential path:
 ```
 Agent receives tenant_id from Coordinator context
   → MCP Server receives tenant_id as tool parameter
-    → MCP Server calls OpenBao: GET secret/tenants/{tenant_id}/{provider}
-      → OpenBao returns short-lived credentials
+    → MCP Server calls Secret Manager: GET secret for tenant-{tenant_id}-{provider}
+      → Secret Manager returns short-lived credentials
         → MCP Server uses credentials for cloud API call
           → Credentials never cached longer than the request
 ```
@@ -170,7 +170,7 @@ While the tool interface is uniform, each MCP server translates to different clo
 | execute_action | EC2, RDS, Lambda, ECS APIs | boto3 |
 | get_idle_resources | CloudWatch GetMetricStatistics + EC2 | boto3 |
 
-**Credential method:** OpenBao → IAM Access Key → AssumeRole with ExternalID
+**Credential method:** Secret Manager → IAM Access Key → AssumeRole with ExternalID
 
 #### Azure MCP Server (Port 8083)
 
@@ -183,7 +183,7 @@ While the tool interface is uniform, each MCP server translates to different clo
 | execute_action | ARM APIs per resource type | azure-mgmt-compute, etc. |
 | get_idle_resources | Monitor: Metrics + Advisor | azure-mgmt-monitor |
 
-**Credential method:** OpenBao → Service Principal (client_id, client_secret, tenant_id)
+**Credential method:** Secret Manager → Service Principal (client_id, client_secret, tenant_id)
 
 #### GCP MCP Server (Port 8084)
 
@@ -196,7 +196,7 @@ While the tool interface is uniform, each MCP server translates to different clo
 | execute_action | Compute, GKE, Cloud SQL APIs | google-cloud-compute |
 | get_idle_resources | Monitoring: TimeSeries.list + Asset | google-cloud-monitoring |
 
-**Credential method:** OpenBao → Service Account JSON key → impersonation
+**Credential method:** Secret Manager → Service Account JSON key → impersonation
 
 #### OpenCost MCP Server (Port 8085)
 
@@ -209,7 +209,7 @@ While the tool interface is uniform, each MCP server translates to different clo
 | execute_action | kubectl / Helm | kubernetes-client |
 | get_idle_resources | Resource metrics + efficiency endpoint | HTTP client |
 
-**Credential method:** OpenBao → Kubeconfig (cluster-specific)
+**Credential method:** Secret Manager → Kubeconfig (cluster-specific)
 
 **Additional tool (K8s only):**
 
@@ -401,7 +401,7 @@ Manages tenant configuration, users, and cloud accounts.
 
 1. Validate `tenant_id` is present and valid
 2. Check caller has permission for this tool (RBAC from JWT)
-3. Retrieve credentials from OpenBao (never hardcode, never cache beyond request)
+3. Retrieve credentials from Secret Manager (never hardcode, never cache beyond request)
 4. Apply rate limiting before cloud API call
 5. Check circuit breaker state before cloud API call
 6. Log the call to audit_log (tool name, parameters, outcome, duration)
@@ -417,13 +417,13 @@ Manages tenant configuration, users, and cloud accounts.
 | `mcp_cache_hit_ratio` | L1 and L2 hit rates |
 | `mcp_cloud_api_calls_total` | Actual cloud API calls (not cache hits) |
 | `mcp_circuit_breaker_state` | Current state per provider per tenant |
-| `mcp_credential_fetch_duration` | OpenBao lookup time |
+| `mcp_credential_fetch_duration` | Secret Manager lookup time |
 
 ---
 
 ## Developer Notes
 
-> **DEV-MCP-001:** All 4 Cloud MCP servers should share a base class / common module that handles OpenBao credential fetch, rate limiting, circuit breaker, caching, and audit logging. Only the cloud API translation layer differs per provider.
+> **DEV-MCP-001:** All 4 Cloud MCP servers should share a base class / common module that handles Secret Manager credential fetch, rate limiting, circuit breaker, caching, and audit logging. Only the cloud API translation layer differs per provider.
 
 > **DEV-MCP-002:** The `data source priority` pattern is critical for performance. Tool implementations should check local DB first (populated by Mode 2), and only call live cloud APIs if data is older than the sync interval. This is what makes interactive queries fast.
 
@@ -431,6 +431,6 @@ Manages tenant configuration, users, and cloud accounts.
 
 > **DEV-MCP-004:** Use FastMCP framework for all MCP servers. Define tools with Pydantic models for input validation. FastMCP handles JSON-RPC protocol, tool discovery, and connection management.
 
-> **DEV-MCP-005:** OpenBao credential fetch adds ~50-100ms per request. Consider short-lived in-memory credential caching (60 seconds max) per tenant per provider to reduce this overhead while maintaining security.
+> **DEV-MCP-005:** Secret Manager credential fetch adds ~50-100ms per request. Consider short-lived in-memory credential caching (60 seconds max) per tenant per provider to reduce this overhead while maintaining security.
 
 > **DEV-MCP-006:** Test each MCP server independently with mock cloud APIs before integration with agents. Each MCP server should have its own integration test suite with provider-specific test fixtures.
