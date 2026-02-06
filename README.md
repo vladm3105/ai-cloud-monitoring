@@ -10,6 +10,9 @@ AI Cloud Cost Monitoring leverages AI agents built on Google ADK (Agent Developm
 
 ## 🚀 Quick Start
 
+> **[View System Architecture Diagram](docs/architecture/README.md)** 📊
+
+
 ### Deployment to GCP
 
 The platform is designed to run on Google Cloud Platform using Cloud Run:
