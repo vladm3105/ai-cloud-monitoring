@@ -120,8 +120,16 @@ AI-cost-monitoring/
 │       ├── 002-gcp-only-first.md
 │       ├── 003-use-bigquery-not-timescaledb.md
 │       └── 004-cloud-run-not-kubernetes.md
+├── terraform/                      # Infrastructure as Code
+│   ├── main.tf                    # Main Terraform configuration
+│   ├── variables.tf               # Variable declarations
+│   ├── outputs.tf                 # Output values
+│   └── modules/                   # Terraform modules
 ├── GCP-only/                       # GCP-specific implementation
-└── UX/                            # User experience and UI documentation
+├── UX/                            # User experience and UI documentation
+├── cloud-config.yaml              # Cloud platform configuration
+├── GCP-DEPLOYMENT.md              # GCP deployment guide
+└── .env.example                   # Environment variable template
 ```
 
 ---
@@ -154,10 +162,10 @@ AI-cost-monitoring/
 - **RBAC** - Role-based access control
 
 ### Data Layer
-- **PostgreSQL 16** - Relational data with Row-Level Security
-- **TimescaleDB** - Time-series metrics (Cloud Run variant: BigQuery)
-- **Redis 7** - Caching and message queue
-- **S3/GCS/Blob** - Object storage for reports
+- **Cloud SQL PostgreSQL 16** - Relational data with Row-Level Security
+- **BigQuery** - Time-series cost metrics (per [ADR-003](docs/adr/003-use-bigquery-not-timescaledb.md))
+- **Cloud Memorystore Redis 7** - Caching and message queue
+- **Cloud Storage** - Object storage for reports and backups
 
 ### Infrastructure
 - **Docker + Cloud Run** - Serverless containers (see [ADR-004](docs/adr/004-cloud-run-not-kubernetes.md))
@@ -300,6 +308,12 @@ Key architectural decisions are documented in [docs/adr/](docs/adr/):
 ---
 
 ## 📚 Documentation
+
+### Deployment & Configuration
+- **[GCP Deployment Guide](GCP-DEPLOYMENT.md)** - Complete deployment instructions
+- **[Cloud Configuration](cloud-config.yaml)** - GCP project and service settings
+- **[Environment Variables](.env.example)** - Configuration template
+- **[Terraform Infrastructure](terraform/)** - Infrastructure as Code
 
 ### Core Specifications
 - **[Database Schema](core/01-database-schema.md)** - Complete data model and storage strategy
