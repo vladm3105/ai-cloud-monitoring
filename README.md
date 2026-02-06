@@ -229,7 +229,7 @@ Both UIs query the **same data sources** (BigQuery for metrics, Cloud SQL for me
   - Natural language queries routed to agent hierarchy
 - **A2UI Components** - Real-time streaming UI components
 - **Tailwind CSS + shadcn/ui** - Styling
-- **Auth0 React SDK** - Authentication
+- **OAuth 2.0/OIDC Provider** - Authentication (Auth0, Okta, Azure AD, Google, AWS Cognito, Keycloak, etc.)
 
 ### Agent Layer
 - **Google ADK** - Agent Development Kit
