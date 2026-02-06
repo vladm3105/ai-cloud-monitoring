@@ -1,587 +1,239 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1800">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" font-family="Arial, sans-serif">
   <defs>
-    <!-- Gradients -->
     <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
       <stop offset="0%" style="stop-color:#1a73e8"/>
       <stop offset="100%" style="stop-color:#4285f4"/>
     </linearGradient>
-    
-    <linearGradient id="gcpManagedGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+    <linearGradient id="autoGrad" x1="0%" y1="0%" x2="0%" y2="100%">
       <stop offset="0%" style="stop-color:#e6f4ea"/>
       <stop offset="100%" style="stop-color:#ceead6"/>
     </linearGradient>
-    
-    <linearGradient id="eventDrivenGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" style="stop-color:#fff3e0"/>
-      <stop offset="100%" style="stop-color:#ffe0b2"/>
+    <linearGradient id="eventGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#fef7e0"/>
+      <stop offset="100%" style="stop-color:#feefc3"/>
     </linearGradient>
-    
-    <linearGradient id="onDemandGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+    <linearGradient id="ondemandGrad" x1="0%" y1="0%" x2="0%" y2="100%">
       <stop offset="0%" style="stop-color:#e8f0fe"/>
       <stop offset="100%" style="stop-color:#d2e3fc"/>
     </linearGradient>
-    
-    <linearGradient id="weDeployGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" style="stop-color:#fce8e6"/>
-      <stop offset="100%" style="stop-color:#fadbd8"/>
-    </linearGradient>
-    
-    <!-- Drop Shadow -->
-    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
       <feDropShadow dx="2" dy="2" stdDeviation="3" flood-opacity="0.15"/>
     </filter>
-    
-    <filter id="shadowSmall" x="-5%" y="-5%" width="110%" height="110%">
-      <feDropShadow dx="1" dy="1" stdDeviation="2" flood-opacity="0.1"/>
-    </filter>
-    
-    <!-- Arrow Markers -->
-    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
       <polygon points="0 0, 10 3.5, 0 7" fill="#5f6368"/>
     </marker>
-    
-    <marker id="arrowheadGreen" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+    <marker id="arrowGreen" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
       <polygon points="0 0, 10 3.5, 0 7" fill="#34a853"/>
     </marker>
-    
-    <marker id="arrowheadOrange" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-      <polygon points="0 0, 10 3.5, 0 7" fill="#f9ab00"/>
+    <marker id="arrowOrange" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#fbbc04"/>
     </marker>
-    
-    <marker id="arrowheadBlue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+    <marker id="arrowBlue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
       <polygon points="0 0, 10 3.5, 0 7" fill="#1a73e8"/>
-    </marker>
-    
-    <marker id="arrowheadRed" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-      <polygon points="0 0, 10 3.5, 0 7" fill="#ea4335"/>
     </marker>
   </defs>
   
   <!-- Background -->
-  <rect width="1600" height="1800" fill="#f8f9fa"/>
+  <rect width="1200" height="900" fill="#f8f9fa"/>
   
-  <!-- Title -->
-  <rect x="50" y="20" width="1500" height="60" rx="10" fill="url(#headerGrad)" filter="url(#shadow)"/>
-  <text x="800" y="58" text-anchor="middle" fill="white" font-family="Google Sans, Arial, sans-serif" font-size="26" font-weight="500">
-    GCP Cost Monitoring Agent — Technical Summary
-  </text>
+  <!-- Title Header -->
+  <rect x="0" y="0" width="1200" height="70" fill="url(#headerGrad)"/>
+  <text x="600" y="32" text-anchor="middle" fill="white" font-size="24" font-weight="bold">GCP Cost Monitoring Agent — Technical Summary</text>
+  <text x="600" y="55" text-anchor="middle" fill="#c2e0ff" font-size="14">Triggers, Schedules &amp; Data Collection | Stateless MCP Server (Cloud Run) → GCP Built-in APIs</text>
   
-  <!-- ==================== SECTION 1: ARCHITECTURE OVERVIEW ==================== -->
-  <rect x="50" y="100" width="740" height="200" rx="12" fill="white" stroke="#1a73e8" stroke-width="2" filter="url(#shadow)"/>
-  <rect x="50" y="100" width="740" height="35" rx="12" fill="#1a73e8"/>
-  <rect x="50" y="125" width="740" height="10" fill="#1a73e8"/>
-  <text x="420" y="125" text-anchor="middle" fill="white" font-family="Arial" font-size="14" font-weight="600">Architecture Overview</text>
+  <!-- Three Data Collection Modes -->
+  <text x="600" y="100" text-anchor="middle" font-weight="bold" font-size="16" fill="#5f6368">THREE DATA COLLECTION MODES</text>
   
-  <!-- Architecture Pattern -->
-  <text x="70" y="160" fill="#1967d2" font-family="Arial" font-size="12" font-weight="600">Architecture Pattern:</text>
+  <!-- Mode 1: Automatic (GCP-Managed) -->
+  <rect x="50" y="120" width="350" height="260" rx="10" fill="url(#autoGrad)" stroke="#34a853" stroke-width="2" filter="url(#shadow)"/>
+  <rect x="50" y="120" width="350" height="35" rx="10" fill="#34a853"/>
+  <rect x="50" y="145" width="350" height="10" fill="#34a853"/>
+  <text x="225" y="145" text-anchor="middle" fill="white" font-weight="bold" font-size="14">AUTOMATIC (GCP-Managed)</text>
+  <text x="225" y="175" text-anchor="middle" fill="#34a853" font-size="11">No action required from us</text>
   
-  <rect x="70" y="170" width="140" height="40" rx="6" fill="#fce8e6" stroke="#ea4335"/>
-  <text x="140" y="195" text-anchor="middle" fill="#c62828" font-family="Arial" font-size="10" font-weight="600">MCP Server</text>
+  <!-- Automatic items -->
+  <rect x="70" y="190" width="310" height="40" rx="4" fill="white" stroke="#34a853" stroke-width="1"/>
+  <text x="85" y="210" font-size="11" fill="#5f6368"><tspan font-weight="bold">Billing Export</tspan> → BigQuery</text>
+  <text x="85" y="225" font-size="9" fill="#999">Daily batch, 24-48h delay</text>
   
-  <line x1="215" y1="190" x2="255" y2="190" stroke="#5f6368" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <rect x="70" y="240" width="310" height="40" rx="4" fill="white" stroke="#34a853" stroke-width="1"/>
+  <text x="85" y="260" font-size="11" fill="#5f6368"><tspan font-weight="bold">Budget Service</tspan> → Threshold Check</text>
+  <text x="85" y="275" font-size="9" fill="#999">Continuous monitoring</text>
   
-  <rect x="260" y="170" width="140" height="40" rx="6" fill="#e6f4ea" stroke="#34a853"/>
-  <text x="330" y="195" text-anchor="middle" fill="#137333" font-family="Arial" font-size="10" font-weight="600">GCP APIs</text>
+  <rect x="70" y="290" width="310" height="40" rx="4" fill="white" stroke="#34a853" stroke-width="1"/>
+  <text x="85" y="310" font-size="11" fill="#5f6368"><tspan font-weight="bold">Recommender</tspan> → ML Analysis</text>
+  <text x="85" y="325" font-size="9" fill="#999">Continuous (8+ day data needed)</text>
   
-  <line x1="405" y1="190" x2="445" y2="190" stroke="#5f6368" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <rect x="70" y="340" width="310" height="30" rx="4" fill="white" stroke="#34a853" stroke-width="1"/>
+  <text x="85" y="360" font-size="11" fill="#5f6368"><tspan font-weight="bold">Asset Inventory</tspan> → Resource State</text>
   
-  <rect x="450" y="170" width="140" height="40" rx="6" fill="#e8f0fe" stroke="#1a73e8"/>
-  <text x="520" y="195" text-anchor="middle" fill="#1967d2" font-family="Arial" font-size="10" font-weight="600">User Response</text>
-  
-  <!-- Design Principles -->
-  <text x="70" y="235" fill="#1967d2" font-family="Arial" font-size="12" font-weight="600">Design Principles:</text>
-  <rect x="70" y="245" width="700" height="40" rx="6" fill="#e8f0fe"/>
-  <text x="420" y="260" text-anchor="middle" fill="#1967d2" font-family="Arial" font-size="10">
-    ✓ Use GCP Built-in Tools | ✓ Stateless Server | ✓ Event-Driven | ✓ On-Demand Queries | ✓ Minimal Infrastructure
-  </text>
-  <text x="420" y="278" text-anchor="middle" fill="#5f6368" font-family="Arial" font-size="10">
-    No custom databases • No polling • All state in GCP services
-  </text>
-  
-  <!-- Infrastructure Cost -->
-  <rect x="620" y="145" width="150" height="70" rx="8" fill="#c8e6c9" stroke="#34a853"/>
-  <text x="695" y="165" text-anchor="middle" fill="#137333" font-family="Arial" font-size="11" font-weight="600">Infrastructure Cost</text>
-  <text x="695" y="185" text-anchor="middle" fill="#202124" font-family="Arial" font-size="10">MCP Server: $10-50</text>
-  <text x="695" y="200" text-anchor="middle" fill="#202124" font-family="Arial" font-size="10">Cloud Function: $5</text>
-  <text x="695" y="215" text-anchor="middle" fill="#137333" font-family="Arial" font-size="12" font-weight="600">Total: $20-80/mo</text>
-  
-  <!-- ==================== SECTION 2: INFRASTRUCTURE ==================== -->
-  <rect x="810" y="100" width="740" height="200" rx="12" fill="white" stroke="#ea4335" stroke-width="2" filter="url(#shadow)"/>
-  <rect x="810" y="100" width="740" height="35" rx="12" fill="#ea4335"/>
-  <rect x="810" y="125" width="740" height="10" fill="#ea4335"/>
-  <text x="1180" y="125" text-anchor="middle" fill="white" font-family="Arial" font-size="14" font-weight="600">What We Build vs What GCP Provides</text>
-  
-  <!-- We Build -->
-  <rect x="830" y="150" width="220" height="135" rx="8" fill="url(#weDeployGrad)" stroke="#ea4335"/>
-  <text x="940" y="172" text-anchor="middle" fill="#c62828" font-family="Arial" font-size="11" font-weight="600">WE BUILD</text>
-  
-  <rect x="845" y="185" width="190" height="40" rx="6" fill="white" stroke="#ea4335"/>
-  <text x="940" y="202" text-anchor="middle" fill="#c62828" font-family="Arial" font-size="10" font-weight="600">MCP Server (Cloud Run)</text>
-  <text x="940" y="218" text-anchor="middle" fill="#5f6368" font-family="Arial" font-size="9">Conversational interface</text>
-  
-  <rect x="845" y="230" width="190" height="40" rx="6" fill="white" stroke="#f9ab00" stroke-dasharray="4,2"/>
-  <text x="940" y="247" text-anchor="middle" fill="#e65100" font-family="Arial" font-size="10" font-weight="600">Cloud Function (Optional)</text>
-  <text x="940" y="263" text-anchor="middle" fill="#5f6368" font-family="Arial" font-size="9">Circuit breaker automation</text>
-  
-  <!-- GCP Provides -->
-  <rect x="1070" y="150" width="460" height="135" rx="8" fill="url(#gcpManagedGrad)" stroke="#34a853"/>
-  <text x="1300" y="172" text-anchor="middle" fill="#137333" font-family="Arial" font-size="11" font-weight="600">GCP PROVIDES (Managed by Google)</text>
-  
-  <rect x="1085" y="185" width="95" height="35" rx="4" fill="white" stroke="#34a853"/>
-  <text x="1132" y="207" text-anchor="middle" fill="#137333" font-family="Arial" font-size="9" font-weight="500">BigQuery</text>
-  
-  <rect x="1190" y="185" width="95" height="35" rx="4" fill="white" stroke="#34a853"/>
-  <text x="1237" y="207" text-anchor="middle" fill="#137333" font-family="Arial" font-size="9" font-weight="500">Budget API</text>
-  
-  <rect x="1295" y="185" width="95" height="35" rx="4" fill="white" stroke="#34a853"/>
-  <text x="1342" y="207" text-anchor="middle" fill="#137333" font-family="Arial" font-size="9" font-weight="500">Recommender</text>
-  
-  <rect x="1400" y="185" width="110" height="35" rx="4" fill="white" stroke="#34a853"/>
-  <text x="1455" y="207" text-anchor="middle" fill="#137333" font-family="Arial" font-size="9" font-weight="500">Asset Inventory</text>
-  
-  <rect x="1085" y="230" width="95" height="35" rx="4" fill="white" stroke="#34a853"/>
-  <text x="1132" y="252" text-anchor="middle" fill="#137333" font-family="Arial" font-size="9" font-weight="500">Pub/Sub</text>
-  
-  <rect x="1190" y="230" width="95" height="35" rx="4" fill="white" stroke="#34a853"/>
-  <text x="1237" y="252" text-anchor="middle" fill="#137333" font-family="Arial" font-size="9" font-weight="500">Monitoring</text>
-  
-  <rect x="1295" y="230" width="95" height="35" rx="4" fill="white" stroke="#34a853"/>
-  <text x="1342" y="252" text-anchor="middle" fill="#137333" font-family="Arial" font-size="9" font-weight="500">Compute API</text>
-  
-  <rect x="1400" y="230" width="110" height="35" rx="4" fill="white" stroke="#34a853"/>
-  <text x="1455" y="252" text-anchor="middle" fill="#137333" font-family="Arial" font-size="9" font-weight="500">Resource Mgr</text>
-  
-  <!-- ==================== SECTION 3: TRIGGERS & DATA COLLECTION ==================== -->
-  <rect x="50" y="320" width="1500" height="420" rx="12" fill="white" stroke="#5f6368" stroke-width="2" filter="url(#shadow)"/>
-  <rect x="50" y="320" width="1500" height="35" rx="12" fill="#5f6368"/>
-  <rect x="50" y="345" width="1500" height="10" fill="#5f6368"/>
-  <text x="800" y="345" text-anchor="middle" fill="white" font-family="Arial" font-size="14" font-weight="600">Triggers, Schedules &amp; Data Collection</text>
-  
-  <!-- Three Trigger Types -->
-  
-  <!-- 1. GCP-Managed -->
-  <rect x="70" y="375" width="460" height="180" rx="10" fill="url(#gcpManagedGrad)" stroke="#34a853" stroke-width="2"/>
-  <rect x="70" y="375" width="460" height="28" rx="10" fill="#34a853"/>
-  <rect x="70" y="395" width="460" height="8" fill="#34a853"/>
-  <text x="300" y="395" text-anchor="middle" fill="white" font-family="Arial" font-size="12" font-weight="600">1. GCP-MANAGED (Automatic)</text>
-  
-  <text x="90" y="425" fill="#137333" font-family="Arial" font-size="10" font-weight="600">Billing Export</text>
-  <line x1="175" y1="422" x2="220" y2="422" stroke="#34a853" stroke-width="1.5" marker-end="url(#arrowheadGreen)"/>
-  <text x="230" y="425" fill="#5f6368" font-family="Arial" font-size="10">BigQuery (Daily, 24-48h delay)</text>
-  
-  <text x="90" y="448" fill="#137333" font-family="Arial" font-size="10" font-weight="600">Budget Service</text>
-  <line x1="185" y1="445" x2="220" y2="445" stroke="#34a853" stroke-width="1.5" marker-end="url(#arrowheadGreen)"/>
-  <text x="230" y="448" fill="#5f6368" font-family="Arial" font-size="10">Threshold Check (Continuous)</text>
-  
-  <text x="90" y="471" fill="#137333" font-family="Arial" font-size="10" font-weight="600">Recommender</text>
-  <line x1="170" y1="468" x2="220" y2="468" stroke="#34a853" stroke-width="1.5" marker-end="url(#arrowheadGreen)"/>
-  <text x="230" y="471" fill="#5f6368" font-family="Arial" font-size="10">ML Analysis (Continuous, 8+ day window)</text>
-  
-  <text x="90" y="494" fill="#137333" font-family="Arial" font-size="10" font-weight="600">Asset Inventory</text>
-  <line x1="180" y1="491" x2="220" y2="491" stroke="#34a853" stroke-width="1.5" marker-end="url(#arrowheadGreen)"/>
-  <text x="230" y="494" fill="#5f6368" font-family="Arial" font-size="10">Resource State (Real-time)</text>
-  
-  <rect x="90" y="510" width="420" height="30" rx="6" fill="#c8e6c9"/>
-  <text x="300" y="530" text-anchor="middle" fill="#2e7d32" font-family="Arial" font-size="10" font-weight="600">WE DO NOTHING — GCP collects and stores automatically</text>
-  
-  <!-- 2. Event-Driven -->
-  <rect x="550" y="375" width="460" height="180" rx="10" fill="url(#eventDrivenGrad)" stroke="#f9ab00" stroke-width="2"/>
-  <rect x="550" y="375" width="460" height="28" rx="10" fill="#f9ab00"/>
-  <rect x="550" y="395" width="460" height="8" fill="#f9ab00"/>
-  <text x="780" y="395" text-anchor="middle" fill="white" font-family="Arial" font-size="12" font-weight="600">2. EVENT-DRIVEN (Pub/Sub)</text>
+  <!-- Mode 2: Event-Driven -->
+  <rect x="425" y="120" width="350" height="260" rx="10" fill="url(#eventGrad)" stroke="#fbbc04" stroke-width="2" filter="url(#shadow)"/>
+  <rect x="425" y="120" width="350" height="35" rx="10" fill="#fbbc04"/>
+  <rect x="425" y="145" width="350" height="10" fill="#fbbc04"/>
+  <text x="600" y="145" text-anchor="middle" fill="white" font-weight="bold" font-size="14">EVENT-DRIVEN (Pub/Sub)</text>
+  <text x="600" y="175" text-anchor="middle" fill="#e37400" font-size="11">React via Cloud Function</text>
   
   <!-- Budget Alert Flow -->
-  <rect x="570" y="415" width="80" height="35" rx="4" fill="white" stroke="#f9ab00"/>
-  <text x="610" y="437" text-anchor="middle" fill="#e65100" font-family="Arial" font-size="9" font-weight="500">Budget Alert</text>
-  
-  <line x1="655" y1="432" x2="685" y2="432" stroke="#f9ab00" stroke-width="1.5" marker-end="url(#arrowheadOrange)"/>
-  
-  <rect x="690" y="415" width="70" height="35" rx="4" fill="white" stroke="#f9ab00"/>
-  <text x="725" y="437" text-anchor="middle" fill="#e65100" font-family="Arial" font-size="9" font-weight="500">Pub/Sub</text>
-  
-  <line x1="765" y1="432" x2="795" y2="432" stroke="#f9ab00" stroke-width="1.5" marker-end="url(#arrowheadOrange)"/>
-  
-  <rect x="800" y="415" width="90" height="35" rx="4" fill="white" stroke="#ea4335"/>
-  <text x="845" y="432" text-anchor="middle" fill="#c62828" font-family="Arial" font-size="9" font-weight="500">Cloud</text>
-  <text x="845" y="444" text-anchor="middle" fill="#c62828" font-family="Arial" font-size="9" font-weight="500">Function</text>
-  
-  <line x1="895" y1="432" x2="925" y2="432" stroke="#ea4335" stroke-width="1.5" marker-end="url(#arrowheadRed)"/>
-  
-  <rect x="930" y="415" width="60" height="35" rx="4" fill="#ffebee" stroke="#ea4335"/>
-  <text x="960" y="432" text-anchor="middle" fill="#c62828" font-family="Arial" font-size="9" font-weight="500">Circuit</text>
-  <text x="960" y="444" text-anchor="middle" fill="#c62828" font-family="Arial" font-size="9" font-weight="500">Breaker</text>
+  <rect x="445" y="190" width="310" height="55" rx="4" fill="white" stroke="#fbbc04" stroke-width="1"/>
+  <text x="600" y="208" text-anchor="middle" font-weight="bold" font-size="11" fill="#5f6368">Budget Alert Flow</text>
+  <text x="460" y="228" font-size="9" fill="#5f6368">Budget Alert → Pub/Sub → Cloud Function → Circuit Breaker</text>
+  <text x="460" y="240" font-size="9" fill="#999">Latency: Near real-time (seconds)</text>
   
   <!-- Asset Change Flow -->
-  <rect x="570" y="465" width="80" height="35" rx="4" fill="white" stroke="#f9ab00"/>
-  <text x="610" y="482" text-anchor="middle" fill="#e65100" font-family="Arial" font-size="9" font-weight="500">Asset</text>
-  <text x="610" y="494" text-anchor="middle" fill="#e65100" font-family="Arial" font-size="9" font-weight="500">Change</text>
+  <rect x="445" y="255" width="310" height="55" rx="4" fill="white" stroke="#fbbc04" stroke-width="1"/>
+  <text x="600" y="273" text-anchor="middle" font-weight="bold" font-size="11" fill="#5f6368">Asset Change Flow</text>
+  <text x="460" y="293" font-size="9" fill="#5f6368">Asset Change → Pub/Sub → Cloud Function → Cost Alert</text>
+  <text x="460" y="305" font-size="9" fill="#999">Latency: Seconds to minutes</text>
   
-  <line x1="655" y1="482" x2="685" y2="482" stroke="#f9ab00" stroke-width="1.5" marker-end="url(#arrowheadOrange)"/>
+  <!-- Actions -->
+  <rect x="445" y="320" width="145" height="50" rx="4" fill="#fce8e6" stroke="#ea4335" stroke-width="1"/>
+  <text x="517" y="340" text-anchor="middle" font-size="10" fill="#c5221f" font-weight="bold">Circuit Breaker</text>
+  <text x="517" y="355" text-anchor="middle" font-size="9" fill="#5f6368">Stop/Scale/Alert</text>
   
-  <rect x="690" y="465" width="70" height="35" rx="4" fill="white" stroke="#f9ab00"/>
-  <text x="725" y="487" text-anchor="middle" fill="#e65100" font-family="Arial" font-size="9" font-weight="500">Pub/Sub</text>
+  <rect x="600" y="320" width="155" height="50" rx="4" fill="#e8f0fe" stroke="#1a73e8" stroke-width="1"/>
+  <text x="677" y="340" text-anchor="middle" font-size="10" fill="#1a73e8" font-weight="bold">Cost Alert</text>
+  <text x="677" y="355" text-anchor="middle" font-size="9" fill="#5f6368">Slack/Email notify</text>
   
-  <line x1="765" y1="482" x2="795" y2="482" stroke="#f9ab00" stroke-width="1.5" marker-end="url(#arrowheadOrange)"/>
+  <!-- Mode 3: On-Demand -->
+  <rect x="800" y="120" width="350" height="260" rx="10" fill="url(#ondemandGrad)" stroke="#1a73e8" stroke-width="2" filter="url(#shadow)"/>
+  <rect x="800" y="120" width="350" height="35" rx="10" fill="#1a73e8"/>
+  <rect x="800" y="145" width="350" height="10" fill="#1a73e8"/>
+  <text x="975" y="145" text-anchor="middle" fill="white" font-weight="bold" font-size="14">ON-DEMAND (User Query)</text>
+  <text x="975" y="175" text-anchor="middle" fill="#1a73e8" font-size="11">Query APIs, return response</text>
   
-  <rect x="800" y="465" width="90" height="35" rx="4" fill="white" stroke="#ea4335"/>
-  <text x="845" y="482" text-anchor="middle" fill="#c62828" font-family="Arial" font-size="9" font-weight="500">Cloud</text>
-  <text x="845" y="494" text-anchor="middle" fill="#c62828" font-family="Arial" font-size="9" font-weight="500">Function</text>
+  <!-- Query Flow -->
+  <rect x="820" y="190" width="100" height="40" rx="20" fill="#202124"/>
+  <text x="870" y="215" text-anchor="middle" fill="white" font-size="11">User</text>
   
-  <line x1="895" y1="482" x2="925" y2="482" stroke="#ea4335" stroke-width="1.5" marker-end="url(#arrowheadRed)"/>
+  <path d="M920 210 L960 210" stroke="#1a73e8" stroke-width="2" marker-end="url(#arrowBlue)"/>
   
-  <rect x="930" y="465" width="60" height="35" rx="4" fill="#fff3e0" stroke="#f9ab00"/>
-  <text x="960" y="482" text-anchor="middle" fill="#e65100" font-family="Arial" font-size="9" font-weight="500">Cost</text>
-  <text x="960" y="494" text-anchor="middle" fill="#e65100" font-family="Arial" font-size="9" font-weight="500">Alert</text>
+  <rect x="960" y="190" width="80" height="40" rx="4" fill="white" stroke="#1a73e8" stroke-width="2"/>
+  <text x="1000" y="215" text-anchor="middle" font-size="10" fill="#1a73e8">MCP</text>
   
-  <rect x="570" y="510" width="420" height="30" rx="6" fill="#fff8e1"/>
-  <text x="780" y="530" text-anchor="middle" fill="#e65100" font-family="Arial" font-size="10" font-weight="600">TRIGGERED BY GCP — We only react to events</text>
+  <path d="M1000 230 L1000 260" stroke="#1a73e8" stroke-width="2" marker-end="url(#arrowBlue)"/>
   
-  <!-- 3. On-Demand -->
-  <rect x="1030" y="375" width="500" height="180" rx="10" fill="url(#onDemandGrad)" stroke="#1a73e8" stroke-width="2"/>
-  <rect x="1030" y="375" width="500" height="28" rx="10" fill="#1a73e8"/>
-  <rect x="1030" y="395" width="500" height="8" fill="#1a73e8"/>
-  <text x="1280" y="395" text-anchor="middle" fill="white" font-family="Arial" font-size="12" font-weight="600">3. ON-DEMAND (User Query)</text>
+  <rect x="930" y="260" width="140" height="40" rx="4" fill="white" stroke="#1a73e8" stroke-width="1"/>
+  <text x="1000" y="285" text-anchor="middle" font-size="10" fill="#5f6368">Query GCP APIs</text>
   
-  <!-- User icon -->
-  <circle cx="1090" cy="460" r="22" fill="#4285f4"/>
-  <circle cx="1090" cy="450" r="9" fill="white"/>
-  <ellipse cx="1090" cy="470" rx="11" ry="6" fill="white"/>
-  <text x="1090" y="495" text-anchor="middle" fill="#1967d2" font-family="Arial" font-size="9">User</text>
+  <path d="M1000 300 L1000 330" stroke="#1a73e8" stroke-width="2" marker-end="url(#arrowBlue)"/>
   
-  <line x1="1120" y1="460" x2="1160" y2="460" stroke="#1a73e8" stroke-width="1.5" marker-end="url(#arrowheadBlue)"/>
+  <rect x="930" y="330" width="140" height="35" rx="4" fill="#e8f0fe" stroke="#1a73e8" stroke-width="1"/>
+  <text x="1000" y="352" text-anchor="middle" font-size="10" fill="#1a73e8">Response</text>
   
-  <rect x="1165" y="440" width="100" height="40" rx="6" fill="white" stroke="#1a73e8"/>
-  <text x="1215" y="455" text-anchor="middle" fill="#1967d2" font-family="Arial" font-size="9" font-weight="500">"Why did costs</text>
-  <text x="1215" y="470" text-anchor="middle" fill="#1967d2" font-family="Arial" font-size="9" font-weight="500">spike?"</text>
-  
-  <line x1="1270" y1="460" x2="1310" y2="460" stroke="#1a73e8" stroke-width="1.5" marker-end="url(#arrowheadBlue)"/>
-  
-  <rect x="1315" y="440" width="90" height="40" rx="6" fill="#fce8e6" stroke="#ea4335"/>
-  <text x="1360" y="455" text-anchor="middle" fill="#c62828" font-family="Arial" font-size="9" font-weight="500">MCP</text>
-  <text x="1360" y="470" text-anchor="middle" fill="#c62828" font-family="Arial" font-size="9" font-weight="500">Server</text>
-  
-  <line x1="1410" y1="460" x2="1450" y2="460" stroke="#1a73e8" stroke-width="1.5" marker-end="url(#arrowheadBlue)"/>
-  
-  <rect x="1455" y="440" width="60" height="40" rx="6" fill="#e6f4ea" stroke="#34a853"/>
-  <text x="1485" y="455" text-anchor="middle" fill="#137333" font-family="Arial" font-size="9" font-weight="500">GCP</text>
-  <text x="1485" y="470" text-anchor="middle" fill="#137333" font-family="Arial" font-size="9" font-weight="500">APIs</text>
-  
-  <rect x="1050" y="510" width="460" height="30" rx="6" fill="#d2e3fc"/>
-  <text x="1280" y="530" text-anchor="middle" fill="#1967d2" font-family="Arial" font-size="10" font-weight="600">NO POLLING — Queries only when user asks</text>
+  <text x="975" y="375" text-anchor="middle" font-size="9" fill="#999">Latency: 2-5 seconds typical</text>
   
   <!-- Data Freshness Table -->
-  <text x="70" y="580" fill="#202124" font-family="Arial" font-size="12" font-weight="600">Data Freshness:</text>
+  <rect x="50" y="400" width="550" height="180" rx="10" fill="white" stroke="#dadce0" stroke-width="1" filter="url(#shadow)"/>
+  <text x="325" y="425" text-anchor="middle" font-weight="bold" font-size="14" fill="#5f6368">DATA FRESHNESS</text>
   
-  <rect x="70" y="590" width="700" height="130" rx="8" fill="white" stroke="#dadce0"/>
+  <line x1="70" y1="440" x2="580" y2="440" stroke="#dadce0" stroke-width="1"/>
+  <text x="150" y="455" text-anchor="middle" font-size="10" fill="#5f6368" font-weight="bold">Data Type</text>
+  <text x="320" y="455" text-anchor="middle" font-size="10" fill="#5f6368" font-weight="bold">Freshness</text>
+  <text x="480" y="455" text-anchor="middle" font-size="10" fill="#5f6368" font-weight="bold">Notes</text>
+  <line x1="70" y1="465" x2="580" y2="465" stroke="#dadce0" stroke-width="1"/>
   
-  <!-- Table header -->
-  <rect x="70" y="590" width="700" height="25" rx="8" fill="#e8f0fe"/>
-  <rect x="70" y="607" width="700" height="8" fill="#e8f0fe"/>
-  <text x="180" y="608" text-anchor="middle" fill="#1967d2" font-family="Arial" font-size="10" font-weight="600">Data Type</text>
-  <text x="350" y="608" text-anchor="middle" fill="#1967d2" font-family="Arial" font-size="10" font-weight="600">Freshness</text>
-  <text x="550" y="608" text-anchor="middle" fill="#1967d2" font-family="Arial" font-size="10" font-weight="600">Notes</text>
+  <text x="150" y="485" text-anchor="middle" font-size="10" fill="#5f6368">Cost data (BigQuery)</text>
+  <text x="320" y="485" text-anchor="middle" font-size="10" fill="#ea4335">24-48 hours</text>
+  <text x="480" y="485" text-anchor="middle" font-size="10" fill="#999">GCP billing export delay</text>
   
-  <!-- Table rows -->
-  <text x="180" y="635" text-anchor="middle" fill="#202124" font-family="Arial" font-size="10">Cost data (BigQuery)</text>
-  <text x="350" y="635" text-anchor="middle" fill="#ea4335" font-family="Arial" font-size="10" font-weight="500">24-48 hours</text>
-  <text x="550" y="635" text-anchor="middle" fill="#5f6368" font-family="Arial" font-size="10">GCP billing export delay</text>
+  <text x="150" y="505" text-anchor="middle" font-size="10" fill="#5f6368">Budget status</text>
+  <text x="320" y="505" text-anchor="middle" font-size="10" fill="#34a853">Real-time</text>
+  <text x="480" y="505" text-anchor="middle" font-size="10" fill="#999">Current spend vs budget</text>
   
-  <text x="180" y="658" text-anchor="middle" fill="#202124" font-family="Arial" font-size="10">Budget status</text>
-  <text x="350" y="658" text-anchor="middle" fill="#34a853" font-family="Arial" font-size="10" font-weight="500">Real-time</text>
-  <text x="550" y="658" text-anchor="middle" fill="#5f6368" font-family="Arial" font-size="10">Current spend vs budget</text>
+  <text x="150" y="525" text-anchor="middle" font-size="10" fill="#5f6368">Recommendations</text>
+  <text x="320" y="525" text-anchor="middle" font-size="10" fill="#fbbc04">8+ days lag</text>
+  <text x="480" y="525" text-anchor="middle" font-size="10" fill="#999">Needs usage history</text>
   
-  <text x="180" y="681" text-anchor="middle" fill="#202124" font-family="Arial" font-size="10">Recommendations</text>
-  <text x="350" y="681" text-anchor="middle" fill="#f9ab00" font-family="Arial" font-size="10" font-weight="500">8+ days lag</text>
-  <text x="550" y="681" text-anchor="middle" fill="#5f6368" font-family="Arial" font-size="10">Needs usage history</text>
+  <text x="150" y="545" text-anchor="middle" font-size="10" fill="#5f6368">Resource inventory</text>
+  <text x="320" y="545" text-anchor="middle" font-size="10" fill="#34a853">Real-time</text>
+  <text x="480" y="545" text-anchor="middle" font-size="10" fill="#999">Current state</text>
   
-  <text x="180" y="704" text-anchor="middle" fill="#202124" font-family="Arial" font-size="10">Resource changes</text>
-  <text x="350" y="704" text-anchor="middle" fill="#34a853" font-family="Arial" font-size="10" font-weight="500">Real-time</text>
-  <text x="550" y="704" text-anchor="middle" fill="#5f6368" font-family="Arial" font-size="10">Via Asset Inventory Feed</text>
+  <text x="150" y="565" text-anchor="middle" font-size="10" fill="#5f6368">Resource changes</text>
+  <text x="320" y="565" text-anchor="middle" font-size="10" fill="#34a853">Real-time</text>
+  <text x="480" y="565" text-anchor="middle" font-size="10" fill="#999">Via Asset Feed</text>
   
-  <!-- Storage Table -->
-  <text x="800" y="580" fill="#202124" font-family="Arial" font-size="12" font-weight="600">What We Store vs What GCP Stores:</text>
+  <!-- 6 Core Components -->
+  <rect x="620" y="400" width="530" height="180" rx="10" fill="white" stroke="#dadce0" stroke-width="1" filter="url(#shadow)"/>
+  <text x="885" y="425" text-anchor="middle" font-weight="bold" font-size="14" fill="#5f6368">6 CORE COMPONENTS</text>
   
-  <rect x="800" y="590" width="730" height="130" rx="8" fill="white" stroke="#dadce0"/>
+  <rect x="640" y="440" width="155" height="55" rx="4" fill="#e8f0fe" stroke="#4285f4" stroke-width="1"/>
+  <text x="717" y="460" text-anchor="middle" font-size="10" fill="#4285f4" font-weight="bold">1. Org Scanner</text>
+  <text x="717" y="475" text-anchor="middle" font-size="9" fill="#5f6368">Projects &amp; services</text>
+  <text x="717" y="488" text-anchor="middle" font-size="8" fill="#999">On-demand</text>
   
-  <!-- We store almost nothing badge -->
-  <rect x="1280" y="595" width="230" height="20" rx="10" fill="#c8e6c9"/>
-  <text x="1395" y="609" text-anchor="middle" fill="#2e7d32" font-family="Arial" font-size="10" font-weight="600">We store almost nothing!</text>
+  <rect x="805" y="440" width="155" height="55" rx="4" fill="#fce8e6" stroke="#ea4335" stroke-width="1"/>
+  <text x="882" y="460" text-anchor="middle" font-size="10" fill="#ea4335" font-weight="bold">2. Circuit Breaker</text>
+  <text x="882" y="475" text-anchor="middle" font-size="9" fill="#5f6368">Auto cost control</text>
+  <text x="882" y="488" text-anchor="middle" font-size="8" fill="#999">Event-driven</text>
   
-  <rect x="820" y="625" width="340" height="80" rx="6" fill="#e6f4ea" stroke="#34a853"/>
-  <text x="990" y="645" text-anchor="middle" fill="#137333" font-family="Arial" font-size="10" font-weight="600">GCP STORES:</text>
-  <text x="830" y="665" fill="#5f6368" font-family="Arial" font-size="9">• Cost history → BigQuery</text>
-  <text x="830" y="680" fill="#5f6368" font-family="Arial" font-size="9">• Budget config → Budget API</text>
-  <text x="830" y="695" fill="#5f6368" font-family="Arial" font-size="9">• Recommendations → Recommender</text>
-  <text x="990" y="665" fill="#5f6368" font-family="Arial" font-size="9">• Resource state → Asset Inventory</text>
-  <text x="990" y="680" fill="#5f6368" font-family="Arial" font-size="9">• Audit logs → Cloud Logging</text>
+  <rect x="970" y="440" width="155" height="55" rx="4" fill="#fef7e0" stroke="#fbbc04" stroke-width="1"/>
+  <text x="1047" y="460" text-anchor="middle" font-size="10" fill="#e37400" font-weight="bold">3. Budget Monitor</text>
+  <text x="1047" y="475" text-anchor="middle" font-size="9" fill="#5f6368">Multi-threshold alerts</text>
+  <text x="1047" y="488" text-anchor="middle" font-size="8" fill="#999">GCP-managed</text>
   
-  <rect x="1180" y="625" width="330" height="80" rx="6" fill="#fce8e6" stroke="#ea4335"/>
-  <text x="1345" y="645" text-anchor="middle" fill="#c62828" font-family="Arial" font-size="10" font-weight="600">WE STORE (Optional):</text>
-  <text x="1190" y="665" fill="#5f6368" font-family="Arial" font-size="9">• Circuit breaker state → Firestore (optional)</text>
-  <text x="1190" y="680" fill="#5f6368" font-family="Arial" font-size="9">• Conversation context → In-memory (per request)</text>
+  <rect x="640" y="505" width="155" height="55" rx="4" fill="#e6f4ea" stroke="#34a853" stroke-width="1"/>
+  <text x="717" y="525" text-anchor="middle" font-size="10" fill="#34a853" font-weight="bold">4. Real-time Tracker</text>
+  <text x="717" y="540" text-anchor="middle" font-size="9" fill="#5f6368">Expensive resources</text>
+  <text x="717" y="553" text-anchor="middle" font-size="8" fill="#999">Event-driven</text>
   
-  <!-- ==================== SECTION 4: COMPONENTS ==================== -->
-  <rect x="50" y="760" width="740" height="280" rx="12" fill="white" stroke="#9334e6" stroke-width="2" filter="url(#shadow)"/>
-  <rect x="50" y="760" width="740" height="35" rx="12" fill="#9334e6"/>
-  <rect x="50" y="785" width="740" height="10" fill="#9334e6"/>
-  <text x="420" y="785" text-anchor="middle" fill="white" font-family="Arial" font-size="14" font-weight="600">6 Core Components</text>
+  <rect x="805" y="505" width="155" height="55" rx="4" fill="#f3e8fd" stroke="#9334e6" stroke-width="1"/>
+  <text x="882" y="525" text-anchor="middle" font-size="10" fill="#9334e6" font-weight="bold">5. ML Recommendations</text>
+  <text x="882" y="540" text-anchor="middle" font-size="9" fill="#5f6368">GCP optimization</text>
+  <text x="882" y="553" text-anchor="middle" font-size="8" fill="#999">On-demand</text>
   
-  <!-- Component cards -->
-  <rect x="70" y="810" width="220" height="65" rx="6" fill="white" stroke="#1a73e8"/>
-  <text x="180" y="830" text-anchor="middle" fill="#1967d2" font-family="Arial" font-size="10" font-weight="600">1. Organization Scanner</text>
-  <text x="180" y="848" text-anchor="middle" fill="#5f6368" font-family="Arial" font-size="9">Discover projects, services, hierarchy</text>
-  <rect x="75" y="855" width="60" height="14" rx="3" fill="#e8f0fe"/>
-  <text x="105" y="865" text-anchor="middle" fill="#1a73e8" font-family="Arial" font-size="8">On-demand</text>
-  
-  <rect x="310" y="810" width="220" height="65" rx="6" fill="white" stroke="#ea4335"/>
-  <text x="420" y="830" text-anchor="middle" fill="#c62828" font-family="Arial" font-size="10" font-weight="600">2. Circuit Breaker</text>
-  <text x="420" y="848" text-anchor="middle" fill="#5f6368" font-family="Arial" font-size="9">Auto-stop resources at thresholds</text>
-  <rect x="315" y="855" width="70" height="14" rx="3" fill="#fff3e0"/>
-  <text x="350" y="865" text-anchor="middle" fill="#e65100" font-family="Arial" font-size="8">Event-driven</text>
-  
-  <rect x="550" y="810" width="220" height="65" rx="6" fill="white" stroke="#fbbc04"/>
-  <text x="660" y="830" text-anchor="middle" fill="#f9a825" font-family="Arial" font-size="10" font-weight="600">3. Budget Monitor</text>
-  <text x="660" y="848" text-anchor="middle" fill="#5f6368" font-family="Arial" font-size="9">Multi-threshold alerts + forecasting</text>
-  <rect x="555" y="855" width="70" height="14" rx="3" fill="#e6f4ea"/>
-  <text x="590" y="865" text-anchor="middle" fill="#137333" font-family="Arial" font-size="8">GCP-managed</text>
-  
-  <rect x="70" y="890" width="220" height="65" rx="6" fill="white" stroke="#00897b"/>
-  <text x="180" y="910" text-anchor="middle" fill="#00695c" font-family="Arial" font-size="10" font-weight="600">4. Real-time Tracker</text>
-  <text x="180" y="928" text-anchor="middle" fill="#5f6368" font-family="Arial" font-size="9">Detect expensive resource creation</text>
-  <rect x="75" y="935" width="70" height="14" rx="3" fill="#fff3e0"/>
-  <text x="110" y="945" text-anchor="middle" fill="#e65100" font-family="Arial" font-size="8">Event-driven</text>
-  
-  <rect x="310" y="890" width="220" height="65" rx="6" fill="white" stroke="#9334e6"/>
-  <text x="420" y="910" text-anchor="middle" fill="#7b1fa2" font-family="Arial" font-size="10" font-weight="600">5. ML Recommendations</text>
-  <text x="420" y="928" text-anchor="middle" fill="#5f6368" font-family="Arial" font-size="9">Surface GCP optimization suggestions</text>
-  <rect x="315" y="935" width="60" height="14" rx="3" fill="#e8f0fe"/>
-  <text x="345" y="945" text-anchor="middle" fill="#1a73e8" font-family="Arial" font-size="8">On-demand</text>
-  
-  <rect x="550" y="890" width="220" height="65" rx="6" fill="white" stroke="#0d47a1"/>
-  <text x="660" y="910" text-anchor="middle" fill="#1565c0" font-family="Arial" font-size="10" font-weight="600">6. Anomaly Detector</text>
-  <text x="660" y="928" text-anchor="middle" fill="#5f6368" font-family="Arial" font-size="9">Statistical spike detection (2σ)</text>
-  <rect x="555" y="935" width="60" height="14" rx="3" fill="#e8f0fe"/>
-  <text x="585" y="945" text-anchor="middle" fill="#1a73e8" font-family="Arial" font-size="8">On-demand</text>
+  <rect x="970" y="505" width="155" height="55" rx="4" fill="#fce4ec" stroke="#f538a0" stroke-width="1"/>
+  <text x="1047" y="525" text-anchor="middle" font-size="10" fill="#f538a0" font-weight="bold">6. Anomaly Detector</text>
+  <text x="1047" y="540" text-anchor="middle" font-size="9" fill="#5f6368">Statistical analysis</text>
+  <text x="1047" y="553" text-anchor="middle" font-size="8" fill="#999">On-demand</text>
   
   <!-- Circuit Breaker Thresholds -->
-  <text x="70" y="980" fill="#c62828" font-family="Arial" font-size="11" font-weight="600">Circuit Breaker Thresholds:</text>
+  <rect x="50" y="600" width="550" height="150" rx="10" fill="white" stroke="#ea4335" stroke-width="2" filter="url(#shadow)"/>
+  <text x="325" y="625" text-anchor="middle" font-weight="bold" font-size="14" fill="#ea4335">CIRCUIT BREAKER THRESHOLDS (Two-Level)</text>
   
-  <rect x="70" y="990" width="150" height="35" rx="4" fill="#e8f5e9" stroke="#34a853"/>
-  <text x="145" y="1005" text-anchor="middle" fill="#2e7d32" font-family="Arial" font-size="9" font-weight="600">$1K WARNING</text>
-  <text x="145" y="1020" text-anchor="middle" fill="#5f6368" font-family="Arial" font-size="8">Alert only</text>
+  <!-- Per-Service -->
+  <rect x="70" y="640" width="250" height="95" rx="4" fill="#fce8e6"/>
+  <text x="195" y="658" text-anchor="middle" font-weight="bold" font-size="11" fill="#c5221f">Per-Service Examples</text>
+  <text x="85" y="678" font-size="10" fill="#5f6368">Vertex AI: $500→$2.5K (CRIT)</text>
+  <text x="85" y="695" font-size="10" fill="#5f6368">Compute: $300→$1.5K (CRIT)</text>
+  <text x="85" y="712" font-size="10" fill="#5f6368">BigQuery: $200→$1K (CRIT)</text>
   
-  <rect x="230" y="990" width="150" height="35" rx="4" fill="#fff3e0" stroke="#f9ab00"/>
-  <text x="305" y="1005" text-anchor="middle" fill="#e65100" font-family="Arial" font-size="9" font-weight="600">$2.5K ELEVATED</text>
-  <text x="305" y="1020" text-anchor="middle" fill="#5f6368" font-family="Arial" font-size="8">Alert + escalate</text>
+  <!-- Overall -->
+  <rect x="335" y="640" width="250" height="95" rx="4" fill="#fef7e0"/>
+  <text x="460" y="658" text-anchor="middle" font-weight="bold" font-size="11" fill="#e37400">Overall (Safety Net)</text>
+  <text x="350" y="678" font-size="10" fill="#5f6368">WARNING: $1,000/day</text>
+  <text x="350" y="695" font-size="10" fill="#5f6368">ELEVATED: $2,500/day</text>
+  <text x="350" y="712" font-size="10" fill="#c5221f">CRITICAL: $5K | EMERGENCY: $10K</text>
   
-  <rect x="390" y="990" width="150" height="35" rx="4" fill="#ffebee" stroke="#ea4335"/>
-  <text x="465" y="1005" text-anchor="middle" fill="#c62828" font-family="Arial" font-size="9" font-weight="600">$5K CRITICAL</text>
-  <text x="465" y="1020" text-anchor="middle" fill="#5f6368" font-family="Arial" font-size="8">Stop resources</text>
+  <!-- APIs Used -->
+  <rect x="620" y="600" width="530" height="150" rx="10" fill="white" stroke="#1a73e8" stroke-width="2" filter="url(#shadow)"/>
+  <text x="885" y="625" text-anchor="middle" font-weight="bold" font-size="14" fill="#1a73e8">8 GCP APIs USED</text>
   
-  <rect x="550" y="990" width="160" height="35" rx="4" fill="#b71c1c"/>
-  <text x="630" y="1005" text-anchor="middle" fill="white" font-family="Arial" font-size="9" font-weight="600">$10K EMERGENCY</text>
-  <text x="630" y="1020" text-anchor="middle" fill="#ffcdd2" font-family="Arial" font-size="8">Disable billing</text>
+  <text x="700" y="650" font-size="10" fill="#5f6368">• Resource Manager v3</text>
+  <text x="700" y="668" font-size="10" fill="#5f6368">• Service Usage</text>
+  <text x="700" y="686" font-size="10" fill="#5f6368">• Budget API</text>
+  <text x="700" y="704" font-size="10" fill="#5f6368">• Cloud Asset Inventory</text>
   
-  <!-- ==================== SECTION 5: MCP TOOLS & INTENTS ==================== -->
-  <rect x="810" y="760" width="740" height="280" rx="12" fill="white" stroke="#f9ab00" stroke-width="2" filter="url(#shadow)"/>
-  <rect x="810" y="760" width="740" height="35" rx="12" fill="#f9ab00"/>
-  <rect x="810" y="785" width="740" height="10" fill="#f9ab00"/>
-  <text x="1180" y="785" text-anchor="middle" fill="white" font-family="Arial" font-size="14" font-weight="600">MCP Tools &amp; Conversational Intents</text>
+  <text x="920" y="650" font-size="10" fill="#5f6368">• Recommender API</text>
+  <text x="920" y="668" font-size="10" fill="#5f6368">• BigQuery</text>
+  <text x="920" y="686" font-size="10" fill="#5f6368">• Cloud Monitoring</text>
+  <text x="920" y="704" font-size="10" fill="#5f6368">• Pub/Sub</text>
   
-  <!-- Tools -->
-  <text x="830" y="820" fill="#e65100" font-family="Arial" font-size="11" font-weight="600">10 MCP Tools:</text>
+  <text x="885" y="735" text-anchor="middle" font-size="10" fill="#999">+ Compute Engine API for stop/start actions</text>
   
-  <rect x="830" y="830" width="340" height="120" rx="6" fill="white" stroke="#f9ab00"/>
+  <!-- What We Store vs GCP -->
+  <rect x="50" y="770" width="1100" height="110" rx="10" fill="white" stroke="#dadce0" stroke-width="1" filter="url(#shadow)"/>
+  <text x="600" y="795" text-anchor="middle" font-weight="bold" font-size="14" fill="#5f6368">WHAT WE STORE vs WHAT GCP STORES</text>
   
-  <text x="845" y="850" fill="#5f6368" font-family="Arial" font-size="9">• <tspan fill="#e65100" font-weight="600">scan_organization</tspan> — Discover projects</text>
-  <text x="845" y="867" fill="#5f6368" font-family="Arial" font-size="9">• <tspan fill="#e65100" font-weight="600">get_cost_summary</tspan> — Retrieve cost data</text>
-  <text x="845" y="884" fill="#5f6368" font-family="Arial" font-size="9">• <tspan fill="#e65100" font-weight="600">get_recommendations</tspan> — ML suggestions</text>
-  <text x="845" y="901" fill="#5f6368" font-family="Arial" font-size="9">• <tspan fill="#e65100" font-weight="600">detect_anomalies</tspan> — Statistical analysis</text>
-  <text x="845" y="918" fill="#5f6368" font-family="Arial" font-size="9">• <tspan fill="#e65100" font-weight="600">get_budget_status</tspan> — Check utilization</text>
-  <text x="845" y="935" fill="#5f6368" font-family="Arial" font-size="9">• <tspan fill="#e65100" font-weight="600">create_budget</tspan> — Create new budget</text>
+  <rect x="70" y="810" width="500" height="55" rx="4" fill="#e6f4ea"/>
+  <text x="320" y="830" text-anchor="middle" font-weight="bold" font-size="11" fill="#34a853">GCP STORES (Everything)</text>
+  <text x="85" y="850" font-size="10" fill="#5f6368">Cost history (BigQuery) | Budget config | Recommendations | Resource state | Audit logs</text>
   
-  <text x="1020" y="850" fill="#5f6368" font-family="Arial" font-size="9">• <tspan fill="#e65100" font-weight="600">get_circuit_status</tspan></text>
-  <text x="1020" y="867" fill="#5f6368" font-family="Arial" font-size="9">• <tspan fill="#e65100" font-weight="600">configure_breaker</tspan></text>
-  <text x="1020" y="884" fill="#5f6368" font-family="Arial" font-size="9">• <tspan fill="#c62828" font-weight="600">stop_resource ⚠️</tspan></text>
-  <text x="1020" y="901" fill="#5f6368" font-family="Arial" font-size="9">• <tspan fill="#34a853" font-weight="600">chat</tspan> — NL router</text>
-  
-  <rect x="1010" y="915" width="140" height="25" rx="4" fill="#ffebee"/>
-  <text x="1080" y="932" text-anchor="middle" fill="#c62828" font-family="Arial" font-size="9">⚠️ = Approval required</text>
-  
-  <!-- Intents -->
-  <text x="1190" y="820" fill="#1967d2" font-family="Arial" font-size="11" font-weight="600">8 Supported Intents:</text>
-  
-  <rect x="1190" y="830" width="340" height="120" rx="6" fill="white" stroke="#1a73e8"/>
-  
-  <text x="1205" y="850" fill="#5f6368" font-family="Arial" font-size="9">• <tspan fill="#1967d2" font-weight="600">COST_QUERY</tspan> — "How much did I spend?"</text>
-  <text x="1205" y="867" fill="#5f6368" font-family="Arial" font-size="9">• <tspan fill="#1967d2" font-weight="600">SPIKE_ANALYSIS</tspan> — "Why did costs spike?"</text>
-  <text x="1205" y="884" fill="#5f6368" font-family="Arial" font-size="9">• <tspan fill="#1967d2" font-weight="600">RECOMMENDATION</tspan> — "How can I save?"</text>
-  <text x="1205" y="901" fill="#5f6368" font-family="Arial" font-size="9">• <tspan fill="#1967d2" font-weight="600">BUDGET_STATUS</tspan> — "Am I over limit?"</text>
-  <text x="1205" y="918" fill="#5f6368" font-family="Arial" font-size="9">• <tspan fill="#1967d2" font-weight="600">ANOMALY_CHECK</tspan> — "Is spending normal?"</text>
-  <text x="1205" y="935" fill="#5f6368" font-family="Arial" font-size="9">• <tspan fill="#1967d2" font-weight="600">CIRCUIT_BREAKER</tspan> / <tspan fill="#1967d2" font-weight="600">RESOURCE_ACTION</tspan> / <tspan fill="#1967d2" font-weight="600">HELP</tspan></text>
-  
-  <!-- BigQuery Queries -->
-  <text x="830" y="970" fill="#7b1fa2" font-family="Arial" font-size="11" font-weight="600">6 BigQuery Query Types:</text>
-  
-  <rect x="830" y="980" width="700" height="45" rx="6" fill="white" stroke="#9334e6"/>
-  <text x="845" y="1000" fill="#5f6368" font-family="Arial" font-size="9">• <tspan font-weight="600">Daily cost summary</tspan> — trends</text>
-  <text x="845" y="1017" fill="#5f6368" font-family="Arial" font-size="9">• <tspan font-weight="600">Service breakdown</tspan> — by service</text>
-  <text x="1050" y="1000" fill="#5f6368" font-family="Arial" font-size="9">• <tspan font-weight="600">Project breakdown</tspan> — by project</text>
-  <text x="1050" y="1017" fill="#5f6368" font-family="Arial" font-size="9">• <tspan font-weight="600">Cost comparison</tspan> — vs prior period</text>
-  <text x="1300" y="1000" fill="#5f6368" font-family="Arial" font-size="9">• <tspan font-weight="600">Anomaly baseline</tspan> — mean + σ</text>
-  <text x="1300" y="1017" fill="#5f6368" font-family="Arial" font-size="9">• <tspan font-weight="600">Forecasting</tspan> — month-end projection</text>
-  
-  <!-- ==================== SECTION 6: DEPLOYMENT & SECURITY ==================== -->
-  <rect x="50" y="1060" width="740" height="200" rx="12" fill="white" stroke="#34a853" stroke-width="2" filter="url(#shadow)"/>
-  <rect x="50" y="1060" width="740" height="35" rx="12" fill="#34a853"/>
-  <rect x="50" y="1085" width="740" height="10" fill="#34a853"/>
-  <text x="420" y="1085" text-anchor="middle" fill="white" font-family="Arial" font-size="14" font-weight="600">Deployment &amp; Security</text>
-  
-  <!-- Setup Steps -->
-  <text x="70" y="1115" fill="#137333" font-family="Arial" font-size="11" font-weight="600">One-Time Setup (8 Steps):</text>
-  
-  <rect x="70" y="1125" width="80" height="45" rx="4" fill="white" stroke="#34a853"/>
-  <text x="110" y="1143" text-anchor="middle" fill="#137333" font-family="Arial" font-size="8" font-weight="600">1. Enable</text>
-  <text x="110" y="1158" text-anchor="middle" fill="#5f6368" font-family="Arial" font-size="8">Billing Export</text>
-  
-  <rect x="160" y="1125" width="80" height="45" rx="4" fill="white" stroke="#34a853"/>
-  <text x="200" y="1143" text-anchor="middle" fill="#137333" font-family="Arial" font-size="8" font-weight="600">2. Create</text>
-  <text x="200" y="1158" text-anchor="middle" fill="#5f6368" font-family="Arial" font-size="8">Service Acct</text>
-  
-  <rect x="250" y="1125" width="80" height="45" rx="4" fill="white" stroke="#34a853"/>
-  <text x="290" y="1143" text-anchor="middle" fill="#137333" font-family="Arial" font-size="8" font-weight="600">3. Assign</text>
-  <text x="290" y="1158" text-anchor="middle" fill="#5f6368" font-family="Arial" font-size="8">IAM Roles</text>
-  
-  <rect x="340" y="1125" width="80" height="45" rx="4" fill="white" stroke="#34a853"/>
-  <text x="380" y="1143" text-anchor="middle" fill="#137333" font-family="Arial" font-size="8" font-weight="600">4. Create</text>
-  <text x="380" y="1158" text-anchor="middle" fill="#5f6368" font-family="Arial" font-size="8">Pub/Sub</text>
-  
-  <rect x="430" y="1125" width="80" height="45" rx="4" fill="white" stroke="#34a853"/>
-  <text x="470" y="1143" text-anchor="middle" fill="#137333" font-family="Arial" font-size="8" font-weight="600">5. Create</text>
-  <text x="470" y="1158" text-anchor="middle" fill="#5f6368" font-family="Arial" font-size="8">Budget</text>
-  
-  <rect x="520" y="1125" width="80" height="45" rx="4" fill="white" stroke="#34a853"/>
-  <text x="560" y="1143" text-anchor="middle" fill="#137333" font-family="Arial" font-size="8" font-weight="600">6. Asset</text>
-  <text x="560" y="1158" text-anchor="middle" fill="#5f6368" font-family="Arial" font-size="8">Feed (opt)</text>
-  
-  <rect x="610" y="1125" width="80" height="45" rx="4" fill="#fce8e6" stroke="#ea4335"/>
-  <text x="650" y="1143" text-anchor="middle" fill="#c62828" font-family="Arial" font-size="8" font-weight="600">7. Deploy</text>
-  <text x="650" y="1158" text-anchor="middle" fill="#5f6368" font-family="Arial" font-size="8">MCP Server</text>
-  
-  <rect x="700" y="1125" width="70" height="45" rx="4" fill="#fff3e0" stroke="#f9ab00" stroke-dasharray="3,2"/>
-  <text x="735" y="1143" text-anchor="middle" fill="#e65100" font-family="Arial" font-size="8" font-weight="600">8. Function</text>
-  <text x="735" y="1158" text-anchor="middle" fill="#5f6368" font-family="Arial" font-size="8">(optional)</text>
-  
-  <!-- IAM Roles -->
-  <text x="70" y="1195" fill="#137333" font-family="Arial" font-size="11" font-weight="600">Key IAM Roles:</text>
-  
-  <rect x="70" y="1205" width="340" height="40" rx="6" fill="#e6f4ea"/>
-  <text x="240" y="1222" text-anchor="middle" fill="#137333" font-family="Arial" font-size="9" font-weight="600">Organization Level:</text>
-  <text x="240" y="1238" text-anchor="middle" fill="#5f6368" font-family="Arial" font-size="8">browser, folderViewer, projectViewer, assetViewer, recommenderViewer</text>
-  
-  <rect x="420" y="1205" width="350" height="40" rx="6" fill="#e6f4ea"/>
-  <text x="595" y="1222" text-anchor="middle" fill="#137333" font-family="Arial" font-size="9" font-weight="600">Billing + Project Level:</text>
-  <text x="595" y="1238" text-anchor="middle" fill="#5f6368" font-family="Arial" font-size="8">billing.viewer, budgetsEditor, bigquery.dataViewer, compute.instanceAdmin</text>
-  
-  <!-- ==================== SECTION 7: MONITORING & LIMITATIONS ==================== -->
-  <rect x="810" y="1060" width="740" height="200" rx="12" fill="white" stroke="#0d47a1" stroke-width="2" filter="url(#shadow)"/>
-  <rect x="810" y="1060" width="740" height="35" rx="12" fill="#0d47a1"/>
-  <rect x="810" y="1085" width="740" height="10" fill="#0d47a1"/>
-  <text x="1180" y="1085" text-anchor="middle" fill="white" font-family="Arial" font-size="14" font-weight="600">Monitoring &amp; Known Limitations</text>
-  
-  <!-- Key Metrics -->
-  <text x="830" y="1115" fill="#1565c0" font-family="Arial" font-size="11" font-weight="600">Key Metrics:</text>
-  
-  <rect x="830" y="1125" width="340" height="55" rx="6" fill="white" stroke="#0d47a1"/>
-  <text x="845" y="1145" fill="#5f6368" font-family="Arial" font-size="9">• Request latency: <tspan fill="#c62828">p95 &lt; 5 seconds</tspan></text>
-  <text x="845" y="1162" fill="#5f6368" font-family="Arial" font-size="9">• Error rate: <tspan fill="#c62828">&lt; 5%</tspan></text>
-  <text x="1020" y="1145" fill="#5f6368" font-family="Arial" font-size="9">• API quota: <tspan fill="#f9ab00">&lt; 80%</tspan></text>
-  <text x="1020" y="1162" fill="#5f6368" font-family="Arial" font-size="9">• Circuit trips: <tspan fill="#c62828">Alert on any</tspan></text>
-  
-  <!-- Known Limitations -->
-  <text x="1190" y="1115" fill="#1565c0" font-family="Arial" font-size="11" font-weight="600">Known Limitations:</text>
-  
-  <rect x="1190" y="1125" width="340" height="55" rx="6" fill="white" stroke="#ea4335"/>
-  <text x="1205" y="1145" fill="#5f6368" font-family="Arial" font-size="9">• Billing delay: <tspan fill="#c62828">24-48 hours</tspan></text>
-  <text x="1205" y="1162" fill="#5f6368" font-family="Arial" font-size="9">• Recommender: <tspan fill="#c62828">8+ days for new</tspan></text>
-  <text x="1360" y="1145" fill="#5f6368" font-family="Arial" font-size="9">• Requires: <tspan fill="#c62828">GCP Org</tspan></text>
-  <text x="1360" y="1162" fill="#5f6368" font-family="Arial" font-size="9">• Budget limit: <tspan fill="#c62828">5,000 max</tspan></text>
-  
-  <!-- Logging -->
-  <text x="830" y="1200" fill="#1565c0" font-family="Arial" font-size="11" font-weight="600">Logging Levels:</text>
-  
-  <rect x="830" y="1210" width="700" height="35" rx="6" fill="white" stroke="#0d47a1"/>
-  <rect x="845" y="1220" width="50" height="18" rx="3" fill="#e8f5e9"/>
-  <text x="870" y="1233" text-anchor="middle" fill="#2e7d32" font-family="Arial" font-size="9">INFO</text>
-  <text x="910" y="1233" fill="#5f6368" font-family="Arial" font-size="9">Queries, API calls</text>
-  
-  <rect x="1030" y="1220" width="65" height="18" rx="3" fill="#fff3e0"/>
-  <text x="1062" y="1233" text-anchor="middle" fill="#e65100" font-family="Arial" font-size="9">WARNING</text>
-  <text x="1110" y="1233" fill="#5f6368" font-family="Arial" font-size="9">Rate limits</text>
-  
-  <rect x="1210" y="1220" width="50" height="18" rx="3" fill="#ffebee"/>
-  <text x="1235" y="1233" text-anchor="middle" fill="#c62828" font-family="Arial" font-size="9">ERROR</text>
-  <text x="1275" y="1233" fill="#5f6368" font-family="Arial" font-size="9">API failures</text>
-  
-  <rect x="1380" y="1220" width="60" height="18" rx="3" fill="#b71c1c"/>
-  <text x="1410" y="1233" text-anchor="middle" fill="white" font-family="Arial" font-size="9">CRITICAL</text>
-  <text x="1455" y="1233" fill="#5f6368" font-family="Arial" font-size="9">Trips</text>
-  
-  <!-- ==================== SUMMARY BOX ==================== -->
-  <rect x="50" y="1280" width="1500" height="120" rx="12" fill="#e8f0fe" stroke="#1a73e8" stroke-width="2" filter="url(#shadow)"/>
-  <text x="800" y="1310" text-anchor="middle" fill="#1967d2" font-family="Google Sans, Arial, sans-serif" font-size="18" font-weight="600">
-    Summary: Triggers &amp; Data Flow
-  </text>
-  
-  <!-- Three columns -->
-  <rect x="70" y="1325" width="450" height="60" rx="8" fill="#c8e6c9"/>
-  <text x="295" y="1345" text-anchor="middle" fill="#2e7d32" font-family="Arial" font-size="11" font-weight="600">AUTOMATIC (GCP-Managed)</text>
-  <text x="295" y="1365" text-anchor="middle" fill="#2e7d32" font-family="Arial" font-size="10">Billing → BigQuery | Budget monitoring | Recommender | Asset tracking</text>
-  <text x="295" y="1380" text-anchor="middle" fill="#137333" font-family="Arial" font-size="9" font-style="italic">We do nothing — GCP handles it</text>
-  
-  <rect x="540" y="1325" width="450" height="60" rx="8" fill="#fff8e1"/>
-  <text x="765" y="1345" text-anchor="middle" fill="#e65100" font-family="Arial" font-size="11" font-weight="600">EVENT-DRIVEN (Pub/Sub)</text>
-  <text x="765" y="1365" text-anchor="middle" fill="#e65100" font-family="Arial" font-size="10">Budget threshold → Circuit Breaker | Resource created → Cost Alert</text>
-  <text x="765" y="1380" text-anchor="middle" fill="#f57c00" font-family="Arial" font-size="9" font-style="italic">Triggered by GCP — we react</text>
-  
-  <rect x="1010" y="1325" width="520" height="60" rx="8" fill="#d2e3fc"/>
-  <text x="1270" y="1345" text-anchor="middle" fill="#1967d2" font-family="Arial" font-size="11" font-weight="600">ON-DEMAND (User Query)</text>
-  <text x="1270" y="1365" text-anchor="middle" fill="#1967d2" font-family="Arial" font-size="10">User question → MCP Server → Query GCP APIs → Response</text>
-  <text x="1270" y="1380" text-anchor="middle" fill="#1a73e8" font-family="Arial" font-size="9" font-style="italic">No polling — queries only when user asks</text>
-  
-  <!-- Legend -->
-  <rect x="50" y="1420" width="1500" height="50" rx="8" fill="white" stroke="#dadce0"/>
-  <text x="70" y="1450" fill="#202124" font-family="Arial" font-size="11" font-weight="600">Legend:</text>
-  
-  <rect x="140" y="1435" width="15" height="15" rx="3" fill="#ceead6" stroke="#34a853"/>
-  <text x="160" y="1447" fill="#5f6368" font-family="Arial" font-size="10">GCP-Managed</text>
-  
-  <rect x="280" y="1435" width="15" height="15" rx="3" fill="#ffe0b2" stroke="#f9ab00"/>
-  <text x="300" y="1447" fill="#5f6368" font-family="Arial" font-size="10">Event-Driven</text>
-  
-  <rect x="420" y="1435" width="15" height="15" rx="3" fill="#d2e3fc" stroke="#1a73e8"/>
-  <text x="440" y="1447" fill="#5f6368" font-family="Arial" font-size="10">On-Demand</text>
-  
-  <rect x="550" y="1435" width="15" height="15" rx="3" fill="#fadbd8" stroke="#ea4335"/>
-  <text x="570" y="1447" fill="#5f6368" font-family="Arial" font-size="10">We Deploy</text>
-  
-  <line x1="680" y1="1442" x2="720" y2="1442" stroke="#34a853" stroke-width="2" marker-end="url(#arrowheadGreen)"/>
-  <text x="730" y="1447" fill="#5f6368" font-family="Arial" font-size="10">Automatic flow</text>
-  
-  <line x1="860" y1="1442" x2="900" y2="1442" stroke="#f9ab00" stroke-width="2" marker-end="url(#arrowheadOrange)"/>
-  <text x="910" y="1447" fill="#5f6368" font-family="Arial" font-size="10">Event flow</text>
-  
-  <line x1="1020" y1="1442" x2="1060" y2="1442" stroke="#1a73e8" stroke-width="2" marker-end="url(#arrowheadBlue)"/>
-  <text x="1070" y="1447" fill="#5f6368" font-family="Arial" font-size="10">Query flow</text>
-  
-  <rect x="1180" y="1432" width="80" height="20" rx="4" fill="#c8e6c9"/>
-  <text x="1220" y="1446" text-anchor="middle" fill="#2e7d32" font-family="Arial" font-size="9" font-weight="600">$20-80/mo</text>
-  <text x="1270" y="1447" fill="#5f6368" font-family="Arial" font-size="10">Total infrastructure cost</text>
+  <rect x="590" y="810" width="540" height="55" rx="4" fill="#fff3e0"/>
+  <text x="860" y="830" text-anchor="middle" font-weight="bold" font-size="11" fill="#e65100">WE STORE (Almost Nothing)</text>
+  <text x="605" y="850" font-size="10" fill="#5f6368">Circuit breaker state (Firestore, optional) | Conversation context (in-memory, per request)</text>
   
   <!-- Footer -->
-  <text x="800" y="1500" text-anchor="middle" fill="#5f6368" font-family="Arial" font-size="11">
-    GCP Cost Monitoring Agent — Technical Summary v1.1 — February 2025
-  </text>
-  
+  <text x="600" y="895" text-anchor="middle" font-size="10" fill="#9aa0a6">Technical Summary v1.1 — February 2025 | Infrastructure: $20-80/month | Target: SMBs with $50K-$500K monthly spend</text>
 </svg>

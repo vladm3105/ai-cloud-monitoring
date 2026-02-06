@@ -21,27 +21,15 @@ The AI Cost Monitoring platform consists of multiple cloud-specific agents, each
 
 ## Multi-Agent Architecture
 
+```mermaid
+flowchart TD
+    User[USER / ORGANIZATION] --> Interface[UNIFIED INTERFACE (Future)<br/>Cross-cloud dashboard & orchestration]
+    
+    Interface --> GCP[GCP AGENT<br/>Google Cloud Services]
+    Interface --> AWS[AWS AGENT<br/>Amazon Web Services]
+    Interface --> Azure[AZURE AGENT<br/>Microsoft Azure]
 ```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                         USER / ORGANIZATION                                  │
-└─────────────────────────────────────────────────────────────────────────────┘
-                                    │
-                                    ▼
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                    UNIFIED INTERFACE (Future)                                │
-│                    Cross-cloud dashboard & orchestration                     │
-└─────────────────────────────────────────────────────────────────────────────┘
-                                    │
-            ┌───────────────────────┼───────────────────────┐
-            │                       │                       │
-            ▼                       ▼                       ▼
-    ┌───────────────┐       ┌───────────────┐       ┌───────────────┐
-    │   GCP AGENT   │       │   AWS AGENT   │       │  AZURE AGENT  │
-    │               │       │               │       │               │
-    │  Google Cloud │       │    Amazon     │       │   Microsoft   │
-    │   Services    │       │  Web Services │       │     Azure     │
-    └───────────────┘       └───────────────┘       └───────────────┘
-```
+**Legend**: The multi-agent architecture with a unified interface orchestrating cloud-specific agents.
 
 ---
 
@@ -216,65 +204,41 @@ Each agent can answer questions like:
 
 ### Per-Agent Data Flow
 
+```mermaid
+flowchart TD
+    subgraph Automatic["AUTOMATIC (Cloud-Managed)"]
+        direction TB
+        CloudServices[Cloud Services] -->|Billing System| DataExport[Data Export] -->|Automatic| QueryStore[Query Store]
+    end
+
+    subgraph EventDriven["EVENT-DRIVEN (Pub/Sub / SNS / Event Grid)"]
+        direction TB
+        BudgetThreshold[Budget Threshold] -->|Event Bus| AgentFunction1[Agent Function] -->|Action| Action[Action]
+        ResourceChange[Resource Change] -->|Event Bus| AgentFunction2[Agent Function] -->|Alert| Alert[Alert]
+    end
+
+    subgraph OnDemand["ON-DEMAND (User Query)"]
+        direction TB
+        UserQuestion[User Question] --> MCP[MCP Agent] -->|Cloud APIs| Response[Response]
+    end
 ```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                         AGENT DATA FLOW (Each Cloud)                         │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                             │
-│  AUTOMATIC (Cloud-Managed)                                                  │
-│  ═════════════════════════                                                  │
-│                                                                             │
-│  Cloud Services ──► Billing System ──► Data Export ──► Query Store         │
-│  (AI/ML, Compute,    (managed)        (automatic)      (BQ/Athena/         │
-│   Data, etc.)                                           Cost Mgmt)          │
-│                                                                             │
-│  EVENT-DRIVEN (Pub/Sub / SNS / Event Grid)                                 │
-│  ═════════════════════════════════════════                                  │
-│                                                                             │
-│  Budget Threshold ──► Event Bus ──► Agent Function ──► Action              │
-│  Resource Change  ──► Event Bus ──► Agent Function ──► Alert               │
-│                                                                             │
-│  ON-DEMAND (User Query)                                                    │
-│  ══════════════════════                                                     │
-│                                                                             │
-│  User Question ──► MCP Agent ──► Cloud APIs ──► Response                   │
-│                                                                             │
-└─────────────────────────────────────────────────────────────────────────────┘
-```
+**Legend**: Data flow within a single agent, covering automatic data collection, event-driven reactions, and user-initiated queries.
 
 ### Cross-Cloud Aggregation (Future)
 
+```mermaid
+flowchart TD
+    subgraph Agents["Agents"]
+        GCP[GCP Agent Results]
+        AWS[AWS Agent Results]
+        Azure[Azure Agent Results]
+    end
+
+    GCP & AWS & Azure --> Aggregation[Aggregation Layer]
+    
+    Aggregation --> UnifiedViews[UNIFIED VIEWS<br/>• Total AI spend across clouds<br/>• LLM cost comparison<br/>• Cross-cloud optimization<br/>• Consolidated alerts]
 ```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                    UNIFIED DASHBOARD (Future Phase)                          │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                             │
-│  ┌─────────────┐    ┌─────────────┐    ┌─────────────┐                    │
-│  │  GCP Agent  │    │  AWS Agent  │    │ Azure Agent │                    │
-│  │   Results   │    │   Results   │    │   Results   │                    │
-│  └──────┬──────┘    └──────┬──────┘    └──────┬──────┘                    │
-│         │                  │                  │                            │
-│         └──────────────────┼──────────────────┘                            │
-│                            │                                               │
-│                            ▼                                               │
-│                  ┌─────────────────┐                                       │
-│                  │   Aggregation   │                                       │
-│                  │     Layer       │                                       │
-│                  └────────┬────────┘                                       │
-│                           │                                                │
-│                           ▼                                                │
-│  ┌─────────────────────────────────────────────────────────────────────┐  │
-│  │                     UNIFIED VIEWS                                    │  │
-│  │                                                                      │  │
-│  │  • Total AI spend across clouds                                     │  │
-│  │  • LLM cost comparison (Gemini vs Bedrock vs Azure OpenAI)         │  │
-│  │  • Cross-cloud optimization opportunities                           │  │
-│  │  • Consolidated alerts and recommendations                          │  │
-│  │                                                                      │  │
-│  └─────────────────────────────────────────────────────────────────────┘  │
-│                                                                             │
-└─────────────────────────────────────────────────────────────────────────────┘
-```
+**Legend**: Designing the future cross-cloud aggregation layer to unify insights from all three agents.
 
 ---
 
@@ -304,16 +268,32 @@ Each agent can answer questions like:
 
 ## Circuit Breaker Thresholds
 
-### AI/ML-Specific Thresholds
+The circuit breaker operates on two levels: **per-service thresholds** that monitor specific high-cost services, and **overall thresholds** that monitor total cloud spend. Both can trigger independently.
 
-| Level | Daily Threshold | Action |
-|-------|-----------------|--------|
-| **WARNING** | $500/day AI spend | Alert only |
-| **ELEVATED** | $1,000/day AI spend | Alert + escalation |
-| **CRITICAL** | $2,500/day AI spend | Stop non-production endpoints |
-| **EMERGENCY** | $5,000/day AI spend | Stop all endpoints + disable APIs |
+### Per-Service Thresholds (Examples)
+
+Each high-cost service can have its own circuit breaker configuration. Default thresholds for common services:
+
+| Service Category | Level | Daily Threshold | Action |
+|------------------|-------|-----------------|--------|
+| **AI/ML Services** | WARNING | $500/day | Alert only |
+| (Vertex AI, Bedrock, Azure OpenAI) | ELEVATED | $1,000/day | Alert + escalation |
+| | CRITICAL | $2,500/day | Stop non-production endpoints |
+| | EMERGENCY | $5,000/day | Stop all endpoints + disable APIs |
+| **Compute Services** | WARNING | $300/day | Alert only |
+| (GCE, EC2, Azure VMs) | ELEVATED | $750/day | Alert + escalation |
+| | CRITICAL | $1,500/day | Stop non-production instances |
+| | EMERGENCY | $3,000/day | Stop all instances (except tagged protected) |
+| **Data Services** | WARNING | $200/day | Alert only |
+| (BigQuery, Redshift, Synapse) | ELEVATED | $500/day | Alert + escalation |
+| | CRITICAL | $1,000/day | Throttle queries |
+| | EMERGENCY | $2,000/day | Disable non-essential access |
+
+> **Note:** Per-service thresholds are customizable based on your workload patterns. Configure via `configure_circuit_breaker` tool.
 
 ### Overall Cloud Thresholds
+
+These thresholds monitor total daily spend across all services and trigger regardless of individual service thresholds:
 
 | Level | Daily Threshold | Action |
 |-------|-----------------|--------|
@@ -321,6 +301,13 @@ Each agent can answer questions like:
 | **ELEVATED** | $2,500/day total | Alert + escalation |
 | **CRITICAL** | $5,000/day total | Stop high-cost resources |
 | **EMERGENCY** | $10,000/day total | Disable billing |
+
+### Threshold Interaction
+
+- Per-service thresholds provide **granular control** for specific cost centers
+- Overall thresholds provide a **safety net** regardless of which service is spending
+- Either threshold type can independently trip the circuit breaker
+- Example: If AI/ML hits $2,500 (per-service CRITICAL) while total spend is $3,000 (overall WARNING), the per-service CRITICAL action executes
 
 ---
 

@@ -2,7 +2,7 @@
 
 ## Overview
 
-The GCP Agent is a specialized component within the AI Cost Monitoring system that monitors Google Cloud Platform services to prevent billing spikes and unexpected costs. It operates through the **GCP MCP Server** (Port 8084) and leverages six primary GCP APIs:
+The GCP Agent is a specialized component within the AI Cost Monitoring system that monitors Google Cloud Platform services to prevent billing spikes and unexpected costs. It operates through the **GCP MCP Server** (Port `${MCP_SERVER_PORT}`) and leverages eight primary GCP APIs:
 
 1. **Cloud Resource Manager API** — Organization, folder, and project hierarchy traversal
 2. **Service Usage API** — Enabled services enumeration per project
@@ -10,6 +10,8 @@ The GCP Agent is a specialized component within the AI Cost Monitoring system th
 4. **Recommender API** — Rightsizing, idle resource detection, commitment recommendations
 5. **Cloud Asset Inventory** — Resource discovery, change tracking, metadata analysis
 6. **Budget API** — Budget thresholds, alerts, and programmatic notifications
+7. **Cloud Monitoring API** — Metrics, custom alerts, and resource utilization data
+8. **BigQuery API** — Billing export queries and historical cost analytics
 
 ---
 
@@ -17,42 +19,25 @@ The GCP Agent is a specialized component within the AI Cost Monitoring system th
 
 The GCP Agent monitors **all enabled services across all projects** in an organization through a hierarchical discovery approach:
 
+```mermaid
+flowchart TD
+    Org["Organization<br/>organizations/123456"]
+    
+    Org --> FolderP[Folder: Production]
+    Org --> FolderD[Folder: Development]
+    Org --> FolderS[Folder: Sandbox]
+    
+    FolderP --> Proj1[Proj-1]
+    FolderP --> Proj2[Proj-2]
+    FolderD --> Proj3[Proj-3]
+    FolderD --> Proj4[Proj-4]
+    FolderS --> Proj5[Proj-5]
+    FolderS --> Proj6[Proj-6]
+    
+    Proj1 & Proj2 & Proj3 & Proj4 & Proj5 & Proj6 --> SU["Service Usage API (per project)<br/>• compute.googleapis.com<br/>• bigquery.googleapis.com<br/>• storage.googleapis.com<br/>• cloudfunctions.googleapis.com<br/>• aiplatform.googleapis.com<br/>• ... (all enabled services)"]
 ```
-┌─────────────────────────────────────────────────────────────────────┐
-│                    ORGANIZATION DISCOVERY FLOW                       │
-├─────────────────────────────────────────────────────────────────────┤
-│                                                                     │
-│  ┌──────────────────────────────────────────────────────────────┐  │
-│  │                    ORGANIZATION                               │  │
-│  │                   organizations/123456                        │  │
-│  └──────────────────────────┬───────────────────────────────────┘  │
-│                             │                                       │
-│         ┌───────────────────┼───────────────────┐                  │
-│         ▼                   ▼                   ▼                  │
-│  ┌─────────────┐     ┌─────────────┐     ┌─────────────┐          │
-│  │  Folder:    │     │  Folder:    │     │  Folder:    │          │
-│  │  Production │     │  Development│     │  Sandbox    │          │
-│  └──────┬──────┘     └──────┬──────┘     └──────┬──────┘          │
-│         │                   │                   │                  │
-│    ┌────┴────┐         ┌────┴────┐         ┌────┴────┐            │
-│    ▼         ▼         ▼         ▼         ▼         ▼            │
-│ ┌──────┐ ┌──────┐ ┌──────┐ ┌──────┐ ┌──────┐ ┌──────┐            │
-│ │Proj-1│ │Proj-2│ │Proj-3│ │Proj-4│ │Proj-5│ │Proj-6│            │
-│ └──┬───┘ └──┬───┘ └──┬───┘ └──┬───┘ └──┬───┘ └──┬───┘            │
-│    │        │        │        │        │        │                  │
-│    ▼        ▼        ▼        ▼        ▼        ▼                  │
-│ ┌──────────────────────────────────────────────────────────────┐  │
-│ │              SERVICE USAGE API (per project)                  │  │
-│ │  • compute.googleapis.com (enabled)                          │  │
-│ │  • bigquery.googleapis.com (enabled)                         │  │
-│ │  • storage.googleapis.com (enabled)                          │  │
-│ │  • cloudfunctions.googleapis.com (enabled)                   │  │
-│ │  • aiplatform.googleapis.com (enabled)                       │  │
-│ │  • ... (all enabled services)                                │  │
-│ └──────────────────────────────────────────────────────────────┘  │
-│                                                                     │
-└─────────────────────────────────────────────────────────────────────┘
-```
+
+**Legend**: organization hierarchy flows from top to bottom, culminating in service enumeration for each project.
 
 ### Required IAM Permissions
 
@@ -74,63 +59,32 @@ To monitor all projects and services organization-wide, the service account need
 
 ## Architecture Position
 
+```mermaid
+flowchart TD
+    subgraph AgentLayer["Agent Orchestration Layer"]
+        CA["COST AGENT<br/>• Query<br/>• Aggregate<br/>• Compare"]
+        OA["OPTIMIZATION AGENT<br/>• Rightsizing<br/>• Idle detect<br/>• Spot/CUD"]
+        RA["REMEDIATION AGENT<br/>• Execute<br/>• Approve<br/>• Rollback"]
+        
+        CA & OA & RA --> Gateway[MCP GATEWAY<br/>Port ${MCP_SERVER_PORT}]
+    end
+    
+    Gateway --> MCPServer
+    
+    subgraph MCPServer["GCP MCP SERVER (Port ${MCP_SERVER_PORT})"]
+        direction LR
+        Billing["Cloud Billing API<br/>• Billing data<br/>• Cost reports<br/>• SKU pricing<br/>• Exports"]
+        Recommender["Recommender API<br/>• VM rightsizing<br/>• Idle VMs<br/>• Idle disks<br/>• CUD recs"]
+        Asset["Cloud Asset Inventory<br/>• Resource list<br/>• Change history<br/>• Asset metadata<br/>• Real-time feeds"]
+        Budget["Budget API<br/>• Budget CRUD<br/>• Thresholds<br/>• Pub/Sub<br/>• Notifications"]
+        Monitoring["Cloud Monitoring<br/>• Metrics<br/>• Alerts<br/>• Dashboards<br/>• Time series"]
+        BQ["BigQuery<br/>• Billing exports<br/>• Historical data<br/>• SQL queries<br/>• Cost analytics"]
+    end
+    
+    MCPServer --> GCP["GOOGLE CLOUD PLATFORM<br/>Compute Engine | Cloud Storage | BigQuery | Cloud SQL | GKE<br/>Cloud Run | Dataflow | Pub/Sub | Cloud Functions"]
 ```
-┌─────────────────────────────────────────────────────────────────────┐
-│                    AGENT ORCHESTRATION LAYER                        │
-├─────────────────────────────────────────────────────────────────────┤
-│                                                                     │
-│   ┌─────────────┐    ┌───────────────┐    ┌────────────────┐       │
-│   │ COST AGENT  │    │ OPTIMIZATION  │    │ REMEDIATION    │       │
-│   │             │    │    AGENT      │    │    AGENT       │       │
-│   │ • Query     │    │ • Rightsizing │    │ • Execute      │       │
-│   │ • Aggregate │    │ • Idle detect │    │ • Approve      │       │
-│   │ • Compare   │    │ • Spot/CUD    │    │ • Rollback     │       │
-│   └──────┬──────┘    └───────┬───────┘    └───────┬────────┘       │
-│          │                   │                    │                 │
-│          └───────────────────┼────────────────────┘                 │
-│                              │                                      │
-│                              ▼                                      │
-│                    ┌─────────────────┐                             │
-│                    │   MCP GATEWAY   │                             │
-│                    │   Port 8081     │                             │
-│                    └────────┬────────┘                             │
-└─────────────────────────────┼───────────────────────────────────────┘
-                              │
-                              ▼
-┌─────────────────────────────────────────────────────────────────────┐
-│                       GCP MCP SERVER                                │
-│                         Port 8084                                   │
-├─────────────────────────────────────────────────────────────────────┤
-│                                                                     │
-│  ┌────────────────┐  ┌────────────────┐  ┌────────────────────┐    │
-│  │ Cloud Billing  │  │  Recommender   │  │  Cloud Asset       │    │
-│  │     API        │  │     API        │  │   Inventory        │    │
-│  ├────────────────┤  ├────────────────┤  ├────────────────────┤    │
-│  │ • Billing data │  │ • VM rightsizing │ │ • Resource list   │    │
-│  │ • Cost reports │  │ • Idle VMs     │  │ • Change history   │    │
-│  │ • SKU pricing  │  │ • Idle disks   │  │ • Asset metadata   │    │
-│  │ • Exports      │  │ • CUD recs     │  │ • Real-time feeds  │    │
-│  └────────────────┘  └────────────────┘  └────────────────────┘    │
-│                                                                     │
-│  ┌────────────────┐  ┌────────────────┐  ┌────────────────────┐    │
-│  │   Budget API   │  │ Cloud Monitoring│  │   BigQuery        │    │
-│  ├────────────────┤  ├────────────────┤  ├────────────────────┤    │
-│  │ • Budget CRUD  │  │ • Metrics      │  │ • Billing exports  │    │
-│  │ • Thresholds   │  │ • Alerts       │  │ • Historical data  │    │
-│  │ • Pub/Sub      │  │ • Dashboards   │  │ • SQL queries      │    │
-│  │ • Notifications│  │ • Time series  │  │ • Cost analytics   │    │
-│  └────────────────┘  └────────────────┘  └────────────────────┘    │
-│                                                                     │
-└─────────────────────────────────────────────────────────────────────┘
-                              │
-                              ▼
-┌─────────────────────────────────────────────────────────────────────┐
-│                    GOOGLE CLOUD PLATFORM                            │
-├─────────────────────────────────────────────────────────────────────┤
-│  Compute Engine │ Cloud Storage │ BigQuery │ Cloud SQL │ GKE       │
-│  Cloud Run      │ Dataflow      │ Pub/Sub  │ Cloud Functions       │
-└─────────────────────────────────────────────────────────────────────┘
-```
+
+**Legend**: three-tier architecture showing agent orchestration, MCP server with six GCP APIs, and the underlying Google Cloud Platform.
 
 ---
 
@@ -649,32 +603,17 @@ class GCPBudgetManager:
 ```
 
 **Spike Detection Flow:**
+```mermaid
+flowchart LR
+    Billing[GCP Billing<br/>Cost Data] --> Budget[Budget API<br/>Thresholds]
+    Budget --> PubSub[Pub/Sub Topic<br/>Notifications]
+    PubSub --> CF[Cloud Function<br/>Alert Handler]
+    CF --> MCP[AI Cost Mon<br/>MCP Server]
+    CF --> Slack[Slack/Email<br/>Notification]
+    CF --> Auto[Auto-Remediation<br/>Disable Billing]
 ```
-┌─────────────────────────────────────────────────────────────────────┐
-│                    BUDGET ALERT FLOW                                │
-├─────────────────────────────────────────────────────────────────────┤
-│                                                                     │
-│  ┌──────────────┐     ┌──────────────┐     ┌──────────────────┐    │
-│  │ GCP Billing  │────▶│ Budget API   │────▶│ Pub/Sub Topic    │    │
-│  │ (Cost Data)  │     │ (Thresholds) │     │ (Notifications)  │    │
-│  └──────────────┘     └──────────────┘     └────────┬─────────┘    │
-│                                                      │              │
-│                              ┌───────────────────────┘              │
-│                              ▼                                      │
-│                    ┌──────────────────┐                            │
-│                    │  Cloud Function  │                            │
-│                    │  (Alert Handler) │                            │
-│                    └────────┬─────────┘                            │
-│                             │                                       │
-│            ┌────────────────┼────────────────┐                     │
-│            ▼                ▼                ▼                     │
-│    ┌──────────────┐ ┌──────────────┐ ┌──────────────────┐         │
-│    │ AI Cost Mon  │ │ Slack/Email  │ │ Auto-Remediation │         │
-│    │ (MCP Server) │ │ Notification │ │ (Disable Billing)│         │
-│    └──────────────┘ └──────────────┘ └──────────────────┘         │
-│                                                                     │
-└─────────────────────────────────────────────────────────────────────┘
-```
+
+**Legend**: budget alert flow from billing data through budget thresholds to multiple notification and remediation channels.
 
 **Budget Alert Payload (Pub/Sub):**
 ```json

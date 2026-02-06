@@ -16,66 +16,116 @@ This document defines the structural and architectural design for a GCP Cost Mon
 
 ## System Architecture
 
+```mermaid
+flowchart TD
+    UI[User Interface Layer]
+    MCP[MCP Server Layer (Port ${MCP_SERVER_PORT})]
+    GCP[GCP API Layer]
+
+    UI -->|Conversational Interface| MCP
+    MCP -->|Organization Scanner| GCP
+    MCP -->|Circuit Breaker| GCP
+    MCP -->|Budget Monitor| GCP
+    MCP -->|Anomaly Detector| GCP
+
+    subgraph UI
+        UI1[Conversational Interface]
+    end
+
+    subgraph MCP
+        ORG[Organization Scanner]
+        CB[Circuit Breaker]
+        BUD[Budget Monitor]
+        ANOM[Anomaly Detector]
+    end
+
+    subgraph GCP
+        RM[Resource Manager API]
+        SU[Service Usage API]
+        BA[Budget API]
+        CA[Cloud Asset Inventory]
+        BQ[BigQuery]
+        CF[Compute Engine]
+        PUB[Pub/Sub]
+    end
+
+    ORG --> RM
+    ORG --> SU
+    CB --> BA
+    BUD --> PUB
+    ANOM --> BQ
+
+    RM --> CF
+    SU --> CF
+    CA --> PUB
+    BQ --> PUB
 ```
-┌─────────────────────────────────────────────────────────────────────────────────┐
-│                              USER INTERFACE LAYER                                │
-├─────────────────────────────────────────────────────────────────────────────────┤
-│                                                                                 │
-│  ┌─────────────────────────────────────────────────────────────────────────┐   │
-│  │                    CONVERSATIONAL INTERFACE                              │   │
-│  │                                                                          │   │
-│  │   "Why did costs spike?"  ───►  Intent Classification  ───►  Response   │   │
-│  │   "Show me idle VMs"      ───►  Entity Extraction     ───►  Actions     │   │
-│  │   "Set budget to $5000"   ───►  Context Management    ───►  Approvals   │   │
-│  │                                                                          │   │
-│  └─────────────────────────────────────────────────────────────────────────┘   │
-│                                        │                                        │
-└────────────────────────────────────────┼────────────────────────────────────────┘
-                                         │
-                                         ▼
-┌─────────────────────────────────────────────────────────────────────────────────┐
-│                              MCP SERVER LAYER (Port 8084)                        │
-├─────────────────────────────────────────────────────────────────────────────────┤
-│                                                                                 │
-│  ┌───────────────┐  ┌───────────────┐  ┌───────────────┐  ┌───────────────┐   │
-│  │ Organization  │  │    Circuit    │  │    Budget     │  │   Anomaly     │   │
-│  │   Scanner     │  │    Breaker    │  │   Monitor     │  │   Detector    │   │
-│  │               │  │               │  │               │  │               │   │
-│  │ • Hierarchy   │  │ • Thresholds  │  │ • Alerts      │  │ • Statistics  │   │
-│  │ • Projects    │  │ • Actions     │  │ • Forecasts   │  │ • Patterns    │   │
-│  │ • Services    │  │ • Cooldowns   │  │ • Pub/Sub     │  │ • Trends      │   │
-│  └───────────────┘  └───────────────┘  └───────────────┘  └───────────────┘   │
-│                                                                                 │
-│  ┌───────────────┐  ┌───────────────┐  ┌───────────────┐  ┌───────────────┐   │
-│  │  Real-time    │  │      ML       │  │   Billing     │  │   Resource    │   │
-│  │   Tracker     │  │  Recommender  │  │  Collector    │  │   Manager     │   │
-│  │               │  │               │  │               │  │               │   │
-│  │ • Asset Feed  │  │ • Idle VMs    │  │ • BigQuery    │  │ • Stop/Start  │   │
-│  │ • Pub/Sub     │  │ • Rightsizing │  │ • Daily Costs │  │ • Scale       │   │
-│  │ • Estimates   │  │ • CUDs        │  │ • Forecasts   │  │ • Delete      │   │
-│  └───────────────┘  └───────────────┘  └───────────────┘  └───────────────┘   │
-│                                                                                 │
-└─────────────────────────────────────────────────────────────────────────────────┘
-                                         │
-                                         ▼
-┌─────────────────────────────────────────────────────────────────────────────────┐
-│                              GCP API LAYER                                       │
-├─────────────────────────────────────────────────────────────────────────────────┤
-│                                                                                 │
-│  ┌─────────────┐ ┌─────────────┐ ┌─────────────┐ ┌─────────────┐ ┌───────────┐│
-│  │  Resource   │ │   Service   │ │   Budget    │ │   Cloud     │ │Recommender││
-│  │  Manager    │ │   Usage     │ │    API      │ │   Asset     │ │   API     ││
-│  │   API v3    │ │    API      │ │             │ │  Inventory  │ │           ││
-│  └─────────────┘ └─────────────┘ └─────────────┘ └─────────────┘ └───────────┘│
-│                                                                                 │
-│  ┌─────────────┐ ┌─────────────┐ ┌─────────────┐ ┌─────────────┐             │
-│  │   Billing   │ │   Compute   │ │  Pub/Sub    │ │  BigQuery   │             │
-│  │    API      │ │   Engine    │ │             │ │  (Export)   │             │
-│  │             │ │    API      │ │             │ │             │             │
-│  └─────────────┘ └─────────────┘ └─────────────┘ └─────────────┘             │
-│                                                                                 │
-└─────────────────────────────────────────────────────────────────────────────────┘
+
+**Legend**: arrows indicate data flow direction between components.
+```mermaid
+flowchart TD
+    UI[User Interface]
+    IC[Intent Classification]
+    EE[Entity Extraction]
+    CM[Context Management]
+    RESP[Response]
+    UI --> IC --> RESP
+    UI --> EE --> "Actions"
+    UI --> CM --> "Approvals"
 ```
+
+**Legend**: arrows show the processing pipeline for user queries.
+
+```mermaid
+graph TD
+    ORG[Organization Scanner]
+    CB[Circuit Breaker]
+    BUD[Budget Monitor]
+    ANOM[Anomaly Detector]
+
+    ORG --> CB
+    ORG --> BUD
+    ORG --> ANOM
+```
+
+**Legend**: arrows show data flow between core components within the MCP server layer.
+
+
+
+```mermaid
+flowchart LR
+    AT[Asset Feed] --> RT[Real‑time Tracker]
+    RT -->|Idle VM detection| IDLE[Idle VMs]
+    RT -->|Rightsizing suggestions| RS[Rightsizing]
+    RT -->|Cost forecasts| CF[Forecasts]
+    RT -->|Scale actions| SC[Scale]
+    RT -->|Delete resources| DEL[Delete]
+```
+
+**Legend**: arrows indicate data flow from the asset feed to various real‑time management actions.
+
+```mermaid
+flowchart LR
+    RM[Resource Manager API]
+    SU[Service Usage API]
+    BA[Budget API]
+    CA[Cloud Asset Inventory]
+    RE[Recommender API]
+    BIL[Billing API]
+    CE[Compute Engine API]
+    PS[Pub/Sub]
+    BQ[BigQuery (Export)]
+    RM --> CE
+    SU --> CE
+    CA --> PS
+    BQ --> PS
+    BA --> RE
+    RE --> PS
+    BIL --> RE
+```
+
+**Legend**: arrows indicate data flow between GCP services used by the agent.
+
 
 ---
 
@@ -87,71 +137,36 @@ This document defines the structural and architectural design for a GCP Cost Mon
 
 **Method:** Resource Manager API + Service Usage API (detailed enumeration)
 
+
+```mermaid
+graph TD
+    Org[Organization: 123456789] -->|contains| FolderProd[Folder: Production]
+    Org -->|contains| FolderDev[Folder: Development]
+    FolderProd -->|projects| ProjWeb[Project: prod-web-app]
+    FolderProd -->|projects| ProjAPI[Project: prod-api]
+    FolderDev -->|projects| DevWeb[Project: dev-web-app]
+    FolderDev -->|projects| DevML[Project: dev-ml-training]
+    Org -->|projects| Shared[Project: shared-services]
 ```
-┌─────────────────────────────────────────────────────────────────┐
-│                    ORGANIZATION SCANNER                          │
-├─────────────────────────────────────────────────────────────────┤
-│                                                                 │
-│  ┌─────────────────────────────────────────────────────────┐   │
-│  │              HIERARCHY DISCOVERY                         │   │
-│  │                                                          │   │
-│  │   Organization (123456789)                               │   │
-│  │        │                                                 │   │
-│  │        ├── Folder: Production                            │   │
-│  │        │      ├── Project: prod-web-app                  │   │
-│  │        │      └── Project: prod-api                      │   │
-│  │        │                                                 │   │
-│  │        ├── Folder: Development                           │   │
-│  │        │      ├── Project: dev-web-app                   │   │
-│  │        │      └── Project: dev-ml-training               │   │
-│  │        │                                                 │   │
-│  │        └── Project: shared-services                      │   │
-│  │                                                          │   │
-│  └─────────────────────────────────────────────────────────┘   │
-│                           │                                     │
-│                           ▼                                     │
-│  ┌─────────────────────────────────────────────────────────┐   │
-│  │              SERVICE ENUMERATION                         │   │
-│  │                                                          │   │
-│  │   For each project:                                      │   │
-│  │     → Query Service Usage API (filter: state:ENABLED)    │   │
-│  │     → Classify by cost risk level                        │   │
-│  │     → Store service metadata                             │   │
-│  │                                                          │   │
-│  └─────────────────────────────────────────────────────────┘   │
-│                           │                                     │
-│                           ▼                                     │
-│  ┌─────────────────────────────────────────────────────────┐   │
-│  │              HIGH-COST SERVICE DETECTION                 │   │
-│  │                                                          │   │
-│  │   CRITICAL: aiplatform.googleapis.com (Vertex AI)        │   │
-│  │   HIGH:     compute.googleapis.com (VMs, GPUs)           │   │
-│  │   HIGH:     bigquery.googleapis.com                      │   │
-│  │   HIGH:     container.googleapis.com (GKE)               │   │
-│  │   HIGH:     dataflow.googleapis.com                      │   │
-│  │   MEDIUM:   sqladmin.googleapis.com (Cloud SQL)          │   │
-│  │   MEDIUM:   run.googleapis.com (Cloud Run)               │   │
-│  │   LOW:      cloudfunctions.googleapis.com                │   │
-│  │                                                          │   │
-│  └─────────────────────────────────────────────────────────┘   │
-│                                                                 │
-└─────────────────────────────────────────────────────────────────┘
-```
+
+**Legend**: arrows show containment hierarchy (organization → folders → projects).
+
+
 
 **Data Flow:**
 
+
+```mermaid
+flowchart LR
+    RM[Resource Manager API] --> SU[Service Usage API] --> BA[Billing API] --> SR[Scan Result]
+    RM -->|folders| Folders
+    SU -->|services| Services
+    BA -->|accounts| BillingAccounts
+    SR -->|enriched| EnrichedProjects
 ```
-┌──────────────┐    ┌──────────────┐    ┌──────────────┐    ┌──────────────┐
-│   Resource   │    │   Service    │    │   Billing    │    │   Scan       │
-│   Manager    │───►│   Usage      │───►│    API       │───►│   Result     │
-│   API v3     │    │   API        │    │              │    │              │
-└──────────────┘    └──────────────┘    └──────────────┘    └──────────────┘
-      │                   │                   │                    │
-      │                   │                   │                    │
-      ▼                   ▼                   ▼                    ▼
-  Folders &          Enabled             Billing              Enriched
-  Projects           Services            Accounts             Projects
-```
+
+**Legend**: arrows indicate data flow between components of the budget monitoring pipeline.
+
 
 **Scan Result Schema:**
 
@@ -188,55 +203,49 @@ OrganizationScanResult:
 
 **Architecture:**
 
+The circuit breaker operates on two levels:
+1. **Per-Service Thresholds** — Monitor specific high-cost services independently
+2. **Overall Thresholds** — Monitor total daily spend as a safety net
+
+```mermaid
+flowchart TD
+    subgraph PerService["Per-Service Thresholds"]
+        S1[Vertex AI: $500/$1K/$2.5K/$5K]
+        S2[Compute Engine: $300/$750/$1.5K/$3K]
+        S3[BigQuery: $200/$500/$1K/$2K]
+    end
+    
+    subgraph Overall["Overall Thresholds (Safety Net)"]
+        L1[Level 1: WARNING $1,000/day → Alert Only]
+        L2[Level 2: ELEVATED $2,500/day → Alert + Escalation]
+        L3[Level 3: CRITICAL $5,000/day → Stop High-Cost Resources]
+        L4[Level 4: EMERGENCY $10,000/day → Disable Billing]
+    end
+    
+    subgraph StateMachine["State Machine"]
+        CLOSED[CLOSED normal]
+        OPEN[OPEN tripped]
+        HALF[HALF-OPEN testing]
+        
+        CLOSED -->|threshold exceeded| OPEN
+        OPEN -->|reset| HALF
+        HALF -->|reset| CLOSED
+        OPEN -->|cooldown expires| CLOSED
+    end
+    
+    subgraph Actions["Trip Actions"]
+        ALERT[ALERT_ONLY<br/>Send alerts to Slack, email, PagerDuty]
+        STOP[STOP_RESOURCES<br/>Stop VMs, Vertex endpoints, jobs]
+        SCALE[SCALE_DOWN<br/>Scale GKE to 0 nodes, reduce DB instances]
+        DISABLE[DISABLE_BILLING<br/>Remove billing account association]
+    end
+    
+    PerService --> StateMachine
+    Overall --> StateMachine
+    StateMachine --> Actions
 ```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                           CIRCUIT BREAKER                                    │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                             │
-│  ┌───────────────────────────────────────────────────────────────────────┐ │
-│  │                      THRESHOLD CONFIGURATION                          │ │
-│  │                                                                        │ │
-│  │   Level 1: WARNING      $1,000/day    → Alert Only                    │ │
-│  │   Level 2: ELEVATED     $2,500/day    → Alert Only                    │ │
-│  │   Level 3: CRITICAL     $5,000/day    → Stop High-Cost Resources      │ │
-│  │   Level 4: EMERGENCY    $10,000/day   → Disable Billing               │ │
-│  │                                                                        │ │
-│  └───────────────────────────────────────────────────────────────────────┘ │
-│                                    │                                        │
-│                                    ▼                                        │
-│  ┌───────────────────────────────────────────────────────────────────────┐ │
-│  │                      STATE MACHINE                                     │ │
-│  │                                                                        │ │
-│  │         ┌─────────┐                    ┌─────────┐                    │ │
-│  │         │ CLOSED  │──── threshold ────►│  OPEN   │                    │ │
-│  │         │(normal) │     exceeded       │(tripped)│                    │ │
-│  │         └─────────┘                    └─────────┘                    │ │
-│  │              ▲                              │                          │ │
-│  │              │                              │                          │ │
-│  │              │         ┌──────────┐         │                          │ │
-│  │              └─────────│HALF-OPEN │◄────────┘                          │ │
-│  │                reset   │(testing) │   cooldown                        │ │
-│  │                        └──────────┘   expires                         │ │
-│  │                                                                        │ │
-│  └───────────────────────────────────────────────────────────────────────┘ │
-│                                    │                                        │
-│                                    ▼                                        │
-│  ┌───────────────────────────────────────────────────────────────────────┐ │
-│  │                      TRIP ACTIONS                                      │ │
-│  │                                                                        │ │
-│  │   ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐ │ │
-│  │   │ ALERT_ONLY  │  │STOP_RESOURCES│ │ SCALE_DOWN  │  │DISABLE_BILLING││ │
-│  │   │             │  │             │  │             │  │             │ │ │
-│  │   │ Send alerts │  │ Stop VMs    │  │ Scale GKE   │  │ Remove      │ │ │
-│  │   │ to Slack,   │  │ Stop Vertex │  │ to 0 nodes  │  │ billing     │ │ │
-│  │   │ email,      │  │ endpoints   │  │ Reduce DB   │  │ account     │ │ │
-│  │   │ PagerDuty   │  │ Stop jobs   │  │ instances   │  │ association │ │ │
-│  │   └─────────────┘  └─────────────┘  └─────────────┘  └─────────────┘ │ │
-│  │                                                                        │ │
-│  └───────────────────────────────────────────────────────────────────────┘ │
-│                                                                             │
-└─────────────────────────────────────────────────────────────────────────────┘
-```
+
+**Legend**: diagram shows the four components of the circuit breaker: per-service thresholds, overall thresholds (safety net), state machine transitions, and available trip actions.
 
 **Threshold Configuration Schema:**
 
@@ -245,11 +254,16 @@ CircuitBreakerConfig:
   project_id: string
   enabled: boolean
   dry_run: boolean  # Log actions without executing
-  thresholds:
+  per_service_thresholds:  # Per-service monitoring
+    - service: string  # e.g., "aiplatform.googleapis.com"
+      thresholds:
+        - level: WARNING | ELEVATED | CRITICAL | EMERGENCY
+          threshold_usd: float
+          action: ALERT_ONLY | STOP_RESOURCES | SCALE_DOWN | DISABLE_BILLING
+  overall_thresholds:  # Safety net for total spend
     - name: string
       threshold_usd: float
       action: ALERT_ONLY | STOP_RESOURCES | SCALE_DOWN | DISABLE_BILLING
-      services: [string]  # Specific services to affect (null = all)
       cooldown_hours: int
       auto_reset: boolean
       notify_channels: [slack, email, pagerduty]
@@ -261,42 +275,23 @@ CircuitBreakerConfig:
 
 **Circuit Breaker Flow:**
 
+```mermaid
+flowchart LR
+    COST[Current Cost<br/>from API] --> COMPARE[Compare Against<br/>Thresholds]
+    COMPARE --> CHECK[Check Cooldown<br/>& Override]
+    CHECK --> EXEC[Execute Action]
+    EXEC --> ACTIONS
+    
+    subgraph ACTIONS["Action Execution"]
+        direction TB
+        A1[ALERT_ONLY: Send notifications]
+        A2[STOP_RESOURCES: Stop VMs, endpoints, jobs]
+        A3[SCALE_DOWN: Scale GKE, reduce DB instances]
+        A4[DISABLE_BILLING: Remove billing account]
+    end
 ```
-┌──────────────┐    ┌──────────────┐    ┌──────────────┐    ┌──────────────┐
-│   Current    │    │   Compare    │    │   Check      │    │   Execute    │
-│   Cost       │───►│   Against    │───►│   Cooldown   │───►│   Action     │
-│   (from API) │    │   Thresholds │    │   & Override │    │              │
-└──────────────┘    └──────────────┘    └──────────────┘    └──────────────┘
-                                                                   │
-                          ┌────────────────────────────────────────┘
-                          │
-                          ▼
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                           ACTION EXECUTION                                   │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                             │
-│  IF action = ALERT_ONLY:                                                    │
-│      → Send notifications to configured channels                            │
-│                                                                             │
-│  IF action = STOP_RESOURCES:                                                │
-│      → List VMs with label "cost-protection: stoppable"                     │
-│      → Stop each VM via Compute Engine API                                  │
-│      → Undeploy Vertex AI endpoints                                         │
-│      → Cancel running Dataflow jobs                                         │
-│      → Send notification with affected resources                            │
-│                                                                             │
-│  IF action = SCALE_DOWN:                                                    │
-│      → Scale GKE node pools to min_nodes: 0                                 │
-│      → Reduce Cloud SQL instances to smallest tier                          │
-│      → Scale Cloud Run services to min_instances: 0                         │
-│                                                                             │
-│  IF action = DISABLE_BILLING:                                               │
-│      → Call Billing API to remove billing account                           │
-│      → WARNING: This stops ALL billable services!                           │
-│      → Requires manual re-enablement                                        │
-│                                                                             │
-└─────────────────────────────────────────────────────────────────────────────┘
-```
+
+**Legend**: flowchart shows the circuit breaker decision pipeline from cost comparison to action execution.
 
 ---
 
@@ -306,91 +301,46 @@ CircuitBreakerConfig:
 
 **Architecture:**
 
+```mermaid
+flowchart TD
+    subgraph Thresholds["Multi-Threshold Alerts (Budget: $10,000/month)"]
+        T1["120% ($12,000) EMERGENCY"]
+        T2["100% ($10,000) CRITICAL"]
+        T3["90% ($9,000) CRITICAL"]
+        T4["80% ($8,000) FORECASTED"]
+        T5["70% ($7,000) WARNING"]
+        T6["50% ($5,000) INFO"]
+    end
+    
+    CURRENT[Current Spend] --> Thresholds
+    FORECAST[Forecasted Spend] --> Thresholds
+    
+    Thresholds --> FLOW
+    
+    subgraph FLOW["Notification Flow"]
+        BA[Budget API] --> PS[Pub/Sub Topic]
+        PS --> CF[Cloud Function]
+        CF --> AG[Agent]
+        BA -->|if threshold >= 100%| CB[Circuit Breaker]
+    end
 ```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                        BUDGET MONITORING SYSTEM                              │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                             │
-│  ┌───────────────────────────────────────────────────────────────────────┐ │
-│  │                      MULTI-THRESHOLD ALERTS                           │ │
-│  │                                                                        │ │
-│  │   Budget: $10,000/month                                               │ │
-│  │                                                                        │ │
-│  │   ┌─────────────────────────────────────────────────────────────────┐│ │
-│  │   │ $12,000 ─────────────────────────────────── 120% EMERGENCY     ││ │
-│  │   │                                                                  ││ │
-│  │   │ $10,000 ═════════════════════════════════════ 100% CRITICAL    ││ │
-│  │   │                                                                  ││ │
-│  │   │ $9,000  ─────────────────────────────────────  90% CRITICAL    ││ │
-│  │   │                                                                  ││ │
-│  │   │ $8,000  ═════════════════════════════════════  80% FORECASTED  ││ │
-│  │   │                                                                  ││ │
-│  │   │ $7,000  ─────────────────────────────────────  70% WARNING     ││ │
-│  │   │                                                                  ││ │
-│  │   │ $5,000  ─────────────────────────────────────  50% INFO        ││ │
-│  │   │                                                                  ││ │
-│  │   │ $0      ─────────────────────────────────────                   ││ │
-│  │   └─────────────────────────────────────────────────────────────────┘│ │
-│  │              ▲                           ▲                            │ │
-│  │              │                           │                            │ │
-│  │        CURRENT SPEND              FORECASTED SPEND                    │ │
-│  │                                                                        │ │
-│  └───────────────────────────────────────────────────────────────────────┘ │
-│                                    │                                        │
-│                                    ▼                                        │
-│  ┌───────────────────────────────────────────────────────────────────────┐ │
-│  │                      NOTIFICATION FLOW                                 │ │
-│  │                                                                        │ │
-│  │   Budget API  ───►  Pub/Sub Topic  ───►  Cloud Function  ───►  Agent  │ │
-│  │      │                                          │                      │ │
-│  │      │                                          ▼                      │ │
-│  │      │                                   ┌─────────────┐               │ │
-│  │      └──────────────────────────────────►│ Circuit     │               │ │
-│  │              (if threshold >= 100%)      │ Breaker     │               │ │
-│  │                                          └─────────────┘               │ │
-│  │                                                                        │ │
-│  └───────────────────────────────────────────────────────────────────────┘ │
-│                                                                             │
-└─────────────────────────────────────────────────────────────────────────────┘
-```
+
+**Legend**: diagram shows budget thresholds, dual sources (current + forecasted spend), and notification flow to the agent and circuit breaker.
 
 **Budget Types:**
 
+```mermaid
+flowchart LR
+    subgraph BT["Budget Types"]
+        direction TB
+        P["1. PROJECT BUDGET<br/>Scope: Single project<br/>Use: Default protection<br/>Example: prod-web-app → $5K/month"]
+        S["2. SERVICE BUDGET<br/>Scope: Specific GCP services<br/>Use: Control expensive services<br/>Example: Vertex AI → $10K/month"]
+        L["3. LABEL BUDGET<br/>Scope: Resources with labels<br/>Use: Team/environment budgets<br/>Example: team=ml-research → $20K/month"]
+        O["4. ORGANIZATION BUDGET<br/>Scope: Entire organization<br/>Use: Global cost cap<br/>Example: All projects → $100K/month"]
+    end
 ```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                           BUDGET TYPES                                       │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                             │
-│  1. PROJECT BUDGET                                                          │
-│     ┌─────────────────────────────────────────────────────────────────┐    │
-│     │ Scope: Single project                                            │    │
-│     │ Use: Default protection for each project                        │    │
-│     │ Example: prod-web-app → $5,000/month                            │    │
-│     └─────────────────────────────────────────────────────────────────┘    │
-│                                                                             │
-│  2. SERVICE BUDGET                                                          │
-│     ┌─────────────────────────────────────────────────────────────────┐    │
-│     │ Scope: Specific GCP services across projects                    │    │
-│     │ Use: Control spend on expensive services                        │    │
-│     │ Example: Vertex AI → $10,000/month (all projects)               │    │
-│     └─────────────────────────────────────────────────────────────────┘    │
-│                                                                             │
-│  3. LABEL BUDGET                                                            │
-│     ┌─────────────────────────────────────────────────────────────────┐    │
-│     │ Scope: Resources with specific labels                           │    │
-│     │ Use: Team-based or environment-based budgets                    │    │
-│     │ Example: team=ml-research → $20,000/month                       │    │
-│     └─────────────────────────────────────────────────────────────────┘    │
-│                                                                             │
-│  4. ORGANIZATION BUDGET                                                     │
-│     ┌─────────────────────────────────────────────────────────────────┐    │
-│     │ Scope: Entire organization                                       │    │
-│     │ Use: Global cost cap                                             │    │
-│     │ Example: All projects → $100,000/month                          │    │
-│     └─────────────────────────────────────────────────────────────────┘    │
-│                                                                             │
-└─────────────────────────────────────────────────────────────────────────────┘
-```
+
+**Legend**: four types of budgets available in the GCP cost monitoring system.
 
 ---
 
@@ -400,110 +350,71 @@ CircuitBreakerConfig:
 
 **Architecture:**
 
+```mermaid
+flowchart TD
+    subgraph Feed["Cloud Asset Inventory Feed (Scope: organizations/123456789)"]
+        Types["Asset Types:<br/>• compute/Instance<br/>• compute/Disk<br/>• sqladmin/Instance<br/>• container/Cluster<br/>• aiplatform/Endpoint<br/>• aiplatform/CustomJob<br/>• dataflow/Job"]
+    end
+    
+    Feed -->|Asset Change Events| Topic[Pub/Sub Topic<br/>projects/my-project/topics/gcp-resource-changes]
+    Topic --> Proc
+    
+    subgraph Proc["Event Processor"]
+        P1["1. Parse asset change event"]
+        P2["2. Determine event type (CREATE, UPDATE, DELETE)"]
+        P3["3. Extract resource details (type, project, location)"]
+        P4["4. Estimate monthly cost"]
+        P5["5. Assess risk level"]
+        P6["6. Trigger alerts if high-cost"]
+        P1 --> P2 --> P3 --> P4 --> P5 --> P6
+    end
+    
+    Proc --> Est
+    
+    subgraph Est["Cost Estimation"]
+        E1["VM Instance: machine_type → pricing table + GPU costs"]
+        E2["Cloud SQL: tier → pricing table × HA multiplier"]
+        E3["GKE Cluster: mgmt fee + (node_count × VM cost)"]
+        E4["Vertex Endpoint: base prediction cost estimate"]
+        E5["Vertex CustomJob: worker_specs × GPU costs × est. hours"]
+        E6["Dataflow Job: vCPU/memory hours estimate"]
+    end
 ```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                    REAL-TIME RESOURCE TRACKING                               │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                             │
-│  ┌───────────────────────────────────────────────────────────────────────┐ │
-│  │                CLOUD ASSET INVENTORY FEED                              │ │
-│  │                                                                        │ │
-│  │   Scope: organizations/123456789                                      │ │
-│  │   Asset Types:                                                        │ │
-│  │     • compute.googleapis.com/Instance                                 │ │
-│  │     • compute.googleapis.com/Disk                                     │ │
-│  │     • sqladmin.googleapis.com/Instance                                │ │
-│  │     • container.googleapis.com/Cluster                                │ │
-│  │     • aiplatform.googleapis.com/Endpoint                              │ │
-│  │     • aiplatform.googleapis.com/CustomJob                             │ │
-│  │     • dataflow.googleapis.com/Job                                     │ │
-│  │                                                                        │ │
-│  └───────────────────────────────────────────────────────────────────────┘ │
-│                                    │                                        │
-│                                    │ Asset Change Events                    │
-│                                    ▼                                        │
-│  ┌───────────────────────────────────────────────────────────────────────┐ │
-│  │                      PUB/SUB TOPIC                                     │ │
-│  │                                                                        │ │
-│  │   projects/my-project/topics/gcp-resource-changes                     │ │
-│  │                                                                        │ │
-│  └───────────────────────────────────────────────────────────────────────┘ │
-│                                    │                                        │
-│                                    ▼                                        │
-│  ┌───────────────────────────────────────────────────────────────────────┐ │
-│  │                      EVENT PROCESSOR                                   │ │
-│  │                                                                        │ │
-│  │   1. Parse asset change event                                         │ │
-│  │   2. Determine event type (CREATE, UPDATE, DELETE)                    │ │
-│  │   3. Extract resource details (type, project, location)               │ │
-│  │   4. Estimate monthly cost                                            │ │
-│  │   5. Assess risk level                                                │ │
-│  │   6. Trigger alerts if high-cost                                      │ │
-│  │                                                                        │ │
-│  └───────────────────────────────────────────────────────────────────────┘ │
-│                                    │                                        │
-│                                    ▼                                        │
-│  ┌───────────────────────────────────────────────────────────────────────┐ │
-│  │                      COST ESTIMATION                                   │ │
-│  │                                                                        │ │
-│  │   Resource Type          Estimation Method                            │ │
-│  │   ─────────────────────────────────────────────────────────────────   │ │
-│  │   VM Instance            machine_type → pricing table + GPU costs     │ │
-│  │   Cloud SQL              tier → pricing table × HA multiplier         │ │
-│  │   GKE Cluster            mgmt fee + (node_count × VM cost)            │ │
-│  │   Vertex Endpoint        base prediction cost estimate                │ │
-│  │   Vertex CustomJob       worker_specs × GPU costs × est. hours        │ │
-│  │   Dataflow Job           vCPU/memory hours estimate                   │ │
-│  │                                                                        │ │
-│  └───────────────────────────────────────────────────────────────────────┘ │
-│                                                                             │
-└─────────────────────────────────────────────────────────────────────────────┘
-```
+
+**Legend**: the pipeline shows how asset changes flow from Cloud Asset Inventory through event processing to cost estimation and alerting.
 
 **GPU Pricing Reference:**
 
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                        GPU COST REFERENCE                                    │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                             │
-│   GPU Type              Hourly Cost      Monthly (730 hrs)                  │
-│   ─────────────────────────────────────────────────────────────────────    │
-│   NVIDIA T4              $0.35           $255                               │
-│   NVIDIA L4              $0.55           $401                               │
-│   NVIDIA P4              $0.60           $438                               │
-│   NVIDIA P100            $1.46           $1,066                             │
-│   NVIDIA V100            $2.48           $1,810                             │
-│   NVIDIA A100 (40GB)     $3.67           $2,679                             │
-│   NVIDIA H100 (80GB)     $10.20          $7,446                             │
-│                                                                             │
-│   Alert Trigger: Any resource with estimated cost > $500/month              │
-│                                                                             │
-└─────────────────────────────────────────────────────────────────────────────┘
-```
+| GPU Type | Hourly Cost | Monthly (730 hrs) |
+|----------|-------------|-------------------|
+| NVIDIA T4 | $0.35 | $255 |
+| NVIDIA L4 | $0.55 | $401 |
+| NVIDIA P4 | $0.60 | $438 |
+| NVIDIA P100 | $1.46 | $1,066 |
+| NVIDIA V100 | $2.48 | $1,810 |
+| NVIDIA A100 (40GB) | $3.67 | $2,679 |
+| NVIDIA H100 (80GB) | $10.20 | $7,446 |
+
+**Alert Trigger:** Any resource with estimated cost > $500/month
 
 **Event Flow:**
 
+```mermaid
+sequenceDiagram
+    participant Console as Resource Created<br/>in GCP Console
+    participant Feed as Asset Inventory<br/>Feed Triggers
+    participant PubSub as Pub/Sub<br/>Message
+    participant Agent as Agent<br/>Processor
+    
+    Console->>Feed: VM with 8x A100
+    Feed->>PubSub: Asset Change
+    PubSub->>Agent: Event Message
+    Note over Agent: Estimate Cost<br/>$21,432/month
+    Note over Agent: Risk: CRITICAL
+    Agent->>Agent: ALERT
 ```
-Resource Created         Asset Inventory         Pub/Sub              Agent
-in GCP Console          Feed Triggers           Message              Processor
-      │                       │                    │                     │
-      │  VM with 8x A100      │                    │                     │
-      ├──────────────────────►│                    │                     │
-      │                       │  Asset Change      │                     │
-      │                       ├───────────────────►│                     │
-      │                       │                    │  Event Message      │
-      │                       │                    ├────────────────────►│
-      │                       │                    │                     │
-      │                       │                    │                     │  Estimate Cost
-      │                       │                    │                     │  $21,432/month
-      │                       │                    │                     │
-      │                       │                    │                     │  Risk: CRITICAL
-      │                       │                    │                     │
-      │                       │                    │                 ┌───┴───┐
-      │                       │                    │                 │ ALERT │
-      │                       │                    │                 └───────┘
-```
+
+**Legend**: sequence diagram showing real-time flow from resource creation to alert generation.
 
 ---
 
@@ -513,55 +424,28 @@ in GCP Console          Feed Triggers           Message              Processor
 
 **Architecture:**
 
+```mermaid
+flowchart TD
+    subgraph Recommenders["Recommender Types"]
+        IV["Idle VM Recommender<br/>• 8-day window<br/>• CPU < 1%<br/>• Network < 1%"]
+        RS["Rightsizing Recommender<br/>• Usage-based<br/>• Machine type<br/>suggestions"]
+        ID["Idle Disk Recommender<br/>• Unattached disks<br/>• Snapshot-only"]
+        CM["Commitment Recommender<br/>• CUD analysis<br/>• 1-year/3-year<br/>• Up to 57% off"]
+        IS["Idle SQL Recommender<br/>• Idle Cloud SQL<br/>instances<br/>• Low queries"]
+        IA["Idle Address Recommender<br/>• Unused static IPs<br/>• $7.30/month"]
+    end
+    
+    Recommenders --> Workflow
+    
+    subgraph Workflow["Recommendation Workflow"]
+        Fetch[Fetch from API] --> Parse[Parse & Map]
+        Parse --> Prior[Prioritize & Filter]
+        Prior --> Present[Present to User]
+        Present --> Impl[Implement<br/>approval required]
+    end
 ```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                      ML RECOMMENDATION ENGINE                                │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                             │
-│  ┌───────────────────────────────────────────────────────────────────────┐ │
-│  │                   RECOMMENDER TYPES                                    │ │
-│  │                                                                        │ │
-│  │   ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐      │ │
-│  │   │   IDLE VM       │  │   RIGHTSIZING   │  │   IDLE DISK     │      │ │
-│  │   │   Recommender   │  │   Recommender   │  │   Recommender   │      │ │
-│  │   │                 │  │                 │  │                 │      │ │
-│  │   │ • 8-day window  │  │ • Usage-based   │  │ • Unattached    │      │ │
-│  │   │ • CPU < 1%      │  │ • Machine type  │  │   disks         │      │ │
-│  │   │ • Network < 1%  │  │   suggestions   │  │ • Snapshot-only │      │ │
-│  │   └─────────────────┘  └─────────────────┘  └─────────────────┘      │ │
-│  │                                                                        │ │
-│  │   ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐      │ │
-│  │   │   COMMITMENT    │  │   IDLE SQL      │  │   IDLE ADDRESS  │      │ │
-│  │   │   Recommender   │  │   Recommender   │  │   Recommender   │      │ │
-│  │   │                 │  │                 │  │                 │      │ │
-│  │   │ • CUD analysis  │  │ • Idle Cloud    │  │ • Unused static │      │ │
-│  │   │ • 1-year/3-year │  │   SQL instances │  │   IP addresses  │      │ │
-│  │   │ • Up to 57% off │  │ • Low queries   │  │ • $7.30/month   │      │ │
-│  │   └─────────────────┘  └─────────────────┘  └─────────────────┘      │ │
-│  │                                                                        │ │
-│  └───────────────────────────────────────────────────────────────────────┘ │
-│                                    │                                        │
-│                                    ▼                                        │
-│  ┌───────────────────────────────────────────────────────────────────────┐ │
-│  │                   RECOMMENDATION WORKFLOW                              │ │
-│  │                                                                        │ │
-│  │   ┌─────────┐    ┌─────────┐    ┌─────────┐    ┌─────────┐           │ │
-│  │   │  Fetch  │───►│  Parse  │───►│Prioritize───►│ Present │           │ │
-│  │   │  from   │    │  & Map  │    │& Filter │    │ to User │           │ │
-│  │   │  API    │    │         │    │         │    │         │           │ │
-│  │   └─────────┘    └─────────┘    └─────────┘    └─────────┘           │ │
-│  │                                                       │               │ │
-│  │                                                       ▼               │ │
-│  │                                              ┌─────────────┐          │ │
-│  │                                              │  Implement  │          │ │
-│  │                                              │  (approval  │          │ │
-│  │                                              │   required) │          │ │
-│  │                                              └─────────────┘          │ │
-│  │                                                                        │ │
-│  └───────────────────────────────────────────────────────────────────────┘ │
-│                                                                             │
-└─────────────────────────────────────────────────────────────────────────────┘
-```
+
+**Legend**: diagram shows six recommendation types and their processing workflow from API fetch to implementation.
 
 **Recommendation Schema:**
 
@@ -584,20 +468,14 @@ CostRecommendation:
 **Auto-Implementation Rules:**
 
 ```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                    AUTO-IMPLEMENTATION CRITERIA                              │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                             │
-│   Recommendation Type      Auto-Implement?    Reason                        │
-│   ─────────────────────────────────────────────────────────────────────    │
-│   Idle VM (P1/P2)          ✓ YES             Low risk, clear savings        │
-│   Idle Disk                ✓ YES             No running workloads           │
-│   Idle Address             ✓ YES             Unused, safe to release        │
-│   Rightsizing              ✗ NO              Requires downtime              │
-│   CUD Purchase             ✗ NO              Financial commitment           │
-│   Idle Cloud SQL           ✗ NO              Data preservation risk         │
-│                                                                             │
-└─────────────────────────────────────────────────────────────────────────────┘
+| Recommendation Type | Auto-Implement? | Reason |
+|---------------------|-----------------|--------|
+| Idle VM (P1/P2) | ✓ YES | Low risk, clear savings |
+| Idle Disk | ✓ YES | No running workloads |
+| Idle Address | ✓ YES | Unused, safe to release |
+| Rightsizing | ✗ NO | Requires downtime |
+| CUD Purchase | ✗ NO | Financial commitment |
+| Idle Cloud SQL | ✗ NO | Data preservation risk |
 ```
 
 ---
@@ -609,75 +487,51 @@ CostRecommendation:
 **Architecture:**
 
 ```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                        ANOMALY DETECTION                                     │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                             │
-│  ┌───────────────────────────────────────────────────────────────────────┐ │
-│  │                   DETECTION METHODS                                    │ │
-│  │                                                                        │ │
-│  │   1. DAILY SPIKE DETECTION                                            │ │
-│  │      ┌────────────────────────────────────────────────────────────┐  │ │
-│  │      │  • Calculate 30-day mean and standard deviation            │  │ │
-│  │      │  • Flag if today > mean + (2 × std)                        │  │ │
-│  │      │  • Severity based on deviation magnitude                   │  │ │
-│  │      └────────────────────────────────────────────────────────────┘  │ │
-│  │                                                                        │ │
-│  │   2. SERVICE SPIKE DETECTION                                          │ │
-│  │      ┌────────────────────────────────────────────────────────────┐  │ │
-│  │      │  • Per-service historical analysis                          │  │ │
-│  │      │  • Identify which service caused the spike                 │  │ │
-│  │      │  • Correlate with resource changes                         │  │ │
-│  │      └────────────────────────────────────────────────────────────┘  │ │
-│  │                                                                        │ │
-│  │   3. SUSTAINED INCREASE DETECTION                                     │ │
-│  │      ┌────────────────────────────────────────────────────────────┐  │ │
-│  │      │  • Compare recent 5-day avg vs historical avg              │  │ │
-│  │      │  • Flag if increase > 20% sustained                        │  │ │
-│  │      │  • Indicates new baseline, not one-time spike              │  │ │
-│  │      └────────────────────────────────────────────────────────────┘  │ │
-│  │                                                                        │ │
-│  │   4. NEW SERVICE COST DETECTION                                       │ │
-│  │      ┌────────────────────────────────────────────────────────────┐  │ │
-│  │      │  • Identify services with costs that weren't in history    │  │ │
-│  │      │  • Alert if new service cost > $100                        │  │ │
-│  │      │  • Verify intentional enablement                           │  │ │
-│  │      └────────────────────────────────────────────────────────────┘  │ │
-│  │                                                                        │ │
-│  └───────────────────────────────────────────────────────────────────────┘ │
-│                                                                             │
-└─────────────────────────────────────────────────────────────────────────────┘
+```mermaid
+graph TD
+    Daily[Daily Spike Detection]
+    Service[Service Spike Detection]
+    Sustained[Sustained Increase Detection]
+    NewService[New Service Cost Detection]
+
+    Daily -->|30‑day mean+2σ| Flag[Flag Spike]
+    Service -->|Per‑service analysis| Flag
+    Sustained -->|5‑day avg vs historic| Flag
+    NewService -->|Cost > $100| Flag
+```
+
+**Legend**: each detection method feeds into a common flagging step that triggers alerts.
+```mermaid
+flowchart TD
+    subgraph Detection["Anomaly Detection System"]
+        D1["1. DAILY SPIKE DETECTION<br/>• Calculate 30-day mean and std dev<br/>• Flag if today > mean + (2 × std)<br/>• Severity based on deviation magnitude"]
+        D2["2. SERVICE SPIKE DETECTION<br/>• Per-service historical analysis<br/>• Identify which service caused the spike<br/>• Correlate with resource changes"]
+        D3["3. SUSTAINED INCREASE DETECTION<br/>• Compare recent 5-day avg vs historical avg<br/>• Flag if increase > 20% sustained<br/>• Indicates new baseline, not one-time spike"]
+        D4["4. NEW SERVICE COST DETECTION<br/>• Identify services with costs that weren't in history<br/>• Alert if new service cost > $100<br/>• Verify intentional enablement"]
+    end
+```
+
+**Legend**: the four primary methods used by the agent to detect cost anomalies.
 ```
 
 **Statistical Analysis:**
 
 ```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                    SPIKE DETECTION VISUALIZATION                             │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                             │
-│   Daily Cost ($)                                                            │
-│        │                                                                    │
-│   $800 │                                            ╭───╮                   │
-│        │                                            │   │ ← SPIKE!          │
-│        │                                            │   │   (4.2 std dev)   │
-│   $600 │                                          ──┤   │                   │
-│        │   ══════════════════════════════════════   │   │ ← EMERGENCY       │
-│        │         mean + 2 std (CRITICAL)            │   │                   │
-│   $400 │   ──────────────────────────────────────   │   │ ← CRITICAL        │
-│        │         mean + 1.5 std (WARNING)           │   │                   │
-│        │                                            │   │                   │
-│   $200 │   ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄  │   │ ← mean            │
-│        │                                            ╰───╯                   │
-│     $0 └────────────────────────────────────────────────────────────────    │
-│           Day 1                              Day 29  Day 30                  │
-│                                                                             │
-│   Sensitivity Configuration:                                                │
-│     LOW:    3.0 standard deviations                                         │
-│     MEDIUM: 2.0 standard deviations (default)                               │
-│     HIGH:   1.5 standard deviations                                         │
-│                                                                             │
-└─────────────────────────────────────────────────────────────────────────────┘
+```mermaid
+xychart-beta
+    title "Daily Cost with Spike Detection Support"
+    x-axis [Day 1, Day 5, Day 10, Day 15, Day 20, Day 25, Day 30]
+    y-axis "Cost ($)" 0 --> 800
+    bar [150, 160, 155, 140, 150, 165, 750]
+    line [160, 160, 160, 160, 160, 160, 160]
+```
+
+**Legend**: visualization of a cost spike exceeding the standard deviation threshold (simulated data).
+
+**Sensitivity Configuration:**
+- **LOW**: 3.0 standard deviations
+- **MEDIUM**: 2.0 standard deviations (default)
+- **HIGH**: 1.5 standard deviations
 ```
 
 **Anomaly Schema:**
@@ -708,7 +562,19 @@ CostAnomaly:
 **Architecture:**
 
 ```
-┌─────────────────────────────────────────────────────────────────────────────┐
+```mermaid
+flowchart TD
+    UI[Conversational Interface]
+    Intent[Intent Classification]
+    Entity[Entity Extraction]
+    Response[Response Generation]
+
+    UI --> Intent
+    Intent --> Entity
+    Entity --> Response
+```
+
+**Legend**: arrows show the processing pipeline from user query to generated response.
 │                    CONVERSATIONAL INTERFACE                                  │
 ├─────────────────────────────────────────────────────────────────────────────┤
 │                                                                             │
@@ -772,55 +638,25 @@ CostAnomaly:
 **Conversation Flow:**
 
 ```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                    MULTI-TURN CONVERSATION                                   │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                             │
-│   User: "Why did my costs spike this week?"                                 │
-│                                                                             │
-│   Agent: 🔍 **Cost Spike Analysis**                                         │
-│                                                                             │
-│          I detected a cost spike on Tuesday (45% above average).            │
-│                                                                             │
-│          **Root Cause:**                                                    │
-│          • 8 new GPU VMs created in project ml-training                     │
-│          • Estimated impact: $3,200/day                                     │
-│                                                                             │
-│          **Recommendation:**                                                │
-│          These VMs are using A100 GPUs. Consider:                           │
-│          • Using preemptible/spot VMs for training                          │
-│          • Setting up auto-shutdown after training completes                │
-│                                                                             │
-│          Would you like me to stop these VMs?                               │
-│          [Yes, stop them] [Schedule shutdown] [Keep running]                │
-│                                                                             │
-│   ─────────────────────────────────────────────────────────────────────    │
-│                                                                             │
-│   User: "Yes, stop them"                                                    │
-│                                                                             │
-│   Agent: ⚠️ **Action Required**                                             │
-│                                                                             │
-│          I'll stop 8 VMs in project ml-training:                            │
-│          • gpu-training-1 through gpu-training-8                            │
-│          • This will terminate any running training jobs                    │
-│                                                                             │
-│          **Estimated savings:** $3,200/day                                  │
-│                                                                             │
-│          Please confirm: [Approve] [Cancel]                                 │
-│                                                                             │
-│   ─────────────────────────────────────────────────────────────────────    │
-│                                                                             │
-│   User: "Approve"                                                           │
-│                                                                             │
-│   Agent: ✅ **Completed**                                                    │
-│                                                                             │
-│          Successfully stopped 8 VMs.                                        │
-│          Your daily spend should decrease by ~$3,200.                       │
-│                                                                             │
-│          Would you like me to:                                              │
-│          [Set up budget alert] [Create circuit breaker] [View costs]        │
-│                                                                             │
-└─────────────────────────────────────────────────────────────────────────────┘
+```mermaid
+sequenceDiagram
+    participant U as User
+    participant A as Agent
+    
+    U->>A: "Why did my costs spike this week?"
+    Note over A: 🔍 Cost Spike Analysis<br/>Detected spike on Tuesday (45% above avg)
+    A->>U: Root Cause: 8 new GPU VMs created in project ml-training<br/>Est. impact: $3,200/day<br/>Recommendation: Use spot VMs or auto-shutdown.<br/>Would you like me to stop these VMs?
+    
+    U->>A: "Yes, stop them"
+    Note over A: ⚠️ Action Required<br/>Stopping 8 VMs in project ml-training<br/>Est. savings: $3,200/day
+    A->>U: Please confirm: [Approve] [Cancel]
+    
+    U->>A: "Approve"
+    Note over A: ✅ Completed<br/>Successfully stopped 8 VMs.<br/>Daily spend should decrease by ~$3,200.
+    A->>U: Would you like me to: [Set budget] [Circuit breaker]
+```
+
+**Legend**: multi-turn conversation showing diagnosis, recommendation, and action confirmation.
 ```
 
 ---

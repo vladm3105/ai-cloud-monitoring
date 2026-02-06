@@ -1,529 +1,195 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1700 2000">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 950" font-family="Arial, sans-serif">
   <defs>
-    <!-- Gradients -->
     <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" style="stop-color:#1a73e8"/>
-      <stop offset="50%" style="stop-color:#ea4335"/>
-      <stop offset="100%" style="stop-color:#00a4ef"/>
+      <stop offset="0%" style="stop-color:#202124"/>
+      <stop offset="100%" style="stop-color:#3c4043"/>
     </linearGradient>
-    
     <linearGradient id="gcpGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" style="stop-color:#e8f0fe"/>
-      <stop offset="100%" style="stop-color:#d2e3fc"/>
+      <stop offset="0%" style="stop-color:#4285f4"/>
+      <stop offset="100%" style="stop-color:#1a73e8"/>
     </linearGradient>
-    
     <linearGradient id="awsGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" style="stop-color:#fff3e0"/>
-      <stop offset="100%" style="stop-color:#ffe0b2"/>
+      <stop offset="0%" style="stop-color:#ff9900"/>
+      <stop offset="100%" style="stop-color:#ec7211"/>
     </linearGradient>
-    
     <linearGradient id="azureGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" style="stop-color:#e3f2fd"/>
-      <stop offset="100%" style="stop-color:#bbdefb"/>
+      <stop offset="0%" style="stop-color:#0078d4"/>
+      <stop offset="100%" style="stop-color:#005a9e"/>
     </linearGradient>
-    
-    <linearGradient id="aiGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" style="stop-color:#f3e8fd"/>
-      <stop offset="100%" style="stop-color:#e9d5ff"/>
-    </linearGradient>
-    
-    <linearGradient id="unifiedGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" style="stop-color:#e8f5e9"/>
-      <stop offset="100%" style="stop-color:#c8e6c9"/>
-    </linearGradient>
-    
-    <!-- Drop Shadow -->
-    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
-      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-opacity="0.15"/>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-opacity="0.2"/>
     </filter>
-    
-    <filter id="shadowSmall" x="-5%" y="-5%" width="110%" height="110%">
-      <feDropShadow dx="1" dy="1" stdDeviation="2" flood-opacity="0.1"/>
-    </filter>
-    
-    <!-- Arrow Markers -->
-    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-      <polygon points="0 0, 10 3.5, 0 7" fill="#5f6368"/>
-    </marker>
-    
-    <marker id="arrowheadGCP" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-      <polygon points="0 0, 10 3.5, 0 7" fill="#4285f4"/>
-    </marker>
-    
-    <marker id="arrowheadAWS" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-      <polygon points="0 0, 10 3.5, 0 7" fill="#ff9900"/>
-    </marker>
-    
-    <marker id="arrowheadAzure" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-      <polygon points="0 0, 10 3.5, 0 7" fill="#00a4ef"/>
-    </marker>
   </defs>
   
   <!-- Background -->
-  <rect width="1700" height="2000" fill="#f8f9fa"/>
+  <rect width="1200" height="950" fill="#f8f9fa"/>
   
-  <!-- Title -->
-  <rect x="50" y="20" width="1600" height="70" rx="12" fill="url(#headerGrad)" filter="url(#shadow)"/>
-  <text x="850" y="60" text-anchor="middle" fill="white" font-family="Google Sans, Arial, sans-serif" font-size="28" font-weight="500">
-    AI Cost Monitoring — Multi-Agent Architecture
-  </text>
-  <text x="850" y="80" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-family="Arial" font-size="12">
-    Cloud-Native Monitoring for AI/ML Services &amp; Infrastructure
-  </text>
+  <!-- Title Header -->
+  <rect x="0" y="0" width="1200" height="70" fill="url(#headerGrad)"/>
+  <text x="600" y="35" text-anchor="middle" fill="white" font-size="24" font-weight="bold">AI Cost Monitoring — Multi-Agent Architecture</text>
+  <text x="600" y="55" text-anchor="middle" fill="#9aa0a6" font-size="14">Cloud-Native | No Proxy Required | AI/ML Focus | Event-Driven</text>
   
-  <!-- ==================== USER & UNIFIED LAYER ==================== -->
-  
-  <!-- User -->
-  <circle cx="850" cy="150" r="35" fill="#5f6368"/>
-  <circle cx="850" cy="138" r="14" fill="white"/>
-  <ellipse cx="850" cy="162" rx="18" ry="10" fill="white"/>
-  <text x="850" y="200" text-anchor="middle" fill="#202124" font-family="Arial" font-size="12" font-weight="500">User / Organization</text>
+  <!-- User/Organization -->
+  <rect x="450" y="90" width="300" height="60" rx="30" fill="#202124" filter="url(#shadow)"/>
+  <text x="600" y="125" text-anchor="middle" fill="white" font-weight="bold" font-size="16">USER / ORGANIZATION</text>
   
   <!-- Arrow down -->
-  <line x1="850" y1="210" x2="850" y2="240" stroke="#5f6368" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <path d="M600 150 L600 190" stroke="#5f6368" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
   
   <!-- Unified Interface -->
-  <rect x="550" y="250" width="600" height="70" rx="12" fill="url(#unifiedGrad)" stroke="#34a853" stroke-width="2" filter="url(#shadow)"/>
-  <text x="850" y="280" text-anchor="middle" fill="#137333" font-family="Arial" font-size="14" font-weight="600">Unified Interface / Orchestrator</text>
-  <text x="850" y="300" text-anchor="middle" fill="#5f6368" font-family="Arial" font-size="11">Cross-cloud dashboard, aggregated views, consolidated alerts (Future Phase)</text>
+  <rect x="350" y="190" width="500" height="70" rx="10" fill="white" stroke="#5f6368" stroke-width="2" stroke-dasharray="5,5" filter="url(#shadow)"/>
+  <text x="600" y="220" text-anchor="middle" fill="#5f6368" font-weight="bold" font-size="14">UNIFIED INTERFACE (Future)</text>
+  <text x="600" y="242" text-anchor="middle" fill="#9aa0a6" font-size="12">Cross-cloud dashboard &amp; orchestration</text>
   
   <!-- Arrows to agents -->
-  <line x1="650" y1="320" x2="320" y2="380" stroke="#4285f4" stroke-width="2" marker-end="url(#arrowheadGCP)"/>
-  <line x1="850" y1="320" x2="850" y2="380" stroke="#ff9900" stroke-width="2" marker-end="url(#arrowheadAWS)"/>
-  <line x1="1050" y1="320" x2="1380" y2="380" stroke="#00a4ef" stroke-width="2" marker-end="url(#arrowheadAzure)"/>
-  
-  <!-- ==================== THREE AGENTS ==================== -->
-  
-  <!-- GCP Agent -->
-  <rect x="50" y="390" width="500" height="700" rx="16" fill="url(#gcpGrad)" stroke="#4285f4" stroke-width="3" filter="url(#shadow)"/>
-  
-  <!-- GCP Header -->
-  <rect x="50" y="390" width="500" height="50" rx="16" fill="#4285f4"/>
-  <rect x="50" y="424" width="500" height="16" fill="#4285f4"/>
-  <text x="300" y="422" text-anchor="middle" fill="white" font-family="Arial" font-size="18" font-weight="600">GCP AGENT</text>
-  
-  <!-- Phase Badge -->
-  <rect x="70" y="400" width="80" height="22" rx="11" fill="#34a853"/>
-  <text x="110" y="415" text-anchor="middle" fill="white" font-family="Arial" font-size="10" font-weight="600">PHASE 1</text>
-  
-  <!-- GCP AI/ML Services -->
-  <rect x="70" y="455" width="460" height="240" rx="10" fill="url(#aiGrad)" stroke="#9334e6" stroke-width="2"/>
-  <rect x="70" y="455" width="460" height="30" rx="10" fill="#9334e6"/>
-  <rect x="70" y="478" width="460" height="7" fill="#9334e6"/>
-  <text x="300" y="476" text-anchor="middle" fill="white" font-family="Arial" font-size="12" font-weight="600">🤖 AI/ML SERVICES</text>
-  
-  <!-- Vertex AI Box -->
-  <rect x="85" y="495" width="200" height="185" rx="8" fill="white" stroke="#9334e6"/>
-  <text x="185" y="515" text-anchor="middle" fill="#7b1fa2" font-family="Arial" font-size="11" font-weight="600">Vertex AI</text>
-  <text x="95" y="535" fill="#5f6368" font-family="Arial" font-size="9">• Gemini (Pro, Flash, Ultra)</text>
-  <text x="95" y="550" fill="#5f6368" font-family="Arial" font-size="9">• PaLM API</text>
-  <text x="95" y="565" fill="#5f6368" font-family="Arial" font-size="9">• Imagen (Image Gen)</text>
-  <text x="95" y="580" fill="#5f6368" font-family="Arial" font-size="9">• Embeddings</text>
-  <text x="95" y="595" fill="#5f6368" font-family="Arial" font-size="9">• Custom Training</text>
-  <text x="95" y="610" fill="#5f6368" font-family="Arial" font-size="9">• Endpoints (Serving)</text>
-  <text x="95" y="625" fill="#5f6368" font-family="Arial" font-size="9">• Pipelines</text>
-  <text x="95" y="640" fill="#5f6368" font-family="Arial" font-size="9">• Feature Store</text>
-  <text x="95" y="655" fill="#5f6368" font-family="Arial" font-size="9">• AutoML</text>
-  <text x="95" y="670" fill="#5f6368" font-family="Arial" font-size="9">• Vector Search</text>
-  
-  <!-- Other AI Services -->
-  <rect x="300" y="495" width="215" height="185" rx="8" fill="white" stroke="#9334e6"/>
-  <text x="407" y="515" text-anchor="middle" fill="#7b1fa2" font-family="Arial" font-size="11" font-weight="600">Other AI Services</text>
-  <text x="310" y="535" fill="#5f6368" font-family="Arial" font-size="9">• Document AI</text>
-  <text x="310" y="550" fill="#5f6368" font-family="Arial" font-size="9">• Vision AI</text>
-  <text x="310" y="565" fill="#5f6368" font-family="Arial" font-size="9">• Video AI</text>
-  <text x="310" y="580" fill="#5f6368" font-family="Arial" font-size="9">• Speech-to-Text</text>
-  <text x="310" y="595" fill="#5f6368" font-family="Arial" font-size="9">• Text-to-Speech</text>
-  <text x="310" y="610" fill="#5f6368" font-family="Arial" font-size="9">• Translation AI</text>
-  <text x="310" y="625" fill="#5f6368" font-family="Arial" font-size="9">• Natural Language AI</text>
-  <text x="310" y="640" fill="#5f6368" font-family="Arial" font-size="9">• Dialogflow</text>
-  <text x="310" y="655" fill="#5f6368" font-family="Arial" font-size="9">• Contact Center AI</text>
-  
-  <!-- GCP Other Services -->
-  <rect x="70" y="705" width="460" height="100" rx="10" fill="white" stroke="#4285f4" stroke-width="1.5"/>
-  <text x="300" y="725" text-anchor="middle" fill="#1967d2" font-family="Arial" font-size="11" font-weight="600">☁️ OTHER CLOUD SERVICES</text>
-  
-  <rect x="85" y="735" width="100" height="55" rx="6" fill="#e8f0fe"/>
-  <text x="135" y="755" text-anchor="middle" fill="#1967d2" font-family="Arial" font-size="9" font-weight="600">Compute</text>
-  <text x="135" y="770" text-anchor="middle" fill="#5f6368" font-family="Arial" font-size="8">GCE, GKE</text>
-  <text x="135" y="783" text-anchor="middle" fill="#5f6368" font-family="Arial" font-size="8">Run, Functions</text>
-  
-  <rect x="195" y="735" width="100" height="55" rx="6" fill="#e8f0fe"/>
-  <text x="245" y="755" text-anchor="middle" fill="#1967d2" font-family="Arial" font-size="9" font-weight="600">Data</text>
-  <text x="245" y="770" text-anchor="middle" fill="#5f6368" font-family="Arial" font-size="8">BigQuery, SQL</text>
-  <text x="245" y="783" text-anchor="middle" fill="#5f6368" font-family="Arial" font-size="8">Dataflow</text>
-  
-  <rect x="305" y="735" width="100" height="55" rx="6" fill="#e8f0fe"/>
-  <text x="355" y="755" text-anchor="middle" fill="#1967d2" font-family="Arial" font-size="9" font-weight="600">Storage</text>
-  <text x="355" y="770" text-anchor="middle" fill="#5f6368" font-family="Arial" font-size="8">Cloud Storage</text>
-  <text x="355" y="783" text-anchor="middle" fill="#5f6368" font-family="Arial" font-size="8">Filestore</text>
-  
-  <rect x="415" y="735" width="100" height="55" rx="6" fill="#e8f0fe"/>
-  <text x="465" y="755" text-anchor="middle" fill="#1967d2" font-family="Arial" font-size="9" font-weight="600">Network</text>
-  <text x="465" y="770" text-anchor="middle" fill="#5f6368" font-family="Arial" font-size="8">Load Balancing</text>
-  <text x="465" y="783" text-anchor="middle" fill="#5f6368" font-family="Arial" font-size="8">CDN, VPC</text>
-  
-  <!-- GCP Built-in Tools -->
-  <rect x="70" y="815" width="460" height="70" rx="10" fill="#c8e6c9" stroke="#34a853"/>
-  <text x="300" y="835" text-anchor="middle" fill="#2e7d32" font-family="Arial" font-size="11" font-weight="600">🔧 GCP BUILT-IN TOOLS</text>
-  <text x="300" y="855" text-anchor="middle" fill="#2e7d32" font-family="Arial" font-size="9">BigQuery Export • Budget API • Recommender • Asset Inventory</text>
-  <text x="300" y="872" text-anchor="middle" fill="#2e7d32" font-family="Arial" font-size="9">Cloud Monitoring • Pub/Sub • Cloud Functions</text>
-  
-  <!-- GCP Infrastructure Cost -->
-  <rect x="70" y="895" width="460" height="35" rx="8" fill="#4285f4"/>
-  <text x="300" y="918" text-anchor="middle" fill="white" font-family="Arial" font-size="12" font-weight="600">Infrastructure Cost: $20-80/month</text>
-  
-  <!-- AWS Agent -->
-  <rect x="600" y="390" width="500" height="700" rx="16" fill="url(#awsGrad)" stroke="#ff9900" stroke-width="3" filter="url(#shadow)"/>
-  
-  <!-- AWS Header -->
-  <rect x="600" y="390" width="500" height="50" rx="16" fill="#ff9900"/>
-  <rect x="600" y="424" width="500" height="16" fill="#ff9900"/>
-  <text x="850" y="422" text-anchor="middle" fill="white" font-family="Arial" font-size="18" font-weight="600">AWS AGENT</text>
-  
-  <!-- Phase Badge -->
-  <rect x="620" y="400" width="80" height="22" rx="11" fill="#232f3e"/>
-  <text x="660" y="415" text-anchor="middle" fill="white" font-family="Arial" font-size="10" font-weight="600">PHASE 2</text>
-  
-  <!-- AWS AI/ML Services -->
-  <rect x="620" y="455" width="460" height="240" rx="10" fill="url(#aiGrad)" stroke="#9334e6" stroke-width="2"/>
-  <rect x="620" y="455" width="460" height="30" rx="10" fill="#9334e6"/>
-  <rect x="620" y="478" width="460" height="7" fill="#9334e6"/>
-  <text x="850" y="476" text-anchor="middle" fill="white" font-family="Arial" font-size="12" font-weight="600">🤖 AI/ML SERVICES</text>
-  
-  <!-- Bedrock & SageMaker -->
-  <rect x="635" y="495" width="200" height="185" rx="8" fill="white" stroke="#9334e6"/>
-  <text x="735" y="515" text-anchor="middle" fill="#7b1fa2" font-family="Arial" font-size="11" font-weight="600">Bedrock &amp; SageMaker</text>
-  <text x="645" y="535" fill="#5f6368" font-family="Arial" font-size="9">• Bedrock (Claude, Titan)</text>
-  <text x="645" y="550" fill="#5f6368" font-family="Arial" font-size="9">• Bedrock (Llama, Mistral)</text>
-  <text x="645" y="565" fill="#5f6368" font-family="Arial" font-size="9">• SageMaker Training</text>
-  <text x="645" y="580" fill="#5f6368" font-family="Arial" font-size="9">• SageMaker Endpoints</text>
-  <text x="645" y="595" fill="#5f6368" font-family="Arial" font-size="9">• SageMaker Pipelines</text>
-  <text x="645" y="610" fill="#5f6368" font-family="Arial" font-size="9">• SageMaker Canvas</text>
-  <text x="645" y="625" fill="#5f6368" font-family="Arial" font-size="9">• SageMaker JumpStart</text>
-  <text x="645" y="640" fill="#5f6368" font-family="Arial" font-size="9">• Amazon Q</text>
-  <text x="645" y="655" fill="#5f6368" font-family="Arial" font-size="9">• CodeWhisperer</text>
-  
-  <!-- Other AI Services -->
-  <rect x="850" y="495" width="215" height="185" rx="8" fill="white" stroke="#9334e6"/>
-  <text x="957" y="515" text-anchor="middle" fill="#7b1fa2" font-family="Arial" font-size="11" font-weight="600">Other AI Services</text>
-  <text x="860" y="535" fill="#5f6368" font-family="Arial" font-size="9">• Comprehend (NLP)</text>
-  <text x="860" y="550" fill="#5f6368" font-family="Arial" font-size="9">• Rekognition (Vision)</text>
-  <text x="860" y="565" fill="#5f6368" font-family="Arial" font-size="9">• Textract (Documents)</text>
-  <text x="860" y="580" fill="#5f6368" font-family="Arial" font-size="9">• Transcribe (Speech)</text>
-  <text x="860" y="595" fill="#5f6368" font-family="Arial" font-size="9">• Polly (TTS)</text>
-  <text x="860" y="610" fill="#5f6368" font-family="Arial" font-size="9">• Translate</text>
-  <text x="860" y="625" fill="#5f6368" font-family="Arial" font-size="9">• Lex (Chatbots)</text>
-  <text x="860" y="640" fill="#5f6368" font-family="Arial" font-size="9">• Kendra (Search)</text>
-  <text x="860" y="655" fill="#5f6368" font-family="Arial" font-size="9">• Personalize</text>
-  
-  <!-- AWS Other Services -->
-  <rect x="620" y="705" width="460" height="100" rx="10" fill="white" stroke="#ff9900" stroke-width="1.5"/>
-  <text x="850" y="725" text-anchor="middle" fill="#c45500" font-family="Arial" font-size="11" font-weight="600">☁️ OTHER CLOUD SERVICES</text>
-  
-  <rect x="635" y="735" width="100" height="55" rx="6" fill="#fff3e0"/>
-  <text x="685" y="755" text-anchor="middle" fill="#c45500" font-family="Arial" font-size="9" font-weight="600">Compute</text>
-  <text x="685" y="770" text-anchor="middle" fill="#5f6368" font-family="Arial" font-size="8">EC2, EKS</text>
-  <text x="685" y="783" text-anchor="middle" fill="#5f6368" font-family="Arial" font-size="8">Lambda, Fargate</text>
-  
-  <rect x="745" y="735" width="100" height="55" rx="6" fill="#fff3e0"/>
-  <text x="795" y="755" text-anchor="middle" fill="#c45500" font-family="Arial" font-size="9" font-weight="600">Data</text>
-  <text x="795" y="770" text-anchor="middle" fill="#5f6368" font-family="Arial" font-size="8">RDS, Redshift</text>
-  <text x="795" y="783" text-anchor="middle" fill="#5f6368" font-family="Arial" font-size="8">DynamoDB</text>
-  
-  <rect x="855" y="735" width="100" height="55" rx="6" fill="#fff3e0"/>
-  <text x="905" y="755" text-anchor="middle" fill="#c45500" font-family="Arial" font-size="9" font-weight="600">Storage</text>
-  <text x="905" y="770" text-anchor="middle" fill="#5f6368" font-family="Arial" font-size="8">S3, EBS</text>
-  <text x="905" y="783" text-anchor="middle" fill="#5f6368" font-family="Arial" font-size="8">EFS, Glacier</text>
-  
-  <rect x="965" y="735" width="100" height="55" rx="6" fill="#fff3e0"/>
-  <text x="1015" y="755" text-anchor="middle" fill="#c45500" font-family="Arial" font-size="9" font-weight="600">Network</text>
-  <text x="1015" y="770" text-anchor="middle" fill="#5f6368" font-family="Arial" font-size="8">ELB, CloudFront</text>
-  <text x="1015" y="783" text-anchor="middle" fill="#5f6368" font-family="Arial" font-size="8">Route 53</text>
-  
-  <!-- AWS Built-in Tools -->
-  <rect x="620" y="815" width="460" height="70" rx="10" fill="#ffecb3" stroke="#ff9900"/>
-  <text x="850" y="835" text-anchor="middle" fill="#c45500" font-family="Arial" font-size="11" font-weight="600">🔧 AWS BUILT-IN TOOLS</text>
-  <text x="850" y="855" text-anchor="middle" fill="#c45500" font-family="Arial" font-size="9">Cost Explorer • AWS Budgets • Compute Optimizer • AWS Config</text>
-  <text x="850" y="872" text-anchor="middle" fill="#c45500" font-family="Arial" font-size="9">CloudWatch • SNS • EventBridge • Lambda</text>
-  
-  <!-- AWS Infrastructure Cost -->
-  <rect x="620" y="895" width="460" height="35" rx="8" fill="#ff9900"/>
-  <text x="850" y="918" text-anchor="middle" fill="white" font-family="Arial" font-size="12" font-weight="600">Infrastructure Cost: $20-80/month</text>
-  
-  <!-- Azure Agent -->
-  <rect x="1150" y="390" width="500" height="700" rx="16" fill="url(#azureGrad)" stroke="#00a4ef" stroke-width="3" filter="url(#shadow)"/>
-  
-  <!-- Azure Header -->
-  <rect x="1150" y="390" width="500" height="50" rx="16" fill="#00a4ef"/>
-  <rect x="1150" y="424" width="500" height="16" fill="#00a4ef"/>
-  <text x="1400" y="422" text-anchor="middle" fill="white" font-family="Arial" font-size="18" font-weight="600">AZURE AGENT</text>
-  
-  <!-- Phase Badge -->
-  <rect x="1170" y="400" width="80" height="22" rx="11" fill="#0078d4"/>
-  <text x="1210" y="415" text-anchor="middle" fill="white" font-family="Arial" font-size="10" font-weight="600">PHASE 3</text>
-  
-  <!-- Azure AI/ML Services -->
-  <rect x="1170" y="455" width="460" height="240" rx="10" fill="url(#aiGrad)" stroke="#9334e6" stroke-width="2"/>
-  <rect x="1170" y="455" width="460" height="30" rx="10" fill="#9334e6"/>
-  <rect x="1170" y="478" width="460" height="7" fill="#9334e6"/>
-  <text x="1400" y="476" text-anchor="middle" fill="white" font-family="Arial" font-size="12" font-weight="600">🤖 AI/ML SERVICES</text>
-  
-  <!-- Azure OpenAI & ML -->
-  <rect x="1185" y="495" width="200" height="185" rx="8" fill="white" stroke="#9334e6"/>
-  <text x="1285" y="515" text-anchor="middle" fill="#7b1fa2" font-family="Arial" font-size="11" font-weight="600">Azure OpenAI &amp; ML</text>
-  <text x="1195" y="535" fill="#5f6368" font-family="Arial" font-size="9">• Azure OpenAI (GPT-4)</text>
-  <text x="1195" y="550" fill="#5f6368" font-family="Arial" font-size="9">• Azure OpenAI (GPT-3.5)</text>
-  <text x="1195" y="565" fill="#5f6368" font-family="Arial" font-size="9">• Azure OpenAI (DALL-E)</text>
-  <text x="1195" y="580" fill="#5f6368" font-family="Arial" font-size="9">• Azure AI Studio</text>
-  <text x="1195" y="595" fill="#5f6368" font-family="Arial" font-size="9">• Azure ML Training</text>
-  <text x="1195" y="610" fill="#5f6368" font-family="Arial" font-size="9">• Azure ML Endpoints</text>
-  <text x="1195" y="625" fill="#5f6368" font-family="Arial" font-size="9">• Azure ML Pipelines</text>
-  <text x="1195" y="640" fill="#5f6368" font-family="Arial" font-size="9">• Copilot Studio</text>
-  <text x="1195" y="655" fill="#5f6368" font-family="Arial" font-size="9">• Prompt Flow</text>
-  
-  <!-- Cognitive Services -->
-  <rect x="1400" y="495" width="215" height="185" rx="8" fill="white" stroke="#9334e6"/>
-  <text x="1507" y="515" text-anchor="middle" fill="#7b1fa2" font-family="Arial" font-size="11" font-weight="600">Cognitive Services</text>
-  <text x="1410" y="535" fill="#5f6368" font-family="Arial" font-size="9">• AI Vision</text>
-  <text x="1410" y="550" fill="#5f6368" font-family="Arial" font-size="9">• AI Speech</text>
-  <text x="1410" y="565" fill="#5f6368" font-family="Arial" font-size="9">• AI Language</text>
-  <text x="1410" y="580" fill="#5f6368" font-family="Arial" font-size="9">• AI Translator</text>
-  <text x="1410" y="595" fill="#5f6368" font-family="Arial" font-size="9">• AI Document Intel.</text>
-  <text x="1410" y="610" fill="#5f6368" font-family="Arial" font-size="9">• AI Search</text>
-  <text x="1410" y="625" fill="#5f6368" font-family="Arial" font-size="9">• Bot Service</text>
-  <text x="1410" y="640" fill="#5f6368" font-family="Arial" font-size="9">• Content Safety</text>
-  <text x="1410" y="655" fill="#5f6368" font-family="Arial" font-size="9">• Form Recognizer</text>
-  
-  <!-- Azure Other Services -->
-  <rect x="1170" y="705" width="460" height="100" rx="10" fill="white" stroke="#00a4ef" stroke-width="1.5"/>
-  <text x="1400" y="725" text-anchor="middle" fill="#0078d4" font-family="Arial" font-size="11" font-weight="600">☁️ OTHER CLOUD SERVICES</text>
-  
-  <rect x="1185" y="735" width="100" height="55" rx="6" fill="#e3f2fd"/>
-  <text x="1235" y="755" text-anchor="middle" fill="#0078d4" font-family="Arial" font-size="9" font-weight="600">Compute</text>
-  <text x="1235" y="770" text-anchor="middle" fill="#5f6368" font-family="Arial" font-size="8">VMs, AKS</text>
-  <text x="1235" y="783" text-anchor="middle" fill="#5f6368" font-family="Arial" font-size="8">Functions</text>
-  
-  <rect x="1295" y="735" width="100" height="55" rx="6" fill="#e3f2fd"/>
-  <text x="1345" y="755" text-anchor="middle" fill="#0078d4" font-family="Arial" font-size="9" font-weight="600">Data</text>
-  <text x="1345" y="770" text-anchor="middle" fill="#5f6368" font-family="Arial" font-size="8">SQL, Cosmos</text>
-  <text x="1345" y="783" text-anchor="middle" fill="#5f6368" font-family="Arial" font-size="8">Synapse</text>
-  
-  <rect x="1405" y="735" width="100" height="55" rx="6" fill="#e3f2fd"/>
-  <text x="1455" y="755" text-anchor="middle" fill="#0078d4" font-family="Arial" font-size="9" font-weight="600">Storage</text>
-  <text x="1455" y="770" text-anchor="middle" fill="#5f6368" font-family="Arial" font-size="8">Blob, Files</text>
-  <text x="1455" y="783" text-anchor="middle" fill="#5f6368" font-family="Arial" font-size="8">Data Lake</text>
-  
-  <rect x="1515" y="735" width="100" height="55" rx="6" fill="#e3f2fd"/>
-  <text x="1565" y="755" text-anchor="middle" fill="#0078d4" font-family="Arial" font-size="9" font-weight="600">Network</text>
-  <text x="1565" y="770" text-anchor="middle" fill="#5f6368" font-family="Arial" font-size="8">Load Balancer</text>
-  <text x="1565" y="783" text-anchor="middle" fill="#5f6368" font-family="Arial" font-size="8">Front Door</text>
-  
-  <!-- Azure Built-in Tools -->
-  <rect x="1170" y="815" width="460" height="70" rx="10" fill="#bbdefb" stroke="#00a4ef"/>
-  <text x="1400" y="835" text-anchor="middle" fill="#0078d4" font-family="Arial" font-size="11" font-weight="600">🔧 AZURE BUILT-IN TOOLS</text>
-  <text x="1400" y="855" text-anchor="middle" fill="#0078d4" font-family="Arial" font-size="9">Cost Management • Azure Budgets • Azure Advisor • Resource Graph</text>
-  <text x="1400" y="872" text-anchor="middle" fill="#0078d4" font-family="Arial" font-size="9">Azure Monitor • Event Grid • Azure Functions</text>
-  
-  <!-- Azure Infrastructure Cost -->
-  <rect x="1170" y="895" width="460" height="35" rx="8" fill="#00a4ef"/>
-  <text x="1400" y="918" text-anchor="middle" fill="white" font-family="Arial" font-size="12" font-weight="600">Infrastructure Cost: $20-80/month</text>
-  
-  <!-- ==================== AI/ML MONITORING FEATURES ==================== -->
-  
-  <rect x="50" y="1110" width="1600" height="200" rx="12" fill="white" stroke="#9334e6" stroke-width="2" filter="url(#shadow)"/>
-  <rect x="50" y="1110" width="1600" height="40" rx="12" fill="#9334e6"/>
-  <rect x="50" y="1140" width="1600" height="10" fill="#9334e6"/>
-  <text x="850" y="1138" text-anchor="middle" fill="white" font-family="Arial" font-size="16" font-weight="600">🤖 AI/ML-Specific Monitoring Features (Common Across All Agents)</text>
-  
-  <!-- Features Grid -->
-  <rect x="70" y="1165" width="230" height="60" rx="8" fill="#f3e8fd" stroke="#9334e6"/>
-  <text x="185" y="1188" text-anchor="middle" fill="#7b1fa2" font-family="Arial" font-size="11" font-weight="600">Token Usage Tracking</text>
-  <text x="185" y="1208" text-anchor="middle" fill="#5f6368" font-family="Arial" font-size="9">Input/output tokens per model</text>
-  
-  <rect x="315" y="1165" width="230" height="60" rx="8" fill="#f3e8fd" stroke="#9334e6"/>
-  <text x="430" y="1188" text-anchor="middle" fill="#7b1fa2" font-family="Arial" font-size="11" font-weight="600">Model Cost Comparison</text>
-  <text x="430" y="1208" text-anchor="middle" fill="#5f6368" font-family="Arial" font-size="9">Compare GPT-4 vs Gemini vs Claude</text>
-  
-  <rect x="560" y="1165" width="230" height="60" rx="8" fill="#f3e8fd" stroke="#9334e6"/>
-  <text x="675" y="1188" text-anchor="middle" fill="#7b1fa2" font-family="Arial" font-size="11" font-weight="600">Training Job Costs</text>
-  <text x="675" y="1208" text-anchor="middle" fill="#5f6368" font-family="Arial" font-size="9">GPU/TPU hours tracking</text>
-  
-  <rect x="805" y="1165" width="230" height="60" rx="8" fill="#f3e8fd" stroke="#9334e6"/>
-  <text x="920" y="1188" text-anchor="middle" fill="#7b1fa2" font-family="Arial" font-size="11" font-weight="600">Endpoint Monitoring</text>
-  <text x="920" y="1208" text-anchor="middle" fill="#5f6368" font-family="Arial" font-size="9">Idle detection, utilization</text>
-  
-  <rect x="1050" y="1165" width="230" height="60" rx="8" fill="#f3e8fd" stroke="#9334e6"/>
-  <text x="1165" y="1188" text-anchor="middle" fill="#7b1fa2" font-family="Arial" font-size="11" font-weight="600">AI-Specific Budgets</text>
-  <text x="1165" y="1208" text-anchor="middle" fill="#5f6368" font-family="Arial" font-size="9">Set limits per AI service</text>
-  
-  <rect x="1295" y="1165" width="230" height="60" rx="8" fill="#f3e8fd" stroke="#9334e6"/>
-  <text x="1410" y="1188" text-anchor="middle" fill="#7b1fa2" font-family="Arial" font-size="11" font-weight="600">Usage Anomaly Detection</text>
-  <text x="1410" y="1208" text-anchor="middle" fill="#5f6368" font-family="Arial" font-size="9">Unusual AI usage patterns</text>
-  
-  <!-- Sample Queries -->
-  <rect x="70" y="1235" width="750" height="60" rx="8" fill="#e8f0fe" stroke="#1a73e8"/>
-  <text x="445" y="1258" text-anchor="middle" fill="#1967d2" font-family="Arial" font-size="11" font-weight="600">💬 Example LLM Queries:</text>
-  <text x="445" y="1278" text-anchor="middle" fill="#5f6368" font-family="Arial" font-size="9">"How much did we spend on Gemini/GPT-4 this month?" • "Compare token costs by model" • "Alert me if AI spend exceeds $500/day"</text>
-  
-  <rect x="835" y="1235" width="690" height="60" rx="8" fill="#fff3e0" stroke="#f9ab00"/>
-  <text x="1180" y="1258" text-anchor="middle" fill="#e65100" font-family="Arial" font-size="11" font-weight="600">⚠️ AI-Specific Circuit Breaker:</text>
-  <text x="1180" y="1278" text-anchor="middle" fill="#5f6368" font-family="Arial" font-size="9">$500 WARNING • $1K ELEVATED • $2.5K CRITICAL (stop endpoints) • $5K EMERGENCY (disable APIs)</text>
-  
-  <!-- ==================== SERVICE RISK CLASSIFICATION ==================== -->
-  
-  <rect x="50" y="1330" width="1600" height="170" rx="12" fill="white" stroke="#ea4335" stroke-width="2" filter="url(#shadow)"/>
-  <rect x="50" y="1330" width="1600" height="40" rx="12" fill="#ea4335"/>
-  <rect x="50" y="1360" width="1600" height="10" fill="#ea4335"/>
-  <text x="850" y="1358" text-anchor="middle" fill="white" font-family="Arial" font-size="16" font-weight="600">⚡ Service Risk Classification</text>
-  
-  <!-- Risk Table -->
-  <rect x="70" y="1385" width="120" height="100" rx="8" fill="#b71c1c"/>
-  <text x="130" y="1408" text-anchor="middle" fill="white" font-family="Arial" font-size="12" font-weight="600">CRITICAL</text>
-  <text x="130" y="1430" text-anchor="middle" fill="#ffcdd2" font-family="Arial" font-size="9">Vertex AI Training</text>
-  <text x="130" y="1445" text-anchor="middle" fill="#ffcdd2" font-family="Arial" font-size="9">SageMaker Training</text>
-  <text x="130" y="1460" text-anchor="middle" fill="#ffcdd2" font-family="Arial" font-size="9">Azure ML Compute</text>
-  <text x="130" y="1475" text-anchor="middle" fill="#ffcdd2" font-family="Arial" font-size="9">GPU/TPU Jobs</text>
-  
-  <rect x="210" y="1385" width="120" height="100" rx="8" fill="#c62828"/>
-  <text x="270" y="1408" text-anchor="middle" fill="white" font-family="Arial" font-size="12" font-weight="600">CRITICAL</text>
-  <text x="270" y="1430" text-anchor="middle" fill="#ffcdd2" font-family="Arial" font-size="9">Gemini Pro/Ultra</text>
-  <text x="270" y="1445" text-anchor="middle" fill="#ffcdd2" font-family="Arial" font-size="9">Bedrock (Claude)</text>
-  <text x="270" y="1460" text-anchor="middle" fill="#ffcdd2" font-family="Arial" font-size="9">Azure OpenAI GPT-4</text>
-  <text x="270" y="1475" text-anchor="middle" fill="#ffcdd2" font-family="Arial" font-size="9">LLM Endpoints</text>
-  
-  <rect x="350" y="1385" width="150" height="100" rx="8" fill="#e65100"/>
-  <text x="425" y="1408" text-anchor="middle" fill="white" font-family="Arial" font-size="12" font-weight="600">HIGH</text>
-  <text x="425" y="1430" text-anchor="middle" fill="#ffe0b2" font-family="Arial" font-size="9">Inference Endpoints</text>
-  <text x="425" y="1445" text-anchor="middle" fill="#ffe0b2" font-family="Arial" font-size="9">Cognitive Services</text>
-  <text x="425" y="1460" text-anchor="middle" fill="#ffe0b2" font-family="Arial" font-size="9">Document AI</text>
-  <text x="425" y="1475" text-anchor="middle" fill="#ffe0b2" font-family="Arial" font-size="9">Vision/Speech AI</text>
-  
-  <rect x="520" y="1385" width="150" height="100" rx="8" fill="#f9a825"/>
-  <text x="595" y="1408" text-anchor="middle" fill="white" font-family="Arial" font-size="12" font-weight="600">MEDIUM</text>
-  <text x="595" y="1430" text-anchor="middle" fill="#fff8e1" font-family="Arial" font-size="9">Translation AI</text>
-  <text x="595" y="1445" text-anchor="middle" fill="#fff8e1" font-family="Arial" font-size="9">Text-to-Speech</text>
-  <text x="595" y="1460" text-anchor="middle" fill="#fff8e1" font-family="Arial" font-size="9">Embeddings</text>
-  <text x="595" y="1475" text-anchor="middle" fill="#fff8e1" font-family="Arial" font-size="9">Search AI</text>
-  
-  <!-- Traditional services -->
-  <rect x="720" y="1385" width="150" height="100" rx="8" fill="#e65100"/>
-  <text x="795" y="1408" text-anchor="middle" fill="white" font-family="Arial" font-size="12" font-weight="600">HIGH</text>
-  <text x="795" y="1430" text-anchor="middle" fill="#ffe0b2" font-family="Arial" font-size="9">BigQuery / Redshift</text>
-  <text x="795" y="1445" text-anchor="middle" fill="#ffe0b2" font-family="Arial" font-size="9">GKE / EKS / AKS</text>
-  <text x="795" y="1460" text-anchor="middle" fill="#ffe0b2" font-family="Arial" font-size="9">Dataflow / EMR</text>
-  <text x="795" y="1475" text-anchor="middle" fill="#ffe0b2" font-family="Arial" font-size="9">Synapse</text>
-  
-  <rect x="890" y="1385" width="150" height="100" rx="8" fill="#f9a825"/>
-  <text x="965" y="1408" text-anchor="middle" fill="white" font-family="Arial" font-size="12" font-weight="600">MEDIUM</text>
-  <text x="965" y="1430" text-anchor="middle" fill="#fff8e1" font-family="Arial" font-size="9">Compute Engine / EC2</text>
-  <text x="965" y="1445" text-anchor="middle" fill="#fff8e1" font-family="Arial" font-size="9">Cloud SQL / RDS</text>
-  <text x="965" y="1460" text-anchor="middle" fill="#fff8e1" font-family="Arial" font-size="9">Cloud Run / Lambda</text>
-  <text x="965" y="1475" text-anchor="middle" fill="#fff8e1" font-family="Arial" font-size="9">VMs / Functions</text>
-  
-  <rect x="1060" y="1385" width="150" height="100" rx="8" fill="#2e7d32"/>
-  <text x="1135" y="1408" text-anchor="middle" fill="white" font-family="Arial" font-size="12" font-weight="600">LOW</text>
-  <text x="1135" y="1430" text-anchor="middle" fill="#c8e6c9" font-family="Arial" font-size="9">Cloud Storage / S3</text>
-  <text x="1135" y="1445" text-anchor="middle" fill="#c8e6c9" font-family="Arial" font-size="9">Blob Storage</text>
-  <text x="1135" y="1460" text-anchor="middle" fill="#c8e6c9" font-family="Arial" font-size="9">Cloud Functions</text>
-  <text x="1135" y="1475" text-anchor="middle" fill="#c8e6c9" font-family="Arial" font-size="9">CDN / DNS</text>
-  
-  <!-- Legend -->
-  <rect x="1240" y="1385" width="390" height="100" rx="8" fill="#f5f5f5" stroke="#dadce0"/>
-  <text x="1435" y="1408" text-anchor="middle" fill="#202124" font-family="Arial" font-size="11" font-weight="600">Risk Classification Legend</text>
-  <text x="1260" y="1435" fill="#5f6368" font-family="Arial" font-size="9">🔴 <tspan font-weight="600">CRITICAL:</tspan> GPU/TPU training, LLM APIs</text>
-  <text x="1260" y="1455" fill="#5f6368" font-family="Arial" font-size="9">🟠 <tspan font-weight="600">HIGH:</tspan> Inference endpoints, analytics</text>
-  <text x="1260" y="1475" fill="#5f6368" font-family="Arial" font-size="9">🟡 <tspan font-weight="600">MEDIUM:</tspan> Compute, databases</text>
-  <text x="1435" y="1435" fill="#5f6368" font-family="Arial" font-size="9">🟢 <tspan font-weight="600">LOW:</tspan> Storage, networking</text>
-  <text x="1435" y="1455" fill="#5f6368" font-family="Arial" font-size="9">AI/ML services have highest risk</text>
-  <text x="1435" y="1475" fill="#5f6368" font-family="Arial" font-size="9">due to per-token/hour costs</text>
-  
-  <!-- ==================== ROADMAP ==================== -->
-  
-  <rect x="50" y="1520" width="1600" height="130" rx="12" fill="white" stroke="#34a853" stroke-width="2" filter="url(#shadow)"/>
-  <rect x="50" y="1520" width="1600" height="40" rx="12" fill="#34a853"/>
-  <rect x="50" y="1550" width="1600" height="10" fill="#34a853"/>
-  <text x="850" y="1548" text-anchor="middle" fill="white" font-family="Arial" font-size="16" font-weight="600">📅 Product Roadmap</text>
-  
-  <!-- Timeline -->
-  <line x1="150" y1="1600" x2="1550" y2="1600" stroke="#5f6368" stroke-width="3"/>
-  
-  <!-- Phase 1 -->
-  <circle cx="300" cy="1600" r="15" fill="#4285f4"/>
-  <text x="300" y="1605" text-anchor="middle" fill="white" font-family="Arial" font-size="12" font-weight="bold">1</text>
-  <text x="300" y="1580" text-anchor="middle" fill="#4285f4" font-family="Arial" font-size="11" font-weight="600">GCP Agent</text>
-  <text x="300" y="1625" text-anchor="middle" fill="#5f6368" font-family="Arial" font-size="10">Current</text>
-  
-  <!-- Phase 2 -->
-  <circle cx="600" cy="1600" r="15" fill="#ff9900"/>
-  <text x="600" y="1605" text-anchor="middle" fill="white" font-family="Arial" font-size="12" font-weight="bold">2</text>
-  <text x="600" y="1580" text-anchor="middle" fill="#ff9900" font-family="Arial" font-size="11" font-weight="600">AWS Agent</text>
-  <text x="600" y="1625" text-anchor="middle" fill="#5f6368" font-family="Arial" font-size="10">+3 months</text>
-  
-  <!-- Phase 3 -->
-  <circle cx="900" cy="1600" r="15" fill="#00a4ef"/>
-  <text x="900" y="1605" text-anchor="middle" fill="white" font-family="Arial" font-size="12" font-weight="bold">3</text>
-  <text x="900" y="1580" text-anchor="middle" fill="#00a4ef" font-family="Arial" font-size="11" font-weight="600">Azure Agent</text>
-  <text x="900" y="1625" text-anchor="middle" fill="#5f6368" font-family="Arial" font-size="10">+6 months</text>
-  
-  <!-- Phase 4 -->
-  <circle cx="1200" cy="1600" r="15" fill="#34a853"/>
-  <text x="1200" y="1605" text-anchor="middle" fill="white" font-family="Arial" font-size="12" font-weight="bold">4</text>
-  <text x="1200" y="1580" text-anchor="middle" fill="#34a853" font-family="Arial" font-size="11" font-weight="600">Unified Dashboard</text>
-  <text x="1200" y="1625" text-anchor="middle" fill="#5f6368" font-family="Arial" font-size="10">+9 months</text>
-  
-  <!-- Phase 5 -->
-  <circle cx="1500" cy="1600" r="15" fill="#9334e6"/>
-  <text x="1500" y="1605" text-anchor="middle" fill="white" font-family="Arial" font-size="12" font-weight="bold">5</text>
-  <text x="1500" y="1580" text-anchor="middle" fill="#9334e6" font-family="Arial" font-size="11" font-weight="600">Advanced Analytics</text>
-  <text x="1500" y="1625" text-anchor="middle" fill="#5f6368" font-family="Arial" font-size="10">+12 months</text>
-  
-  <!-- ==================== SUMMARY ==================== -->
-  
-  <rect x="50" y="1670" width="1600" height="100" rx="12" fill="#e8f0fe" stroke="#1a73e8" stroke-width="2" filter="url(#shadow)"/>
-  <text x="850" y="1700" text-anchor="middle" fill="#1967d2" font-family="Google Sans, Arial, sans-serif" font-size="18" font-weight="600">
-    Summary: Multi-Agent AI Cost Monitoring Platform
+  <path d="M450 260 L200 310" stroke="#5f6368" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  <path d="M600 260 L600 310" stroke="#5f6368" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  <path d="M750 260 L1000 310" stroke="#5f6368" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  
+  <!-- GCP Agent Box -->
+  <rect x="50" y="310" width="300" height="280" rx="10" fill="white" stroke="#4285f4" stroke-width="3" filter="url(#shadow)"/>
+  <rect x="50" y="310" width="300" height="45" rx="10" fill="url(#gcpGrad)"/>
+  <rect x="50" y="340" width="300" height="15" fill="url(#gcpGrad)"/>
+  <text x="200" y="340" text-anchor="middle" fill="white" font-weight="bold" font-size="16">GCP AGENT</text>
+  <text x="200" y="375" text-anchor="middle" fill="#4285f4" font-size="12" font-weight="bold">Phase 1 — Current Focus</text>
+  
+  <text x="70" y="400" font-size="11" font-weight="bold" fill="#5f6368">AI/ML Services:</text>
+  <text x="70" y="418" font-size="10" fill="#5f6368">• Vertex AI (Gemini, PaLM, Training)</text>
+  <text x="70" y="434" font-size="10" fill="#5f6368">• Document AI, Vision AI, Speech AI</text>
+  
+  <text x="70" y="458" font-size="11" font-weight="bold" fill="#5f6368">Other Services:</text>
+  <text x="70" y="476" font-size="10" fill="#5f6368">• Compute, BigQuery, GKE, Cloud SQL</text>
+  
+  <text x="70" y="500" font-size="11" font-weight="bold" fill="#5f6368">Built-in Tools:</text>
+  <text x="70" y="518" font-size="10" fill="#5f6368">• Billing Export, Budget API</text>
+  <text x="70" y="534" font-size="10" fill="#5f6368">• Recommender, Asset Inventory</text>
+  
+  <rect x="70" y="550" width="260" height="25" rx="4" fill="#e8f0fe"/>
+  <text x="200" y="567" text-anchor="middle" font-size="11" fill="#1a73e8">Cost: $20-80/month</text>
+  
+  <!-- AWS Agent Box -->
+  <rect x="450" y="310" width="300" height="280" rx="10" fill="white" stroke="#ff9900" stroke-width="3" filter="url(#shadow)"/>
+  <rect x="450" y="310" width="300" height="45" rx="10" fill="url(#awsGrad)"/>
+  <rect x="450" y="340" width="300" height="15" fill="url(#awsGrad)"/>
+  <text x="600" y="340" text-anchor="middle" fill="white" font-weight="bold" font-size="16">AWS AGENT</text>
+  <text x="600" y="375" text-anchor="middle" fill="#ff9900" font-size="12" font-weight="bold">Phase 2 — +3 months</text>
+  
+  <text x="470" y="400" font-size="11" font-weight="bold" fill="#5f6368">AI/ML Services:</text>
+  <text x="470" y="418" font-size="10" fill="#5f6368">• Amazon Bedrock (Claude, Titan)</text>
+  <text x="470" y="434" font-size="10" fill="#5f6368">• SageMaker, Comprehend, Rekognition</text>
+  
+  <text x="470" y="458" font-size="11" font-weight="bold" fill="#5f6368">Other Services:</text>
+  <text x="470" y="476" font-size="10" fill="#5f6368">• EC2, RDS, EKS, Lambda</text>
+  
+  <text x="470" y="500" font-size="11" font-weight="bold" fill="#5f6368">Built-in Tools:</text>
+  <text x="470" y="518" font-size="10" fill="#5f6368">• Cost Explorer, AWS Budgets</text>
+  <text x="470" y="534" font-size="10" fill="#5f6368">• Compute Optimizer, CloudWatch</text>
+  
+  <rect x="470" y="550" width="260" height="25" rx="4" fill="#fff4e5"/>
+  <text x="600" y="567" text-anchor="middle" font-size="11" fill="#ec7211">Cost: $20-80/month</text>
+  
+  <!-- Azure Agent Box -->
+  <rect x="850" y="310" width="300" height="280" rx="10" fill="white" stroke="#0078d4" stroke-width="3" filter="url(#shadow)"/>
+  <rect x="850" y="310" width="300" height="45" rx="10" fill="url(#azureGrad)"/>
+  <rect x="850" y="340" width="300" height="15" fill="url(#azureGrad)"/>
+  <text x="1000" y="340" text-anchor="middle" fill="white" font-weight="bold" font-size="16">AZURE AGENT</text>
+  <text x="1000" y="375" text-anchor="middle" fill="#0078d4" font-size="12" font-weight="bold">Phase 3 — +6 months</text>
+  
+  <text x="870" y="400" font-size="11" font-weight="bold" fill="#5f6368">AI/ML Services:</text>
+  <text x="870" y="418" font-size="10" fill="#5f6368">• Azure OpenAI (GPT-4, GPT-3.5)</text>
+  <text x="870" y="434" font-size="10" fill="#5f6368">• Cognitive Services, ML Studio</text>
+  
+  <text x="870" y="458" font-size="11" font-weight="bold" fill="#5f6368">Other Services:</text>
+  <text x="870" y="476" font-size="10" fill="#5f6368">• VMs, SQL, AKS, Functions</text>
+  
+  <text x="870" y="500" font-size="11" font-weight="bold" fill="#5f6368">Built-in Tools:</text>
+  <text x="870" y="518" font-size="10" fill="#5f6368">• Cost Management, Azure Budgets</text>
+  <text x="870" y="534" font-size="10" fill="#5f6368">• Azure Advisor, Monitor</text>
+  
+  <rect x="870" y="550" width="260" height="25" rx="4" fill="#e5f1fb"/>
+  <text x="1000" y="567" text-anchor="middle" font-size="11" fill="#0078d4">Cost: $20-80/month</text>
+  
+  <!-- Circuit Breaker Section -->
+  <rect x="50" y="620" width="1100" height="180" rx="10" fill="white" stroke="#ea4335" stroke-width="2" filter="url(#shadow)"/>
+  <text x="600" y="650" text-anchor="middle" font-weight="bold" font-size="16" fill="#ea4335">CIRCUIT BREAKER THRESHOLDS (Two-Level Architecture)</text>
+  
+  <!-- Per-Service Thresholds -->
+  <rect x="70" y="670" width="510" height="115" rx="6" fill="#fce8e6"/>
+  <text x="325" y="692" text-anchor="middle" font-weight="bold" font-size="12" fill="#c5221f">PER-SERVICE THRESHOLDS (Examples)</text>
+  
+  <text x="90" y="715" font-size="10" fill="#5f6368" font-weight="bold">AI/ML Services:</text>
+  <text x="200" y="715" font-size="10" fill="#5f6368">$500 → $1K → $2.5K → $5K/day</text>
+  
+  <text x="90" y="735" font-size="10" fill="#5f6368" font-weight="bold">Compute:</text>
+  <text x="200" y="735" font-size="10" fill="#5f6368">$300 → $750 → $1.5K → $3K/day</text>
+  
+  <text x="90" y="755" font-size="10" fill="#5f6368" font-weight="bold">Data Services:</text>
+  <text x="200" y="755" font-size="10" fill="#5f6368">$200 → $500 → $1K → $2K/day</text>
+  
+  <text x="370" y="715" font-size="10" fill="#5f6368">WARNING → ELEVATED → CRITICAL → EMERGENCY</text>
+  <text x="370" y="735" font-size="10" fill="#999">Alert → Escalate → Stop Non-Prod → Stop All</text>
+  
+  <!-- Overall Thresholds -->
+  <rect x="600" y="670" width="530" height="115" rx="6" fill="#fef7e0"/>
+  <text x="865" y="692" text-anchor="middle" font-weight="bold" font-size="12" fill="#e37400">OVERALL THRESHOLDS (Safety Net)</text>
+  
+  <text x="620" y="718" font-size="11" fill="#5f6368">
+    <tspan font-weight="bold">WARNING:</tspan> $1,000/day → Alert only
+  </text>
+  <text x="620" y="738" font-size="11" fill="#5f6368">
+    <tspan font-weight="bold">ELEVATED:</tspan> $2,500/day → Alert + escalation
+  </text>
+  <text x="620" y="758" font-size="11" fill="#5f6368">
+    <tspan font-weight="bold">CRITICAL:</tspan> $5,000/day → Stop high-cost resources
+  </text>
+  <text x="620" y="778" font-size="11" fill="#c5221f">
+    <tspan font-weight="bold">EMERGENCY:</tspan> $10,000/day → Disable billing
   </text>
   
-  <text x="850" y="1730" text-anchor="middle" fill="#202124" font-family="Arial" font-size="12">
-    <tspan font-weight="600">3 Cloud-Native Agents:</tspan> GCP (Vertex AI) • AWS (Bedrock/SageMaker) • Azure (Azure OpenAI) — Each using only native cloud APIs
-  </text>
+  <!-- Service Risk Classification -->
+  <rect x="50" y="820" width="700" height="110" rx="10" fill="white" stroke="#5f6368" stroke-width="1" filter="url(#shadow)"/>
+  <text x="400" y="845" text-anchor="middle" font-weight="bold" font-size="14" fill="#5f6368">SERVICE RISK CLASSIFICATION</text>
   
-  <text x="850" y="1755" text-anchor="middle" fill="#202124" font-family="Arial" font-size="12">
-    <tspan font-weight="600">AI/ML Focus:</tspan> Token tracking • Model comparison • Training costs • Endpoint monitoring • AI-specific budgets &amp; circuit breakers
-  </text>
+  <rect x="70" y="860" width="80" height="20" rx="4" fill="#c5221f"/>
+  <text x="110" y="875" text-anchor="middle" fill="white" font-size="10" font-weight="bold">CRITICAL</text>
+  <text x="170" y="875" font-size="10" fill="#5f6368">Vertex AI Training, Bedrock, Azure OpenAI (GPU/TPU)</text>
   
-  <!-- Legend -->
-  <rect x="50" y="1790" width="1600" height="50" rx="8" fill="white" stroke="#dadce0"/>
-  <text x="70" y="1820" fill="#202124" font-family="Arial" font-size="11" font-weight="600">Legend:</text>
+  <rect x="70" y="885" width="80" height="20" rx="4" fill="#ea4335"/>
+  <text x="110" y="900" text-anchor="middle" fill="white" font-size="10" font-weight="bold">HIGH</text>
+  <text x="170" y="900" font-size="10" fill="#5f6368">BigQuery, GKE, SageMaker, Synapse (High hourly rates)</text>
   
-  <rect x="140" y="1805" width="20" height="20" rx="4" fill="#4285f4"/>
-  <text x="170" y="1820" fill="#5f6368" font-family="Arial" font-size="10">GCP</text>
+  <rect x="400" y="860" width="80" height="20" rx="4" fill="#fbbc04"/>
+  <text x="440" y="875" text-anchor="middle" fill="white" font-size="10" font-weight="bold">MEDIUM</text>
+  <text x="500" y="875" font-size="10" fill="#5f6368">Cloud SQL, EC2, VMs</text>
   
-  <rect x="220" y="1805" width="20" height="20" rx="4" fill="#ff9900"/>
-  <text x="250" y="1820" fill="#5f6368" font-family="Arial" font-size="10">AWS</text>
+  <rect x="400" y="885" width="80" height="20" rx="4" fill="#34a853"/>
+  <text x="440" y="900" text-anchor="middle" fill="white" font-size="10" font-weight="bold">LOW</text>
+  <text x="500" y="900" font-size="10" fill="#5f6368">Cloud Storage, S3, Blob</text>
   
-  <rect x="300" y="1805" width="20" height="20" rx="4" fill="#00a4ef"/>
-  <text x="330" y="1820" fill="#5f6368" font-family="Arial" font-size="10">Azure</text>
+  <!-- Roadmap -->
+  <rect x="770" y="820" width="380" height="110" rx="10" fill="white" stroke="#5f6368" stroke-width="1" filter="url(#shadow)"/>
+  <text x="960" y="845" text-anchor="middle" font-weight="bold" font-size="14" fill="#5f6368">PRODUCT ROADMAP</text>
   
-  <rect x="400" y="1805" width="20" height="20" rx="4" fill="#9334e6"/>
-  <text x="430" y="1820" fill="#5f6368" font-family="Arial" font-size="10">AI/ML Services</text>
+  <circle cx="800" cy="870" r="8" fill="#4285f4"/>
+  <text x="815" y="874" font-size="10" fill="#5f6368">Phase 1: GCP Agent (Current)</text>
   
-  <rect x="550" y="1805" width="20" height="20" rx="4" fill="#c8e6c9" stroke="#34a853"/>
-  <text x="580" y="1820" fill="#5f6368" font-family="Arial" font-size="10">Built-in Tools</text>
+  <circle cx="800" cy="892" r="8" fill="#ff9900"/>
+  <text x="815" y="896" font-size="10" fill="#5f6368">Phase 2: AWS Agent (+3 mo)</text>
   
-  <rect x="700" y="1805" width="80" height="20" rx="4" fill="#34a853"/>
-  <text x="740" y="1820" text-anchor="middle" fill="white" font-family="Arial" font-size="9" font-weight="600">$20-80/mo</text>
-  <text x="800" y="1820" fill="#5f6368" font-family="Arial" font-size="10">per agent</text>
+  <circle cx="960" cy="870" r="8" fill="#0078d4"/>
+  <text x="975" y="874" font-size="10" fill="#5f6368">Phase 3: Azure (+6 mo)</text>
   
-  <text x="950" y="1820" fill="#5f6368" font-family="Arial" font-size="10">
-    <tspan font-weight="600">Key Principle:</tspan> Each agent monitors ONLY its cloud — no external APIs, no proxies
-  </text>
+  <circle cx="960" cy="892" r="8" fill="#5f6368"/>
+  <text x="975" y="896" font-size="10" fill="#5f6368">Phase 4-5: Unified (+9-12 mo)</text>
   
   <!-- Footer -->
-  <text x="850" y="1870" text-anchor="middle" fill="#5f6368" font-family="Arial" font-size="11">
-    AI Cost Monitoring — Multi-Agent Architecture v1.0 — February 2025
-  </text>
+  <text x="600" y="940" text-anchor="middle" font-size="10" fill="#9aa0a6">Multi-Agent Architecture v1.1 — February 2025 | Each agent: $20-80/month infrastructure cost</text>
   
+  <!-- Arrowhead marker -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#5f6368"/>
+    </marker>
+  </defs>
 </svg>

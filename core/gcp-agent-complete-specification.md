@@ -60,28 +60,34 @@ The GCP Cost Monitoring Agent is a conversational AI assistant that helps SMB ow
 
 ### 2.1 Architecture Overview
 
+```mermaid
+flowchart TD
+    User[USER] --> MCP[MCP SERVER Cloud Run]
+    
+    subgraph MCP_Components[MCP Components]
+        direction TB
+        Interface[Conversational Interface]
+        Router[Query Router]
+        Breaker[Circuit Breaker]
+    end
+    
+    MCP --- Interface & Router & Breaker
+    
+    MCP --> GCP[GCP BUILT-IN SERVICES]
+    
+    subgraph GCP_Services[GCP Services]
+        direction LR
+        BQ[BigQuery]
+        Budget[Budget API]
+        Rec[Recommender]
+        Asset[Asset Inventory]
+        Etc[etc.]
+    end
+    
+    GCP --- BQ & Budget & Rec & Asset & Etc
 ```
-┌─────────────────────────────────────────────────────────────────┐
-│                         USER                                     │
-└─────────────────────────────────────────────────────────────────┘
-                              │
-                              ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                    MCP SERVER (Cloud Run)                        │
-│                                                                  │
-│  ┌──────────────┐ ┌──────────────┐ ┌──────────────┐            │
-│  │Conversational│ │    Query     │ │   Circuit    │            │
-│  │  Interface   │ │   Router     │ │   Breaker    │            │
-│  └──────────────┘ └──────────────┘ └──────────────┘            │
-└─────────────────────────────────────────────────────────────────┘
-                              │
-                              ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                  GCP BUILT-IN SERVICES                           │
-│                                                                  │
-│  BigQuery │ Budget API │ Recommender │ Asset Inventory │ etc.   │
-└─────────────────────────────────────────────────────────────────┘
-```
+
+**Legend**: High-level data flow from User to the Agent (MCP Server) and downstream to GCP services.
 
 ### 2.2 Design Principles
 
@@ -146,14 +152,39 @@ The GCP Cost Monitoring Agent is a conversational AI assistant that helps SMB ow
 - Cloud Function receives event and evaluates action
 - Action executed based on threshold level
 
-**Threshold Levels:**
+**Threshold Architecture:**
+
+The circuit breaker operates on two levels:
+1. **Per-Service Thresholds** — Monitor specific high-cost services independently
+2. **Overall Thresholds** — Monitor total daily spend as a safety net
+
+**Per-Service Threshold Examples:**
+
+| Service | Level | Default Threshold | Action |
+|---------|-------|-------------------|--------|
+| Vertex AI | WARNING | $500/day | Alert only |
+| | ELEVATED | $1,000/day | Alert with escalation |
+| | CRITICAL | $2,500/day | Stop non-production endpoints |
+| | EMERGENCY | $5,000/day | Stop all endpoints |
+| Compute Engine | WARNING | $300/day | Alert only |
+| | ELEVATED | $750/day | Alert with escalation |
+| | CRITICAL | $1,500/day | Stop non-production VMs |
+| | EMERGENCY | $3,000/day | Stop all VMs (except protected) |
+| BigQuery | WARNING | $200/day | Alert only |
+| | ELEVATED | $500/day | Alert with escalation |
+| | CRITICAL | $1,000/day | Throttle queries |
+| | EMERGENCY | $2,000/day | Disable non-essential access |
+
+**Overall Threshold Levels (Safety Net):**
 
 | Level | Default Threshold | Action |
 |-------|-------------------|--------|
-| WARNING | $1,000/day | Alert only (Slack, email) |
-| ELEVATED | $2,500/day | Alert with escalation |
-| CRITICAL | $5,000/day | Stop high-cost resources |
-| EMERGENCY | $10,000/day | Disable billing (requires approval) |
+| WARNING | $1,000/day total | Alert only (Slack, email) |
+| ELEVATED | $2,500/day total | Alert with escalation |
+| CRITICAL | $5,000/day total | Stop high-cost resources |
+| EMERGENCY | $10,000/day total | Disable billing (requires approval) |
+
+> **Note:** Either threshold type can independently trip the circuit breaker. Per-service thresholds are customizable via `configure_circuit_breaker` tool.
 
 **State Machine:**
 - CLOSED (normal) → OPEN (tripped) → HALF-OPEN (testing) → CLOSED

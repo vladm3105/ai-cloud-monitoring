@@ -43,41 +43,29 @@ Stateless MCP Server (Cloud Run) → GCP Built-in APIs → User Response
 
 ### Data Collection Overview
 
+```mermaid
+flowchart TD
+    subgraph Automatic["GCP-MANAGED (Automatic)"]
+        direction TB
+        Billing[Billing Export] -->|Daily, 24-48h delay| BQ[BigQuery]
+        Budget[Budget Service] -->|Continuous| Threshold[Threshold Check]
+        Rec[Recommender] -->|Continuous| ML[ML Analysis]
+        Asset[Asset Inventory] -->|Real-time| State[Resource State]
+    end
+
+    subgraph EventDriven["EVENT-DRIVEN (Pub/Sub)"]
+        direction TB
+        BudgetAlert[Budget Alert] --> PubSub1[Pub/Sub] --> CF1[Cloud Function] --> Breaker[Circuit Breaker]
+        AssetChange[Asset Change] --> PubSub2[Pub/Sub] --> CF2[Cloud Function] --> CostAlert[Cost Alert]
+    end
+
+    subgraph OnDemand["ON-DEMAND (User Query)"]
+        direction TB
+        Question[User Question] --> MCP[MCP Server] --> API[Query GCP APIs] --> Resp[Response]
+    end
 ```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                    DATA COLLECTION & TRIGGERS                                │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                             │
-│  ┌─────────────────────────────────────────────────────────────────────┐   │
-│  │                 GCP-MANAGED (Automatic)                              │   │
-│  │                                                                      │   │
-│  │  Billing Export ──► BigQuery        (Daily, ~24-48h delay)          │   │
-│  │  Budget Service ──► Threshold Check (Continuous)                    │   │
-│  │  Recommender    ──► ML Analysis     (Continuous, 8+ day window)     │   │
-│  │  Asset Inventory ──► Resource State (Real-time)                     │   │
-│  │                                                                      │   │
-│  │  WE DO NOTHING — GCP collects and stores automatically              │   │
-│  └─────────────────────────────────────────────────────────────────────┘   │
-│                                                                             │
-│  ┌─────────────────────────────────────────────────────────────────────┐   │
-│  │                 EVENT-DRIVEN (Pub/Sub)                               │   │
-│  │                                                                      │   │
-│  │  Budget Alert ──► Pub/Sub ──► Cloud Function ──► Circuit Breaker    │   │
-│  │  Asset Change ──► Pub/Sub ──► Cloud Function ──► Cost Alert         │   │
-│  │                                                                      │   │
-│  │  TRIGGERED BY GCP — We only react to events                         │   │
-│  └─────────────────────────────────────────────────────────────────────┘   │
-│                                                                             │
-│  ┌─────────────────────────────────────────────────────────────────────┐   │
-│  │                 ON-DEMAND (User Query)                               │   │
-│  │                                                                      │   │
-│  │  User Question ──► MCP Server ──► Query GCP APIs ──► Response       │   │
-│  │                                                                      │   │
-│  │  NO POLLING — Queries only when user asks                           │   │
-│  └─────────────────────────────────────────────────────────────────────┘   │
-│                                                                             │
-└─────────────────────────────────────────────────────────────────────────────┘
-```
+
+**Legend**: Three modes of data collection: Automatic (GCP), Event-Driven (Pub/Sub), and On-Demand (User Query).
 
 ### Trigger Types
 
@@ -250,12 +238,27 @@ If business requires a daily summary email/Slack message:
 
 ### Circuit Breaker Thresholds
 
+The circuit breaker operates on two levels: per-service thresholds and overall thresholds.
+
+**Per-Service Thresholds (Examples):**
+
+| Service | Level | Threshold | Action |
+|---------|-------|-----------|--------|
+| Vertex AI | WARNING | $500/day | Alert only |
+| | CRITICAL | $2,500/day | Stop non-production endpoints |
+| Compute Engine | WARNING | $300/day | Alert only |
+| | CRITICAL | $1,500/day | Stop non-production VMs |
+| BigQuery | WARNING | $200/day | Alert only |
+| | CRITICAL | $1,000/day | Throttle queries |
+
+**Overall Thresholds (Safety Net):**
+
 | Level | Threshold | Action |
 |-------|-----------|--------|
-| WARNING | $1,000/day | Alert only |
-| ELEVATED | $2,500/day | Alert + escalation |
-| CRITICAL | $5,000/day | Stop high-cost resources |
-| EMERGENCY | $10,000/day | Disable billing |
+| WARNING | $1,000/day total | Alert only |
+| ELEVATED | $2,500/day total | Alert + escalation |
+| CRITICAL | $5,000/day total | Stop high-cost resources |
+| EMERGENCY | $10,000/day total | Disable billing |
 
 ### Service Risk Classification
 
@@ -463,32 +466,29 @@ CIRCUIT_BREAKER_DRY_RUN=false
 
 ## Summary: Triggers & Data Flow
 
+```mermaid
+flowchart TD
+    subgraph Automatic["AUTOMATIC (GCP-Managed)"]
+        Billing[Billing] -->|Daily| BQ[BigQuery]
+        Budget[Budget] -->|Continuous| Mon[Monitoring]
+        Rec[Recommender] -->|Continuous| Analysis[Analysis]
+        Asset[Asset] -->|Real-time| Track[Tracking]
+    end
+
+    subgraph EventDriven["EVENT-DRIVEN (Pub/Sub)"]
+        Threshold[Budget Threshold] -->|Pub/Sub| Circuit[Alert / Circuit Breaker]
+        Resource[Resource Created] -->|Pub/Sub| Estim[Cost Estimate / Alert]
+    end
+
+    subgraph OnDemand["ON-DEMAND (User Query)"]
+        User[User] -->|Question| MCP[MCP Server] -->|Query| APIs[Query APIs] -->|Response| User
+    end
+    
+    EventDriven -.-> MCP
+    Automatic -.-> MCP
 ```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                         COMPLETE DATA FLOW                                   │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                             │
-│  AUTOMATIC (GCP-Managed):                                                   │
-│  ════════════════════════                                                   │
-│  • Billing → BigQuery (daily)                                               │
-│  • Budget monitoring (continuous)                                           │
-│  • Recommender analysis (continuous)                                        │
-│  • Asset tracking (real-time)                                               │
-│                                                                             │
-│  EVENT-DRIVEN (Pub/Sub):                                                    │
-│  ═══════════════════════                                                    │
-│  • Budget threshold → Alert/Circuit Breaker                                 │
-│  • Resource created → Cost estimate/Alert                                   │
-│                                                                             │
-│  ON-DEMAND (User Query):                                                    │
-│  ═══════════════════════                                                    │
-│  • User question → Query APIs → Response                                    │
-│                                                                             │
-│  WE BUILD: MCP Server + Cloud Function                                      │
-│  GCP PROVIDES: Everything else                                              │
-│                                                                             │
-└─────────────────────────────────────────────────────────────────────────────┘
-```
+
+**Legend**: Complete data flow summary showing the interaction between GCP managed services, event-driven triggers, and the on-demand user flow.
 
 ---
 
