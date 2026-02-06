@@ -160,6 +160,65 @@ AI-cost-monitoring/
 
 ---
 
+
+---
+
+## 🎨 User Interface Architecture
+
+The platform provides **two complementary interfaces** for different interaction modes:
+
+### 1. Grafana Dashboards – Analytics & Visualization
+
+**Purpose**: Pre-built, reliable dashboards for cost monitoring and analysis
+
+**Features**:
+- Real-time cost overview across all clouds
+- Multi-cloud comparison dashboards
+- Budget tracking and alerts
+- Custom SQL queries to BigQuery
+- Export and sharing capabilities
+- Fast, cached visualizations
+
+**Access**: `/dashboards` or embedded via iframe
+
+**Technology**: Grafana with native BigQuery and Cloud SQL data sources (no Prometheus needed)
+
+### 2. CopilotKit (AG-UI) – Conversational Interface
+
+**Purpose**: Natural language interaction with AI agents for ad-hoc analysis
+
+**Features**:
+- Chat-based cost queries: *"Why did AWS costs spike yesterday?"*
+- Agent-driven multi-cloud analysis
+- Real-time streaming responses
+- Actionable recommendations
+- Complex multi-step investigations
+
+**Access**: `/` or `/chat` – embedded chat widget
+
+**Technology**: CopilotKit client → FastAPI AG-UI server → Agent hierarchy
+
+### Hybrid Approach Benefits
+
+| Use Case | Interface | Why |
+|----------|-----------|-----|
+| **Daily monitoring** | Grafana | Fast, reliable dashboards |
+| **Budget alerts** | Grafana | Native alerting |
+| **Ad-hoc questions** | AG-UI Chat | Natural language |
+| **Root cause analysis** | AG-UI Chat | Multi-agent investigation |
+| **Executive reports** | Grafana | Export/share dashboards |
+| **Optimization recs** | AG-UI Chat | Agent-driven insights |
+
+### Integration
+
+**Loose Coupling**: Each UI is independent but can link to the other
+- Grafana dashboard → "Ask AI about this" button → Opens CopilotKit
+- Chat widget available in Grafana header/sidebar (optional)
+
+Both UIs query the **same data sources** (BigQuery for metrics, Cloud SQL for metadata).
+
+---
+
 ## 🔧 Technology Stack
 
 ### Frontend
