@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1000" font-family="Arial, sans-serif">
+  <defs>
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#1a73e8"/>
+      <stop offset="100%" style="stop-color:#4285f4"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="1000" fill="#f8f9fa"/>
+  
+  <!-- Title Header -->
+  <rect x="0" y="0" width="1200" height="80" fill="url(#headerGrad)"/>
+  <text x="600" y="35" text-anchor="middle" fill="white" font-size="24" font-weight="bold">GCP Cost Monitoring Agent — Complete Specification</text>
+  <text x="600" y="60" text-anchor="middle" fill="#c2e0ff" font-size="14">Conversational AI for SMBs with $50K-$500K monthly cloud spend</text>
+  
+  <!-- System Architecture Overview -->
+  <rect x="50" y="100" width="1100" height="200" rx="10" fill="white" stroke="#dadce0" stroke-width="1" filter="url(#shadow)"/>
+  <text x="600" y="125" text-anchor="middle" font-weight="bold" font-size="16" fill="#1a73e8">SYSTEM ARCHITECTURE</text>
+  
+  <!-- User -->
+  <rect x="100" y="150" width="120" height="50" rx="25" fill="#202124"/>
+  <text x="160" y="180" text-anchor="middle" fill="white" font-weight="bold" font-size="12">USER</text>
+  
+  <path d="M220 175 L280 175" stroke="#5f6368" stroke-width="2" marker-end="url(#arrow)"/>
+  
+  <!-- MCP Server -->
+  <rect x="280" y="140" width="280" height="70" rx="8" fill="#fef7e0" stroke="#fbbc04" stroke-width="2"/>
+  <text x="420" y="165" text-anchor="middle" font-weight="bold" font-size="12" fill="#e37400">MCP SERVER (Cloud Run)</text>
+  <text x="420" y="185" text-anchor="middle" font-size="10" fill="#5f6368">Conversational Interface | Query Router | Circuit Breaker</text>
+  <text x="420" y="200" text-anchor="middle" font-size="9" fill="#999">Port: ${MCP_SERVER_PORT}</text>
+  
+  <path d="M560 175 L620 175" stroke="#5f6368" stroke-width="2" marker-end="url(#arrow)"/>
+  
+  <!-- GCP Services -->
+  <rect x="620" y="140" width="480" height="70" rx="8" fill="#e6f4ea" stroke="#34a853" stroke-width="2"/>
+  <text x="860" y="165" text-anchor="middle" font-weight="bold" font-size="12" fill="#34a853">GCP BUILT-IN SERVICES</text>
+  <text x="860" y="185" text-anchor="middle" font-size="10" fill="#5f6368">BigQuery | Budget API | Recommender | Asset Inventory | Pub/Sub</text>
+  
+  <!-- Design Principles -->
+  <text x="100" y="235" font-size="11" fill="#5f6368">
+    <tspan font-weight="bold">Design Principles:</tspan> Use GCP Built-in Tools | Stateless Server | Event-Driven | On-Demand Queries | Minimal Infrastructure
+  </text>
+  <text x="100" y="255" font-size="11" fill="#5f6368">
+    <tspan font-weight="bold">Cost:</tspan> $20-80/month (Cloud Run $10-50 + Cloud Function $5 + BigQuery queries $5-20)
+  </text>
+  
+  <!-- 7 Core Components Grid -->
+  <text x="600" y="330" text-anchor="middle" font-weight="bold" font-size="16" fill="#5f6368">7 CORE COMPONENTS</text>
+  
+  <!-- Component 1: Organization Scanner -->
+  <rect x="50" y="350" width="260" height="130" rx="8" fill="white" stroke="#4285f4" stroke-width="2" filter="url(#shadow)"/>
+  <rect x="50" y="350" width="260" height="30" rx="8" fill="#4285f4"/>
+  <rect x="50" y="370" width="260" height="10" fill="#4285f4"/>
+  <text x="180" y="370" text-anchor="middle" fill="white" font-weight="bold" font-size="11">1. ORGANIZATION SCANNER</text>
+  <text x="65" y="400" font-size="10" fill="#5f6368">• Resource Manager API v3</text>
+  <text x="65" y="415" font-size="10" fill="#5f6368">• Service Usage API</text>
+  <text x="65" y="430" font-size="10" fill="#5f6368">• Discovers all projects/services</text>
+  <text x="65" y="445" font-size="10" fill="#5f6368">• Classifies services by cost risk</text>
+  <text x="65" y="465" font-size="9" fill="#999">Trigger: On-demand</text>
+  
+  <!-- Component 2: Circuit Breaker -->
+  <rect x="330" y="350" width="260" height="130" rx="8" fill="white" stroke="#ea4335" stroke-width="2" filter="url(#shadow)"/>
+  <rect x="330" y="350" width="260" height="30" rx="8" fill="#ea4335"/>
+  <rect x="330" y="370" width="260" height="10" fill="#ea4335"/>
+  <text x="460" y="370" text-anchor="middle" fill="white" font-weight="bold" font-size="11">2. CIRCUIT BREAKER</text>
+  <text x="345" y="400" font-size="10" fill="#5f6368">• Per-service thresholds</text>
+  <text x="345" y="415" font-size="10" fill="#5f6368">• Overall safety net thresholds</text>
+  <text x="345" y="430" font-size="10" fill="#5f6368">• State: CLOSED→OPEN→HALF-OPEN</text>
+  <text x="345" y="445" font-size="10" fill="#5f6368">• Actions: Alert, Stop, Scale, Disable</text>
+  <text x="345" y="465" font-size="9" fill="#999">Trigger: Event-driven (Pub/Sub)</text>
+  
+  <!-- Component 3: Budget Monitor -->
+  <rect x="610" y="350" width="260" height="130" rx="8" fill="white" stroke="#fbbc04" stroke-width="2" filter="url(#shadow)"/>
+  <rect x="610" y="350" width="260" height="30" rx="8" fill="#fbbc04"/>
+  <rect x="610" y="370" width="260" height="10" fill="#fbbc04"/>
+  <text x="740" y="370" text-anchor="middle" fill="white" font-weight="bold" font-size="11">3. BUDGET MONITOR</text>
+  <text x="625" y="400" font-size="10" fill="#5f6368">• Budget API (fully managed)</text>
+  <text x="625" y="415" font-size="10" fill="#5f6368">• Multi-threshold alerts</text>
+  <text x="625" y="430" font-size="10" fill="#5f6368">• 50%, 70%, 80%, 90%, 100%</text>
+  <text x="625" y="445" font-size="10" fill="#5f6368">• Forecasted spend alerts</text>
+  <text x="625" y="465" font-size="9" fill="#999">Trigger: GCP-managed (continuous)</text>
+  
+  <!-- Component 4: Real-time Tracker -->
+  <rect x="890" y="350" width="260" height="130" rx="8" fill="white" stroke="#34a853" stroke-width="2" filter="url(#shadow)"/>
+  <rect x="890" y="350" width="260" height="30" rx="8" fill="#34a853"/>
+  <rect x="890" y="370" width="260" height="10" fill="#34a853"/>
+  <text x="1020" y="370" text-anchor="middle" fill="white" font-weight="bold" font-size="11">4. REAL-TIME TRACKER</text>
+  <text x="905" y="400" font-size="10" fill="#5f6368">• Cloud Asset Inventory Feeds</text>
+  <text x="905" y="415" font-size="10" fill="#5f6368">• Detects expensive resources</text>
+  <text x="905" y="430" font-size="10" fill="#5f6368">• VMs, GKE, Cloud SQL, Vertex AI</text>
+  <text x="905" y="445" font-size="10" fill="#5f6368">• Alert if >$500/month estimated</text>
+  <text x="905" y="465" font-size="9" fill="#999">Trigger: Event-driven (Asset Feed)</text>
+  
+  <!-- Component 5: ML Recommendations -->
+  <rect x="50" y="500" width="260" height="130" rx="8" fill="white" stroke="#9334e6" stroke-width="2" filter="url(#shadow)"/>
+  <rect x="50" y="500" width="260" height="30" rx="8" fill="#9334e6"/>
+  <rect x="50" y="520" width="260" height="10" fill="#9334e6"/>
+  <text x="180" y="520" text-anchor="middle" fill="white" font-weight="bold" font-size="11">5. ML RECOMMENDATIONS</text>
+  <text x="65" y="550" font-size="10" fill="#5f6368">• Recommender API (GCP ML)</text>
+  <text x="65" y="565" font-size="10" fill="#5f6368">• Idle VMs, Rightsizing, CUDs</text>
+  <text x="65" y="580" font-size="10" fill="#5f6368">• Idle disks, IPs, Cloud SQL</text>
+  <text x="65" y="595" font-size="10" fill="#5f6368">• Sorted by savings potential</text>
+  <text x="65" y="615" font-size="9" fill="#999">Trigger: On-demand</text>
+  
+  <!-- Component 6: Anomaly Detector -->
+  <rect x="330" y="500" width="260" height="130" rx="8" fill="white" stroke="#f538a0" stroke-width="2" filter="url(#shadow)"/>
+  <rect x="330" y="500" width="260" height="30" rx="8" fill="#f538a0"/>
+  <rect x="330" y="520" width="260" height="10" fill="#f538a0"/>
+  <text x="460" y="520" text-anchor="middle" fill="white" font-weight="bold" font-size="11">6. ANOMALY DETECTOR</text>
+  <text x="345" y="550" font-size="10" fill="#5f6368">• Statistical analysis (BigQuery)</text>
+  <text x="345" y="565" font-size="10" fill="#5f6368">• Daily spike (30-day baseline)</text>
+  <text x="345" y="580" font-size="10" fill="#5f6368">• Service spike detection</text>
+  <text x="345" y="595" font-size="10" fill="#5f6368">• Sensitivity: LOW/MED/HIGH</text>
+  <text x="345" y="615" font-size="9" fill="#999">Trigger: On-demand</text>
+  
+  <!-- Component 7: Conversational Interface -->
+  <rect x="610" y="500" width="260" height="130" rx="8" fill="white" stroke="#00bcd4" stroke-width="2" filter="url(#shadow)"/>
+  <rect x="610" y="500" width="260" height="30" rx="8" fill="#00bcd4"/>
+  <rect x="610" y="520" width="260" height="10" fill="#00bcd4"/>
+  <text x="740" y="520" text-anchor="middle" fill="white" font-weight="bold" font-size="11">7. CONVERSATIONAL INTERFACE</text>
+  <text x="625" y="550" font-size="10" fill="#5f6368">• Natural language queries</text>
+  <text x="625" y="565" font-size="10" fill="#5f6368">• Intent classification</text>
+  <text x="625" y="580" font-size="10" fill="#5f6368">• Entity extraction</text>
+  <text x="625" y="595" font-size="10" fill="#5f6368">• Context management</text>
+  <text x="625" y="615" font-size="9" fill="#999">Trigger: Every user message</text>
+  
+  <!-- MCP Tools Box -->
+  <rect x="890" y="500" width="260" height="130" rx="8" fill="white" stroke="#5f6368" stroke-width="2" filter="url(#shadow)"/>
+  <text x="1020" y="525" text-anchor="middle" font-weight="bold" font-size="12" fill="#5f6368">10 MCP TOOLS</text>
+  <text x="905" y="550" font-size="10" fill="#5f6368">• scan_organization</text>
+  <text x="905" y="565" font-size="10" fill="#5f6368">• get_cost_summary</text>
+  <text x="905" y="580" font-size="10" fill="#5f6368">• get_recommendations</text>
+  <text x="905" y="595" font-size="10" fill="#5f6368">• detect_anomalies</text>
+  <text x="1020" y="550" font-size="10" fill="#5f6368">• create_budget</text>
+  <text x="1020" y="565" font-size="10" fill="#5f6368">• get_budget_status</text>
+  <text x="1020" y="580" font-size="10" fill="#5f6368">• configure_circuit_breaker</text>
+  <text x="1020" y="595" font-size="10" fill="#5f6368">• stop_resource ⚠️</text>
+  <text x="905" y="615" font-size="9" fill="#ea4335">⚠️ = Requires user approval</text>
+  
+  <!-- Circuit Breaker Thresholds Detail -->
+  <rect x="50" y="650" width="550" height="170" rx="10" fill="white" stroke="#ea4335" stroke-width="2" filter="url(#shadow)"/>
+  <text x="325" y="675" text-anchor="middle" font-weight="bold" font-size="14" fill="#ea4335">CIRCUIT BREAKER THRESHOLDS</text>
+  
+  <!-- Per-Service -->
+  <text x="70" y="700" font-weight="bold" font-size="11" fill="#5f6368">Per-Service (Customizable):</text>
+  <rect x="70" y="710" width="240" height="95" rx="4" fill="#fce8e6"/>
+  <text x="85" y="728" font-size="10" fill="#5f6368">Vertex AI: $500→$1K→$2.5K→$5K</text>
+  <text x="85" y="746" font-size="10" fill="#5f6368">Compute: $300→$750→$1.5K→$3K</text>
+  <text x="85" y="764" font-size="10" fill="#5f6368">BigQuery: $200→$500→$1K→$2K</text>
+  <text x="85" y="790" font-size="9" fill="#999">WARNING→ELEVATED→CRITICAL→EMERGENCY</text>
+  
+  <!-- Overall -->
+  <text x="330" y="700" font-weight="bold" font-size="11" fill="#5f6368">Overall (Safety Net):</text>
+  <rect x="330" y="710" width="250" height="95" rx="4" fill="#fef7e0"/>
+  <text x="345" y="728" font-size="10" fill="#5f6368">WARNING: $1,000/day → Alert</text>
+  <text x="345" y="746" font-size="10" fill="#5f6368">ELEVATED: $2,500/day → Escalate</text>
+  <text x="345" y="764" font-size="10" fill="#5f6368">CRITICAL: $5,000/day → Stop resources</text>
+  <text x="345" y="782" font-size="10" fill="#c5221f">EMERGENCY: $10,000/day → Disable billing</text>
+  
+  <!-- IAM & Security -->
+  <rect x="620" y="650" width="530" height="170" rx="10" fill="white" stroke="#1a73e8" stroke-width="2" filter="url(#shadow)"/>
+  <text x="885" y="675" text-anchor="middle" font-weight="bold" font-size="14" fill="#1a73e8">IAM &amp; SECURITY REQUIREMENTS</text>
+  
+  <text x="640" y="700" font-weight="bold" font-size="11" fill="#5f6368">Organization Level:</text>
+  <text x="640" y="718" font-size="10" fill="#5f6368">• roles/browser, roles/resourcemanager.folderViewer</text>
+  <text x="640" y="734" font-size="10" fill="#5f6368">• roles/serviceusage.serviceUsageViewer</text>
+  <text x="640" y="750" font-size="10" fill="#5f6368">• roles/cloudasset.viewer, roles/recommender.computeViewer</text>
+  
+  <text x="640" y="775" font-weight="bold" font-size="11" fill="#5f6368">Billing Account:</text>
+  <text x="640" y="793" font-size="10" fill="#5f6368">• roles/billing.viewer, roles/billing.budgetsViewer/Editor</text>
+  
+  <text x="900" y="700" font-weight="bold" font-size="11" fill="#5f6368">Safety Features:</text>
+  <text x="900" y="718" font-size="10" fill="#5f6368">• User approval for destructive actions</text>
+  <text x="900" y="734" font-size="10" fill="#5f6368">• Dry-run mode for testing</text>
+  <text x="900" y="750" font-size="10" fill="#5f6368">• Cooldown periods</text>
+  <text x="900" y="766" font-size="10" fill="#5f6368">• Audit logging</text>
+  
+  <!-- Known Limitations -->
+  <rect x="50" y="840" width="1100" height="70" rx="10" fill="#fff3e0" stroke="#ff9800" stroke-width="1"/>
+  <text x="600" y="865" text-anchor="middle" font-weight="bold" font-size="12" fill="#e65100">KNOWN LIMITATIONS</text>
+  <text x="200" y="890" text-anchor="middle" font-size="11" fill="#5f6368">Billing export delay: 24-48 hrs</text>
+  <text x="500" y="890" text-anchor="middle" font-size="11" fill="#5f6368">Recommender latency: 8+ days</text>
+  <text x="800" y="890" text-anchor="middle" font-size="11" fill="#5f6368">Requires GCP Organization</text>
+  <text x="1050" y="890" text-anchor="middle" font-size="11" fill="#5f6368">Max 5K budgets</text>
+  
+  <!-- Footer -->
+  <rect x="50" y="920" width="1100" height="60" rx="10" fill="white" stroke="#dadce0" stroke-width="1"/>
+  <text x="200" y="945" text-anchor="middle" font-size="11" fill="#5f6368">
+    <tspan font-weight="bold">Target:</tspan> SMBs with $50K-$500K/month
+  </text>
+  <text x="500" y="945" text-anchor="middle" font-size="11" fill="#5f6368">
+    <tspan font-weight="bold">Problem:</tspan> 30-47% of cloud spend is wasted
+  </text>
+  <text x="850" y="945" text-anchor="middle" font-size="11" fill="#5f6368">
+    <tspan font-weight="bold">Solution:</tspan> Conversational cost monitoring
+  </text>
+  <text x="600" y="970" text-anchor="middle" font-size="10" fill="#9aa0a6">Document Version 1.0 — February 2025</text>
+  
+  <!-- Arrow marker -->
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#5f6368"/>
+    </marker>
+  </defs>
+</svg>

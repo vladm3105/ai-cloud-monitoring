@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 950" font-family="Arial, sans-serif">
+  <defs>
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#202124"/>
+      <stop offset="100%" style="stop-color:#3c4043"/>
+    </linearGradient>
+    <linearGradient id="gcpGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#4285f4"/>
+      <stop offset="100%" style="stop-color:#1a73e8"/>
+    </linearGradient>
+    <linearGradient id="awsGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ff9900"/>
+      <stop offset="100%" style="stop-color:#ec7211"/>
+    </linearGradient>
+    <linearGradient id="azureGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0078d4"/>
+      <stop offset="100%" style="stop-color:#005a9e"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-opacity="0.2"/>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="950" fill="#f8f9fa"/>
+  
+  <!-- Title Header -->
+  <rect x="0" y="0" width="1200" height="70" fill="url(#headerGrad)"/>
+  <text x="600" y="35" text-anchor="middle" fill="white" font-size="24" font-weight="bold">AI Cost Monitoring — Multi-Agent Architecture</text>
+  <text x="600" y="55" text-anchor="middle" fill="#9aa0a6" font-size="14">Cloud-Native | No Proxy Required | AI/ML Focus | Event-Driven</text>
+  
+  <!-- User/Organization -->
+  <rect x="450" y="90" width="300" height="60" rx="30" fill="#202124" filter="url(#shadow)"/>
+  <text x="600" y="125" text-anchor="middle" fill="white" font-weight="bold" font-size="16">USER / ORGANIZATION</text>
+  
+  <!-- Arrow down -->
+  <path d="M600 150 L600 190" stroke="#5f6368" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+  
+  <!-- Unified Interface -->
+  <rect x="350" y="190" width="500" height="70" rx="10" fill="white" stroke="#5f6368" stroke-width="2" stroke-dasharray="5,5" filter="url(#shadow)"/>
+  <text x="600" y="220" text-anchor="middle" fill="#5f6368" font-weight="bold" font-size="14">UNIFIED INTERFACE (Future)</text>
+  <text x="600" y="242" text-anchor="middle" fill="#9aa0a6" font-size="12">Cross-cloud dashboard &amp; orchestration</text>
+  
+  <!-- Arrows to agents -->
+  <path d="M450 260 L200 310" stroke="#5f6368" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  <path d="M600 260 L600 310" stroke="#5f6368" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  <path d="M750 260 L1000 310" stroke="#5f6368" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  
+  <!-- GCP Agent Box -->
+  <rect x="50" y="310" width="300" height="280" rx="10" fill="white" stroke="#4285f4" stroke-width="3" filter="url(#shadow)"/>
+  <rect x="50" y="310" width="300" height="45" rx="10" fill="url(#gcpGrad)"/>
+  <rect x="50" y="340" width="300" height="15" fill="url(#gcpGrad)"/>
+  <text x="200" y="340" text-anchor="middle" fill="white" font-weight="bold" font-size="16">GCP AGENT</text>
+  <text x="200" y="375" text-anchor="middle" fill="#4285f4" font-size="12" font-weight="bold">Phase 1 — Current Focus</text>
+  
+  <text x="70" y="400" font-size="11" font-weight="bold" fill="#5f6368">AI/ML Services:</text>
+  <text x="70" y="418" font-size="10" fill="#5f6368">• Vertex AI (Gemini, PaLM, Training)</text>
+  <text x="70" y="434" font-size="10" fill="#5f6368">• Document AI, Vision AI, Speech AI</text>
+  
+  <text x="70" y="458" font-size="11" font-weight="bold" fill="#5f6368">Other Services:</text>
+  <text x="70" y="476" font-size="10" fill="#5f6368">• Compute, BigQuery, GKE, Cloud SQL</text>
+  
+  <text x="70" y="500" font-size="11" font-weight="bold" fill="#5f6368">Built-in Tools:</text>
+  <text x="70" y="518" font-size="10" fill="#5f6368">• Billing Export, Budget API</text>
+  <text x="70" y="534" font-size="10" fill="#5f6368">• Recommender, Asset Inventory</text>
+  
+  <rect x="70" y="550" width="260" height="25" rx="4" fill="#e8f0fe"/>
+  <text x="200" y="567" text-anchor="middle" font-size="11" fill="#1a73e8">Cost: $20-80/month</text>
+  
+  <!-- AWS Agent Box -->
+  <rect x="450" y="310" width="300" height="280" rx="10" fill="white" stroke="#ff9900" stroke-width="3" filter="url(#shadow)"/>
+  <rect x="450" y="310" width="300" height="45" rx="10" fill="url(#awsGrad)"/>
+  <rect x="450" y="340" width="300" height="15" fill="url(#awsGrad)"/>
+  <text x="600" y="340" text-anchor="middle" fill="white" font-weight="bold" font-size="16">AWS AGENT</text>
+  <text x="600" y="375" text-anchor="middle" fill="#ff9900" font-size="12" font-weight="bold">Phase 2 — +3 months</text>
+  
+  <text x="470" y="400" font-size="11" font-weight="bold" fill="#5f6368">AI/ML Services:</text>
+  <text x="470" y="418" font-size="10" fill="#5f6368">• Amazon Bedrock (Claude, Titan)</text>
+  <text x="470" y="434" font-size="10" fill="#5f6368">• SageMaker, Comprehend, Rekognition</text>
+  
+  <text x="470" y="458" font-size="11" font-weight="bold" fill="#5f6368">Other Services:</text>
+  <text x="470" y="476" font-size="10" fill="#5f6368">• EC2, RDS, EKS, Lambda</text>
+  
+  <text x="470" y="500" font-size="11" font-weight="bold" fill="#5f6368">Built-in Tools:</text>
+  <text x="470" y="518" font-size="10" fill="#5f6368">• Cost Explorer, AWS Budgets</text>
+  <text x="470" y="534" font-size="10" fill="#5f6368">• Compute Optimizer, CloudWatch</text>
+  
+  <rect x="470" y="550" width="260" height="25" rx="4" fill="#fff4e5"/>
+  <text x="600" y="567" text-anchor="middle" font-size="11" fill="#ec7211">Cost: $20-80/month</text>
+  
+  <!-- Azure Agent Box -->
+  <rect x="850" y="310" width="300" height="280" rx="10" fill="white" stroke="#0078d4" stroke-width="3" filter="url(#shadow)"/>
+  <rect x="850" y="310" width="300" height="45" rx="10" fill="url(#azureGrad)"/>
+  <rect x="850" y="340" width="300" height="15" fill="url(#azureGrad)"/>
+  <text x="1000" y="340" text-anchor="middle" fill="white" font-weight="bold" font-size="16">AZURE AGENT</text>
+  <text x="1000" y="375" text-anchor="middle" fill="#0078d4" font-size="12" font-weight="bold">Phase 3 — +6 months</text>
+  
+  <text x="870" y="400" font-size="11" font-weight="bold" fill="#5f6368">AI/ML Services:</text>
+  <text x="870" y="418" font-size="10" fill="#5f6368">• Azure OpenAI (GPT-4, GPT-3.5)</text>
+  <text x="870" y="434" font-size="10" fill="#5f6368">• Cognitive Services, ML Studio</text>
+  
+  <text x="870" y="458" font-size="11" font-weight="bold" fill="#5f6368">Other Services:</text>
+  <text x="870" y="476" font-size="10" fill="#5f6368">• VMs, SQL, AKS, Functions</text>
+  
+  <text x="870" y="500" font-size="11" font-weight="bold" fill="#5f6368">Built-in Tools:</text>
+  <text x="870" y="518" font-size="10" fill="#5f6368">• Cost Management, Azure Budgets</text>
+  <text x="870" y="534" font-size="10" fill="#5f6368">• Azure Advisor, Monitor</text>
+  
+  <rect x="870" y="550" width="260" height="25" rx="4" fill="#e5f1fb"/>
+  <text x="1000" y="567" text-anchor="middle" font-size="11" fill="#0078d4">Cost: $20-80/month</text>
+  
+  <!-- Circuit Breaker Section -->
+  <rect x="50" y="620" width="1100" height="180" rx="10" fill="white" stroke="#ea4335" stroke-width="2" filter="url(#shadow)"/>
+  <text x="600" y="650" text-anchor="middle" font-weight="bold" font-size="16" fill="#ea4335">CIRCUIT BREAKER THRESHOLDS (Two-Level Architecture)</text>
+  
+  <!-- Per-Service Thresholds -->
+  <rect x="70" y="670" width="510" height="115" rx="6" fill="#fce8e6"/>
+  <text x="325" y="692" text-anchor="middle" font-weight="bold" font-size="12" fill="#c5221f">PER-SERVICE THRESHOLDS (Examples)</text>
+  
+  <text x="90" y="715" font-size="10" fill="#5f6368" font-weight="bold">AI/ML Services:</text>
+  <text x="200" y="715" font-size="10" fill="#5f6368">$500 → $1K → $2.5K → $5K/day</text>
+  
+  <text x="90" y="735" font-size="10" fill="#5f6368" font-weight="bold">Compute:</text>
+  <text x="200" y="735" font-size="10" fill="#5f6368">$300 → $750 → $1.5K → $3K/day</text>
+  
+  <text x="90" y="755" font-size="10" fill="#5f6368" font-weight="bold">Data Services:</text>
+  <text x="200" y="755" font-size="10" fill="#5f6368">$200 → $500 → $1K → $2K/day</text>
+  
+  <text x="370" y="715" font-size="10" fill="#5f6368">WARNING → ELEVATED → CRITICAL → EMERGENCY</text>
+  <text x="370" y="735" font-size="10" fill="#999">Alert → Escalate → Stop Non-Prod → Stop All</text>
+  
+  <!-- Overall Thresholds -->
+  <rect x="600" y="670" width="530" height="115" rx="6" fill="#fef7e0"/>
+  <text x="865" y="692" text-anchor="middle" font-weight="bold" font-size="12" fill="#e37400">OVERALL THRESHOLDS (Safety Net)</text>
+  
+  <text x="620" y="718" font-size="11" fill="#5f6368">
+    <tspan font-weight="bold">WARNING:</tspan> $1,000/day → Alert only
+  </text>
+  <text x="620" y="738" font-size="11" fill="#5f6368">
+    <tspan font-weight="bold">ELEVATED:</tspan> $2,500/day → Alert + escalation
+  </text>
+  <text x="620" y="758" font-size="11" fill="#5f6368">
+    <tspan font-weight="bold">CRITICAL:</tspan> $5,000/day → Stop high-cost resources
+  </text>
+  <text x="620" y="778" font-size="11" fill="#c5221f">
+    <tspan font-weight="bold">EMERGENCY:</tspan> $10,000/day → Disable billing
+  </text>
+  
+  <!-- Service Risk Classification -->
+  <rect x="50" y="820" width="700" height="110" rx="10" fill="white" stroke="#5f6368" stroke-width="1" filter="url(#shadow)"/>
+  <text x="400" y="845" text-anchor="middle" font-weight="bold" font-size="14" fill="#5f6368">SERVICE RISK CLASSIFICATION</text>
+  
+  <rect x="70" y="860" width="80" height="20" rx="4" fill="#c5221f"/>
+  <text x="110" y="875" text-anchor="middle" fill="white" font-size="10" font-weight="bold">CRITICAL</text>
+  <text x="170" y="875" font-size="10" fill="#5f6368">Vertex AI Training, Bedrock, Azure OpenAI (GPU/TPU)</text>
+  
+  <rect x="70" y="885" width="80" height="20" rx="4" fill="#ea4335"/>
+  <text x="110" y="900" text-anchor="middle" fill="white" font-size="10" font-weight="bold">HIGH</text>
+  <text x="170" y="900" font-size="10" fill="#5f6368">BigQuery, GKE, SageMaker, Synapse (High hourly rates)</text>
+  
+  <rect x="400" y="860" width="80" height="20" rx="4" fill="#fbbc04"/>
+  <text x="440" y="875" text-anchor="middle" fill="white" font-size="10" font-weight="bold">MEDIUM</text>
+  <text x="500" y="875" font-size="10" fill="#5f6368">Cloud SQL, EC2, VMs</text>
+  
+  <rect x="400" y="885" width="80" height="20" rx="4" fill="#34a853"/>
+  <text x="440" y="900" text-anchor="middle" fill="white" font-size="10" font-weight="bold">LOW</text>
+  <text x="500" y="900" font-size="10" fill="#5f6368">Cloud Storage, S3, Blob</text>
+  
+  <!-- Roadmap -->
+  <rect x="770" y="820" width="380" height="110" rx="10" fill="white" stroke="#5f6368" stroke-width="1" filter="url(#shadow)"/>
+  <text x="960" y="845" text-anchor="middle" font-weight="bold" font-size="14" fill="#5f6368">PRODUCT ROADMAP</text>
+  
+  <circle cx="800" cy="870" r="8" fill="#4285f4"/>
+  <text x="815" y="874" font-size="10" fill="#5f6368">Phase 1: GCP Agent (Current)</text>
+  
+  <circle cx="800" cy="892" r="8" fill="#ff9900"/>
+  <text x="815" y="896" font-size="10" fill="#5f6368">Phase 2: AWS Agent (+3 mo)</text>
+  
+  <circle cx="960" cy="870" r="8" fill="#0078d4"/>
+  <text x="975" y="874" font-size="10" fill="#5f6368">Phase 3: Azure (+6 mo)</text>
+  
+  <circle cx="960" cy="892" r="8" fill="#5f6368"/>
+  <text x="975" y="896" font-size="10" fill="#5f6368">Phase 4-5: Unified (+9-12 mo)</text>
+  
+  <!-- Footer -->
+  <text x="600" y="940" text-anchor="middle" font-size="10" fill="#9aa0a6">Multi-Agent Architecture v1.1 — February 2025 | Each agent: $20-80/month infrastructure cost</text>
+  
+  <!-- Arrowhead marker -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#5f6368"/>
+    </marker>
+  </defs>
+</svg>

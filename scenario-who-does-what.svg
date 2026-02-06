@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1000" font-family="Arial, sans-serif">
+  <defs>
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#ea4335"/>
+      <stop offset="100%" style="stop-color:#c5221f"/>
+    </linearGradient>
+    <linearGradient id="agentGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a73e8"/>
+      <stop offset="100%" style="stop-color:#1557b0"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-opacity="0.15"/>
+    </filter>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#5f6368"/>
+    </marker>
+    <marker id="arrowBlue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#1a73e8"/>
+    </marker>
+    <marker id="arrowRed" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#ea4335"/>
+    </marker>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="1000" fill="#f8f9fa"/>
+  
+  <!-- Title Header -->
+  <rect x="0" y="0" width="1200" height="70" fill="url(#headerGrad)"/>
+  <text x="600" y="30" text-anchor="middle" fill="white" font-size="22" font-weight="bold">Scenario: LLM Cost Threshold Breach — Who Does What?</text>
+  <text x="600" y="55" text-anchor="middle" fill="#ffcdd2" font-size="14">Google sends alerts → YOUR AGENT executes actions</text>
+  
+  <!-- Key Insight Box -->
+  <rect x="50" y="85" width="1100" height="60" rx="8" fill="#fff3e0" stroke="#ff9800" stroke-width="2"/>
+  <text x="600" y="110" text-anchor="middle" font-weight="bold" font-size="14" fill="#e65100">⚠️ CRITICAL: Google will NOT automatically stop your services!</text>
+  <text x="600" y="132" text-anchor="middle" font-size="12" fill="#5f6368">Google sends Pub/Sub alerts. YOUR Circuit Breaker Agent must receive them and execute stop commands.</text>
+  
+  <!-- Architecture Flow -->
+  <rect x="50" y="160" width="1100" height="220" rx="10" fill="white" stroke="#1a73e8" stroke-width="2" filter="url(#shadow)"/>
+  <text x="600" y="185" text-anchor="middle" font-weight="bold" font-size="14" fill="#1a73e8">CIRCUIT BREAKER ARCHITECTURE — WHO DOES WHAT</text>
+  
+  <!-- Google's Responsibility -->
+  <rect x="70" y="200" width="350" height="160" rx="8" fill="#e8f5e9" stroke="#34a853" stroke-width="2"/>
+  <text x="245" y="225" text-anchor="middle" font-weight="bold" font-size="12" fill="#34a853">GOOGLE DOES (Automatic)</text>
+  
+  <text x="90" y="250" font-size="11" fill="#5f6368">1. Track spending (Billing Export)</text>
+  <text x="90" y="270" font-size="11" fill="#5f6368">2. Compare against budget thresholds</text>
+  <text x="90" y="290" font-size="11" fill="#5f6368">3. Send Pub/Sub message when exceeded</text>
+  
+  <rect x="90" y="305" width="310" height="45" rx="4" fill="#c8e6c9"/>
+  <text x="245" y="325" text-anchor="middle" font-size="10" fill="#2e7d32" font-weight="bold">That's ALL Google does.</text>
+  <text x="245" y="342" text-anchor="middle" font-size="10" fill="#2e7d32">Google will NOT stop your services.</text>
+  
+  <!-- Arrow -->
+  <path d="M420 280 L480 280" stroke="#5f6368" stroke-width="3" marker-end="url(#arrow)"/>
+  <text x="450" y="270" text-anchor="middle" font-size="9" fill="#5f6368">Pub/Sub</text>
+  <text x="450" y="295" text-anchor="middle" font-size="9" fill="#5f6368">Alert</text>
+  
+  <!-- Your Agent's Responsibility -->
+  <rect x="480" y="200" width="650" height="160" rx="8" fill="#e8f0fe" stroke="#1a73e8" stroke-width="2"/>
+  <text x="805" y="225" text-anchor="middle" font-weight="bold" font-size="12" fill="#1a73e8">YOUR AGENT DOES (Your Code)</text>
+  
+  <text x="500" y="250" font-size="11" fill="#5f6368">1. Cloud Function receives Pub/Sub message</text>
+  <text x="500" y="270" font-size="11" fill="#5f6368">2. Circuit Breaker evaluates threshold level</text>
+  <text x="500" y="290" font-size="11" fill="#5f6368">3. Decides on action (Alert, Stop, Disable)</text>
+  <text x="500" y="310" font-size="11" fill="#1a73e8" font-weight="bold">4. YOUR CODE executes the command:</text>
+  
+  <rect x="500" y="320" width="610" height="30" rx="4" fill="#bbdefb"/>
+  <text x="805" y="340" text-anchor="middle" font-size="10" fill="#1565c0" font-family="monospace">client.disable_service("aiplatform.googleapis.com")  # YOUR AGENT calls this</text>
+  
+  <!-- Timeline with Clear Ownership -->
+  <text x="600" y="405" text-anchor="middle" font-weight="bold" font-size="14" fill="#5f6368">TIMELINE: $2,500 CRITICAL THRESHOLD BREACH</text>
+  
+  <!-- Step 1: Google detects -->
+  <rect x="50" y="425" width="220" height="130" rx="8" fill="#e8f5e9" stroke="#34a853" stroke-width="2" filter="url(#shadow)"/>
+  <circle cx="80" cy="450" r="15" fill="#34a853"/>
+  <text x="80" y="455" text-anchor="middle" fill="white" font-weight="bold" font-size="12">1</text>
+  <text x="170" y="455" text-anchor="middle" font-weight="bold" font-size="11" fill="#34a853">Google Detects</text>
+  <text x="60" y="480" font-size="10" fill="#5f6368">Budget API sees:</text>
+  <text x="60" y="495" font-size="10" fill="#5f6368">Spend: $2,534</text>
+  <text x="60" y="510" font-size="10" fill="#5f6368">Threshold: $2,500</text>
+  <rect x="60" y="520" width="200" height="25" rx="4" fill="#a5d6a7"/>
+  <text x="160" y="537" text-anchor="middle" font-size="9" fill="#2e7d32">Sends Pub/Sub message</text>
+  
+  <path d="M270 490 L310 490" stroke="#34a853" stroke-width="2" marker-end="url(#arrow)"/>
+  
+  <!-- Step 2: Your Function receives -->
+  <rect x="310" y="425" width="220" height="130" rx="8" fill="#e8f0fe" stroke="#1a73e8" stroke-width="2" filter="url(#shadow)"/>
+  <circle cx="340" cy="450" r="15" fill="#1a73e8"/>
+  <text x="340" y="455" text-anchor="middle" fill="white" font-weight="bold" font-size="12">2</text>
+  <text x="430" y="455" text-anchor="middle" font-weight="bold" font-size="11" fill="#1a73e8">Your Function</text>
+  <text x="320" y="480" font-size="10" fill="#5f6368">Cloud Function triggered</text>
+  <text x="320" y="495" font-size="10" fill="#5f6368">by Pub/Sub message</text>
+  <rect x="320" y="510" width="200" height="35" rx="4" fill="#bbdefb"/>
+  <text x="420" y="525" text-anchor="middle" font-size="9" fill="#1565c0">circuit_breaker_handler()</text>
+  <text x="420" y="540" text-anchor="middle" font-size="9" fill="#1565c0">receives event</text>
+  
+  <path d="M530 490 L570 490" stroke="#1a73e8" stroke-width="2" marker-end="url(#arrowBlue)"/>
+  
+  <!-- Step 3: Your Logic decides -->
+  <rect x="570" y="425" width="220" height="130" rx="8" fill="#e8f0fe" stroke="#1a73e8" stroke-width="2" filter="url(#shadow)"/>
+  <circle cx="600" cy="450" r="15" fill="#1a73e8"/>
+  <text x="600" y="455" text-anchor="middle" fill="white" font-weight="bold" font-size="12">3</text>
+  <text x="690" y="455" text-anchor="middle" font-weight="bold" font-size="11" fill="#1a73e8">Your Logic</text>
+  <text x="580" y="480" font-size="10" fill="#5f6368">Evaluates threshold:</text>
+  <text x="580" y="495" font-size="10" fill="#ea4335" font-weight="bold">Level = CRITICAL</text>
+  <text x="580" y="515" font-size="10" fill="#5f6368">Decides action:</text>
+  <text x="580" y="530" font-size="10" fill="#ea4335" font-weight="bold">STOP_RESOURCES</text>
+  
+  <path d="M790 490 L830 490" stroke="#1a73e8" stroke-width="2" marker-end="url(#arrowBlue)"/>
+  
+  <!-- Step 4: Your Agent executes -->
+  <rect x="830" y="425" width="320" height="130" rx="8" fill="#fce8e6" stroke="#ea4335" stroke-width="2" filter="url(#shadow)"/>
+  <circle cx="860" cy="450" r="15" fill="#ea4335"/>
+  <text x="860" y="455" text-anchor="middle" fill="white" font-weight="bold" font-size="12">4</text>
+  <text x="990" y="455" text-anchor="middle" font-weight="bold" font-size="11" fill="#ea4335">YOUR AGENT Executes</text>
+  <text x="840" y="480" font-size="10" fill="#5f6368">Your code calls GCP APIs:</text>
+  
+  <rect x="840" y="490" width="300" height="55" rx="4" fill="#ffcdd2"/>
+  <text x="990" y="508" text-anchor="middle" font-size="9" fill="#c5221f" font-family="monospace">endpoint.undeploy_all()</text>
+  <text x="990" y="523" text-anchor="middle" font-size="9" fill="#c5221f" font-family="monospace">// or disable_service()</text>
+  <text x="990" y="538" text-anchor="middle" font-size="9" fill="#c5221f" font-family="monospace">// YOUR CODE runs this</text>
+  
+  <!-- Code Example -->
+  <rect x="50" y="570" width="1100" height="180" rx="10" fill="#263238" filter="url(#shadow)"/>
+  <text x="600" y="595" text-anchor="middle" font-weight="bold" font-size="12" fill="#4fc3f7">YOUR CLOUD FUNCTION CODE (Python)</text>
+  
+  <text x="70" y="625" font-size="11" fill="#aed581" font-family="monospace">def circuit_breaker_handler(event, context):</text>
+  <text x="70" y="645" font-size="11" fill="#e0e0e0" font-family="monospace">    """YOUR code that executes when Google sends alert"""</text>
+  <text x="70" y="665" font-size="11" fill="#e0e0e0" font-family="monospace">    alert = parse_budget_alert(event)</text>
+  <text x="70" y="685" font-size="11" fill="#e0e0e0" font-family="monospace">    </text>
+  <text x="70" y="705" font-size="11" fill="#ffcc80" font-family="monospace">    if alert.threshold_level == "CRITICAL":</text>
+  <text x="70" y="725" font-size="11" fill="#ef9a9a" font-family="monospace">        # YOUR AGENT executes this - NOT Google!</text>
+  <text x="70" y="745" font-size="11" fill="#81d4fa" font-family="monospace">        stop_vertex_ai_endpoints(project_id=alert.project_id)</text>
+  
+  <text x="620" y="625" font-size="11" fill="#aed581" font-family="monospace">def stop_vertex_ai_endpoints(project_id):</text>
+  <text x="620" y="645" font-size="11" fill="#e0e0e0" font-family="monospace">    """YOUR code calls Google's API"""</text>
+  <text x="620" y="665" font-size="11" fill="#e0e0e0" font-family="monospace">    client = aiplatform.EndpointServiceClient()</text>
+  <text x="620" y="685" font-size="11" fill="#e0e0e0" font-family="monospace">    </text>
+  <text x="620" y="705" font-size="11" fill="#ef9a9a" font-family="monospace">    # YOUR AGENT tells Google to undeploy</text>
+  <text x="620" y="725" font-size="11" fill="#81d4fa" font-family="monospace">    for endpoint in list_endpoints(project_id):</text>
+  <text x="620" y="745" font-size="11" fill="#81d4fa" font-family="monospace">        endpoint.undeploy_all()</text>
+  
+  <!-- IAM Requirements -->
+  <rect x="50" y="765" width="540" height="100" rx="8" fill="white" stroke="#ff9800" stroke-width="2" filter="url(#shadow)"/>
+  <text x="320" y="790" text-anchor="middle" font-weight="bold" font-size="12" fill="#e65100">IAM PERMISSIONS YOUR AGENT NEEDS</text>
+  <text x="70" y="815" font-size="10" fill="#5f6368" font-family="monospace">roles/serviceusage.serviceUsageAdmin</text>
+  <text x="350" y="815" font-size="9" fill="#999">← To disable APIs</text>
+  <text x="70" y="835" font-size="10" fill="#5f6368" font-family="monospace">roles/aiplatform.admin</text>
+  <text x="350" y="835" font-size="9" fill="#999">← To undeploy endpoints</text>
+  <text x="70" y="855" font-size="10" fill="#5f6368" font-family="monospace">roles/compute.instanceAdmin.v1</text>
+  <text x="350" y="855" font-size="9" fill="#999">← To stop VMs</text>
+  
+  <!-- Summary -->
+  <rect x="610" y="765" width="540" height="100" rx="8" fill="white" stroke="#1a73e8" stroke-width="2" filter="url(#shadow)"/>
+  <text x="880" y="790" text-anchor="middle" font-weight="bold" font-size="12" fill="#1a73e8">SUMMARY: WHO DOES WHAT</text>
+  
+  <rect x="630" y="805" width="240" height="50" rx="4" fill="#e8f5e9"/>
+  <text x="750" y="825" text-anchor="middle" font-weight="bold" font-size="10" fill="#34a853">GOOGLE</text>
+  <text x="750" y="845" text-anchor="middle" font-size="9" fill="#5f6368">Sends alerts only</text>
+  
+  <rect x="890" y="805" width="240" height="50" rx="4" fill="#e8f0fe"/>
+  <text x="1010" y="825" text-anchor="middle" font-weight="bold" font-size="10" fill="#1a73e8">YOUR AGENT</text>
+  <text x="1010" y="845" text-anchor="middle" font-size="9" fill="#5f6368">Executes all stop commands</text>
+  
+  <!-- Bottom Warning -->
+  <rect x="50" y="880" width="1100" height="50" rx="8" fill="#ffebee" stroke="#c5221f" stroke-width="2"/>
+  <text x="600" y="905" text-anchor="middle" font-weight="bold" font-size="13" fill="#c5221f">⚠️ Without YOUR circuit breaker agent, Google will let you spend unlimited money!</text>
+  <text x="600" y="922" text-anchor="middle" font-size="11" fill="#5f6368">Budget alerts are just notifications. You must build the system that takes action.</text>
+  
+  <!-- Footer -->
+  <text x="600" y="980" text-anchor="middle" font-size="10" fill="#9aa0a6">Circuit Breaker Architecture — Your Agent executes commands, Google only sends alerts</text>
+</svg>

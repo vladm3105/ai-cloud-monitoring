@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 850" font-family="Arial, sans-serif">
+  <defs>
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#34a853"/>
+      <stop offset="100%" style="stop-color:#0f9d58"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-opacity="0.15"/>
+    </filter>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#5f6368"/>
+    </marker>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="850" fill="#f8f9fa"/>
+  
+  <!-- Title Header -->
+  <rect x="0" y="0" width="1200" height="70" fill="url(#headerGrad)"/>
+  <text x="600" y="32" text-anchor="middle" fill="white" font-size="24" font-weight="bold">GCP Cost Monitoring Agent — Setup Guide</text>
+  <text x="600" y="55" text-anchor="middle" fill="#c8e6c9" font-size="14">Estimated time: 45-60 minutes | 8 Setup Steps</text>
+  
+  <!-- Prerequisites -->
+  <rect x="50" y="90" width="1100" height="80" rx="10" fill="white" stroke="#dadce0" stroke-width="1" filter="url(#shadow)"/>
+  <text x="600" y="115" text-anchor="middle" font-weight="bold" font-size="14" fill="#5f6368">PREREQUISITES</text>
+  <rect x="80" y="130" width="200" height="25" rx="4" fill="#e8f0fe"/>
+  <text x="180" y="147" text-anchor="middle" font-size="10" fill="#1a73e8">GCP Organization</text>
+  <rect x="300" y="130" width="250" height="25" rx="4" fill="#e8f0fe"/>
+  <text x="425" y="147" text-anchor="middle" font-size="10" fill="#1a73e8">Billing Account (Owner role)</text>
+  <rect x="570" y="130" width="250" height="25" rx="4" fill="#e8f0fe"/>
+  <text x="695" y="147" text-anchor="middle" font-size="10" fill="#1a73e8">Project creation permissions</text>
+  <rect x="840" y="130" width="200" height="25" rx="4" fill="#e8f0fe"/>
+  <text x="940" y="147" text-anchor="middle" font-size="10" fill="#1a73e8">gcloud CLI installed</text>
+  
+  <!-- Setup Steps Flow -->
+  <text x="600" y="200" text-anchor="middle" font-weight="bold" font-size="16" fill="#34a853">8 SETUP STEPS</text>
+  
+  <!-- Step 1 -->
+  <rect x="50" y="220" width="260" height="120" rx="10" fill="white" stroke="#4285f4" stroke-width="2" filter="url(#shadow)"/>
+  <circle cx="80" cy="245" r="18" fill="#4285f4"/>
+  <text x="80" y="250" text-anchor="middle" fill="white" font-weight="bold" font-size="14">1</text>
+  <text x="180" y="250" text-anchor="middle" font-weight="bold" font-size="12" fill="#4285f4">Create Project</text>
+  <text x="70" y="275" font-size="10" fill="#5f6368">• gcloud projects create</text>
+  <text x="70" y="292" font-size="10" fill="#5f6368">• Link billing account</text>
+  <text x="70" y="309" font-size="10" fill="#5f6368">• Set as default project</text>
+  <text x="160" y="330" text-anchor="middle" font-size="9" fill="#999">PROJECT_ID=gcp-cost-monitoring</text>
+  
+  <path d="M310 280 L340 280" stroke="#5f6368" stroke-width="2" marker-end="url(#arrow)"/>
+  
+  <!-- Step 2 -->
+  <rect x="340" y="220" width="260" height="120" rx="10" fill="white" stroke="#ea4335" stroke-width="2" filter="url(#shadow)"/>
+  <circle cx="370" cy="245" r="18" fill="#ea4335"/>
+  <text x="370" y="250" text-anchor="middle" fill="white" font-weight="bold" font-size="14">2</text>
+  <text x="470" y="250" text-anchor="middle" font-weight="bold" font-size="12" fill="#ea4335">Enable APIs</text>
+  <text x="360" y="275" font-size="10" fill="#5f6368">• cloudresourcemanager</text>
+  <text x="360" y="292" font-size="10" fill="#5f6368">• cloudbilling, bigquery</text>
+  <text x="360" y="309" font-size="10" fill="#5f6368">• recommender, cloudasset</text>
+  <text x="450" y="330" text-anchor="middle" font-size="9" fill="#999">gcloud services enable</text>
+  
+  <path d="M600 280 L630 280" stroke="#5f6368" stroke-width="2" marker-end="url(#arrow)"/>
+  
+  <!-- Step 3 -->
+  <rect x="630" y="220" width="260" height="120" rx="10" fill="white" stroke="#fbbc04" stroke-width="2" filter="url(#shadow)"/>
+  <circle cx="660" cy="245" r="18" fill="#fbbc04"/>
+  <text x="660" y="250" text-anchor="middle" fill="white" font-weight="bold" font-size="14">3</text>
+  <text x="760" y="250" text-anchor="middle" font-weight="bold" font-size="12" fill="#e37400">BigQuery Export</text>
+  <text x="650" y="275" font-size="10" fill="#5f6368">• Create dataset</text>
+  <text x="650" y="292" font-size="10" fill="#5f6368">• Enable billing export (Console)</text>
+  <text x="650" y="309" font-size="10" fill="#5f6368">• Wait 24-48h for data</text>
+  <text x="760" y="330" text-anchor="middle" font-size="9" fill="#ea4335">⚠️ Most critical step!</text>
+  
+  <path d="M890 280 L920 280" stroke="#5f6368" stroke-width="2" marker-end="url(#arrow)"/>
+  
+  <!-- Step 4 -->
+  <rect x="920" y="220" width="230" height="120" rx="10" fill="white" stroke="#34a853" stroke-width="2" filter="url(#shadow)"/>
+  <circle cx="950" cy="245" r="18" fill="#34a853"/>
+  <text x="950" y="250" text-anchor="middle" fill="white" font-weight="bold" font-size="14">4</text>
+  <text x="1035" y="250" text-anchor="middle" font-weight="bold" font-size="12" fill="#34a853">Service Account</text>
+  <text x="940" y="275" font-size="10" fill="#5f6368">• Create SA</text>
+  <text x="940" y="292" font-size="10" fill="#5f6368">• Grant org-level roles</text>
+  <text x="940" y="309" font-size="10" fill="#5f6368">• Grant billing roles</text>
+  <text x="1035" y="330" text-anchor="middle" font-size="9" fill="#999">gcp-cost-agent@...</text>
+  
+  <!-- Arrow down to next row -->
+  <path d="M1035 340 L1035 370 L50 370 L50 400" stroke="#5f6368" stroke-width="2" marker-end="url(#arrow)"/>
+  
+  <!-- Step 5 -->
+  <rect x="50" y="400" width="260" height="120" rx="10" fill="white" stroke="#9334e6" stroke-width="2" filter="url(#shadow)"/>
+  <circle cx="80" cy="425" r="18" fill="#9334e6"/>
+  <text x="80" y="430" text-anchor="middle" fill="white" font-weight="bold" font-size="14">5</text>
+  <text x="180" y="430" text-anchor="middle" font-weight="bold" font-size="12" fill="#9334e6">Pub/Sub Topic</text>
+  <text x="70" y="455" font-size="10" fill="#5f6368">• Create budget-alerts topic</text>
+  <text x="70" y="472" font-size="10" fill="#5f6368">• Grant publisher role</text>
+  <text x="70" y="489" font-size="10" fill="#5f6368">• For budget notifications</text>
+  <text x="160" y="510" text-anchor="middle" font-size="9" fill="#999">topics/budget-alerts</text>
+  
+  <path d="M310 460 L340 460" stroke="#5f6368" stroke-width="2" marker-end="url(#arrow)"/>
+  
+  <!-- Step 6 -->
+  <rect x="340" y="400" width="260" height="120" rx="10" fill="white" stroke="#00bcd4" stroke-width="2" filter="url(#shadow)"/>
+  <circle cx="370" cy="425" r="18" fill="#00bcd4"/>
+  <text x="370" y="430" text-anchor="middle" fill="white" font-weight="bold" font-size="14">6</text>
+  <text x="470" y="430" text-anchor="middle" font-weight="bold" font-size="12" fill="#00bcd4">Create Budget</text>
+  <text x="360" y="455" font-size="10" fill="#5f6368">• Set monthly amount ($5K)</text>
+  <text x="360" y="472" font-size="10" fill="#5f6368">• Configure thresholds</text>
+  <text x="360" y="489" font-size="10" fill="#5f6368">• Enable Pub/Sub notify</text>
+  <text x="450" y="510" text-anchor="middle" font-size="9" fill="#999">50%, 80%, 100% alerts</text>
+  
+  <path d="M600 460 L630 460" stroke="#5f6368" stroke-width="2" marker-end="url(#arrow)"/>
+  
+  <!-- Step 7 -->
+  <rect x="630" y="400" width="260" height="120" rx="10" fill="white" stroke="#f538a0" stroke-width="2" filter="url(#shadow)"/>
+  <circle cx="660" cy="425" r="18" fill="#f538a0"/>
+  <text x="660" y="430" text-anchor="middle" fill="white" font-weight="bold" font-size="14">7</text>
+  <text x="760" y="430" text-anchor="middle" font-weight="bold" font-size="12" fill="#f538a0">Asset Feed (Optional)</text>
+  <text x="650" y="455" font-size="10" fill="#5f6368">• Create asset-changes topic</text>
+  <text x="650" y="472" font-size="10" fill="#5f6368">• Create VM creation feed</text>
+  <text x="650" y="489" font-size="10" fill="#5f6368">• Real-time resource alerts</text>
+  <text x="760" y="510" text-anchor="middle" font-size="9" fill="#999">gcloud asset feeds create</text>
+  
+  <path d="M890 460 L920 460" stroke="#5f6368" stroke-width="2" marker-end="url(#arrow)"/>
+  
+  <!-- Step 8 -->
+  <rect x="920" y="400" width="230" height="120" rx="10" fill="white" stroke="#1a73e8" stroke-width="2" filter="url(#shadow)"/>
+  <circle cx="950" cy="425" r="18" fill="#1a73e8"/>
+  <text x="950" y="430" text-anchor="middle" fill="white" font-weight="bold" font-size="14">8</text>
+  <text x="1035" y="430" text-anchor="middle" font-weight="bold" font-size="12" fill="#1a73e8">Deploy MCP Server</text>
+  <text x="940" y="455" font-size="10" fill="#5f6368">• Build container</text>
+  <text x="940" y="472" font-size="10" fill="#5f6368">• Deploy to Cloud Run</text>
+  <text x="940" y="489" font-size="10" fill="#5f6368">• Set env variables</text>
+  <text x="1035" y="510" text-anchor="middle" font-size="9" fill="#999">gcloud run deploy</text>
+  
+  <!-- Environment Variables -->
+  <rect x="50" y="540" width="550" height="160" rx="10" fill="white" stroke="#5f6368" stroke-width="1" filter="url(#shadow)"/>
+  <text x="325" y="565" text-anchor="middle" font-weight="bold" font-size="14" fill="#5f6368">ENVIRONMENT VARIABLES</text>
+  
+  <text x="70" y="590" font-size="11" fill="#5f6368" font-family="monospace">GCP_ORGANIZATION_ID=123456789</text>
+  <text x="70" y="610" font-size="11" fill="#5f6368" font-family="monospace">GCP_BILLING_ACCOUNT_ID=ABCDEF-123456-GHIJKL</text>
+  <text x="70" y="630" font-size="11" fill="#5f6368" font-family="monospace">BIGQUERY_PROJECT=gcp-cost-monitoring</text>
+  <text x="70" y="650" font-size="11" fill="#5f6368" font-family="monospace">BIGQUERY_DATASET=billing_export</text>
+  <text x="70" y="670" font-size="11" fill="#5f6368" font-family="monospace">PUBSUB_BUDGET_TOPIC=budget-alerts</text>
+  <text x="70" y="690" font-size="11" fill="#5f6368" font-family="monospace">MCP_SERVER_PORT=8080</text>
+  
+  <!-- IAM Roles Required -->
+  <rect x="620" y="540" width="530" height="160" rx="10" fill="white" stroke="#1a73e8" stroke-width="1" filter="url(#shadow)"/>
+  <text x="885" y="565" text-anchor="middle" font-weight="bold" font-size="14" fill="#1a73e8">IAM ROLES REQUIRED</text>
+  
+  <text x="640" y="590" font-weight="bold" font-size="11" fill="#5f6368">Organization Level:</text>
+  <text x="640" y="608" font-size="10" fill="#5f6368">• roles/browser, roles/resourcemanager.folderViewer</text>
+  <text x="640" y="624" font-size="10" fill="#5f6368">• roles/serviceusage.serviceUsageViewer, roles/cloudasset.viewer</text>
+  
+  <text x="640" y="648" font-weight="bold" font-size="11" fill="#5f6368">Billing Account Level:</text>
+  <text x="640" y="666" font-size="10" fill="#5f6368">• roles/billing.viewer, roles/billing.budgetsViewer/Editor</text>
+  
+  <text x="640" y="690" font-weight="bold" font-size="11" fill="#5f6368">Project Level:</text>
+  <text x="640" y="708" font-size="10" fill="#5f6368">• roles/bigquery.dataViewer/jobUser, roles/compute.instanceAdmin.v1</text>
+  
+  <!-- Troubleshooting -->
+  <rect x="50" y="720" width="1100" height="80" rx="10" fill="#fff3e0" stroke="#ff9800" stroke-width="1"/>
+  <text x="600" y="745" text-anchor="middle" font-weight="bold" font-size="14" fill="#e65100">TROUBLESHOOTING</text>
+  <text x="200" y="770" text-anchor="middle" font-size="11" fill="#5f6368">No data in BigQuery? Check billing export enabled, wait 24-48h</text>
+  <text x="600" y="770" text-anchor="middle" font-size="11" fill="#5f6368">403 Forbidden? Verify IAM roles, wait 1-2 min for propagation</text>
+  <text x="1000" y="770" text-anchor="middle" font-size="11" fill="#5f6368">Budget alerts not firing? Check Pub/Sub publisher role</text>
+  
+  <!-- Security Checklist -->
+  <rect x="50" y="810" width="1100" height="30" rx="5" fill="#e6f4ea" stroke="#34a853" stroke-width="1"/>
+  <text x="600" y="830" text-anchor="middle" font-size="11" fill="#34a853">
+    ✓ SA key stored securely | ✓ Least-privilege IAM | ✓ Audit logging enabled | ✓ MCP server requires auth | ✓ Credential rotation policy
+  </text>
+</svg>

@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" font-family="Arial, sans-serif">
+  <defs>
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#1a73e8"/>
+      <stop offset="100%" style="stop-color:#4285f4"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-opacity="0.15"/>
+    </filter>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#5f6368"/>
+    </marker>
+    <marker id="arrowRed" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#ea4335"/>
+    </marker>
+    <marker id="arrowGreen" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#34a853"/>
+    </marker>
+    <marker id="arrowOrange" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#fbbc04"/>
+    </marker>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="900" fill="#f8f9fa"/>
+  
+  <!-- Title Header -->
+  <rect x="0" y="0" width="1200" height="60" fill="url(#headerGrad)"/>
+  <text x="600" y="28" text-anchor="middle" fill="white" font-size="22" font-weight="bold">GCP Cost Monitoring Agent — Architectural Design v2</text>
+  <text x="600" y="48" text-anchor="middle" fill="#c2e0ff" font-size="12">Component Architecture with Circuit Breaker State Machine</text>
+  
+  <!-- Circuit Breaker State Machine - Main Focus -->
+  <rect x="50" y="75" width="700" height="280" rx="10" fill="white" stroke="#ea4335" stroke-width="2" filter="url(#shadow)"/>
+  <rect x="50" y="75" width="700" height="35" rx="10" fill="#ea4335"/>
+  <rect x="50" y="100" width="700" height="10" fill="#ea4335"/>
+  <text x="400" y="100" text-anchor="middle" fill="white" font-weight="bold" font-size="14">CIRCUIT BREAKER STATE MACHINE</text>
+  
+  <!-- Three States - Properly positioned -->
+  <!-- CLOSED State -->
+  <circle cx="150" cy="210" r="45" fill="#e6f4ea" stroke="#34a853" stroke-width="3"/>
+  <text x="150" y="205" text-anchor="middle" font-weight="bold" font-size="12" fill="#34a853">CLOSED</text>
+  <text x="150" y="222" text-anchor="middle" font-size="10" fill="#5f6368">(normal)</text>
+  
+  <!-- OPEN State -->
+  <circle cx="400" cy="210" r="45" fill="#fce8e6" stroke="#ea4335" stroke-width="3"/>
+  <text x="400" y="205" text-anchor="middle" font-weight="bold" font-size="12" fill="#ea4335">OPEN</text>
+  <text x="400" y="222" text-anchor="middle" font-size="10" fill="#5f6368">(tripped)</text>
+  
+  <!-- HALF-OPEN State -->
+  <circle cx="650" cy="210" r="45" fill="#fef7e0" stroke="#fbbc04" stroke-width="3"/>
+  <text x="650" y="205" text-anchor="middle" font-weight="bold" font-size="12" fill="#e37400">HALF-OPEN</text>
+  <text x="650" y="222" text-anchor="middle" font-size="10" fill="#5f6368">(testing)</text>
+  
+  <!-- State Transitions -->
+  <!-- CLOSED -> OPEN (threshold exceeded) -->
+  <path d="M195 210 L355 210" stroke="#ea4335" stroke-width="2" marker-end="url(#arrowRed)"/>
+  <text x="275" y="200" text-anchor="middle" font-size="9" fill="#ea4335">threshold exceeded</text>
+  
+  <!-- OPEN -> HALF-OPEN (manual reset) -->
+  <path d="M445 210 L605 210" stroke="#fbbc04" stroke-width="2" marker-end="url(#arrowOrange)"/>
+  <text x="525" y="200" text-anchor="middle" font-size="9" fill="#e37400">manual reset</text>
+  
+  <!-- HALF-OPEN -> CLOSED (test passed) - curved arrow on top -->
+  <path d="M620 170 Q 400 100 180 170" stroke="#34a853" stroke-width="2" fill="none" marker-end="url(#arrowGreen)"/>
+  <text x="400" y="125" text-anchor="middle" font-size="9" fill="#34a853">test passed / reset complete</text>
+  
+  <!-- OPEN -> CLOSED (cooldown expires) - curved arrow on bottom, dashed -->
+  <path d="M370 250 Q 275 320 180 250" stroke="#5f6368" stroke-width="1.5" stroke-dasharray="5,3" fill="none" marker-end="url(#arrow)"/>
+  <text x="275" y="310" text-anchor="middle" font-size="8" fill="#999">cooldown expires (auto)</text>
+  
+  <!-- Actions Box -->
+  <rect x="80" y="325" width="640" height="22" rx="4" fill="#f3e8fd"/>
+  <text x="400" y="340" text-anchor="middle" font-size="10" fill="#9334e6">Actions: ALERT_ONLY → STOP_RESOURCES → SCALE_DOWN → DISABLE_BILLING</text>
+  
+  <!-- Thresholds Panel -->
+  <rect x="770" y="75" width="380" height="280" rx="10" fill="white" stroke="#5f6368" stroke-width="2" filter="url(#shadow)"/>
+  <text x="960" y="100" text-anchor="middle" font-weight="bold" font-size="14" fill="#5f6368">TWO-LEVEL THRESHOLDS</text>
+  
+  <!-- Per-Service -->
+  <rect x="790" y="115" width="340" height="100" rx="6" fill="#fce8e6"/>
+  <text x="960" y="135" text-anchor="middle" font-weight="bold" font-size="11" fill="#c5221f">Per-Service Thresholds</text>
+  <text x="810" y="155" font-size="10" fill="#5f6368">Vertex AI:</text>
+  <text x="910" y="155" font-size="9" fill="#5f6368">$500 → $1K → $2.5K → $5K</text>
+  <text x="810" y="173" font-size="10" fill="#5f6368">Compute:</text>
+  <text x="910" y="173" font-size="9" fill="#5f6368">$300 → $750 → $1.5K → $3K</text>
+  <text x="810" y="191" font-size="10" fill="#5f6368">BigQuery:</text>
+  <text x="910" y="191" font-size="9" fill="#5f6368">$200 → $500 → $1K → $2K</text>
+  <text x="960" y="210" text-anchor="middle" font-size="8" fill="#999">WARN → ELEVATED → CRITICAL → EMERGENCY</text>
+  
+  <!-- Overall -->
+  <rect x="790" y="225" width="340" height="100" rx="6" fill="#fef7e0"/>
+  <text x="960" y="245" text-anchor="middle" font-weight="bold" font-size="11" fill="#e37400">Overall Thresholds (Safety Net)</text>
+  <text x="810" y="268" font-size="10" fill="#5f6368">WARNING: $1,000/day → Alert</text>
+  <text x="810" y="286" font-size="10" fill="#5f6368">ELEVATED: $2,500/day → Escalate</text>
+  <text x="810" y="304" font-size="10" fill="#5f6368">CRITICAL: $5,000/day → Stop</text>
+  <text x="810" y="322" font-size="10" fill="#c5221f">EMERGENCY: $10,000/day → Disable</text>
+  
+  <!-- Real-time Resource Tracker -->
+  <rect x="50" y="370" width="550" height="175" rx="10" fill="white" stroke="#34a853" stroke-width="2" filter="url(#shadow)"/>
+  <rect x="50" y="370" width="550" height="28" rx="10" fill="#34a853"/>
+  <rect x="50" y="391" width="550" height="7" fill="#34a853"/>
+  <text x="325" y="390" text-anchor="middle" fill="white" font-weight="bold" font-size="11">REAL-TIME RESOURCE TRACKER (Asset Inventory Feed)</text>
+  
+  <!-- Event Flow -->
+  <rect x="70" y="410" width="90" height="32" rx="4" fill="#e8f0fe" stroke="#1a73e8" stroke-width="1"/>
+  <text x="115" y="430" text-anchor="middle" font-size="9" fill="#1a73e8">Resource Created</text>
+  
+  <path d="M160 426 L185 426" stroke="#5f6368" stroke-width="1" marker-end="url(#arrow)"/>
+  
+  <rect x="185" y="410" width="70" height="32" rx="4" fill="#e6f4ea" stroke="#34a853" stroke-width="1"/>
+  <text x="220" y="430" text-anchor="middle" font-size="9" fill="#34a853">Asset Feed</text>
+  
+  <path d="M255 426 L280 426" stroke="#5f6368" stroke-width="1" marker-end="url(#arrow)"/>
+  
+  <rect x="280" y="410" width="60" height="32" rx="4" fill="#fef7e0" stroke="#fbbc04" stroke-width="1"/>
+  <text x="310" y="430" text-anchor="middle" font-size="9" fill="#e37400">Pub/Sub</text>
+  
+  <path d="M340 426 L365 426" stroke="#5f6368" stroke-width="1" marker-end="url(#arrow)"/>
+  
+  <rect x="365" y="410" width="75" height="32" rx="4" fill="#f3e8fd" stroke="#9334e6" stroke-width="1"/>
+  <text x="402" y="430" text-anchor="middle" font-size="9" fill="#9334e6">Estimate Cost</text>
+  
+  <path d="M440 426 L465 426" stroke="#5f6368" stroke-width="1" marker-end="url(#arrow)"/>
+  
+  <rect x="465" y="410" width="55" height="32" rx="4" fill="#fce8e6" stroke="#ea4335" stroke-width="1"/>
+  <text x="492" y="430" text-anchor="middle" font-size="9" fill="#ea4335">ALERT</text>
+  
+  <!-- GPU Pricing -->
+  <text x="70" y="465" font-weight="bold" font-size="10" fill="#5f6368">GPU Pricing Reference (per hour):</text>
+  <text x="70" y="482" font-size="9" fill="#5f6368">T4: $0.35 | L4: $0.55 | V100: $2.48 | A100: $3.67 | H100: $10.20</text>
+  <rect x="70" y="495" width="510" height="25" rx="4" fill="#fff3e0"/>
+  <text x="325" y="512" text-anchor="middle" font-size="9" fill="#e65100">Alert Trigger: Any resource with estimated cost &gt; $500/month</text>
+  
+  <!-- ML Recommendations -->
+  <rect x="620" y="370" width="530" height="175" rx="10" fill="white" stroke="#9334e6" stroke-width="2" filter="url(#shadow)"/>
+  <rect x="620" y="370" width="530" height="28" rx="10" fill="#9334e6"/>
+  <rect x="620" y="391" width="530" height="7" fill="#9334e6"/>
+  <text x="885" y="390" text-anchor="middle" fill="white" font-weight="bold" font-size="11">ML RECOMMENDATIONS (Recommender API)</text>
+  
+  <!-- Recommender Types - Row 1 -->
+  <rect x="640" y="410" width="155" height="45" rx="4" fill="#f3e8fd" stroke="#9334e6" stroke-width="1"/>
+  <text x="717" y="428" text-anchor="middle" font-weight="bold" font-size="10" fill="#9334e6">Idle VM</text>
+  <text x="717" y="445" text-anchor="middle" font-size="8" fill="#5f6368">8-day window, CPU &lt;1%</text>
+  
+  <rect x="805" y="410" width="155" height="45" rx="4" fill="#f3e8fd" stroke="#9334e6" stroke-width="1"/>
+  <text x="882" y="428" text-anchor="middle" font-weight="bold" font-size="10" fill="#9334e6">Rightsizing</text>
+  <text x="882" y="445" text-anchor="middle" font-size="8" fill="#5f6368">Machine type suggestions</text>
+  
+  <rect x="970" y="410" width="155" height="45" rx="4" fill="#f3e8fd" stroke="#9334e6" stroke-width="1"/>
+  <text x="1047" y="428" text-anchor="middle" font-weight="bold" font-size="10" fill="#9334e6">Commitment</text>
+  <text x="1047" y="445" text-anchor="middle" font-size="8" fill="#5f6368">CUD 1yr/3yr, up to 57% off</text>
+  
+  <!-- Recommender Types - Row 2 -->
+  <rect x="640" y="465" width="155" height="45" rx="4" fill="#f3e8fd" stroke="#9334e6" stroke-width="1"/>
+  <text x="717" y="483" text-anchor="middle" font-weight="bold" font-size="10" fill="#9334e6">Idle Disk</text>
+  <text x="717" y="500" text-anchor="middle" font-size="8" fill="#5f6368">Unattached disks</text>
+  
+  <rect x="805" y="465" width="155" height="45" rx="4" fill="#f3e8fd" stroke="#9334e6" stroke-width="1"/>
+  <text x="882" y="483" text-anchor="middle" font-weight="bold" font-size="10" fill="#9334e6">Idle SQL</text>
+  <text x="882" y="500" text-anchor="middle" font-size="8" fill="#5f6368">Low query instances</text>
+  
+  <rect x="970" y="465" width="155" height="45" rx="4" fill="#f3e8fd" stroke="#9334e6" stroke-width="1"/>
+  <text x="1047" y="483" text-anchor="middle" font-weight="bold" font-size="10" fill="#9334e6">Idle Address</text>
+  <text x="1047" y="500" text-anchor="middle" font-size="8" fill="#5f6368">Unused IPs ($7.30/mo)</text>
+  
+  <!-- Auto-Implementation note -->
+  <text x="885" y="535" text-anchor="middle" font-size="9" fill="#34a853">✓ Auto-implement: Idle VM, Disk, Address (with approval)</text>
+  
+  <!-- Anomaly Detection -->
+  <rect x="50" y="560" width="550" height="130" rx="10" fill="white" stroke="#f538a0" stroke-width="2" filter="url(#shadow)"/>
+  <rect x="50" y="560" width="550" height="28" rx="10" fill="#f538a0"/>
+  <rect x="50" y="581" width="550" height="7" fill="#f538a0"/>
+  <text x="325" y="580" text-anchor="middle" fill="white" font-weight="bold" font-size="11">ANOMALY DETECTION (Statistical Analysis)</text>
+  
+  <!-- Detection Methods -->
+  <rect x="70" y="600" width="120" height="40" rx="4" fill="#fce4ec" stroke="#f538a0" stroke-width="1"/>
+  <text x="130" y="616" text-anchor="middle" font-weight="bold" font-size="9" fill="#f538a0">Daily Spike</text>
+  <text x="130" y="632" text-anchor="middle" font-size="8" fill="#5f6368">30-day mean + 2σ</text>
+  
+  <rect x="200" y="600" width="120" height="40" rx="4" fill="#fce4ec" stroke="#f538a0" stroke-width="1"/>
+  <text x="260" y="616" text-anchor="middle" font-weight="bold" font-size="9" fill="#f538a0">Service Spike</text>
+  <text x="260" y="632" text-anchor="middle" font-size="8" fill="#5f6368">Per-service analysis</text>
+  
+  <rect x="330" y="600" width="120" height="40" rx="4" fill="#fce4ec" stroke="#f538a0" stroke-width="1"/>
+  <text x="390" y="616" text-anchor="middle" font-weight="bold" font-size="9" fill="#f538a0">Sustained Inc.</text>
+  <text x="390" y="632" text-anchor="middle" font-size="8" fill="#5f6368">5-day avg vs historic</text>
+  
+  <rect x="460" y="600" width="120" height="40" rx="4" fill="#fce4ec" stroke="#f538a0" stroke-width="1"/>
+  <text x="520" y="616" text-anchor="middle" font-weight="bold" font-size="9" fill="#f538a0">New Service</text>
+  <text x="520" y="632" text-anchor="middle" font-size="8" fill="#5f6368">Cost &gt; $100</text>
+  
+  <!-- Sensitivity -->
+  <text x="325" y="670" text-anchor="middle" font-size="9" fill="#5f6368">Sensitivity: LOW (3σ) | MEDIUM (2σ, default) | HIGH (1.5σ)</text>
+  
+  <!-- MCP Tools -->
+  <rect x="620" y="560" width="530" height="130" rx="10" fill="white" stroke="#5f6368" stroke-width="2" filter="url(#shadow)"/>
+  <text x="885" y="585" text-anchor="middle" font-weight="bold" font-size="13" fill="#5f6368">MCP TOOL DEFINITIONS (12 Tools)</text>
+  
+  <!-- Tool Groups -->
+  <text x="700" y="610" font-weight="bold" font-size="10" fill="#4285f4">Organization:</text>
+  <text x="700" y="625" font-size="9" fill="#5f6368">scan_organization, list_project_services</text>
+  
+  <text x="700" y="650" font-weight="bold" font-size="10" fill="#ea4335">Circuit Breaker:</text>
+  <text x="700" y="665" font-size="9" fill="#5f6368">get/configure_circuit_breaker, reset</text>
+  
+  <text x="950" y="610" font-weight="bold" font-size="10" fill="#fbbc04">Budget:</text>
+  <text x="950" y="625" font-size="9" fill="#5f6368">create_budget, list_budgets</text>
+  
+  <text x="950" y="650" font-weight="bold" font-size="10" fill="#34a853">Real-time:</text>
+  <text x="950" y="665" font-size="9" fill="#5f6368">setup_monitoring, get_recent_expensive</text>
+  
+  <text x="700" y="685" font-weight="bold" font-size="10" fill="#9334e6">Recommendations:</text>
+  <text x="870" y="685" font-size="9" fill="#5f6368">get_recommendations, implement_recommendation</text>
+  
+  <!-- Data Flow Summary -->
+  <rect x="50" y="705" width="1100" height="75" rx="10" fill="white" stroke="#1a73e8" stroke-width="2" filter="url(#shadow)"/>
+  <text x="600" y="727" text-anchor="middle" font-weight="bold" font-size="13" fill="#1a73e8">DATA FLOW SUMMARY</text>
+  
+  <rect x="70" y="740" width="130" height="28" rx="4" fill="#e8f0fe"/>
+  <text x="135" y="758" text-anchor="middle" font-size="10" fill="#1a73e8">User Query</text>
+  
+  <path d="M200 754 L235 754" stroke="#5f6368" stroke-width="1" marker-end="url(#arrow)"/>
+  
+  <rect x="235" y="740" width="130" height="28" rx="4" fill="#f3e8fd"/>
+  <text x="300" y="758" text-anchor="middle" font-size="10" fill="#9334e6">Intent Classify</text>
+  
+  <path d="M365 754 L400 754" stroke="#5f6368" stroke-width="1" marker-end="url(#arrow)"/>
+  
+  <rect x="400" y="740" width="130" height="28" rx="4" fill="#fef7e0"/>
+  <text x="465" y="758" text-anchor="middle" font-size="10" fill="#e37400">Route Handler</text>
+  
+  <path d="M530 754 L565 754" stroke="#5f6368" stroke-width="1" marker-end="url(#arrow)"/>
+  
+  <rect x="565" y="740" width="130" height="28" rx="4" fill="#e6f4ea"/>
+  <text x="630" y="758" text-anchor="middle" font-size="10" fill="#34a853">Query GCP APIs</text>
+  
+  <path d="M695 754 L730 754" stroke="#5f6368" stroke-width="1" marker-end="url(#arrow)"/>
+  
+  <rect x="730" y="740" width="130" height="28" rx="4" fill="#fce8e6"/>
+  <text x="795" y="758" text-anchor="middle" font-size="10" fill="#ea4335">Circuit Breaker</text>
+  
+  <path d="M860 754 L895 754" stroke="#5f6368" stroke-width="1" marker-end="url(#arrow)"/>
+  
+  <rect x="895" y="740" width="130" height="28" rx="4" fill="#e8f0fe"/>
+  <text x="960" y="758" text-anchor="middle" font-size="10" fill="#1a73e8">Response</text>
+  
+  <!-- IAM Requirements -->
+  <rect x="50" y="795" width="1100" height="55" rx="10" fill="#fff3e0" stroke="#ff9800" stroke-width="1"/>
+  <text x="600" y="817" text-anchor="middle" font-weight="bold" font-size="12" fill="#e65100">IAM REQUIREMENTS</text>
+  <text x="300" y="837" text-anchor="middle" font-size="10" fill="#5f6368">Organization: resourcemanager.*, cloudasset.*, serviceusage.*</text>
+  <text x="700" y="837" text-anchor="middle" font-size="10" fill="#5f6368">Billing: billing.accounts.get, billing.budgets.* | Project: compute.instances.*, bigquery.*</text>
+  
+  <!-- Footer -->
+  <text x="600" y="880" text-anchor="middle" font-size="10" fill="#9aa0a6">Architecture Design v2 — February 2025 | Port: ${MCP_SERVER_PORT}</text>
+</svg>
