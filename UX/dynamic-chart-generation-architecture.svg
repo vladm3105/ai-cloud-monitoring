@@ -1,0 +1,352 @@
+<svg viewBox="0 0 1800 1400" xmlns="http://www.w3.org/2000/svg">
+  <!-- Title -->
+  <text x="900" y="40" font-size="34" font-weight="bold" text-anchor="middle" fill="#1e293b">
+    Dynamic Chart Generation: Any LLM + Recharts
+  </text>
+  <text x="900" y="75" font-size="16" text-anchor="middle" fill="#64748b">
+    Production-Ready Architecture for AI-Powered Data Visualization
+  </text>
+  
+  <!-- Main Flow -->
+  <g transform="translate(50, 120)">
+    
+    <!-- Step 1: User Query -->
+    <g transform="translate(0, 0)">
+      <rect x="0" y="0" width="1700" height="120" rx="12" fill="#f0f9ff" stroke="#0284c7" stroke-width="3"/>
+      <text x="850" y="35" font-size="20" font-weight="bold" text-anchor="middle" fill="#0c4a6e">
+        STEP 1: User Query
+      </text>
+      
+      <rect x="100" y="55" width="1500" height="50" rx="8" fill="#ffffff" stroke="#0ea5e9" stroke-width="2"/>
+      <text x="850" y="87" font-size="14" text-anchor="middle" fill="#0c4a6e">
+        💬 User: "Show me GPT-4 vs Claude costs for last 30 days"
+      </text>
+    </g>
+    
+    <!-- Arrow Down -->
+    <g transform="translate(850, 135)">
+      <line x1="0" y1="0" x2="0" y2="40" stroke="#475569" stroke-width="4" marker-end="url(#arrowhead)"/>
+      <text x="20" y="25" font-size="12" font-weight="600" fill="#475569">Send to API</text>
+    </g>
+    
+    <!-- Step 2: LLM Processing (Multiple Options) -->
+    <g transform="translate(0, 190)">
+      <rect x="0" y="0" width="1700" height="320" rx="12" fill="#fef3c7" stroke="#f59e0b" stroke-width="3"/>
+      <text x="850" y="35" font-size="20" font-weight="bold" text-anchor="middle" fill="#92400e">
+        STEP 2: LLM Processing (Choose One)
+      </text>
+      
+      <!-- Option 1: GPT-4o -->
+      <g transform="translate(50, 60)">
+        <rect x="0" y="0" width="500" height="230" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="3"/>
+        <rect x="0" y="0" width="500" height="45" rx="10" fill="#16a34a"/>
+        <text x="250" y="30" font-size="16" font-weight="bold" text-anchor="middle" fill="#ffffff">
+          🟢 OPTION 1: OpenAI GPT-4o (Recommended)
+        </text>
+        
+        <g transform="translate(20, 65)">
+          <text x="0" y="0" font-size="13" font-weight="600" fill="#15803d">Key Features:</text>
+          <text x="0" y="22" font-size="11" fill="#166534">✅ Cost: $0.005 per chart</text>
+          <text x="0" y="40" font-size="11" fill="#166534">✅ Speed: 2-3 seconds</text>
+          <text x="0" y="58" font-size="11" fill="#166534">✅ Quality: Excellent (⭐⭐⭐⭐⭐)</text>
+          <text x="0" y="76" font-size="11" fill="#166534">✅ Uptime: 99.9%</text>
+          <text x="0" y="94" font-size="11" fill="#166534">✅ JSON mode: Built-in</text>
+          
+          <rect x="0" y="110" width="460" height="60" rx="6" fill="#f0fdf4" stroke="#22c55e" stroke-width="1"/>
+          <text x="10" y="130" font-size="9" font-family="monospace" fill="#166534">response = openai.chat.completions.create(</text>
+          <text x="10" y="145" font-size="9" font-family="monospace" fill="#166534">  model="gpt-4o",</text>
+          <text x="10" y="160" font-size="9" font-family="monospace" fill="#166534">  response_format={"type": "json_object"}</text>
+        </g>
+      </g>
+      
+      <!-- Option 2: Gemini -->
+      <g transform="translate(600, 60)">
+        <rect x="0" y="0" width="500" height="230" rx="10" fill="#dbeafe" stroke="#0284c7" stroke-width="3"/>
+        <rect x="0" y="0" width="500" height="45" rx="10" fill="#0284c7"/>
+        <text x="250" y="30" font-size="16" font-weight="bold" text-anchor="middle" fill="#ffffff">
+          🔵 OPTION 2: Google Gemini 1.5
+        </text>
+        
+        <g transform="translate(20, 65)">
+          <text x="0" y="0" font-size="13" font-weight="600" fill="#0c4a6e">Key Features:</text>
+          <text x="0" y="22" font-size="11" fill="#075985">✅ Cost: $0.002 per chart (60% cheaper!)</text>
+          <text x="0" y="40" font-size="11" fill="#075985">✅ Speed: 2-3 seconds</text>
+          <text x="0" y="58" font-size="11" fill="#075985">✅ Quality: Excellent (⭐⭐⭐⭐)</text>
+          <text x="0" y="76" font-size="11" fill="#075985">✅ BigQuery native integration</text>
+          <text x="0" y="94" font-size="11" fill="#075985">✅ JSON mode: Built-in</text>
+          
+          <rect x="0" y="110" width="460" height="60" rx="6" fill="#f0f9ff" stroke="#38bdf8" stroke-width="1"/>
+          <text x="10" y="130" font-size="9" font-family="monospace" fill="#075985">response = model.generate_content(</text>
+          <text x="10" y="145" font-size="9" font-family="monospace" fill="#075985">  query,</text>
+          <text x="10" y="160" font-size="9" font-family="monospace" fill="#075985">  response_mime_type="application/json"</text>
+        </g>
+      </g>
+      
+      <!-- Multi-LLM Badge -->
+      <g transform="translate(1150, 60)">
+        <rect x="0" y="0" width="500" height="230" rx="10" fill="#fef3c7" stroke="#f59e0b" stroke-width="3"/>
+        <rect x="0" y="0" width="500" height="45" rx="10" fill="#f59e0b"/>
+        <text x="250" y="30" font-size="16" font-weight="bold" text-anchor="middle" fill="#ffffff">
+          🟡 BEST: Multi-LLM Strategy
+        </text>
+        
+        <g transform="translate(20, 65)">
+          <text x="0" y="0" font-size="13" font-weight="600" fill="#92400e">Recommended Approach:</text>
+          <text x="0" y="22" font-size="11" fill="#78350f">✅ Primary: GPT-4o</text>
+          <text x="0" y="40" font-size="11" fill="#78350f">✅ Fallback: Gemini</text>
+          <text x="0" y="58" font-size="11" fill="#78350f">✅ Uptime: 99.99%</text>
+          <text x="0" y="76" font-size="11" fill="#78350f">✅ Cost optimization</text>
+          <text x="0" y="94" font-size="11" fill="#78350f">✅ No vendor lock-in</text>
+          
+          <rect x="0" y="110" width="460" height="75" rx="6" fill="#fffbeb" stroke="#fbbf24" stroke-width="1"/>
+          <text x="10" y="130" font-size="9" font-family="monospace" fill="#78350f">try:</text>
+          <text x="10" y="145" font-size="9" font-family="monospace" fill="#78350f">  return gpt4.generate(query)</text>
+          <text x="10" y="160" font-size="9" font-family="monospace" fill="#78350f">except:</text>
+          <text x="10" y="175" font-size="9" font-family="monospace" fill="#78350f">  return gemini.generate(query)</text>
+        </g>
+      </g>
+    </g>
+    
+    <!-- Arrow Down -->
+    <g transform="translate(850, 525)">
+      <line x1="0" y1="0" x2="0" y2="40" stroke="#475569" stroke-width="4" marker-end="url(#arrowhead)"/>
+      <text x="20" y="25" font-size="12" font-weight="600" fill="#475569">Returns JSON</text>
+    </g>
+    
+    <!-- Step 3: Generated JSON Config -->
+    <g transform="translate(0, 580)">
+      <rect x="0" y="0" width="1700" height="260" rx="12" fill="#f8fafc" stroke="#64748b" stroke-width="3"/>
+      <text x="850" y="35" font-size="20" font-weight="bold" text-anchor="middle" fill="#1e293b">
+        STEP 3: LLM Returns Chart Configuration JSON
+      </text>
+      
+      <rect x="100" y="55" width="1500" height="180" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+      
+      <g transform="translate(120, 75)" font-family="monospace" font-size="10">
+        <text x="0" y="0" fill="#475569">{</text>
+        <text x="20" y="18" fill="#059669">"chartType"</text><text x="120" y="18" fill="#475569">: </text><text x="140" y="18" fill="#dc2626">"LineChart"</text><text x="240" y="18" fill="#64748b">,  // AI chooses chart type</text>
+        
+        <text x="20" y="36" fill="#059669">"sqlQuery"</text><text x="120" y="36" fill="#475569">: </text><text x="140" y="36" fill="#dc2626">"SELECT date, model, SUM(cost_usd) as cost</text>
+        <text x="140" y="52" fill="#dc2626">             FROM unified_costs</text>
+        <text x="140" y="68" fill="#dc2626">             WHERE date >= DATE_SUB(CURRENT_DATE(), 30)</text>
+        <text x="140" y="84" fill="#dc2626">               AND model IN ('gpt-4', 'claude-3')</text>
+        <text x="140" y="100" fill="#dc2626">             GROUP BY date, model"</text><text x="380" y="100" fill="#64748b">,  // AI generates SQL</text>
+        
+        <text x="20" y="118" fill="#059669">"chartConfig"</text><text x="120" y="118" fill="#475569">: {</text>
+        <text x="40" y="133" fill="#059669">"xAxis"</text><text x="120" y="133" fill="#475569">: { </text><text x="140" y="133" fill="#059669">"dataKey"</text><text x="220" y="133" fill="#475569">: </text><text x="240" y="133" fill="#dc2626">"date"</text><text x="290" y="133" fill="#475569"> },</text>
+        <text x="40" y="148" fill="#059669">"lines"</text><text x="120" y="148" fill="#475569">: [</text>
+        <text x="60" y="163" fill="#475569">{ </text><text x="80" y="163" fill="#059669">"dataKey"</text><text x="160" y="163" fill="#475569">: </text><text x="180" y="163" fill="#dc2626">"cost"</text><text x="230" y="163" fill="#475569">, </text><text x="250" y="163" fill="#059669">"stroke"</text><text x="310" y="163" fill="#475569">: </text><text x="330" y="163" fill="#dc2626">"#8884d8"</text><text x="410" y="163" fill="#475569"> }</text>
+        <text x="40" y="178" fill="#475569">]</text>
+        <text x="20" y="193" fill="#475569">}</text>
+        <text x="0" y="208" fill="#475569">}</text>
+      </g>
+    </g>
+    
+    <!-- Arrow Down -->
+    <g transform="translate(850, 855)">
+      <line x1="0" y1="0" x2="0" y2="40" stroke="#475569" stroke-width="4" marker-end="url(#arrowhead)"/>
+      <text x="20" y="25" font-size="12" font-weight="600" fill="#475569">Process</text>
+    </g>
+    
+    <!-- Step 4: Backend Processing -->
+    <g transform="translate(0, 910)">
+      <rect x="0" y="0" width="1700" height="180" rx="12" fill="#fef3c7" stroke="#f59e0b" stroke-width="3"/>
+      <text x="850" y="35" font-size="20" font-weight="bold" text-anchor="middle" fill="#92400e">
+        STEP 4: Backend Processing
+      </text>
+      
+      <g transform="translate(100, 60)">
+        <!-- Execute SQL -->
+        <g transform="translate(0, 0)">
+          <rect x="0" y="0" width="500" height="100" rx="8" fill="#ffffff" stroke="#d97706" stroke-width="2"/>
+          <text x="250" y="25" font-size="14" font-weight="600" text-anchor="middle" fill="#92400e">
+            4A. Execute SQL on BigQuery
+          </text>
+          <text x="20" y="50" font-size="11" fill="#78350f">• Parse SQL from JSON</text>
+          <text x="20" y="68" font-size="11" fill="#78350f">• Query BigQuery database</text>
+          <text x="20" y="86" font-size="11" fill="#78350f">• Return data rows</text>
+        </g>
+        
+        <!-- Render Chart -->
+        <g transform="translate(550, 0)">
+          <rect x="0" y="0" width="500" height="100" rx="8" fill="#ffffff" stroke="#d97706" stroke-width="2"/>
+          <text x="250" y="25" font-size="14" font-weight="600" text-anchor="middle" fill="#92400e">
+            4B. Prepare Chart Component
+          </text>
+          <text x="20" y="50" font-size="11" fill="#78350f">• Parse chartConfig from JSON</text>
+          <text x="20" y="68" font-size="11" fill="#78350f">• Map to Recharts props</text>
+          <text x="20" y="86" font-size="11" fill="#78350f">• Send to frontend</text>
+        </g>
+        
+        <!-- Data Flow -->
+        <g transform="translate(1100, 0)">
+          <rect x="0" y="0" width="500" height="100" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+          <text x="250" y="25" font-size="14" font-weight="600" text-anchor="middle" fill="#15803d">
+            4C. Return to Frontend
+          </text>
+          <text x="20" y="50" font-size="11" fill="#166534">• Chart configuration</text>
+          <text x="20" y="68" font-size="11" fill="#166534">• Query results (data)</text>
+          <text x="20" y="86" font-size="11" fill="#166534">• Ready to render!</text>
+        </g>
+      </g>
+    </g>
+    
+    <!-- Arrow Down -->
+    <g transform="translate(850, 1105)">
+      <line x1="0" y1="0" x2="0" y2="40" stroke="#475569" stroke-width="4" marker-end="url(#arrowhead)"/>
+      <text x="20" y="25" font-size="12" font-weight="600" fill="#475569">Render</text>
+    </g>
+    
+    <!-- Step 5: Rendered Chart -->
+    <g transform="translate(0, 1160)">
+      <rect x="0" y="0" width="1700" height="200" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="3"/>
+      <text x="850" y="35" font-size="20" font-weight="bold" text-anchor="middle" fill="#15803d">
+        STEP 5: User Sees Dynamic Chart
+      </text>
+      
+      <g transform="translate(100, 60)">
+        <!-- Chart Mock -->
+        <rect x="0" y="0" width="700" height="120" rx="8" fill="#ffffff" stroke="#22c55e" stroke-width="2"/>
+        <text x="350" y="25" font-size="13" font-weight="600" text-anchor="middle" fill="#15803d">
+          GPT-4 vs Claude Costs (Last 30 Days)
+        </text>
+        
+        <!-- Mock chart lines -->
+        <g transform="translate(30, 40)">
+          <line x1="0" y1="60" x2="640" y2="60" stroke="#e5e7eb" stroke-width="1"/>
+          <line x1="0" y1="30" x2="640" y2="30" stroke="#e5e7eb" stroke-width="1"/>
+          <line x1="0" y1="0" x2="640" y2="0" stroke="#e5e7eb" stroke-width="1"/>
+          
+          <!-- GPT-4 line -->
+          <polyline points="0,40 160,35 320,20 480,25 640,15" fill="none" stroke="#8884d8" stroke-width="3"/>
+          <!-- Claude line -->
+          <polyline points="0,50 160,48 320,35 480,38 640,30" fill="none" stroke="#82ca9d" stroke-width="3"/>
+          
+          <text x="650" y="20" font-size="10" fill="#8884d8">GPT-4</text>
+          <text x="650" y="35" font-size="10" fill="#82ca9d">Claude</text>
+        </g>
+        
+        <!-- Info -->
+        <g transform="translate(750, 30)">
+          <text x="0" y="0" font-size="12" font-weight="600" fill="#15803d">Chart Features:</text>
+          <text x="0" y="22" font-size="10" fill="#166534">✅ Interactive (hover tooltips)</text>
+          <text x="0" y="40" font-size="10" fill="#166534">✅ Responsive</text>
+          <text x="0" y="58" font-size="10" fill="#166534">✅ Generated in 3 seconds</text>
+          <text x="0" y="76" font-size="10" fill="#166534">✅ Cost: $0.005</text>
+          <text x="0" y="94" font-size="10" fill="#166534">✅ Customizable</text>
+        </g>
+      </g>
+    </g>
+  </g>
+  
+  <!-- Cost Breakdown (Bottom) -->
+  <g transform="translate(50, 1500)">
+    <rect x="0" y="0" width="1700" height="140" rx="12" fill="#fef3c7" stroke="#f59e0b" stroke-width="3"/>
+    <text x="850" y="35" font-size="22" font-weight="bold" text-anchor="middle" fill="#92400e">
+      💰 Cost Breakdown
+    </text>
+    
+    <g transform="translate(100, 60)">
+      <!-- GPT-4o costs -->
+      <g transform="translate(0, 0)">
+        <rect x="0" y="0" width="500" height="60" rx="6" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+        <text x="250" y="25" font-size="14" font-weight="600" text-anchor="middle" fill="#15803d">
+          GPT-4o Pricing
+        </text>
+        <text x="250" y="45" font-size="11" text-anchor="middle" fill="#166534">
+          1,000 charts/mo = $5 | 10,000 charts/mo = $50
+        </text>
+      </g>
+      
+      <!-- Gemini costs -->
+      <g transform="translate(550, 0)">
+        <rect x="0" y="0" width="500" height="60" rx="6" fill="#dbeafe" stroke="#0284c7" stroke-width="2"/>
+        <text x="250" y="25" font-size="14" font-weight="600" text-anchor="middle" fill="#0c4a6e">
+          Gemini 1.5 Flash Pricing
+        </text>
+        <text x="250" y="45" font-size="11" text-anchor="middle" fill="#075985">
+          1,000 charts/mo = $2 | 10,000 charts/mo = $20 (60% cheaper!)
+        </text>
+      </g>
+      
+      <!-- Total -->
+      <g transform="translate(1100, 0)">
+        <rect x="0" y="0" width="500" height="60" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+        <text x="250" y="25" font-size="14" font-weight="600" text-anchor="middle" fill="#92400e">
+          Multi-LLM (80/20)
+        </text>
+        <text x="250" y="45" font-size="11" text-anchor="middle" fill="#78350f">
+          1,000 charts/mo = $4.40 | Best reliability!
+        </text>
+      </g>
+    </g>
+  </g>
+  
+  <!-- Key Benefits (Right Side) -->
+  <g transform="translate(1825, 120)">
+    <rect x="0" y="0" width="350" height="550" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="3"/>
+    <text x="175" y="35" font-size="18" font-weight="bold" text-anchor="middle" fill="#15803d">
+      ✅ Key Benefits
+    </text>
+    
+    <g transform="translate(20, 60)">
+      <text x="0" y="0" font-size="13" font-weight="600" fill="#15803d">Production Ready:</text>
+      <text x="0" y="22" font-size="11" fill="#166534">• Works with any LLM</text>
+      <text x="0" y="40" font-size="11" fill="#166534">• No Claude required</text>
+      <text x="0" y="58" font-size="11" fill="#166534">• 99.9% uptime</text>
+      <text x="0" y="76" font-size="11" fill="#166534">• Fast (2-3 seconds)</text>
+      
+      <text x="0" y="106" font-size="13" font-weight="600" fill="#15803d">Cost Effective:</text>
+      <text x="0" y="128" font-size="11" fill="#166534">• $0.002-$0.005 per chart</text>
+      <text x="0" y="146" font-size="11" fill="#166534">• Incredibly affordable</text>
+      <text x="0" y="164" font-size="11" fill="#166534">• No infrastructure costs</text>
+      
+      <text x="0" y="194" font-size="13" font-weight="600" fill="#15803d">Flexible:</text>
+      <text x="0" y="216" font-size="11" fill="#166534">• Any chart type</text>
+      <text x="0" y="234" font-size="11" fill="#166534">• Dynamic SQL generation</text>
+      <text x="0" y="252" font-size="11" fill="#166534">• Customizable styling</text>
+      <text x="0" y="270" font-size="11" fill="#166534">• No vendor lock-in</text>
+      
+      <text x="0" y="300" font-size="13" font-weight="600" fill="#15803d">Easy to Implement:</text>
+      <text x="0" y="322" font-size="11" fill="#166534">• Simple API calls</text>
+      <text x="0" y="340" font-size="11" fill="#166534">• Well-documented</text>
+      <text x="0" y="358" font-size="11" fill="#166534">• 2-3 weeks to build</text>
+      <text x="0" y="376" font-size="11" fill="#166534">• Proven approach</text>
+      
+      <text x="0" y="406" font-size="13" font-weight="600" fill="#15803d">Better Than A2UI:</text>
+      <text x="0" y="428" font-size="11" fill="#166534">• Available now</text>
+      <text x="0" y="446" font-size="11" fill="#166534">• Predictable costs</text>
+      <text x="0" y="464" font-size="11" fill="#166534">• Full control</text>
+      <text x="0" y="482" font-size="11" fill="#166534">• Production-proven</text>
+    </g>
+  </g>
+  
+  <!-- Implementation Timeline (Bottom Right) -->
+  <g transform="translate(1825, 700)">
+    <rect x="0" y="0" width="350" height="200" rx="12" fill="#fef3c7" stroke="#f59e0b" stroke-width="3"/>
+    <text x="175" y="35" font-size="18" font-weight="bold" text-anchor="middle" fill="#92400e">
+      📅 Implementation
+    </text>
+    
+    <g transform="translate(20, 60)">
+      <text x="0" y="0" font-size="12" font-weight="600" fill="#92400e">Week 1: Setup</text>
+      <text x="0" y="18" font-size="10" fill="#78350f">• Get API keys</text>
+      <text x="0" y="33" font-size="10" fill="#78350f">• Test locally</text>
+      
+      <text x="0" y="55" font-size="12" font-weight="600" fill="#92400e">Week 2: Integration</text>
+      <text x="0" y="73" font-size="10" fill="#78350f">• Build API endpoint</text>
+      <text x="0" y="88" font-size="10" fill="#78350f">• Chart renderer</text>
+      
+      <text x="0" y="110" font-size="12" font-weight="600" fill="#92400e">Week 3: Production</text>
+      <text x="0" y="128" font-size="10" fill="#78350f">• Deploy</text>
+      <text x="0" y="143" font-size="10" fill="#78350f">• Monitor & optimize</text>
+    </g>
+  </g>
+  
+  <!-- Arrow markers -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#475569"/>
+    </marker>
+  </defs>
+</svg>

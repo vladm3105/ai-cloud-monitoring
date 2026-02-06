@@ -1,0 +1,218 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 1000">
+  <defs>
+    <linearGradient id="awsGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ff9900"/>
+      <stop offset="100%" style="stop-color:#ec7211"/>
+    </linearGradient>
+    <linearGradient id="azureGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0078d4"/>
+      <stop offset="100%" style="stop-color:#005a9e"/>
+    </linearGradient>
+    <linearGradient id="gcpGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#4285f4"/>
+      <stop offset="100%" style="stop-color:#3367d6"/>
+    </linearGradient>
+    <linearGradient id="k8sGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#326ce5"/>
+      <stop offset="100%" style="stop-color:#2456b8"/>
+    </linearGradient>
+    <linearGradient id="gatewayGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#2d3748"/>
+      <stop offset="100%" style="stop-color:#4a5568"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <rect width="1400" height="1000" fill="#f7fafc"/>
+  
+  <rect x="0" y="0" width="1400" height="70" fill="#1a365d"/>
+  <text x="700" y="35" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="24" font-weight="bold">MCP Server Layer - Detailed Architecture</text>
+  <text x="700" y="55" text-anchor="middle" fill="#a0aec0" font-family="Arial, sans-serif" font-size="12">Model Context Protocol Servers for Multi-Cloud Cost Intelligence</text>
+  
+  <!-- MCP Gateway -->
+  <rect x="200" y="90" width="1000" height="100" rx="10" fill="url(#gatewayGrad)" filter="url(#shadow)"/>
+  <text x="700" y="125" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="18" font-weight="bold">🔀 MCP GATEWAY / ROUTER</text>
+  <text x="700" y="150" text-anchor="middle" fill="#a0aec0" font-family="Arial, sans-serif" font-size="12">Port 8081 • Request Routing • Response Aggregation • Rate Limiting • Circuit Breaker</text>
+  
+  <g transform="translate(250, 160)">
+    <rect x="0" y="0" width="140" height="22" rx="3" fill="white" fill-opacity="0.15"/>
+    <text x="70" y="15" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10">Load Balancing</text>
+    <rect x="160" y="0" width="140" height="22" rx="3" fill="white" fill-opacity="0.15"/>
+    <text x="230" y="15" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10">Request Caching</text>
+    <rect x="320" y="0" width="140" height="22" rx="3" fill="white" fill-opacity="0.15"/>
+    <text x="390" y="15" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10">Rate Limiting</text>
+    <rect x="480" y="0" width="140" height="22" rx="3" fill="white" fill-opacity="0.15"/>
+    <text x="550" y="15" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10">Health Checks</text>
+    <rect x="640" y="0" width="140" height="22" rx="3" fill="white" fill-opacity="0.15"/>
+    <text x="710" y="15" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10">Circuit Breaker</text>
+  </g>
+  
+  <line x1="300" y1="190" x2="180" y2="230" stroke="#718096" stroke-width="2"/>
+  <line x1="500" y1="190" x2="430" y2="230" stroke="#718096" stroke-width="2"/>
+  <line x1="700" y1="190" x2="700" y2="230" stroke="#718096" stroke-width="2"/>
+  <line x1="900" y1="190" x2="970" y2="230" stroke="#718096" stroke-width="2"/>
+  <line x1="1100" y1="190" x2="1220" y2="230" stroke="#718096" stroke-width="2"/>
+  
+  <!-- AWS MCP Server -->
+  <rect x="50" y="230" width="300" height="350" rx="10" fill="url(#awsGrad)" filter="url(#shadow)"/>
+  <text x="200" y="260" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="16" font-weight="bold">☁️ AWS MCP Server</text>
+  <text x="200" y="280" text-anchor="middle" fill="#ffecd2" font-family="Arial, sans-serif" font-size="11">Port 8082 • boto3</text>
+  <rect x="65" y="295" width="270" height="270" rx="6" fill="white" fill-opacity="0.15"/>
+  <text x="80" y="315" fill="white" font-family="Arial, sans-serif" font-size="11" font-weight="bold">TOOLS (14):</text>
+  <text x="80" y="340" fill="white" font-family="Arial, sans-serif" font-size="10">Cost Analysis:</text>
+  <text x="90" y="355" fill="#ffecd2" font-family="Arial, sans-serif" font-size="9">• get_cost_and_usage</text>
+  <text x="90" y="368" fill="#ffecd2" font-family="Arial, sans-serif" font-size="9">• get_cost_by_service</text>
+  <text x="90" y="381" fill="#ffecd2" font-family="Arial, sans-serif" font-size="9">• get_cost_by_account</text>
+  <text x="80" y="400" fill="white" font-family="Arial, sans-serif" font-size="10">Intelligence:</text>
+  <text x="90" y="415" fill="#ffecd2" font-family="Arial, sans-serif" font-size="9">• get_anomalies</text>
+  <text x="90" y="428" fill="#ffecd2" font-family="Arial, sans-serif" font-size="9">• get_rightsizing_recommendations</text>
+  <text x="90" y="441" fill="#ffecd2" font-family="Arial, sans-serif" font-size="9">• get_trusted_advisor_checks</text>
+  <text x="80" y="460" fill="white" font-family="Arial, sans-serif" font-size="10">Resources:</text>
+  <text x="90" y="475" fill="#ffecd2" font-family="Arial, sans-serif" font-size="9">• get_resource_inventory</text>
+  <text x="90" y="488" fill="#ffecd2" font-family="Arial, sans-serif" font-size="9">• get_utilization_metrics</text>
+  <text x="90" y="501" fill="#ffecd2" font-family="Arial, sans-serif" font-size="9">• get_idle_resources</text>
+  <text x="80" y="520" fill="white" font-family="Arial, sans-serif" font-size="10">Actions:</text>
+  <text x="90" y="535" fill="#ffecd2" font-family="Arial, sans-serif" font-size="9">• execute_remediation</text>
+  <text x="90" y="548" fill="#ffecd2" font-family="Arial, sans-serif" font-size="9">• get_savings_opportunities</text>
+  
+  <!-- Azure MCP Server -->
+  <rect x="370" y="230" width="300" height="350" rx="10" fill="url(#azureGrad)" filter="url(#shadow)"/>
+  <text x="520" y="260" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="16" font-weight="bold">☁️ Azure MCP Server</text>
+  <text x="520" y="280" text-anchor="middle" fill="#cce5ff" font-family="Arial, sans-serif" font-size="11">Port 8083 • azure-mgmt-*</text>
+  <rect x="385" y="295" width="270" height="270" rx="6" fill="white" fill-opacity="0.15"/>
+  <text x="400" y="315" fill="white" font-family="Arial, sans-serif" font-size="11" font-weight="bold">TOOLS (12):</text>
+  <text x="400" y="340" fill="white" font-family="Arial, sans-serif" font-size="10">Cost Analysis:</text>
+  <text x="410" y="355" fill="#cce5ff" font-family="Arial, sans-serif" font-size="9">• query_costs</text>
+  <text x="410" y="368" fill="#cce5ff" font-family="Arial, sans-serif" font-size="9">• get_cost_by_resource</text>
+  <text x="410" y="381" fill="#cce5ff" font-family="Arial, sans-serif" font-size="9">• get_cost_by_subscription</text>
+  <text x="400" y="400" fill="white" font-family="Arial, sans-serif" font-size="10">Intelligence:</text>
+  <text x="410" y="415" fill="#cce5ff" font-family="Arial, sans-serif" font-size="9">• get_advisor_recommendations</text>
+  <text x="410" y="428" fill="#cce5ff" font-family="Arial, sans-serif" font-size="9">• get_reservation_recommendations</text>
+  <text x="410" y="441" fill="#cce5ff" font-family="Arial, sans-serif" font-size="9">• get_budgets</text>
+  <text x="400" y="460" fill="white" font-family="Arial, sans-serif" font-size="10">Resources:</text>
+  <text x="410" y="475" fill="#cce5ff" font-family="Arial, sans-serif" font-size="9">• get_resource_inventory</text>
+  <text x="410" y="488" fill="#cce5ff" font-family="Arial, sans-serif" font-size="9">• get_utilization_metrics</text>
+  <text x="410" y="501" fill="#cce5ff" font-family="Arial, sans-serif" font-size="9">• get_idle_resources</text>
+  <text x="400" y="520" fill="white" font-family="Arial, sans-serif" font-size="10">Actions:</text>
+  <text x="410" y="535" fill="#cce5ff" font-family="Arial, sans-serif" font-size="9">• execute_remediation</text>
+  
+  <!-- GCP MCP Server -->
+  <rect x="690" y="230" width="300" height="350" rx="10" fill="url(#gcpGrad)" filter="url(#shadow)"/>
+  <text x="840" y="260" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="16" font-weight="bold">☁️ GCP MCP Server</text>
+  <text x="840" y="280" text-anchor="middle" fill="#d4e5ff" font-family="Arial, sans-serif" font-size="11">Port 8084 • google-cloud-*</text>
+  <rect x="705" y="295" width="270" height="270" rx="6" fill="white" fill-opacity="0.15"/>
+  <text x="720" y="315" fill="white" font-family="Arial, sans-serif" font-size="11" font-weight="bold">TOOLS (11):</text>
+  <text x="720" y="340" fill="white" font-family="Arial, sans-serif" font-size="10">Cost Analysis:</text>
+  <text x="730" y="355" fill="#d4e5ff" font-family="Arial, sans-serif" font-size="9">• get_billing_data</text>
+  <text x="730" y="368" fill="#d4e5ff" font-family="Arial, sans-serif" font-size="9">• get_cost_breakdown</text>
+  <text x="730" y="381" fill="#d4e5ff" font-family="Arial, sans-serif" font-size="9">• get_budget_status</text>
+  <text x="720" y="400" fill="white" font-family="Arial, sans-serif" font-size="10">Intelligence:</text>
+  <text x="730" y="415" fill="#d4e5ff" font-family="Arial, sans-serif" font-size="9">• get_recommendations</text>
+  <text x="730" y="428" fill="#d4e5ff" font-family="Arial, sans-serif" font-size="9">• get_commitment_recommendations</text>
+  <text x="730" y="441" fill="#d4e5ff" font-family="Arial, sans-serif" font-size="9">• get_unattended_projects</text>
+  <text x="720" y="460" fill="white" font-family="Arial, sans-serif" font-size="10">Resources:</text>
+  <text x="730" y="475" fill="#d4e5ff" font-family="Arial, sans-serif" font-size="9">• get_asset_inventory</text>
+  <text x="730" y="488" fill="#d4e5ff" font-family="Arial, sans-serif" font-size="9">• get_utilization_metrics</text>
+  <text x="720" y="507" fill="white" font-family="Arial, sans-serif" font-size="10">Actions:</text>
+  <text x="730" y="522" fill="#d4e5ff" font-family="Arial, sans-serif" font-size="9">• execute_remediation</text>
+  
+  <!-- OpenCost MCP Server -->
+  <rect x="1010" y="230" width="340" height="170" rx="10" fill="url(#k8sGrad)" filter="url(#shadow)"/>
+  <text x="1180" y="260" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="16" font-weight="bold">⎈ OpenCost MCP</text>
+  <text x="1180" y="280" text-anchor="middle" fill="#bee3f8" font-family="Arial, sans-serif" font-size="11">Port 8085 • CNCF Project</text>
+  <rect x="1025" y="295" width="310" height="90" rx="6" fill="white" fill-opacity="0.15"/>
+  <text x="1040" y="315" fill="white" font-family="Arial, sans-serif" font-size="11" font-weight="bold">TOOLS (4):</text>
+  <text x="1050" y="335" fill="#bee3f8" font-family="Arial, sans-serif" font-size="9">• get_allocation_costs (namespace, pod, controller)</text>
+  <text x="1050" y="350" fill="#bee3f8" font-family="Arial, sans-serif" font-size="9">• get_asset_costs (nodes, PVs, load balancers)</text>
+  <text x="1050" y="365" fill="#bee3f8" font-family="Arial, sans-serif" font-size="9">• get_cloud_costs (underlying cloud spend)</text>
+  <text x="1050" y="380" fill="#bee3f8" font-family="Arial, sans-serif" font-size="9">• get_efficiency_metrics (request vs actual)</text>
+  
+  <!-- Forecast MCP Server -->
+  <rect x="1010" y="420" width="340" height="160" rx="10" fill="#805ad5" filter="url(#shadow)"/>
+  <text x="1180" y="450" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="16" font-weight="bold">📈 Forecast MCP</text>
+  <text x="1180" y="470" text-anchor="middle" fill="#e9d8fd" font-family="Arial, sans-serif" font-size="11">Port 8086 • Prophet + Custom ML</text>
+  <rect x="1025" y="485" width="310" height="80" rx="6" fill="white" fill-opacity="0.15"/>
+  <text x="1040" y="505" fill="white" font-family="Arial, sans-serif" font-size="11" font-weight="bold">TOOLS (4):</text>
+  <text x="1050" y="525" fill="#e9d8fd" font-family="Arial, sans-serif" font-size="9">• get_cost_forecast (30/60/90 day projections)</text>
+  <text x="1050" y="540" fill="#e9d8fd" font-family="Arial, sans-serif" font-size="9">• get_budget_burndown (days until exhaustion)</text>
+  <text x="1050" y="555" fill="#e9d8fd" font-family="Arial, sans-serif" font-size="9">• get_trend_analysis • simulate_scenario</text>
+  
+  <!-- Remediation MCP Server -->
+  <rect x="50" y="600" width="340" height="180" rx="10" fill="#c53030" filter="url(#shadow)"/>
+  <text x="220" y="630" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="16" font-weight="bold">🔧 Remediation MCP</text>
+  <text x="220" y="650" text-anchor="middle" fill="#fed7d7" font-family="Arial, sans-serif" font-size="11">Port 8087 • Temporal.io Workflows</text>
+  <rect x="65" y="665" width="310" height="100" rx="6" fill="white" fill-opacity="0.15"/>
+  <text x="80" y="685" fill="white" font-family="Arial, sans-serif" font-size="11" font-weight="bold">TOOLS (8):</text>
+  <text x="90" y="705" fill="#fed7d7" font-family="Arial, sans-serif" font-size="9">• list_pending_actions • get_action_details</text>
+  <text x="90" y="720" fill="#fed7d7" font-family="Arial, sans-serif" font-size="9">• approve_action • reject_action • schedule_action</text>
+  <text x="90" y="735" fill="#fed7d7" font-family="Arial, sans-serif" font-size="9">• execute_action • cancel_execution</text>
+  <text x="90" y="750" fill="#fed7d7" font-family="Arial, sans-serif" font-size="9">• rollback_action • get_action_history</text>
+  <rect x="290" y="620" width="80" height="22" rx="11" fill="#fc8181"/>
+  <text x="330" y="635" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="9" font-weight="bold">⚠️ SAFE</text>
+  
+  <!-- Policy MCP Server -->
+  <rect x="410" y="600" width="340" height="180" rx="10" fill="#2f855a" filter="url(#shadow)"/>
+  <text x="580" y="630" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="16" font-weight="bold">📋 Policy MCP</text>
+  <text x="580" y="650" text-anchor="middle" fill="#c6f6d5" font-family="Arial, sans-serif" font-size="11">Port 8088 • Guardrails Engine</text>
+  <rect x="425" y="665" width="310" height="100" rx="6" fill="white" fill-opacity="0.15"/>
+  <text x="440" y="685" fill="white" font-family="Arial, sans-serif" font-size="11" font-weight="bold">TOOLS (5):</text>
+  <text x="450" y="705" fill="#c6f6d5" font-family="Arial, sans-serif" font-size="9">• get_policies • create_policy • update_policy</text>
+  <text x="450" y="720" fill="#c6f6d5" font-family="Arial, sans-serif" font-size="9">• evaluate_compliance</text>
+  <text x="450" y="735" fill="#c6f6d5" font-family="Arial, sans-serif" font-size="9">• get_violations • delete_policy</text>
+  
+  <!-- Unified Data Model -->
+  <rect x="770" y="600" width="580" height="180" rx="10" fill="#2d3748" filter="url(#shadow)"/>
+  <text x="1060" y="630" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="16" font-weight="bold">📊 Unified Data Model</text>
+  <rect x="785" y="650" width="170" height="115" rx="6" fill="#4a5568"/>
+  <text x="870" y="675" text-anchor="middle" fill="#a0aec0" font-family="Arial, sans-serif" font-size="11" font-weight="bold">Normalized Cost</text>
+  <text x="800" y="695" fill="#e2e8f0" font-family="Arial, sans-serif" font-size="9">• timestamp</text>
+  <text x="800" y="710" fill="#e2e8f0" font-family="Arial, sans-serif" font-size="9">• provider (aws/azure/gcp)</text>
+  <text x="800" y="725" fill="#e2e8f0" font-family="Arial, sans-serif" font-size="9">• service, region</text>
+  <text x="800" y="740" fill="#e2e8f0" font-family="Arial, sans-serif" font-size="9">• cost_usd, usage</text>
+  <text x="800" y="755" fill="#e2e8f0" font-family="Arial, sans-serif" font-size="9">• tags (normalized)</text>
+  
+  <rect x="970" y="650" width="170" height="115" rx="6" fill="#4a5568"/>
+  <text x="1055" y="675" text-anchor="middle" fill="#a0aec0" font-family="Arial, sans-serif" font-size="11" font-weight="bold">Normalized Resource</text>
+  <text x="985" y="695" fill="#e2e8f0" font-family="Arial, sans-serif" font-size="9">• resource_id</text>
+  <text x="985" y="710" fill="#e2e8f0" font-family="Arial, sans-serif" font-size="9">• provider, type</text>
+  <text x="985" y="725" fill="#e2e8f0" font-family="Arial, sans-serif" font-size="9">• region, status</text>
+  <text x="985" y="740" fill="#e2e8f0" font-family="Arial, sans-serif" font-size="9">• utilization_cpu</text>
+  <text x="985" y="755" fill="#e2e8f0" font-family="Arial, sans-serif" font-size="9">• utilization_memory</text>
+  
+  <rect x="1155" y="650" width="170" height="115" rx="6" fill="#4a5568"/>
+  <text x="1240" y="675" text-anchor="middle" fill="#a0aec0" font-family="Arial, sans-serif" font-size="11" font-weight="bold">Recommendation</text>
+  <text x="1170" y="695" fill="#e2e8f0" font-family="Arial, sans-serif" font-size="9">• rec_id, source</text>
+  <text x="1170" y="710" fill="#e2e8f0" font-family="Arial, sans-serif" font-size="9">• type (rightsize/idle)</text>
+  <text x="1170" y="725" fill="#e2e8f0" font-family="Arial, sans-serif" font-size="9">• savings_monthly</text>
+  <text x="1170" y="740" fill="#e2e8f0" font-family="Arial, sans-serif" font-size="9">• risk_level</text>
+  <text x="1170" y="755" fill="#e2e8f0" font-family="Arial, sans-serif" font-size="9">• action_plan</text>
+  
+  <!-- Cloud APIs -->
+  <rect x="50" y="800" width="1300" height="90" rx="10" fill="#1a365d" filter="url(#shadow)"/>
+  <text x="700" y="830" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="16" font-weight="bold">Cloud Provider APIs Consumed</text>
+  <g transform="translate(70, 845)">
+    <rect x="0" y="0" width="300" height="35" rx="4" fill="#ff9900" fill-opacity="0.3"/>
+    <text x="10" y="15" fill="#ff9900" font-family="Arial, sans-serif" font-size="10" font-weight="bold">AWS:</text>
+    <text x="10" y="28" fill="#ffecd2" font-family="Arial, sans-serif" font-size="8">Cost Explorer • CloudWatch • Compute Optimizer • Trusted Advisor • Pricing</text>
+    
+    <rect x="320" y="0" width="300" height="35" rx="4" fill="#0078d4" fill-opacity="0.3"/>
+    <text x="330" y="15" fill="#63b3ed" font-family="Arial, sans-serif" font-size="10" font-weight="bold">Azure:</text>
+    <text x="330" y="28" fill="#cce5ff" font-family="Arial, sans-serif" font-size="8">Cost Management • Advisor • Resource Graph • Monitor • Consumption</text>
+    
+    <rect x="640" y="0" width="300" height="35" rx="4" fill="#4285f4" fill-opacity="0.3"/>
+    <text x="650" y="15" fill="#90cdf4" font-family="Arial, sans-serif" font-size="10" font-weight="bold">GCP:</text>
+    <text x="650" y="28" fill="#d4e5ff" font-family="Arial, sans-serif" font-size="8">Cloud Billing • Recommender • Asset Inventory • Cloud Monitoring • Budget</text>
+    
+    <rect x="960" y="0" width="280" height="35" rx="4" fill="#326ce5" fill-opacity="0.3"/>
+    <text x="970" y="15" fill="#90cdf4" font-family="Arial, sans-serif" font-size="10" font-weight="bold">Kubernetes:</text>
+    <text x="970" y="28" fill="#bee3f8" font-family="Arial, sans-serif" font-size="8">OpenCost API • Prometheus • Metrics Server</text>
+  </g>
+  
+  <!-- Summary -->
+  <rect x="50" y="905" width="1300" height="45" rx="8" fill="#edf2f7"/>
+  <text x="700" y="935" text-anchor="middle" fill="#2d3748" font-family="Arial, sans-serif" font-size="12" font-weight="bold">
+    Total: 7 MCP Servers • 58 Tools • 4 Cloud Providers • Real-time + Batch Data Collection • Unified Schema
+  </text>
+</svg>

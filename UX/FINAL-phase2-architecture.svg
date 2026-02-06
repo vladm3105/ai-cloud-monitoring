@@ -1,0 +1,280 @@
+<svg viewBox="0 0 1400 1400" xmlns="http://www.w3.org/2000/svg">
+  <!-- Title -->
+  <text x="700" y="40" font-size="28" font-weight="bold" text-anchor="middle" fill="#1e293b">
+    Phase 2: Cloud-Native Independence
+  </text>
+  <text x="700" y="70" font-size="14" text-anchor="middle" fill="#64748b">
+    Each Cloud Uses Its Own Native Database
+  </text>
+  <text x="700" y="92" font-size="13" font-weight="600" text-anchor="middle" fill="#dc2626">
+    Cost: $90-150/month | Migration: 7 weeks
+  </text>
+  
+  <!-- Grafana Layer -->
+  <g transform="translate(100, 130)">
+    <rect x="0" y="0" width="1200" height="150" rx="12" fill="#dcfce7" stroke="#16a34a" stroke-width="3"/>
+    <rect x="0" y="0" width="1200" height="45" rx="12" fill="#16a34a"/>
+    <text x="600" y="30" font-size="18" font-weight="bold" text-anchor="middle" fill="#ffffff">
+      GRAFANA DASHBOARDS
+    </text>
+    
+    <text x="30" y="75" font-size="13" font-weight="600" fill="#15803d">Three Independent Data Sources:</text>
+    <text x="30" y="95" font-size="12" fill="#166534">• GCP Costs (BigQuery)</text>
+    <text x="30" y="113" font-size="12" fill="#166534">• AWS Costs (Redshift)</text>
+    <text x="30" y="131" font-size="12" fill="#166534">• Azure Costs (Azure SQL)</text>
+    
+    <text x="650" y="75" font-size="13" font-weight="600" fill="#15803d">Benefits:</text>
+    <text x="650" y="95" font-size="12" fill="#166534">✅ True multi-cloud independence</text>
+    <text x="650" y="113" font-size="12" fill="#166534">✅ No single point of failure</text>
+    <text x="650" y="131" font-size="12" fill="#166534">✅ Cloud-specific optimization</text>
+  </g>
+  
+  <!-- Arrows down -->
+  <line x1="310" y1="295" x2="310" y2="340" stroke="#475569" stroke-width="4" marker-end="url(#arrowhead)"/>
+  <line x1="700" y1="295" x2="700" y2="340" stroke="#475569" stroke-width="4" marker-end="url(#arrowhead)"/>
+  <line x1="1090" y1="295" x2="1090" y2="340" stroke="#475569" stroke-width="4" marker-end="url(#arrowhead)"/>
+  
+  <text x="240" y="320" font-size="11" font-weight="600" fill="#475569">SQL</text>
+  <text x="630" y="320" font-size="11" font-weight="600" fill="#475569">SQL</text>
+  <text x="1020" y="320" font-size="11" font-weight="600" fill="#475569">SQL</text>
+  
+  <!-- Database Layer -->
+  <g transform="translate(100, 360)">
+    <!-- GCP BigQuery -->
+    <g transform="translate(0, 0)">
+      <rect x="0" y="0" width="360" height="220" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="3"/>
+      <rect x="0" y="0" width="360" height="40" rx="8" fill="#2563eb"/>
+      <text x="180" y="27" font-size="15" font-weight="bold" text-anchor="middle" fill="#ffffff">
+        GCP BigQuery
+      </text>
+      
+      <text x="180" y="65" font-size="13" font-weight="600" text-anchor="middle" fill="#1e40af">
+        GCP Costs Only
+      </text>
+      
+      <text x="15" y="90" font-size="11" fill="#1e40af">Dataset: gcp_llm_costs</text>
+      <text x="15" y="108" font-size="11" fill="#1e40af">Source: Native billing export</text>
+      <text x="15" y="126" font-size="11" fill="#1e40af">Update: Every 4-6 hours</text>
+      <text x="15" y="144" font-size="11" fill="#1e40af">✅ No ETL required</text>
+      
+      <rect x="60" y="165" width="240" height="40" rx="6" fill="#f0f9ff" stroke="#0284c7" stroke-width="1"/>
+      <text x="180" y="183" font-size="11" font-weight="600" text-anchor="middle" fill="#0c4a6e">Monthly Cost</text>
+      <text x="180" y="199" font-size="12" font-weight="bold" text-anchor="middle" fill="#0369a1">$2-5</text>
+    </g>
+    
+    <!-- AWS Redshift -->
+    <g transform="translate(390, 0)">
+      <rect x="0" y="0" width="360" height="220" rx="8" fill="#fed7aa" stroke="#ea580c" stroke-width="3"/>
+      <rect x="0" y="0" width="360" height="40" rx="8" fill="#ea580c"/>
+      <text x="180" y="27" font-size="15" font-weight="bold" text-anchor="middle" fill="#ffffff">
+        AWS Redshift
+      </text>
+      
+      <text x="180" y="65" font-size="13" font-weight="600" text-anchor="middle" fill="#9a3412">
+        AWS Costs Only
+      </text>
+      
+      <text x="15" y="90" font-size="11" fill="#9a3412">Cluster: dc2.large (1 node)</text>
+      <text x="15" y="108" font-size="11" fill="#9a3412">Source: Lambda ETL</text>
+      <text x="15" y="126" font-size="11" fill="#9a3412">Update: Daily at 3 AM</text>
+      <text x="15" y="144" font-size="11" fill="#9a3412">⚠️ ETL writes to Redshift</text>
+      
+      <rect x="60" y="165" width="240" height="40" rx="6" fill="#fff7ed" stroke="#f97316" stroke-width="1"/>
+      <text x="180" y="183" font-size="11" font-weight="600" text-anchor="middle" fill="#7c2d12">Monthly Cost</text>
+      <text x="180" y="199" font-size="12" font-weight="bold" text-anchor="middle" fill="#ea580c">$50-80</text>
+    </g>
+    
+    <!-- Azure SQL -->
+    <g transform="translate(780, 0)">
+      <rect x="0" y="0" width="360" height="220" rx="8" fill="#e0f2fe" stroke="#0284c7" stroke-width="3"/>
+      <rect x="0" y="0" width="360" height="40" rx="8" fill="#0284c7"/>
+      <text x="180" y="27" font-size="15" font-weight="bold" text-anchor="middle" fill="#ffffff">
+        Azure SQL Database
+      </text>
+      
+      <text x="180" y="65" font-size="13" font-weight="600" text-anchor="middle" fill="#075985">
+        Azure Costs Only
+      </text>
+      
+      <text x="15" y="90" font-size="11" fill="#075985">Tier: S0 (Standard)</text>
+      <text x="15" y="108" font-size="11" fill="#075985">Source: Function App ETL</text>
+      <text x="15" y="126" font-size="11" fill="#075985">Update: Daily at 4 AM</text>
+      <text x="15" y="144" font-size="11" fill="#075985">⚠️ ETL writes to Azure SQL</text>
+      
+      <rect x="60" y="165" width="240" height="40" rx="6" fill="#f0f9ff" stroke="#0369a1" stroke-width="1"/>
+      <text x="180" y="183" font-size="11" font-weight="600" text-anchor="middle" fill="#0c4a6e">Monthly Cost</text>
+      <text x="180" y="199" font-size="12" font-weight="bold" text-anchor="middle" fill="#0284c7">$15-30</text>
+    </g>
+  </g>
+  
+  <!-- Arrows down to ETL -->
+  <line x1="310" y1="605" x2="310" y2="640" stroke="#475569" stroke-width="3" marker-end="url(#arrowhead)"/>
+  <line x1="700" y1="605" x2="700" y2="640" stroke="#475569" stroke-width="3" marker-end="url(#arrowhead)"/>
+  <line x1="1090" y1="605" x2="1090" y2="640" stroke="#475569" stroke-width="3" marker-end="url(#arrowhead)"/>
+  
+  <!-- ETL Layer -->
+  <g transform="translate(100, 660)">
+    <!-- GCP - No ETL -->
+    <g transform="translate(0, 0)">
+      <rect x="0" y="0" width="360" height="100" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+      <text x="180" y="30" font-size="13" font-weight="bold" text-anchor="middle" fill="#15803d">
+        ✅ No ETL Required
+      </text>
+      <text x="180" y="55" font-size="11" text-anchor="middle" fill="#166534">
+        Native billing export
+      </text>
+      <text x="180" y="73" font-size="11" text-anchor="middle" fill="#166534">
+        Automatic data flow
+      </text>
+      <text x="180" y="91" font-size="11" text-anchor="middle" fill="#166534">
+        Setup: 5 minutes
+      </text>
+    </g>
+    
+    <!-- AWS Lambda -->
+    <g transform="translate(390, 0)">
+      <rect x="0" y="0" width="360" height="100" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+      <text x="180" y="30" font-size="13" font-weight="bold" text-anchor="middle" fill="#92400e">
+        Lambda ETL Function
+      </text>
+      <text x="180" y="55" font-size="11" text-anchor="middle" fill="#78350f">
+        Cost Explorer API → Redshift
+      </text>
+      <text x="180" y="73" font-size="11" text-anchor="middle" fill="#78350f">
+        Daily at 3 AM UTC
+      </text>
+      <text x="180" y="91" font-size="11" text-anchor="middle" fill="#78350f">
+        Cost: $3-5/month
+      </text>
+    </g>
+    
+    <!-- Azure Function App -->
+    <g transform="translate(780, 0)">
+      <rect x="0" y="0" width="360" height="100" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+      <text x="180" y="30" font-size="13" font-weight="bold" text-anchor="middle" fill="#92400e">
+        Function App ETL
+      </text>
+      <text x="180" y="55" font-size="11" text-anchor="middle" fill="#78350f">
+        Cost Mgmt API → Azure SQL
+      </text>
+      <text x="180" y="73" font-size="11" text-anchor="middle" fill="#78350f">
+        Daily at 4 AM UTC
+      </text>
+      <text x="180" y="91" font-size="11" text-anchor="middle" fill="#78350f">
+        Cost: $3-5/month
+      </text>
+    </g>
+  </g>
+  
+  <!-- Arrows down to sources -->
+  <line x1="310" y1="775" x2="310" y2="810" stroke="#475569" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="700" y1="775" x2="700" y2="810" stroke="#475569" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="1090" y1="775" x2="1090" y2="810" stroke="#475569" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- Data Sources -->
+  <g transform="translate(100, 830)">
+    <!-- GCP Source -->
+    <g transform="translate(0, 0)">
+      <rect x="0" y="0" width="360" height="80" rx="8" fill="#ffffff" stroke="#4285f4" stroke-width="2"/>
+      <text x="180" y="25" font-size="13" font-weight="600" text-anchor="middle" fill="#4285f4">
+        GCP Billing Export
+      </text>
+      <text x="180" y="48" font-size="11" text-anchor="middle" fill="#64748b">
+        Vertex AI, Gemini, PaLM
+      </text>
+      <text x="180" y="66" font-size="11" text-anchor="middle" fill="#64748b">
+        Document AI, Vision AI
+      </text>
+    </g>
+    
+    <!-- AWS Source -->
+    <g transform="translate(390, 0)">
+      <rect x="0" y="0" width="360" height="80" rx="8" fill="#ffffff" stroke="#ff9900" stroke-width="2"/>
+      <text x="180" y="25" font-size="13" font-weight="600" text-anchor="middle" fill="#ff9900">
+        AWS Cost Explorer
+      </text>
+      <text x="180" y="48" font-size="11" text-anchor="middle" fill="#64748b">
+        Bedrock, Claude, Titan
+      </text>
+      <text x="180" y="66" font-size="11" text-anchor="middle" fill="#64748b">
+        SageMaker
+      </text>
+    </g>
+    
+    <!-- Azure Source -->
+    <g transform="translate(780, 0)">
+      <rect x="0" y="0" width="360" height="80" rx="8" fill="#ffffff" stroke="#0078d4" stroke-width="2"/>
+      <text x="180" y="25" font-size="13" font-weight="600" text-anchor="middle" fill="#0078d4">
+        Azure Cost Management
+      </text>
+      <text x="180" y="48" font-size="11" text-anchor="middle" fill="#64748b">
+        Azure OpenAI, GPT-4
+      </text>
+      <text x="180" y="66" font-size="11" text-anchor="middle" fill="#64748b">
+        Cognitive Services
+      </text>
+    </g>
+  </g>
+  
+  <!-- Key Benefits -->
+  <g transform="translate(100, 950)">
+    <rect x="0" y="0" width="1200" height="180" rx="12" fill="#f0f9ff" stroke="#0284c7" stroke-width="2"/>
+    <text x="600" y="30" font-size="16" font-weight="bold" text-anchor="middle" fill="#0c4a6e">
+      Why Cloud-Native Independence?
+    </text>
+    
+    <g transform="translate(50, 55)">
+      <text x="0" y="0" font-size="13" font-weight="600" fill="#075985">Benefits:</text>
+      <text x="0" y="22" font-size="12" fill="#0c4a6e">✅ True independence - no GCP lock-in</text>
+      <text x="0" y="40" font-size="12" fill="#0c4a6e">✅ Failure isolation - AWS down ≠ GCP/Azure down</text>
+      <text x="0" y="58" font-size="12" fill="#0c4a6e">✅ Cloud-specific optimization</text>
+      <text x="0" y="76" font-size="12" fill="#0c4a6e">✅ Better enterprise positioning</text>
+      <text x="0" y="94" font-size="12" fill="#0c4a6e">✅ Data stays in same region (low egress costs)</text>
+      
+      <text x="650" y="0" font-size="13" font-weight="600" fill="#075985">When to migrate:</text>
+      <text x="650" y="22" font-size="12" fill="#0c4a6e">• 20+ paying customers</text>
+      <text x="650" y="40" font-size="12" fill="#0c4a6e">• $20K+ monthly revenue</text>
+      <text x="650" y="58" font-size="12" fill="#0c4a6e">• Enterprise deals requiring independence</text>
+      <text x="650" y="76" font-size="12" fill="#0c4a6e">• Customer asks about vendor lock-in</text>
+      <text x="650" y="94" font-size="12" fill="#0c4a6e">• Revenue supports $150-200/mo infrastructure</text>
+    </g>
+  </g>
+  
+  <!-- Cost Breakdown -->
+  <g transform="translate(100, 1170)">
+    <rect x="0" y="0" width="1200" height="100" rx="8" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+    <text x="600" y="30" font-size="15" font-weight="bold" text-anchor="middle" fill="#991b1b">
+      Phase 2 Monthly Cost Breakdown
+    </text>
+    
+    <g transform="translate(50, 50)">
+      <text x="0" y="0" font-size="12" fill="#7f1d1d">BigQuery (GCP): $2-5</text>
+      <text x="200" y="0" font-size="12" fill="#7f1d1d">Redshift (AWS): $50-80</text>
+      <text x="450" y="0" font-size="12" fill="#7f1d1d">Azure SQL: $15-30</text>
+      <text x="700" y="0" font-size="12" fill="#7f1d1d">ETL: $6-10</text>
+      <text x="900" y="0" font-size="12" fill="#7f1d1d">Grafana: $15-25</text>
+    </g>
+    
+    <rect x="400" y="70" width="400" height="22" rx="6" fill="#fca5a5" stroke="#dc2626" stroke-width="2"/>
+    <text x="600" y="86" font-size="14" font-weight="bold" text-anchor="middle" fill="#7f1d1d">
+      TOTAL: $90-150/month
+    </text>
+  </g>
+  
+  <!-- Migration Timeline -->
+  <g transform="translate(100, 1300)">
+    <text x="600" y="0" font-size="13" font-weight="600" text-anchor="middle" fill="#475569">
+      Migration Timeline: 7 weeks | Cost increase: +$65-$115/month (vs Phase 1)
+    </text>
+    <text x="600" y="20" font-size="12" text-anchor="middle" fill="#64748b">
+      But customer saves $30K-$47K/month → Extra cost is 0.2% of customer savings
+    </text>
+  </g>
+  
+  <!-- Arrow markers -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#475569"/>
+    </marker>
+  </defs>
+</svg>

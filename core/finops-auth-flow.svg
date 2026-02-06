@@ -1,0 +1,206 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 1100">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a202c"/>
+      <stop offset="100%" style="stop-color:#2d3748"/>
+    </linearGradient>
+    <linearGradient id="authGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#eb5424"/>
+      <stop offset="100%" style="stop-color:#c7451d"/>
+    </linearGradient>
+    <linearGradient id="vaultGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffcf25"/>
+      <stop offset="100%" style="stop-color:#f0b90b"/>
+    </linearGradient>
+    <linearGradient id="tenantGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#e53e3e"/>
+      <stop offset="100%" style="stop-color:#c53030"/>
+    </linearGradient>
+    <linearGradient id="agentGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#805ad5"/>
+      <stop offset="100%" style="stop-color:#553c9a"/>
+    </linearGradient>
+    <linearGradient id="a2aGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#4285f4"/>
+      <stop offset="100%" style="stop-color:#1a73e8"/>
+    </linearGradient>
+    <linearGradient id="mcpGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#3182ce"/>
+      <stop offset="100%" style="stop-color:#2b6cb0"/>
+    </linearGradient>
+    
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-opacity="0.3"/>
+    </filter>
+    
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#a0aec0"/>
+    </marker>
+    <marker id="arrowAuth" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#eb5424"/>
+    </marker>
+    <marker id="arrowVault" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#f0b90b"/>
+    </marker>
+    <marker id="arrowBlue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#4285f4"/>
+    </marker>
+  </defs>
+  
+  <rect width="1400" height="1100" fill="url(#bgGrad)"/>
+  
+  <text x="700" y="40" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="26" font-weight="bold">Authentication &amp; Multi-Tenant Flow</text>
+  <text x="700" y="65" text-anchor="middle" fill="#a0aec0" font-family="Arial, sans-serif" font-size="14">Auth0 + OpenBao + Tenant Isolation + A2A Gateway</text>
+  
+  <!-- Step Numbers -->
+  <g fill="#48bb78" font-family="Arial, sans-serif">
+    <circle cx="90" cy="140" r="18" fill="#48bb78"/><text x="90" y="147" text-anchor="middle" fill="white" font-size="14">1</text>
+    <circle cx="90" cy="280" r="18" fill="#48bb78"/><text x="90" y="287" text-anchor="middle" fill="white" font-size="14">2</text>
+    <circle cx="90" cy="420" r="18" fill="#48bb78"/><text x="90" y="427" text-anchor="middle" fill="white" font-size="14">3</text>
+    <circle cx="90" cy="560" r="18" fill="#48bb78"/><text x="90" y="567" text-anchor="middle" fill="white" font-size="14">4</text>
+    <circle cx="90" cy="700" r="18" fill="#48bb78"/><text x="90" y="707" text-anchor="middle" fill="white" font-size="14">5</text>
+    <circle cx="90" cy="840" r="18" fill="#48bb78"/><text x="90" y="847" text-anchor="middle" fill="white" font-size="14">6</text>
+    <circle cx="90" cy="980" r="18" fill="#48bb78"/><text x="90" y="987" text-anchor="middle" fill="white" font-size="14">7</text>
+  </g>
+  
+  <!-- Step 1: User Login -->
+  <rect x="120" y="100" width="250" height="80" rx="8" fill="#319795" filter="url(#shadow)"/>
+  <text x="245" y="130" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="14" font-weight="bold">👤 User</text>
+  <text x="245" y="150" text-anchor="middle" fill="#e6fffa" font-family="Arial, sans-serif" font-size="11">Accesses FinOps Dashboard</text>
+  <text x="245" y="168" text-anchor="middle" fill="#b2f5ea" font-family="Arial, sans-serif" font-size="10">finops.company.com</text>
+  
+  <line x1="370" y1="140" x2="450" y2="140" stroke="#eb5424" stroke-width="2" marker-end="url(#arrowAuth)"/>
+  <text x="410" y="132" text-anchor="middle" fill="#eb5424" font-family="Arial, sans-serif" font-size="10">Login</text>
+  
+  <rect x="460" y="100" width="300" height="80" rx="8" fill="url(#authGrad)" filter="url(#shadow)"/>
+  <text x="610" y="125" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="16" font-weight="bold">Auth0</text>
+  <text x="610" y="145" text-anchor="middle" fill="#fed7d7" font-family="Arial, sans-serif" font-size="11">Universal Login / SSO</text>
+  <text x="610" y="165" text-anchor="middle" fill="#feebc8" font-family="Arial, sans-serif" font-size="10">Google / Microsoft / Okta / SAML</text>
+  
+  <rect x="800" y="100" width="500" height="80" rx="6" fill="#2d3748"/>
+  <text x="1050" y="125" text-anchor="middle" fill="#a0aec0" font-family="Arial, sans-serif" font-size="12" font-weight="bold">Auth0 Capabilities</text>
+  <text x="820" y="145" fill="#e2e8f0" font-family="Arial, sans-serif" font-size="10">• OAuth 2.0 / OIDC • MFA • Social Login • Enterprise SSO</text>
+  <text x="820" y="162" fill="#e2e8f0" font-family="Arial, sans-serif" font-size="10">• Organizations (multi-tenant) • Custom Claims • Role Assignment</text>
+  
+  <!-- Step 2: JWT Token -->
+  <rect x="120" y="240" width="640" height="80" rx="8" fill="#4a5568" filter="url(#shadow)"/>
+  <text x="440" y="265" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="14" font-weight="bold">🎫 JWT Token (ID Token + Access Token)</text>
+  <text x="440" y="285" text-anchor="middle" fill="#a0aec0" font-family="Arial, sans-serif" font-size="11">Returned to browser after successful authentication</text>
+  
+  <rect x="800" y="220" width="500" height="120" rx="6" fill="#1a202c" stroke="#eb5424" stroke-width="2"/>
+  <text x="1050" y="245" text-anchor="middle" fill="#eb5424" font-family="Arial, sans-serif" font-size="12" font-weight="bold">JWT Claims (example)</text>
+  <text x="820" y="268" fill="#68d391" font-family="Arial, sans-serif" font-size="10">{</text>
+  <text x="830" y="283" fill="#e2e8f0" font-family="Arial, sans-serif" font-size="10">"sub": "auth0|user123",</text>
+  <text x="830" y="298" fill="#f6e05e" font-family="Arial, sans-serif" font-size="10">"org_id": "org_acme_corp",        ← Tenant ID</text>
+  <text x="830" y="313" fill="#f6e05e" font-family="Arial, sans-serif" font-size="10">"roles": ["analyst", "operator"],  ← RBAC Roles</text>
+  <text x="830" y="328" fill="#e2e8f0" font-family="Arial, sans-serif" font-size="10">"permissions": ["read:costs", "approve:low_risk"]</text>
+  <text x="820" y="343" fill="#68d391" font-family="Arial, sans-serif" font-size="10">}</text>
+  
+  <!-- Step 3: AG-UI Server -->
+  <rect x="120" y="380" width="250" height="80" rx="8" fill="#319795" filter="url(#shadow)"/>
+  <text x="245" y="410" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="14" font-weight="bold">📱 Frontend</text>
+  <text x="245" y="430" text-anchor="middle" fill="#e6fffa" font-family="Arial, sans-serif" font-size="11">CopilotKit + Auth0 SDK</text>
+  <text x="245" y="448" text-anchor="middle" fill="#b2f5ea" font-family="Arial, sans-serif" font-size="10">Stores JWT in memory</text>
+  
+  <line x1="370" y1="420" x2="450" y2="420" stroke="#a0aec0" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="410" y="410" text-anchor="middle" fill="#a0aec0" font-family="Arial, sans-serif" font-size="9">API + Bearer</text>
+  
+  <rect x="460" y="380" width="300" height="80" rx="8" fill="#2d3748" filter="url(#shadow)"/>
+  <text x="610" y="405" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="14" font-weight="bold">🖥️ AG-UI Server</text>
+  <text x="610" y="425" text-anchor="middle" fill="#a0aec0" font-family="Arial, sans-serif" font-size="11">FastAPI + JWT Middleware</text>
+  <text x="610" y="443" text-anchor="middle" fill="#68d391" font-family="Arial, sans-serif" font-size="10">Validates token, extracts tenant</text>
+  
+  <rect x="800" y="380" width="500" height="80" rx="6" fill="#2d3748"/>
+  <text x="1050" y="405" text-anchor="middle" fill="#a0aec0" font-family="Arial, sans-serif" font-size="12" font-weight="bold">JWT Middleware Actions</text>
+  <text x="820" y="425" fill="#e2e8f0" font-family="Arial, sans-serif" font-size="10">1. Verify signature (Auth0 public key) 2. Check expiration</text>
+  <text x="820" y="442" fill="#e2e8f0" font-family="Arial, sans-serif" font-size="10">3. Extract org_id, roles, permissions 4. Inject into request context</text>
+  
+  <!-- Step 4: Agent Coordinator -->
+  <rect x="120" y="520" width="640" height="80" rx="8" fill="url(#agentGrad)" filter="url(#shadow)"/>
+  <text x="440" y="550" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="16" font-weight="bold">🧠 Agent Coordinator (Tenant-Aware)</text>
+  <text x="440" y="575" text-anchor="middle" fill="#e9d8fd" font-family="Arial, sans-serif" font-size="11">Receives query + TenantContext(org_id, user_id, roles, permissions)</text>
+  
+  <rect x="800" y="520" width="500" height="80" rx="6" fill="#553c9a"/>
+  <text x="1050" y="545" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="12" font-weight="bold">Tenant Context Object</text>
+  <text x="820" y="568" fill="#e9d8fd" font-family="Arial, sans-serif" font-size="10">• org_id: "org_acme_corp" • user_id: "user123"</text>
+  <text x="820" y="585" fill="#e9d8fd" font-family="Arial, sans-serif" font-size="10">• cloud_accounts: ["aws-123", "azure-sub-456", "gcp-proj-789"]</text>
+  
+  <!-- Step 5: OpenBao Lookup -->
+  <rect x="120" y="660" width="300" height="80" rx="8" fill="url(#agentGrad)" filter="url(#shadow)"/>
+  <text x="270" y="690" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="14" font-weight="bold">🔧 MCP Gateway</text>
+  <text x="270" y="710" text-anchor="middle" fill="#e9d8fd" font-family="Arial, sans-serif" font-size="11">Needs cloud credentials</text>
+  <text x="270" y="728" text-anchor="middle" fill="#d6bcfa" font-family="Arial, sans-serif" font-size="10">for tenant: org_acme_corp</text>
+  
+  <line x1="420" y1="700" x2="500" y2="700" stroke="#f0b90b" stroke-width="2" marker-end="url(#arrowVault)"/>
+  <text x="460" y="690" text-anchor="middle" fill="#f0b90b" font-family="Arial, sans-serif" font-size="9">Lookup</text>
+  
+  <rect x="510" y="660" width="350" height="80" rx="8" fill="url(#vaultGrad)" filter="url(#shadow)"/>
+  <text x="685" y="690" text-anchor="middle" fill="#1a202c" font-family="Arial, sans-serif" font-size="16" font-weight="bold">🔑 OpenBao</text>
+  <text x="685" y="710" text-anchor="middle" fill="#744210" font-family="Arial, sans-serif" font-size="11">secret/tenants/org_acme_corp/*</text>
+  <text x="685" y="728" text-anchor="middle" fill="#975a16" font-family="Arial, sans-serif" font-size="10">Dynamic credential retrieval</text>
+  
+  <rect x="900" y="640" width="400" height="120" rx="6" fill="#1a202c" stroke="#f0b90b" stroke-width="2"/>
+  <text x="1100" y="665" text-anchor="middle" fill="#f0b90b" font-family="Arial, sans-serif" font-size="12" font-weight="bold">OpenBao Secret Paths</text>
+  <text x="920" y="688" fill="#f6e05e" font-family="Arial, sans-serif" font-size="10">secret/tenants/org_acme_corp/aws</text>
+  <text x="940" y="703" fill="#a0aec0" font-family="Arial, sans-serif" font-size="9">→ {role_arn, external_id}</text>
+  <text x="920" y="720" fill="#f6e05e" font-family="Arial, sans-serif" font-size="10">secret/tenants/org_acme_corp/azure</text>
+  <text x="940" y="735" fill="#a0aec0" font-family="Arial, sans-serif" font-size="9">→ {client_id, client_secret, tenant_id}</text>
+  <text x="920" y="752" fill="#f6e05e" font-family="Arial, sans-serif" font-size="10">secret/tenants/org_acme_corp/gcp</text>
+  
+  <!-- Step 6: MCP + Cloud APIs -->
+  <rect x="120" y="800" width="200" height="80" rx="8" fill="url(#mcpGrad)" filter="url(#shadow)"/>
+  <text x="220" y="830" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="14" font-weight="bold">AWS MCP</text>
+  <text x="220" y="850" text-anchor="middle" fill="#bee3f8" font-family="Arial, sans-serif" font-size="10">AssumeRole with</text>
+  <text x="220" y="865" text-anchor="middle" fill="#90cdf4" font-family="Arial, sans-serif" font-size="9">tenant credentials</text>
+  
+  <rect x="340" y="800" width="200" height="80" rx="8" fill="url(#mcpGrad)" filter="url(#shadow)"/>
+  <text x="440" y="830" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="14" font-weight="bold">Azure MCP</text>
+  <text x="440" y="850" text-anchor="middle" fill="#bee3f8" font-family="Arial, sans-serif" font-size="10">SP authentication</text>
+  <text x="440" y="865" text-anchor="middle" fill="#90cdf4" font-family="Arial, sans-serif" font-size="9">per tenant</text>
+  
+  <rect x="560" y="800" width="200" height="80" rx="8" fill="url(#mcpGrad)" filter="url(#shadow)"/>
+  <text x="660" y="830" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="14" font-weight="bold">GCP MCP</text>
+  <text x="660" y="850" text-anchor="middle" fill="#bee3f8" font-family="Arial, sans-serif" font-size="10">Service Account</text>
+  <text x="660" y="865" text-anchor="middle" fill="#90cdf4" font-family="Arial, sans-serif" font-size="9">impersonation</text>
+  
+  <rect x="800" y="800" width="500" height="80" rx="6" fill="#2d3748"/>
+  <text x="1050" y="825" text-anchor="middle" fill="#68d391" font-family="Arial, sans-serif" font-size="12" font-weight="bold">✓ Complete Tenant Isolation</text>
+  <text x="820" y="848" fill="#e2e8f0" font-family="Arial, sans-serif" font-size="10">• Each MCP call uses tenant-specific credentials from OpenBao</text>
+  <text x="820" y="865" fill="#e2e8f0" font-family="Arial, sans-serif" font-size="10">• No cross-tenant data access possible • Audit trail per tenant</text>
+  
+  <!-- Step 7: A2A Gateway -->
+  <rect x="120" y="940" width="350" height="80" rx="8" fill="url(#a2aGrad)" filter="url(#shadow)"/>
+  <text x="295" y="970" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="16" font-weight="bold">🔗 Google A2A Gateway</text>
+  <text x="295" y="990" text-anchor="middle" fill="#bee3f8" font-family="Arial, sans-serif" font-size="11">Agent-to-Agent Protocol</text>
+  <text x="295" y="1008" text-anchor="middle" fill="#90cdf4" font-family="Arial, sans-serif" font-size="10">Tenant context preserved</text>
+  
+  <line x1="470" y1="980" x2="550" y2="980" stroke="#4285f4" stroke-width="2" marker-end="url(#arrowBlue)"/>
+  
+  <rect x="560" y="940" width="200" height="80" rx="8" fill="#4a5568" filter="url(#shadow)"/>
+  <text x="660" y="970" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="12" font-weight="bold">🤖 External Agents</text>
+  <text x="660" y="990" text-anchor="middle" fill="#a0aec0" font-family="Arial, sans-serif" font-size="10">SlackBot, Advisors</text>
+  <text x="660" y="1008" text-anchor="middle" fill="#718096" font-family="Arial, sans-serif" font-size="9">Compliance Auditors</text>
+  
+  <rect x="800" y="940" width="500" height="80" rx="6" fill="#1a73e8"/>
+  <text x="1050" y="965" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="12" font-weight="bold">A2A Security Model</text>
+  <text x="820" y="988" fill="#e2e8f0" font-family="Arial, sans-serif" font-size="10">• Agent authentication via mTLS or API keys</text>
+  <text x="820" y="1005" fill="#e2e8f0" font-family="Arial, sans-serif" font-size="10">• Tenant context passed in A2A headers • Scoped permissions per agent</text>
+  
+  <!-- Vertical flow lines -->
+  <line x1="440" y1="180" x2="440" y2="220" stroke="#a0aec0" stroke-width="1" stroke-dasharray="5,3"/>
+  <line x1="440" y1="340" x2="440" y2="360" stroke="#a0aec0" stroke-width="1" stroke-dasharray="5,3"/>
+  <line x1="440" y1="460" x2="440" y2="500" stroke="#a0aec0" stroke-width="1" stroke-dasharray="5,3"/>
+  <line x1="440" y1="600" x2="440" y2="640" stroke="#a0aec0" stroke-width="1" stroke-dasharray="5,3"/>
+  <line x1="440" y1="760" x2="440" y2="780" stroke="#a0aec0" stroke-width="1" stroke-dasharray="5,3"/>
+  <line x1="440" y1="880" x2="440" y2="920" stroke="#a0aec0" stroke-width="1" stroke-dasharray="5,3"/>
+  
+  <!-- Legend -->
+  <rect x="40" y="1040" width="1320" height="50" rx="6" fill="#1a202c" stroke="#4a5568"/>
+  <text x="60" y="1070" fill="#e2e8f0" font-family="Arial, sans-serif" font-size="11" font-weight="bold">SECURITY:</text>
+  <text x="150" y="1070" fill="#eb5424" font-family="Arial, sans-serif" font-size="10">Auth0 = Identity</text>
+  <text x="290" y="1070" fill="#f0b90b" font-family="Arial, sans-serif" font-size="10">OpenBao = Secrets</text>
+  <text x="450" y="1070" fill="#e53e3e" font-family="Arial, sans-serif" font-size="10">Tenant Context = Isolation</text>
+  <text x="650" y="1070" fill="#805ad5" font-family="Arial, sans-serif" font-size="10">RBAC = Authorization</text>
+  <text x="840" y="1070" fill="#4285f4" font-family="Arial, sans-serif" font-size="10">A2A = Inter-Agent</text>
+  <text x="1000" y="1070" fill="#48bb78" font-family="Arial, sans-serif" font-size="10">Every API call is tenant-scoped ✓</text>
+</svg>

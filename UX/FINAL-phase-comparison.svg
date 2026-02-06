@@ -1,0 +1,253 @@
+<svg viewBox="0 0 1600 1000" xmlns="http://www.w3.org/2000/svg">
+  <!-- Title -->
+  <text x="800" y="40" font-size="32" font-weight="bold" text-anchor="middle" fill="#1e293b">
+    Phase 1 vs Phase 2: Architecture Comparison
+  </text>
+  <text x="800" y="75" font-size="15" text-anchor="middle" fill="#64748b">
+    Simple Cost Monitoring - No Prometheus Required
+  </text>
+  
+  <!-- Phase 1 Column -->
+  <g transform="translate(50, 120)">
+    <rect x="0" y="0" width="700" height="820" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="3"/>
+    <rect x="0" y="0" width="700" height="50" rx="12" fill="#16a34a"/>
+    <text x="350" y="33" font-size="20" font-weight="bold" text-anchor="middle" fill="#ffffff">
+      PHASE 1: All-in-BigQuery MVP
+    </text>
+    
+    <!-- Cost Badge -->
+    <rect x="200" y="70" width="300" height="40" rx="8" fill="#dcfce7" stroke="#22c55e" stroke-width="2"/>
+    <text x="350" y="93" font-size="14" font-weight="bold" text-anchor="middle" fill="#15803d">
+      $25-35/month | 2-3 weeks
+    </text>
+    
+    <!-- Architecture -->
+    <g transform="translate(50, 130)">
+      <!-- Grafana -->
+      <rect x="0" y="0" width="600" height="70" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+      <text x="300" y="25" font-size="14" font-weight="bold" text-anchor="middle" fill="#15803d">
+        Grafana
+      </text>
+      <text x="300" y="45" font-size="11" text-anchor="middle" fill="#166534">
+        1 Data Source (BigQuery)
+      </text>
+      <text x="300" y="60" font-size="10" text-anchor="middle" fill="#166534">
+        Simple SQL queries
+      </text>
+      
+      <!-- Arrow -->
+      <line x1="300" y1="80" x2="300" y2="100" stroke="#475569" stroke-width="3" marker-end="url(#arrowhead)"/>
+      
+      <!-- BigQuery -->
+      <rect x="0" y="110" width="600" height="100" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+      <text x="300" y="135" font-size="14" font-weight="bold" text-anchor="middle" fill="#1e40af">
+        Google BigQuery
+      </text>
+      <text x="300" y="155" font-size="11" text-anchor="middle" fill="#1e40af">
+        Unified storage for all clouds
+      </text>
+      <text x="20" y="178" font-size="10" fill="#1e40af">• gcp_llm_costs</text>
+      <text x="20" y="193" font-size="10" fill="#1e40af">• aws_llm_costs</text>
+      <text x="20" y="208" font-size="10" fill="#1e40af">• azure_llm_costs</text>
+      <text x="350" y="193" font-size="10" fill="#1e40af">View: unified_costs</text>
+      
+      <!-- Arrows down -->
+      <line x1="120" y1="220" x2="120" y2="240" stroke="#475569" stroke-width="2" marker-end="url(#arrowhead)"/>
+      <line x1="300" y1="220" x2="300" y2="240" stroke="#475569" stroke-width="2" marker-end="url(#arrowhead)"/>
+      <line x1="480" y1="220" x2="480" y2="240" stroke="#475569" stroke-width="2" marker-end="url(#arrowhead)"/>
+      
+      <!-- Cloud Sources -->
+      <g transform="translate(0, 250)">
+        <!-- GCP -->
+        <rect x="0" y="0" width="180" height="90" rx="6" fill="#ffffff" stroke="#4285f4" stroke-width="2"/>
+        <text x="90" y="20" font-size="12" font-weight="600" text-anchor="middle" fill="#4285f4">GCP</text>
+        <text x="90" y="40" font-size="9" text-anchor="middle" fill="#64748b">Billing Export</text>
+        <text x="90" y="55" font-size="9" text-anchor="middle" fill="#15803d">✅ Automatic</text>
+        <text x="90" y="70" font-size="9" text-anchor="middle" fill="#64748b">No ETL</text>
+        <text x="90" y="83" font-size="8" text-anchor="middle" fill="#64748b">Setup: 5 min</text>
+        
+        <!-- AWS -->
+        <rect x="210" y="0" width="180" height="90" rx="6" fill="#ffffff" stroke="#ff9900" stroke-width="2"/>
+        <text x="300" y="20" font-size="12" font-weight="600" text-anchor="middle" fill="#ff9900">AWS</text>
+        <text x="300" y="40" font-size="9" text-anchor="middle" fill="#64748b">S3 → Cloud Fn</text>
+        <text x="300" y="55" font-size="9" text-anchor="middle" fill="#ea580c">⚠️ ETL needed</text>
+        <text x="300" y="70" font-size="9" text-anchor="middle" fill="#64748b">Daily at 3 AM</text>
+        <text x="300" y="83" font-size="8" text-anchor="middle" fill="#64748b">Setup: 2-3 hrs</text>
+        
+        <!-- Azure -->
+        <rect x="420" y="0" width="180" height="90" rx="6" fill="#ffffff" stroke="#0078d4" stroke-width="2"/>
+        <text x="510" y="20" font-size="12" font-weight="600" text-anchor="middle" fill="#0078d4">Azure</text>
+        <text x="510" y="40" font-size="9" text-anchor="middle" fill="#64748b">API → Cloud Fn</text>
+        <text x="510" y="55" font-size="9" text-anchor="middle" fill="#0284c7">⚠️ ETL needed</text>
+        <text x="510" y="70" font-size="9" text-anchor="middle" fill="#64748b">Daily at 4 AM</text>
+        <text x="510" y="83" font-size="8" text-anchor="middle" fill="#64748b">Setup: 2-3 hrs</text>
+      </g>
+    </g>
+    
+    <!-- Benefits -->
+    <g transform="translate(50, 530)">
+      <text x="0" y="0" font-size="13" font-weight="600" fill="#15803d">✅ Benefits:</text>
+      <text x="0" y="20" font-size="11" fill="#166534">• Simple architecture</text>
+      <text x="0" y="37" font-size="11" fill="#166534">• Single data source</text>
+      <text x="0" y="54" font-size="11" fill="#166534">• Fast to market (2-3 weeks)</text>
+      <text x="0" y="71" font-size="11" fill="#166534">• Low cost ($25-35/mo)</text>
+      <text x="0" y="88" font-size="11" fill="#166534">• One SQL dialect</text>
+    </g>
+    
+    <!-- Drawbacks -->
+    <g transform="translate(50, 640)">
+      <text x="0" y="0" font-size="13" font-weight="600" fill="#dc2626">❌ Drawbacks:</text>
+      <text x="0" y="20" font-size="11" fill="#991b1b">• GCP lock-in (BigQuery)</text>
+      <text x="0" y="37" font-size="11" fill="#991b1b">• Single point of failure</text>
+      <text x="0" y="54" font-size="11" fill="#991b1b">• Less enterprise appeal</text>
+    </g>
+    
+    <!-- Use Case -->
+    <rect x="100" y="720" width="500" height="60" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+    <text x="350" y="745" font-size="12" font-weight="600" text-anchor="middle" fill="#92400e">
+      Use for: MVP, First 20 Customers
+    </text>
+    <text x="350" y="765" font-size="10" text-anchor="middle" fill="#78350f">
+      Fast time-to-market, prove concept, low budget
+    </text>
+  </g>
+  
+  <!-- Phase 2 Column -->
+  <g transform="translate(850, 120)">
+    <rect x="0" y="0" width="700" height="820" rx="12" fill="#fef2f2" stroke="#dc2626" stroke-width="3"/>
+    <rect x="0" y="0" width="700" height="50" rx="12" fill="#dc2626"/>
+    <text x="350" y="33" font-size="20" font-weight="bold" text-anchor="middle" fill="#ffffff">
+      PHASE 2: Cloud-Native Independence
+    </text>
+    
+    <!-- Cost Badge -->
+    <rect x="200" y="70" width="300" height="40" rx="8" fill="#fee2e2" stroke="#ef4444" stroke-width="2"/>
+    <text x="350" y="93" font-size="14" font-weight="bold" text-anchor="middle" fill="#991b1b">
+      $90-150/month | 7 weeks
+    </text>
+    
+    <!-- Architecture -->
+    <g transform="translate(50, 130)">
+      <!-- Grafana -->
+      <rect x="0" y="0" width="600" height="70" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+      <text x="300" y="25" font-size="14" font-weight="bold" text-anchor="middle" fill="#15803d">
+        Grafana
+      </text>
+      <text x="300" y="45" font-size="11" text-anchor="middle" fill="#166534">
+        3 Data Sources (Independent)
+      </text>
+      <text x="300" y="60" font-size="10" text-anchor="middle" fill="#166534">
+        3 SQL dialects
+      </text>
+      
+      <!-- Arrows -->
+      <line x1="120" y1="80" x2="120" y2="100" stroke="#475569" stroke-width="3" marker-end="url(#arrowhead)"/>
+      <line x1="300" y1="80" x2="300" y2="100" stroke="#475569" stroke-width="3" marker-end="url(#arrowhead)"/>
+      <line x1="480" y1="80" x2="480" y2="100" stroke="#475569" stroke-width="3" marker-end="url(#arrowhead)"/>
+      
+      <!-- Databases -->
+      <g transform="translate(0, 110)">
+        <!-- BigQuery -->
+        <rect x="0" y="0" width="180" height="100" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+        <text x="90" y="20" font-size="12" font-weight="600" text-anchor="middle" fill="#1e40af">BigQuery</text>
+        <text x="90" y="40" font-size="10" text-anchor="middle" fill="#1e40af">GCP only</text>
+        <text x="90" y="60" font-size="9" text-anchor="middle" fill="#64748b">Native export</text>
+        <text x="90" y="75" font-size="9" text-anchor="middle" fill="#64748b">No ETL</text>
+        <text x="90" y="90" font-size="9" font-weight="600" text-anchor="middle" fill="#0369a1">$2-5/mo</text>
+        
+        <!-- Redshift -->
+        <rect x="210" y="0" width="180" height="100" rx="6" fill="#fed7aa" stroke="#ea580c" stroke-width="2"/>
+        <text x="300" y="20" font-size="12" font-weight="600" text-anchor="middle" fill="#9a3412">Redshift</text>
+        <text x="300" y="40" font-size="10" text-anchor="middle" fill="#9a3412">AWS only</text>
+        <text x="300" y="60" font-size="9" text-anchor="middle" fill="#64748b">Lambda ETL</text>
+        <text x="300" y="75" font-size="9" text-anchor="middle" fill="#64748b">dc2.large</text>
+        <text x="300" y="90" font-size="9" font-weight="600" text-anchor="middle" fill="#ea580c">$50-80/mo</text>
+        
+        <!-- Azure SQL -->
+        <rect x="420" y="0" width="180" height="100" rx="6" fill="#e0f2fe" stroke="#0284c7" stroke-width="2"/>
+        <text x="510" y="20" font-size="12" font-weight="600" text-anchor="middle" fill="#075985">Azure SQL</text>
+        <text x="510" y="40" font-size="10" text-anchor="middle" fill="#075985">Azure only</text>
+        <text x="510" y="60" font-size="9" text-anchor="middle" fill="#64748b">Fn App ETL</text>
+        <text x="510" y="75" font-size="9" text-anchor="middle" fill="#64748b">S0 tier</text>
+        <text x="510" y="90" font-size="9" font-weight="600" text-anchor="middle" fill="#0284c7">$15-30/mo</text>
+      </g>
+      
+      <!-- Arrows down -->
+      <line x1="120" y1="220" x2="120" y2="240" stroke="#475569" stroke-width="2" marker-end="url(#arrowhead)"/>
+      <line x1="300" y1="220" x2="300" y2="240" stroke="#475569" stroke-width="2" marker-end="url(#arrowhead)"/>
+      <line x1="480" y1="220" x2="480" y2="240" stroke="#475569" stroke-width="2" marker-end="url(#arrowhead)"/>
+      
+      <!-- Cloud Sources -->
+      <g transform="translate(0, 250)">
+        <!-- GCP -->
+        <rect x="0" y="0" width="180" height="90" rx="6" fill="#ffffff" stroke="#4285f4" stroke-width="2"/>
+        <text x="90" y="20" font-size="12" font-weight="600" text-anchor="middle" fill="#4285f4">GCP</text>
+        <text x="90" y="40" font-size="9" text-anchor="middle" fill="#64748b">Billing Export</text>
+        <text x="90" y="55" font-size="9" text-anchor="middle" fill="#15803d">✅ Automatic</text>
+        <text x="90" y="70" font-size="9" text-anchor="middle" fill="#64748b">No ETL</text>
+        <text x="90" y="83" font-size="8" text-anchor="middle" fill="#64748b">Setup: 5 min</text>
+        
+        <!-- AWS -->
+        <rect x="210" y="0" width="180" height="90" rx="6" fill="#ffffff" stroke="#ff9900" stroke-width="2"/>
+        <text x="300" y="20" font-size="12" font-weight="600" text-anchor="middle" fill="#ff9900">AWS</text>
+        <text x="300" y="40" font-size="9" text-anchor="middle" fill="#64748b">Lambda → Redshift</text>
+        <text x="300" y="55" font-size="9" text-anchor="middle" fill="#ea580c">⚠️ ETL needed</text>
+        <text x="300" y="70" font-size="9" text-anchor="middle" fill="#64748b">Daily at 3 AM</text>
+        <text x="300" y="83" font-size="8" text-anchor="middle" fill="#64748b">Setup: 2 weeks</text>
+        
+        <!-- Azure -->
+        <rect x="420" y="0" width="180" height="90" rx="6" fill="#ffffff" stroke="#0078d4" stroke-width="2"/>
+        <text x="510" y="20" font-size="12" font-weight="600" text-anchor="middle" fill="#0078d4">Azure</text>
+        <text x="510" y="40" font-size="9" text-anchor="middle" fill="#64748b">Fn App → Azure SQL</text>
+        <text x="510" y="55" font-size="9" text-anchor="middle" fill="#0284c7">⚠️ ETL needed</text>
+        <text x="510" y="70" font-size="9" text-anchor="middle" fill="#64748b">Daily at 4 AM</text>
+        <text x="510" y="83" font-size="8" text-anchor="middle" fill="#64748b">Setup: 2 weeks</text>
+      </g>
+    </g>
+    
+    <!-- Benefits -->
+    <g transform="translate(50, 530)">
+      <text x="0" y="0" font-size="13" font-weight="600" fill="#15803d">✅ Benefits:</text>
+      <text x="0" y="20" font-size="11" fill="#166534">• True cloud independence</text>
+      <text x="0" y="37" font-size="11" fill="#166534">• No vendor lock-in</text>
+      <text x="0" y="54" font-size="11" fill="#166534">• Failure isolation</text>
+      <text x="0" y="71" font-size="11" fill="#166534">• Better enterprise appeal</text>
+      <text x="0" y="88" font-size="11" fill="#166534">• Cloud-optimized storage</text>
+    </g>
+    
+    <!-- Drawbacks -->
+    <g transform="translate(50, 640)">
+      <text x="0" y="0" font-size="13" font-weight="600" fill="#dc2626">❌ Drawbacks:</text>
+      <text x="0" y="20" font-size="11" fill="#991b1b">• Higher cost ($90-150/mo)</text>
+      <text x="0" y="37" font-size="11" fill="#991b1b">• More complexity (3 sources)</text>
+      <text x="0" y="54" font-size="11" fill="#991b1b">• Longer setup (7 weeks)</text>
+    </g>
+    
+    <!-- Use Case -->
+    <rect x="100" y="720" width="500" height="60" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+    <text x="350" y="745" font-size="12" font-weight="600" text-anchor="middle" fill="#92400e">
+      Use for: Enterprise, 20+ Customers
+    </text>
+    <text x="350" y="765" font-size="10" text-anchor="middle" fill="#78350f">
+      True independence, high revenue, premium positioning
+    </text>
+  </g>
+  
+  <!-- Key Insight -->
+  <g transform="translate(50, 960)">
+    <rect x="0" y="0" width="1500" height="80" rx="10" fill="#fef3c7" stroke="#f59e0b" stroke-width="3"/>
+    <text x="750" y="30" font-size="16" font-weight="bold" text-anchor="middle" fill="#92400e">
+      🔑 Key Insight: NO Prometheus Needed in Either Phase
+    </text>
+    <text x="750" y="55" font-size="13" text-anchor="middle" fill="#78350f">
+      Cost monitoring uses billing data (daily), not real-time metrics (15-second) → Simple: Cloud Billing → Database → Grafana SQL
+    </text>
+  </g>
+  
+  <!-- Arrow markers -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#475569"/>
+    </marker>
+  </defs>
+</svg>

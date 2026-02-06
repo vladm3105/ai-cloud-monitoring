@@ -1,0 +1,287 @@
+<svg viewBox="0 0 1400 1600" xmlns="http://www.w3.org/2000/svg">
+  <!-- Title -->
+  <text x="700" y="40" font-size="28" font-weight="bold" text-anchor="middle" fill="#1e293b">
+    Phase 1: All-in-BigQuery Architecture
+  </text>
+  <text x="700" y="70" font-size="14" text-anchor="middle" fill="#64748b">
+    Simple Cost Monitoring - No Prometheus Required
+  </text>
+  <text x="700" y="92" font-size="13" font-weight="600" text-anchor="middle" fill="#059669">
+    Cost: $25-35/month | Time: 2-3 weeks
+  </text>
+  
+  <!-- Grafana Layer -->
+  <g transform="translate(100, 130)">
+    <rect x="0" y="0" width="1200" height="140" rx="12" fill="#dcfce7" stroke="#16a34a" stroke-width="3"/>
+    <rect x="0" y="0" width="1200" height="45" rx="12" fill="#16a34a"/>
+    <text x="600" y="30" font-size="18" font-weight="bold" text-anchor="middle" fill="#ffffff">
+      GRAFANA DASHBOARDS
+    </text>
+    
+    <text x="30" y="75" font-size="13" font-weight="600" fill="#15803d">Single Data Source:</text>
+    <text x="30" y="95" font-size="12" fill="#166534">• Multi-Cloud Costs (BigQuery)</text>
+    <text x="30" y="113" font-size="12" fill="#166534">• SQL queries only - no Prometheus</text>
+    <text x="30" y="131" font-size="12" fill="#166534">• 4-5 core dashboards</text>
+    
+    <text x="650" y="75" font-size="13" font-weight="600" fill="#15803d">Example Queries:</text>
+    <text x="650" y="95" font-size="11" fill="#166534">SELECT cloud, SUM(cost) FROM unified_costs</text>
+    <text x="650" y="113" font-size="11" fill="#166534">WHERE date >= DATE_SUB(CURRENT_DATE(), 30)</text>
+    <text x="650" y="131" font-size="11" fill="#166534">GROUP BY cloud ORDER BY cost DESC</text>
+  </g>
+  
+  <!-- Arrow -->
+  <line x1="700" y1="285" x2="700" y2="330" stroke="#475569" stroke-width="4" marker-end="url(#arrowhead)"/>
+  <text x="730" y="312" font-size="12" font-weight="600" fill="#475569">SQL Queries</text>
+  
+  <!-- BigQuery Layer -->
+  <g transform="translate(100, 350)">
+    <rect x="0" y="0" width="1200" height="550" rx="12" fill="#f0f9ff" stroke="#0284c7" stroke-width="3"/>
+    <rect x="0" y="0" width="1200" height="45" rx="12" fill="#0284c7"/>
+    <text x="600" y="30" font-size="18" font-weight="bold" text-anchor="middle" fill="#ffffff">
+      GOOGLE BIGQUERY (Unified Storage)
+    </text>
+    
+    <text x="600" y="75" font-size="14" font-weight="600" text-anchor="middle" fill="#0c4a6e">
+      Dataset: multi_cloud_costs
+    </text>
+    
+    <!-- GCP Table -->
+    <g transform="translate(30, 100)">
+      <rect x="0" y="0" width="360" height="160" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+      <rect x="0" y="0" width="360" height="35" rx="8" fill="#2563eb"/>
+      <text x="180" y="23" font-size="14" font-weight="bold" text-anchor="middle" fill="#ffffff">
+        gcp_llm_costs
+      </text>
+      
+      <text x="15" y="55" font-size="12" font-weight="600" fill="#1e40af">Source:</text>
+      <text x="15" y="73" font-size="11" fill="#1e40af">GCP Billing Export (Native)</text>
+      <text x="15" y="89" font-size="11" fill="#1e40af">✅ Automatic - no ETL</text>
+      
+      <text x="15" y="111" font-size="12" font-weight="600" fill="#1e40af">Updates:</text>
+      <text x="15" y="129" font-size="11" fill="#1e40af">Every 4-6 hours</text>
+      
+      <text x="15" y="151" font-size="12" font-weight="600" fill="#1e40af">Data: Vertex AI, Gemini, PaLM</text>
+    </g>
+    
+    <!-- AWS Table -->
+    <g transform="translate(420, 100)">
+      <rect x="0" y="0" width="360" height="160" rx="8" fill="#fed7aa" stroke="#ea580c" stroke-width="2"/>
+      <rect x="0" y="0" width="360" height="35" rx="8" fill="#ea580c"/>
+      <text x="180" y="23" font-size="14" font-weight="bold" text-anchor="middle" fill="#ffffff">
+        aws_llm_costs
+      </text>
+      
+      <text x="15" y="55" font-size="12" font-weight="600" fill="#9a3412">Source:</text>
+      <text x="15" y="73" font-size="11" fill="#9a3412">Cloud Function ETL</text>
+      <text x="15" y="89" font-size="11" fill="#9a3412">⚠️ ETL required</text>
+      
+      <text x="15" y="111" font-size="12" font-weight="600" fill="#9a3412">Updates:</text>
+      <text x="15" y="129" font-size="11" fill="#9a3412">Daily at 3 AM UTC</text>
+      
+      <text x="15" y="151" font-size="12" font-weight="600" fill="#9a3412">Data: Bedrock, Claude, Titan</text>
+    </g>
+    
+    <!-- Azure Table -->
+    <g transform="translate(810, 100)">
+      <rect x="0" y="0" width="360" height="160" rx="8" fill="#e0f2fe" stroke="#0284c7" stroke-width="2"/>
+      <rect x="0" y="0" width="360" height="35" rx="8" fill="#0284c7"/>
+      <text x="180" y="23" font-size="14" font-weight="bold" text-anchor="middle" fill="#ffffff">
+        azure_llm_costs
+      </text>
+      
+      <text x="15" y="55" font-size="12" font-weight="600" fill="#075985">Source:</text>
+      <text x="15" y="73" font-size="11" fill="#075985">Cloud Function ETL</text>
+      <text x="15" y="89" font-size="11" fill="#075985">⚠️ ETL required</text>
+      
+      <text x="15" y="111" font-size="12" font-weight="600" fill="#075985">Updates:</text>
+      <text x="15" y="129" font-size="11" fill="#075985">Daily at 4 AM UTC</text>
+      
+      <text x="15" y="151" font-size="12" font-weight="600" fill="#075985">Data: Azure OpenAI, GPT-4</text>
+    </g>
+    
+    <!-- Unified View -->
+    <g transform="translate(300, 290)">
+      <rect x="0" y="0" width="600" height="90" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="3"/>
+      <text x="300" y="25" font-size="15" font-weight="bold" text-anchor="middle" fill="#92400e">
+        VIEW: unified_costs
+      </text>
+      <text x="300" y="50" font-size="12" text-anchor="middle" fill="#78350f">
+        UNION ALL of 3 tables
+      </text>
+      <text x="300" y="70" font-size="11" text-anchor="middle" fill="#854d0e">
+        Standardized schema: date, cloud, service, model, cost, usage, customer_id
+      </text>
+    </g>
+    
+    <!-- Arrows pointing up to view -->
+    <line x1="210" y1="275" x2="450" y2="295" stroke="#475569" stroke-width="2" marker-end="url(#arrowhead)"/>
+    <line x1="600" y1="275" x2="600" y2="295" stroke="#475569" stroke-width="2" marker-end="url(#arrowhead)"/>
+    <line x1="990" y1="275" x2="750" y2="295" stroke="#475569" stroke-width="2" marker-end="url(#arrowhead)"/>
+    
+    <!-- Storage cost -->
+    <rect x="420" y="410" width="360" height="60" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+    <text x="600" y="435" font-size="13" font-weight="bold" text-anchor="middle" fill="#15803d">
+      BigQuery Storage & Queries
+    </text>
+    <text x="600" y="455" font-size="11" text-anchor="middle" fill="#166534">
+      $1 (storage) + $2.50 (queries) = $3.50/month
+    </text>
+    
+    <!-- Cost breakdown -->
+    <g transform="translate(30, 490)">
+      <text x="0" y="0" font-size="12" font-weight="600" fill="#0c4a6e">Monthly Costs:</text>
+      <text x="0" y="20" font-size="11" fill="#075985">BigQuery: $3.50</text>
+      <text x="150" y="20" font-size="11" fill="#075985">AWS ETL: $2-3</text>
+      <text x="280" y="20" font-size="11" fill="#075985">Azure ETL: $2-3</text>
+      <text x="430" y="20" font-size="11" fill="#075985">Schedulers: $0.20</text>
+      <text x="600" y="20" font-size="11" fill="#075985">Grafana: $15-25</text>
+      <text x="800" y="20" font-size="13" font-weight="bold" fill="#0c4a6e">Total: $25-35/mo</text>
+    </g>
+  </g>
+  
+  <!-- Arrows down to sources -->
+  <line x1="310" y1="915" x2="310" y2="960" stroke="#475569" stroke-width="3" marker-end="url(#arrowhead)"/>
+  <line x1="700" y1="915" x2="700" y2="960" stroke="#475569" stroke-width="3" marker-end="url(#arrowhead)"/>
+  <line x1="1090" y1="915" x2="1090" y2="960" stroke="#475569" stroke-width="3" marker-end="url(#arrowhead)"/>
+  
+  <!-- Data Sources -->
+  <g transform="translate(100, 980)">
+    <!-- GCP Source -->
+    <g transform="translate(0, 0)">
+      <rect x="0" y="0" width="360" height="140" rx="8" fill="#ffffff" stroke="#4285f4" stroke-width="2"/>
+      <text x="180" y="25" font-size="14" font-weight="bold" text-anchor="middle" fill="#4285f4">
+        GCP Billing Export
+      </text>
+      <text x="180" y="50" font-size="12" text-anchor="middle" fill="#1e40af">
+        ✅ Automatic
+      </text>
+      <text x="180" y="70" font-size="11" text-anchor="middle" fill="#64748b">
+        No code required
+      </text>
+      <text x="180" y="88" font-size="11" text-anchor="middle" fill="#64748b">
+        Enable in Console
+      </text>
+      <text x="180" y="106" font-size="11" text-anchor="middle" fill="#64748b">
+        Data flows every 4-6 hours
+      </text>
+      <rect x="100" y="118" width="160" height="18" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1"/>
+      <text x="180" y="131" font-size="10" font-weight="bold" text-anchor="middle" fill="#15803d">
+        Setup: 5 minutes
+      </text>
+    </g>
+    
+    <!-- AWS Source -->
+    <g transform="translate(390, 0)">
+      <rect x="0" y="0" width="360" height="140" rx="8" fill="#ffffff" stroke="#ff9900" stroke-width="2"/>
+      <text x="180" y="25" font-size="14" font-weight="bold" text-anchor="middle" fill="#ff9900">
+        AWS Cost Explorer → S3
+      </text>
+      <text x="180" y="50" font-size="12" text-anchor="middle" fill="#ea580c">
+        ⚠️ ETL Required
+      </text>
+      <text x="180" y="70" font-size="11" text-anchor="middle" fill="#64748b">
+        Cloud Function (Python)
+      </text>
+      <text x="180" y="88" font-size="11" text-anchor="middle" fill="#64748b">
+        Daily at 3 AM UTC
+      </text>
+      <text x="180" y="106" font-size="11" text-anchor="middle" fill="#64748b">
+        Cost Explorer API → BigQuery
+      </text>
+      <rect x="100" y="118" width="160" height="18" rx="4" fill="#fed7aa" stroke="#ea580c" stroke-width="1"/>
+      <text x="180" y="131" font-size="10" font-weight="bold" text-anchor="middle" fill="#9a3412">
+        Setup: 2-3 hours
+      </text>
+    </g>
+    
+    <!-- Azure Source -->
+    <g transform="translate(780, 0)">
+      <rect x="0" y="0" width="360" height="140" rx="8" fill="#ffffff" stroke="#0078d4" stroke-width="2"/>
+      <text x="180" y="25" font-size="14" font-weight="bold" text-anchor="middle" fill="#0078d4">
+        Azure Cost Mgmt API
+      </text>
+      <text x="180" y="50" font-size="12" text-anchor="middle" fill="#0284c7">
+        ⚠️ ETL Required
+      </text>
+      <text x="180" y="70" font-size="11" text-anchor="middle" fill="#64748b">
+        Cloud Function (Python)
+      </text>
+      <text x="180" y="88" font-size="11" text-anchor="middle" fill="#64748b">
+        Daily at 4 AM UTC
+      </text>
+      <text x="180" y="106" font-size="11" text-anchor="middle" fill="#64748b">
+        Cost Mgmt API → BigQuery
+      </text>
+      <rect x="100" y="118" width="160" height="18" rx="4" fill="#e0f2fe" stroke="#0284c7" stroke-width="1"/>
+      <text x="180" y="131" font-size="10" font-weight="bold" text-anchor="middle" fill="#075985">
+        Setup: 2-3 hours
+      </text>
+    </g>
+  </g>
+  
+  <!-- Key Benefits -->
+  <g transform="translate(100, 1160)">
+    <rect x="0" y="0" width="1200" height="220" rx="12" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+    <text x="600" y="30" font-size="16" font-weight="bold" text-anchor="middle" fill="#92400e">
+      Why This Architecture Is Simple
+    </text>
+    
+    <g transform="translate(50, 60)">
+      <text x="0" y="0" font-size="13" font-weight="600" fill="#78350f">✅ What You NEED:</text>
+      <text x="0" y="22" font-size="12" fill="#854d0e">• BigQuery (storage + queries)</text>
+      <text x="0" y="40" font-size="12" fill="#854d0e">• 2 Cloud Functions (AWS, Azure ETL)</text>
+      <text x="0" y="58" font-size="12" fill="#854d0e">• Cloud Scheduler (2 daily jobs)</text>
+      <text x="0" y="76" font-size="12" fill="#854d0e">• Grafana (SQL dashboards)</text>
+      
+      <text x="550" y="0" font-size="13" font-weight="600" fill="#78350f">❌ What You DON'T Need:</text>
+      <text x="550" y="22" font-size="12" fill="#854d0e">• Prometheus (for real-time metrics)</text>
+      <text x="550" y="40" font-size="12" fill="#854d0e">• Prometheus Exporters</text>
+      <text x="550" y="58" font-size="12" fill="#854d0e">• TimescaleDB</text>
+      <text x="550" y="76" font-size="12" fill="#854d0e">• MCP Servers / Orchestrators</text>
+      
+      <rect x="200" y="100" width="700" height="50" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+      <text x="550" y="125" font-size="13" font-weight="bold" text-anchor="middle" fill="#15803d">
+        Simple Data Flow: Cloud Billing → Database → Grafana
+      </text>
+      <text x="550" y="143" font-size="11" text-anchor="middle" fill="#166534">
+        Total Setup Time: 2-3 weeks (36-48 hours) | Monthly Cost: $25-35
+      </text>
+    </g>
+  </g>
+  
+  <!-- Timeline -->
+  <g transform="translate(100, 1410)">
+    <rect x="0" y="0" width="1200" height="120" rx="8" fill="#f0f9ff" stroke="#0284c7" stroke-width="2"/>
+    <text x="600" y="25" font-size="14" font-weight="bold" text-anchor="middle" fill="#0c4a6e">
+      Implementation Timeline
+    </text>
+    
+    <g transform="translate(50, 45)">
+      <rect x="0" y="0" width="350" height="60" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1"/>
+      <text x="175" y="20" font-size="12" font-weight="600" text-anchor="middle" fill="#1e40af">Week 1: Infrastructure</text>
+      <text x="10" y="40" font-size="10" fill="#1e40af">• Enable billing exports</text>
+      <text x="10" y="54" font-size="10" fill="#1e40af">• Create BigQuery dataset</text>
+    </g>
+    
+    <g transform="translate(425, 45)">
+      <rect x="0" y="0" width="350" height="60" rx="6" fill="#fed7aa" stroke="#ea580c" stroke-width="1"/>
+      <text x="175" y="20" font-size="12" font-weight="600" text-anchor="middle" fill="#9a3412">Week 2: ETL Pipelines</text>
+      <text x="10" y="40" font-size="10" fill="#9a3412">• Build Cloud Functions</text>
+      <text x="10" y="54" font-size="10" fill="#9a3412">• Test data flow</text>
+    </g>
+    
+    <g transform="translate(800, 45)">
+      <rect x="0" y="0" width="350" height="60" rx="6" fill="#dcfce7" stroke="#16a34a" stroke-width="1"/>
+      <text x="175" y="20" font-size="12" font-weight="600" text-anchor="middle" fill="#15803d">Week 3: Dashboards</text>
+      <text x="10" y="40" font-size="10" fill="#15803d">• Configure Grafana</text>
+      <text x="10" y="54" font-size="10" fill="#15803d">• Launch to customers</text>
+    </g>
+  </g>
+  
+  <!-- Arrow markers -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#475569"/>
+    </marker>
+  </defs>
+</svg>

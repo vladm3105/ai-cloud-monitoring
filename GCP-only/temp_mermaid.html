@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    <div class="mermaid">
+flowchart LR
+    User([User / Stakeholder]) <-->|Natural Language| Agent[AI Agent (Cloud Run)]
+    
+    subgraph "Your GCP Environment"
+        direction TB
+        Agent <-->|Query & Actions| Tools[Native GCP Tools]
+        
+        Tools -.->|Streams| Billing[Billing & Budgets]
+        Tools -.->|Monitors| Assets[Resources & Assets]
+        Tools -.->|Analyzes| ML[Recommender & ML]
+    end
+
+    style Agent fill:#4285F4,color:white,stroke:#333
+    style Billing fill:#34A853,color:white
+    style Assets fill:#FBBC04,color:white
+    style ML fill:#EA4335,color:white
+    </div>
+</body>
+</html>

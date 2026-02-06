@@ -1,0 +1,415 @@
+<svg viewBox="0 0 2000 2200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Title -->
+  <text x="1000" y="40" font-size="34" font-weight="bold" text-anchor="middle" fill="#1e293b">
+    Backend Processing: Complete Architecture
+  </text>
+  <text x="1000" y="75" font-size="16" text-anchor="middle" fill="#64748b">
+    Deep Dive: How Your Server Orchestrates Chart Generation
+  </text>
+  
+  <!-- Main Architecture Diagram -->
+  <g transform="translate(50, 120)">
+    
+    <!-- Frontend Layer -->
+    <g transform="translate(0, 0)">
+      <rect x="0" y="0" width="1900" height="180" rx="12" fill="#f0f9ff" stroke="#0284c7" stroke-width="3"/>
+      <text x="950" y="35" font-size="20" font-weight="bold" text-anchor="middle" fill="#0c4a6e">
+        FRONTEND (User's Browser)
+      </text>
+      
+      <g transform="translate(100, 60)">
+        <rect x="0" y="0" width="500" height="100" rx="8" fill="#ffffff" stroke="#0ea5e9" stroke-width="2"/>
+        <text x="250" y="25" font-size="14" font-weight="600" text-anchor="middle" fill="#0c4a6e">React/Next.js Application</text>
+        <text x="20" y="48" font-size="11" fill="#075985">• User interface (browser)</text>
+        <text x="20" y="66" font-size="11" fill="#075985">• Input: User types query</text>
+        <text x="20" y="84" font-size="11" fill="#075985">• Output: Renders Recharts</text>
+        
+        <g transform="translate(550, 0)">
+          <rect x="0" y="0" width="500" height="100" rx="8" fill="#ffffff" stroke="#0ea5e9" stroke-width="2"/>
+          <text x="250" y="25" font-size="14" font-weight="600" text-anchor="middle" fill="#0c4a6e">User Action</text>
+          <text x="20" y="48" font-size="11" fill="#075985">User asks: "Show me costs"</text>
+          <text x="20" y="66" font-size="11" fill="#075985">↓</text>
+          <text x="20" y="84" font-size="11" fill="#075985">POST /api/chart/generate</text>
+        </g>
+        
+        <g transform="translate(1100, 0)">
+          <rect x="0" y="0" width="600" height="100" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+          <text x="300" y="25" font-size="14" font-weight="600" text-anchor="middle" fill="#15803d">✅ Why Frontend Can't Do It Alone</text>
+          <text x="20" y="48" font-size="10" fill="#166534">❌ No database credentials</text>
+          <text x="20" y="64" font-size="10" fill="#166534">❌ Can't store API keys (security!)</text>
+          <text x="20" y="80" font-size="10" fill="#166534">✅ Needs backend to orchestrate</text>
+        </g>
+      </g>
+    </g>
+    
+    <!-- Arrow Down -->
+    <g transform="translate(950, 195)">
+      <line x1="0" y1="0" x2="0" y2="50" stroke="#475569" stroke-width="5" marker-end="url(#arrowhead)"/>
+      <text x="20" y="30" font-size="13" font-weight="600" fill="#475569">HTTP Request</text>
+    </g>
+    
+    <!-- Backend Layer -->
+    <g transform="translate(0, 260)">
+      <rect x="0" y="0" width="1900" height="1180" rx="12" fill="#fef3c7" stroke="#f59e0b" stroke-width="4"/>
+      <text x="950" y="40" font-size="22" font-weight="bold" text-anchor="middle" fill="#92400e">
+        BACKEND (Your Server) - Three Critical Steps
+      </text>
+      
+      <!-- Step 4A: Execute SQL -->
+      <g transform="translate(50, 70)">
+        <rect x="0" y="0" width="1800" height="340" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="3"/>
+        <rect x="0" y="0" width="1800" height="50" rx="10" fill="#16a34a"/>
+        <text x="900" y="33" font-size="18" font-weight="bold" text-anchor="middle" fill="#ffffff">
+          STEP 4A: Execute SQL on BigQuery
+        </text>
+        
+        <g transform="translate(30, 70)">
+          <!-- Input -->
+          <g transform="translate(0, 0)">
+            <rect x="0" y="0" width="520" height="240" rx="8" fill="#ffffff" stroke="#22c55e" stroke-width="2"/>
+            <text x="260" y="25" font-size="14" font-weight="600" text-anchor="middle" fill="#15803d">INPUT: SQL from LLM</text>
+            <rect x="20" y="40" width="480" height="180" rx="6" fill="#f0fdf4" stroke="#86efac" stroke-width="1"/>
+            <text x="30" y="60" font-size="10" font-family="monospace" fill="#166534">SELECT date, model,</text>
+            <text x="30" y="76" font-size="10" font-family="monospace" fill="#166534">  SUM(cost_usd) as cost</text>
+            <text x="30" y="92" font-size="10" font-family="monospace" fill="#166534">FROM unified_costs</text>
+            <text x="30" y="108" font-size="10" font-family="monospace" fill="#166534">WHERE date >= </text>
+            <text x="30" y="124" font-size="10" font-family="monospace" fill="#166534">  DATE_SUB(CURRENT_DATE(),</text>
+            <text x="30" y="140" font-size="10" font-family="monospace" fill="#166534">           INTERVAL 30 DAY)</text>
+            <text x="30" y="156" font-size="10" font-family="monospace" fill="#166534">GROUP BY date, model</text>
+            <text x="30" y="180" font-size="9" fill="#166534">⚠️ Generated by GPT-4o/Gemini</text>
+            <text x="30" y="200" font-size="9" fill="#166534">⚠️ Must be validated!</text>
+          </g>
+          
+          <!-- Processing -->
+          <g transform="translate(570, 0)">
+            <rect x="0" y="0" width="600" height="240" rx="8" fill="#ffffff" stroke="#22c55e" stroke-width="2"/>
+            <text x="300" y="25" font-size="14" font-weight="600" text-anchor="middle" fill="#15803d">BACKEND PROCESSING</text>
+            
+            <g transform="translate(20, 40)">
+              <text x="0" y="0" font-size="12" font-weight="600" fill="#15803d">1. Validate SQL (Security)</text>
+              <rect x="0" y="8" width="560" height="35" rx="4" fill="#dcfce7" stroke="#22c55e" stroke-width="1"/>
+              <text x="10" y="25" font-size="9" font-family="monospace" fill="#166534">❌ Block: DROP, DELETE, UPDATE, INSERT</text>
+              <text x="10" y="38" font-size="9" font-family="monospace" fill="#166534">✅ Allow: SELECT only</text>
+              
+              <text x="0" y="58" font-size="12" font-weight="600" fill="#15803d">2. Add Customer Filter</text>
+              <rect x="0" y="66" width="560" height="35" rx="4" fill="#dcfce7" stroke="#22c55e" stroke-width="1"/>
+              <text x="10" y="83" font-size="9" font-family="monospace" fill="#166534">WHERE customer_id = "cust_123"</text>
+              <text x="10" y="96" font-size="9" font-family="monospace" fill="#dc2626">🔒 CRITICAL: Multi-tenant security!</text>
+              
+              <text x="0" y="116" font-size="12" font-weight="600" fill="#15803d">3. Execute on BigQuery</text>
+              <rect x="0" y="124" width="560" height="35" rx="4" fill="#dcfce7" stroke="#22c55e" stroke-width="1"/>
+              <text x="10" y="141" font-size="9" font-family="monospace" fill="#166534">bq_client.query(safe_sql)</text>
+              <text x="10" y="154" font-size="9" font-family="monospace" fill="#166534">⏱️ 500-1500ms</text>
+              
+              <text x="0" y="174" font-size="12" font-weight="600" fill="#15803d">4. Format Results</text>
+              <rect x="0" y="182" width="560" height="35" rx="4" fill="#dcfce7" stroke="#22c55e" stroke-width="1"/>
+              <text x="10" y="199" font-size="9" font-family="monospace" fill="#166534">Convert to list of dicts</text>
+              <text x="10" y="212" font-size="9" font-family="monospace" fill="#166534">Handle dates, numbers</text>
+            </g>
+          </g>
+          
+          <!-- Output -->
+          <g transform="translate(1220, 0)">
+            <rect x="0" y="0" width="520" height="240" rx="8" fill="#ffffff" stroke="#22c55e" stroke-width="2"/>
+            <text x="260" y="25" font-size="14" font-weight="600" text-anchor="middle" fill="#15803d">OUTPUT: Data Rows</text>
+            <rect x="20" y="40" width="480" height="180" rx="6" fill="#f0fdf4" stroke="#86efac" stroke-width="1"/>
+            <text x="30" y="60" font-size="10" font-family="monospace" fill="#166534">[</text>
+            <text x="30" y="76" font-size="10" font-family="monospace" fill="#166534">  {</text>
+            <text x="40" y="92" font-size="10" font-family="monospace" fill="#166534">"date": "2026-01-15",</text>
+            <text x="40" y="108" font-size="10" font-family="monospace" fill="#166534">"model": "gpt-4",</text>
+            <text x="40" y="124" font-size="10" font-family="monospace" fill="#166534">"cost": 234.56</text>
+            <text x="30" y="140" font-size="10" font-family="monospace" fill="#166534">  },</text>
+            <text x="30" y="156" font-size="10" font-family="monospace" fill="#166534">  { ... more rows ... }</text>
+            <text x="30" y="172" font-size="10" font-family="monospace" fill="#166534">]</text>
+            <text x="30" y="200" font-size="9" fill="#15803d">✅ Ready for Step 4B</text>
+          </g>
+        </g>
+        
+        <!-- Tools Used -->
+        <g transform="translate(30, 320)">
+          <text x="0" y="0" font-size="11" font-weight="600" fill="#15803d">🔧 Tools Used:</text>
+          <text x="100" y="0" font-size="10" fill="#166534">google-cloud-bigquery • sqlparse • Pydantic</text>
+        </g>
+      </g>
+      
+      <!-- Step 4B: Prepare Chart -->
+      <g transform="translate(50, 440)">
+        <rect x="0" y="0" width="1800" height="340" rx="10" fill="#dbeafe" stroke="#0284c7" stroke-width="3"/>
+        <rect x="0" y="0" width="1800" height="50" rx="10" fill="#0284c7"/>
+        <text x="900" y="33" font-size="18" font-weight="bold" text-anchor="middle" fill="#ffffff">
+          STEP 4B: Prepare Chart Component
+        </text>
+        
+        <g transform="translate(30, 70)">
+          <!-- Input 1 -->
+          <g transform="translate(0, 0)">
+            <rect x="0" y="0" width="420" height="240" rx="8" fill="#ffffff" stroke="#38bdf8" stroke-width="2"/>
+            <text x="210" y="25" font-size="13" font-weight="600" text-anchor="middle" fill="#0c4a6e">INPUT 1: LLM Config</text>
+            <rect x="20" y="40" width="380" height="180" rx="6" fill="#f0f9ff" stroke="#7dd3fc" stroke-width="1"/>
+            <text x="30" y="60" font-size="9" font-family="monospace" fill="#075985">{</text>
+            <text x="30" y="75" font-size="9" font-family="monospace" fill="#075985">  "chartType": "LineChart",</text>
+            <text x="30" y="90" font-size="9" font-family="monospace" fill="#075985">  "chartConfig": {</text>
+            <text x="40" y="105" font-size="9" font-family="monospace" fill="#075985">"xAxis": {</text>
+            <text x="50" y="120" font-size="9" font-family="monospace" fill="#075985">"dataKey": "date"</text>
+            <text x="40" y="135" font-size="9" font-family="monospace" fill="#075985">},</text>
+            <text x="40" y="150" font-size="9" font-family="monospace" fill="#075985">"lines": [{</text>
+            <text x="50" y="165" font-size="9" font-family="monospace" fill="#075985">"dataKey": "cost",</text>
+            <text x="50" y="180" font-size="9" font-family="monospace" fill="#075985">"stroke": "#8884d8"</text>
+            <text x="40" y="195" font-size="9" font-family="monospace" fill="#075985">}]</text>
+            <text x="30" y="210" font-size="9" font-family="monospace" fill="#075985">  }</text>
+            <text x="30" y="225" font-size="9" font-family="monospace" fill="#075985">}</text>
+          </g>
+          
+          <!-- Input 2 -->
+          <g transform="translate(450, 0)">
+            <rect x="0" y="0" width="420" height="240" rx="8" fill="#ffffff" stroke="#38bdf8" stroke-width="2"/>
+            <text x="210" y="25" font-size="13" font-weight="600" text-anchor="middle" fill="#0c4a6e">INPUT 2: Data (from 4A)</text>
+            <rect x="20" y="40" width="380" height="180" rx="6" fill="#f0f9ff" stroke="#7dd3fc" stroke-width="1"/>
+            <text x="30" y="60" font-size="9" font-family="monospace" fill="#075985">[</text>
+            <text x="30" y="75" font-size="9" font-family="monospace" fill="#075985">  {</text>
+            <text x="40" y="90" font-size="9" font-family="monospace" fill="#075985">"date": "2026-01-15",</text>
+            <text x="40" y="105" font-size="9" font-family="monospace" fill="#075985">"cost": 234.56</text>
+            <text x="30" y="120" font-size="9" font-family="monospace" fill="#075985">  },</text>
+            <text x="30" y="135" font-size="9" font-family="monospace" fill="#075985">  {</text>
+            <text x="40" y="150" font-size="9" font-family="monospace" fill="#075985">"date": "2026-01-16",</text>
+            <text x="40" y="165" font-size="9" font-family="monospace" fill="#075985">"cost": 245.67</text>
+            <text x="30" y="180" font-size="9" font-family="monospace" fill="#075985">  },</text>
+            <text x="30" y="195" font-size="9" font-family="monospace" fill="#075985">  ...</text>
+            <text x="30" y="210" font-size="9" font-family="monospace" fill="#075985">]</text>
+          </g>
+          
+          <!-- Processing -->
+          <g transform="translate(900, 0)">
+            <rect x="0" y="0" width="420" height="240" rx="8" fill="#e0f2fe" stroke="#38bdf8" stroke-width="2"/>
+            <text x="210" y="25" font-size="13" font-weight="600" text-anchor="middle" fill="#0c4a6e">PROCESSING</text>
+            
+            <g transform="translate(20, 40)">
+              <text x="0" y="0" font-size="11" font-weight="600" fill="#0c4a6e">1. Validate Config</text>
+              <text x="0" y="16" font-size="9" fill="#075985">✅ Check chartType valid</text>
+              <text x="0" y="30" font-size="9" fill="#075985">✅ Ensure dataKeys exist</text>
+              
+              <text x="0" y="50" font-size="11" font-weight="600" fill="#0c4a6e">2. Transform Data</text>
+              <text x="0" y="66" font-size="9" fill="#075985">• Format dates</text>
+              <text x="0" y="80" font-size="9" fill="#075985">• Round numbers</text>
+              <text x="0" y="94" font-size="9" fill="#075985">• Handle nulls</text>
+              
+              <text x="0" y="114" font-size="11" font-weight="600" fill="#0c4a6e">3. Add Metadata</text>
+              <text x="0" y="130" font-size="9" fill="#075985">• Title, timestamp</text>
+              <text x="0" y="144" font-size="9" fill="#075985">• LLM provider used</text>
+              
+              <text x="0" y="164" font-size="11" font-weight="600" fill="#0c4a6e">4. Build Response</text>
+              <text x="0" y="180" font-size="9" fill="#075985">• Complete package</text>
+              <text x="0" y="194" font-size="9" fill="#075985">• Ready for frontend</text>
+            </g>
+          </g>
+          
+          <!-- Output -->
+          <g transform="translate(1350, 0)">
+            <rect x="0" y="0" width="420" height="240" rx="8" fill="#ffffff" stroke="#38bdf8" stroke-width="2"/>
+            <text x="210" y="25" font-size="13" font-weight="600" text-anchor="middle" fill="#0c4a6e">OUTPUT: Chart Package</text>
+            <rect x="20" y="40" width="380" height="180" rx="6" fill="#f0f9ff" stroke="#7dd3fc" stroke-width="1"/>
+            <text x="30" y="60" font-size="9" font-family="monospace" fill="#075985">{</text>
+            <text x="30" y="75" font-size="9" font-family="monospace" fill="#075985">  "chartType": "LineChart",</text>
+            <text x="30" y="90" font-size="9" font-family="monospace" fill="#075985">  "config": { ... },</text>
+            <text x="30" y="105" font-size="9" font-family="monospace" fill="#075985">  "data": [ ... ],</text>
+            <text x="30" y="120" font-size="9" font-family="monospace" fill="#075985">  "metadata": {</text>
+            <text x="40" y="135" font-size="9" font-family="monospace" fill="#075985">"title": "Cost Trends",</text>
+            <text x="40" y="150" font-size="9" font-family="monospace" fill="#075985">"generatedAt": "...",</text>
+            <text x="40" y="165" font-size="9" font-family="monospace" fill="#075985">"dataPoints": 30,</text>
+            <text x="40" y="180" font-size="9" font-family="monospace" fill="#075985">"llmUsed": "gpt-4o"</text>
+            <text x="30" y="195" font-size="9" font-family="monospace" fill="#075985">  }</text>
+            <text x="30" y="210" font-size="9" font-family="monospace" fill="#075985">}</text>
+          </g>
+        </g>
+        
+        <!-- Tools Used -->
+        <g transform="translate(30, 320)">
+          <text x="0" y="0" font-size="11" font-weight="600" fill="#0c4a6e">🔧 Tools Used:</text>
+          <text x="100" y="0" font-size="10" fill="#075985">Pandas • Pydantic • Custom validators</text>
+        </g>
+      </g>
+      
+      <!-- Step 4C: Return to Frontend -->
+      <g transform="translate(50, 810)">
+        <rect x="0" y="0" width="1800" height="320" rx="10" fill="#fef3c7" stroke="#f59e0b" stroke-width="3"/>
+        <rect x="0" y="0" width="1800" height="50" rx="10" fill="#f59e0b"/>
+        <text x="900" y="33" font-size="18" font-weight="bold" text-anchor="middle" fill="#ffffff">
+          STEP 4C: Return to Frontend (HTTP Response)
+        </text>
+        
+        <g transform="translate(30, 70)">
+          <!-- HTTP Response -->
+          <g transform="translate(0, 0)">
+            <rect x="0" y="0" width="850" height="220" rx="8" fill="#ffffff" stroke="#fbbf24" stroke-width="2"/>
+            <text x="425" y="25" font-size="14" font-weight="600" text-anchor="middle" fill="#92400e">HTTP Response to Frontend</text>
+            
+            <rect x="20" y="40" width="810" height="160" rx="6" fill="#fffbeb" stroke="#fcd34d" stroke-width="1"/>
+            <g transform="translate(30, 55)" font-family="monospace" font-size="9">
+              <text x="0" y="0" fill="#78350f">HTTP/1.1 200 OK</text>
+              <text x="0" y="16" fill="#78350f">Content-Type: application/json</text>
+              <text x="0" y="32" fill="#78350f">Cache-Control: no-cache</text>
+              <text x="0" y="48" fill="#78350f">X-Generation-Time: 2341ms</text>
+              <text x="0" y="64" fill="#78350f">X-LLM-Used: gpt-4o</text>
+              <text x="0" y="88" fill="#78350f">{</text>
+              <text x="20" y="104" fill="#78350f">"success": true,</text>
+              <text x="20" y="120" fill="#78350f">"chartType": "LineChart",</text>
+              <text x="20" y="136" fill="#78350f">"config": { ... },</text>
+              <text x="20" y="152" fill="#78350f">"data": [ ... ]</text>
+              <text x="0" y="168" fill="#78350f">}</text>
+            </g>
+          </g>
+          
+          <!-- Processing Steps -->
+          <g transform="translate(900, 0)">
+            <rect x="0" y="0" width="870" height="220" rx="8" fill="#fffbeb" stroke="#fbbf24" stroke-width="2"/>
+            <text x="435" y="25" font-size="14" font-weight="600" text-anchor="middle" fill="#92400e">Backend Actions</text>
+            
+            <g transform="translate(30, 45)">
+              <text x="0" y="0" font-size="11" font-weight="600" fill="#92400e">1. Combine Data + Config</text>
+              <text x="0" y="18" font-size="9" fill="#78350f">• Merge chart package from Step 4B</text>
+              <text x="0" y="32" font-size="9" fill="#78350f">• Add execution metadata</text>
+              
+              <text x="0" y="52" font-size="11" font-weight="600" fill="#92400e">2. Set Response Headers</text>
+              <text x="0" y="70" font-size="9" fill="#78350f">• Content-Type: application/json</text>
+              <text x="0" y="84" font-size="9" fill="#78350f">• CORS headers (allow frontend)</text>
+              <text x="0" y="98" font-size="9" fill="#78350f">• Cache-Control, timing headers</text>
+              
+              <text x="0" y="118" font-size="11" font-weight="600" fill="#92400e">3. Send HTTP Response</text>
+              <text x="0" y="136" font-size="9" fill="#78350f">• Status: 200 OK</text>
+              <text x="0" y="150" font-size="9" fill="#78350f">• JSON payload to React</text>
+              
+              <text x="0" y="170" font-size="11" font-weight="600" fill="#92400e">4. Error Handling</text>
+              <text x="0" y="188" font-size="9" fill="#78350f">• Try/catch for all errors</text>
+              <text x="0" y="202" font-size="9" fill="#78350f">• Return 400/500 with error details</text>
+            </g>
+          </g>
+        </g>
+        
+        <!-- Tools Used -->
+        <g transform="translate(30, 300)">
+          <text x="0" y="0" font-size="11" font-weight="600" fill="#92400e">🔧 Tools Used:</text>
+          <text x="100" y="0" font-size="10" fill="#78350f">FastAPI Response • Express.js res.json() • CORS middleware</text>
+        </g>
+      </g>
+    </g>
+    
+    <!-- Arrow Down -->
+    <g transform="translate(950, 1455)">
+      <line x1="0" y1="0" x2="0" y2="50" stroke="#475569" stroke-width="5" marker-end="url(#arrowhead)"/>
+      <text x="20" y="30" font-size="13" font-weight="600" fill="#475569">HTTP Response</text>
+    </g>
+    
+    <!-- Frontend Receives -->
+    <g transform="translate(0, 1520)">
+      <rect x="0" y="0" width="1900" height="140" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="3"/>
+      <text x="950" y="35" font-size="20" font-weight="bold" text-anchor="middle" fill="#15803d">
+        FRONTEND RECEIVES RESPONSE → Renders Chart with Recharts
+      </text>
+      
+      <g transform="translate(100, 60)">
+        <rect x="0" y="0" width="800" height="60" rx="8" fill="#ffffff" stroke="#22c55e" stroke-width="2"/>
+        <text x="400" y="25" font-size="12" font-weight="600" text-anchor="middle" fill="#15803d">React Component Code</text>
+        <g transform="translate(20, 35)" font-family="monospace" font-size="9">
+          <text x="0" y="0" fill="#166534">const { chartType, config, data } = response;</text>
+          <text x="0" y="15" fill="#166534">return &lt;LineChart data={data}&gt; ... &lt;/LineChart&gt;</text>
+        </g>
+        
+        <g transform="translate(850, 0)">
+          <rect x="0" y="0" width="900" height="60" rx="8" fill="#dcfce7" stroke="#22c55e" stroke-width="2"/>
+          <text x="450" y="25" font-size="12" font-weight="600" text-anchor="middle" fill="#15803d">✅ User Sees Beautiful Interactive Chart!</text>
+          <text x="450" y="45" font-size="10" text-anchor="middle" fill="#166534">Total Time: 2-3 seconds | Total Cost: $0.005</text>
+        </g>
+      </g>
+    </g>
+    
+    <!-- Technology Stack -->
+    <g transform="translate(0, 1690)">
+      <rect x="0" y="0" width="1900" height="320" rx="12" fill="#f8fafc" stroke="#64748b" stroke-width="3"/>
+      <text x="950" y="35" font-size="20" font-weight="bold" text-anchor="middle" fill="#1e293b">
+        🔧 Complete Backend Technology Stack
+      </text>
+      
+      <g transform="translate(50, 70)">
+        <!-- Framework Options -->
+        <g transform="translate(0, 0)">
+          <rect x="0" y="0" width="560" height="220" rx="8" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+          <text x="280" y="25" font-size="14" font-weight="600" text-anchor="middle" fill="#1e293b">Backend Framework</text>
+          
+          <g transform="translate(20, 45)">
+            <text x="0" y="0" font-size="12" font-weight="600" fill="#059669">Option 1: FastAPI (Python)</text>
+            <text x="0" y="18" font-size="10" fill="#475569">✅ Recommended for data/ML</text>
+            <text x="0" y="33" font-size="10" fill="#475569">✅ Auto API docs</text>
+            <text x="0" y="48" font-size="10" fill="#475569">✅ Easy to learn</text>
+            <rect x="0" y="58" width="520" height="20" rx="4" fill="#f0fdf4" stroke="#22c55e" stroke-width="1"/>
+            <text x="10" y="72" font-size="9" font-family="monospace" fill="#166534">pip install fastapi uvicorn</text>
+            
+            <text x="0" y="95" font-size="12" font-weight="600" fill="#0284c7">Option 2: Express.js (Node)</text>
+            <text x="0" y="113" font-size="10" fill="#475569">✅ JavaScript everywhere</text>
+            <text x="0" y="128" font-size="10" fill="#475569">✅ Huge ecosystem</text>
+            <rect x="0" y="138" width="520" height="20" rx="4" fill="#f0f9ff" stroke="#38bdf8" stroke-width="1"/>
+            <text x="10" y="152" font-size="9" font-family="monospace" fill="#075985">npm install express cors</text>
+            
+            <text x="0" y="175" font-size="12" font-weight="600" fill="#f59e0b">Option 3: Next.js API Routes</text>
+            <text x="0" y="193" font-size="10" fill="#475569">✅ Simplest (frontend+backend)</text>
+          </g>
+        </g>
+        
+        <!-- LLM Clients -->
+        <g transform="translate(610, 0)">
+          <rect x="0" y="0" width="560" height="220" rx="8" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+          <text x="280" y="25" font-size="14" font-weight="600" text-anchor="middle" fill="#1e293b">LLM Integration</text>
+          
+          <g transform="translate(20, 45)">
+            <text x="0" y="0" font-size="12" font-weight="600" fill="#059669">OpenAI (GPT-4o)</text>
+            <rect x="0" y="8" width="520" height="20" rx="4" fill="#f0fdf4" stroke="#22c55e" stroke-width="1"/>
+            <text x="10" y="22" font-size="9" font-family="monospace" fill="#166534">pip install openai</text>
+            <text x="10" y="40" font-size="9" fill="#475569">✅ $0.005 per chart | Best quality</text>
+            
+            <text x="0" y="65" font-size="12" font-weight="600" fill="#0284c7">Google Gemini</text>
+            <rect x="0" y="73" width="520" height="20" rx="4" fill="#f0f9ff" stroke="#38bdf8" stroke-width="1"/>
+            <text x="10" y="87" font-size="9" font-family="monospace" fill="#075985">pip install google-generativeai</text>
+            <text x="10" y="105" font-size="9" fill="#475569">✅ $0.002 per chart | 60% cheaper</text>
+            
+            <text x="0" y="130" font-size="12" font-weight="600" fill="#64748b">Multi-LLM Strategy</text>
+            <text x="10" y="148" font-size="9" fill="#475569">try: gpt4 → except: gemini</text>
+            <text x="10" y="163" font-size="9" fill="#475569">✅ 99.99% uptime</text>
+          </g>
+        </g>
+        
+        <!-- Database & Tools -->
+        <g transform="translate(1220, 0)">
+          <rect x="0" y="0" width="630" height="220" rx="8" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+          <text x="315" y="25" font-size="14" font-weight="600" text-anchor="middle" fill="#1e293b">Database & Processing</text>
+          
+          <g transform="translate(20, 45)">
+            <text x="0" y="0" font-size="12" font-weight="600" fill="#059669">BigQuery Client</text>
+            <rect x="0" y="8" width="590" height="20" rx="4" fill="#f0fdf4" stroke="#22c55e" stroke-width="1"/>
+            <text x="10" y="22" font-size="9" font-family="monospace" fill="#166534">pip install google-cloud-bigquery</text>
+            
+            <text x="0" y="45" font-size="12" font-weight="600" fill="#0284c7">Data Validation</text>
+            <rect x="0" y="53" width="590" height="20" rx="4" fill="#f0f9ff" stroke="#38bdf8" stroke-width="1"/>
+            <text x="10" y="67" font-size="9" font-family="monospace" fill="#075985">pip install pydantic pandas</text>
+            
+            <text x="0" y="90" font-size="12" font-weight="600" fill="#f59e0b">Security</text>
+            <rect x="0" y="98" width="590" height="20" rx="4" fill="#fffbeb" stroke="#fbbf24" stroke-width="1"/>
+            <text x="10" y="112" font-size="9" font-family="monospace" fill="#78350f">SQL injection prevention</text>
+            
+            <text x="0" y="135" font-size="12" font-weight="600" fill="#94a3b8">Deployment</text>
+            <rect x="0" y="143" width="590" height="20" rx="4" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+            <text x="10" y="157" font-size="9" font-family="monospace" fill="#475569">Google Cloud Run • Vercel • AWS Lambda</text>
+            
+            <text x="0" y="180" font-size="11" font-weight="600" fill="#dc2626">💰 Cost: $5-20/month</text>
+            <text x="0" y="198" font-size="9" fill="#475569">Infrastructure + API usage</text>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+  
+  <!-- Arrow marker -->
+  <defs>
+    <marker id="arrowhead" markerWidth="12" markerHeight="12" refX="10" refY="3" orient="auto">
+      <polygon points="0 0, 12 3, 0 6" fill="#475569"/>
+    </marker>
+  </defs>
+</svg>

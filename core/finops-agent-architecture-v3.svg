@@ -1,0 +1,602 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 2800">
+  <defs>
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#1a365d"/>
+      <stop offset="100%" style="stop-color:#2c5282"/>
+    </linearGradient>
+    <linearGradient id="coordGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#553c9a"/>
+      <stop offset="100%" style="stop-color:#6b46c1"/>
+    </linearGradient>
+    <linearGradient id="domainGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#2c7a7b"/>
+      <stop offset="100%" style="stop-color:#319795"/>
+    </linearGradient>
+    <linearGradient id="awsAgentGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ff9900"/>
+      <stop offset="100%" style="stop-color:#ec7211"/>
+    </linearGradient>
+    <linearGradient id="azureAgentGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0078d4"/>
+      <stop offset="100%" style="stop-color:#005a9e"/>
+    </linearGradient>
+    <linearGradient id="gcpAgentGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#4285f4"/>
+      <stop offset="100%" style="stop-color:#1a73e8"/>
+    </linearGradient>
+    <linearGradient id="k8sAgentGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#326ce5"/>
+      <stop offset="100%" style="stop-color:#2456b8"/>
+    </linearGradient>
+    <linearGradient id="mcpGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#2b6cb0"/>
+      <stop offset="100%" style="stop-color:#3182ce"/>
+    </linearGradient>
+    <linearGradient id="authGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#eb5424"/>
+      <stop offset="100%" style="stop-color:#c7451d"/>
+    </linearGradient>
+    <linearGradient id="vaultGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffcf25"/>
+      <stop offset="100%" style="stop-color:#f0b90b"/>
+    </linearGradient>
+    <linearGradient id="a2aGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#4285f4"/>
+      <stop offset="100%" style="stop-color:#1a73e8"/>
+    </linearGradient>
+    <linearGradient id="serviceGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#276749"/>
+      <stop offset="100%" style="stop-color:#38a169"/>
+    </linearGradient>
+    <linearGradient id="dataGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#975a16"/>
+      <stop offset="100%" style="stop-color:#d69e2e"/>
+    </linearGradient>
+    <linearGradient id="frontendGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d9488"/>
+      <stop offset="100%" style="stop-color:#14b8a6"/>
+    </linearGradient>
+    
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-opacity="0.3"/>
+    </filter>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#4a5568"/>
+    </marker>
+    <marker id="arrowPurple" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#805ad5"/>
+    </marker>
+    <marker id="arrowTeal" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#319795"/>
+    </marker>
+    <marker id="arrowAWS" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#ff9900"/>
+    </marker>
+    <marker id="arrowAzure" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#0078d4"/>
+    </marker>
+    <marker id="arrowGCP" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#4285f4"/>
+    </marker>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1800" height="2800" fill="#f7fafc"/>
+  
+  <!-- Title Header -->
+  <rect x="0" y="0" width="1800" height="100" fill="url(#headerGrad)"/>
+  <text x="900" y="35" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="30" font-weight="bold">Multi-Cloud FinOps Agent Architecture v3.0</text>
+  <text x="900" y="60" text-anchor="middle" fill="#a0aec0" font-family="Arial, sans-serif" font-size="16">Hierarchical Agent Architecture with Cloud Provider Agent Layer</text>
+  <text x="900" y="85" text-anchor="middle" fill="#718096" font-family="Arial, sans-serif" font-size="12">Performance Optimized • Parallel Execution • Reduced Latency • Better Isolation</text>
+  
+  <!-- ==================== ARCHITECTURE COMPARISON BOX ==================== -->
+  <g id="comparison">
+    <rect x="40" y="120" width="1720" height="180" rx="10" fill="#fef3c7" stroke="#d97706" stroke-width="2" filter="url(#shadow)"/>
+    <text x="60" y="150" fill="#92400e" font-family="Arial, sans-serif" font-size="16" font-weight="bold">🔄 ARCHITECTURE EVOLUTION: Why Add Cloud Provider Agent Layer?</text>
+    
+    <!-- Before -->
+    <rect x="60" y="170" width="550" height="110" rx="8" fill="#fecaca"/>
+    <text x="335" y="195" text-anchor="middle" fill="#991b1b" font-family="Arial, sans-serif" font-size="14" font-weight="bold">❌ Before (v2.0) - Performance Issues</text>
+    <text x="80" y="220" fill="#7f1d1d" font-family="Arial, sans-serif" font-size="11">• Cost Agent → calls AWS MCP + Azure MCP + GCP MCP (serial/parallel)</text>
+    <text x="80" y="238" fill="#7f1d1d" font-family="Arial, sans-serif" font-size="11">• Optimization Agent → calls same 3 MCPs again</text>
+    <text x="80" y="256" fill="#7f1d1d" font-family="Arial, sans-serif" font-size="11">• Each domain agent duplicates cloud-specific orchestration logic</text>
+    <text x="80" y="274" fill="#991b1b" font-family="Arial, sans-serif" font-size="11" font-weight="bold">Result: N agents × M clouds = complexity explosion</text>
+    
+    <!-- After -->
+    <rect x="640" y="170" width="550" height="110" rx="8" fill="#bbf7d0"/>
+    <text x="915" y="195" text-anchor="middle" fill="#166534" font-family="Arial, sans-serif" font-size="14" font-weight="bold">✅ After (v3.0) - Optimized Hierarchy</text>
+    <text x="660" y="220" fill="#14532d" font-family="Arial, sans-serif" font-size="11">• Domain Agents (Cost, Optimization) → delegate to Cloud Agents</text>
+    <text x="660" y="238" fill="#14532d" font-family="Arial, sans-serif" font-size="11">• AWS Agent owns all AWS logic + AWS MCP exclusively</text>
+    <text x="660" y="256" fill="#14532d" font-family="Arial, sans-serif" font-size="11">• Parallel execution: query all clouds simultaneously</text>
+    <text x="660" y="274" fill="#166534" font-family="Arial, sans-serif" font-size="11" font-weight="bold">Result: Clean separation, parallel execution, better caching</text>
+    
+    <!-- Benefits -->
+    <rect x="1220" y="170" width="520" height="110" rx="8" fill="#dbeafe"/>
+    <text x="1480" y="195" text-anchor="middle" fill="#1e40af" font-family="Arial, sans-serif" font-size="14" font-weight="bold">📈 Performance Benefits</text>
+    <text x="1240" y="220" fill="#1e3a8a" font-family="Arial, sans-serif" font-size="11">• 60-70% latency reduction (parallel vs serial)</text>
+    <text x="1240" y="238" fill="#1e3a8a" font-family="Arial, sans-serif" font-size="11">• Per-cloud credential caching in Cloud Agents</text>
+    <text x="1240" y="256" fill="#1e3a8a" font-family="Arial, sans-serif" font-size="11">• Cloud-specific rate limiting isolation</text>
+    <text x="1240" y="274" fill="#1e3a8a" font-family="Arial, sans-serif" font-size="11">• Better failure isolation (AWS down ≠ Azure down)</text>
+  </g>
+  
+  <!-- ==================== AUTH LAYER (Compact) ==================== -->
+  <g id="auth-layer">
+    <rect x="40" y="320" width="1720" height="100" rx="10" fill="#fff5f5" stroke="#eb5424" stroke-width="2" filter="url(#shadow)"/>
+    <text x="60" y="350" fill="#c53030" font-family="Arial, sans-serif" font-size="14" font-weight="bold">🔐 AUTHENTICATION LAYER</text>
+    
+    <rect x="80" y="365" width="300" height="40" rx="6" fill="url(#authGrad)"/>
+    <text x="230" y="390" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="12" font-weight="bold">Auth0 (Identity + SSO + MFA)</text>
+    
+    <rect x="410" y="365" width="300" height="40" rx="6" fill="#c53030"/>
+    <text x="560" y="390" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="12" font-weight="bold">Multi-Tenant Context (org_id)</text>
+    
+    <rect x="740" y="365" width="300" height="40" rx="6" fill="#2d3748"/>
+    <text x="890" y="390" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="12" font-weight="bold">JWT Token + RBAC Claims</text>
+    
+    <rect x="1070" y="365" width="300" height="40" rx="6" fill="url(#vaultGrad)"/>
+    <text x="1220" y="390" text-anchor="middle" fill="#1a202c" font-family="Arial, sans-serif" font-size="12" font-weight="bold">OpenBao (Per-Tenant Secrets)</text>
+    
+    <rect x="1400" y="365" width="300" height="40" rx="6" fill="url(#a2aGrad)"/>
+    <text x="1550" y="390" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="12" font-weight="bold">Google A2A Gateway</text>
+  </g>
+  
+  <!-- ==================== PRESENTATION LAYER (Compact) ==================== -->
+  <g id="presentation-layer">
+    <rect x="40" y="440" width="1720" height="80" rx="10" fill="#e6fffa" stroke="#0d9488" stroke-width="2" filter="url(#shadow)"/>
+    <text x="60" y="470" fill="#0d9488" font-family="Arial, sans-serif" font-size="14" font-weight="bold">📱 PRESENTATION LAYER</text>
+    
+    <rect x="400" y="460" width="350" height="45" rx="6" fill="url(#frontendGrad)"/>
+    <text x="575" y="488" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="13" font-weight="bold">CopilotKit (React) + A2UI Components</text>
+    
+    <rect x="800" y="460" width="350" height="45" rx="6" fill="#2d3748"/>
+    <text x="975" y="488" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="13" font-weight="bold">AG-UI Server (FastAPI + SSE)</text>
+  </g>
+  
+  <!-- ==================== LAYER 1: COORDINATOR AGENT ==================== -->
+  <g id="coordinator-layer">
+    <rect x="40" y="540" width="1720" height="140" rx="10" fill="#faf5ff" stroke="#6b46c1" stroke-width="2" filter="url(#shadow)"/>
+    <text x="60" y="570" fill="#553c9a" font-family="Arial, sans-serif" font-size="14" font-weight="bold">LAYER 1: COORDINATOR AGENT (Intent Classification + Routing)</text>
+    
+    <rect x="400" y="590" width="1000" height="70" rx="8" fill="url(#coordGrad)" filter="url(#shadow)"/>
+    <text x="900" y="620" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="18" font-weight="bold">🧠 COORDINATOR AGENT</text>
+    <text x="900" y="645" text-anchor="middle" fill="#e9d8fd" font-family="Arial, sans-serif" font-size="12">Intent Classification → Routes to Domain Agents → Aggregates Results → Renders A2UI</text>
+  </g>
+  
+  <!-- ==================== LAYER 2: DOMAIN AGENTS ==================== -->
+  <g id="domain-agents-layer">
+    <rect x="40" y="700" width="1720" height="200" rx="10" fill="#e6fffa" stroke="#319795" stroke-width="2" filter="url(#shadow)"/>
+    <text x="60" y="730" fill="#2c7a7b" font-family="Arial, sans-serif" font-size="14" font-weight="bold">LAYER 2: DOMAIN AGENTS (Business Logic - Cloud Agnostic)</text>
+    
+    <!-- Cost Agent -->
+    <rect x="80" y="755" width="260" height="125" rx="8" fill="url(#domainGrad)" filter="url(#shadow)"/>
+    <text x="210" y="785" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="14" font-weight="bold">💰 COST AGENT</text>
+    <rect x="100" y="800" width="220" height="65" rx="4" fill="white" fill-opacity="0.2"/>
+    <text x="120" y="820" fill="white" font-family="Arial, sans-serif" font-size="10">• Unified cost queries</text>
+    <text x="120" y="835" fill="white" font-family="Arial, sans-serif" font-size="10">• Cross-cloud aggregation</text>
+    <text x="120" y="850" fill="white" font-family="Arial, sans-serif" font-size="10">• Delegates to Cloud Agents</text>
+    
+    <!-- Optimization Agent -->
+    <rect x="370" y="755" width="260" height="125" rx="8" fill="url(#domainGrad)" filter="url(#shadow)"/>
+    <text x="500" y="785" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="14" font-weight="bold">⚡ OPTIMIZATION AGENT</text>
+    <rect x="390" y="800" width="220" height="65" rx="4" fill="white" fill-opacity="0.2"/>
+    <text x="410" y="820" fill="white" font-family="Arial, sans-serif" font-size="10">• Rightsizing analysis</text>
+    <text x="410" y="835" fill="white" font-family="Arial, sans-serif" font-size="10">• Idle resource detection</text>
+    <text x="410" y="850" fill="white" font-family="Arial, sans-serif" font-size="10">• Delegates to Cloud Agents</text>
+    
+    <!-- Remediation Agent -->
+    <rect x="660" y="755" width="260" height="125" rx="8" fill="url(#domainGrad)" filter="url(#shadow)"/>
+    <text x="790" y="785" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="14" font-weight="bold">🔧 REMEDIATION AGENT</text>
+    <rect x="680" y="800" width="220" height="65" rx="4" fill="white" fill-opacity="0.2"/>
+    <text x="700" y="820" fill="white" font-family="Arial, sans-serif" font-size="10">• Approval workflows</text>
+    <text x="700" y="835" fill="white" font-family="Arial, sans-serif" font-size="10">• Action execution</text>
+    <text x="700" y="850" fill="white" font-family="Arial, sans-serif" font-size="10">• Delegates to Cloud Agents</text>
+    
+    <!-- Reporting Agent -->
+    <rect x="950" y="755" width="260" height="125" rx="8" fill="url(#domainGrad)" filter="url(#shadow)"/>
+    <text x="1080" y="785" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="14" font-weight="bold">📊 REPORTING AGENT</text>
+    <rect x="970" y="800" width="220" height="65" rx="4" fill="white" fill-opacity="0.2"/>
+    <text x="990" y="820" fill="white" font-family="Arial, sans-serif" font-size="10">• Forecasting</text>
+    <text x="990" y="835" fill="white" font-family="Arial, sans-serif" font-size="10">• Executive summaries</text>
+    <text x="990" y="850" fill="white" font-family="Arial, sans-serif" font-size="10">• Delegates to Cloud Agents</text>
+    
+    <!-- Tenant Agent -->
+    <rect x="1240" y="755" width="260" height="125" rx="8" fill="url(#domainGrad)" filter="url(#shadow)"/>
+    <text x="1370" y="785" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="14" font-weight="bold">🏢 TENANT AGENT</text>
+    <rect x="1260" y="800" width="220" height="65" rx="4" fill="white" fill-opacity="0.2"/>
+    <text x="1280" y="820" fill="white" font-family="Arial, sans-serif" font-size="10">• Cloud account mgmt</text>
+    <text x="1280" y="835" fill="white" font-family="Arial, sans-serif" font-size="10">• User/role management</text>
+    <text x="1280" y="850" fill="white" font-family="Arial, sans-serif" font-size="10">• Policy configuration</text>
+    
+    <!-- Cross-Cloud Agent -->
+    <rect x="1530" y="755" width="200" height="125" rx="8" fill="#805ad5" filter="url(#shadow)"/>
+    <text x="1630" y="785" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="14" font-weight="bold">🌐 CROSS-CLOUD</text>
+    <rect x="1550" y="800" width="160" height="65" rx="4" fill="white" fill-opacity="0.2"/>
+    <text x="1570" y="820" fill="white" font-family="Arial, sans-serif" font-size="10">• Multi-cloud compare</text>
+    <text x="1570" y="835" fill="white" font-family="Arial, sans-serif" font-size="10">• Workload migration</text>
+    <text x="1570" y="850" fill="white" font-family="Arial, sans-serif" font-size="10">• Arbitrage analysis</text>
+  </g>
+  
+  <!-- ==================== LAYER 3: CLOUD PROVIDER AGENTS (NEW!) ==================== -->
+  <g id="cloud-agents-layer">
+    <rect x="40" y="920" width="1720" height="320" rx="10" fill="#fef3c7" stroke="#d97706" stroke-width="3" filter="url(#shadow)"/>
+    <text x="60" y="955" fill="#92400e" font-family="Arial, sans-serif" font-size="16" font-weight="bold">⭐ LAYER 3: CLOUD PROVIDER AGENTS (NEW! - Cloud-Specific Logic + MCP Ownership)</text>
+    <text x="60" y="975" fill="#b45309" font-family="Arial, sans-serif" font-size="11">Each Cloud Agent owns its MCP server exclusively • Handles cloud-specific API patterns • Manages credentials via OpenBao • Parallel execution across clouds</text>
+    
+    <!-- AWS Agent -->
+    <rect x="80" y="1000" width="380" height="220" rx="10" fill="url(#awsAgentGrad)" filter="url(#shadow)"/>
+    <text x="270" y="1030" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="16" font-weight="bold">☁️ AWS AGENT</text>
+    <text x="270" y="1050" text-anchor="middle" fill="#ffecd2" font-family="Arial, sans-serif" font-size="11">Owns: AWS MCP Server</text>
+    
+    <rect x="100" y="1065" width="340" height="140" rx="6" fill="white" fill-opacity="0.2"/>
+    <text x="120" y="1085" fill="white" font-family="Arial, sans-serif" font-size="11" font-weight="bold">Unified Interface (called by Domain Agents):</text>
+    <text x="130" y="1105" fill="#ffecd2" font-family="Arial, sans-serif" font-size="10">• get_costs(filters) → Cost Explorer</text>
+    <text x="130" y="1120" fill="#ffecd2" font-family="Arial, sans-serif" font-size="10">• get_recommendations() → Compute Optimizer</text>
+    <text x="130" y="1135" fill="#ffecd2" font-family="Arial, sans-serif" font-size="10">• get_idle_resources() → CloudWatch + Trusted Advisor</text>
+    <text x="130" y="1150" fill="#ffecd2" font-family="Arial, sans-serif" font-size="10">• execute_action(action) → EC2/RDS/etc APIs</text>
+    <text x="130" y="1165" fill="#ffecd2" font-family="Arial, sans-serif" font-size="10">• get_anomalies() → Cost Anomaly Detection</text>
+    <text x="120" y="1190" fill="white" font-family="Arial, sans-serif" font-size="10" font-weight="bold">Credentials: OpenBao → AssumeRole</text>
+    
+    <!-- Azure Agent -->
+    <rect x="490" y="1000" width="380" height="220" rx="10" fill="url(#azureAgentGrad)" filter="url(#shadow)"/>
+    <text x="680" y="1030" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="16" font-weight="bold">☁️ AZURE AGENT</text>
+    <text x="680" y="1050" text-anchor="middle" fill="#cce5ff" font-family="Arial, sans-serif" font-size="11">Owns: Azure MCP Server</text>
+    
+    <rect x="510" y="1065" width="340" height="140" rx="6" fill="white" fill-opacity="0.2"/>
+    <text x="530" y="1085" fill="white" font-family="Arial, sans-serif" font-size="11" font-weight="bold">Unified Interface (called by Domain Agents):</text>
+    <text x="540" y="1105" fill="#cce5ff" font-family="Arial, sans-serif" font-size="10">• get_costs(filters) → Cost Management API</text>
+    <text x="540" y="1120" fill="#cce5ff" font-family="Arial, sans-serif" font-size="10">• get_recommendations() → Azure Advisor</text>
+    <text x="540" y="1135" fill="#cce5ff" font-family="Arial, sans-serif" font-size="10">• get_idle_resources() → Monitor + Advisor</text>
+    <text x="540" y="1150" fill="#cce5ff" font-family="Arial, sans-serif" font-size="10">• execute_action(action) → ARM APIs</text>
+    <text x="540" y="1165" fill="#cce5ff" font-family="Arial, sans-serif" font-size="10">• get_anomalies() → Cost Alerts</text>
+    <text x="530" y="1190" fill="white" font-family="Arial, sans-serif" font-size="10" font-weight="bold">Credentials: OpenBao → Service Principal</text>
+    
+    <!-- GCP Agent -->
+    <rect x="900" y="1000" width="380" height="220" rx="10" fill="url(#gcpAgentGrad)" filter="url(#shadow)"/>
+    <text x="1090" y="1030" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="16" font-weight="bold">☁️ GCP AGENT</text>
+    <text x="1090" y="1050" text-anchor="middle" fill="#d4e5ff" font-family="Arial, sans-serif" font-size="11">Owns: GCP MCP Server</text>
+    
+    <rect x="920" y="1065" width="340" height="140" rx="6" fill="white" fill-opacity="0.2"/>
+    <text x="940" y="1085" fill="white" font-family="Arial, sans-serif" font-size="11" font-weight="bold">Unified Interface (called by Domain Agents):</text>
+    <text x="950" y="1105" fill="#d4e5ff" font-family="Arial, sans-serif" font-size="10">• get_costs(filters) → Cloud Billing API</text>
+    <text x="950" y="1120" fill="#d4e5ff" font-family="Arial, sans-serif" font-size="10">• get_recommendations() → Recommender API</text>
+    <text x="950" y="1135" fill="#d4e5ff" font-family="Arial, sans-serif" font-size="10">• get_idle_resources() → Asset Inventory</text>
+    <text x="950" y="1150" fill="#d4e5ff" font-family="Arial, sans-serif" font-size="10">• execute_action(action) → Compute/GKE APIs</text>
+    <text x="950" y="1165" fill="#d4e5ff" font-family="Arial, sans-serif" font-size="10">• get_anomalies() → Budget Alerts</text>
+    <text x="940" y="1190" fill="white" font-family="Arial, sans-serif" font-size="10" font-weight="bold">Credentials: OpenBao → Service Account</text>
+    
+    <!-- K8s Agent -->
+    <rect x="1310" y="1000" width="380" height="220" rx="10" fill="url(#k8sAgentGrad)" filter="url(#shadow)"/>
+    <text x="1500" y="1030" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="16" font-weight="bold">⎈ KUBERNETES AGENT</text>
+    <text x="1500" y="1050" text-anchor="middle" fill="#bee3f8" font-family="Arial, sans-serif" font-size="11">Owns: OpenCost MCP Server</text>
+    
+    <rect x="1330" y="1065" width="340" height="140" rx="6" fill="white" fill-opacity="0.2"/>
+    <text x="1350" y="1085" fill="white" font-family="Arial, sans-serif" font-size="11" font-weight="bold">Unified Interface (called by Domain Agents):</text>
+    <text x="1360" y="1105" fill="#bee3f8" font-family="Arial, sans-serif" font-size="10">• get_costs(filters) → OpenCost Allocation</text>
+    <text x="1360" y="1120" fill="#bee3f8" font-family="Arial, sans-serif" font-size="10">• get_recommendations() → VPA/HPA analysis</text>
+    <text x="1360" y="1135" fill="#bee3f8" font-family="Arial, sans-serif" font-size="10">• get_idle_resources() → Efficiency metrics</text>
+    <text x="1360" y="1150" fill="#bee3f8" font-family="Arial, sans-serif" font-size="10">• execute_action(action) → kubectl/Helm</text>
+    <text x="1360" y="1165" fill="#bee3f8" font-family="Arial, sans-serif" font-size="10">• get_namespace_costs() → Per-team breakdown</text>
+    <text x="1350" y="1190" fill="white" font-family="Arial, sans-serif" font-size="10" font-weight="bold">Credentials: OpenBao → Kubeconfig</text>
+  </g>
+  
+  <!-- ==================== LAYER 4: MCP SERVERS ==================== -->
+  <g id="mcp-layer">
+    <rect x="40" y="1260" width="1720" height="180" rx="10" fill="#ebf8ff" stroke="#3182ce" stroke-width="2" filter="url(#shadow)"/>
+    <text x="60" y="1290" fill="#2b6cb0" font-family="Arial, sans-serif" font-size="14" font-weight="bold">LAYER 4: MCP SERVERS (1:1 with Cloud Agents)</text>
+    
+    <!-- AWS MCP -->
+    <rect x="80" y="1310" width="380" height="110" rx="8" fill="url(#mcpGrad)" filter="url(#shadow)"/>
+    <text x="270" y="1340" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="14" font-weight="bold">AWS MCP Server</text>
+    <text x="270" y="1360" text-anchor="middle" fill="#bee3f8" font-family="Arial, sans-serif" font-size="10">Port 8082 • boto3</text>
+    <rect x="100" y="1375" width="340" height="35" rx="4" fill="white" fill-opacity="0.15"/>
+    <text x="120" y="1395" fill="white" font-family="Arial, sans-serif" font-size="9">Cost Explorer • Compute Optimizer • Trusted Advisor • CloudWatch</text>
+    
+    <!-- Azure MCP -->
+    <rect x="490" y="1310" width="380" height="110" rx="8" fill="url(#mcpGrad)" filter="url(#shadow)"/>
+    <text x="680" y="1340" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="14" font-weight="bold">Azure MCP Server</text>
+    <text x="680" y="1360" text-anchor="middle" fill="#bee3f8" font-family="Arial, sans-serif" font-size="10">Port 8083 • azure-mgmt-*</text>
+    <rect x="510" y="1375" width="340" height="35" rx="4" fill="white" fill-opacity="0.15"/>
+    <text x="530" y="1395" fill="white" font-family="Arial, sans-serif" font-size="9">Cost Management • Advisor • Resource Graph • Monitor</text>
+    
+    <!-- GCP MCP -->
+    <rect x="900" y="1310" width="380" height="110" rx="8" fill="url(#mcpGrad)" filter="url(#shadow)"/>
+    <text x="1090" y="1340" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="14" font-weight="bold">GCP MCP Server</text>
+    <text x="1090" y="1360" text-anchor="middle" fill="#bee3f8" font-family="Arial, sans-serif" font-size="10">Port 8084 • google-cloud-*</text>
+    <rect x="920" y="1375" width="340" height="35" rx="4" fill="white" fill-opacity="0.15"/>
+    <text x="940" y="1395" fill="white" font-family="Arial, sans-serif" font-size="9">Cloud Billing • Recommender • Asset Inventory • Monitoring</text>
+    
+    <!-- OpenCost MCP -->
+    <rect x="1310" y="1310" width="380" height="110" rx="8" fill="url(#mcpGrad)" filter="url(#shadow)"/>
+    <text x="1500" y="1340" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="14" font-weight="bold">OpenCost MCP Server</text>
+    <text x="1500" y="1360" text-anchor="middle" fill="#bee3f8" font-family="Arial, sans-serif" font-size="10">Port 8085 • OpenCost API</text>
+    <rect x="1330" y="1375" width="340" height="35" rx="4" fill="white" fill-opacity="0.15"/>
+    <text x="1350" y="1395" fill="white" font-family="Arial, sans-serif" font-size="9">Allocation • Assets • Efficiency • Cloud Costs</text>
+    
+    <!-- Vertical connections from Cloud Agents to MCPs -->
+    <line x1="270" y1="1220" x2="270" y2="1310" stroke="#ff9900" stroke-width="3" marker-end="url(#arrowAWS)"/>
+    <line x1="680" y1="1220" x2="680" y2="1310" stroke="#0078d4" stroke-width="3" marker-end="url(#arrowAzure)"/>
+    <line x1="1090" y1="1220" x2="1090" y2="1310" stroke="#4285f4" stroke-width="3" marker-end="url(#arrowGCP)"/>
+    <line x1="1500" y1="1220" x2="1500" y2="1310" stroke="#326ce5" stroke-width="3"/>
+  </g>
+  
+  <!-- ==================== SHARED SERVICES MCP ==================== -->
+  <g id="shared-mcp">
+    <rect x="40" y="1460" width="1720" height="120" rx="10" fill="#f0fff4" stroke="#38a169" stroke-width="2" filter="url(#shadow)"/>
+    <text x="60" y="1490" fill="#276749" font-family="Arial, sans-serif" font-size="14" font-weight="bold">SHARED MCP SERVERS (Cross-Cloud Services)</text>
+    
+    <rect x="200" y="1510" width="280" height="55" rx="6" fill="url(#serviceGrad)"/>
+    <text x="340" y="1535" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="12" font-weight="bold">📈 Forecast MCP</text>
+    <text x="340" y="1555" text-anchor="middle" fill="#c6f6d5" font-family="Arial, sans-serif" font-size="10">Prophet • Multi-cloud predictions</text>
+    
+    <rect x="520" y="1510" width="280" height="55" rx="6" fill="url(#serviceGrad)"/>
+    <text x="660" y="1535" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="12" font-weight="bold">🔧 Remediation MCP</text>
+    <text x="660" y="1555" text-anchor="middle" fill="#c6f6d5" font-family="Arial, sans-serif" font-size="10">Temporal.io • Approval workflows</text>
+    
+    <rect x="840" y="1510" width="280" height="55" rx="6" fill="url(#serviceGrad)"/>
+    <text x="980" y="1535" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="12" font-weight="bold">📋 Policy MCP</text>
+    <text x="980" y="1555" text-anchor="middle" fill="#c6f6d5" font-family="Arial, sans-serif" font-size="10">Guardrails • Compliance</text>
+    
+    <rect x="1160" y="1510" width="280" height="55" rx="6" fill="url(#serviceGrad)"/>
+    <text x="1300" y="1535" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="12" font-weight="bold">🏢 Tenant MCP</text>
+    <text x="1300" y="1555" text-anchor="middle" fill="#c6f6d5" font-family="Arial, sans-serif" font-size="10">User/Org management</text>
+  </g>
+  
+  <!-- ==================== EXECUTION FLOW DIAGRAM ==================== -->
+  <g id="execution-flow">
+    <rect x="40" y="1600" width="1720" height="280" rx="10" fill="#1a202c" filter="url(#shadow)"/>
+    <text x="60" y="1630" fill="white" font-family="Arial, sans-serif" font-size="16" font-weight="bold">📊 EXECUTION FLOW EXAMPLE: "Show me cost breakdown across all clouds"</text>
+    
+    <!-- Step 1 -->
+    <rect x="80" y="1660" width="200" height="60" rx="6" fill="#6b46c1"/>
+    <text x="180" y="1685" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="11" font-weight="bold">1. Coordinator</text>
+    <text x="180" y="1705" text-anchor="middle" fill="#e9d8fd" font-family="Arial, sans-serif" font-size="9">Intent: COST_QUERY</text>
+    
+    <line x1="280" y1="1690" x2="340" y2="1690" stroke="#805ad5" stroke-width="2" marker-end="url(#arrowPurple)"/>
+    
+    <!-- Step 2 -->
+    <rect x="350" y="1660" width="200" height="60" rx="6" fill="#319795"/>
+    <text x="450" y="1685" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="11" font-weight="bold">2. Cost Agent</text>
+    <text x="450" y="1705" text-anchor="middle" fill="#e6fffa" font-family="Arial, sans-serif" font-size="9">Fan-out to Cloud Agents</text>
+    
+    <!-- Parallel fan-out -->
+    <line x1="550" y1="1680" x2="620" y2="1660" stroke="#319795" stroke-width="2"/>
+    <line x1="550" y1="1690" x2="620" y2="1690" stroke="#319795" stroke-width="2"/>
+    <line x1="550" y1="1700" x2="620" y2="1720" stroke="#319795" stroke-width="2"/>
+    <line x1="550" y1="1710" x2="620" y2="1750" stroke="#319795" stroke-width="2"/>
+    
+    <!-- Step 3: Parallel Cloud Agents -->
+    <rect x="630" y="1640" width="180" height="40" rx="4" fill="#ff9900"/>
+    <text x="720" y="1665" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10" font-weight="bold">3a. AWS Agent</text>
+    
+    <rect x="630" y="1690" width="180" height="40" rx="4" fill="#0078d4"/>
+    <text x="720" y="1715" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10" font-weight="bold">3b. Azure Agent</text>
+    
+    <rect x="630" y="1740" width="180" height="40" rx="4" fill="#4285f4"/>
+    <text x="720" y="1765" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10" font-weight="bold">3c. GCP Agent</text>
+    
+    <rect x="630" y="1790" width="180" height="40" rx="4" fill="#326ce5"/>
+    <text x="720" y="1815" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10" font-weight="bold">3d. K8s Agent</text>
+    
+    <!-- PARALLEL badge -->
+    <rect x="570" y="1700" width="50" height="50" rx="25" fill="#48bb78"/>
+    <text x="595" y="1730" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10" font-weight="bold">||</text>
+    
+    <!-- Step 4: MCP calls -->
+    <line x1="810" y1="1660" x2="870" y2="1660" stroke="#ff9900" stroke-width="2"/>
+    <line x1="810" y1="1710" x2="870" y2="1710" stroke="#0078d4" stroke-width="2"/>
+    <line x1="810" y1="1760" x2="870" y2="1760" stroke="#4285f4" stroke-width="2"/>
+    <line x1="810" y1="1810" x2="870" y2="1810" stroke="#326ce5" stroke-width="2"/>
+    
+    <rect x="880" y="1640" width="120" height="40" rx="4" fill="#2b6cb0"/>
+    <text x="940" y="1665" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="9">AWS MCP</text>
+    
+    <rect x="880" y="1690" width="120" height="40" rx="4" fill="#2b6cb0"/>
+    <text x="940" y="1715" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="9">Azure MCP</text>
+    
+    <rect x="880" y="1740" width="120" height="40" rx="4" fill="#2b6cb0"/>
+    <text x="940" y="1765" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="9">GCP MCP</text>
+    
+    <rect x="880" y="1790" width="120" height="40" rx="4" fill="#2b6cb0"/>
+    <text x="940" y="1815" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="9">OpenCost MCP</text>
+    
+    <!-- Step 5: Aggregate -->
+    <line x1="1000" y1="1660" x2="1060" y2="1715" stroke="#a0aec0" stroke-width="1.5"/>
+    <line x1="1000" y1="1710" x2="1060" y2="1715" stroke="#a0aec0" stroke-width="1.5"/>
+    <line x1="1000" y1="1760" x2="1060" y2="1715" stroke="#a0aec0" stroke-width="1.5"/>
+    <line x1="1000" y1="1810" x2="1060" y2="1715" stroke="#a0aec0" stroke-width="1.5"/>
+    
+    <rect x="1070" y="1685" width="200" height="60" rx="6" fill="#319795"/>
+    <text x="1170" y="1710" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="11" font-weight="bold">5. Cost Agent</text>
+    <text x="1170" y="1730" text-anchor="middle" fill="#e6fffa" font-family="Arial, sans-serif" font-size="9">Aggregate + Normalize</text>
+    
+    <line x1="1270" y1="1715" x2="1330" y2="1715" stroke="#319795" stroke-width="2" marker-end="url(#arrowTeal)"/>
+    
+    <!-- Step 6: Coordinator renders -->
+    <rect x="1340" y="1685" width="200" height="60" rx="6" fill="#6b46c1"/>
+    <text x="1440" y="1710" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="11" font-weight="bold">6. Coordinator</text>
+    <text x="1440" y="1730" text-anchor="middle" fill="#e9d8fd" font-family="Arial, sans-serif" font-size="9">Render A2UI Response</text>
+    
+    <line x1="1540" y1="1715" x2="1600" y2="1715" stroke="#805ad5" stroke-width="2" marker-end="url(#arrowPurple)"/>
+    
+    <!-- Step 7: UI -->
+    <rect x="1610" y="1685" width="120" height="60" rx="6" fill="#14b8a6"/>
+    <text x="1670" y="1715" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="11" font-weight="bold">7. UI</text>
+    <text x="1670" y="1730" text-anchor="middle" fill="#e6fffa" font-family="Arial, sans-serif" font-size="9">CostSummaryCard</text>
+    
+    <!-- Timing comparison -->
+    <rect x="80" y="1840" width="700" height="30" rx="4" fill="#fecaca"/>
+    <text x="430" y="1860" text-anchor="middle" fill="#991b1b" font-family="Arial, sans-serif" font-size="11">v2.0 Serial: AWS(2s) → Azure(2s) → GCP(2s) → K8s(1s) = ~7 seconds total</text>
+    
+    <rect x="800" y="1840" width="700" height="30" rx="4" fill="#bbf7d0"/>
+    <text x="1150" y="1860" text-anchor="middle" fill="#166534" font-family="Arial, sans-serif" font-size="11">v3.0 Parallel: max(AWS,Azure,GCP,K8s) = ~2-3 seconds total (60% faster!)</text>
+  </g>
+  
+  <!-- ==================== SERVICES LAYER ==================== -->
+  <g id="services-layer">
+    <rect x="40" y="1900" width="1720" height="140" rx="10" fill="#f0fff4" stroke="#38a169" stroke-width="2" filter="url(#shadow)"/>
+    <text x="60" y="1930" fill="#276749" font-family="Arial, sans-serif" font-size="14" font-weight="bold">BACKGROUND SERVICES LAYER</text>
+    
+    <g transform="translate(0, 1950)">
+      <rect x="80" y="0" width="200" height="70" rx="6" fill="url(#serviceGrad)"/>
+      <text x="180" y="25" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="11" font-weight="bold">📥 Data Collector</text>
+      <text x="180" y="45" text-anchor="middle" fill="#c6f6d5" font-family="Arial, sans-serif" font-size="9">Per-tenant sync</text>
+      <text x="180" y="60" text-anchor="middle" fill="#9ae6b4" font-family="Arial, sans-serif" font-size="8">Celery + Redis Beat</text>
+      
+      <rect x="310" y="0" width="200" height="70" rx="6" fill="url(#serviceGrad)"/>
+      <text x="410" y="25" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="11" font-weight="bold">🔍 Anomaly Detector</text>
+      <text x="410" y="45" text-anchor="middle" fill="#c6f6d5" font-family="Arial, sans-serif" font-size="9">Cross-cloud correlation</text>
+      <text x="410" y="60" text-anchor="middle" fill="#9ae6b4" font-family="Arial, sans-serif" font-size="8">Prophet + Isolation Forest</text>
+      
+      <rect x="540" y="0" width="200" height="70" rx="6" fill="url(#serviceGrad)"/>
+      <text x="640" y="25" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="11" font-weight="bold">💡 Recommendation</text>
+      <text x="640" y="45" text-anchor="middle" fill="#c6f6d5" font-family="Arial, sans-serif" font-size="9">Prioritization engine</text>
+      <text x="640" y="60" text-anchor="middle" fill="#9ae6b4" font-family="Arial, sans-serif" font-size="8">Impact calculation</text>
+      
+      <rect x="770" y="0" width="200" height="70" rx="6" fill="url(#serviceGrad)"/>
+      <text x="870" y="25" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="11" font-weight="bold">⚙️ Remediation</text>
+      <text x="870" y="45" text-anchor="middle" fill="#c6f6d5" font-family="Arial, sans-serif" font-size="9">Approval workflows</text>
+      <text x="870" y="60" text-anchor="middle" fill="#9ae6b4" font-family="Arial, sans-serif" font-size="8">Temporal.io</text>
+      
+      <rect x="1000" y="0" width="200" height="70" rx="6" fill="url(#serviceGrad)"/>
+      <text x="1100" y="25" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="11" font-weight="bold">⏰ Scheduler</text>
+      <text x="1100" y="45" text-anchor="middle" fill="#c6f6d5" font-family="Arial, sans-serif" font-size="9">Resource scheduling</text>
+      <text x="1100" y="60" text-anchor="middle" fill="#9ae6b4" font-family="Arial, sans-serif" font-size="8">Celery Beat</text>
+      
+      <rect x="1230" y="0" width="200" height="70" rx="6" fill="url(#serviceGrad)"/>
+      <text x="1330" y="25" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="11" font-weight="bold">🔔 Notification</text>
+      <text x="1330" y="45" text-anchor="middle" fill="#c6f6d5" font-family="Arial, sans-serif" font-size="9">Slack/Email/PagerDuty</text>
+      <text x="1330" y="60" text-anchor="middle" fill="#9ae6b4" font-family="Arial, sans-serif" font-size="8">Per-tenant channels</text>
+      
+      <rect x="1460" y="0" width="200" height="70" rx="6" fill="#c53030"/>
+      <text x="1560" y="25" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="11" font-weight="bold">🏢 Tenant Manager</text>
+      <text x="1560" y="45" text-anchor="middle" fill="#fed7d7" font-family="Arial, sans-serif" font-size="9">Org provisioning</text>
+      <text x="1560" y="60" text-anchor="middle" fill="#fecaca" font-family="Arial, sans-serif" font-size="8">Quota enforcement</text>
+    </g>
+  </g>
+  
+  <!-- ==================== DATA LAYER ==================== -->
+  <g id="data-layer">
+    <rect x="40" y="2060" width="1720" height="130" rx="10" fill="#fffff0" stroke="#d69e2e" stroke-width="2" filter="url(#shadow)"/>
+    <text x="60" y="2090" fill="#975a16" font-family="Arial, sans-serif" font-size="14" font-weight="bold">DATA LAYER (Tenant-Isolated)</text>
+    
+    <g transform="translate(0, 2105)">
+      <rect x="80" y="0" width="220" height="65" rx="6" fill="url(#dataGrad)"/>
+      <text x="190" y="20" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="12" font-weight="bold">🕐 TimescaleDB</text>
+      <text x="190" y="40" text-anchor="middle" fill="#fefcbf" font-family="Arial, sans-serif" font-size="9">Time-series metrics</text>
+      <text x="190" y="55" text-anchor="middle" fill="#f6e05e" font-family="Arial, sans-serif" font-size="8">RLS by tenant_id</text>
+      
+      <rect x="320" y="0" width="220" height="65" rx="6" fill="url(#dataGrad)"/>
+      <text x="430" y="20" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="12" font-weight="bold">🐘 PostgreSQL</text>
+      <text x="430" y="40" text-anchor="middle" fill="#fefcbf" font-family="Arial, sans-serif" font-size="9">Relational data</text>
+      <text x="430" y="55" text-anchor="middle" fill="#f6e05e" font-family="Arial, sans-serif" font-size="8">RLS policies</text>
+      
+      <rect x="560" y="0" width="180" height="65" rx="6" fill="url(#dataGrad)"/>
+      <text x="650" y="20" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="12" font-weight="bold">⚡ Redis</text>
+      <text x="650" y="40" text-anchor="middle" fill="#fefcbf" font-family="Arial, sans-serif" font-size="9">Cache + Queue</text>
+      <text x="650" y="55" text-anchor="middle" fill="#f6e05e" font-family="Arial, sans-serif" font-size="8">tenant:{id}:*</text>
+      
+      <rect x="760" y="0" width="220" height="65" rx="6" fill="url(#vaultGrad)"/>
+      <text x="870" y="20" text-anchor="middle" fill="#1a202c" font-family="Arial, sans-serif" font-size="12" font-weight="bold">🔑 OpenBao</text>
+      <text x="870" y="40" text-anchor="middle" fill="#744210" font-family="Arial, sans-serif" font-size="9">Per-tenant secrets</text>
+      <text x="870" y="55" text-anchor="middle" fill="#92400e" font-family="Arial, sans-serif" font-size="8">secret/tenants/{id}/*</text>
+      
+      <rect x="1000" y="0" width="200" height="65" rx="6" fill="url(#dataGrad)"/>
+      <text x="1100" y="20" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="12" font-weight="bold">📦 Object Storage</text>
+      <text x="1100" y="40" text-anchor="middle" fill="#fefcbf" font-family="Arial, sans-serif" font-size="9">Reports/Exports</text>
+      <text x="1100" y="55" text-anchor="middle" fill="#f6e05e" font-family="Arial, sans-serif" font-size="8">/{tenant_id}/</text>
+      
+      <rect x="1220" y="0" width="200" height="65" rx="6" fill="#2d3748"/>
+      <text x="1320" y="20" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="12" font-weight="bold">📝 Audit Log</text>
+      <text x="1320" y="40" text-anchor="middle" fill="#a0aec0" font-family="Arial, sans-serif" font-size="9">Immutable trail</text>
+      <text x="1320" y="55" text-anchor="middle" fill="#718096" font-family="Arial, sans-serif" font-size="8">7-year retention</text>
+      
+      <rect x="1440" y="0" width="280" height="65" rx="6" fill="#4a5568"/>
+      <text x="1580" y="20" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="12" font-weight="bold">☁️ Cloud APIs</text>
+      <text x="1580" y="40" text-anchor="middle" fill="#a0aec0" font-family="Arial, sans-serif" font-size="9">AWS • Azure • GCP • K8s</text>
+      <text x="1580" y="55" text-anchor="middle" fill="#718096" font-family="Arial, sans-serif" font-size="8">Per-tenant credentials</text>
+    </g>
+  </g>
+  
+  <!-- ==================== AGENT HIERARCHY SUMMARY ==================== -->
+  <g id="hierarchy-summary">
+    <rect x="40" y="2210" width="1720" height="180" rx="10" fill="#1a202c" filter="url(#shadow)"/>
+    <text x="900" y="2245" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="18" font-weight="bold">AGENT HIERARCHY SUMMARY (v3.0)</text>
+    
+    <!-- Layer boxes -->
+    <rect x="100" y="2270" width="350" height="100" rx="8" fill="#6b46c1"/>
+    <text x="275" y="2300" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="14" font-weight="bold">Layer 1: Coordinator</text>
+    <text x="275" y="2325" text-anchor="middle" fill="#e9d8fd" font-family="Arial, sans-serif" font-size="11">1 Agent</text>
+    <text x="275" y="2350" text-anchor="middle" fill="#d6bcfa" font-family="Arial, sans-serif" font-size="10">Intent routing, A2UI rendering</text>
+    
+    <rect x="480" y="2270" width="350" height="100" rx="8" fill="#319795"/>
+    <text x="655" y="2300" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="14" font-weight="bold">Layer 2: Domain Agents</text>
+    <text x="655" y="2325" text-anchor="middle" fill="#e6fffa" font-family="Arial, sans-serif" font-size="11">6 Agents</text>
+    <text x="655" y="2350" text-anchor="middle" fill="#b2f5ea" font-family="Arial, sans-serif" font-size="10">Cost, Optimization, Remediation, Reporting, Tenant, Cross-Cloud</text>
+    
+    <rect x="860" y="2270" width="350" height="100" rx="8" fill="#d97706"/>
+    <text x="1035" y="2300" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="14" font-weight="bold">Layer 3: Cloud Agents ⭐</text>
+    <text x="1035" y="2325" text-anchor="middle" fill="#fef3c7" font-family="Arial, sans-serif" font-size="11">4 Agents (NEW)</text>
+    <text x="1035" y="2350" text-anchor="middle" fill="#fde68a" font-family="Arial, sans-serif" font-size="10">AWS, Azure, GCP, Kubernetes</text>
+    
+    <rect x="1240" y="2270" width="350" height="100" rx="8" fill="#2b6cb0"/>
+    <text x="1415" y="2300" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="14" font-weight="bold">Layer 4: MCP Servers</text>
+    <text x="1415" y="2325" text-anchor="middle" fill="#bee3f8" font-family="Arial, sans-serif" font-size="11">8 Servers</text>
+    <text x="1415" y="2350" text-anchor="middle" fill="#90cdf4" font-family="Arial, sans-serif" font-size="10">4 Cloud + 4 Shared (Forecast, Policy, etc.)</text>
+    
+    <!-- Arrows between layers -->
+    <line x1="450" y1="2320" x2="480" y2="2320" stroke="white" stroke-width="2" marker-end="url(#arrowhead)"/>
+    <line x1="830" y1="2320" x2="860" y2="2320" stroke="white" stroke-width="2" marker-end="url(#arrowhead)"/>
+    <line x1="1210" y1="2320" x2="1240" y2="2320" stroke="white" stroke-width="2" marker-end="url(#arrowhead)"/>
+  </g>
+  
+  <!-- ==================== KEY METRICS ==================== -->
+  <g id="metrics">
+    <rect x="40" y="2410" width="1720" height="80" rx="10" fill="#edf2f7" stroke="#a0aec0" stroke-width="2"/>
+    <text x="900" y="2440" text-anchor="middle" fill="#2d3748" font-family="Arial, sans-serif" font-size="14" font-weight="bold">KEY METRICS v3.0</text>
+    
+    <g transform="translate(80, 2455)">
+      <rect x="0" y="0" width="160" height="25" rx="4" fill="#6b46c1"/>
+      <text x="80" y="17" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10" font-weight="bold">11 Total Agents</text>
+      
+      <rect x="180" y="0" width="160" height="25" rx="4" fill="#319795"/>
+      <text x="260" y="17" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10" font-weight="bold">6 Domain Agents</text>
+      
+      <rect x="360" y="0" width="160" height="25" rx="4" fill="#d97706"/>
+      <text x="440" y="17" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10" font-weight="bold">4 Cloud Agents ⭐</text>
+      
+      <rect x="540" y="0" width="160" height="25" rx="4" fill="#2b6cb0"/>
+      <text x="620" y="17" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10" font-weight="bold">8 MCP Servers</text>
+      
+      <rect x="720" y="0" width="160" height="25" rx="4" fill="#48bb78"/>
+      <text x="800" y="17" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10" font-weight="bold">60% Faster ⚡</text>
+      
+      <rect x="900" y="0" width="160" height="25" rx="4" fill="#eb5424"/>
+      <text x="980" y="17" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10" font-weight="bold">Auth0 + RBAC</text>
+      
+      <rect x="1080" y="0" width="160" height="25" rx="4" fill="#f0b90b"/>
+      <text x="1160" y="17" text-anchor="middle" fill="#1a202c" font-family="Arial, sans-serif" font-size="10" font-weight="bold">OpenBao Secrets</text>
+      
+      <rect x="1260" y="0" width="160" height="25" rx="4" fill="#4285f4"/>
+      <text x="1340" y="17" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10" font-weight="bold">A2A Gateway</text>
+      
+      <rect x="1440" y="0" width="160" height="25" rx="4" fill="#c53030"/>
+      <text x="1520" y="17" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10" font-weight="bold">Multi-Tenant</text>
+    </g>
+  </g>
+  
+  <!-- Footer -->
+  <text x="900" y="2530" text-anchor="middle" fill="#718096" font-family="Arial, sans-serif" font-size="12">Multi-Cloud FinOps Agent v3.0 • Hierarchical Agent Architecture • Auth0 + A2A + OpenBao + Multi-Tenant • January 2026</text>
+  
+  <!-- Connection lines between major layers -->
+  <line x1="900" y1="505" x2="900" y2="540" stroke="#4a5568" stroke-width="2" stroke-dasharray="5,3"/>
+  <line x1="900" y1="660" x2="900" y2="700" stroke="#4a5568" stroke-width="2" stroke-dasharray="5,3"/>
+  <line x1="900" y1="880" x2="900" y2="920" stroke="#4a5568" stroke-width="2" stroke-dasharray="5,3"/>
+</svg>

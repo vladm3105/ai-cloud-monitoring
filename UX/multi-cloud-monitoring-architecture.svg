@@ -1,0 +1,542 @@
+<svg viewBox="0 0 1600 2000" xmlns="http://www.w3.org/2000/svg">
+  <!-- Title -->
+  <text x="800" y="40" font-size="32" font-weight="bold" text-anchor="middle" fill="#1e293b">
+    Multi-Cloud Monitoring Architecture
+  </text>
+  <text x="800" y="75" font-size="16" text-anchor="middle" fill="#64748b">
+    Unified Dashboard Across GCP, AWS, Azure with MCP Server Integration
+  </text>
+  
+  <!-- ============================================================ -->
+  <!-- UNIFIED MONITORING LAYER (TOP) -->
+  <!-- ============================================================ -->
+  <g transform="translate(50, 120)">
+    <rect x="0" y="0" width="1500" height="280" rx="12" fill="#f0f9ff" stroke="#0284c7" stroke-width="3"/>
+    <rect x="0" y="0" width="1500" height="50" rx="12" fill="#0284c7"/>
+    <text x="750" y="32" font-size="20" font-weight="bold" text-anchor="middle" fill="#ffffff">
+      UNIFIED MONITORING LAYER
+    </text>
+    
+    <!-- Central Grafana -->
+    <g transform="translate(400, 70)">
+      <rect x="0" y="0" width="700" height="120" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+      <text x="350" y="25" font-size="16" font-weight="bold" text-anchor="middle" fill="#1e3a8a">
+        Central Grafana (Single Unified Dashboard)
+      </text>
+      
+      <text x="20" y="50" font-size="12" fill="#1e40af">✓ Multi-cloud cost overview</text>
+      <text x="20" y="70" font-size="12" fill="#1e40af">✓ Cross-cloud model comparison</text>
+      <text x="20" y="90" font-size="12" fill="#1e40af">✓ Tenant cloud selection (enable/disable)</text>
+      <text x="20" y="110" font-size="12" fill="#1e40af">✓ Unified alerting across all clouds</text>
+      
+      <text x="400" y="50" font-size="12" fill="#1e40af">• Queries all MCP servers</text>
+      <text x="400" y="70" font-size="12" fill="#1e40af">• Dynamic cloud filtering</text>
+      <text x="400" y="90" font-size="12" fill="#1e40af">• Per-tenant configuration</text>
+    </g>
+    
+    <!-- Prometheus Federation -->
+    <g transform="translate(50, 70)">
+      <rect x="0" y="0" width="280" height="120" rx="10" fill="#dcfce7" stroke="#22c55e" stroke-width="2"/>
+      <text x="140" y="25" font-size="14" font-weight="bold" text-anchor="middle" fill="#15803d">
+        Prometheus Federation
+      </text>
+      <text x="10" y="50" font-size="11" fill="#166534">Scrapes:</text>
+      <text x="10" y="68" font-size="10" fill="#15803d">• GCP Exporter</text>
+      <text x="10" y="84" font-size="10" fill="#15803d">• AWS Exporter</text>
+      <text x="10" y="100" font-size="10" fill="#15803d">• Azure Exporter</text>
+      <text x="145" y="68" font-size="10" fill="#15803d">Every 15s</text>
+      <text x="145" y="84" font-size="10" fill="#15803d">Relabels</text>
+      <text x="145" y="100" font-size="10" fill="#15803d">30d retention</text>
+    </g>
+    
+    <!-- Cloud Registry DB -->
+    <g transform="translate(1170, 70)">
+      <rect x="0" y="0" width="280" height="120" rx="10" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+      <text x="140" y="25" font-size="14" font-weight="bold" text-anchor="middle" fill="#92400e">
+        Cloud Registry DB
+      </text>
+      <text x="10" y="50" font-size="11" fill="#78350f">Tables:</text>
+      <text x="10" y="68" font-size="10" fill="#854d0e">• cloud_environments</text>
+      <text x="10" y="84" font-size="10" fill="#854d0e">• tenant_cloud_config</text>
+      <text x="10" y="100" font-size="10" fill="#854d0e">• mcp_server_endpoints</text>
+    </g>
+    
+    <!-- Data Source Connections (arrows down) -->
+    <line x1="300" y1="210" x2="300" y2="260" stroke="#475569" stroke-width="3" marker-end="url(#arrowhead)"/>
+    <line x1="750" y1="210" x2="750" y2="260" stroke="#475569" stroke-width="3" marker-end="url(#arrowhead)"/>
+    <line x1="1200" y1="210" x2="1200" y2="260" stroke="#475569" stroke-width="3" marker-end="url(#arrowhead)"/>
+    
+    <text x="250" y="240" font-size="11" fill="#475569" font-weight="bold">GCP Data</text>
+    <text x="700" y="240" font-size="11" fill="#475569" font-weight="bold">AWS Data</text>
+    <text x="1150" y="240" font-size="11" fill="#475569" font-weight="bold">Azure Data</text>
+  </g>
+  
+  <!-- ============================================================ -->
+  <!-- CLOUD ENVIRONMENTS SECTION -->
+  <!-- ============================================================ -->
+  <g transform="translate(50, 450)">
+    <rect x="0" y="0" width="1500" height="1400" rx="12" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+    <text x="750" y="35" font-size="22" font-weight="bold" text-anchor="middle" fill="#1e293b">
+      INDEPENDENT CLOUD ENVIRONMENTS
+    </text>
+    
+    <!-- ============================================================ -->
+    <!-- GCP ENVIRONMENT -->
+    <!-- ============================================================ -->
+    <g transform="translate(30, 60)">
+      <rect x="0" y="0" width="450" height="1280" rx="10" fill="#ffffff" stroke="#4285f4" stroke-width="3"/>
+      <rect x="0" y="0" width="450" height="50" rx="10" fill="#4285f4"/>
+      <text x="225" y="32" font-size="18" font-weight="bold" text-anchor="middle" fill="#ffffff">
+        GCP ENVIRONMENT
+      </text>
+      
+      <!-- Project info -->
+      <text x="225" y="75" font-size="11" text-anchor="middle" fill="#64748b">
+        Project: ai-cost-monitoring-gcp
+      </text>
+      <text x="225" y="92" font-size="11" text-anchor="middle" fill="#64748b">
+        Region: us-central1
+      </text>
+      
+      <!-- MCP Server -->
+      <g transform="translate(25, 110)">
+        <rect x="0" y="0" width="400" height="180" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+        <text x="200" y="25" font-size="14" font-weight="bold" text-anchor="middle" fill="#1e40af">
+          GCP MCP Server (Cloud Run)
+        </text>
+        
+        <text x="10" y="50" font-size="11" font-weight="600" fill="#1e3a8a">Endpoints:</text>
+        <text x="10" y="68" font-size="10" fill="#1e40af">GET /metrics/costs/daily</text>
+        <text x="10" y="83" font-size="10" fill="#1e40af">GET /metrics/costs/hourly</text>
+        <text x="10" y="98" font-size="10" fill="#1e40af">GET /metrics/tokens/{model}</text>
+        <text x="10" y="113" font-size="10" fill="#1e40af">GET /metrics/customers/{id}</text>
+        <text x="10" y="128" font-size="10" fill="#1e40af">GET /health</text>
+        
+        <text x="220" y="68" font-size="10" fill="#1e40af">Prometheus metrics:</text>
+        <text x="220" y="83" font-size="9" fill="#1e40af">gcp_llm_cost_usd_total</text>
+        <text x="220" y="98" font-size="9" fill="#1e40af">gcp_llm_tokens_total</text>
+        <text x="220" y="113" font-size="9" fill="#1e40af">gcp_llm_requests_total</text>
+        
+        <rect x="120" y="145" width="160" height="25" rx="4" fill="#bfdbfe" stroke="#2563eb" stroke-width="1"/>
+        <text x="200" y="162" font-size="10" font-weight="bold" text-anchor="middle" fill="#1e3a8a">
+          Standardized API
+        </text>
+      </g>
+      
+      <!-- Arrow down -->
+      <line x1="225" y1="305" x2="225" y2="340" stroke="#475569" stroke-width="2" marker-end="url(#arrowhead)"/>
+      
+      <!-- Prometheus Exporter -->
+      <g transform="translate(25, 350)">
+        <rect x="0" y="0" width="400" height="100" rx="8" fill="#dcfce7" stroke="#22c55e" stroke-width="2"/>
+        <text x="200" y="25" font-size="14" font-weight="bold" text-anchor="middle" fill="#15803d">
+          Prometheus Exporter
+        </text>
+        <text x="10" y="50" font-size="10" fill="#166534">• Queries TimescaleDB every 15s</text>
+        <text x="10" y="68" font-size="10" fill="#166534">• Converts DB → Prometheus metrics</text>
+        <text x="10" y="86" font-size="10" fill="#166534">• Exposes /metrics endpoint</text>
+      </g>
+      
+      <!-- Arrow down -->
+      <line x1="225" y1="465" x2="225" y2="500" stroke="#475569" stroke-width="2" marker-end="url(#arrowhead)"/>
+      
+      <!-- TimescaleDB -->
+      <g transform="translate(25, 510)">
+        <rect x="0" y="0" width="400" height="120" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+        <text x="200" y="25" font-size="14" font-weight="bold" text-anchor="middle" fill="#92400e">
+          TimescaleDB (Cloud SQL)
+        </text>
+        <text x="10" y="50" font-size="10" fill="#78350f">Database: gcp_llm_costs</text>
+        <text x="10" y="68" font-size="10" fill="#78350f">Table: llm_consumption</text>
+        <text x="10" y="86" font-size="10" fill="#78350f">• Hypertable on timestamp</text>
+        <text x="10" y="104" font-size="10" fill="#78350f">• 30-day retention</text>
+      </g>
+      
+      <!-- Arrow down -->
+      <line x1="225" y1="645" x2="225" y2="680" stroke="#475569" stroke-width="2" marker-end="url(#arrowhead)"/>
+      
+      <!-- ETL Pipeline -->
+      <g transform="translate(25, 690)">
+        <rect x="0" y="0" width="400" height="130" rx="8" fill="#f3e8ff" stroke="#a855f7" stroke-width="2"/>
+        <text x="200" y="25" font-size="14" font-weight="bold" text-anchor="middle" fill="#6b21a8">
+          ETL Pipeline (Cloud Function)
+        </text>
+        <text x="10" y="50" font-size="10" fill="#7c3aed">Trigger: Cloud Scheduler (daily 2 AM)</text>
+        <text x="10" y="68" font-size="10" fill="#7c3aed">Source: BigQuery Billing Export</text>
+        <text x="10" y="86" font-size="10" fill="#7c3aed">• Extract Vertex AI costs</text>
+        <text x="10" y="104" font-size="10" fill="#7c3aed">• Parse Gemini, PaLM usage</text>
+        <text x="10" y="122" font-size="10" fill="#7c3aed">• Write to TimescaleDB</text>
+      </g>
+      
+      <!-- Arrow down -->
+      <line x1="225" y1="835" x2="225" y2="870" stroke="#475569" stroke-width="2" marker-end="url(#arrowhead)"/>
+      
+      <!-- GCP Services -->
+      <g transform="translate(25, 880)">
+        <rect x="0" y="0" width="400" height="150" rx="8" fill="#e0f2fe" stroke="#0284c7" stroke-width="2"/>
+        <text x="200" y="25" font-size="14" font-weight="bold" text-anchor="middle" fill="#075985">
+          GCP LLM Services
+        </text>
+        
+        <g transform="translate(30, 45)">
+          <rect x="0" y="0" width="100" height="35" rx="4" fill="#bae6fd" stroke="#0369a1" stroke-width="1"/>
+          <text x="50" y="13" font-size="10" font-weight="600" text-anchor="middle" fill="#0c4a6e">Vertex AI</text>
+          <text x="50" y="27" font-size="8" text-anchor="middle" fill="#075985">Gemini, PaLM</text>
+        </g>
+        
+        <g transform="translate(150, 45)">
+          <rect x="0" y="0" width="100" height="35" rx="4" fill="#bae6fd" stroke="#0369a1" stroke-width="1"/>
+          <text x="50" y="13" font-size="10" font-weight="600" text-anchor="middle" fill="#0c4a6e">Document AI</text>
+          <text x="50" y="27" font-size="8" text-anchor="middle" fill="#075985">OCR, Analysis</text>
+        </g>
+        
+        <g transform="translate(270, 45)">
+          <rect x="0" y="0" width="100" height="35" rx="4" fill="#bae6fd" stroke="#0369a1" stroke-width="1"/>
+          <text x="50" y="13" font-size="10" font-weight="600" text-anchor="middle" fill="#0c4a6e">Vision AI</text>
+          <text x="50" y="27" font-size="8" text-anchor="middle" fill="#075985">Image Analysis</text>
+        </g>
+        
+        <text x="200" y="110" font-size="10" text-anchor="middle" fill="#075985">
+          BigQuery Billing Export
+        </text>
+        <text x="200" y="128" font-size="9" text-anchor="middle" fill="#0284c7">
+          (Automatic cost data)
+        </text>
+      </g>
+      
+      <!-- Cost -->
+      <rect x="100" y="1220" width="250" height="35" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+      <text x="225" y="1242" font-size="12" font-weight="bold" text-anchor="middle" fill="#92400e">
+        Cost: $70-100/month
+      </text>
+    </g>
+    
+    <!-- ============================================================ -->
+    <!-- AWS ENVIRONMENT -->
+    <!-- ============================================================ -->
+    <g transform="translate(525, 60)">
+      <rect x="0" y="0" width="450" height="1280" rx="10" fill="#ffffff" stroke="#ff9900" stroke-width="3"/>
+      <rect x="0" y="0" width="450" height="50" rx="10" fill="#ff9900"/>
+      <text x="225" y="32" font-size="18" font-weight="bold" text-anchor="middle" fill="#ffffff">
+        AWS ENVIRONMENT
+      </text>
+      
+      <!-- Account info -->
+      <text x="225" y="75" font-size="11" text-anchor="middle" fill="#64748b">
+        Account: 123456789012
+      </text>
+      <text x="225" y="92" font-size="11" text-anchor="middle" fill="#64748b">
+        Region: us-east-1
+      </text>
+      
+      <!-- MCP Server -->
+      <g transform="translate(25, 110)">
+        <rect x="0" y="0" width="400" height="180" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+        <text x="200" y="25" font-size="14" font-weight="bold" text-anchor="middle" fill="#1e40af">
+          AWS MCP Server (ECS Fargate)
+        </text>
+        
+        <text x="10" y="50" font-size="11" font-weight="600" fill="#1e3a8a">Endpoints:</text>
+        <text x="10" y="68" font-size="10" fill="#1e40af">GET /metrics/costs/daily</text>
+        <text x="10" y="83" font-size="10" fill="#1e40af">GET /metrics/costs/hourly</text>
+        <text x="10" y="98" font-size="10" fill="#1e40af">GET /metrics/tokens/{model}</text>
+        <text x="10" y="113" font-size="10" fill="#1e40af">GET /metrics/customers/{id}</text>
+        <text x="10" y="128" font-size="10" fill="#1e40af">GET /health</text>
+        
+        <text x="220" y="68" font-size="10" fill="#1e40af">Prometheus metrics:</text>
+        <text x="220" y="83" font-size="9" fill="#1e40af">aws_llm_cost_usd_total</text>
+        <text x="220" y="98" font-size="9" fill="#1e40af">aws_llm_tokens_total</text>
+        <text x="220" y="113" font-size="9" fill="#1e40af">aws_llm_requests_total</text>
+        
+        <rect x="120" y="145" width="160" height="25" rx="4" fill="#bfdbfe" stroke="#2563eb" stroke-width="1"/>
+        <text x="200" y="162" font-size="10" font-weight="bold" text-anchor="middle" fill="#1e3a8a">
+          Standardized API
+        </text>
+      </g>
+      
+      <!-- Arrow down -->
+      <line x1="225" y1="305" x2="225" y2="340" stroke="#475569" stroke-width="2" marker-end="url(#arrowhead)"/>
+      
+      <!-- Prometheus Exporter -->
+      <g transform="translate(25, 350)">
+        <rect x="0" y="0" width="400" height="100" rx="8" fill="#dcfce7" stroke="#22c55e" stroke-width="2"/>
+        <text x="200" y="25" font-size="14" font-weight="bold" text-anchor="middle" fill="#15803d">
+          Prometheus Exporter
+        </text>
+        <text x="10" y="50" font-size="10" fill="#166534">• Queries TimescaleDB every 15s</text>
+        <text x="10" y="68" font-size="10" fill="#166534">• Converts DB → Prometheus metrics</text>
+        <text x="10" y="86" font-size="10" fill="#166534">• Exposes /metrics endpoint</text>
+      </g>
+      
+      <!-- Arrow down -->
+      <line x1="225" y1="465" x2="225" y2="500" stroke="#475569" stroke-width="2" marker-end="url(#arrowhead)"/>
+      
+      <!-- TimescaleDB -->
+      <g transform="translate(25, 510)">
+        <rect x="0" y="0" width="400" height="120" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+        <text x="200" y="25" font-size="14" font-weight="bold" text-anchor="middle" fill="#92400e">
+          TimescaleDB (RDS)
+        </text>
+        <text x="10" y="50" font-size="10" fill="#78350f">Database: aws_llm_costs</text>
+        <text x="10" y="68" font-size="10" fill="#78350f">Instance: db.t3.micro</text>
+        <text x="10" y="86" font-size="10" fill="#78350f">• Hypertable on timestamp</text>
+        <text x="10" y="104" font-size="10" fill="#78350f">• 30-day retention</text>
+      </g>
+      
+      <!-- Arrow down -->
+      <line x1="225" y1="645" x2="225" y2="680" stroke="#475569" stroke-width="2" marker-end="url(#arrowhead)"/>
+      
+      <!-- ETL Pipeline -->
+      <g transform="translate(25, 690)">
+        <rect x="0" y="0" width="400" height="130" rx="8" fill="#f3e8ff" stroke="#a855f7" stroke-width="2"/>
+        <text x="200" y="25" font-size="14" font-weight="bold" text-anchor="middle" fill="#6b21a8">
+          ETL Pipeline (Lambda)
+        </text>
+        <text x="10" y="50" font-size="10" fill="#7c3aed">Trigger: EventBridge (daily 2 AM)</text>
+        <text x="10" y="68" font-size="10" fill="#7c3aed">Source: Cost Explorer API</text>
+        <text x="10" y="86" font-size="10" fill="#7c3aed">• Extract Bedrock costs</text>
+        <text x="10" y="104" font-size="10" fill="#7c3aed">• Parse Claude, Titan usage</text>
+        <text x="10" y="122" font-size="10" fill="#7c3aed">• Write to TimescaleDB</text>
+      </g>
+      
+      <!-- Arrow down -->
+      <line x1="225" y1="835" x2="225" y2="870" stroke="#475569" stroke-width="2" marker-end="url(#arrowhead)"/>
+      
+      <!-- AWS Services -->
+      <g transform="translate(25, 880)">
+        <rect x="0" y="0" width="400" height="150" rx="8" fill="#fef3e2" stroke="#ff9900" stroke-width="2"/>
+        <text x="200" y="25" font-size="14" font-weight="bold" text-anchor="middle" fill="#7c2d12">
+          AWS LLM Services
+        </text>
+        
+        <g transform="translate(30, 45)">
+          <rect x="0" y="0" width="100" height="35" rx="4" fill="#fed7aa" stroke="#ea580c" stroke-width="1"/>
+          <text x="50" y="13" font-size="10" font-weight="600" text-anchor="middle" fill="#7c2d12">Bedrock</text>
+          <text x="50" y="27" font-size="8" text-anchor="middle" fill="#9a3412">Claude, Titan</text>
+        </g>
+        
+        <g transform="translate(150, 45)">
+          <rect x="0" y="0" width="100" height="35" rx="4" fill="#fed7aa" stroke="#ea580c" stroke-width="1"/>
+          <text x="50" y="13" font-size="10" font-weight="600" text-anchor="middle" fill="#7c2d12">SageMaker</text>
+          <text x="50" y="27" font-size="8" text-anchor="middle" fill="#9a3412">Training, Hosting</text>
+        </g>
+        
+        <g transform="translate(270, 45)">
+          <rect x="0" y="0" width="100" height="35" rx="4" fill="#fed7aa" stroke="#ea580c" stroke-width="1"/>
+          <text x="50" y="13" font-size="10" font-weight="600" text-anchor="middle" fill="#7c2d12">Lambda</text>
+          <text x="50" y="27" font-size="8" text-anchor="middle" fill="#9a3412">Serverless</text>
+        </g>
+        
+        <text x="200" y="110" font-size="10" text-anchor="middle" fill="#7c2d12">
+          AWS Cost Explorer
+        </text>
+        <text x="200" y="128" font-size="9" text-anchor="middle" fill="#9a3412">
+          (API-based cost data)
+        </text>
+      </g>
+      
+      <!-- Cost -->
+      <rect x="100" y="1220" width="250" height="35" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+      <text x="225" y="1242" font-size="12" font-weight="bold" text-anchor="middle" fill="#92400e">
+        Cost: $90-130/month
+      </text>
+    </g>
+    
+    <!-- ============================================================ -->
+    <!-- AZURE ENVIRONMENT -->
+    <!-- ============================================================ -->
+    <g transform="translate(1020, 60)">
+      <rect x="0" y="0" width="450" height="1280" rx="10" fill="#ffffff" stroke="#0078d4" stroke-width="3"/>
+      <rect x="0" y="0" width="450" height="50" rx="10" fill="#0078d4"/>
+      <text x="225" y="32" font-size="18" font-weight="bold" text-anchor="middle" fill="#ffffff">
+        AZURE ENVIRONMENT
+      </text>
+      
+      <!-- Subscription info -->
+      <text x="225" y="75" font-size="11" text-anchor="middle" fill="#64748b">
+        Subscription: ai-cost-monitoring
+      </text>
+      <text x="225" y="92" font-size="11" text-anchor="middle" fill="#64748b">
+        Region: eastus
+      </text>
+      
+      <!-- MCP Server -->
+      <g transform="translate(25, 110)">
+        <rect x="0" y="0" width="400" height="180" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+        <text x="200" y="25" font-size="14" font-weight="bold" text-anchor="middle" fill="#1e40af">
+          Azure MCP Server (Container App)
+        </text>
+        
+        <text x="10" y="50" font-size="11" font-weight="600" fill="#1e3a8a">Endpoints:</text>
+        <text x="10" y="68" font-size="10" fill="#1e40af">GET /metrics/costs/daily</text>
+        <text x="10" y="83" font-size="10" fill="#1e40af">GET /metrics/costs/hourly</text>
+        <text x="10" y="98" font-size="10" fill="#1e40af">GET /metrics/tokens/{model}</text>
+        <text x="10" y="113" font-size="10" fill="#1e40af">GET /metrics/customers/{id}</text>
+        <text x="10" y="128" font-size="10" fill="#1e40af">GET /health</text>
+        
+        <text x="220" y="68" font-size="10" fill="#1e40af">Prometheus metrics:</text>
+        <text x="220" y="83" font-size="9" fill="#1e40af">azure_llm_cost_usd_total</text>
+        <text x="220" y="98" font-size="9" fill="#1e40af">azure_llm_tokens_total</text>
+        <text x="220" y="113" font-size="9" fill="#1e40af">azure_llm_requests_total</text>
+        
+        <rect x="120" y="145" width="160" height="25" rx="4" fill="#bfdbfe" stroke="#2563eb" stroke-width="1"/>
+        <text x="200" y="162" font-size="10" font-weight="bold" text-anchor="middle" fill="#1e3a8a">
+          Standardized API
+        </text>
+      </g>
+      
+      <!-- Arrow down -->
+      <line x1="225" y1="305" x2="225" y2="340" stroke="#475569" stroke-width="2" marker-end="url(#arrowhead)"/>
+      
+      <!-- Prometheus Exporter -->
+      <g transform="translate(25, 350)">
+        <rect x="0" y="0" width="400" height="100" rx="8" fill="#dcfce7" stroke="#22c55e" stroke-width="2"/>
+        <text x="200" y="25" font-size="14" font-weight="bold" text-anchor="middle" fill="#15803d">
+          Prometheus Exporter
+        </text>
+        <text x="10" y="50" font-size="10" fill="#166534">• Queries TimescaleDB every 15s</text>
+        <text x="10" y="68" font-size="10" fill="#166534">• Converts DB → Prometheus metrics</text>
+        <text x="10" y="86" font-size="10" fill="#166534">• Exposes /metrics endpoint</text>
+      </g>
+      
+      <!-- Arrow down -->
+      <line x1="225" y1="465" x2="225" y2="500" stroke="#475569" stroke-width="2" marker-end="url(#arrowhead)"/>
+      
+      <!-- TimescaleDB -->
+      <g transform="translate(25, 510)">
+        <rect x="0" y="0" width="400" height="120" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+        <text x="200" y="25" font-size="14" font-weight="bold" text-anchor="middle" fill="#92400e">
+          TimescaleDB (Azure DB)
+        </text>
+        <text x="10" y="50" font-size="10" fill="#78350f">Database: azure_llm_costs</text>
+        <text x="10" y="68" font-size="10" fill="#78350f">Tier: Basic</text>
+        <text x="10" y="86" font-size="10" fill="#78350f">• Hypertable on timestamp</text>
+        <text x="10" y="104" font-size="10" fill="#78350f">• 30-day retention</text>
+      </g>
+      
+      <!-- Arrow down -->
+      <line x1="225" y1="645" x2="225" y2="680" stroke="#475569" stroke-width="2" marker-end="url(#arrowhead)"/>
+      
+      <!-- ETL Pipeline -->
+      <g transform="translate(25, 690)">
+        <rect x="0" y="0" width="400" height="130" rx="8" fill="#f3e8ff" stroke="#a855f7" stroke-width="2"/>
+        <text x="200" y="25" font-size="14" font-weight="bold" text-anchor="middle" fill="#6b21a8">
+          ETL Pipeline (Function App)
+        </text>
+        <text x="10" y="50" font-size="10" fill="#7c3aed">Trigger: Timer (daily 2 AM)</text>
+        <text x="10" y="68" font-size="10" fill="#7c3aed">Source: Cost Management API</text>
+        <text x="10" y="86" font-size="10" fill="#7c3aed">• Extract Azure OpenAI costs</text>
+        <text x="10" y="104" font-size="10" fill="#7c3aed">• Parse GPT-4, GPT-3.5 usage</text>
+        <text x="10" y="122" font-size="10" fill="#7c3aed">• Write to TimescaleDB</text>
+      </g>
+      
+      <!-- Arrow down -->
+      <line x1="225" y1="835" x2="225" y2="870" stroke="#475569" stroke-width="2" marker-end="url(#arrowhead)"/>
+      
+      <!-- Azure Services -->
+      <g transform="translate(25, 880)">
+        <rect x="0" y="0" width="400" height="150" rx="8" fill="#e0f2fe" stroke="#0284c7" stroke-width="2"/>
+        <text x="200" y="25" font-size="14" font-weight="bold" text-anchor="middle" fill="#075985">
+          Azure LLM Services
+        </text>
+        
+        <g transform="translate(30, 45)">
+          <rect x="0" y="0" width="100" height="35" rx="4" fill="#bae6fd" stroke="#0369a1" stroke-width="1"/>
+          <text x="50" y="13" font-size="10" font-weight="600" text-anchor="middle" fill="#0c4a6e">Azure OpenAI</text>
+          <text x="50" y="27" font-size="8" text-anchor="middle" fill="#075985">GPT-4, GPT-3.5</text>
+        </g>
+        
+        <g transform="translate(150, 45)">
+          <rect x="0" y="0" width="100" height="35" rx="4" fill="#bae6fd" stroke="#0369a1" stroke-width="1"/>
+          <text x="50" y="13" font-size="10" font-weight="600" text-anchor="middle" fill="#0c4a6e">Cognitive Svc</text>
+          <text x="50" y="27" font-size="8" text-anchor="middle" fill="#075985">Vision, Speech</text>
+        </g>
+        
+        <g transform="translate(270, 45)">
+          <rect x="0" y="0" width="100" height="35" rx="4" fill="#bae6fd" stroke="#0369a1" stroke-width="1"/>
+          <text x="50" y="13" font-size="10" font-weight="600" text-anchor="middle" fill="#0c4a6e">ML Studio</text>
+          <text x="50" y="27" font-size="8" text-anchor="middle" fill="#075985">Training</text>
+        </g>
+        
+        <text x="200" y="110" font-size="10" text-anchor="middle" fill="#075985">
+          Azure Cost Management
+        </text>
+        <text x="200" y="128" font-size="9" text-anchor="middle" fill="#0284c7">
+          (API-based cost data)
+        </text>
+      </g>
+      
+      <!-- Cost -->
+      <rect x="100" y="1220" width="250" height="35" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+      <text x="225" y="1242" font-size="12" font-weight="bold" text-anchor="middle" fill="#92400e">
+        Cost: $80-120/month
+      </text>
+    </g>
+  </g>
+  
+  <!-- ============================================================ -->
+  <!-- KEY FEATURES SECTION -->
+  <!-- ============================================================ -->
+  <g transform="translate(50, 1900)">
+    <text x="750" y="0" font-size="22" font-weight="bold" text-anchor="middle" fill="#1e293b">
+      Key Architecture Features
+    </text>
+    
+    <!-- Feature 1 -->
+    <g transform="translate(0, 30)">
+      <rect x="0" y="0" width="350" height="100" rx="8" fill="#dcfce7" stroke="#22c55e" stroke-width="2"/>
+      <text x="175" y="25" font-size="14" font-weight="bold" text-anchor="middle" fill="#15803d">
+        ✓ Independent Cloud Stacks
+      </text>
+      <text x="10" y="48" font-size="11" fill="#166534">• Each cloud isolated</text>
+      <text x="10" y="65" font-size="11" fill="#166534">• Failure resilience</text>
+      <text x="10" y="82" font-size="11" fill="#166534">• Cloud-specific optimization</text>
+    </g>
+    
+    <!-- Feature 2 -->
+    <g transform="translate(375, 30)">
+      <rect x="0" y="0" width="350" height="100" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+      <text x="175" y="25" font-size="14" font-weight="bold" text-anchor="middle" fill="#1e40af">
+        ✓ Standardized MCP API
+      </text>
+      <text x="10" y="48" font-size="11" fill="#1e40af">• Same endpoints all clouds</text>
+      <text x="10" y="65" font-size="11" fill="#1e40af">• Prometheus compatible</text>
+      <text x="10" y="82" font-size="11" fill="#1e40af">• Health checks built-in</text>
+    </g>
+    
+    <!-- Feature 3 -->
+    <g transform="translate(750, 30)">
+      <rect x="0" y="0" width="350" height="100" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+      <text x="175" y="25" font-size="14" font-weight="bold" text-anchor="middle" fill="#92400e">
+        ✓ Dynamic Cloud Enable/Disable
+      </text>
+      <text x="10" y="48" font-size="11" fill="#78350f">• Per-tenant configuration</text>
+      <text x="10" y="65" font-size="11" fill="#78350f">• REST API management</text>
+      <text x="10" y="82" font-size="11" fill="#78350f">• Real-time dashboard updates</text>
+    </g>
+    
+    <!-- Feature 4 -->
+    <g transform="translate(1125, 30)">
+      <rect x="0" y="0" width="350" height="100" rx="8" fill="#f3e8ff" stroke="#a855f7" stroke-width="2"/>
+      <text x="175" y="25" font-size="14" font-weight="bold" text-anchor="middle" fill="#6b21a8">
+        ✓ Unified Grafana Dashboard
+      </text>
+      <text x="10" y="48" font-size="11" fill="#7c3aed">• Single pane of glass</text>
+      <text x="10" y="65" font-size="11" fill="#7c3aed">• Cross-cloud comparison</text>
+      <text x="10" y="82" font-size="11" fill="#7c3aed">• Multi-tenant support</text>
+    </g>
+  </g>
+  
+  <!-- Total Cost -->
+  <rect x="600" y="2030" width="400" height="50" rx="8" fill="#fee2e2" stroke="#dc2626" stroke-width="3"/>
+  <text x="800" y="2060" font-size="18" font-weight="bold" text-anchor="middle" fill="#991b1b">
+    Total Infrastructure Cost: $290-430/month
+  </text>
+  
+  <!-- Arrow markers -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#475569"/>
+    </marker>
+  </defs>
+</svg>

@@ -1,0 +1,604 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 2600">
+  <defs>
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#1a365d"/>
+      <stop offset="100%" style="stop-color:#2c5282"/>
+    </linearGradient>
+    <linearGradient id="interactiveGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#553c9a"/>
+      <stop offset="100%" style="stop-color:#6b46c1"/>
+    </linearGradient>
+    <linearGradient id="scheduledGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#2c7a7b"/>
+      <stop offset="100%" style="stop-color:#319795"/>
+    </linearGradient>
+    <linearGradient id="eventGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#c53030"/>
+      <stop offset="100%" style="stop-color:#e53e3e"/>
+    </linearGradient>
+    <linearGradient id="a2aGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#2b6cb0"/>
+      <stop offset="100%" style="stop-color:#3182ce"/>
+    </linearGradient>
+    <linearGradient id="dataGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#975a16"/>
+      <stop offset="100%" style="stop-color:#d69e2e"/>
+    </linearGradient>
+    <linearGradient id="agentGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#276749"/>
+      <stop offset="100%" style="stop-color:#38a169"/>
+    </linearGradient>
+    <linearGradient id="cloudGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#4a5568"/>
+      <stop offset="100%" style="stop-color:#718096"/>
+    </linearGradient>
+    <linearGradient id="notifyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#d69e2e"/>
+      <stop offset="100%" style="stop-color:#ecc94b"/>
+    </linearGradient>
+    <linearGradient id="authGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#eb5424"/>
+      <stop offset="100%" style="stop-color:#c7451d"/>
+    </linearGradient>
+    
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="115%">
+      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-opacity="0.25"/>
+    </filter>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    
+    <marker id="arrowGray" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#4a5568"/>
+    </marker>
+    <marker id="arrowPurple" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#6b46c1"/>
+    </marker>
+    <marker id="arrowTeal" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#319795"/>
+    </marker>
+    <marker id="arrowRed" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#e53e3e"/>
+    </marker>
+    <marker id="arrowBlue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#3182ce"/>
+    </marker>
+    <marker id="arrowGreen" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#38a169"/>
+    </marker>
+    <marker id="arrowYellow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#d69e2e"/>
+    </marker>
+    <marker id="arrowWhite" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="white"/>
+    </marker>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1800" height="2600" fill="#f7fafc"/>
+  
+  <!-- Title Header -->
+  <rect x="0" y="0" width="1800" height="90" fill="url(#headerGrad)"/>
+  <text x="900" y="35" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="28" font-weight="bold">AI Cost Monitoring — Operational Modes</text>
+  <text x="900" y="58" text-anchor="middle" fill="#a0aec0" font-family="Arial, sans-serif" font-size="14">Interactive • Scheduled • Event-Driven • Agent-to-Agent</text>
+  <text x="900" y="78" text-anchor="middle" fill="#718096" font-family="Arial, sans-serif" font-size="12">How the platform collects, analyzes, and acts on cloud cost data</text>
+  
+  <!-- ==================== MODE OVERVIEW BADGES ==================== -->
+  <g id="mode-badges">
+    <rect x="40" y="110" width="1720" height="80" rx="10" fill="white" stroke="#e2e8f0" stroke-width="2" filter="url(#shadow)"/>
+    
+    <rect x="70" y="125" width="380" height="50" rx="25" fill="url(#interactiveGrad)"/>
+    <text x="260" y="156" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="14" font-weight="bold">💬 MODE 1: Interactive (On-Demand)</text>
+    
+    <rect x="480" y="125" width="380" height="50" rx="25" fill="url(#scheduledGrad)"/>
+    <text x="670" y="156" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="14" font-weight="bold">⏰ MODE 2: Scheduled (Background)</text>
+    
+    <rect x="890" y="125" width="380" height="50" rx="25" fill="url(#eventGrad)"/>
+    <text x="1080" y="156" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="14" font-weight="bold">⚡ MODE 3: Event-Driven (Reactive)</text>
+    
+    <rect x="1300" y="125" width="380" height="50" rx="25" fill="url(#a2aGrad)"/>
+    <text x="1490" y="156" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="14" font-weight="bold">🤖 MODE 4: A2A (Agent-Initiated)</text>
+  </g>
+  
+  <!-- ==================== MODE 1: INTERACTIVE ==================== -->
+  <g id="mode-interactive">
+    <rect x="40" y="210" width="840" height="480" rx="12" fill="#faf5ff" stroke="#6b46c1" stroke-width="2" filter="url(#shadow)"/>
+    <rect x="40" y="210" width="840" height="45" rx="12" fill="url(#interactiveGrad)"/>
+    <rect x="40" y="237" width="840" height="18" fill="url(#interactiveGrad)"/>
+    <text x="460" y="240" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="16" font-weight="bold">💬 MODE 1: INTERACTIVE (User-Driven, On-Demand)</text>
+    
+    <!-- Trigger -->
+    <rect x="70" y="275" width="120" height="50" rx="8" fill="#553c9a"/>
+    <text x="130" y="298" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="11" font-weight="bold">👤 User</text>
+    <text x="130" y="315" text-anchor="middle" fill="#e9d8fd" font-family="Arial, sans-serif" font-size="9">NL Query</text>
+    
+    <line x1="190" y1="300" x2="220" y2="300" stroke="#6b46c1" stroke-width="2" marker-end="url(#arrowPurple)"/>
+    
+    <!-- CopilotKit -->
+    <rect x="230" y="275" width="130" height="50" rx="8" fill="#805ad5"/>
+    <text x="295" y="298" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10" font-weight="bold">CopilotKit</text>
+    <text x="295" y="315" text-anchor="middle" fill="#e9d8fd" font-family="Arial, sans-serif" font-size="9">React Chat UI</text>
+    
+    <line x1="360" y1="300" x2="390" y2="300" stroke="#6b46c1" stroke-width="2" marker-end="url(#arrowPurple)"/>
+    
+    <!-- AG-UI Server -->
+    <rect x="400" y="275" width="130" height="50" rx="8" fill="#2d3748"/>
+    <text x="465" y="298" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10" font-weight="bold">AG-UI Server</text>
+    <text x="465" y="315" text-anchor="middle" fill="#a0aec0" font-family="Arial, sans-serif" font-size="9">JWT + Tenant</text>
+    
+    <line x1="530" y1="300" x2="560" y2="300" stroke="#6b46c1" stroke-width="2" marker-end="url(#arrowPurple)"/>
+    
+    <!-- Coordinator -->
+    <rect x="570" y="275" width="130" height="50" rx="8" fill="#553c9a"/>
+    <text x="635" y="298" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10" font-weight="bold">Coordinator</text>
+    <text x="635" y="315" text-anchor="middle" fill="#e9d8fd" font-family="Arial, sans-serif" font-size="9">Intent Routing</text>
+    
+    <line x1="700" y1="300" x2="730" y2="300" stroke="#6b46c1" stroke-width="2" marker-end="url(#arrowPurple)"/>
+    
+    <!-- Domain Agent -->
+    <rect x="740" y="275" width="120" height="50" rx="8" fill="#319795"/>
+    <text x="800" y="298" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10" font-weight="bold">Domain Agent</text>
+    <text x="800" y="315" text-anchor="middle" fill="#b2f5ea" font-family="Arial, sans-serif" font-size="9">Cost/Optim/etc</text>
+    
+    <!-- Fan-out to Cloud Agents -->
+    <line x1="800" y1="325" x2="800" y2="350" stroke="#319795" stroke-width="2"/>
+    <line x1="800" y1="350" x2="200" y2="350" stroke="#319795" stroke-width="1.5"/>
+    <line x1="800" y1="350" x2="420" y2="350" stroke="#319795" stroke-width="1.5"/>
+    <line x1="800" y1="350" x2="620" y2="350" stroke="#319795" stroke-width="1.5"/>
+    <line x1="800" y1="350" x2="800" y2="350" stroke="#319795" stroke-width="1.5"/>
+    
+    <!-- Parallel badge -->
+    <rect x="468" y="338" width="65" height="24" rx="12" fill="#48bb78"/>
+    <text x="500" y="355" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10" font-weight="bold">parallel</text>
+    
+    <!-- Cloud Agents -->
+    <line x1="200" y1="350" x2="200" y2="375" stroke="#ff9900" stroke-width="2"/>
+    <rect x="130" y="375" width="140" height="45" rx="6" fill="#ff9900"/>
+    <text x="200" y="396" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10" font-weight="bold">☁️ AWS Agent</text>
+    <text x="200" y="412" text-anchor="middle" fill="#ffecd2" font-family="Arial, sans-serif" font-size="8">→ AWS MCP → API</text>
+    
+    <line x1="420" y1="350" x2="420" y2="375" stroke="#0078d4" stroke-width="2"/>
+    <rect x="350" y="375" width="140" height="45" rx="6" fill="#0078d4"/>
+    <text x="420" y="396" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10" font-weight="bold">☁️ Azure Agent</text>
+    <text x="420" y="412" text-anchor="middle" fill="#cce5ff" font-family="Arial, sans-serif" font-size="8">→ Azure MCP → API</text>
+    
+    <line x1="620" y1="350" x2="620" y2="375" stroke="#4285f4" stroke-width="2"/>
+    <rect x="550" y="375" width="140" height="45" rx="6" fill="#4285f4"/>
+    <text x="620" y="396" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10" font-weight="bold">☁️ GCP Agent</text>
+    <text x="620" y="412" text-anchor="middle" fill="#d4e5ff" font-family="Arial, sans-serif" font-size="8">→ GCP MCP → API</text>
+    
+    <line x1="800" y1="350" x2="800" y2="375" stroke="#326ce5" stroke-width="2"/>
+    <rect x="730" y="375" width="140" height="45" rx="6" fill="#326ce5"/>
+    <text x="800" y="396" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10" font-weight="bold">⎈ K8s Agent</text>
+    <text x="800" y="412" text-anchor="middle" fill="#bee3f8" font-family="Arial, sans-serif" font-size="8">→ OpenCost MCP</text>
+    
+    <!-- Response path -->
+    <line x1="460" y1="420" x2="460" y2="450" stroke="#38a169" stroke-width="2" marker-end="url(#arrowGreen)"/>
+    
+    <rect x="280" y="455" width="380" height="50" rx="8" fill="#276749"/>
+    <text x="470" y="478" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="11" font-weight="bold">Aggregate → Normalize → Stream A2UI Response</text>
+    <text x="470" y="496" text-anchor="middle" fill="#c6f6d5" font-family="Arial, sans-serif" font-size="9">SSE streaming with interactive charts, tables, recommendations</text>
+    
+    <!-- Data source note -->
+    <rect x="70" y="525" width="790" height="60" rx="8" fill="white" stroke="#6b46c1" stroke-width="1" stroke-dasharray="4,3"/>
+    <text x="90" y="548" fill="#553c9a" font-family="Arial, sans-serif" font-size="11" font-weight="bold">Data Sources:</text>
+    <text x="90" y="568" fill="#718096" font-family="Arial, sans-serif" font-size="10">Primary: Local DB (pre-synced by Mode 2) for fast response • Fallback: Live Cloud API call if data stale or missing</text>
+    <text x="90" y="582" fill="#718096" font-family="Arial, sans-serif" font-size="10">Latency: 2-5 seconds (parallel queries) • Trigger: User action • Auth: JWT + Tenant Context</text>
+
+    <!-- Examples -->
+    <rect x="70" y="600" width="790" height="75" rx="8" fill="#e9d8fd"/>
+    <text x="90" y="622" fill="#553c9a" font-family="Arial, sans-serif" font-size="11" font-weight="bold">Example Queries:</text>
+    <text x="90" y="640" fill="#553c9a" font-family="Arial, sans-serif" font-size="10">• "Why did our AWS bill increase by 40% last month?"</text>
+    <text x="90" y="655" fill="#553c9a" font-family="Arial, sans-serif" font-size="10">• "Show me all idle resources across clouds"</text>
+    <text x="90" y="670" fill="#553c9a" font-family="Arial, sans-serif" font-size="10">• "Stop dev instances every night at 8 PM" → triggers Remediation workflow</text>
+  </g>
+  
+  <!-- ==================== MODE 2: SCHEDULED ==================== -->
+  <g id="mode-scheduled">
+    <rect x="920" y="210" width="840" height="480" rx="12" fill="#e6fffa" stroke="#319795" stroke-width="2" filter="url(#shadow)"/>
+    <rect x="920" y="210" width="840" height="45" rx="12" fill="url(#scheduledGrad)"/>
+    <rect x="920" y="237" width="840" height="18" fill="url(#scheduledGrad)"/>
+    <text x="1340" y="240" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="16" font-weight="bold">⏰ MODE 2: SCHEDULED (Background Pipeline)</text>
+    
+    <!-- Celery Beat -->
+    <rect x="950" y="275" width="160" height="55" rx="8" fill="#2c7a7b"/>
+    <text x="1030" y="298" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="11" font-weight="bold">⏰ Celery Beat</text>
+    <text x="1030" y="318" text-anchor="middle" fill="#b2f5ea" font-family="Arial, sans-serif" font-size="9">Cron Scheduler</text>
+    
+    <!-- Scheduled Jobs -->
+    <line x1="1110" y1="302" x2="1150" y2="275" stroke="#319795" stroke-width="1.5"/>
+    <line x1="1110" y1="302" x2="1150" y2="302" stroke="#319795" stroke-width="1.5"/>
+    <line x1="1110" y1="302" x2="1150" y2="330" stroke="#319795" stroke-width="1.5"/>
+    <line x1="1110" y1="302" x2="1150" y2="358" stroke="#319795" stroke-width="1.5"/>
+    
+    <rect x="1160" y="260" width="260" height="30" rx="6" fill="#319795"/>
+    <text x="1290" y="280" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10" font-weight="bold">📥 Cost Data Sync — Every 4 hours</text>
+    
+    <rect x="1160" y="296" width="260" height="30" rx="6" fill="#2c7a7b"/>
+    <text x="1290" y="316" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10" font-weight="bold">📦 Resource Inventory — Every 6 hrs</text>
+    
+    <rect x="1160" y="332" width="260" height="30" rx="6" fill="#285e61"/>
+    <text x="1290" y="352" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10" font-weight="bold">🔍 Anomaly Detection — Every 4 hrs</text>
+    
+    <rect x="1160" y="368" width="260" height="30" rx="6" fill="#234e52"/>
+    <text x="1290" y="388" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10" font-weight="bold">💡 Recommendations — Daily 2 AM</text>
+    
+    <!-- More jobs -->
+    <rect x="1440" y="260" width="280" height="30" rx="6" fill="#319795"/>
+    <text x="1580" y="280" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10" font-weight="bold">📈 Forecast Update — Daily 3 AM</text>
+    
+    <rect x="1440" y="296" width="280" height="30" rx="6" fill="#2c7a7b"/>
+    <text x="1580" y="316" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10" font-weight="bold">📊 Report Generation — Weekly/Monthly</text>
+    
+    <rect x="1440" y="332" width="280" height="30" rx="6" fill="#285e61"/>
+    <text x="1580" y="352" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10" font-weight="bold">🔑 Credential Rotation — Daily midnight</text>
+    
+    <rect x="1440" y="368" width="280" height="30" rx="6" fill="#234e52"/>
+    <text x="1580" y="388" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10" font-weight="bold">🗜️ Data Rollup/Compress — Daily 4 AM</text>
+    
+    <!-- Pipeline flow -->
+    <line x1="1290" y1="398" x2="1290" y2="430" stroke="#319795" stroke-width="2" marker-end="url(#arrowTeal)"/>
+    
+    <!-- Pipeline steps -->
+    <rect x="960" y="435" width="155" height="45" rx="6" fill="#ff9900"/>
+    <text x="1037" y="455" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="9" font-weight="bold">AWS APIs</text>
+    <text x="1037" y="472" text-anchor="middle" fill="#ffecd2" font-family="Arial, sans-serif" font-size="8">Cost Explorer, CW</text>
+    
+    <rect x="1130" y="435" width="155" height="45" rx="6" fill="#0078d4"/>
+    <text x="1207" y="455" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="9" font-weight="bold">Azure APIs</text>
+    <text x="1207" y="472" text-anchor="middle" fill="#cce5ff" font-family="Arial, sans-serif" font-size="8">Cost Mgmt, Advisor</text>
+    
+    <rect x="1300" y="435" width="155" height="45" rx="6" fill="#4285f4"/>
+    <text x="1377" y="455" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="9" font-weight="bold">GCP APIs</text>
+    <text x="1377" y="472" text-anchor="middle" fill="#d4e5ff" font-family="Arial, sans-serif" font-size="8">Billing, Recommender</text>
+    
+    <rect x="1470" y="435" width="155" height="45" rx="6" fill="#326ce5"/>
+    <text x="1547" y="455" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="9" font-weight="bold">K8s APIs</text>
+    <text x="1547" y="472" text-anchor="middle" fill="#bee3f8" font-family="Arial, sans-serif" font-size="8">OpenCost</text>
+    
+    <!-- Store -->
+    <line x1="1290" y1="480" x2="1290" y2="510" stroke="#319795" stroke-width="2" marker-end="url(#arrowTeal)"/>
+    
+    <rect x="1050" y="515" width="480" height="50" rx="8" fill="url(#dataGrad)"/>
+    <text x="1290" y="540" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="12" font-weight="bold">📦 Store → TimescaleDB + PostgreSQL + Redis Cache</text>
+    <text x="1290" y="557" text-anchor="middle" fill="#fefcbf" font-family="Arial, sans-serif" font-size="9">Normalized metrics, resources, recommendations per tenant</text>
+    
+    <!-- Why this matters -->
+    <rect x="950" y="585" width="790" height="45" rx="8" fill="white" stroke="#319795" stroke-width="1" stroke-dasharray="4,3"/>
+    <text x="970" y="605" fill="#2c7a7b" font-family="Arial, sans-serif" font-size="11" font-weight="bold">Purpose:</text>
+    <text x="970" y="622" fill="#718096" font-family="Arial, sans-serif" font-size="10">Keeps local DB fresh so Mode 1 (Interactive) returns instant results without hitting cloud APIs on every query</text>
+    
+    <!-- Examples -->
+    <rect x="950" y="640" width="790" height="35" rx="8" fill="#b2f5ea"/>
+    <text x="970" y="662" fill="#234e52" font-family="Arial, sans-serif" font-size="10" font-weight="bold">Runs 24/7 per tenant • No user action needed • Credentials from OpenBao • Results feed all other modes</text>
+  </g>
+  
+  <!-- ==================== MODE 3: EVENT-DRIVEN ==================== -->
+  <g id="mode-event">
+    <rect x="40" y="710" width="840" height="500" rx="12" fill="#fff5f5" stroke="#e53e3e" stroke-width="2" filter="url(#shadow)"/>
+    <rect x="40" y="710" width="840" height="45" rx="12" fill="url(#eventGrad)"/>
+    <rect x="40" y="737" width="840" height="18" fill="url(#eventGrad)"/>
+    <text x="460" y="740" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="16" font-weight="bold">⚡ MODE 3: EVENT-DRIVEN (Reactive, Real-Time)</text>
+    
+    <!-- Cloud Event Sources -->
+    <rect x="70" y="775" width="175" height="50" rx="6" fill="#ff9900"/>
+    <text x="157" y="798" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10" font-weight="bold">AWS CloudWatch</text>
+    <text x="157" y="815" text-anchor="middle" fill="#ffecd2" font-family="Arial, sans-serif" font-size="8">SNS → Webhook</text>
+    
+    <rect x="260" y="775" width="175" height="50" rx="6" fill="#0078d4"/>
+    <text x="347" y="798" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10" font-weight="bold">Azure Monitor</text>
+    <text x="347" y="815" text-anchor="middle" fill="#cce5ff" font-family="Arial, sans-serif" font-size="8">Action Group → Webhook</text>
+    
+    <rect x="450" y="775" width="175" height="50" rx="6" fill="#4285f4"/>
+    <text x="537" y="798" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10" font-weight="bold">GCP Monitoring</text>
+    <text x="537" y="815" text-anchor="middle" fill="#d4e5ff" font-family="Arial, sans-serif" font-size="8">Pub/Sub → Push</text>
+    
+    <rect x="640" y="775" width="175" height="50" rx="6" fill="#326ce5"/>
+    <text x="727" y="798" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10" font-weight="bold">K8s Prometheus</text>
+    <text x="727" y="815" text-anchor="middle" fill="#bee3f8" font-family="Arial, sans-serif" font-size="8">Alertmanager → Webhook</text>
+    
+    <!-- Arrows down -->
+    <line x1="157" y1="825" x2="420" y2="860" stroke="#e53e3e" stroke-width="1.5"/>
+    <line x1="347" y1="825" x2="420" y2="860" stroke="#e53e3e" stroke-width="1.5"/>
+    <line x1="537" y1="825" x2="420" y2="860" stroke="#e53e3e" stroke-width="1.5"/>
+    <line x1="727" y1="825" x2="420" y2="860" stroke="#e53e3e" stroke-width="1.5"/>
+    
+    <!-- Webhook Endpoint -->
+    <rect x="310" y="860" width="220" height="45" rx="8" fill="#c53030"/>
+    <text x="420" y="883" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="11" font-weight="bold">🔌 Webhook Endpoint</text>
+    <text x="420" y="899" text-anchor="middle" fill="#fed7d7" font-family="Arial, sans-serif" font-size="9">/api/v1/events/ingest</text>
+    
+    <line x1="420" y1="905" x2="420" y2="935" stroke="#e53e3e" stroke-width="2" marker-end="url(#arrowRed)"/>
+    
+    <!-- Event Processor -->
+    <rect x="270" y="940" width="300" height="45" rx="8" fill="#9b2c2c"/>
+    <text x="420" y="963" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="11" font-weight="bold">🔄 Event Processor</text>
+    <text x="420" y="979" text-anchor="middle" fill="#fed7d7" font-family="Arial, sans-serif" font-size="9">Evaluate against tenant policies &amp; thresholds</text>
+    
+    <!-- Decision diamond -->
+    <line x1="420" y1="985" x2="420" y2="1010" stroke="#e53e3e" stroke-width="2"/>
+    <polygon points="420,1010 450,1035 420,1060 390,1035" fill="#c53030" stroke="#9b2c2c" stroke-width="1"/>
+    <text x="420" y="1040" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="9" font-weight="bold">threshold?</text>
+    
+    <!-- Below threshold -->
+    <line x1="390" y1="1035" x2="200" y2="1035" stroke="#718096" stroke-width="1.5" marker-end="url(#arrowGray)"/>
+    <rect x="70" y="1015" width="130" height="40" rx="6" fill="#a0aec0"/>
+    <text x="135" y="1035" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10" font-weight="bold">Log &amp; Store</text>
+    <text x="135" y="1048" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="8">No action needed</text>
+    
+    <!-- Above threshold: 3 outputs -->
+    <line x1="450" y1="1035" x2="520" y2="1035" stroke="#e53e3e" stroke-width="1.5"/>
+    <line x1="520" y1="1035" x2="520" y2="1000" stroke="#e53e3e" stroke-width="1.5"/>
+    <line x1="520" y1="1035" x2="520" y2="1035" stroke="#e53e3e" stroke-width="1.5"/>
+    <line x1="520" y1="1035" x2="520" y2="1070" stroke="#e53e3e" stroke-width="1.5"/>
+    
+    <line x1="520" y1="1000" x2="590" y2="1000" stroke="#d69e2e" stroke-width="1.5" marker-end="url(#arrowYellow)"/>
+    <line x1="520" y1="1035" x2="590" y2="1035" stroke="#38a169" stroke-width="1.5" marker-end="url(#arrowGreen)"/>
+    <line x1="520" y1="1070" x2="590" y2="1070" stroke="#6b46c1" stroke-width="1.5" marker-end="url(#arrowPurple)"/>
+    
+    <rect x="600" y="983" width="250" height="35" rx="6" fill="url(#notifyGrad)"/>
+    <text x="725" y="1005" text-anchor="middle" fill="#1a202c" font-family="Arial, sans-serif" font-size="10" font-weight="bold">🔔 Notify (Slack/Email/PagerDuty)</text>
+    
+    <rect x="600" y="1018" width="250" height="35" rx="6" fill="url(#agentGrad)"/>
+    <text x="725" y="1040" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10" font-weight="bold">💡 Create Recommendation</text>
+    
+    <rect x="600" y="1053" width="250" height="35" rx="6" fill="url(#interactiveGrad)"/>
+    <text x="725" y="1075" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10" font-weight="bold">🔧 Auto-Remediate (if policy)</text>
+    
+    <!-- Event types -->
+    <rect x="70" y="1105" width="790" height="85" rx="8" fill="#fed7d7"/>
+    <text x="90" y="1127" fill="#742a2a" font-family="Arial, sans-serif" font-size="11" font-weight="bold">Event Types:</text>
+    <text x="90" y="1145" fill="#742a2a" font-family="Arial, sans-serif" font-size="10">• AWS Budget hits 80% → Slack alert to finance team</text>
+    <text x="90" y="1160" fill="#742a2a" font-family="Arial, sans-serif" font-size="10">• Azure VM at 5% CPU for 7 days → Generate rightsizing recommendation</text>
+    <text x="90" y="1175" fill="#742a2a" font-family="Arial, sans-serif" font-size="10">• GCP BigQuery cost spikes 300% in 1 hour → PagerDuty critical alert + auto-investigation</text>
+    <text x="90" y="1190" fill="#742a2a" font-family="Arial, sans-serif" font-size="10">• K8s namespace exceeds memory quota → Platform team alert</text>
+  </g>
+  
+  <!-- ==================== MODE 4: A2A ==================== -->
+  <g id="mode-a2a">
+    <rect x="920" y="710" width="840" height="500" rx="12" fill="#ebf8ff" stroke="#3182ce" stroke-width="2" filter="url(#shadow)"/>
+    <rect x="920" y="710" width="840" height="45" rx="12" fill="url(#a2aGrad)"/>
+    <rect x="920" y="737" width="840" height="18" fill="url(#a2aGrad)"/>
+    <text x="1340" y="740" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="16" font-weight="bold">🤖 MODE 4: A2A — Agent-to-Agent (External Agent-Initiated)</text>
+    
+    <!-- External Agents -->
+    <rect x="950" y="775" width="180" height="65" rx="8" fill="#2b6cb0"/>
+    <text x="1040" y="800" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="11" font-weight="bold">💬 SlackBot Agent</text>
+    <text x="1040" y="818" text-anchor="middle" fill="#bee3f8" font-family="Arial, sans-serif" font-size="9">"What's our cloud</text>
+    <text x="1040" y="830" text-anchor="middle" fill="#bee3f8" font-family="Arial, sans-serif" font-size="9">spend this month?"</text>
+    
+    <rect x="1155" y="775" width="180" height="65" rx="8" fill="#2c5282"/>
+    <text x="1245" y="800" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="11" font-weight="bold">🔍 Compliance</text>
+    <text x="1245" y="818" text-anchor="middle" fill="#bee3f8" font-family="Arial, sans-serif" font-size="9">Nightly policy</text>
+    <text x="1245" y="830" text-anchor="middle" fill="#bee3f8" font-family="Arial, sans-serif" font-size="9">violation scan</text>
+    
+    <rect x="1360" y="775" width="180" height="65" rx="8" fill="#1a365d"/>
+    <text x="1450" y="800" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="11" font-weight="bold">💰 Vendor Advisor</text>
+    <text x="1450" y="818" text-anchor="middle" fill="#bee3f8" font-family="Arial, sans-serif" font-size="9">New savings</text>
+    <text x="1450" y="830" text-anchor="middle" fill="#bee3f8" font-family="Arial, sans-serif" font-size="9">opportunities</text>
+    
+    <rect x="1565" y="775" width="180" height="65" rx="8" fill="#2a4365"/>
+    <text x="1655" y="800" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="11" font-weight="bold">🛡️ Security Scanner</text>
+    <text x="1655" y="818" text-anchor="middle" fill="#bee3f8" font-family="Arial, sans-serif" font-size="9">Cost-related</text>
+    <text x="1655" y="830" text-anchor="middle" fill="#bee3f8" font-family="Arial, sans-serif" font-size="9">security checks</text>
+    
+    <!-- Arrows to A2A Gateway -->
+    <line x1="1040" y1="840" x2="1290" y2="880" stroke="#3182ce" stroke-width="1.5"/>
+    <line x1="1245" y1="840" x2="1290" y2="880" stroke="#3182ce" stroke-width="1.5"/>
+    <line x1="1450" y1="840" x2="1290" y2="880" stroke="#3182ce" stroke-width="1.5"/>
+    <line x1="1655" y1="840" x2="1290" y2="880" stroke="#3182ce" stroke-width="1.5"/>
+    
+    <!-- A2A Gateway -->
+    <rect x="1140" y="880" width="300" height="55" rx="8" fill="#2b6cb0" filter="url(#glow)"/>
+    <text x="1290" y="905" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="13" font-weight="bold">🌐 A2A Gateway</text>
+    <text x="1290" y="925" text-anchor="middle" fill="#bee3f8" font-family="Arial, sans-serif" font-size="9">Google A2A Protocol • mTLS/API Key Auth</text>
+    
+    <!-- Security checks -->
+    <line x1="1290" y1="935" x2="1290" y2="960" stroke="#3182ce" stroke-width="2" marker-end="url(#arrowBlue)"/>
+    
+    <rect x="1090" y="965" width="400" height="45" rx="8" fill="#2d3748"/>
+    <text x="1290" y="988" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="11" font-weight="bold">🔐 Auth Check: Agent registered? Tenant scoped? Permissions?</text>
+    <text x="1290" y="1003" text-anchor="middle" fill="#a0aec0" font-family="Arial, sans-serif" font-size="9">External agents NEVER get write/execute permissions • Read-only by default</text>
+    
+    <line x1="1290" y1="1010" x2="1290" y2="1035" stroke="#3182ce" stroke-width="2" marker-end="url(#arrowBlue)"/>
+    
+    <!-- Routes to Coordinator -->
+    <rect x="1090" y="1040" width="400" height="45" rx="8" fill="#553c9a"/>
+    <text x="1290" y="1063" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="11" font-weight="bold">🧠 Coordinator Agent (same pipeline as Mode 1)</text>
+    <text x="1290" y="1078" text-anchor="middle" fill="#e9d8fd" font-family="Arial, sans-serif" font-size="9">Routes to Domain Agents → Cloud Agents → MCP → Response</text>
+    
+    <line x1="1290" y1="1085" x2="1290" y2="1110" stroke="#3182ce" stroke-width="2" marker-end="url(#arrowBlue)"/>
+    
+    <!-- Response back -->
+    <rect x="1090" y="1115" width="400" height="40" rx="8" fill="#2b6cb0"/>
+    <text x="1290" y="1140" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="11" font-weight="bold">📤 A2A Response → Back to External Agent</text>
+    
+    <!-- Scope note -->
+    <rect x="950" y="1170" width="790" height="35" rx="8" fill="#bee3f8"/>
+    <text x="970" y="1193" fill="#1a365d" font-family="Arial, sans-serif" font-size="10" font-weight="bold">Scoped permissions per agent • Rate limited: 10 req/min • Tenant context from agent registration • Audit logged</text>
+  </g>
+  
+  <!-- ==================== SHARED DATA LAYER ==================== -->
+  <g id="shared-data">
+    <rect x="40" y="1240" width="1720" height="140" rx="12" fill="#fffff0" stroke="#d69e2e" stroke-width="2" filter="url(#shadow)"/>
+    <rect x="40" y="1240" width="1720" height="45" rx="12" fill="url(#dataGrad)"/>
+    <rect x="40" y="1267" width="1720" height="18" fill="url(#dataGrad)"/>
+    <text x="900" y="1270" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="16" font-weight="bold">📦 SHARED DATA LAYER (All Modes Read/Write)</text>
+    
+    <rect x="80" y="1300" width="240" height="60" rx="8" fill="#975a16"/>
+    <text x="200" y="1325" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="12" font-weight="bold">🕐 TimescaleDB</text>
+    <text x="200" y="1345" text-anchor="middle" fill="#fefcbf" font-family="Arial, sans-serif" font-size="9">Time-series metrics (RLS)</text>
+    
+    <rect x="350" y="1300" width="240" height="60" rx="8" fill="#975a16"/>
+    <text x="470" y="1325" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="12" font-weight="bold">🐘 PostgreSQL</text>
+    <text x="470" y="1345" text-anchor="middle" fill="#fefcbf" font-family="Arial, sans-serif" font-size="9">Resources, recommendations (RLS)</text>
+    
+    <rect x="620" y="1300" width="200" height="60" rx="8" fill="#975a16"/>
+    <text x="720" y="1325" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="12" font-weight="bold">⚡ Redis</text>
+    <text x="720" y="1345" text-anchor="middle" fill="#fefcbf" font-family="Arial, sans-serif" font-size="9">Cache + Queue (namespaced)</text>
+    
+    <rect x="850" y="1300" width="240" height="60" rx="8" fill="#f0b90b"/>
+    <text x="970" y="1325" text-anchor="middle" fill="#1a202c" font-family="Arial, sans-serif" font-size="12" font-weight="bold">🔑 OpenBao</text>
+    <text x="970" y="1345" text-anchor="middle" fill="#744210" font-family="Arial, sans-serif" font-size="9">Per-tenant secrets</text>
+    
+    <rect x="1120" y="1300" width="240" height="60" rx="8" fill="#2d3748"/>
+    <text x="1240" y="1325" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="12" font-weight="bold">📝 Audit Log</text>
+    <text x="1240" y="1345" text-anchor="middle" fill="#a0aec0" font-family="Arial, sans-serif" font-size="9">Immutable (7-year retention)</text>
+    
+    <rect x="1390" y="1300" width="340" height="60" rx="8" fill="#eb5424"/>
+    <text x="1560" y="1325" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="12" font-weight="bold">🔐 Auth0 + RBAC</text>
+    <text x="1560" y="1345" text-anchor="middle" fill="#fed7d7" font-family="Arial, sans-serif" font-size="9">JWT, Tenant Context, Permissions (all modes)</text>
+  </g>
+  
+  <!-- ==================== MODES INTERACTION DIAGRAM ==================== -->
+  <g id="interaction-diagram">
+    <rect x="40" y="1410" width="1720" height="460" rx="12" fill="#1a202c" filter="url(#shadow)"/>
+    <text x="900" y="1445" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="18" font-weight="bold">HOW ALL MODES WORK TOGETHER — Real-World Scenario</text>
+    <text x="900" y="1470" text-anchor="middle" fill="#a0aec0" font-family="Arial, sans-serif" font-size="12">Example: AWS EC2 cost spike detected and resolved</text>
+    
+    <!-- Timeline -->
+    <line x1="100" y1="1510" x2="1700" y2="1510" stroke="#4a5568" stroke-width="2"/>
+    
+    <!-- Step 1: Scheduled -->
+    <rect x="100" y="1490" width="10" height="40" rx="2" fill="#319795"/>
+    <rect x="130" y="1530" width="340" height="110" rx="8" fill="#2c7a7b"/>
+    <text x="150" y="1555" fill="white" font-family="Arial, sans-serif" font-size="12" font-weight="bold">⏰ Step 1 — 2:00 AM (Scheduled)</text>
+    <text x="150" y="1578" fill="#b2f5ea" font-family="Arial, sans-serif" font-size="10">Data Collector syncs AWS costs.</text>
+    <text x="150" y="1596" fill="#b2f5ea" font-family="Arial, sans-serif" font-size="10">Anomaly Detector runs, flags a 40%</text>
+    <text x="150" y="1614" fill="#b2f5ea" font-family="Arial, sans-serif" font-size="10">spend increase on EC2 in us-east-1.</text>
+    <text x="150" y="1632" fill="#9ae6b4" font-family="Arial, sans-serif" font-size="9">Stores anomaly + recommendations in DB.</text>
+    
+    <line x1="470" y1="1510" x2="530" y2="1510" stroke="#4a5568" stroke-width="2" marker-end="url(#arrowGray)"/>
+    
+    <!-- Step 2: Event -->
+    <rect x="530" y="1490" width="10" height="40" rx="2" fill="#e53e3e"/>
+    <rect x="560" y="1530" width="340" height="110" rx="8" fill="#9b2c2c"/>
+    <text x="580" y="1555" fill="white" font-family="Arial, sans-serif" font-size="12" font-weight="bold">⚡ Step 2 — 7:30 AM (Event)</text>
+    <text x="580" y="1578" fill="#fed7d7" font-family="Arial, sans-serif" font-size="10">AWS Budget alarm fires at 80%.</text>
+    <text x="580" y="1596" fill="#fed7d7" font-family="Arial, sans-serif" font-size="10">Webhook → Event Processor evaluates</text>
+    <text x="580" y="1614" fill="#fed7d7" font-family="Arial, sans-serif" font-size="10">against tenant policy → threshold exceeded.</text>
+    <text x="580" y="1632" fill="#fecaca" font-family="Arial, sans-serif" font-size="9">→ Slack alert sent to Org Admin + finance team.</text>
+    
+    <line x1="900" y1="1510" x2="960" y2="1510" stroke="#4a5568" stroke-width="2" marker-end="url(#arrowGray)"/>
+    
+    <!-- Step 3: Interactive -->
+    <rect x="960" y="1490" width="10" height="40" rx="2" fill="#6b46c1"/>
+    <rect x="990" y="1530" width="340" height="110" rx="8" fill="#553c9a"/>
+    <text x="1010" y="1555" fill="white" font-family="Arial, sans-serif" font-size="12" font-weight="bold">💬 Step 3 — 9:00 AM (Interactive)</text>
+    <text x="1010" y="1578" fill="#e9d8fd" font-family="Arial, sans-serif" font-size="10">Admin opens AI Cost Monitoring, asks:</text>
+    <text x="1010" y="1596" fill="white" font-family="Arial, sans-serif" font-size="10" font-style="italic">"Why did our AWS spend spike?"</text>
+    <text x="1010" y="1614" fill="#e9d8fd" font-family="Arial, sans-serif" font-size="10">Agent instantly has data from Mode 2 +</text>
+    <text x="1010" y="1632" fill="#d6bcfa" font-family="Arial, sans-serif" font-size="9">anomaly flagged. Shows 12 over-provisioned instances.</text>
+    
+    <line x1="1330" y1="1510" x2="1390" y2="1510" stroke="#4a5568" stroke-width="2" marker-end="url(#arrowGray)"/>
+    
+    <!-- Step 4: Interactive + Remediation -->
+    <rect x="1390" y="1490" width="10" height="40" rx="2" fill="#38a169"/>
+    <rect x="1420" y="1530" width="300" height="110" rx="8" fill="#276749"/>
+    <text x="1440" y="1555" fill="white" font-family="Arial, sans-serif" font-size="12" font-weight="bold">🔧 Step 4 — 9:05 AM (Action)</text>
+    <text x="1440" y="1578" fill="#c6f6d5" font-family="Arial, sans-serif" font-size="10">Admin clicks "Rightsize all 12"</text>
+    <text x="1440" y="1596" fill="#c6f6d5" font-family="Arial, sans-serif" font-size="10">→ Approval workflow triggers</text>
+    <text x="1440" y="1614" fill="#c6f6d5" font-family="Arial, sans-serif" font-size="10">→ Operator approves</text>
+    <text x="1440" y="1632" fill="#9ae6b4" font-family="Arial, sans-serif" font-size="9">→ AWS Agent executes via MCP. Audit logged.</text>
+    
+    <!-- Result box -->
+    <rect x="130" y="1660" width="1590" height="50" rx="8" fill="#48bb78"/>
+    <text x="925" y="1685" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="14" font-weight="bold">✅ Result: $12,400/month savings identified and applied — all 4 modes contributed</text>
+    <text x="925" y="1703" text-anchor="middle" fill="#f0fff4" font-family="Arial, sans-serif" font-size="10">Mode 2 collected data → Mode 3 alerted in real-time → Mode 1 provided analysis → Remediation saved money</text>
+    
+    <!-- Mode timeline labels -->
+    <rect x="130" y="1725" width="340" height="25" rx="12" fill="#319795"/>
+    <text x="300" y="1742" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10" font-weight="bold">⏰ Scheduled — Background</text>
+    
+    <rect x="560" y="1725" width="340" height="25" rx="12" fill="#e53e3e"/>
+    <text x="730" y="1742" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10" font-weight="bold">⚡ Event — Real-time Alert</text>
+    
+    <rect x="990" y="1725" width="340" height="25" rx="12" fill="#6b46c1"/>
+    <text x="1160" y="1742" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10" font-weight="bold">💬 Interactive — User Investigation</text>
+    
+    <rect x="1420" y="1725" width="300" height="25" rx="12" fill="#276749"/>
+    <text x="1570" y="1742" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10" font-weight="bold">🔧 Remediation — Automated Fix</text>
+  </g>
+  
+  <!-- ==================== SCHEDULE TABLE ==================== -->
+  <g id="schedule-table">
+    <rect x="40" y="1900" width="1720" height="370" rx="12" fill="white" stroke="#e2e8f0" stroke-width="2" filter="url(#shadow)"/>
+    <text x="900" y="1935" text-anchor="middle" fill="#1a202c" font-family="Arial, sans-serif" font-size="18" font-weight="bold">COMPLETE SCHEDULED JOBS TABLE</text>
+    
+    <!-- Header row -->
+    <rect x="70" y="1955" width="1660" height="35" rx="6" fill="#2d3748"/>
+    <text x="200" y="1978" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="12" font-weight="bold">Job Name</text>
+    <text x="440" y="1978" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="12" font-weight="bold">Frequency</text>
+    <text x="680" y="1978" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="12" font-weight="bold">Purpose</text>
+    <text x="1050" y="1978" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="12" font-weight="bold">Data Flow</text>
+    <text x="1440" y="1978" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="12" font-weight="bold">Feeds Into</text>
+    
+    <!-- Row 1 -->
+    <rect x="70" y="1990" width="1660" height="32" rx="0" fill="#f7fafc"/>
+    <text x="200" y="2011" text-anchor="middle" fill="#2d3748" font-family="Arial, sans-serif" font-size="11" font-weight="bold">📥 Cost Data Sync</text>
+    <text x="440" y="2011" text-anchor="middle" fill="#2d3748" font-family="Arial, sans-serif" font-size="11">Every 4 hours</text>
+    <text x="680" y="2011" text-anchor="middle" fill="#2d3748" font-family="Arial, sans-serif" font-size="11">Pull cost metrics from all clouds</text>
+    <text x="1050" y="2011" text-anchor="middle" fill="#2d3748" font-family="Arial, sans-serif" font-size="11">Cloud APIs → TimescaleDB</text>
+    <text x="1440" y="2011" text-anchor="middle" fill="#6b46c1" font-family="Arial, sans-serif" font-size="11">Mode 1 (Interactive)</text>
+    
+    <!-- Row 2 -->
+    <rect x="70" y="2022" width="1660" height="32" rx="0" fill="white"/>
+    <text x="200" y="2043" text-anchor="middle" fill="#2d3748" font-family="Arial, sans-serif" font-size="11" font-weight="bold">📦 Resource Inventory</text>
+    <text x="440" y="2043" text-anchor="middle" fill="#2d3748" font-family="Arial, sans-serif" font-size="11">Every 6 hours</text>
+    <text x="680" y="2043" text-anchor="middle" fill="#2d3748" font-family="Arial, sans-serif" font-size="11">Discover new/terminated resources</text>
+    <text x="1050" y="2043" text-anchor="middle" fill="#2d3748" font-family="Arial, sans-serif" font-size="11">Cloud APIs → PostgreSQL</text>
+    <text x="1440" y="2043" text-anchor="middle" fill="#6b46c1" font-family="Arial, sans-serif" font-size="11">Mode 1, Optimization</text>
+    
+    <!-- Row 3 -->
+    <rect x="70" y="2054" width="1660" height="32" rx="0" fill="#f7fafc"/>
+    <text x="200" y="2075" text-anchor="middle" fill="#2d3748" font-family="Arial, sans-serif" font-size="11" font-weight="bold">🔍 Anomaly Detection</text>
+    <text x="440" y="2075" text-anchor="middle" fill="#2d3748" font-family="Arial, sans-serif" font-size="11">Every 4 hrs (after sync)</text>
+    <text x="680" y="2075" text-anchor="middle" fill="#2d3748" font-family="Arial, sans-serif" font-size="11">Flag spending spikes and deviations</text>
+    <text x="1050" y="2075" text-anchor="middle" fill="#2d3748" font-family="Arial, sans-serif" font-size="11">TimescaleDB → Anomalies table</text>
+    <text x="1440" y="2075" text-anchor="middle" fill="#e53e3e" font-family="Arial, sans-serif" font-size="11">Mode 3 (Alerts)</text>
+    
+    <!-- Row 4 -->
+    <rect x="70" y="2086" width="1660" height="32" rx="0" fill="white"/>
+    <text x="200" y="2107" text-anchor="middle" fill="#2d3748" font-family="Arial, sans-serif" font-size="11" font-weight="bold">💡 Recommendation Refresh</text>
+    <text x="440" y="2107" text-anchor="middle" fill="#2d3748" font-family="Arial, sans-serif" font-size="11">Daily at 2 AM</text>
+    <text x="680" y="2107" text-anchor="middle" fill="#2d3748" font-family="Arial, sans-serif" font-size="11">Recalculate optimization suggestions</text>
+    <text x="1050" y="2107" text-anchor="middle" fill="#2d3748" font-family="Arial, sans-serif" font-size="11">Resources → Recommendations</text>
+    <text x="1440" y="2107" text-anchor="middle" fill="#6b46c1" font-family="Arial, sans-serif" font-size="11">Mode 1, Remediation</text>
+    
+    <!-- Row 5 -->
+    <rect x="70" y="2118" width="1660" height="32" rx="0" fill="#f7fafc"/>
+    <text x="200" y="2139" text-anchor="middle" fill="#2d3748" font-family="Arial, sans-serif" font-size="11" font-weight="bold">📈 Forecast Update</text>
+    <text x="440" y="2139" text-anchor="middle" fill="#2d3748" font-family="Arial, sans-serif" font-size="11">Daily at 3 AM</text>
+    <text x="680" y="2139" text-anchor="middle" fill="#2d3748" font-family="Arial, sans-serif" font-size="11">Re-run ML spend prediction models</text>
+    <text x="1050" y="2139" text-anchor="middle" fill="#2d3748" font-family="Arial, sans-serif" font-size="11">TimescaleDB → Forecast table</text>
+    <text x="1440" y="2139" text-anchor="middle" fill="#6b46c1" font-family="Arial, sans-serif" font-size="11">Mode 1, Reports</text>
+    
+    <!-- Row 6 -->
+    <rect x="70" y="2150" width="1660" height="32" rx="0" fill="white"/>
+    <text x="200" y="2171" text-anchor="middle" fill="#2d3748" font-family="Arial, sans-serif" font-size="11" font-weight="bold">📊 Report Generation</text>
+    <text x="440" y="2171" text-anchor="middle" fill="#2d3748" font-family="Arial, sans-serif" font-size="11">Weekly / Monthly</text>
+    <text x="680" y="2171" text-anchor="middle" fill="#2d3748" font-family="Arial, sans-serif" font-size="11">Executive summaries, chargeback</text>
+    <text x="1050" y="2171" text-anchor="middle" fill="#2d3748" font-family="Arial, sans-serif" font-size="11">All data → PDF/S3</text>
+    <text x="1440" y="2171" text-anchor="middle" fill="#d69e2e" font-family="Arial, sans-serif" font-size="11">Email / Slack delivery</text>
+    
+    <!-- Row 7 -->
+    <rect x="70" y="2182" width="1660" height="32" rx="0" fill="#f7fafc"/>
+    <text x="200" y="2203" text-anchor="middle" fill="#2d3748" font-family="Arial, sans-serif" font-size="11" font-weight="bold">🔑 Credential Rotation</text>
+    <text x="440" y="2203" text-anchor="middle" fill="#2d3748" font-family="Arial, sans-serif" font-size="11">Daily at midnight</text>
+    <text x="680" y="2203" text-anchor="middle" fill="#2d3748" font-family="Arial, sans-serif" font-size="11">Verify OpenBao credential health</text>
+    <text x="1050" y="2203" text-anchor="middle" fill="#2d3748" font-family="Arial, sans-serif" font-size="11">OpenBao → Rotation check</text>
+    <text x="1440" y="2203" text-anchor="middle" fill="#e53e3e" font-family="Arial, sans-serif" font-size="11">Alert if rotation fails</text>
+    
+    <!-- Row 8 -->
+    <rect x="70" y="2214" width="1660" height="32" rx="0" fill="white"/>
+    <text x="200" y="2235" text-anchor="middle" fill="#2d3748" font-family="Arial, sans-serif" font-size="11" font-weight="bold">🗜️ Data Rollup / Compress</text>
+    <text x="440" y="2235" text-anchor="middle" fill="#2d3748" font-family="Arial, sans-serif" font-size="11">Daily at 4 AM</text>
+    <text x="680" y="2235" text-anchor="middle" fill="#2d3748" font-family="Arial, sans-serif" font-size="11">Aggregate old data, compress chunks</text>
+    <text x="1050" y="2235" text-anchor="middle" fill="#2d3748" font-family="Arial, sans-serif" font-size="11">TimescaleDB compression</text>
+    <text x="1440" y="2235" text-anchor="middle" fill="#319795" font-family="Arial, sans-serif" font-size="11">Storage optimization</text>
+  </g>
+  
+  <!-- Footer -->
+  <text x="900" y="2310" text-anchor="middle" fill="#718096" font-family="Arial, sans-serif" font-size="12">AI Cost Monitoring — Operational Modes Diagram • Interactive + Scheduled + Event-Driven + A2A • January 2026</text>
+</svg>

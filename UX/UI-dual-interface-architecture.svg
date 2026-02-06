@@ -1,0 +1,269 @@
+<svg viewBox="0 0 1600 1400" xmlns="http://www.w3.org/2000/svg">
+  <!-- Title -->
+  <text x="800" y="40" font-size="32" font-weight="bold" text-anchor="middle" fill="#1e293b">
+    Dual UI Architecture: Grafana + Conversational Widget
+  </text>
+  <text x="800" y="75" font-size="15" text-anchor="middle" fill="#64748b">
+    Two Complementary Interfaces for AI Cost Monitoring
+  </text>
+  
+  <!-- Main Architecture Boxes -->
+  <g transform="translate(50, 120)">
+    
+    <!-- User Interface Layer -->
+    <rect x="0" y="0" width="1500" height="500" rx="12" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+    <rect x="0" y="0" width="1500" height="45" rx="12" fill="#475569"/>
+    <text x="750" y="30" font-size="18" font-weight="bold" text-anchor="middle" fill="#ffffff">
+      USER INTERFACE LAYER
+    </text>
+    
+    <!-- Grafana Column -->
+    <g transform="translate(50, 70)">
+      <rect x="0" y="0" width="650" height="400" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="3"/>
+      <rect x="0" y="0" width="650" height="50" rx="10" fill="#16a34a"/>
+      <text x="325" y="33" font-size="17" font-weight="bold" text-anchor="middle" fill="#ffffff">
+        📊 GRAFANA DASHBOARDS
+      </text>
+      
+      <!-- Grafana Features -->
+      <g transform="translate(20, 70)">
+        <text x="0" y="0" font-size="14" font-weight="600" fill="#15803d">Visual Analytics</text>
+        
+        <!-- Dashboard 1 -->
+        <rect x="0" y="15" width="280" height="100" rx="6" fill="#ffffff" stroke="#22c55e" stroke-width="2"/>
+        <text x="140" y="35" font-size="12" font-weight="600" text-anchor="middle" fill="#166534">Executive Overview</text>
+        <text x="10" y="55" font-size="9" fill="#166534">• Total cost: $47,234</text>
+        <text x="10" y="68" font-size="9" fill="#166534">• Budget: 67% used</text>
+        <text x="10" y="81" font-size="9" fill="#166534">• Cost by cloud (pie chart)</text>
+        <text x="10" y="94" font-size="9" fill="#166534">• Daily trend (line chart)</text>
+        <text x="10" y="107" font-size="9" fill="#166534">• Top 10 customers</text>
+        
+        <!-- Dashboard 2 -->
+        <rect x="300" y="15" width="280" height="100" rx="6" fill="#ffffff" stroke="#22c55e" stroke-width="2"/>
+        <text x="440" y="35" font-size="12" font-weight="600" text-anchor="middle" fill="#166534">Model Performance</text>
+        <text x="310" y="55" font-size="9" fill="#166534">• Cost per model</text>
+        <text x="310" y="68" font-size="9" fill="#166534">• Token usage trends</text>
+        <text x="310" y="81" font-size="9" fill="#166534">• Cost efficiency ($/1K)</text>
+        <text x="310" y="94" font-size="9" fill="#166534">• Hourly patterns</text>
+        <text x="310" y="107" font-size="9" fill="#166534">• Input vs output ratio</text>
+        
+        <!-- Dashboard 3 -->
+        <rect x="0" y="130" width="280" height="100" rx="6" fill="#ffffff" stroke="#22c55e" stroke-width="2"/>
+        <text x="140" y="150" font-size="12" font-weight="600" text-anchor="middle" fill="#166534">Customer Attribution</text>
+        <text x="10" y="170" font-size="9" fill="#166534">• Top spenders</text>
+        <text x="10" y="183" font-size="9" fill="#166534">• Cost per customer</text>
+        <text x="10" y="196" font-size="9" fill="#166534">• Growth tracking</text>
+        <text x="10" y="209" font-size="9" fill="#166534">• Churn risk alerts</text>
+        <text x="10" y="222" font-size="9" fill="#166534">• Usage heatmap</text>
+        
+        <!-- Dashboard 4 -->
+        <rect x="300" y="130" width="280" height="100" rx="6" fill="#ffffff" stroke="#22c55e" stroke-width="2"/>
+        <text x="440" y="150" font-size="12" font-weight="600" text-anchor="middle" fill="#166534">Anomaly Detection</text>
+        <text x="310" y="170" font-size="9" fill="#166534">• Cost spike alerts</text>
+        <text x="310" y="183" font-size="9" fill="#166534">• Unusual patterns</text>
+        <text x="310" y="196" font-size="9" fill="#166534">• Threshold violations</text>
+        <text x="310" y="209" font-size="9" fill="#166534">• Automated alerts</text>
+        <text x="310" y="222" font-size="9" fill="#166534">• Root cause analysis</text>
+      </g>
+      
+      <!-- Grafana Best For -->
+      <g transform="translate(20, 290)">
+        <text x="0" y="0" font-size="12" font-weight="600" fill="#15803d">✅ Best for:</text>
+        <text x="0" y="18" font-size="10" fill="#166534">• Visual trend analysis</text>
+        <text x="0" y="33" font-size="10" fill="#166534">• Executive reports</text>
+        <text x="0" y="48" font-size="10" fill="#166534">• Team collaboration</text>
+        <text x="0" y="63" font-size="10" fill="#166534">• Deep data exploration</text>
+        <text x="0" y="78" font-size="10" fill="#166534">• Scheduled alerts</text>
+      </g>
+    </g>
+    
+    <!-- Conversational Widget Column -->
+    <g transform="translate(780, 70)">
+      <rect x="0" y="0" width="670" height="400" rx="10" fill="#dbeafe" stroke="#0284c7" stroke-width="3"/>
+      <rect x="0" y="0" width="670" height="50" rx="10" fill="#0284c7"/>
+      <text x="335" y="33" font-size="17" font-weight="bold" text-anchor="middle" fill="#ffffff">
+        💬 CONVERSATIONAL WIDGET
+      </text>
+      
+      <!-- Chat Interface Mock -->
+      <g transform="translate(20, 70)">
+        <text x="0" y="0" font-size="14" font-weight="600" fill="#0c4a6e">Natural Language Interface</text>
+        
+        <!-- Chat window -->
+        <rect x="0" y="15" width="630" height="250" rx="8" fill="#ffffff" stroke="#38bdf8" stroke-width="2"/>
+        
+        <!-- Chat messages -->
+        <g transform="translate(15, 30)">
+          <!-- User message 1 -->
+          <rect x="320" y="0" width="280" height="40" rx="6" fill="#e0f2fe" stroke="#0ea5e9" stroke-width="1"/>
+          <text x="330" y="15" font-size="10" font-weight="600" fill="#0c4a6e">You:</text>
+          <text x="330" y="30" font-size="10" fill="#075985">How much did we spend yesterday?</text>
+          
+          <!-- AI response 1 -->
+          <rect x="20" y="50" width="350" height="60" rx="6" fill="#f0f9ff" stroke="#0284c7" stroke-width="1"/>
+          <text x="30" y="65" font-size="10" font-weight="600" fill="#0c4a6e">Assistant:</text>
+          <text x="30" y="80" font-size="9" fill="#075985">You spent $1,234.56 yesterday on LLM costs.</text>
+          <text x="30" y="93" font-size="9" fill="#075985">That's a 15% increase from your daily average.</text>
+          <text x="30" y="105" font-size="8" fill="#0369a1">[View details in dashboard →]</text>
+          
+          <!-- User message 2 -->
+          <rect x="280" y="120" width="320" height="40" rx="6" fill="#e0f2fe" stroke="#0ea5e9" stroke-width="1"/>
+          <text x="290" y="135" font-size="10" font-weight="600" fill="#0c4a6e">You:</text>
+          <text x="290" y="150" font-size="10" fill="#075985">Which model was most expensive?</text>
+          
+          <!-- AI response 2 -->
+          <rect x="20" y="170" width="380" height="50" rx="6" fill="#f0f9ff" stroke="#0284c7" stroke-width="1"/>
+          <text x="30" y="185" font-size="10" font-weight="600" fill="#0c4a6e">Assistant:</text>
+          <text x="30" y="200" font-size="9" fill="#075985">GPT-4 was your most expensive model at $856.34,</text>
+          <text x="30" y="212" font-size="9" fill="#075985">accounting for 45% of your total spend.</text>
+        </g>
+        
+        <!-- Input box -->
+        <rect x="15" y="220" width="600" height="30" rx="6" fill="#f8fafc" stroke="#94a3b8" stroke-width="1"/>
+        <text x="25" y="240" font-size="10" fill="#94a3b8">Type your question...</text>
+        <text x="580" y="240" font-size="12" fill="#0284c7">→</text>
+      </g>
+      
+      <!-- Widget Best For -->
+      <g transform="translate(20, 290)">
+        <text x="0" y="0" font-size="12" font-weight="600" fill="#0c4a6e">✅ Best for:</text>
+        <text x="0" y="18" font-size="10" fill="#075985">• Quick status checks</text>
+        <text x="0" y="33" font-size="10" fill="#075985">• Ad-hoc questions</text>
+        <text x="0" y="48" font-size="10" fill="#075985">• Non-technical users</text>
+        <text x="0" y="63" font-size="10" fill="#075985">• Mobile-friendly access</text>
+        <text x="0" y="78" font-size="10" fill="#075985">• Natural language queries</text>
+      </g>
+    </g>
+  </g>
+  
+  <!-- Integration Layer -->
+  <g transform="translate(50, 650)">
+    <rect x="0" y="0" width="1500" height="180" rx="12" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+    <rect x="0" y="0" width="1500" height="45" rx="12" fill="#f59e0b"/>
+    <text x="750" y="30" font-size="18" font-weight="bold" text-anchor="middle" fill="#ffffff">
+      INTEGRATION LAYER
+    </text>
+    
+    <g transform="translate(50, 70)">
+      <!-- Grafana Backend -->
+      <g transform="translate(0, 0)">
+        <rect x="0" y="0" width="320" height="80" rx="8" fill="#ffffff" stroke="#16a34a" stroke-width="2"/>
+        <text x="160" y="25" font-size="13" font-weight="600" text-anchor="middle" fill="#15803d">Grafana Query Engine</text>
+        <text x="20" y="45" font-size="10" fill="#166534">• Direct SQL to BigQuery</text>
+        <text x="20" y="60" font-size="10" fill="#166534">• Dashboard variables</text>
+        <text x="20" y="75" font-size="10" fill="#166534">• Alert rules engine</text>
+      </g>
+      
+      <!-- Conversational API -->
+      <g transform="translate(1100, 0)">
+        <rect x="0" y="0" width="320" height="80" rx="8" fill="#ffffff" stroke="#0284c7" stroke-width="2"/>
+        <text x="160" y="25" font-size="13" font-weight="600" text-anchor="middle" fill="#0c4a6e">Conversational API</text>
+        <text x="20" y="45" font-size="10" fill="#075985">• FastAPI backend</text>
+        <text x="20" y="60" font-size="10" fill="#075985">• Claude AI integration</text>
+        <text x="20" y="75" font-size="10" fill="#075985">• Dynamic SQL generation</text>
+      </g>
+      
+      <!-- Connection -->
+      <line x1="360" y1="40" x2="550" y2="40" stroke="#92400e" stroke-width="3" stroke-dasharray="5,5"/>
+      <text x="455" y="30" font-size="11" font-weight="600" text-anchor="middle" fill="#92400e">Both query same data</text>
+      <line x1="870" y1="40" x2="1060" y2="40" stroke="#92400e" stroke-width="3" stroke-dasharray="5,5"/>
+      
+      <!-- Shared database -->
+      <g transform="translate(550, 10)">
+        <rect x="0" y="0" width="320" height="60" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+        <text x="160" y="25" font-size="13" font-weight="bold" text-anchor="middle" fill="#92400e">BigQuery Database</text>
+        <text x="160" y="45" font-size="10" text-anchor="middle" fill="#78350f">unified_costs view</text>
+      </g>
+    </g>
+  </g>
+  
+  <!-- Data Flow -->
+  <g transform="translate(50, 860)">
+    <!-- Arrows pointing down -->
+    <line x1="375" y1="0" x2="375" y2="30" stroke="#475569" stroke-width="4" marker-end="url(#arrowhead)"/>
+    <line x1="1175" y1="0" x2="1175" y2="30" stroke="#475569" stroke-width="4" marker-end="url(#arrowhead)"/>
+    
+    <text x="300" y="22" font-size="11" font-weight="600" fill="#475569">SQL Queries</text>
+    <text x="1090" y="22" font-size="11" font-weight="600" fill="#475569">API Calls → SQL</text>
+  </g>
+  
+  <!-- Database Layer -->
+  <g transform="translate(50, 910)">
+    <rect x="0" y="0" width="1500" height="200" rx="12" fill="#f0fdf4" stroke="#22c55e" stroke-width="2"/>
+    <rect x="0" y="0" width="1500" height="45" rx="12" fill="#22c55e"/>
+    <text x="750" y="30" font-size="18" font-weight="bold" text-anchor="middle" fill="#ffffff">
+      DATABASE LAYER
+    </text>
+    
+    <g transform="translate(50, 70)">
+      <!-- BigQuery details -->
+      <rect x="450" y="0" width="600" height="100" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+      <text x="750" y="25" font-size="15" font-weight="bold" text-anchor="middle" fill="#15803d">Google BigQuery</text>
+      <text x="750" y="48" font-size="12" text-anchor="middle" fill="#166534">Dataset: multi_cloud_costs</text>
+      
+      <g transform="translate(470, 60)">
+        <text x="0" y="0" font-size="11" fill="#166534">• gcp_llm_costs (GCP billing data)</text>
+        <text x="0" y="18" font-size="11" fill="#166534">• aws_llm_costs (AWS ETL data)</text>
+        <text x="0" y="36" font-size="11" fill="#166534">• azure_llm_costs (Azure ETL data)</text>
+        
+        <text x="280" y="0" font-size="11" fill="#166534">• View: unified_costs</text>
+        <text x="280" y="18" font-size="11" fill="#166534">• Storage: 50GB</text>
+        <text x="280" y="36" font-size="11" fill="#166534">• Cost: $3.50/month</text>
+      </g>
+    </g>
+  </g>
+  
+  <!-- Use Case Comparison -->
+  <g transform="translate(50, 1140)">
+    <rect x="0" y="0" width="1500" height="220" rx="12" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+    <text x="750" y="35" font-size="18" font-weight="bold" text-anchor="middle" fill="#1e293b">
+      When to Use Each Interface
+    </text>
+    
+    <g transform="translate(50, 60)">
+      <!-- Left column -->
+      <text x="0" y="0" font-size="14" font-weight="600" fill="#475569">Use Grafana for:</text>
+      <rect x="0" y="10" width="680" height="130" rx="6" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+      <g transform="translate(15, 30)">
+        <text x="0" y="0" font-size="11" fill="#166534">✅ Visual trend analysis over time</text>
+        <text x="0" y="20" font-size="11" fill="#166534">✅ Custom dashboard creation</text>
+        <text x="0" y="40" font-size="11" fill="#166534">✅ Executive reports with charts</text>
+        <text x="0" y="60" font-size="11" fill="#166534">✅ Deep data exploration with filters</text>
+        <text x="0" y="80" font-size="11" fill="#166534">✅ Team collaboration and sharing</text>
+        <text x="0" y="100" font-size="11" fill="#166534">✅ Scheduled alerts and notifications</text>
+      </g>
+      
+      <!-- Right column -->
+      <g transform="translate(740, 0)">
+        <text x="0" y="0" font-size="14" font-weight="600" fill="#475569">Use Conversational Widget for:</text>
+        <rect x="0" y="10" width="680" height="130" rx="6" fill="#dbeafe" stroke="#0284c7" stroke-width="2"/>
+        <g transform="translate(15, 30)">
+          <text x="0" y="0" font-size="11" fill="#075985">✅ Quick status checks ("How much yesterday?")</text>
+          <text x="0" y="20" font-size="11" fill="#075985">✅ Ad-hoc questions without building dashboards</text>
+          <text x="0" y="40" font-size="11" fill="#075985">✅ Natural language queries (non-technical users)</text>
+          <text x="0" y="60" font-size="11" fill="#075985">✅ Explaining anomalies ("Why did costs spike?")</text>
+          <text x="0" y="80" font-size="11" fill="#075985">✅ Mobile-friendly quick access</text>
+          <text x="0" y="100" font-size="11" fill="#075985">✅ Customer-specific lookups on the fly</text>
+        </g>
+      </g>
+    </g>
+  </g>
+  
+  <!-- Cost Summary -->
+  <g transform="translate(450, 1375)">
+    <rect x="0" y="0" width="700" height="50" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+    <text x="350" y="23" font-size="13" font-weight="bold" text-anchor="middle" fill="#92400e">
+      Total Monthly Cost: $50-115/month
+    </text>
+    <text x="350" y="40" font-size="11" text-anchor="middle" fill="#78350f">
+      Grafana ($15-25) + Widget API ($5-10) + Claude AI ($30-80) | Customer saves $30K-47K/mo ✅
+    </text>
+  </g>
+  
+  <!-- Arrow markers -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#475569"/>
+    </marker>
+  </defs>
+</svg>

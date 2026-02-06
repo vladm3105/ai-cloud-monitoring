@@ -1,0 +1,385 @@
+<svg viewBox="0 0 1800 1600" xmlns="http://www.w3.org/2000/svg">
+  <!-- Title -->
+  <text x="900" y="40" font-size="34" font-weight="bold" text-anchor="middle" fill="#1e293b">
+    Complete Architecture: Simple vs Advanced (with MCP)
+  </text>
+  <text x="900" y="75" font-size="16" text-anchor="middle" fill="#64748b">
+    Evolution from Cost Monitoring to AI-Powered Optimization
+  </text>
+  
+  <!-- Simple Architecture (Left Side) -->
+  <g transform="translate(50, 120)">
+    <rect x="0" y="0" width="800" height="1400" rx="15" fill="#f0fdf4" stroke="#16a34a" stroke-width="4"/>
+    <rect x="0" y="0" width="800" height="60" rx="15" fill="#16a34a"/>
+    <text x="400" y="40" font-size="22" font-weight="bold" text-anchor="middle" fill="#ffffff">
+      OPTION A: SIMPLE ARCHITECTURE
+    </text>
+    
+    <!-- Badge -->
+    <rect x="250" y="75" width="300" height="35" rx="8" fill="#dcfce7" stroke="#22c55e" stroke-width="2"/>
+    <text x="400" y="98" font-size="13" font-weight="bold" text-anchor="middle" fill="#15803d">
+      Phase 1 & 2 | Cost: $50-115/month
+    </text>
+    
+    <!-- User Layer -->
+    <g transform="translate(50, 130)">
+      <rect x="0" y="0" width="700" height="160" rx="10" fill="#dcfce7" stroke="#22c55e" stroke-width="2"/>
+      <text x="350" y="25" font-size="16" font-weight="bold" text-anchor="middle" fill="#15803d">
+        USER INTERFACES
+      </text>
+      
+      <!-- Grafana -->
+      <g transform="translate(20, 45)">
+        <rect x="0" y="0" width="310" height="95" rx="8" fill="#ffffff" stroke="#16a34a" stroke-width="2"/>
+        <text x="155" y="25" font-size="14" font-weight="600" text-anchor="middle" fill="#15803d">📊 Grafana Dashboards</text>
+        <text x="15" y="45" font-size="10" fill="#166534">• Visual analytics</text>
+        <text x="15" y="60" font-size="10" fill="#166534">• Cost trends</text>
+        <text x="15" y="75" font-size="10" fill="#166534">• Model comparison</text>
+        <text x="15" y="90" font-size="10" fill="#166534">• Budget tracking</text>
+      </g>
+      
+      <!-- Conversational Widget -->
+      <g transform="translate(360, 45)">
+        <rect x="0" y="0" width="310" height="95" rx="8" fill="#ffffff" stroke="#16a34a" stroke-width="2"/>
+        <text x="155" y="25" font-size="14" font-weight="600" text-anchor="middle" fill="#15803d">💬 Conversational Widget</text>
+        <text x="15" y="45" font-size="10" fill="#166534">• Natural language Q&A</text>
+        <text x="15" y="60" font-size="10" fill="#166534">• "How much yesterday?"</text>
+        <text x="15" y="75" font-size="10" fill="#166534">• Simple SQL generation</text>
+        <text x="15" y="90" font-size="10" fill="#166534">• Read-only queries</text>
+      </g>
+    </g>
+    
+    <!-- Arrow down -->
+    <line x1="400" y1="305" x2="400" y2="340" stroke="#475569" stroke-width="4" marker-end="url(#arrowhead)"/>
+    <text x="430" y="327" font-size="11" font-weight="600" fill="#475569">SQL Queries</text>
+    
+    <!-- Backend Layer -->
+    <g transform="translate(50, 360)">
+      <rect x="0" y="0" width="700" height="140" rx="10" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+      <text x="350" y="25" font-size="16" font-weight="bold" text-anchor="middle" fill="#92400e">
+        BACKEND LAYER
+      </text>
+      
+      <g transform="translate(20, 45)">
+        <!-- Grafana Query -->
+        <rect x="0" y="0" width="310" height="70" rx="8" fill="#ffffff" stroke="#d97706" stroke-width="2"/>
+        <text x="155" y="25" font-size="12" font-weight="600" text-anchor="middle" fill="#92400e">Grafana Query Engine</text>
+        <text x="15" y="45" font-size="9" fill="#78350f">Direct SQL to BigQuery</text>
+        <text x="15" y="60" font-size="9" fill="#78350f">No intermediate processing</text>
+        
+        <!-- Widget API -->
+        <rect x="360" y="0" width="310" height="70" rx="8" fill="#ffffff" stroke="#d97706" stroke-width="2"/>
+        <text x="515" y="25" font-size="12" font-weight="600" text-anchor="middle" fill="#92400e">Widget API + Claude AI</text>
+        <text x="375" y="45" font-size="9" fill="#78350f">Parse natural language</text>
+        <text x="375" y="60" font-size="9" fill="#78350f">Generate SQL → BigQuery</text>
+      </g>
+    </g>
+    
+    <!-- Arrow down -->
+    <line x1="400" y1="515" x2="400" y2="550" stroke="#475569" stroke-width="4" marker-end="url(#arrowhead)"/>
+    <text x="460" y="537" font-size="11" font-weight="600" fill="#475569">Daily Updates</text>
+    
+    <!-- Database Layer -->
+    <g transform="translate(50, 570)">
+      <rect x="0" y="0" width="700" height="180" rx="10" fill="#dbeafe" stroke="#0284c7" stroke-width="2"/>
+      <text x="350" y="25" font-size="16" font-weight="bold" text-anchor="middle" fill="#0c4a6e">
+        DATABASE LAYER
+      </text>
+      
+      <rect x="150" y="45" width="400" height="110" rx="8" fill="#ffffff" stroke="#0369a1" stroke-width="2"/>
+      <text x="350" y="70" font-size="14" font-weight="600" text-anchor="middle" fill="#0c4a6e">Google BigQuery</text>
+      <text x="350" y="90" font-size="11" text-anchor="middle" fill="#075985">Dataset: multi_cloud_costs</text>
+      <text x="170" y="115" font-size="10" fill="#075985">• gcp_llm_costs</text>
+      <text x="170" y="130" font-size="10" fill="#075985">• aws_llm_costs</text>
+      <text x="170" y="145" font-size="10" fill="#075985">• azure_llm_costs</text>
+      <text x="380" y="115" font-size="10" fill="#075985">View: unified_costs</text>
+      <text x="380" y="130" font-size="10" fill="#075985">Daily updates</text>
+      <text x="380" y="145" font-size="10" fill="#075985">4-24 hour delay</text>
+    </g>
+    
+    <!-- Arrow down -->
+    <line x1="400" y1="765" x2="400" y2="800" stroke="#475569" stroke-width="4" marker-end="url(#arrowhead)"/>
+    
+    <!-- Data Sources -->
+    <g transform="translate(50, 820)">
+      <rect x="0" y="0" width="700" height="180" rx="10" fill="#f0f9ff" stroke="#38bdf8" stroke-width="2"/>
+      <text x="350" y="25" font-size="16" font-weight="bold" text-anchor="middle" fill="#0c4a6e">
+        DATA SOURCES
+      </text>
+      
+      <g transform="translate(30, 50)">
+        <!-- GCP -->
+        <rect x="0" y="0" width="200" height="100" rx="6" fill="#ffffff" stroke="#4285f4" stroke-width="2"/>
+        <text x="100" y="25" font-size="12" font-weight="600" text-anchor="middle" fill="#4285f4">GCP Billing</text>
+        <text x="10" y="45" font-size="9" fill="#1e40af">✅ Automatic</text>
+        <text x="10" y="60" font-size="9" fill="#1e40af">Export every 4-6h</text>
+        <text x="10" y="75" font-size="9" fill="#1e40af">No ETL needed</text>
+        <text x="10" y="90" font-size="9" fill="#1e40af">Native to BigQuery</text>
+        
+        <!-- AWS -->
+        <rect x="230" y="0" width="200" height="100" rx="6" fill="#ffffff" stroke="#ff9900" stroke-width="2"/>
+        <text x="330" y="25" font-size="12" font-weight="600" text-anchor="middle" fill="#ff9900">AWS Cost Reports</text>
+        <text x="240" y="45" font-size="9" fill="#ea580c">⚠️ ETL required</text>
+        <text x="240" y="60" font-size="9" fill="#ea580c">S3 → Cloud Function</text>
+        <text x="240" y="75" font-size="9" fill="#ea580c">Daily at 3 AM</text>
+        <text x="240" y="90" font-size="9" fill="#ea580c">→ BigQuery</text>
+        
+        <!-- Azure -->
+        <rect x="460" y="0" width="200" height="100" rx="6" fill="#ffffff" stroke="#0078d4" stroke-width="2"/>
+        <text x="560" y="25" font-size="12" font-weight="600" text-anchor="middle" fill="#0078d4">Azure Cost API</text>
+        <text x="470" y="45" font-size="9" fill="#0284c7">⚠️ ETL required</text>
+        <text x="470" y="60" font-size="9" fill="#0284c7">API → Cloud Function</text>
+        <text x="470" y="75" font-size="9" fill="#0284c7">Daily at 4 AM</text>
+        <text x="470" y="90" font-size="9" fill="#0284c7">→ BigQuery</text>
+      </g>
+    </g>
+    
+    <!-- Characteristics -->
+    <g transform="translate(50, 1020)">
+      <rect x="0" y="0" width="700" height="140" rx="10" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+      <text x="350" y="25" font-size="15" font-weight="bold" text-anchor="middle" fill="#92400e">
+        Characteristics
+      </text>
+      
+      <g transform="translate(30, 45)">
+        <text x="0" y="0" font-size="12" font-weight="600" fill="#92400e">✅ Good for:</text>
+        <text x="0" y="20" font-size="10" fill="#78350f">• Cost reporting & analysis</text>
+        <text x="0" y="35" font-size="10" fill="#78350f">• Budget tracking</text>
+        <text x="0" y="50" font-size="10" fill="#78350f">• Historical trends</text>
+        <text x="0" y="65" font-size="10" fill="#78350f">• Daily/weekly reviews</text>
+        
+        <text x="350" y="0" font-size="12" font-weight="600" fill="#92400e">❌ Limitations:</text>
+        <text x="350" y="20" font-size="10" fill="#78350f">• 4-24 hour data delay</text>
+        <text x="350" y="35" font-size="10" fill="#78350f">• No real-time alerts</text>
+        <text x="350" y="50" font-size="10" fill="#78350f">• Read-only (no actions)</text>
+        <text x="350" y="65" font-size="10" fill="#78350f">• Limited to billing data</text>
+      </g>
+    </g>
+    
+    <!-- Cost -->
+    <g transform="translate(200, 1180)">
+      <rect x="0" y="0" width="400" height="55" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="3"/>
+      <text x="200" y="25" font-size="14" font-weight="bold" text-anchor="middle" fill="#15803d">
+        Monthly Cost: $50-115
+      </text>
+      <text x="200" y="45" font-size="11" text-anchor="middle" fill="#166534">
+        Grafana $15-25 | Widget API $5-10 | Claude $30-80
+      </text>
+    </g>
+    
+    <!-- Timeline -->
+    <g transform="translate(50, 1260)">
+      <rect x="0" y="0" width="700" height="50" rx="8" fill="#e0f2fe" stroke="#0284c7" stroke-width="2"/>
+      <text x="350" y="25" font-size="13" font-weight="600" text-anchor="middle" fill="#0c4a6e">
+        Phase 1 & 2: Months 1-12
+      </text>
+      <text x="350" y="42" font-size="10" text-anchor="middle" fill="#075985">
+        Start here | Prove concept | Get first 20-50 customers
+      </text>
+    </g>
+  </g>
+  
+  <!-- Advanced Architecture (Right Side) -->
+  <g transform="translate(950, 120)">
+    <rect x="0" y="0" width="800" height="1400" rx="15" fill="#fef2f2" stroke="#dc2626" stroke-width="4"/>
+    <rect x="0" y="0" width="800" height="60" rx="15" fill="#dc2626"/>
+    <text x="400" y="40" font-size="22" font-weight="bold" text-anchor="middle" fill="#ffffff">
+      OPTION B: ADVANCED ARCHITECTURE
+    </text>
+    
+    <!-- Badge -->
+    <rect x="250" y="75" width="300" height="35" rx="8" fill="#fee2e2" stroke="#ef4444" stroke-width="2"/>
+    <text x="400" y="98" font-size="13" font-weight="bold" text-anchor="middle" fill="#991b1b">
+      Phase 3 | Cost: $300-455/month
+    </text>
+    
+    <!-- User Layer -->
+    <g transform="translate(50, 130)">
+      <rect x="0" y="0" width="700" height="160" rx="10" fill="#dbeafe" stroke="#0284c7" stroke-width="2"/>
+      <text x="350" y="25" font-size="16" font-weight="bold" text-anchor="middle" fill="#0c4a6e">
+        USER INTERFACES
+      </text>
+      
+      <!-- Grafana -->
+      <g transform="translate(20, 45)">
+        <rect x="0" y="0" width="310" height="95" rx="8" fill="#ffffff" stroke="#0284c7" stroke-width="2"/>
+        <text x="155" y="25" font-size="14" font-weight="600" text-anchor="middle" fill="#0c4a6e">📊 Grafana Dashboards</text>
+        <text x="15" y="45" font-size="10" fill="#075985">• Visual analytics</text>
+        <text x="15" y="60" font-size="10" fill="#075985">• Real-time metrics</text>
+        <text x="15" y="75" font-size="10" fill="#075985">• Live alerts</text>
+        <text x="15" y="90" font-size="10" fill="#075985">• Prometheus data</text>
+      </g>
+      
+      <!-- AI Agent -->
+      <g transform="translate(360, 45)">
+        <rect x="0" y="0" width="310" height="95" rx="8" fill="#ffffff" stroke="#0284c7" stroke-width="2"/>
+        <text x="155" y="25" font-size="14" font-weight="600" text-anchor="middle" fill="#0c4a6e">🤖 AI Agent Chat</text>
+        <text x="15" y="45" font-size="10" fill="#075985">• Complex workflows</text>
+        <text x="15" y="60" font-size="10" fill="#075985">• "Optimize my costs"</text>
+        <text x="15" y="75" font-size="10" fill="#075985">• Can take actions</text>
+        <text x="15" y="90" font-size="10" fill="#075985">• Multi-step reasoning</text>
+      </g>
+    </g>
+    
+    <!-- Arrow down -->
+    <line x1="400" y1="305" x2="400" y2="340" stroke="#475569" stroke-width="4" marker-end="url(#arrowhead)"/>
+    <text x="340" y="327" font-size="11" font-weight="600" fill="#475569">Natural Language</text>
+    
+    <!-- Orchestrator Layer -->
+    <g transform="translate(50, 360)">
+      <rect x="0" y="0" width="700" height="180" rx="10" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+      <text x="350" y="25" font-size="16" font-weight="bold" text-anchor="middle" fill="#92400e">
+        AI ORCHESTRATOR / UX AGENT
+      </text>
+      
+      <rect x="50" y="45" width="600" height="110" rx="8" fill="#ffffff" stroke="#d97706" stroke-width="2"/>
+      <text x="350" y="68" font-size="13" font-weight="600" text-anchor="middle" fill="#92400e">Claude 3.5 Sonnet + Agent Logic</text>
+      
+      <g transform="translate(70, 85)">
+        <text x="0" y="0" font-size="10" fill="#78350f">• Parse complex queries</text>
+        <text x="0" y="18" font-size="10" fill="#78350f">• Route to MCP servers</text>
+        <text x="0" y="36" font-size="10" fill="#78350f">• Multi-step planning</text>
+        
+        <text x="280" y="0" font-size="10" fill="#78350f">• Execute actions (not just read)</text>
+        <text x="280" y="18" font-size="10" fill="#78350f">• Automated workflows</text>
+        <text x="280" y="36" font-size="10" fill="#78350f">• Context management</text>
+      </g>
+    </g>
+    
+    <!-- Arrows to MCP servers -->
+    <line x1="200" y1="555" x2="200" y2="590" stroke="#475569" stroke-width="3" marker-end="url(#arrowhead)"/>
+    <line x1="400" y1="555" x2="400" y2="590" stroke="#475569" stroke-width="3" marker-end="url(#arrowhead)"/>
+    <line x1="600" y1="555" x2="600" y2="590" stroke="#475569" stroke-width="3" marker-end="url(#arrowhead)"/>
+    
+    <text x="120" y="577" font-size="9" font-weight="600" fill="#475569">Real-time</text>
+    <text x="335" y="577" font-size="9" font-weight="600" fill="#475569">Real-time</text>
+    <text x="535" y="577" font-size="9" font-weight="600" fill="#475569">Real-time</text>
+    
+    <!-- MCP Servers Layer -->
+    <g transform="translate(50, 610)">
+      <rect x="0" y="0" width="700" height="200" rx="10" fill="#f0fdf4" stroke="#22c55e" stroke-width="2"/>
+      <text x="350" y="25" font-size="16" font-weight="bold" text-anchor="middle" fill="#15803d">
+        MCP SERVERS (Real-Time APIs)
+      </text>
+      
+      <g transform="translate(30, 50)">
+        <!-- GCP MCP -->
+        <rect x="0" y="0" width="200" height="120" rx="8" fill="#ffffff" stroke="#4285f4" stroke-width="2"/>
+        <text x="100" y="22" font-size="12" font-weight="600" text-anchor="middle" fill="#4285f4">GCP MCP Server</text>
+        <text x="100" y="38" font-size="9" text-anchor="middle" fill="#1e40af">Port 3001</text>
+        <text x="10" y="58" font-size="9" fill="#1e40af">• Live token usage</text>
+        <text x="10" y="73" font-size="9" fill="#1e40af">• Current hour cost</text>
+        <text x="10" y="88" font-size="9" fill="#1e40af">• Vertex AI metrics</text>
+        <text x="10" y="103" font-size="9" fill="#1e40af">• Can pause models</text>
+        
+        <!-- AWS MCP -->
+        <rect x="230" y="0" width="200" height="120" rx="8" fill="#ffffff" stroke="#ff9900" stroke-width="2"/>
+        <text x="330" y="22" font-size="12" font-weight="600" text-anchor="middle" fill="#ff9900">AWS MCP Server</text>
+        <text x="330" y="38" font-size="9" text-anchor="middle" fill="#ea580c">Port 3002</text>
+        <text x="240" y="58" font-size="9" fill="#ea580c">• Bedrock invocations</text>
+        <text x="240" y="73" font-size="9" fill="#ea580c">• CloudWatch metrics</text>
+        <text x="240" y="88" font-size="9" fill="#ea580c">• Live cost estimates</text>
+        <text x="240" y="103" font-size="9" fill="#ea580c">• Can set quotas</text>
+        
+        <!-- Azure MCP -->
+        <rect x="460" y="0" width="200" height="120" rx="8" fill="#ffffff" stroke="#0078d4" stroke-width="2"/>
+        <text x="560" y="22" font-size="12" font-weight="600" text-anchor="middle" fill="#0078d4">Azure MCP Server</text>
+        <text x="560" y="38" font-size="9" text-anchor="middle" fill="#0284c7">Port 3003</text>
+        <text x="470" y="58" font-size="9" fill="#0284c7">• OpenAI usage live</text>
+        <text x="470" y="73" font-size="9" fill="#0284c7">• Azure Monitor data</text>
+        <text x="470" y="88" font-size="9" fill="#0284c7">• Current token count</text>
+        <text x="470" y="103" font-size="9" fill="#0284c7">• Can pause deploys</text>
+      </g>
+    </g>
+    
+    <!-- Arrow down to BigQuery -->
+    <line x1="400" y1="825" x2="400" y2="860" stroke="#475569" stroke-width="3" marker-end="url(#arrowhead)"/>
+    <text x="435" y="847" font-size="10" font-weight="600" fill="#475569">Historical</text>
+    
+    <!-- Database Layer -->
+    <g transform="translate(50, 880)">
+      <rect x="0" y="0" width="700" height="100" rx="10" fill="#dbeafe" stroke="#0284c7" stroke-width="2"/>
+      <text x="350" y="25" font-size="16" font-weight="bold" text-anchor="middle" fill="#0c4a6e">
+        DATABASE (Historical)
+      </text>
+      
+      <rect x="200" y="45" width="300" height="40" rx="6" fill="#ffffff" stroke="#0369a1" stroke-width="2"/>
+      <text x="350" y="68" font-size="12" font-weight="600" text-anchor="middle" fill="#0c4a6e">BigQuery + Prometheus</text>
+    </g>
+    
+    <!-- Characteristics -->
+    <g transform="translate(50, 1000)">
+      <rect x="0" y="0" width="700" height="140" rx="10" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+      <text x="350" y="25" font-size="15" font-weight="bold" text-anchor="middle" fill="#92400e">
+        Characteristics
+      </text>
+      
+      <g transform="translate(30, 45)">
+        <text x="0" y="0" font-size="12" font-weight="600" fill="#92400e">✅ Capabilities:</text>
+        <text x="0" y="20" font-size="10" fill="#78350f">• Real-time monitoring (15-sec)</text>
+        <text x="0" y="35" font-size="10" fill="#78350f">• Can take actions</text>
+        <text x="0" y="50" font-size="10" fill="#78350f">• Automated workflows</text>
+        <text x="0" y="65" font-size="10" fill="#78350f">• Live alerts & optimization</text>
+        
+        <text x="350" y="0" font-size="12" font-weight="600" fill="#92400e">⚠️ Trade-offs:</text>
+        <text x="350" y="20" font-size="10" fill="#78350f">• Higher cost ($300-455/mo)</text>
+        <text x="350" y="35" font-size="10" fill="#78350f">• More complex to maintain</text>
+        <text x="350" y="50" font-size="10" fill="#78350f">• 3 MCP servers to run</text>
+        <text x="350" y="65" font-size="10" fill="#78350f">• Requires more dev time</text>
+      </g>
+    </g>
+    
+    <!-- Cost -->
+    <g transform="translate(200, 1160)">
+      <rect x="0" y="0" width="400" height="55" rx="8" fill="#fee2e2" stroke="#dc2626" stroke-width="3"/>
+      <text x="200" y="25" font-size="14" font-weight="bold" text-anchor="middle" fill="#991b1b">
+        Monthly Cost: $300-455
+      </text>
+      <text x="200" y="45" font-size="10" text-anchor="middle" fill="#7f1d1d">
+        MCP Servers $100-150 | Prometheus $50-80 | Orchestrator $100-150 | Base $50-75
+      </text>
+    </g>
+    
+    <!-- Timeline -->
+    <g transform="translate(50, 1240)">
+      <rect x="0" y="0" width="700" height="50" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+      <text x="350" y="25" font-size="13" font-weight="600" text-anchor="middle" fill="#92400e">
+        Phase 3: After Month 12
+      </text>
+      <text x="350" y="42" font-size="10" text-anchor="middle" fill="#78350f">
+        Add when: 50+ customers | Revenue > $50K/mo | Need real-time + actions
+      </text>
+    </g>
+  </g>
+  
+  <!-- Evolution Arrow -->
+  <g transform="translate(0, 1580)">
+    <line x1="100" y1="0" x2="1700" y2="0" stroke="#94a3b8" stroke-width="3" marker-end="url(#arrowhead-gray)"/>
+    <text x="900" y="-10" font-size="14" font-weight="bold" text-anchor="middle" fill="#475569">
+      EVOLUTION PATH →
+    </text>
+    
+    <!-- Milestones -->
+    <circle cx="450" cy="0" r="8" fill="#16a34a"/>
+    <text x="450" y="25" font-size="11" font-weight="600" text-anchor="middle" fill="#15803d">Months 1-6</text>
+    <text x="450" y="40" font-size="9" text-anchor="middle" fill="#166534">Start Simple</text>
+    
+    <circle cx="900" cy="0" r="8" fill="#f59e0b"/>
+    <text x="900" y="25" font-size="11" font-weight="600" text-anchor="middle" fill="#92400e">Months 7-12</text>
+    <text x="900" y="40" font-size="9" text-anchor="middle" fill="#78350f">20+ customers</text>
+    
+    <circle cx="1350" cy="0" r="8" fill="#dc2626"/>
+    <text x="1350" y="25" font-size="11" font-weight="600" text-anchor="middle" fill="#991b1b">Month 13+</text>
+    <text x="1350" y="40" font-size="9" text-anchor="middle" fill="#7f1d1d">Add MCP + Agent</text>
+  </g>
+  
+  <!-- Arrow markers -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#475569"/>
+    </marker>
+    <marker id="arrowhead-gray" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#94a3b8"/>
+    </marker>
+  </defs>
+</svg>

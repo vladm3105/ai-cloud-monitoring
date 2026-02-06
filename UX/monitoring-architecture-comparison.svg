@@ -1,0 +1,416 @@
+<svg viewBox="0 0 1400 1800" xmlns="http://www.w3.org/2000/svg">
+  <!-- Title -->
+  <text x="700" y="40" font-size="28" font-weight="bold" text-anchor="middle" fill="#1e293b">
+    Monitoring &amp; Observability Architecture Comparison
+  </text>
+  <text x="700" y="70" font-size="14" text-anchor="middle" fill="#64748b">
+    Cloud-Based vs Docker-Based Deployments
+  </text>
+  
+  <!-- Legend -->
+  <g transform="translate(50, 90)">
+    <rect x="0" y="0" width="200" height="120" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
+    <text x="100" y="25" font-size="12" font-weight="bold" text-anchor="middle" fill="#334155">Legend</text>
+    
+    <rect x="10" y="40" width="60" height="20" rx="4" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="80" y="54" font-size="10" fill="#1e293b">Application</text>
+    
+    <rect x="10" y="65" width="60" height="20" rx="4" fill="#dcfce7" stroke="#22c55e" stroke-width="1.5"/>
+    <text x="80" y="79" font-size="10" fill="#1e293b">Observability</text>
+    
+    <rect x="10" y="90" width="60" height="20" rx="4" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
+    <text x="80" y="104" font-size="10" fill="#1e293b">Data Storage</text>
+  </g>
+  
+  <!-- CLOUD DEPLOYMENT -->
+  <g transform="translate(50, 240)">
+    <!-- Container -->
+    <rect x="0" y="0" width="600" height="700" rx="12" fill="#ffffff" stroke="#3b82f6" stroke-width="3"/>
+    <rect x="0" y="0" width="600" height="50" rx="12" fill="#3b82f6"/>
+    <text x="300" y="32" font-size="18" font-weight="bold" text-anchor="middle" fill="#ffffff">
+      CLOUD DEPLOYMENT
+    </text>
+    <text x="300" y="75" font-size="12" text-anchor="middle" fill="#64748b">
+      GCP Cloud Run / AWS ECS / Azure Container Apps
+    </text>
+    
+    <!-- Application Layer -->
+    <rect x="30" y="100" width="540" height="100" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+    <text x="300" y="125" font-size="14" font-weight="bold" text-anchor="middle" fill="#1e40af">
+      Application Layer
+    </text>
+    
+    <rect x="50" y="140" width="150" height="40" rx="6" fill="#bfdbfe" stroke="#2563eb" stroke-width="1.5"/>
+    <text x="125" y="157" font-size="11" font-weight="600" text-anchor="middle" fill="#1e3a8a">MCP Servers</text>
+    <text x="125" y="172" font-size="9" text-anchor="middle" fill="#1e40af">(Cloud Run)</text>
+    
+    <rect x="225" y="140" width="150" height="40" rx="6" fill="#bfdbfe" stroke="#2563eb" stroke-width="1.5"/>
+    <text x="300" y="157" font-size="11" font-weight="600" text-anchor="middle" fill="#1e3a8a">Cost Monitor</text>
+    <text x="300" y="172" font-size="9" text-anchor="middle" fill="#1e40af">API</text>
+    
+    <rect x="400" y="140" width="150" height="40" rx="6" fill="#bfdbfe" stroke="#2563eb" stroke-width="1.5"/>
+    <text x="475" y="157" font-size="11" font-weight="600" text-anchor="middle" fill="#1e3a8a">ETL Pipeline</text>
+    <text x="475" y="172" font-size="9" text-anchor="middle" fill="#1e40af">Service</text>
+    
+    <!-- Arrow down -->
+    <path d="M 300 190 L 300 210" stroke="#475569" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+    <text x="320" y="205" font-size="10" fill="#475569">stdout/stderr</text>
+    
+    <!-- Cloud Native Logging -->
+    <rect x="30" y="220" width="540" height="80" rx="8" fill="#f0f9ff" stroke="#0ea5e9" stroke-width="2"/>
+    <text x="300" y="245" font-size="14" font-weight="bold" text-anchor="middle" fill="#075985">
+      Cloud Native Logging
+    </text>
+    
+    <rect x="50" y="255" width="150" height="30" rx="4" fill="#e0f2fe" stroke="#0284c7" stroke-width="1"/>
+    <text x="125" y="275" font-size="10" text-anchor="middle" fill="#0c4a6e">GCP Cloud Logging</text>
+    
+    <rect x="225" y="255" width="150" height="30" rx="4" fill="#e0f2fe" stroke="#0284c7" stroke-width="1"/>
+    <text x="300" y="275" font-size="10" text-anchor="middle" fill="#0c4a6e">AWS CloudWatch</text>
+    
+    <rect x="400" y="255" width="150" height="30" rx="4" fill="#e0f2fe" stroke="#0284c7" stroke-width="1"/>
+    <text x="475" y="275" font-size="10" text-anchor="middle" fill="#0c4a6e">Azure Monitor</text>
+    
+    <!-- Key Feature Callout -->
+    <rect x="180" y="310" width="240" height="35" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+    <text x="300" y="323" font-size="10" font-weight="bold" text-anchor="middle" fill="#92400e">
+      ✓ NO PROMTAIL NEEDED
+    </text>
+    <text x="300" y="336" font-size="9" text-anchor="middle" fill="#78350f">
+      Native cloud logging captures all logs
+    </text>
+    
+    <!-- Arrow down -->
+    <path d="M 300 355 L 300 375" stroke="#475569" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+    
+    <!-- Observability Stack -->
+    <rect x="30" y="385" width="540" height="120" rx="8" fill="#dcfce7" stroke="#22c55e" stroke-width="2"/>
+    <text x="300" y="410" font-size="14" font-weight="bold" text-anchor="middle" fill="#15803d">
+      Observability Stack
+    </text>
+    
+    <rect x="70" y="425" width="130" height="60" rx="6" fill="#bbf7d0" stroke="#16a34a" stroke-width="1.5"/>
+    <text x="135" y="445" font-size="11" font-weight="600" text-anchor="middle" fill="#14532d">Prometheus</text>
+    <text x="135" y="460" font-size="9" text-anchor="middle" fill="#166534">(Metrics)</text>
+    <text x="135" y="473" font-size="8" text-anchor="middle" fill="#15803d">Cloud Run</text>
+    
+    <rect x="235" y="425" width="130" height="60" rx="6" fill="#bbf7d0" stroke="#16a34a" stroke-width="1.5"/>
+    <text x="300" y="445" font-size="11" font-weight="600" text-anchor="middle" fill="#14532d">Grafana</text>
+    <text x="300" y="460" font-size="9" text-anchor="middle" fill="#166534">(Dashboards)</text>
+    <text x="300" y="473" font-size="8" text-anchor="middle" fill="#15803d">Cloud Run</text>
+    
+    <rect x="400" y="425" width="130" height="60" rx="6" fill="#bbf7d0" stroke="#16a34a" stroke-width="1.5"/>
+    <text x="465" y="445" font-size="11" font-weight="600" text-anchor="middle" fill="#14532d">TimescaleDB</text>
+    <text x="465" y="460" font-size="9" text-anchor="middle" fill="#166534">(LLM Costs)</text>
+    <text x="465" y="473" font-size="8" text-anchor="middle" fill="#15803d">Cloud SQL/RDS</text>
+    
+    <!-- Arrow down -->
+    <path d="M 300 515 L 300 535" stroke="#475569" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+    
+    <!-- Data Sources -->
+    <rect x="30" y="545" width="540" height="120" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+    <text x="300" y="570" font-size="14" font-weight="bold" text-anchor="middle" fill="#92400e">
+      Data Sources
+    </text>
+    
+    <rect x="50" y="585" width="150" height="60" rx="6" fill="#fef9c3" stroke="#eab308" stroke-width="1.5"/>
+    <text x="125" y="605" font-size="10" font-weight="600" text-anchor="middle" fill="#713f12">GCP BigQuery</text>
+    <text x="125" y="620" font-size="9" text-anchor="middle" fill="#854d0e">Billing Export</text>
+    <text x="125" y="633" font-size="8" text-anchor="middle" fill="#a16207">Vertex AI costs</text>
+    
+    <rect x="225" y="585" width="150" height="60" rx="6" fill="#fef9c3" stroke="#eab308" stroke-width="1.5"/>
+    <text x="300" y="605" font-size="10" font-weight="600" text-anchor="middle" fill="#713f12">AWS Cost</text>
+    <text x="300" y="620" font-size="9" text-anchor="middle" fill="#854d0e">Explorer API</text>
+    <text x="300" y="633" font-size="8" text-anchor="middle" fill="#a16207">Bedrock costs</text>
+    
+    <rect x="400" y="585" width="150" height="60" rx="6" fill="#fef9c3" stroke="#eab308" stroke-width="1.5"/>
+    <text x="475" y="605" font-size="10" font-weight="600" text-anchor="middle" fill="#713f12">Azure Cost</text>
+    <text x="475" y="620" font-size="9" text-anchor="middle" fill="#854d0e">Management</text>
+    <text x="475" y="633" font-size="8" text-anchor="middle" fill="#a16207">OpenAI costs</text>
+    
+    <!-- Cost estimate -->
+    <text x="300" y="685" font-size="12" font-weight="bold" text-anchor="middle" fill="#1e293b">
+      Monthly Cost: $65-$170
+    </text>
+  </g>
+  
+  <!-- DOCKER DEPLOYMENT -->
+  <g transform="translate(750, 240)">
+    <!-- Container -->
+    <rect x="0" y="0" width="600" height="700" rx="12" fill="#ffffff" stroke="#8b5cf6" stroke-width="3"/>
+    <rect x="0" y="0" width="600" height="50" rx="12" fill="#8b5cf6"/>
+    <text x="300" y="32" font-size="18" font-weight="bold" text-anchor="middle" fill="#ffffff">
+      DOCKER DEPLOYMENT
+    </text>
+    <text x="300" y="75" font-size="12" text-anchor="middle" fill="#64748b">
+      Docker Compose / Docker Swarm / Local Dev
+    </text>
+    
+    <!-- Application Layer -->
+    <rect x="30" y="100" width="540" height="100" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+    <text x="300" y="125" font-size="14" font-weight="bold" text-anchor="middle" fill="#1e40af">
+      Application Containers
+    </text>
+    
+    <rect x="50" y="140" width="150" height="40" rx="6" fill="#bfdbfe" stroke="#2563eb" stroke-width="1.5"/>
+    <text x="125" y="157" font-size="11" font-weight="600" text-anchor="middle" fill="#1e3a8a">MCP Servers</text>
+    <text x="125" y="172" font-size="9" text-anchor="middle" fill="#1e40af">(Container)</text>
+    
+    <rect x="225" y="140" width="150" height="40" rx="6" fill="#bfdbfe" stroke="#2563eb" stroke-width="1.5"/>
+    <text x="300" y="157" font-size="11" font-weight="600" text-anchor="middle" fill="#1e3a8a">Cost Monitor</text>
+    <text x="300" y="172" font-size="9" text-anchor="middle" fill="#1e40af">API</text>
+    
+    <rect x="400" y="140" width="150" height="40" rx="6" fill="#bfdbfe" stroke="#2563eb" stroke-width="1.5"/>
+    <text x="475" y="157" font-size="11" font-weight="600" text-anchor="middle" fill="#1e3a8a">ETL Pipeline</text>
+    <text x="475" y="172" font-size="9" text-anchor="middle" fill="#1e40af">Service</text>
+    
+    <!-- Arrow down -->
+    <path d="M 300 190 L 300 210" stroke="#475569" stroke-width="2" fill="none" marker-end="url(#arrowhead2)"/>
+    <text x="315" y="205" font-size="10" fill="#475569">Loki driver</text>
+    
+    <!-- Loki (replaces Cloud Logging) -->
+    <rect x="30" y="220" width="540" height="80" rx="8" fill="#f3e8ff" stroke="#a855f7" stroke-width="2"/>
+    <text x="300" y="245" font-size="14" font-weight="bold" text-anchor="middle" fill="#6b21a8">
+      Log Aggregation
+    </text>
+    
+    <rect x="180" y="255" width="240" height="30" rx="6" fill="#e9d5ff" stroke="#9333ea" stroke-width="1.5"/>
+    <text x="300" y="275" font-size="11" font-weight="600" text-anchor="middle" fill="#581c87">Loki (Container)</text>
+    
+    <!-- Key Feature Callout -->
+    <rect x="180" y="310" width="240" height="35" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+    <text x="300" y="323" font-size="10" font-weight="bold" text-anchor="middle" fill="#92400e">
+      ✓ NO PROMTAIL NEEDED
+    </text>
+    <text x="300" y="336" font-size="9" text-anchor="middle" fill="#78350f">
+      Loki Docker driver ships logs
+    </text>
+    
+    <!-- Arrow down -->
+    <path d="M 300 355 L 300 375" stroke="#475569" stroke-width="2" fill="none" marker-end="url(#arrowhead2)"/>
+    
+    <!-- Observability Stack -->
+    <rect x="30" y="385" width="540" height="120" rx="8" fill="#dcfce7" stroke="#22c55e" stroke-width="2"/>
+    <text x="300" y="410" font-size="14" font-weight="bold" text-anchor="middle" fill="#15803d">
+      Observability Stack (All Containers)
+    </text>
+    
+    <rect x="70" y="425" width="130" height="60" rx="6" fill="#bbf7d0" stroke="#16a34a" stroke-width="1.5"/>
+    <text x="135" y="445" font-size="11" font-weight="600" text-anchor="middle" fill="#14532d">Prometheus</text>
+    <text x="135" y="460" font-size="9" text-anchor="middle" fill="#166534">(Metrics)</text>
+    <text x="135" y="473" font-size="8" text-anchor="middle" fill="#15803d">Container</text>
+    
+    <rect x="235" y="425" width="130" height="60" rx="6" fill="#bbf7d0" stroke="#16a34a" stroke-width="1.5"/>
+    <text x="300" y="445" font-size="11" font-weight="600" text-anchor="middle" fill="#14532d">Grafana</text>
+    <text x="300" y="460" font-size="9" text-anchor="middle" fill="#166534">(Dashboards)</text>
+    <text x="300" y="473" font-size="8" text-anchor="middle" fill="#15803d">Container</text>
+    
+    <rect x="400" y="425" width="130" height="60" rx="6" fill="#bbf7d0" stroke="#16a34a" stroke-width="1.5"/>
+    <text x="465" y="445" font-size="11" font-weight="600" text-anchor="middle" fill="#14532d">TimescaleDB</text>
+    <text x="465" y="460" font-size="9" text-anchor="middle" fill="#166534">(LLM Costs)</text>
+    <text x="465" y="473" font-size="8" text-anchor="middle" fill="#15803d">Container</text>
+    
+    <!-- Arrow down -->
+    <path d="M 300 515 L 300 535" stroke="#475569" stroke-width="2" fill="none" marker-end="url(#arrowhead2)"/>
+    
+    <!-- Data Sources -->
+    <rect x="30" y="545" width="540" height="120" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+    <text x="300" y="570" font-size="14" font-weight="bold" text-anchor="middle" fill="#92400e">
+      Data Persistence (Docker Volumes)
+    </text>
+    
+    <rect x="50" y="585" width="150" height="60" rx="6" fill="#fef9c3" stroke="#eab308" stroke-width="1.5"/>
+    <text x="125" y="605" font-size="10" font-weight="600" text-anchor="middle" fill="#713f12">prometheus-data</text>
+    <text x="125" y="620" font-size="9" text-anchor="middle" fill="#854d0e">TSDB storage</text>
+    <text x="125" y="633" font-size="8" text-anchor="middle" fill="#a16207">30 day retention</text>
+    
+    <rect x="225" y="585" width="150" height="60" rx="6" fill="#fef9c3" stroke="#eab308" stroke-width="1.5"/>
+    <text x="300" y="605" font-size="10" font-weight="600" text-anchor="middle" fill="#713f12">loki-data</text>
+    <text x="300" y="620" font-size="9" text-anchor="middle" fill="#854d0e">Log storage</text>
+    <text x="300" y="633" font-size="8" text-anchor="middle" fill="#a16207">7 day retention</text>
+    
+    <rect x="400" y="585" width="150" height="60" rx="6" fill="#fef9c3" stroke="#eab308" stroke-width="1.5"/>
+    <text x="475" y="605" font-size="10" font-weight="600" text-anchor="middle" fill="#713f12">timescaledb-data</text>
+    <text x="475" y="620" font-size="9" text-anchor="middle" fill="#854d0e">PostgreSQL</text>
+    <text x="475" y="633" font-size="8" text-anchor="middle" fill="#a16207">All LLM costs</text>
+    
+    <!-- Cost estimate -->
+    <text x="300" y="685" font-size="12" font-weight="bold" text-anchor="middle" fill="#1e293b">
+      Monthly Cost: $0 (self-hosted)
+    </text>
+  </g>
+  
+  <!-- Key Differences Section -->
+  <g transform="translate(50, 980)">
+    <rect x="0" y="0" width="1300" height="280" rx="12" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+    <text x="650" y="35" font-size="20" font-weight="bold" text-anchor="middle" fill="#1e293b">
+      Key Architecture Differences
+    </text>
+    
+    <!-- Cloud column -->
+    <g transform="translate(50, 60)">
+      <text x="250" y="0" font-size="16" font-weight="bold" text-anchor="middle" fill="#3b82f6">
+        Cloud Deployment
+      </text>
+      
+      <text x="0" y="30" font-size="11" fill="#334155">✓ Native cloud logging (automatic)</text>
+      <text x="0" y="50" font-size="11" fill="#334155">✓ Grafana queries cloud services directly</text>
+      <text x="0" y="70" font-size="11" fill="#334155">✓ Managed databases (Cloud SQL/RDS)</text>
+      <text x="0" y="90" font-size="11" fill="#334155">✓ Auto-scaling containers</text>
+      <text x="0" y="110" font-size="11" fill="#334155">✓ No infrastructure management</text>
+      <text x="0" y="130" font-size="11" fill="#334155">✓ Pay per use ($65-170/month)</text>
+      <text x="0" y="150" font-size="11" fill="#334155">✓ High availability built-in</text>
+      <text x="0" y="170" font-size="11" fill="#334155">✓ Multi-region support</text>
+      
+      <rect x="0" y="185" width="500" height="25" rx="4" fill="#dbeafe" stroke="#3b82f6" stroke-width="1"/>
+      <text x="250" y="202" font-size="10" font-weight="bold" text-anchor="middle" fill="#1e40af">
+        Best for: Production, Multi-cloud, Enterprise
+      </text>
+    </g>
+    
+    <!-- Docker column -->
+    <g transform="translate(700, 60)">
+      <text x="250" y="0" font-size="16" font-weight="bold" text-anchor="middle" fill="#8b5cf6">
+        Docker Deployment
+      </text>
+      
+      <text x="0" y="30" font-size="11" fill="#334155">✓ Loki Docker driver (automatic)</text>
+      <text x="0" y="50" font-size="11" fill="#334155">✓ All services in containers</text>
+      <text x="0" y="70" font-size="11" fill="#334155">✓ Local PostgreSQL/TimescaleDB</text>
+      <text x="0" y="90" font-size="11" fill="#334155">✓ Single docker-compose up</text>
+      <text x="0" y="110" font-size="11" fill="#334155">✓ Volume-based persistence</text>
+      <text x="0" y="130" font-size="11" fill="#334155">✓ Zero cloud costs (hardware only)</text>
+      <text x="0" y="150" font-size="11" fill="#334155">✓ Full control over infrastructure</text>
+      <text x="0" y="170" font-size="11" fill="#334155">✓ Ideal for local development</text>
+      
+      <rect x="0" y="185" width="500" height="25" rx="4" fill="#f3e8ff" stroke="#8b5cf6" stroke-width="1"/>
+      <text x="250" y="202" font-size="10" font-weight="bold" text-anchor="middle" fill="#6b21a8">
+        Best for: Development, Self-hosted, Small teams
+      </text>
+    </g>
+  </g>
+  
+  <!-- Common Features Section -->
+  <g transform="translate(50, 1300)">
+    <rect x="0" y="0" width="1300" height="220" rx="12" fill="#ecfdf5" stroke="#10b981" stroke-width="2"/>
+    <text x="650" y="35" font-size="20" font-weight="bold" text-anchor="middle" fill="#065f46">
+      Common Features (Both Deployments)
+    </text>
+    
+    <g transform="translate(50, 60)">
+      <!-- Column 1 -->
+      <g>
+        <text x="0" y="0" font-size="12" font-weight="bold" fill="#047857">Stack Components</text>
+        <text x="0" y="20" font-size="11" fill="#064e3b">• Prometheus (metrics)</text>
+        <text x="0" y="40" font-size="11" fill="#064e3b">• Loki (logs)</text>
+        <text x="0" y="60" font-size="11" fill="#064e3b">• Grafana (dashboards)</text>
+        <text x="0" y="80" font-size="11" fill="#064e3b">• TimescaleDB (LLM costs)</text>
+        <text x="0" y="100" font-size="11" fill="#064e3b">• Alertmanager (notifications)</text>
+      </g>
+      
+      <!-- Column 2 -->
+      <g transform="translate(350, 0)">
+        <text x="0" y="0" font-size="12" font-weight="bold" fill="#047857">Dashboards</text>
+        <text x="0" y="20" font-size="11" fill="#064e3b">• LLM Cost Overview</text>
+        <text x="0" y="40" font-size="11" fill="#064e3b">• Model Comparison</text>
+        <text x="0" y="60" font-size="11" fill="#064e3b">• Customer Attribution</text>
+        <text x="0" y="80" font-size="11" fill="#064e3b">• Anomaly Detection</text>
+        <text x="0" y="100" font-size="11" fill="#064e3b">• System Health</text>
+      </g>
+      
+      <!-- Column 3 -->
+      <g transform="translate(700, 0)">
+        <text x="0" y="0" font-size="12" font-weight="bold" fill="#047857">Alert Rules</text>
+        <text x="0" y="20" font-size="11" fill="#064e3b">• Cost spike detection</text>
+        <text x="0" y="40" font-size="11" fill="#064e3b">• Budget warnings</text>
+        <text x="0" y="60" font-size="11" fill="#064e3b">• Customer quota exceeded</text>
+        <text x="0" y="80" font-size="11" fill="#064e3b">• High token usage</text>
+        <text x="0" y="100" font-size="11" fill="#064e3b">• Infrastructure issues</text>
+      </g>
+      
+      <!-- Column 4 -->
+      <g transform="translate(1050, 0)">
+        <text x="0" y="0" font-size="12" font-weight="bold" fill="#047857">Data Sources</text>
+        <text x="0" y="20" font-size="11" fill="#064e3b">• GCP Vertex AI</text>
+        <text x="0" y="40" font-size="11" fill="#064e3b">• AWS Bedrock</text>
+        <text x="0" y="60" font-size="11" fill="#064e3b">• Azure OpenAI</text>
+        <text x="0" y="80" font-size="11" fill="#064e3b">• Multi-cloud billing</text>
+        <text x="0" y="100" font-size="11" fill="#064e3b">• Token tracking</text>
+      </g>
+    </g>
+    
+    <!-- Bottom highlight -->
+    <rect x="350" y="170" width="600" height="30" rx="6" fill="#a7f3d0" stroke="#059669" stroke-width="2"/>
+    <text x="650" y="190" font-size="12" font-weight="bold" text-anchor="middle" fill="#065f46">
+      ✓ NO PROMTAIL REQUIRED IN EITHER DEPLOYMENT
+    </text>
+  </g>
+  
+  <!-- Implementation Timeline -->
+  <g transform="translate(50, 1560)">
+    <rect x="0" y="0" width="1300" height="180" rx="12" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+    <text x="650" y="35" font-size="20" font-weight="bold" text-anchor="middle" fill="#92400e">
+      Implementation Timeline
+    </text>
+    
+    <!-- Week 1 -->
+    <g transform="translate(50, 60)">
+      <rect x="0" y="0" width="280" height="90" rx="6" fill="#fef9c3" stroke="#eab308" stroke-width="1.5"/>
+      <text x="140" y="20" font-size="12" font-weight="bold" text-anchor="middle" fill="#78350f">Week 1: Foundation</text>
+      <text x="10" y="40" font-size="10" fill="#713f12">• Deploy TimescaleDB</text>
+      <text x="10" y="55" font-size="10" fill="#713f12">• Setup Prometheus</text>
+      <text x="10" y="70" font-size="10" fill="#713f12">• Setup Loki (or cloud logging)</text>
+      <text x="10" y="85" font-size="10" fill="#713f12">• Deploy Grafana</text>
+    </g>
+    
+    <!-- Week 2 -->
+    <g transform="translate(360, 60)">
+      <rect x="0" y="0" width="280" height="90" rx="6" fill="#fef9c3" stroke="#eab308" stroke-width="1.5"/>
+      <text x="140" y="20" font-size="12" font-weight="bold" text-anchor="middle" fill="#78350f">Week 2: ETL Pipeline</text>
+      <text x="10" y="40" font-size="10" fill="#713f12">• Create ETL functions</text>
+      <text x="10" y="55" font-size="10" fill="#713f12">• Schedule daily runs</text>
+      <text x="10" y="70" font-size="10" fill="#713f12">• Test data collection</text>
+      <text x="10" y="85" font-size="10" fill="#713f12">• Verify TimescaleDB data</text>
+    </g>
+    
+    <!-- Week 3 -->
+    <g transform="translate(670, 60)">
+      <rect x="0" y="0" width="280" height="90" rx="6" fill="#fef9c3" stroke="#eab308" stroke-width="1.5"/>
+      <text x="140" y="20" font-size="12" font-weight="bold" text-anchor="middle" fill="#78350f">Week 3: Dashboards</text>
+      <text x="10" y="40" font-size="10" fill="#713f12">• Import 4 dashboards</text>
+      <text x="10" y="55" font-size="10" fill="#713f12">• Configure data sources</text>
+      <text x="10" y="70" font-size="10" fill="#713f12">• Test all panels</text>
+      <text x="10" y="85" font-size="10" fill="#713f12">• Set up variables</text>
+    </g>
+    
+    <!-- Week 4 -->
+    <g transform="translate(980, 60)">
+      <rect x="0" y="0" width="280" height="90" rx="6" fill="#fef9c3" stroke="#eab308" stroke-width="1.5"/>
+      <text x="140" y="20" font-size="12" font-weight="bold" text-anchor="middle" fill="#78350f">Week 4: Alerting</text>
+      <text x="10" y="40" font-size="10" fill="#713f12">• Configure alert rules</text>
+      <text x="10" y="55" font-size="10" fill="#713f12">• Setup Alertmanager</text>
+      <text x="10" y="70" font-size="10" fill="#713f12">• Test notifications</text>
+      <text x="10" y="85" font-size="10" fill="#713f12">• Production ready ✓</text>
+    </g>
+  </g>
+  
+  <!-- Footer -->
+  <g transform="translate(50, 1760)">
+    <text x="650" y="0" font-size="11" text-anchor="middle" fill="#64748b">
+      Documentation: 1,547 lines (Cloud) | Comprehensive guides with code examples, configurations, and operational runbooks
+    </text>
+    <text x="650" y="20" font-size="11" text-anchor="middle" fill="#64748b">
+      Stack: Grafana + Prometheus + Loki + TimescaleDB + Alertmanager | No Promtail Required
+    </text>
+  </g>
+  
+  <!-- Arrow markers -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#475569"/>
+    </marker>
+    <marker id="arrowhead2" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#475569"/>
+    </marker>
+  </defs>
+</svg>
