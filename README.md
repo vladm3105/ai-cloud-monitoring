@@ -234,7 +234,11 @@ Both UIs query the **same data sources** (BigQuery for metrics, Cloud SQL for me
 ### Agent Layer
 - **Google ADK** - Agent Development Kit
 - **Google A2A Protocol** - Agent-to-Agent communication
-- **Gemini 2.0 / Claude** - LLM backbone
+- **LiteLLM** - Vendor-neutral LLM abstraction layer
+  - Supports: Gemini 2.0, Claude 3.5, GPT-4, Llama, Mistral, and 100+ providers
+  - Single API for all LLM providers (avoid vendor lock-in)
+  - Currently configured: Gemini 2.0 (GCP) or Claude 3.5 Sonnet (Anthropic)
+  - Easy to switch providers via config
 - **AG-UI Protocol** - Agent-to-UI streaming (FastAPI SSE endpoint: `/api/copilotkit`)
 
 ### Backend
