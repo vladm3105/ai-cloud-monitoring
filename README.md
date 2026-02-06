@@ -183,7 +183,7 @@ AI-cost-monitoring/
 
 ### Authentication & Security
 - **Auth0** - Identity provider (OAuth 2.0/OIDC, SSO, MFA)
-- **OpenBao** - Secrets management (HashiCorp Vault fork)
+- **GCP Secret Manager** - Secrets management (cloud-native, HA, auto-rotation)
 - **JWT/OIDC** - Token-based authentication
 - **RBAC** - Role-based access control
 
@@ -250,7 +250,7 @@ External AI agents initiate queries through the Google A2A Protocol gateway.
 - **TimescaleDB Partitioning** - Partitioned by `tenant_id`
 - **Redis Key Namespacing** - `tenant:{id}:*` pattern
 - **Object Storage Path Isolation** - `/{tenant_id}/` paths
-- **OpenBao Path Isolation** - `secret/tenants/{id}/*` paths
+- **GCP Secret Manager Path Isolation** - `projects/{project}/secrets/tenant-{id}-{provider}` naming
 
 ### Authentication
 - **Single Sign-On (SSO)** - Google, Microsoft, Okta, SAML
@@ -322,7 +322,7 @@ Key architectural decisions are documented in [docs/adr/](docs/adr/):
 
 | Phase | Duration | Focus |
 |-------|----------|-------|
-| **Phase 1** | 5 weeks | Foundation (Auth0, OpenBao, PostgreSQL, Redis) |
+| **Phase 1** | 5 weeks | Foundation (Auth0, GCP Secret Manager, PostgreSQL, Redis) |
 | **Phase 2** | 5 weeks | MCP Servers (AWS, Azure, GCP, OpenCost) |
 | **Phase 3** | 5 weeks | Cloud Agents (AWS, Azure, GCP, K8s) |
 | **Phase 4** | 5 weeks | Domain Agents (Cost, Optimization, Remediation) |
