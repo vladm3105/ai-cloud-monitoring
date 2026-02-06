@@ -94,7 +94,6 @@ AI-cost-monitoring/
 │   ├── 03-agent-routing-spec.md    # Agent routing specifications
 │   ├── 04-tenant-onboarding.md     # Multi-tenant onboarding flow
 │   ├── 05-api-endpoint-spec.md     # API endpoint specifications
-│   ├── 06-self-learning.md         # Self-learning capabilities
 │   ├── 07-deployment-infrastructure.md  # Deployment architecture
 │   ├── 08-cost-model.md            # Cost model and pricing
 │   └── *.svg                       # Architecture diagrams
@@ -291,7 +290,6 @@ Key architectural decisions are documented in [docs/adr/](docs/adr/):
 - **[Agent Routing](core/03-agent-routing-spec.md)** - Agent orchestration logic
 - **[Tenant Onboarding](core/04-tenant-onboarding.md)** - Multi-tenant setup flow
 - **[API Endpoints](core/05-api-endpoint-spec.md)** - REST API specifications
-- **[Self-Learning](core/06-self-learning.md)** - ML capabilities and model tuning
 - **[Deployment Infrastructure](core/07-deployment-infrastructure.md)** - Cloud Run deployment
 - **[Cost Model](core/08-cost-model.md)** - Platform pricing and cost structure
 
