@@ -82,20 +82,39 @@
 
 ## Architecture Overview
 
-### Phase 1: GCP Agent (Current)
+### Home Cloud vs Monitored Clouds
 
-**8 GCP APIs integrated:**
-1. Cloud Resource Manager — Org/project hierarchy
-2. Service Usage — Enabled services per project
-3. Cloud Billing — Cost data and SKU pricing
-4. Recommender — ML-powered optimization suggestions
-5. Cloud Asset Inventory — Resource tracking
-6. Budget API — Threshold alerts via Pub/Sub
-7. Cloud Monitoring — Metrics and alerts
-8. BigQuery — Billing export queries
+**Critical Distinction:**
+- **Home Cloud**: Where the platform runs (GCP initially, AWS/Azure later)
+- **Monitored Clouds**: What the platform monitors (AWS, Azure, GCP, K8s from day 1)
 
-**10 MCP Tools available:**
-- `scan_organization` — Discover all projects/services
+### Phase 1: GCP as Home Cloud (Current)
+
+**Platform Infrastructure (runs on GCP):**
+- Frontend: Next.js on Cloud Run
+- Backend: FastAPI on Cloud Run
+- Analytics DB: BigQuery
+- Relational DB: Cloud SQL PostgreSQL
+- Task Queue: Cloud Tasks
+
+**Monitors All Clouds:**
+- AWS costs (via Cost Explorer API)
+- Azure costs (via Cost Management API)
+- GCP costs (via Cloud Billing API)
+- Kubernetes costs (via OpenCost)
+
+**8 Cloud APIs integrated** (multi-cloud monitoring):
+1. AWS Cost Explorer — AWS billing data
+2. Azure Cost Management — Azure billing data
+3. GCP Cloud Billing — GCP billing data
+4. OpenCost API — Kubernetes cost allocation
+5. Cloud provider recommenders (AWS Trusted Advisor, Azure Advisor, GCP Recommender)
+6. Resource inventory APIs (cross-cloud)
+7. Budget APIs (cross-cloud)
+8. Monitoring APIs (cross-cloud)
+
+**10+ MCP Tools available:**
+- `scan_organization` — Discover all projects/services (cross-cloud)
 - `get_cost_summary` — Query spending by period/service/project
 - `get_recommendations` — Surface optimization opportunities
 - `detect_anomalies` — Statistical spike detection
@@ -107,9 +126,9 @@
 
 | Phase | Deliverable | Timeline |
 |-------|-------------|----------|
-| Phase 2 | AWS Agent | +3 months |
-| Phase 3 | Azure Agent | +6 months |
-| Phase 4 | Unified Dashboard | +9 months |
+| Phase 2 | Production-ready GCP deployment | +3 months |
+| Phase 3 | AWS as alternative home cloud | +6 months |
+| Phase 4 | Azure as alternative home cloud | +9 months |
 | Phase 5 | Predictive Analytics | +12 months |
 
 ---
@@ -135,14 +154,24 @@
 
 ## Infrastructure Cost
 
+### GCP (First Home Cloud)
+
 | Component | Monthly Cost |
 |-----------|--------------|
-| Cloud Run (MCP Server) | $10-50 |
-| Cloud Function (Circuit Breaker) | ~$5 |
-| BigQuery (queries) | $5-20 |
-| **Total** | **$20-80/month** |
+| Cloud Run (frontend + backend + MCPs) | $50-200 |
+| Cloud SQL PostgreSQL | $100 |
+| BigQuery (billing export queries) | $5-20 |
+| Cloud Tasks + Scheduler | $1 |
+| Cloud Storage (reports) | $10 |
+| Cloud Memorystore Redis (optional) | $0-30 |
+| Monitoring/Logging | $50 |
+| **Total** | **$216-411/month** |
 
-**ROI:** System pays for itself by preventing a single $1,000 cost spike.
+**ROI:** System pays for itself by preventing a single $500+ cost spike.
+
+### AWS / Azure Alternatives
+
+Similar costs using ECS Fargate/Container Apps + RDS/Azure Database + Athena/Synapse.
 
 ---
 
