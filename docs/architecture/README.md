@@ -2,7 +2,7 @@
 
 ## Architecture Diagram
 
-![System Architecture](system-architecture.svg)
+<img src="system-architecture.svg" alt="System Architecture" width="100%" />
 
 ## Overview
 
