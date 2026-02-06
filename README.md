@@ -164,7 +164,10 @@ AI-cost-monitoring/
 
 ### Frontend
 - **Next.js 14** - React framework
-- **CopilotKit** - AI chat interface with AG-UI protocol
+- **CopilotKit** - AI chat interface implementing AG-UI protocol client
+  - Real-time streaming chat widget with Server-Sent Events (SSE)
+  - Progressive UI updates as agents work
+  - Natural language queries routed to agent hierarchy
 - **A2UI Components** - Real-time streaming UI components
 - **Tailwind CSS + shadcn/ui** - Styling
 - **Auth0 React SDK** - Authentication
@@ -173,10 +176,10 @@ AI-cost-monitoring/
 - **Google ADK** - Agent Development Kit
 - **Google A2A Protocol** - Agent-to-Agent communication
 - **Gemini 2.0 / Claude** - LLM backbone
-- **AG-UI Protocol** - Agent-to-UI streaming
+- **AG-UI Protocol** - Agent-to-UI streaming (FastAPI SSE endpoint: `/api/copilotkit`)
 
 ### Backend
-- **FastAPI** - AG-UI server
+- **FastAPI** - AG-UI server (handles SSE streaming, JWT validation, tenant context)
 - **FastMCP** - MCP server framework
 - **Celery + Redis** - Task queue for background jobs
 - **Temporal.io** - Workflow orchestration
@@ -207,7 +210,52 @@ AI-cost-monitoring/
   - No Prometheus needed - Grafana has native database support
 - **OpenTelemetry** - Distributed tracing and application metrics
 
+
 ---
+
+## 🔄 AG-UI Streaming Architecture
+
+The platform uses **AG-UI (Agent-to-UI)** protocol for real-time streaming communication between agents and the user interface.
+
+### How It Works
+
+```
+User Query → CopilotKit (Frontend)
+    ↓ POST /api/copilotkit
+AG-UI Server (FastAPI + SSE)
+    ↓ JWT validation + tenant context injection
+Coordinator Agent
+    ↓ routes to appropriate agents
+Domain Agents → Cloud Agents (parallel execution)
+    ↓ MCP tool calls
+Cloud APIs (AWS, Azure, GCP, K8s)
+    ↓ stream results back
+AG-UI Server (SSE stream)
+    ↓ StateSnapshot events
+CopilotKit (progressive UI rendering)
+```
+
+### Key Features
+
+- **Real-Time Streaming**: Server-Sent Events (SSE) for one-way server-to-client updates
+- **Progressive Rendering**: UI updates as agents discover information
+- **Stateful Sessions**: Maintains conversation context across multiple queries
+- **Multi-Agent Coordination**: Single query triggers hierarchical agent execution
+- **Security**: JWT authentication and tenant context validation at AG-UI server
+
+### Implementation
+
+| Component | Technology | Purpose |
+|-----------|-----------|---------|
+| **Frontend Client** | CopilotKit | Chat widget with AG-UI protocol support |
+| **AG-UI Server** | FastAPI + SSE | Streaming endpoint, auth, routing |
+| **Event Types** | StateSnapshot, ProgressUpdate | UI state and progress indicators |
+| **Endpoint** | `/api/copilotkit` | Single SSE streaming endpoint |
+
+See [`finops-agent-a2ui-flow.svg`](core/finops-agent-a2ui-flow.svg) for complete sequence diagram.
+
+---
+
 
 ## 🚀 Operational Modes
 
