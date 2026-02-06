@@ -4,9 +4,9 @@
 [![GCP](https://img.shields.io/badge/cloud-GCP-4285F4?logo=google-cloud)](https://cloud.google.com)
 [![Status](https://img.shields.io/badge/status-in%20development-yellow)](https://github.techtrend.us/USDA-AI-Innovation-Hub/AI-Cloud-Cost-Monitoring)
 
-> **Enterprise-grade, AI-powered multi-cloud FinOps platform for intelligent cost analysis, optimization, and automated remediation.**
+> **Self-hosted AI-powered FinOps platform for intelligent cloud cost analysis, optimization, and automated remediation across AWS, Azure, GCP, and Kubernetes.**
 
-AI Cloud Cost Monitoring leverages AI agents built on Google ADK (Agent Development Kit) to provide natural language interactions for cloud cost management with real-time streaming UI responses across AWS, Azure, GCP, and Kubernetes environments.
+AI Cloud Cost Monitoring leverages AI agents built on Google ADK (Agent Development Kit) to provide natural language interactions for cloud cost management with real-time streaming UI responses. Designed for **single-organization deployments** with optional multi-tenant support for MSPs and consultancies.
 
 ## 🚀 Quick Start
 
@@ -135,7 +135,7 @@ AI-cost-monitoring/
 │   ├── 01-database-schema.md       # Database schema and data model
 │   ├── 02-mcp-tool-contracts.md    # MCP server tool contracts
 │   ├── 03-agent-routing-spec.md    # Agent routing specifications
-│   ├── 04-tenant-onboarding.md     # Multi-tenant onboarding flow
+│   ├── 04-tenant-onboarding.md     # Tenant setup (optional multi-tenant)
 │   ├── 05-api-endpoint-spec.md     # API endpoint specifications
 │   ├── 07-deployment-infrastructure.md  # Deployment architecture
 │   ├── 08-cost-model.md            # Cost model and pricing
@@ -248,9 +248,29 @@ External AI agents initiate queries through the Google A2A Protocol gateway.
 
 ---
 
-## 🔐 Security & Multi-Tenancy
+## 🔐 Security & Deployment Modes
 
-### Tenant Isolation
+### Deployment Modes
+
+**Single-Tenant Mode (Default)**:
+- Designed for one organization managing their own cloud costs
+- Simplified setup and better performance (no RLS overhead)
+- All users within organization have access based on RBAC roles
+- Database uses a single tenant ID (randomly generated during setup)
+- Recommended for most deployments
+
+**Multi-Tenant Mode (Optional)**:
+- Enable via `TENANT_MODE=multi` environment variable
+- For MSPs, consultancies, or platforms managing multiple clients
+- Full tenant isolation at database, cache, and storage layers
+- Tenant selection required at login
+- Row-Level Security (RLS) enforced for data isolation
+
+### Tenant Isolation (Multi-Tenant Mode)
+
+> [!NOTE]
+> These isolation mechanisms are built into the schema but only enforced when `TENANT_MODE=multi`.
+
 - **PostgreSQL Row-Level Security (RLS)** - Database-level tenant data isolation
 - **TimescaleDB Partitioning** - Partitioned by `tenant_id`
 - **Redis Key Namespacing** - `tenant:{id}:*` pattern
@@ -268,7 +288,7 @@ External AI agents initiate queries through the Google A2A Protocol gateway.
 ### Authorization
 - **5 Role-Based Access Levels**: Super Admin → Org Admin → Operator → Analyst → Viewer
 - **Permission-Based Tool Access** - Every API call validated
-- **Multi-Level Approval Workflows** - For sensitive remediation actions
+- **Approval Workflows** - For sensitive remediation actions (optional multi-level in multi-tenant mode)
 
 ### Compliance
 - **Audit Logging** - Immutable 7-year retention
@@ -335,7 +355,7 @@ Key architectural decisions are documented in [docs/adr/](docs/adr/):
 | **Phase 3** | 5 weeks | Cloud Agents (AWS, Azure, GCP, K8s) |
 | **Phase 4** | 5 weeks | Domain Agents (Cost, Optimization, Remediation) |
 | **Phase 5** | 4 weeks | AG-UI/A2UI Integration |
-| **Phase 6** | 4 weeks | Multi-Tenant & A2A Gateway |
+| **Phase 6** | 4 weeks | Optional Multi-Tenant Support & A2A Gateway |
 | **Phase 7** | 4 weeks | Security Hardening |
 | **Phase 8** | 4 weeks | Testing & Documentation |
 

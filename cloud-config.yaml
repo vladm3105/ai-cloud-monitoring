@@ -20,6 +20,10 @@ regions:
 deployment:
   platform: "cloud-run"
   environment: "production"
+  tenant_mode: "single"  # single (default) or multi
+  # Default tenant ID: Generate with 'uuidgen' or equivalent during setup
+  # Only used in single-tenant mode
+  default_tenant_id: ""  # Random UUID, never use predictable values like all-zeros
 ```
 
 ### Required GCP APIs
