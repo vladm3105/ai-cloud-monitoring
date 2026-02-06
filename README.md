@@ -25,6 +25,21 @@ The platform is designed to run on Google Cloud Platform using Cloud Run:
 > [!NOTE]
 > Currently optimized for GCP deployment (per [ADR-002](docs/adr/002-gcp-only-first.md)). Multi-cloud expansion planned for future phases.
 
+### For Developers
+
+**New to the project?** Start here:
+1. **[HANDOFF.md](HANDOFF.md)** - Project status, what's built, immediate next steps
+2. **[DEVELOPER_GUIDE.md](DEVELOPER_GUIDE.md)** - Local setup, project structure, common tasks
+3. **[CONTRIBUTING.md](CONTRIBUTING.md)** - Code standards, git workflow, testing guidelines
+4. **[core/](core/)** - Complete technical specifications
+
+**Quick Links:**
+- [All Architecture Decisions (ADRs)](docs/adr/)
+- [Database Schema](core/01-database-schema.md)
+- [API Endpoints](core/05-api-endpoint-spec.md)
+- [GCP Deployment Guide](GCP-DEPLOYMENT.md)
+
+
 ### Home Cloud vs Monitored Clouds
 
 **Important Architectural Distinction:**
