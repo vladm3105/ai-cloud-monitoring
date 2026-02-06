@@ -8,6 +8,23 @@
 
 AI Cloud Cost Monitoring leverages AI agents built on Google ADK (Agent Development Kit) to provide natural language interactions for cloud cost management with real-time streaming UI responses across AWS, Azure, GCP, and Kubernetes environments.
 
+## 🚀 Quick Start
+
+### Deployment to GCP
+
+The platform is designed to run on Google Cloud Platform using Cloud Run:
+
+1. **Prerequisites**: GCP project with billing enabled, gcloud CLI installed
+2. **Deploy**: Follow the [GCP Deployment Guide](GCP-DEPLOYMENT.md)
+3. **Configure**: Use [cloud-config.yaml](cloud-config.yaml) and [.env.example](.env.example)
+4. **Infrastructure**: Terraform configs in [terraform/](terraform/)
+
+**Estimated Setup Time**: 30-45 minutes  
+**Monthly Cost**: ~$75-130 (MVP), ~$420-770 (Production)
+
+> [!NOTE]
+> Currently optimized for GCP deployment (per [ADR-002](docs/adr/002-gcp-only-first.md)). Multi-cloud expansion planned for future phases.
+
 ---
 
 ## 🌟 Key Features

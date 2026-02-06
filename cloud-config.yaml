@@ -1,0 +1,184 @@
+# AI Cloud Cost Monitoring - Cloud Platform Configuration
+
+## Primary Cloud Provider
+**Google Cloud Platform (GCP)**
+
+## Configuration
+
+### GCP Project Settings
+```yaml
+project:
+  id: "ai-cost-monitoring"  # Update with your actual GCP project ID
+  name: "AI Cloud Cost Monitoring"
+  organization_id: ""  # Optional: Your GCP organization ID
+  billing_account_id: ""  # Your GCP billing account ID
+
+regions:
+  primary: "us-central1"
+  secondary: "us-east1"
+  
+deployment:
+  platform: "cloud-run"
+  environment: "production"
+```
+
+### Required GCP APIs
+The following APIs must be enabled in your GCP project:
+
+- `run.googleapis.com` - Cloud Run (serverless containers)
+- `cloudbuild.googleapis.com` - Cloud Build (CI/CD)
+- `cloudbilling.googleapis.com` - Cloud Billing API
+- `cloudresourcemanager.googleapis.com` - Resource Manager
+- `compute.googleapis.com` - Compute Engine (for networking)
+- `iam.googleapis.com` - Identity and Access Management
+- `secretmanager.googleapis.com` - Secret Manager
+- `redis.googleapis.com` - Cloud Memorystore for Redis
+- `sql.googleapis.com` - Cloud SQL (PostgreSQL)
+- `storage.googleapis.com` - Cloud Storage
+- `monitoring.googleapis.com` - Cloud Monitoring
+- `logging.googleapis.com` - Cloud Logging
+- `bigquery.googleapis.com` - BigQuery (for cost metrics)
+
+### Service Configuration
+
+#### Frontend (Next.js UX)
+- **Service Name**: `ai-cost-monitoring-frontend`
+- **Platform**: Cloud Run
+- **Region**: us-central1
+- **Memory**: 512 MB
+- **CPU**: 1
+- **Concurrency**: 80
+- **Min Instances**: 0
+- **Max Instances**: 10
+
+#### Backend (FastAPI AG-UI Server)
+- **Service Name**: `ai-cost-monitoring-backend`
+- **Platform**: Cloud Run
+- **Region**: us-central1
+- **Memory**: 1 GB
+- **CPU**: 2
+- **Concurrency**: 20
+- **Min Instances**: 1 (to avoid cold starts)
+- **Max Instances**: 20
+
+#### GCP MCP Server
+- **Service Name**: `gcp-cost-mcp-server`
+- **Platform**: Cloud Run
+- **Region**: us-central1
+- **Memory**: 512 MB
+- **CPU**: 1
+- **Concurrency**: 10
+- **Min Instances**: 0
+- **Max Instances**: 5
+
+### Database Configuration
+
+#### Cloud SQL (PostgreSQL)
+- **Instance Name**: `ai-cost-monitoring-db`
+- **Database**: PostgreSQL 16
+- **Region**: us-central1
+- **Tier**: db-custom-1-3840 (1 vCPU, 3.75 GB RAM)
+- **High Availability**: Optional (for production)
+- **Backup**: Automated daily backups
+
+#### Cloud Memorystore (Redis)
+- **Instance Name**: `ai-cost-monitoring-cache`
+- **Tier**: Basic (Standard for production)
+- **Capacity**: 1 GB
+- **Region**: us-central1
+
+### Authentication & Secrets
+
+#### Auth0 Configuration
+- **Domain**: Configured in environment variables
+- **Client ID**: Stored in Secret Manager
+- **Client Secret**: Stored in Secret Manager
+
+#### Secret Manager Paths
+- `ai-cost-monitoring/auth0-client-secret`
+- `ai-cost-monitoring/database-password`
+- `ai-cost-monitoring/redis-auth`
+- `ai-cost-monitoring/api-keys`
+
+### Cost Estimates
+
+#### Monthly Cost Breakdown (MVP/Low Traffic)
+- Cloud Run Services: $10-30/month
+- Cloud SQL (PostgreSQL): $30-50/month
+- Cloud Memorystore (Redis): $25/month
+- BigQuery: $5-20/month
+- Cloud Storage: $5/month
+- Secret Manager: $1/month
+- **Total Estimated**: ~$75-130/month
+
+#### Monthly Cost Breakdown (Production/High Traffic)
+- Cloud Run Services: $100-300/month
+- Cloud SQL (HA): $150-250/month
+- Cloud Memorystore (Standard): $80/month
+- BigQuery: $50-100/month
+- Cloud Storage: $20/month
+- Load Balancer: $20/month
+- **Total Estimated**: ~$420-770/month
+
+### Networking
+
+#### VPC Configuration
+- **Network Name**: `ai-cost-monitoring-vpc`
+- **Subnet**: `10.0.0.0/20`
+- **Private Google Access**: Enabled
+
+#### Load Balancing
+- **Type**: HTTPS Load Balancer
+- **SSL**: Google-managed certificate
+- **Backend**: Cloud Run services
+
+### Monitoring & Logging
+
+#### Cloud Monitoring
+- **Dashboards**: Custom dashboards for each service
+- **Alerts**: Budget alerts, error rate alerts, latency alerts
+- **Uptime Checks**: Frontend and backend endpoints
+
+#### Cloud Logging
+- **Log Retention**: 30 days (default), 90+ days for audit logs
+- **Log Sinks**: Optional export to BigQuery for analysis
+
+---
+
+## Enable APIs Script
+
+```bash
+#!/bin/bash
+# Enable required GCP APIs
+
+PROJECT_ID="your-project-id"  # Update this
+
+gcloud config set project $PROJECT_ID
+
+echo "Enabling required GCP APIs..."
+
+gcloud services enable run.googleapis.com
+gcloud services enable cloudbuild.googleapis.com
+gcloud services enable cloudbilling.googleapis.com
+gcloud services enable cloudresourcemanager.googleapis.com
+gcloud services enable compute.googleapis.com
+gcloud services enable iam.googleapis.com
+gcloud services enable secretmanager.googleapis.com
+gcloud services enable redis.googleapis.com
+gcloud services enable sql.googleapis.com
+gcloud services enable storage.googleapis.com
+gcloud services enable monitoring.googleapis.com
+gcloud services enable logging.googleapis.com
+gcloud services enable bigquery.googleapis.com
+
+echo "All APIs enabled successfully!"
+```
+
+---
+
+## Next Steps
+
+1. Update the `project.id` in this file with your actual GCP project ID
+2. Run the enable APIs script
+3. Follow [GCP-DEPLOYMENT.md](GCP-DEPLOYMENT.md) for detailed deployment instructions
+4. Configure environment variables using [.env.example](.env.example) as a template
