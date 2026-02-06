@@ -182,11 +182,13 @@ AI-cost-monitoring/
 - **Temporal.io** - Workflow orchestration
 
 ### Authentication & Security
-- **Auth0** - Identity provider (OAuth 2.0/OIDC, SSO, MFA)
-- **Home Cloud Secret Manager** - GCP Secret Manager (cloud-native secrets management)
-  - Uses the secret manager of the home cloud (GCP, AWS, or Azure)
+- **OAuth 2.0/OIDC Provider** - Auth0 (current), or any OAuth provider
+  - Alternatives: Okta, Azure AD, Google Identity, AWS Cognito, Keycloak
+  - Provides SSO, MFA, social login, and session management
+- **Home Cloud Secret Manager** - Uses the secret manager of the home cloud
   - Currently: GCP Secret Manager (auto-rotation, HA, IAM integration)
-  - If home cloud changes: Would use AWS Secrets Manager or Azure Key Vault
+  - If home cloud changes: AWS Secrets Manager or Azure Key Vault
+  - Stores cloud credentials for monitored accounts (never in database)
 - **JWT/OIDC** - Token-based authentication
 - **RBAC** - Role-based access control
 
@@ -328,7 +330,7 @@ Key architectural decisions are documented in [docs/adr/](docs/adr/):
 
 | Phase | Duration | Focus |
 |-------|----------|-------|
-| **Phase 1** | 5 weeks | Foundation (Auth0, Secret Manager, PostgreSQL, Redis) |
+| **Phase 1** | 5 weeks | Foundation (OAuth Provider, Secret Manager, PostgreSQL, Redis) |
 | **Phase 2** | 5 weeks | MCP Servers (AWS, Azure, GCP, OpenCost) |
 | **Phase 3** | 5 weeks | Cloud Agents (AWS, Azure, GCP, K8s) |
 | **Phase 4** | 5 weeks | Domain Agents (Cost, Optimization, Remediation) |
