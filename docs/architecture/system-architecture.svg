@@ -142,24 +142,23 @@
 
   <!-- Connections -->
   <!-- User to App -->
-  <path d="M 240 120 L 240 200 L 550 200 L 550 360" class="arrow" /> <!-- Grafana to API -->
-  <path d="M 860 120 L 860 200 L 550 200" class="arrow" /> <!-- AG-UI to API -->
+  <path d="M 290 220 L 290 320 L 580 320 L 580 360" class="arrow" /> <!-- Grafana to API -->
+  <path d="M 910 220 L 910 320 L 620 320 L 620 360" class="arrow" /> <!-- AG-UI to API -->
   
-  <!-- API to Components -->
-  <path d="M 460 380 L 350 380" class="arrow" /> <!-- API to Agents -->
-  <path d="M 640 380 L 750 380" class="arrow" /> <!-- API to MCP -->
+  <!-- App Layer Inter-connects -->
+  <path d="M 510 420 L 400 420" class="arrow" /> <!-- API to Agents -->
+  <path d="M 690 400 L 800 400" class="arrow" /> <!-- API to MCP -->
 
   <!-- App to Data -->
-  <path d="M 350 400 L 240 400 L 240 650" class="arrow" /> <!-- Agent to BigQuery -->
-  <path d="M 550 440 L 550 650" class="arrow" /> <!-- API to SQL -->
-  <path d="M 860 470 L 860 650" class="arrow" /> <!-- MCP to Tasks -->
+  <path d="M 300 500 L 300 650" class="arrow" /> <!-- Agent to BigQuery -->
+  <path d="M 600 440 L 600 650" class="arrow" /> <!-- API to SQL -->
+  <path d="M 910 520 L 910 650" class="arrow" /> <!-- MCP to Tasks -->
 
   <!-- Data Integration -->
   <path d="M 330 685 L 460 685" class="dashed-arrow" /> <!-- BigQuery <-> SQL Link -->
 
   <!-- Cloud Billing Data Flow -->
-  <path d="M 240 800 L 240 720" class="dashed-arrow" /> <!-- GCP Data -->
-  <path d="M 550 800 L 550 750 L 330 750 L 330 720" class="dashed-arrow" /> <!-- AWS Data -->
-  <path d="M 860 800 L 860 750 L 330 750" class="dashed-arrow" /> <!-- Azure Data -->
-
+  <path d="M 290 800 L 290 720" class="dashed-arrow" /> <!-- GCP Data -->
+  <path d="M 600 800 L 600 760 L 310 760 L 310 720" class="dashed-arrow" /> <!-- AWS Data -->
+  <path d="M 910 800 L 910 770 L 330 770 L 330 720" class="dashed-arrow" /> <!-- Azure Data -->
 </svg>
