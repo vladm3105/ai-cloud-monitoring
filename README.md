@@ -271,10 +271,25 @@ Both UIs query the **same data sources** (BigQuery for metrics, Cloud SQL for me
   - Can be added later as needed
 
 ### Data Layer
-- **Cloud SQL PostgreSQL 16** - Relational data with Row-Level Security
-- **BigQuery** - Time-series cost metrics (per [ADR-003](docs/adr/003-use-bigquery-not-timescaledb.md))
-- **Cloud Storage** - Object storage for reports and backups
-- **Cloud Memorystore (optional)** - Caching for high-traffic deployments (GCP Redis, AWS ElastiCache, Azure Cache)
+- **Relational Database (PostgreSQL)** - Operational data with Row-Level Security
+  - Currently: Cloud SQL PostgreSQL 16 (GCP)
+  - AWS alternative: RDS PostgreSQL or Aurora PostgreSQL
+  - Azure alternative: Azure Database for PostgreSQL
+  - Stores: Tenants, accounts, users, workflow state
+- **Analytics Database** - Time-series cost metrics (see [ADR-003](docs/adr/003-use-bigquery-not-timescaledb.md))
+  - Currently: BigQuery (GCP)
+  - AWS alternative: Athena + S3 or Redshift
+  - Azure alternative: Azure Synapse Analytics
+  - Stores: Cost data, usage metrics, forecasts
+- **Object Storage** - Reports, exports, and backups
+  - Currently: Cloud Storage (GCP)
+  - AWS alternative: S3
+  - Azure alternative: Azure Blob Storage
+- **Cache (optional)** - High-traffic deployments only
+  - Currently: Cloud Memorystore Redis (GCP)
+  - AWS alternative: ElastiCache Redis
+  - Azure alternative: Azure Cache for Redis
+  - Use for: Query result caching, session storage
 
 ### Infrastructure
 - **Serverless Containers** - Docker-based container execution
