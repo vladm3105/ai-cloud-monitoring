@@ -5,7 +5,7 @@
 | Field | Value |
 |-------|-------|
 | **Document** | 07 — Deployment & Infrastructure Architecture |
-| **Version** | 1.0 |
+| **Version** | 2.0 |
 | **Date** | February 2026 |
 | **Status** | Architecture |
 | **Audience** | Architects, DevOps Engineers, SRE |
@@ -14,148 +14,239 @@
 
 ## 1. Infrastructure Overview
 
-### 1.1 Target Environment
+### 1.1 Target Environment (Cloud-Native, Serverless-First)
 
 | Aspect | Choice | Rationale |
 |--------|--------|-----------|
-| Primary Cloud | AWS (or GCP) | Most mature K8s managed service, broadest service catalog |
-| Container Orchestration | Kubernetes (EKS or GKE) | Multi-service deployment, auto-scaling, health management |
-| Infrastructure as Code | Terraform | Multi-cloud capability, state management, module ecosystem |
-| CI/CD | GitHub Actions | Integrated with repo, good K8s ecosystem |
-| Container Registry | ECR (or Artifact Registry) | Close to K8s cluster, integrated auth |
+| **Home Cloud** | GCP first, AWS/Azure later | GCP for MVP, cloud-agnostic architecture (see ADR-002) |
+| **Container Platform** | Serverless containers | Cloud Run / ECS Fargate / Azure Container Apps (see ADR-004) |
+| **Analytics Database** | Cloud-native | BigQuery / Athena / Synapse (see ADR-003) |
+| **Task Queue** | Cloud-native | Cloud Tasks / SQS / Service Bus (see ADR-006) |
+| **Infrastructure as Code** | Terraform | Multi-cloud capability, state management |
+| **CI/CD** | GitHub Actions | Integrated with repo, cloud deployment actions |
+
+**Architecture Principles:**
+- ✅ Serverless-first (zero infrastructure management)
+- ✅ Cloud-native services (managed, pay-per-use)
+- ✅ No Kubernetes (too complex for team size)
+- ✅ No self-hosted databases (TimescaleDB, InfluxDB)
+- ✅ No Celery/Redis task queues (use cloud services)
 
 ### 1.2 Environment Strategy
 
 | Environment | Purpose | Infra Scale | Data |
 |-------------|---------|-------------|------|
-| **dev** | Developer testing, feature branches | Minimal (single replica) | Synthetic / sample data |
+| **dev** | Developer testing, feature branches | Minimal (zero-scale serverless) | Synthetic / sample data |
 | **staging** | Pre-production validation, integration tests | Production-like (scaled down) | Anonymized production snapshot |
-| **production** | Live customer traffic | Full scale, HA | Real tenant data |
+| **production** | Live customer traffic | Auto-scales with load | Real tenant data |
 
 ---
 
-## 2. Kubernetes Architecture
+## 2. GCP Deployment Architecture (First Home Cloud)
 
-### 2.1 Namespace Strategy
+### 2.1 Component Mapping
+
+| Component | GCP Service | Scaling | Purpose |
+|-----------|-------------|---------|----------|
+| **Frontend** | Cloud Run | Auto (0-100) | Next.js + CopilotKit UI |
+| **Backend API** | Cloud Run | Auto (1-50) | FastAPI orchestrator/AG-UI server |
+| **MCP Servers** | Cloud Run | Auto (0-20 each) | AWS, Azure, GCP, OpenCost, Forecast, Policy MCPs |
+| **Relational DB** | Cloud SQL PostgreSQL | Managed | Tenants, users, accounts, metadata |
+| **Analytics DB** | BigQuery | Serverless | Cost metrics from billing export |
+| **Task Queue** | Cloud Tasks | Serverless | Background jobs (sync, anomaly detection) |
+| **Scheduler** | Cloud Scheduler | Managed | Trigger scheduled jobs (every 4 hours) |
+| **Secret Manager** | GCP Secret Manager | Managed | Cloud credentials, API keys |
+| **Object Storage** | Cloud Storage | Serverless | Reports, exports |
+| **Cache** (optional) | Cloud Memorystore Redis | Managed | L2 query cache |
+| **CDN** | Cloud CDN | Global | Static assets |
+| **Load Balancer** | Cloud Load Balancing | Global | HTTPS termination, routing |
+
+### 2.2 Architecture Diagram
 
 ```
-finops-system/           ← Platform infrastructure
-  ├── api-gateway (Kong/Envoy)
-  ├── cert-manager
-  └── monitoring (Prometheus, Grafana, Loki)
-
-finops-frontend/         ← User-facing
-  └── next-app (Next.js + CopilotKit)
-
-finops-agents/           ← Agent layer
-  ├── ag-ui-server (FastAPI)
-  ├── coordinator-agent
-  ├── cost-agent
-  ├── optimization-agent
-  ├── remediation-agent
-  ├── reporting-agent
-  ├── tenant-agent
-  └── cross-cloud-agent
-
-finops-mcp/              ← MCP servers
-  ├── aws-mcp
-  ├── azure-mcp
-  ├── gcp-mcp
-  ├── opencost-mcp
-  ├── forecast-mcp
-  ├── remediation-mcp
-  ├── policy-mcp
-  └── tenant-mcp
-
-finops-workers/          ← Background processing
-  ├── celery-beat (scheduler)
-  ├── celery-workers (data sync, anomaly detection, etc.)
-  └── event-processor (webhook consumer)
-
-finops-data/             ← Data layer
-  ├── postgresql-timescaledb (StatefulSet or managed)
-  ├── redis (StatefulSet or managed)
-  └── openbao (StatefulSet with HA)
-
-finops-a2a/              ← External agent gateway
-  └── a2a-gateway
+Internet
+  ↓
+Cloud Load Balancer (HTTPS)
+  ↓
+┌─────────────────────────────────────────────┐
+│ Cloud Run Services (Auto-scaling)           │
+├─────────────────────────────────────────────┤
+│ Frontend (Next.js)                          │
+│ Backend API (FastAPI + CopilotKit)         │
+│ MCP Servers (AWS, Azure, GCP, OpenCost...) │
+└─────────────────────────────────────────────┘
+  ↓
+┌─────────────────────────────────────────────┐
+│ Data Layer                                  │
+├─────────────────────────────────────────────┤
+│ Cloud SQL PostgreSQL (managed HA)          │
+│ BigQuery (billing export)                  │
+│ Cloud Storage (reports)                    │
+│ Secret Manager (credentials)               │
+│ Cloud Memorystore Redis (optional cache)   │
+└─────────────────────────────────────────────┘
+  ↓
+┌─────────────────────────────────────────────┐
+│ Background Jobs                             │
+├─────────────────────────────────────────────┤
+│ Cloud Scheduler → Cloud Tasks → Cloud Run  │
+│ (cost sync, anomaly detection, forecasts)  │
+└─────────────────────────────────────────────┘
 ```
 
-### 2.2 Scaling Strategy
+### 2.3 Scaling Strategy (GCP)
 
-| Component | Scaling Type | Min Replicas | Max Replicas | Scale Trigger |
-|-----------|-------------|-------------|-------------|---------------|
-| Next.js frontend | HPA | 2 | 10 | CPU > 70% |
-| AG-UI Server | HPA | 3 | 20 | Active SSE connections |
-| Coordinator Agent | HPA | 2 | 10 | Request queue depth |
-| Domain Agents | HPA | 2 | 8 each | Request queue depth |
-| Cloud MCP servers | HPA | 2 | 6 each | Request rate |
-| Celery workers | HPA | 3 | 20 | Queue length |
-| Event processor | HPA | 2 | 10 | Event queue depth |
-| A2A Gateway | HPA | 2 | 6 | Request rate |
-| PostgreSQL/TimescaleDB | Vertical (managed) | 1 primary + 1 replica | — | Storage/connections |
-| Redis | Vertical (managed) | 1 primary + 1 replica | — | Memory/connections |
-| OpenBao | Fixed HA | 3 (Raft consensus) | 3 | — |
+All Cloud Run services auto-scale based on:
+- Request concurrency (default: 80 concurrent requests/instance)
+- CPU utilization
+- Minimum instances (0 for cost savings, 1 for latency-sensitive)
 
-### 2.3 Resource Estimates (Production Starting Point)
+| Service | Min Instances | Max Instances | Concurrency |
+|---------|---------------|---------------|-------------|
+| Frontend | 0 | 100 | 80 |
+| Backend API | 1 | 50 | 80 |
+| MCP Servers | 0 | 20 each | 80 |
 
-| Component | CPU Request | Memory Request | Notes |
-|-----------|------------|----------------|-------|
-| AG-UI Server | 500m | 512Mi | Per replica |
-| Each Agent | 250m | 256Mi | Per replica (LLM calls are I/O bound) |
-| Each MCP Server | 250m | 256Mi | Per replica |
-| Celery worker | 500m | 512Mi | Data processing |
-| PostgreSQL | 4 CPU | 16Gi | Managed service recommended |
-| TimescaleDB | 4 CPU | 16Gi | Same instance as PostgreSQL |
-| Redis | 2 CPU | 8Gi | Managed service recommended |
-| OpenBao | 500m | 512Mi | Per node (3 nodes) |
+**Cost Optimization:**
+- Most services scale to zero when idle
+- Backend API keeps 1 warm instance (low latency)
+- Billed only for actual CPU/memory usage
 
 ---
 
-## 3. Terraform Module Structure
+## 3. AWS Deployment Architecture (Alternative Home Cloud)
+
+### 3.1 Component Mapping
+
+| Component | AWS Service | GCP Equivalent |
+|-----------|-------------|----------------|
+| **Containers** | ECS Fargate or App Runner | Cloud Run |
+| **Relational DB** | RDS PostgreSQL | Cloud SQL |
+| **Analytics DB** | Athena + S3 (CUR export) | BigQuery |
+| **Task Queue** | SQS + Lambda | Cloud Tasks |
+| **Scheduler** | EventBridge Scheduler | Cloud Scheduler |
+| **Secrets** | AWS Secrets Manager | GCP Secret Manager |
+| **Object Storage** | S3 | Cloud Storage |
+| **Cache** (optional) | ElastiCache Redis | Cloud Memorystore |
+| **CDN** | CloudFront | Cloud CDN |
+| **Load Balancer** | ALB | Cloud Load Balancing |
+
+### 3.2 Background Jobs Pattern (AWS)
+
+```
+EventBridge Scheduler (cron)
+  → SQS Queue
+    → Lambda Function
+      → Calls ECS Fargate task (long-running jobs)
+```
+
+**Why this pattern:**
+- Lambda for orchestration (< 15 min)
+- ECS Fargate for long-running sync jobs (can run hours)
+
+---
+
+## 4. Azure Deployment Architecture (Alternative Home Cloud)
+
+### 4.1 Component Mapping
+
+| Component | Azure Service | GCP Equivalent |
+|-----------|---------------|----------------|
+| **Containers** | Azure Container Apps | Cloud Run |
+| **Relational DB** | Azure Database for PostgreSQL | Cloud SQL |
+| **Analytics DB** | Synapse Analytics (serverless SQL) | BigQuery |
+| **Task Queue** | Service Bus + Azure Functions | Cloud Tasks |
+| **Scheduler** | Azure Functions (timer trigger) | Cloud Scheduler |
+| **Secrets** | Azure Key Vault | GCP Secret Manager |
+| **Object Storage** | Blob Storage | Cloud Storage |
+| **Cache** (optional) | Azure Cache for Redis | Cloud Memorystore |
+| **CDN** | Azure CDN | Cloud CDN |
+| **Load Balancer** | Application Gateway | Cloud Load Balancing |
+
+---
+
+## 5. Multi-Cloud Deployment (Terraform Modules)
+
+### 5.1 Terraform Structure
 
 ```
 terraform/
   ├── environments/
-  │     ├── dev/
-  │     │     ├── main.tf
-  │     │     ├── variables.tf
-  │     │     └── terraform.tfvars
-  │     ├── staging/
-  │     └── production/
+  │     ├── gcp-dev/
+  │     ├── gcp-staging/
+  │     ├── gcp-production/
+  │     ├── aws-production/         (future)
+  │     └── azure-production/       (future)
   │
   ├── modules/
-  │     ├── networking/          ← VPC, subnets, security groups
-  │     ├── kubernetes/          ← EKS/GKE cluster, node groups
-  │     ├── database/            ← RDS PostgreSQL + TimescaleDB
-  │     ├── cache/               ← ElastiCache Redis
-  │     ├── secrets/             ← OpenBao deployment
-  │     ├── auth/                ← Auth0 tenant configuration
-  │     ├── monitoring/          ← Prometheus, Grafana, alerts
-  │     ├── storage/             ← S3/GCS buckets for reports
-  │     ├── dns/                 ← Route53/Cloud DNS
-  │     └── certificates/        ← ACM/cert-manager
+  │     ├── cloud_run_services/     (GCP)
+  │     ├── ecs_fargate_services/   (AWS)
+  │     ├── container_apps/         (Azure)
+  │     ├── analytics_db/           (multi-cloud)
+  │     ├── relational_db/          (multi-cloud)
+  │     ├── task_queue/             (multi-cloud)
+  │     ├── secrets/                (multi-cloud)
+  │     ├── storage/                (multi-cloud)
+  │     ├── auth/                   (Auth0, cloud-agnostic)
+  │     ├── monitoring/             (cloud-specific)
+  │     └── dns/                    (cloud-agnostic)
   │
   └── shared/
         ├── providers.tf
-        └── backend.tf          ← Remote state in S3/GCS
+        └── backend.tf              (Remote state in GCS/S3)
 ```
 
-### 3.1 Module Dependency Order
+### 5.2 Example: Cloud Run Service Module (GCP)
 
-```
-1. networking (VPC, subnets)
-  → 2. kubernetes (cluster, node groups)
-    → 3. database + cache + secrets (data layer)
-      → 4. monitoring (needs K8s cluster)
-        → 5. storage + dns + certificates (supporting services)
+```hcl
+resource "google_cloud_run_service" "backend_api" {
+  name     = "backend-api"
+  location = var.region
+
+  template {
+    spec {
+      containers {
+        image = var.image
+        
+        resources {
+          limits = {
+            cpu    = "2000m"
+            memory = "2Gi"
+          }
+        }
+
+        env {
+          name = "DATABASE_URL"
+          value_from {
+            secret_key_ref {
+              name = google_secret_manager_secret.db_url.secret_id
+              key  = "latest"
+            }
+          }
+        }
+      }
+    }
+
+    metadata {
+      annotations = {
+        "autoscaling.knative.dev/minScale" = "1"
+        "autoscaling.knative.dev/maxScale" = "50"
+      }
+    }
+  }
+
+  traffic {
+    percent         = 100
+    latest_revision = true
+  }
+}
 ```
 
 ---
 
-## 4. CI/CD Pipeline
+## 6. CI/CD Pipeline
 
-### 4.1 Pipeline Stages
+### 6.1 Pipeline Stages
 
 ```
 Developer pushes to feature branch
@@ -163,178 +254,187 @@ Developer pushes to feature branch
     → Unit Tests (pytest / jest)
       → Build Docker Images (multi-stage builds)
         → Integration Tests (against test containers)
-          → Security Scan (container image + dependency audit)
-            → Push to Container Registry (tagged with commit SHA)
+          → Security Scan (Trivy for container images)
+            → Push to Container Registry
+              (Artifact Registry/ECR/ACR - tagged with commit SHA)
 
 Merge to main
   → All above +
-    → Deploy to staging (automatic)
+    → Deploy to staging (automatic, Cloud Run)
       → E2E Tests against staging
         → Manual approval gate
-          → Deploy to production (blue-green or rolling)
+          → Deploy to production (Cloud Run rolling update)
             → Smoke tests
               → Monitor for 15 minutes
-                → Promote or rollback
+                → Promote or rollback (instant via Cloud Run revisions)
 ```
 
-### 4.2 Deployment Strategy
+### 6.2 Deployment Strategy
 
 | Strategy | Used For | Rollback Time |
 |----------|----------|---------------|
-| **Rolling update** | Stateless services (agents, MCP, API) | < 2 minutes |
-| **Blue-green** | Frontend (Next.js) | Instant (DNS switch) |
-| **Canary** | Agent prompt changes, model updates | < 5 minutes |
-| **Manual** | Database migrations, OpenBao upgrades | Planned maintenance window |
+| **Rolling update** | All Cloud Run services | < 1 minute (revision traffic split) |
+| **Blue-green** | Database schema changes | Instant (traffic switch) |
+| **Canary** | Prompt/model changes | 1-5 minutes (gradual traffic shift) |
 
-### 4.3 Docker Image Strategy
-
-Each component has its own Dockerfile with multi-stage builds:
+### 6.3 Docker Image Strategy
 
 ```
 Base images:
-  ├── python:3.12-slim     ← Agents, MCP servers, Celery workers
-  ├── node:20-alpine       ← Next.js frontend
-  └── vault:latest         ← OpenBao (official image)
+  ├── python:3.12-slim     ← Backend API, MCP servers
+  ├── node:20-alpine       ← Frontend
+  └── postgres:16          ← Local dev only
 
 Shared layers:
-  ├── finops-agent-base    ← Common Python deps for all agents
-  ├── finops-mcp-base      ← Common Python deps for all MCP servers
-  └── finops-worker-base   ← Common Python deps for Celery workers
+  ├── finops-python-base   ← Common Python deps (FastAPI, LiteLLM, etc.)
+  └── finops-mcp-base      ← MCP SDK, cloud provider SDKs
+```
+
+**Image naming:**
+```
+gcr.io/PROJECT_ID/backend-api:main-a1b2c3d
+gcr.io/PROJECT_ID/mcp-gcp:main-a1b2c3d
+gcr.io/PROJECT_ID/frontend:main-a1b2c3d
 ```
 
 ---
 
-## 5. Network Architecture
+## 7. Network Architecture (GCP Example)
 
-### 5.1 Network Zones
+### 7.1 VPC Design
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│  PUBLIC ZONE (Internet-Facing)                               │
-│  ├── CloudFlare (WAF + DDoS protection)                      │
-│  └── API Gateway (Kong/Envoy) — SSL termination              │
-├─────────────────────────────────────────────────────────────┤
-│  DMZ (API Layer)                                             │
-│  ├── Next.js frontend                                        │
-│  ├── AG-UI Server                                            │
-│  └── A2A Gateway                                             │
-├─────────────────────────────────────────────────────────────┤
-│  APPLICATION ZONE (Internal Only)                            │
-│  ├── All Agent services                                      │
-│  ├── All MCP servers                                         │
-│  ├── Celery workers                                          │
-│  └── Event processor                                         │
-├─────────────────────────────────────────────────────────────┤
-│  DATA ZONE (Most Restricted)                                 │
-│  ├── PostgreSQL / TimescaleDB                                │
-│  ├── Redis                                                   │
-│  ├── OpenBao                                                 │
-│  └── Object Storage (S3/GCS)                                 │
-└─────────────────────────────────────────────────────────────┘
+VPC: finops-prod (10.0.0.0/16)
+  │
+  ├── Subnet: public (10.0.1.0/24)
+  │     └── Cloud Load Balancer
+  │
+  ├── Subnet: private (10.0.2.0/24)
+  │     ├── Cloud Run services (VPC connector)
+  │     ├── Cloud SQL (private IP)
+  │     └── Cloud Memorystore Redis (private IP)
+  │
+  └── Subnet: admin (10.0.3.0/24)
+        └── Cloud SQL proxy for admin access
 ```
 
-### 5.2 Network Rules
+### 7.2 Network Rules
 
-| Source → Destination | Allowed | Protocol |
-|---------------------|---------|----------|
-| Internet → Public Zone | Yes | HTTPS (443) |
-| Public Zone → DMZ | Yes | HTTP (internal) |
-| DMZ → Application Zone | Yes | gRPC / HTTP |
-| Application Zone → Data Zone | Yes | PostgreSQL (5432), Redis (6379), OpenBao (8200) |
-| Data Zone → Internet | No | Blocked (except cloud API egress) |
-| Application Zone → Cloud APIs | Yes | HTTPS (443, egress only) |
-| Cross-namespace within same zone | Yes | K8s NetworkPolicy |
-| Cross-zone without explicit rule | No | Blocked by default |
+| Source → Destination | Allowed | Notes |
+|---------------------|---------|-------|
+| Internet → Load Balancer | HTTPS only (443) | CloudFlare WAF recommended |
+| Load Balancer → Cloud Run | Yes | Serverless VPC connector |
+| Cloud Run → Cloud SQL | Yes (private IP) | VPC peering |
+| Cloud Run → BigQuery | Yes | Google API endpoint |
+| Cloud Run → Secret Manager | Yes | IAM-based |
+| Cloud Run → Cloud APIs (AWS, Azure) | Yes (egress) | For monitoring multi-cloud |
+| Cloud SQL → Internet | No | Blocked |
 
 ---
 
-## 6. Secrets Injection
+## 8. Secrets Management
 
-### 6.1 OpenBao ↔ Kubernetes Integration
+### 8.1 GCP Secret Manager Usage
 
-```
-OpenBao Agent Injector (sidecar pattern)
-  → Agents/MCP pods request secrets at startup
-    → OpenBao Agent authenticates with K8s service account
-      → OpenBao returns secrets as volume-mounted files
-        → Application reads from file (not environment variable)
-          → Secrets auto-refreshed on rotation
-```
+| Secret Type | Storage | Access Pattern |
+|-------------|---------|----------------|
+| Tenant cloud credentials | Secret Manager | Runtime API call per request (IAM-authorized) |
+| Database connection string | Secret Manager | Mounted as env var in Cloud Run |
+| LLM API keys (LiteLLM) | Secret Manager | Mounted as env var |
+| Auth0 client secrets | Secret Manager | Mounted as env var |
 
-### 6.2 What Goes Where
-
-| Secret Type | Storage | Injection Method |
-|-------------|---------|-----------------|
-| Tenant cloud credentials | OpenBao | Runtime API call per request |
-| Database connection strings | OpenBao | Pod startup injection (sidecar) |
-| Redis password | OpenBao | Pod startup injection |
-| Auth0 client secrets | OpenBao | Pod startup injection |
-| API Gateway TLS certificates | cert-manager | K8s Secret (auto-renewed) |
-| LLM API keys (Gemini/Claude) | OpenBao | Pod startup injection |
+**No OpenBao needed** - Cloud-native secret management is sufficient.
 
 ---
 
-## 7. Monitoring & Observability
+## 9. Monitoring & Observability
 
-### 7.1 Three Pillars
+### 9.1 GCP Monitoring Stack
 
 | Pillar | Tool | What It Covers |
 |--------|------|----------------|
-| **Metrics** | Prometheus + Grafana | System metrics, agent performance, cache hit rates, cloud API latencies |
-| **Logs** | Loki (or ELK) | Structured JSON logs from all services, correlated by request_id |
-| **Traces** | OpenTelemetry + Jaeger | End-to-end request tracing through all 4 agent layers |
+| **Metrics** | Cloud Monitoring | Cloud Run metrics, BigQuery query performance, API latencies |
+| **Logs** | Cloud Logging | Structured JSON logs from all services, correlated by request_id |
+| **Traces** | Cloud Trace | End-to-end request tracing through MCP servers |
+| **Dashboards** | Grafana (optional) | Custom dashboards, cost analytics |
+| **Alerts** | Cloud Monitoring Alerts → Slack/PagerDuty | Service health, error rates |
 
-### 7.2 Key Dashboards
+### 9.2 Key Metrics
 
-| Dashboard | Audience | Key Metrics |
-|-----------|----------|-------------|
-| System Health | SRE | Service uptime, error rates, resource utilization |
-| Agent Performance | Developers | Response times (p50/p95/p99), routing accuracy, tool call counts |
-| MCP Performance | Developers | Cloud API latencies, cache hit ratios, circuit breaker states |
-| Tenant Usage | Product | Active tenants, queries per day, feature adoption |
-| Security | Security | Auth failures, cross-tenant attempts, rate limit hits |
-| Business | Leadership | Total tenants, MRR, savings delivered |
-
-### 7.3 Alert Rules (PagerDuty/Slack)
-
-| Alert | Severity | Threshold |
-|-------|----------|-----------|
-| Service down (any component) | Critical | Health check fails for 2 minutes |
-| Error rate spike | High | >5% error rate for 5 minutes |
-| Agent response time | High | p95 > 10 seconds for 10 minutes |
-| Database connection pool exhausted | Critical | Available connections < 5 |
-| OpenBao sealed | Critical | Immediate |
-| Cloud API circuit breaker open | Medium | Any provider circuit open |
-| Disk usage >80% | Medium | Any persistent volume |
-| Certificate expiring | Low | Within 14 days |
+| Metric | Threshold | Alert |
+|--------|-----------|-------|
+| Cloud Run request latency (p95) | > 5 seconds | Warning |
+| Cloud Run error rate | > 5% | Critical |
+| Cloud SQL connection pool | > 90% | Warning |
+| BigQuery query cost | > $100/day | Warning |
+| Cloud Run cold starts | > 1 second | Info |
 
 ---
 
-## 8. Disaster Recovery
+## 10. Disaster Recovery
 
 | Aspect | Strategy | Target |
 |--------|----------|--------|
 | **RPO** (Recovery Point Objective) | 1 hour | Maximum data loss |
-| **RTO** (Recovery Time Objective) | 4 hours | Maximum downtime |
-| Database backup | Continuous WAL archiving to S3 + daily snapshots | Point-in-time recovery |
-| Redis backup | AOF persistence + hourly RDB snapshots | 1-hour data loss acceptable |
-| OpenBao backup | Auto-unseal keys in separate region + Raft snapshots | |
-| Object storage | Cross-region replication | |
-| Configuration | All in Git (Terraform + Helm + config) | Rebuild from scratch |
-| Multi-region (future) | Active-passive failover | <30 min failover |
+| **RTO** (Recovery Time Objective) | 2 hours | Maximum downtime |
+| Cloud SQL backup | Automated daily + continuous WAL | Point-in-time recovery |
+| BigQuery | Automatic dataset versioning | 7-day time travel |
+| Secret Manager | Automatic versioning | Restore previous version |
+| Object Storage | Versioning enabled | 30-day retention |
+| Configuration | All in Git (Terraform + Dockerfiles) | Rebuild from scratch in < 1 hour |
+
+---
+
+## 11. Cost Estimates
+
+### 11.1 GCP Monthly Costs (MVP, 100 tenants)
+
+| Component | Cost | Notes |
+|-----------|------|-------|
+| Cloud Run (frontend + backend + MCPs) | $50-200 | Pay-per-use, depends on traffic |
+| Cloud SQL PostgreSQL (db-n1-standard-2) | $100 | Includes HA, backups |
+| BigQuery | $0-50 | Billing export is free, queries minimal |
+| Cloud Tasks | $0 | Free tier covers MVP |
+| Cloud Scheduler | $0.50 | $0.10/job × 5 jobs |
+| Secret Manager | $5 | ~50 secrets |
+| Cloud Storage | $10 | Reports, exports |
+| Cloud Memorystore Redis (optional) | $0-30 | 1GB instance |
+| Cloud Monitoring/Logging | $50 | Log ingestion |
+| **Total** | **$215-445/month** | Scales with usage |
+
+**Compare to Kubernetes:**
+- K8s cluster: $150-300/month (3 nodes minimum)
+- TimescaleDB: $50-100/month (self-managed or RDS)
+- Redis: $30-50/month
+- Celery workers: $50-100/month
+- **Total Kubernetes**: **$280-550/month** (PLUS operational complexity)
+
+**Serverless is cheaper AND simpler!**
 
 ---
 
 ## Developer Notes
 
-> **DEV-INF-001:** Use managed database services (RDS, ElastiCache, Cloud SQL) for production. Self-hosted databases in K8s are not worth the operational overhead for this team size.
+> **DEV-INF-001:** Use cloud-native managed services for everything. Self-hosting (Kubernetes, TimescaleDB, Celery) adds operational burden with no benefit at our scale.
 
-> **DEV-INF-002:** Every service must have a `/health` endpoint that returns 200 when healthy. K8s liveness and readiness probes should hit this endpoint. Readiness should also check database connectivity.
+> **DEV-INF-002:** Every Cloud Run service must have a `/health` endpoint that returns 200 when healthy. Critical for load balancer health checks.
 
-> **DEV-INF-003:** Terraform state must be stored remotely (S3 + DynamoDB locking) from day one. Never commit state files to Git.
+> **DEV-INF-003:** Terraform state must be stored remotely (GCS/S3 + locking) from day one. Never commit state files to Git.
 
-> **DEV-INF-004:** Docker images should use pinned base image versions with digest hashes, not `:latest`. Run Trivy or Snyk scanning on every build.
+> **DEV-INF-004:** Docker images should use pinned base image versions with digest hashes, not `:latest`. Run Trivy scanning on every build.
 
-> **DEV-INF-005:** The OpenBao cluster is the most operationally critical component. If OpenBao is unavailable, no agent can retrieve cloud credentials. Plan for HA from day one (3-node Raft), and test unseal procedures monthly.
+> **DEV-INF-005:** Cloud Run services should use minimum instances = 0 for cost savings, except latency-critical services (backend API = 1).
 
-> **DEV-INF-006:** Namespace-level resource quotas should be set for each K8s namespace to prevent any single component from starving others. Set both requests and limits.
+> **DEV-INF-006:** BigQuery billing export is automatic in GCP. For AWS/Azure monitoring, configure Cost and Usage Reports (CUR) and Cost Management exports respectively.
+
+> **DEV-INF-007:** See ADR-003 (BigQuery), ADR-004 (Serverless Containers), ADR-006 (Cloud-Native Task Queues) for architectural decisions.
+
+---
+
+## Related ADRs
+
+
+- [ADR-002: GCP as First Home Cloud](../docs/adr/002-gcp-only-first.md)
+- [ADR-003: Use BigQuery, Not TimescaleDB](../docs/adr/003-use-bigquery-not-timescaledb.md)
+- [ADR-004: Serverless Containers, Not Kubernetes](../docs/adr/004-cloud-run-not-kubernetes.md)
+- [ADR-006: Cloud-Native Task Queues, Not Celery](../docs/adr/006-cloud-native-task-queues-not-celery.md)
