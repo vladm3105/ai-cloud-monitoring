@@ -273,7 +273,10 @@ Both UIs query the **same data sources** (BigQuery for metrics, Cloud SQL for me
   - Direct SQL queries to BigQuery for cost metrics
   - Direct SQL queries to Cloud SQL for operational data
   - No Prometheus needed - Grafana has native database support
-- **OpenTelemetry** - Distributed tracing and application metrics
+- **Distributed Tracing & Metrics** - Application observability
+  - Option 1 (Vendor-neutral): OpenTelemetry → Cloud Trace/X-Ray/App Insights
+  - Option 2 (Cloud-native): Direct integration with Cloud Trace (GCP), X-Ray (AWS), Application Insights (Azure)
+  - Use for: Debugging multi-agent flows, performance optimization, request tracing
 
 
 ---
