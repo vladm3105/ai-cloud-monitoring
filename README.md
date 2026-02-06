@@ -239,6 +239,10 @@ Both UIs query the **same data sources** (BigQuery for metrics, Cloud SQL for me
   - Single API for all LLM providers (avoid vendor lock-in)
   - Currently configured: Gemini 2.0 (GCP) or Claude 3.5 Sonnet (Anthropic)
   - Easy to switch providers via config
+  - **Compliance option**: Use cloud provider LLM gateways for data residency/governance:
+    - GCP: Vertex AI (Gemini, Claude, Llama via Model Garden)
+    - Azure: Azure OpenAI Service (GPT-4, GPT-3.5)
+    - AWS: Amazon Bedrock (Claude, Llama, Titan)
 - **AG-UI Protocol** - Agent-to-UI streaming (FastAPI SSE endpoint: `/api/copilotkit`)
 
 ### Backend
