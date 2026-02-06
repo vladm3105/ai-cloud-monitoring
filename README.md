@@ -201,8 +201,11 @@ AI-cost-monitoring/
 ### Infrastructure
 - **Docker + Cloud Run** - Serverless containers (see [ADR-004](docs/adr/004-cloud-run-not-kubernetes.md))
 - **Terraform** - Infrastructure as Code
-- **Prometheus + Grafana** - Monitoring
-- **OpenTelemetry** - Distributed tracing
+- **Grafana** - Monitoring dashboards (native BigQuery & Cloud SQL integration)
+  - Direct SQL queries to BigQuery for cost metrics
+  - Direct SQL queries to Cloud SQL for operational data
+  - No Prometheus needed - Grafana has native database support
+- **OpenTelemetry** - Distributed tracing and application metrics
 
 ---
 
@@ -235,7 +238,7 @@ Real-time response to events from cloud environments via webhooks.
 - AWS CloudWatch Alarms → SNS → Webhook
 - Azure Monitor → Action Group → Webhook
 - GCP Cloud Monitoring → Pub/Sub → Push
-- Kubernetes Prometheus Alertmanager → Webhook
+- Kubernetes Webhook: Cluster alerts (OpenCost or native) → HTTP endpoint
 
 ### Mode 4: A2A — Agent-to-Agent
 External AI agents initiate queries through the Google A2A Protocol gateway.
