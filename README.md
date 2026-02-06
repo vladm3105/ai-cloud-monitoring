@@ -278,6 +278,36 @@ Both UIs query the **same data sources** (BigQuery for metrics, Cloud SQL for me
   - Option 2 (Cloud-native): Direct integration with Cloud Trace (GCP), X-Ray (AWS), Application Insights (Azure)
   - Use for: Debugging multi-agent flows, performance optimization, request tracing
 
+### Why Distributed Tracing?
+
+The platform uses a **multi-agent, multi-service architecture**. A single user query triggers a cascade of calls:
+
+```
+User: "Why did AWS costs spike yesterday?"
+  ↓
+AG-UI Server (50ms)
+  ↓
+Coordinator Agent (120ms)
+  ↓ (parallel execution)
+Cost Agent → AWS MCP → AWS Cost Explorer API (800ms)
+Cost Agent → GCP MCP → BigQuery (200ms)
+Cost Agent → Azure MCP → Cost Management API (TIMEOUT)
+  ↓
+Total response time: 1.2s
+```
+
+**Distributed tracing** shows you:
+- ✅ Which agent/MCP call is slow
+- ✅ Where timeouts occur
+- ✅ End-to-end request latency
+- ✅ Bottlenecks in the agent hierarchy
+
+**Two implementation options**:
+1. **OpenTelemetry** (vendor-neutral) → Works across all clouds
+2. **Cloud-native** (GCP Cloud Trace, AWS X-Ray, Azure App Insights) → Simpler setup
+
+Use for debugging multi-agent flows and performance optimization in production.
+
 
 ---
 
