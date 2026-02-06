@@ -383,11 +383,11 @@ Manages tenant configuration, users, and cloud accounts.
 
 ### 4.3 Caching Strategy (3-Tier)
 
-| Tier | Location | TTL | Use Case |
-|------|----------|-----|----------|
-| L1 | In-memory (per MCP process) | 60 sec | Hot data — current costs, active alerts |
-| L2 | Redis (shared) | 5-30 min | Query results, recommendations, resources |
-| L3 | TimescaleDB/PostgreSQL | Persistent | Historical data, pre-computed aggregates |
+| Layer | Storage | Typical TTL | What's Cached |
+|-------|---------|-------------|---------------|
+| L1 | Agent in-memory | 30 seconds | Current tool call results, intermediate computations |
+| L2 | Redis (optional) | 5-30 min | Query results, recommendations, resources |
+| L3 | PostgreSQL + BigQuery | Persistent | Historical data, pre-computed aggregates, billing exports |
 
 **Cache key pattern:** `tenant:{id}:cache:{tool}:{param_hash}`
 

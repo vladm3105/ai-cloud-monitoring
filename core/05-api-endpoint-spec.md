@@ -210,8 +210,8 @@ Webhook received
     → Extract tenant_id from webhook metadata
       → Parse provider-specific payload into common event format
         → Store in events table
-          → Enqueue to Redis event processing queue
-            → Event Processor picks up (async)
+          → Enqueue to Cloud Tasks (GCP) / SQS (AWS) / Service Bus (Azure)
+            → Event Processor picks up (async serverless function)
               → Evaluate against tenant policies (Policy MCP)
                 → Take action (notify / recommend / remediate)
 ```
@@ -315,9 +315,9 @@ All list endpoints support cursor-based pagination:
 
 > **DEV-API-001:** The AG-UI endpoint (`/api/copilotkit`) should be the only endpoint that streams. All REST endpoints return complete JSON responses. Don't mix SSE into REST endpoints.
 
-> **DEV-API-002:** Dashboard endpoints should query pre-computed aggregates (TimescaleDB continuous aggregates), not raw cost_metrics. Response time target for dashboard endpoints is <200ms.
+> **DEV-API-002:** Dashboard endpoints should query pre-computed aggregates (BigQuery materialized views or scheduled query results), not raw billing export data. Response time target for dashboard endpoints is <200ms. Use Redis L2 cache for frequently accessed queries.
 
-> **DEV-API-003:** Webhook endpoints must respond with 200 within 3 seconds and process asynchronously via Redis queue. Cloud providers retry on timeout, and duplicate processing must be idempotent (deduplicate by event ID).
+> **DEV-API-003:** Webhook endpoints must respond with 200 within 3 seconds and process asynchronously via Cloud Tasks (GCP) / SQS (AWS) / Service Bus (Azure). Cloud providers retry on timeout, and duplicate processing must be idempotent (deduplicate by event ID).
 
 > **DEV-API-004:** All REST endpoints should include `X-Request-ID` header in responses for tracing. If the client sends `X-Request-ID`, use that; otherwise generate one.
 
