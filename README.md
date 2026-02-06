@@ -240,10 +240,11 @@ Both UIs query the **same data sources** (BigQuery for metrics, Cloud SQL for me
 ### Backend
 - **FastAPI** - AG-UI server (handles SSE streaming, JWT validation, tenant context)
 - **FastMCP** - MCP server framework
-- **Celery + Redis** - Background jobs, scheduled tasks, and workflow orchestration
-  - Data sync jobs (every 4 hours)
-  - Anomaly detection, forecasts
-  - Approval workflows (state stored in PostgreSQL)
+- **Cloud Task Queue & Scheduler** - Background jobs and workflow orchestration
+  - Currently: GCP Cloud Tasks + Cloud Scheduler
+  - AWS alternative: SQS + EventBridge + Lambda
+  - Azure alternative: Service Bus + Azure Functions
+  - Handles: Data sync (every 4 hours), anomaly detection, forecasts, approval workflows
 
 ### Authentication & Security
 - **OAuth 2.0/OIDC Provider** - Auth0 (current), or any OAuth provider
