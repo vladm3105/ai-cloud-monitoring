@@ -245,6 +245,9 @@ Both UIs query the **same data sources** (BigQuery for metrics, Cloud SQL for me
   - AWS alternative: SQS + EventBridge + Lambda
   - Azure alternative: Service Bus + Azure Functions
   - Handles: Data sync (every 4 hours), anomaly detection, forecasts, approval workflows
+  
+> [!NOTE]
+> Background services (task queues, schedulers, secret managers, caching) use **home cloud native services** and will differ based on where the platform is deployed. The architecture pattern remains the same across clouds.
 
 ### Authentication & Security
 - **OAuth 2.0/OIDC Provider** - Auth0 (current), or any OAuth provider
@@ -260,8 +263,8 @@ Both UIs query the **same data sources** (BigQuery for metrics, Cloud SQL for me
 ### Data Layer
 - **Cloud SQL PostgreSQL 16** - Relational data with Row-Level Security
 - **BigQuery** - Time-series cost metrics (per [ADR-003](docs/adr/003-use-bigquery-not-timescaledb.md))
-- **Cloud Memorystore Redis 7** - Caching and message queue
 - **Cloud Storage** - Object storage for reports and backups
+- **Cloud Memorystore (optional)** - Caching for high-traffic deployments (GCP Redis, AWS ElastiCache, Azure Cache)
 
 ### Infrastructure
 - **Docker + Cloud Run** - Serverless containers (see [ADR-004](docs/adr/004-cloud-run-not-kubernetes.md))
