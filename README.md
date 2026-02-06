@@ -267,8 +267,12 @@ Both UIs query the **same data sources** (BigQuery for metrics, Cloud SQL for me
 - **Cloud Memorystore (optional)** - Caching for high-traffic deployments (GCP Redis, AWS ElastiCache, Azure Cache)
 
 ### Infrastructure
-- **Docker + Cloud Run** - Serverless containers (see [ADR-004](docs/adr/004-cloud-run-not-kubernetes.md))
-- **Terraform** - Infrastructure as Code
+- **Serverless Containers** - Docker-based container execution
+  - Currently: GCP Cloud Run (see [ADR-004](docs/adr/004-cloud-run-not-kubernetes.md))
+  - AWS alternative: ECS Fargate or AWS App Runner
+  - Azure alternative: Azure Container Apps
+  - Serverless scaling, pay-per-use
+- **Terraform** - Infrastructure as Code (cloud-agnostic)
 - **Grafana** - Monitoring dashboards (native BigQuery & Cloud SQL integration)
   - Direct SQL queries to BigQuery for cost metrics
   - Direct SQL queries to Cloud SQL for operational data
