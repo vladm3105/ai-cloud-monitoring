@@ -1,4 +1,4 @@
-# ADR-002: Start with GCP-Only, Not Multi-Cloud
+# ADR-002: GCP as First Home Cloud (Not Multi-Cloud Day 1)
 
 ## Status
 Accepted
@@ -16,40 +16,45 @@ We have detailed specifications for two different architectures:
    - Complex routing and coordination
    - Estimated timeline: 9 months
 
-2. **GCP-only MVP** - Single cloud provider focus
-   - Simplified 2-layer architecture
-   - Direct MCP server integration
+2. **GCP as first home cloud** - Single cloud deployment with multi-cloud monitoring
+   - GCP hosts the platform infrastructure
+   - Platform can monitor AWS, Azure, GCP, Kubernetes costs
+   - Simplified architecture
    - Estimated timeline: 6 weeks
 
 The question: Which should we build first?
 
 ## Decision
 
-We will **build the GCP-only version first** as an MVP, with the architecture designed to support multi-cloud expansion later.
+We will **build GCP as the first home cloud** for the platform deployment, while supporting multi-cloud cost monitoring from day 1. The platform architecture is designed to support AWS/Azure as alternative home clouds later.
 
 ## Rationale
 
-### Why GCP-only First?
+**Important Distinction:**
+- **Home Cloud**: Where the platform itself runs (GCP initially)
+- **Monitored Clouds**: What clouds the platform can monitor (AWS, Azure, GCP, K8s from day 1)
+
+### Why GCP as First Home Cloud?
 
 **Faster Time to Market:**
-- 6 weeks to MVP vs 9 months for multi-cloud
+- 6 weeks to MVP vs 9 months for multi-home-cloud support
 - Can validate product-market fit quickly
 - Start generating revenue/feedback sooner
 
 **Lower Complexity:**
-- No agent orchestration needed
-- No cross-cloud aggregation logic
-- Simpler testing and deployment
+- Single cloud infrastructure to manage
+- No multi-cloud deployment complexity
+- Simpler testing and operations
 
 **Market Validation:**
-- Prove the value prop with one cloud first
-- Many SMBs are GCP-only or GCP-primary
+- Prove the value prop with one deployment cloud first
+- Many SMBs prefer single-cloud operations
 - Can test pricing and features with real users
 
-**GCP Advantages:**
-- Excellent built-in tools (Budget API, Recommender, Asset Inventory)
-- BigQuery for billing = no custom database needed
-- Best dev experience (compared to AWS/Azure)
+**GCP Advantages for Home Cloud:**
+- Excellent built-in tools (BigQuery, Secret Manager, Cloud Tasks)
+- Best developer experience (compared to AWS/Azure)
+- Serverless-first (Cloud Run, Cloud Functions)
 - We know GCP best
 
 **Financial Prudence:**
@@ -73,13 +78,13 @@ We will **build the GCP-only version first** as an MVP, with the architecture de
 - Multi-cloud users are enterprise (different segment)
 - Can add clouds incrementally as demand grows
 
-## Multi-Cloud Expansion Path
+## Home Cloud Expansion Path
 
-We're not abandoning multi-cloud, just deferring it:
+We're not abandoning multi-home-cloud support, just deferring it:
 
-**Phase 1: GCP-only MVP (Weeks 1-6)**
-- Single MCP server for GCP
-- Simple conversational agent
+**Phase 1: GCP Home Cloud (Weeks 1-6)**
+- Platform runs on GCP (Cloud Run, BigQuery, Cloud SQL)
+- Monitors AWS, Azure, GCP, Kubernetes costs
 - 6 core features
 - Beta with 10-20 companies
 
@@ -89,15 +94,15 @@ We're not abandoning multi-cloud, just deferring it:
 - Polish UI/UX
 - Scale to 100+ companies
 
-**Phase 3: Add AWS (Months 4-6)**
-- Build AWS MCP server (copy GCP pattern)
-- Add AWS agent (reuse architecture)
-- Cross-cloud cost comparison tools
+**Phase 3: AWS Home Cloud Option (Months 4-6)**
+- Create AWS deployment guide (ECS Fargate, RDS, Athena)
+- Terraform modules for AWS
+- Users can choose GCP or AWS as home cloud
 
-**Phase 4: Add Azure (Months 7-9)**
-- Azure MCP server
-- Azure agent
-- Full multi-cloud platform complete
+**Phase 4: Azure Home Cloud Option (Months 7-9)**
+- Create Azure deployment guide (Container Apps, PostgreSQL, Synapse)
+- Terraform modules for Azure
+- Users can choose GCP, AWS, or Azure as home cloud
 
 ## Consequences
 

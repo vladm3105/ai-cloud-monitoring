@@ -1,4 +1,4 @@
-# ADR-004: Deploy to Cloud Run, Not Kubernetes
+# ADR-004: Use Serverless Containers, Not Kubernetes
 
 ## Status
 Accepted
@@ -10,14 +10,14 @@ Accepted
 
 For deploying the MCP server and conversational agent, we need a container orchestration platform. Options:
 
-1. **Google Kubernetes Engine (GKE)** - Full Kubernetes cluster
-2. **Cloud Run** - Serverless containers
+1. **Kubernetes (GKE, EKS, AKS)** - Full Kubernetes cluster
+2. **Serverless Containers** - Cloud Run / ECS Fargate / Azure Container Apps
 3. **Compute Engine VMs** - Traditional VMs
-4. **Cloud Functions** - Function-as-a-Service
+4. **Functions** - Function-as-a-Service
 
 ## Decision
 
-We will deploy the MCP server and agent to **Cloud Run**, not Kubernetes.
+We will deploy containers to **serverless container platforms**, not Kubernetes. For GCP as the first home cloud, this means **Cloud Run**.
 
 ## Rationale
 
@@ -84,6 +84,22 @@ We will deploy the MCP server and agent to **Cloud Run**, not Kubernetes.
 - 9-minute timeout limit
 - Less control over runtime environment
 - Cold start issues for MCP server
+
+## Cloud Alternatives
+
+This pattern applies across all home cloud options:
+
+| Home Cloud | Serverless Container Platform | Notes |
+|------------|-------------------------------|-------|
+| **GCP** | **Cloud Run** | Knative-based, simplest deployment |
+| **AWS** | **ECS Fargate** or **App Runner** | Fargate for control, App Runner for simplicity |
+| **Azure** | **Azure Container Apps** | Similar to Cloud Run, built on KEDA |
+
+All three offer:
+- Pay-per-use pricing (vs always-on Kubernetes)
+- Auto-scaling from zero
+- Managed infrastructure (no node pools, no kubectl)
+- Fast deployments (< 2 minutes)
 
 ## Implementation
 
