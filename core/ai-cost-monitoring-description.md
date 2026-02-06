@@ -97,11 +97,15 @@ The platform uses a hierarchical multi-agent architecture built on Google ADK (A
 - **Gemini 2.0 / Claude** - LLM backbone
 - **AG-UI Protocol** - Agent-to-UI streaming
 
-### Backend
-- **FastAPI** - AG-UI server
-- **FastMCP** - MCP server framework
-- **Celery + Redis** - Task queue
-- **Temporal.io** - Workflow orchestration
+### Backend Infrastructure:
+- **Serverless Containers (Cloud Run / ECS Fargate / Azure Container Apps)** - All services
+- **Cloud-native Task Queues (Cloud Tasks / SQS / Service Bus)** - Background jobs
+- **Cloud Scheduler (GCP) / EventBridge (AWS) / Azure Functions** - Job scheduling
+
+**Backend Data:**
+- **PostgreSQL** - Relational data (tenants, users, accounts, policies)
+- **BigQuery / Athena / Synapse** - Time-series cost metrics (billing export)
+- **Redis** (optional) - L2 query cacheage for reports
 
 ### Authentication & Security
 - **Auth0** - Identity provider (OAuth 2.0/OIDC, SSO, MFA)
@@ -148,7 +152,7 @@ The conversational AI interface where users ask natural language questions and r
 
 Automated data pipeline that runs continuously, keeping the local database fresh so interactive queries return instant results.
 
-**Flow:** Celery Beat → Scheduled Jobs → Cloud APIs → Data Processing → TimescaleDB / PostgreSQL / Redis
+**Flow:** Cloud Scheduler → Cloud Tasks → Serverless Function → Cloud APIs → Data Processing → BigQuery (cost data) / PostgreSQL (metadata) / Redis (cache)
 
 **Schedule:**
 
@@ -161,10 +165,10 @@ Automated data pipeline that runs continuously, keeping the local database fresh
 | Forecast Update | Daily at 3 AM | Re-run ML spend prediction models |
 | Report Generation | Weekly / Monthly | Executive summaries, chargeback reports |
 | Credential Rotation Check | Daily at midnight | Verify OpenBao credential health |
-| Data Rollup / Compress | Daily at 4 AM | Aggregate old data, compress TimescaleDB chunks |
+| Data Rollup / Compress | Daily at 4 AM | Aggregate old data, refresh BigQuery materialized views |
 
 **Characteristics:**
-- Trigger: Cron schedule (Celery Beat)
+- Trigger: Cron schedule (Cloud Scheduler / EventBridge)
 - Runs 24/7 per tenant, no user action needed
 - Credentials from OpenBao
 - Results feed all other modes
@@ -232,9 +236,9 @@ A real-world example demonstrating all four modes:
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │  DATA ISOLATION                                              │
-│  • PostgreSQL Row-Level Security (RLS)                       │
-│  • TimescaleDB partitioned by tenant_id                      │
-│  • Redis key namespacing: tenant:{id}:*                      │
+│  • PostgreSQL RLS on tenant_id                               │
+│  • BigQuery filters by authorized cloud accounts             │
+│  • Redis namespacing: tenant:{id}:* (optional L2 cache)      │
 │  • Object storage path isolation: /{tenant_id}/              │
 └─────────────────────────────────────────────────────────────┘
 

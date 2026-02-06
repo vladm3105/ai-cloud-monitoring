@@ -299,7 +299,7 @@ All four Cloud Agents (AWS, Azure, GCP, K8s) follow the same pattern:
 2. Check L1 cache (in-memory, 60 sec)
    → Hit: return cached result
 
-3. Check L2 cache (Redis, 5-30 min)
+3. Check L2 cache (Redis, 5-30 min) - optional
    → Hit: populate L1, return cached result
 
 4. Check circuit breaker state
@@ -362,7 +362,7 @@ The Coordinator selects response components based on data type and user query:
 
 > **DEV-AGT-001:** The Coordinator's intent classifier should be tested with at least 200 sample queries covering all intent categories. Track classification accuracy and routing correctness as a metric.
 
-> **DEV-AGT-002:** Multi-turn conversation context is stored in Redis with session TTL of 30 minutes. The last 10 turns are included in the Coordinator's prompt. Older turns are summarized.
+> **DEV-AGT-002:** Multi-turn conversation context is stored in Redis (if available) or in-memory with session TTL of 30 minutes. The last 10 turns are included in the Coordinator's prompt. Older turns are summarized. Redis is recommended for production but not required for MVP.
 
 > **DEV-AGT-003:** Domain Agents should never call Cloud APIs directly. They always go through Cloud Agents, which go through MCP Servers. This ensures caching, rate limiting, and circuit breaking are consistently applied.
 

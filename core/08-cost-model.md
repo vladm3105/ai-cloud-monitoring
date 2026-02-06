@@ -33,20 +33,23 @@ Platform Operating Cost = Infrastructure + LLM Inference + Cloud API + Operation
 
 ### 2.1 Infrastructure Cost per Tenant
 
-Shared infrastructure amortized across tenants:
+Shared infrastructure amortized across tenants (GCP serverless example):
 
 | Component | Monthly Cost (100 tenants) | Per Tenant | Notes |
 |-----------|---------------------------|------------|-------|
-| Kubernetes cluster (EKS/GKE) | $800 | $8.00 | 3 nodes, shared |
-| PostgreSQL/TimescaleDB (managed) | $600 | $6.00 | Shared, RLS isolated |
-| Redis (managed) | $200 | $2.00 | Shared, namespaced |
-| OpenBao (3-node HA) | $150 | $1.50 | Shared |
-| Object storage (S3/GCS) | $50 | $0.50 | Per-tenant path |
-| API Gateway + CDN | $200 | $2.00 | Shared |
-| Monitoring stack | $150 | $1.50 | Shared |
-| **Subtotal** | **$2,150** | **$21.50** | |
+| Cloud Run (all services) | $300-500 | $3.00-5.00 | Pay-per-use, scales to zero |
+| Cloud SQL PostgreSQL (db-n1-standard-2) | $100 | $1.00 | Shared, RLS isolated |
+| BigQuery (billing export queries) | $10-30 | $0.10-0.30 | Serverless analytics |
+| Cloud Tasks + Scheduler | $10 | $0.10 | Serverless background jobs |
+| Cloud Storage (reports) | $10 | $0.10 | Per-tenant path |
+| Cloud Memorystore Redis (optional) | $40 | $0.40 | 1GB instance for L2 cache |
+| Cloud Load Balancing + CDN | $50 | $0.50 | Shared |
+| Cloud Monitoring/Logging | $50 | $0.50 | Shared |
+| **Subtotal** | **$570-690** | **$5.70-6.90** | |
 
-At scale (500 tenants), per-tenant infrastructure cost drops to ~$8-10/month.
+**Cost advantage:** Serverless saves ~$1,460/month vs Kubernetes ($2,150 - $690 = $1,460).
+
+At scale (500 tenants), per-tenant infrastructure cost drops to ~$2-3/month.
 
 ### 2.2 LLM Inference Cost per Tenant
 
@@ -168,10 +171,10 @@ At scale (500 tenants), infrastructure share drops significantly:
 
 | Strategy | Savings | Implementation |
 |----------|---------|----------------|
-| Spot/preemptible nodes | 60-70% | For Celery workers and non-critical agents |
-| Auto-scaling down | 20-30% | Scale to minimum during off-peak hours |
-| Reserved instances | 30-40% | For baseline K8s nodes and databases |
-| TimescaleDB compression | 90%+ storage | Automatic after 7 days |
+| Scale to zero | 40-60% | Cloud Run services scale to 0 during off-peak hours |
+| Minimum instances = 0 | 20-30% | Only backend API keeps 1 warm instance |
+| BigQuery slot reservations | 30-40% | For predictable query workloads |
+| Committed use discounts | 20-30% | 1-year commit for Cloud SQL, Redis |
 
 ### 4.3 Cloud API Cost Reduction
 
@@ -231,7 +234,7 @@ The strongest selling point is demonstrable ROI:
 
 > **DEV-COST-003:** Cloud API costs are the hardest to predict because they depend on tenant account size. Implement metering for cloud API calls per tenant to identify outliers that might need usage-based pricing adjustments.
 
-> **DEV-COST-004:** Spot instances for Celery workers are safe because all sync jobs are idempotent and retryable. If a spot instance is reclaimed, the job restarts on another worker.
+> **DEV-COST-004:** Cloud Run with min instances = 0 is safe for most services because startup time is < 1 second. Only backend API needs min = 1 for low latency. Background jobs via Cloud Tasks automatically retry on failure.
 
 > **DEV-COST-005:** The savings tracking feature (recommendation estimated vs. actual) is the most important business metric. It directly proves platform ROI to customers. Build this measurement pipeline in Phase 5 alongside the self-learning Loop 2.
 
