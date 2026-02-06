@@ -119,7 +119,64 @@ The root entity. One tenant = one customer organization.
 - `status` updated by scheduled sync jobs; `error` triggers notification
 - `config.regions` controls which regions the Cloud Agent queries
 
-### 3.4 cost_metrics (TimescaleDB Hypertable)
+### 3.4 cost_metrics (Analytics Database - Cloud-Native)
+
+**Storage**: BigQuery (GCP) / Athena + S3 (AWS) / Synapse (Azure)
+
+Time-series cost data from cloud billing exports. This is **not** stored in PostgreSQL.
+
+**GCP (BigQuery)**:
+Cloud billing automatically exports to a BigQuery dataset. Query directly:
+```sql
+SELECT 
+  DATE(usage_start_time) as date,
+  project.id as project_id,
+  service.description as service,
+  SUM(cost) as total_cost
+FROM `billing_export.gcp_billing_export_v1_*`
+WHERE DATE(usage_start_time) >= DATE_SUB(CURRENT_DATE(), INTERVAL 30 DAY)
+  AND project.id IN (SELECT project_id FROM authorized_projects WHERE tenant_id = @tenant_id)
+GROUP BY date, project_id, service
+```
+
+**AWS (Athena + S3)**:
+Cost and Usage Report (CUR) stored in S3, queried via Athena:
+```sql
+SELECT 
+  line_item_usage_start_date as date,
+  line_item_usage_account_id as account_id,
+  product_product_name as service,
+  SUM(line_item_unblended_cost) as total_cost
+FROM cur_database.cur_table
+WHERE line_item_usage_start_date >= DATE_ADD('day', -30, CURRENT_DATE)
+GROUP BY date, account_id, service
+```
+
+**Azure (Synapse Analytics)**:
+Cost Management exports to Storage Account, queried via Synapse serverless SQL:
+```sql
+SELECT 
+  usageDate as date,
+  subscriptionGuid as subscription_id,
+  consumedService as service,
+  SUM(cost) as total_cost
+FROM OPENROWSET(
+  BULK 'https://storage.blob.core.windows.net/exports/*.csv',
+  FORMAT = 'CSV'
+) AS costs
+WHERE usageDate >= DATEADD(day, -30, GETDATE())
+GROUP BY date, subscription_id, service
+```
+
+**Tenant Isolation**:
+- Query filters by authorized project_id/account_id/subscription_id
+- List of authorized cloud accounts stored in PostgreSQL `cloud_accounts` table
+- MCP servers enforce tenant context before querying
+
+**Performance**:
+- Queries cached in Redis (L2) for 5-30 minutes
+- Pre-computed daily/monthly rollups for common queries
+- Partitioned by date for fast time-range queries
 
 The primary time-series table. Stores cost data points synced from cloud providers.
 
@@ -364,7 +421,39 @@ The primary time-series table. Stores cost data points synced from cloud provide
 
 ---
 
-## 4. TimescaleDB Continuous Aggregates
+## 4. Pre-Computed Aggregates (Analytics Database)
+
+For performance, create materialized views or scheduled queries for common aggregations:
+
+**GCP (BigQuery Scheduled Queries)**:
+```sql
+-- Daily rollup (runs every 4 hours)
+CREATE OR REPLACE TABLE cost_daily AS
+SELECT 
+  DATE(usage_start_time) as date,
+  project.id as project_id,
+  service.description as service,
+  SUM(cost) as total_cost
+FROM `billing_export.gcp_billing_export_v1_*`
+WHERE DATE(usage_start_time) >= DATE_SUB(CURRENT_DATE(), INTERVAL 90 DAY)
+GROUP BY date, project_id, service;
+
+-- Monthly rollup (runs daily)
+CREATE OR REPLACE TABLE cost_monthly AS
+SELECT 
+  FORMAT_DATE('%Y-%m', DATE(usage_start_time)) as month,
+  project.id as project_id,
+  service.description as service,
+  SUM(cost) as total_cost
+FROM `billing_export.gcp_billing_export_v1_*`
+GROUP BY month, project_id, service;
+```
+
+**AWS (Athena CREATE TABLE AS SELECT)**:
+Similar pattern, materialized views updated via Lambda on schedule.
+
+**Azure (Synapse Materialized Views)**:
+Use Synapse serverless SQL materialized views or Azure Data Factory pipelines.
 
 Pre-computed rollups that make Mode 1 interactive queries fast:
 
@@ -379,9 +468,20 @@ Pre-computed rollups that make Mode 1 interactive queries fast:
 
 ---
 
-## 5. Redis Key Namespace Design
+## 5. Redis Key Namespace Design (Optional L2 Cache)
 
-All Redis keys are namespaced by tenant to prevent cross-tenant data leakage:
+**Note**: Redis is **optional** for performance optimization. Not required for MVP.
+
+If using Redis for L2 caching, all keys are namespaced by tenant to prevent cross-tenant data leakage:
+
+| Key Pattern | TTL | Purpose |
+|-------------|-----|---------|
+| `tenant:{id}:cost:summary:{params_hash}` | 30 min | Cost summary query results |
+| `tenant:{id}:recommendations:{cloud}:{account}` | 1 hour | Cloud provider recommendations |
+| `tenant:{id}:resources:{cloud}:{account}` | 30 min | Resource inventory snapshot |
+| `tenant:{id}:session:{session_id}` | 30 min | User session data (CopilotKit conversation) |
+
+**No task queue keys** - Background jobs use cloud-native services (Cloud Tasks/SQS/Service Bus per ADR-006).
 
 | Pattern | Purpose | TTL |
 |---------|---------|-----|
