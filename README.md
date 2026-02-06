@@ -29,18 +29,25 @@ The platform is designed to run on Google Cloud Platform using Cloud Run:
 
 **Important Architectural Distinction:**
 
-- **Home Cloud (Primary Cloud)**: GCP - Where the platform itself runs
-  - Hosts the frontend (Next.js on Cloud Run)
-  - Hosts the backend orchestrator (FastAPI on Cloud Run)
-  - Hosts the database (Cloud SQL PostgreSQL)
-  - Hosts the cache (Cloud Memorystore Redis)
+- **Home Cloud (Primary Cloud)**: Currently GCP - Where the platform itself runs
+  - All platform infrastructure (frontend, backend,databases, task queues)
   - Infrastructure managed via Terraform
+  - Can be deployed to AWS or Azure (see Technology Stack for cloud alternatives)
 
 - **Monitored Clouds**: AWS, Azure, GCP, Kubernetes - What the platform analyzes
   - The platform connects to these clouds via APIs
   - Retrieves cost data, resource inventories, recommendations
   - Can execute remediation actions (with approval)
   - GCP appears in both roles (home cloud + monitored cloud)
+
+**Example with GCP as Home Cloud**:
+- **Frontend**: Next.js on Cloud Run
+- **Backend**: FastAPI on Cloud Run  
+- **Relational DB**: Cloud SQL PostgreSQL
+- **Analytics DB**: BigQuery
+- **Task Queue**: Cloud Tasks + Cloud Scheduler
+- **Secret Manager**: GCP Secret Manager
+- **Cache (optional)**: Cloud Memorystore Redis
 
 **Why This Matters:**
 
@@ -450,7 +457,7 @@ External AI agents initiate queries through the Google A2A Protocol gateway.
 > These isolation mechanisms are built into the schema but only enforced when `TENANT_MODE=multi`.
 
 - **PostgreSQL Row-Level Security (RLS)** - Database-level tenant data isolation
-- **TimescaleDB Partitioning** - Partitioned by `tenant_id`
+- **PostgreSQL Partitioning** - Partitioned by `tenant_id` for multi-tenant performance
 - **Redis Key Namespacing** - `tenant:{id}:*` pattern
 - **Object Storage Path Isolation** - `/{tenant_id}/` paths
 - **Secret Manager Path Isolation** - Home cloud's secret manager with tenant-specific naming
@@ -528,7 +535,7 @@ Key architectural decisions are documented in [docs/adr/](docs/adr/):
 
 | Phase | Duration | Focus |
 |-------|----------|-------|
-| **Phase 1** | 5 weeks | Foundation (OAuth Provider, Secret Manager, PostgreSQL, Redis) |
+| **Phase 1** | 5 weeks | Foundation (OAuth Provider, Secret Manager, PostgreSQL, Cloud Tasks) |
 | **Phase 2** | 5 weeks | MCP Servers (AWS, Azure, GCP, OpenCost) |
 | **Phase 3** | 5 weeks | Cloud Agents (AWS, Azure, GCP, K8s) |
 | **Phase 4** | 5 weeks | Domain Agents (Cost, Optimization, Remediation) |
