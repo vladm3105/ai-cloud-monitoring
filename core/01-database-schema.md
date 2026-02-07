@@ -14,15 +14,41 @@
 
 ## 1. Storage Strategy
 
-AI Cost Monitoring uses three storage engines, each chosen for a specific access pattern:
+> **Scope Note:** This document describes the **multi-tenant production architecture**. For MVP (single-tenant), see [MVP_ARCHITECTURE.md](../docs/architecture/MVP_ARCHITECTURE.md) which uses Firestore + BigQuery only.
+
+AI Cost Monitoring uses a tiered storage strategy based on deployment phase:
+
+### 1.1 MVP Storage (Single-Tenant)
 
 | Engine | Purpose | Why This Engine |
 |--------|---------|-----------------|
-| **TimescaleDB** | Time-series cost metrics, resource utilization | Hypertable compression, continuous aggregates, native time-based partitioning. Cost data is inherently time-series. |
-| **PostgreSQL 16** | Relational data — tenants, users, cloud accounts, recommendations, audit | ACID compliance, Row-Level Security (RLS), mature ecosystem, same server as TimescaleDB |
-| **Redis 7** | Cache, session, task queue, real-time counters | Sub-millisecond reads for L2 cache, Celery broker, pub/sub for event fanout |
+| **BigQuery** | Cost metrics from cloud billing exports | Serverless, auto-scales, native billing export integration, 1TB free/month |
+| **Firestore** | All operational data (see below) | Serverless NoSQL, real-time listeners, generous free tier |
+| **GCP Secret Manager** | Cloud credentials | Managed secrets with auto-rotation, IAM integration |
 
-All three enforce tenant isolation at the storage level — no application-level filtering alone.
+**Firestore collections (single-owner):**
+
+| Collection | Purpose | TTL |
+|------------|---------|-----|
+| `users` | User profiles, roles | Persistent |
+| `config` | App settings, cloud accounts | Persistent |
+| `policies` | Budget rules, alert thresholds | Persistent |
+| `tasks` | Sync jobs, remediation workflows | Persistent |
+| `task_progress` | Real-time sync status (UI streaming) | 24 hours |
+| `messages` | Notifications, alerts | 7 days |
+| `recommendations` | Optimization suggestions | 30 days |
+
+Real-time listeners on `task_progress` and `messages` enable live UI updates without SSE infrastructure.
+
+### 1.2 Multi-Tenant Storage (Production)
+
+| Engine | Purpose | Why This Engine |
+|--------|---------|-----------------|
+| **BigQuery** | Time-series cost metrics, resource utilization | Serverless analytics, handles petabyte scale, native billing export |
+| **PostgreSQL 16** | Relational data — tenants, users, cloud accounts, recommendations, audit | ACID compliance, Row-Level Security (RLS), mature ecosystem |
+| **Redis 7** (optional) | L2 cache, session storage | Sub-millisecond reads for query caching, session management |
+
+Multi-tenant mode enforces tenant isolation at the storage level — no application-level filtering alone.
 
 ---
 
@@ -178,11 +204,13 @@ GROUP BY date, subscription_id, service
 - Pre-computed daily/monthly rollups for common queries
 - Partitioned by date for fast time-range queries
 
+**Note:** This schema applies to PostgreSQL (multi-tenant). For MVP, cost data lives in BigQuery via native billing exports.
+
 The primary time-series table. Stores cost data points synced from cloud providers.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| time | Timestamp | Metric timestamp (hypertable partition key) |
+| time | Timestamp | Metric timestamp (partition key) |
 | tenant_id | UUID | FK → tenants (RLS) |
 | cloud_account_id | UUID | FK → cloud_accounts |
 | provider | Enum | aws / azure / gcp / kubernetes |
@@ -197,10 +225,9 @@ The primary time-series table. Stores cost data points synced from cloud provide
 | granularity | Enum | hourly / daily / monthly |
 
 **Business Rules:**
-- Synced by Mode 2 (Scheduled) — Cost Data Sync job every 4 hours
-- Hypertable partitioned by `time` with monthly chunks
-- Continuous aggregates pre-compute daily and monthly rollups
-- Compression policy: chunks older than 7 days are compressed
+- Synced by Mode 2 (Scheduled) — Cost Data Sync job every 4 hours via Cloud Tasks
+- Table partitioned by `time` with monthly partitions
+- Scheduled queries pre-compute daily and monthly rollups
 - Retention policy: based on tenant plan (free: 90 days, pro: 1 year, enterprise: 3 years)
 - Interactive queries (Mode 1) read from this table and its aggregates
 
@@ -472,39 +499,35 @@ Pre-computed rollups that make Mode 1 interactive queries fast:
 
 **Note**: Redis is **optional** for performance optimization. Not required for MVP.
 
-If using Redis for L2 caching, all keys are namespaced by tenant to prevent cross-tenant data leakage:
+> **MVP Alternative:** For single-tenant MVP, in-memory caching in Cloud Run instances is sufficient. Redis is recommended only for multi-tenant production deployments.
+
+If using Redis for L2 caching (multi-tenant), all keys are namespaced by tenant to prevent cross-tenant data leakage:
 
 | Key Pattern | TTL | Purpose |
 |-------------|-----|---------|
-| `tenant:{id}:cost:summary:{params_hash}` | 30 min | Cost summary query results |
-| `tenant:{id}:recommendations:{cloud}:{account}` | 1 hour | Cloud provider recommendations |
-| `tenant:{id}:resources:{cloud}:{account}` | 30 min | Resource inventory snapshot |
-| `tenant:{id}:session:{session_id}` | 30 min | User session data (CopilotKit conversation) |
+| `tenant:{id}:cache:costs:{hash}` | 5 min | L2 cost query cache |
+| `tenant:{id}:cache:resources:{hash}` | 15 min | L2 resource query cache |
+| `tenant:{id}:cache:recommendations` | 30 min | L2 recommendations cache |
+| `tenant:{id}:session:{session_id}` | 24 hours | User session data |
+| `tenant:{id}:ratelimit:{user_id}` | 1 hour | Per-user rate limiting counter |
+| `tenant:{id}:ratelimit:a2a:{agent_id}` | 1 min | Per-agent A2A rate limiting |
+| `tenant:{id}:lock:sync:{provider}` | 30 min | Distributed lock for sync jobs |
+| `global:ratelimit:cloud:{provider}` | 1 sec | Cloud API rate limit tracking |
 
 **No task queue keys** - Background jobs use cloud-native services (Cloud Tasks/SQS/Service Bus per ADR-006).
-
-| Pattern | Purpose | TTL |
-|---------|---------|-----|
-| `tenant:{id}:cache:costs:{hash}` | L2 cost query cache | 5 min |
-| `tenant:{id}:cache:resources:{hash}` | L2 resource query cache | 15 min |
-| `tenant:{id}:cache:recommendations` | L2 recommendations cache | 30 min |
-| `tenant:{id}:session:{session_id}` | User session data | 24 hours |
-| `tenant:{id}:ratelimit:{user_id}` | Per-user rate limiting counter | 1 hour |
-| `tenant:{id}:ratelimit:a2a:{agent_id}` | Per-agent A2A rate limiting | 1 min |
-| `tenant:{id}:lock:sync:{provider}` | Distributed lock for sync jobs | 30 min |
-| `tenant:{id}:events:queue` | Event processing queue | Until consumed |
-| `global:ratelimit:cloud:{provider}` | Cloud API rate limit tracking | 1 sec |
 
 ---
 
 ## 6. Row-Level Security (RLS) Strategy
+
+> **MVP Note:** RLS is not required for single-tenant MVP. This section applies to multi-tenant production.
 
 Every table with `tenant_id` has RLS policies enforced at the database level:
 
 | Layer | Mechanism | Description |
 |-------|-----------|-------------|
 | **PostgreSQL RLS** | `SET app.current_tenant = '{tenant_id}'` | Set per-connection from JWT org_id |
-| **TimescaleDB RLS** | Same policy on hypertables | Applied to cost_metrics and aggregates |
+| **BigQuery** | Authorized views / row-level access | Filter by authorized cloud accounts |
 | **Redis Namespacing** | Key prefix `tenant:{id}:*` | Application-level, enforced by MCP servers |
 | **Object Storage** | Path isolation `/{tenant_id}/` | Bucket policy per tenant prefix |
 | **Secret Manager** | Path/name isolation (cloud-specific) | IAM/RBAC policy per tenant |
@@ -530,14 +553,14 @@ Every table with `tenant_id` has RLS policies enforced at the database level:
 
 ## Developer Notes
 
-> **DEV-DB-001:** TimescaleDB hypertable chunk interval should be 1 month for cost_metrics. Test with `chunk_time_interval => INTERVAL '1 month'`. Smaller intervals create too many chunks; larger intervals slow compression.
+> **DEV-DB-001:** For MVP, use BigQuery for cost metrics with native billing export. For multi-tenant, PostgreSQL tables should be partitioned by month for cost_metrics. Use pg_partman for automatic partition management.
 
-> **DEV-DB-002:** RLS must be tested with a dedicated integration test suite that attempts cross-tenant reads. This is a security-critical path — every new table needs an RLS policy before it goes to production.
+> **DEV-DB-002:** RLS must be tested with a dedicated integration test suite that attempts cross-tenant reads. This is a security-critical path — every new table needs an RLS policy before it goes to production. (Multi-tenant only)
 
-> **DEV-DB-003:** Redis key TTLs in the table above are starting points. Tune based on actual query patterns after beta launch. The L2 cache hit ratio target is >80%.
+> **DEV-DB-003:** Redis key TTLs in the table above are starting points. Tune based on actual query patterns after beta launch. The L2 cache hit ratio target is >80%. Redis is optional for MVP.
 
 > **DEV-DB-004:** The `audit_log` table should be partitioned by month for query performance. Consider using pg_partman for automatic partition management.
 
 > **DEV-DB-005:** JSONB fields (`settings`, `config`, `tags`, `payload`, `details`) should have GIN indexes for queries that filter on specific JSON keys. Don't index all JSONB fields — only the ones that appear in WHERE clauses.
 
-> **DEV-DB-006:** The `cost_metrics` table will be the largest table in the system. Estimate ~500K rows per cloud account per month at hourly granularity. Plan storage capacity accordingly per tenant plan.
+> **DEV-DB-006:** BigQuery handles cost metrics at scale with automatic partitioning and clustering. No manual capacity planning needed. For PostgreSQL (multi-tenant), estimate ~500K rows per cloud account per month at hourly granularity.

@@ -1,12 +1,29 @@
 # Multi-Cloud Infrastructure Architecture
 
 **Document:** MULTI_CLOUD_INFRASTRUCTURE.md
-**Version:** 1.1.0
+**Version:** 1.2.0
 **Date:** 2026-02-07
-**Status:** Planning
+**Status:** Reference (Future Phase)
+**Phase:** Multi-Tenant Production
 **Related:** [MULTI_CLOUD_COST_REALITY_CHECK.md](MULTI_CLOUD_COST_REALITY_CHECK.md)
 
-> **Note:** This document focuses on architectural design and structural decisions.
+---
+
+**⚠️ IMPORTANT: This document describes the FUTURE multi-tenant architecture.**
+
+For the current MVP (single-tenant) implementation, see:
+
+- **[MVP_ARCHITECTURE.md](architecture/MVP_ARCHITECTURE.md)** - Simplified stack using Firestore + BigQuery
+- **[ADR-008: Database Strategy](adr/008-database-strategy-mvp.md)** - Why we defer PostgreSQL to multi-tenant phase
+
+| Phase                       | Stack                                                  | Monthly Cost |
+|-----------------------------|--------------------------------------------------------|--------------|
+| **MVP (Current)**           | GCP Cloud Run + Firestore + BigQuery + Secret Manager  | ~$0-10       |
+| **Multi-Tenant (This Doc)** | GCP + Azure + Neon.tech + Neo4j                        | ~$100-150    |
+
+---
+
+> **Note:** This document focuses on architectural design and structural decisions for the multi-tenant production phase.
 > Detailed implementation specifications (environment variables, API schemas, etc.)
 > will be developed in subsequent implementation phases.
 

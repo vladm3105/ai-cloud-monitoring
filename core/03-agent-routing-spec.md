@@ -306,7 +306,7 @@ All four Cloud Agents (AWS, Azure, GCP, K8s) follow the same pattern:
    → Open: return cached data (if available) OR error with retry_after
 
 5. Call MCP Server tool
-   → MCP handles: OpenBao creds, rate limiting, cloud API call
+   → MCP handles: Secret Manager creds, rate limiting, cloud API call
 
 6. On success:
    → Populate L2 cache, L1 cache
@@ -362,7 +362,7 @@ The Coordinator selects response components based on data type and user query:
 
 > **DEV-AGT-001:** The Coordinator's intent classifier should be tested with at least 200 sample queries covering all intent categories. Track classification accuracy and routing correctness as a metric.
 
-> **DEV-AGT-002:** Multi-turn conversation context is stored in Redis (if available) or in-memory with session TTL of 30 minutes. The last 10 turns are included in the Coordinator's prompt. Older turns are summarized. Redis is recommended for production but not required for MVP.
+> **DEV-AGT-002:** Multi-turn conversation context is stored in Redis (if available) or in-memory with session TTL of 30 minutes. The last 10 turns are included in the Coordinator's prompt. Older turns are summarized. Redis is optional — in-memory storage is sufficient for MVP (single-tenant).
 
 > **DEV-AGT-003:** Domain Agents should never call Cloud APIs directly. They always go through Cloud Agents, which go through MCP Servers. This ensures caching, rate limiting, and circuit breaking are consistently applied.
 

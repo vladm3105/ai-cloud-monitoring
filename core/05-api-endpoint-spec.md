@@ -33,7 +33,7 @@ All APIs sit behind a single API Gateway (Kong/Envoy) that handles SSL terminati
 |-------------|-------------|--------------|
 | AG-UI Streaming | Bearer JWT | Auth0 (from CopilotKit) |
 | REST Admin | Bearer JWT | Auth0 (from frontend app) |
-| Webhook Ingestion | HMAC Signature + Shared Secret | Per-provider secret from OpenBao |
+| Webhook Ingestion | HMAC Signature + Shared Secret | Per-provider secret from Secret Manager |
 | A2A Gateway | mTLS Certificate OR API Key + HMAC | Per-agent registration |
 
 ---
@@ -115,7 +115,7 @@ CRUD operations for tenant management. All endpoints require JWT authentication.
 | credentials | Object | Yes | Provider-specific (see onboarding doc) |
 | config | Object | No | Regions to monitor, excluded services |
 
-**Credential handling:** Credentials are forwarded to OpenBao by the backend — never stored in PostgreSQL, never returned in GET responses. GET responses show `credential_status: valid/expired/error` instead.
+**Credential handling:** Credentials are forwarded to Secret Manager by the backend — never stored in database, never returned in GET responses. GET responses show `credential_status: valid/expired/error` instead.
 
 ### 3.3 Users & Roles
 

@@ -2,11 +2,40 @@
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![GCP](https://img.shields.io/badge/cloud-GCP-4285F4?logo=google-cloud)](https://cloud.google.com)
-[![Status](https://img.shields.io/badge/status-in%20development-yellow)](https://github.techtrend.us/USDA-AI-Innovation-Hub/AI-Cloud-Cost-Monitoring)
+[![Status](https://img.shields.io/badge/status-in%20development-yellow)](https://github.com/vladm3105/ai-cloud-monitoring)
 
-> **Self-hosted AI-powered FinOps platform for intelligent cloud cost analysis, optimization, and automated remediation across AWS, Azure, GCP, and Kubernetes.**
+> **AI-agent-powered FinOps platform for intelligent cloud cost monitoring, optimization, and automated remediation across AWS, Azure, GCP, and Kubernetes.**
 
-AI Cloud Cost Monitoring leverages AI agents built on Google ADK (Agent Development Kit) to provide natural language interactions for cloud cost management with real-time streaming UI responses. Designed for **single-organization deployments** with optional multi-tenant support for MSPs and consultancies.
+## What Makes This Different
+
+**AI Agents + MCP Servers** — not traditional REST API integrations:
+
+| Traditional Approach                 | This Platform                                          |
+|--------------------------------------|--------------------------------------------------------|
+| REST API calls from backend code     | AI agents call MCP (Model Context Protocol) servers    |
+| Manual data aggregation              | Agents orchestrate multi-cloud queries automatically   |
+| Static dashboards                    | Natural language interface with streaming responses    |
+| Code-driven logic                    | Agent-driven reasoning and recommendations             |
+
+**See [PROJECT_DEFINITION.md](PROJECT_DEFINITION.md) for the complete architectural vision.**
+
+## Core Architecture
+
+```text
+User (Natural Language) → AI Agents → MCP Servers → Cloud APIs
+                              │
+                              ├── Coordinator Agent (intent routing)
+                              ├── Domain Agents (cost, optimization, remediation)
+                              ├── Cloud Agents (AWS, Azure, GCP, K8s)
+                              └── MCP Servers (tool execution)
+```
+
+**MCP Server Strategy:**
+
+- **Provider-native MCP servers** when available (preferred)
+- **Custom-developed MCP servers** when provider doesn't offer one (using FastMCP)
+
+All cloud MCP servers implement unified tool contracts (`get_costs`, `get_recommendations`, `execute_remediation`, etc.) for seamless multi-cloud agent orchestration.
 
 ## 🚀 Quick Start
 
@@ -19,14 +48,24 @@ The platform is designed to run on Google Cloud Platform using Cloud Run:
 
 1. **Prerequisites**: GCP project with billing enabled, gcloud CLI installed
 2. **Deploy**: Follow the [GCP Deployment Guide](GCP-DEPLOYMENT.md)
-3. **Configure**: Use [cloud-config.yaml](cloud-config.yaml) and [.env.example](.env.example)
+3. **Configure**: Use [CLOUD_CONFIG.md](CLOUD_CONFIG.md) and [.env.example](.env.example)
 4. **Infrastructure**: Terraform configs in [terraform/](terraform/)
 
-**Estimated Setup Time**: 30-45 minutes  
-**Monthly Cost**: ~$75-130 (MVP), ~$420-770 (Production)
+**Estimated Setup Time**: 30-45 minutes
 
-> [!NOTE]
-> Currently optimized for GCP deployment (per [ADR-002](docs/adr/002-gcp-only-first.md)). Multi-cloud expansion planned for future phases.
+**Monthly Cost (Single-Owner/Internal Team):**
+| Scenario | Monthly Cost |
+|----------|--------------|
+| GCP only | $0.60-5.60 |
+| Multi-cloud (GCP+AWS+Azure) | $1.50-11.50 |
+
+Most infrastructure stays within GCP free tier. Primary cost is LLM inference (~$0.003/query).
+
+**Monthly Cost (Multi-Tenant SaaS)**: ~$50-150 (Production at 100 tenants)
+
+> **📋 MVP Architecture**: See [MVP_ARCHITECTURE.md](docs/architecture/MVP_ARCHITECTURE.md) for the simplified single-tenant stack using Firestore + BigQuery (no PostgreSQL required for MVP).
+
+**Note:** Currently optimized for GCP deployment (per [ADR-002](docs/adr/002-gcp-only-first.md)). Multi-cloud expansion planned for future phases.
 
 ### For Developers
 
@@ -58,14 +97,16 @@ The platform is designed to run on Google Cloud Platform using Cloud Run:
   - Can execute remediation actions (with approval)
   - GCP appears in both roles (home cloud + monitored cloud)
 
-**Example with GCP as Home Cloud**:
+**Example with GCP as Home Cloud (MVP)**:
 - **Frontend**: Next.js on Cloud Run
-- **Backend**: FastAPI on Cloud Run  
-- **Relational DB**: Cloud SQL PostgreSQL
+- **Backend**: FastAPI on Cloud Run
+- **Config Store**: Firestore (MVP) → PostgreSQL (multi-tenant)
+- **Real-time UI**: Firestore listeners (no SSE infrastructure needed)
 - **Analytics DB**: BigQuery
 - **Task Queue**: Cloud Tasks + Cloud Scheduler
 - **Secret Manager**: GCP Secret Manager
-- **Cache (optional)**: Cloud Memorystore Redis
+
+See [ADR-008](docs/adr/008-database-strategy-mvp.md) for the database strategy decision.
 
 **Why This Matters:**
 
@@ -166,11 +207,15 @@ AI-cost-monitoring/
 │   ├── 08-cost-model.md            # Cost model and pricing
 │   └── *.svg                       # Architecture diagrams
 ├── docs/                           # Documentation
+│   ├── architecture/               # Architecture documentation
+│   │   ├── MVP_ARCHITECTURE.md     # MVP simplified stack
+│   │   └── CLOUD_PLATFORM_COMPARISON.md
 │   └── adr/                        # Architecture Decision Records
 │       ├── 001-use-mcp-servers.md
 │       ├── 002-gcp-only-first.md
 │       ├── 003-use-bigquery-not-timescaledb.md
-│       └── 004-cloud-run-not-kubernetes.md
+│       ├── 004-cloud-run-not-kubernetes.md
+│       └── 008-database-strategy-mvp.md
 ├── terraform/                      # Infrastructure as Code
 │   ├── main.tf                    # Main Terraform configuration
 │   ├── variables.tf               # Variable declarations
@@ -178,7 +223,9 @@ AI-cost-monitoring/
 │   └── modules/                   # Terraform modules
 ├── GCP-only/                       # GCP-specific implementation
 ├── UX/                            # User experience and UI documentation
-├── cloud-config.yaml              # Cloud platform configuration
+├── config/                        # Configuration files
+│   └── gcp-mvp.yaml              # GCP MVP configuration
+├── CLOUD_CONFIG.md               # Cloud platform configuration guide
 ├── GCP-DEPLOYMENT.md              # GCP deployment guide
 └── .env.example                   # Environment variable template
 ```
@@ -278,7 +325,15 @@ Both UIs query the **same data sources** (BigQuery for metrics, Cloud SQL for me
   - AWS alternative: SQS + EventBridge + Lambda
   - Azure alternative: Service Bus + Azure Functions
   - Handles: Data sync (every 4 hours), anomaly detection, forecasts, approval workflows
-  
+- **Cloud Pub/Sub (optional)** - Event-driven messaging for webhooks
+  - Free tier: 10 GiB messages/month
+  - Use for: Webhook ingestion, async notifications, decoupled event processing
+- **Workflows (optional)** - Multi-step orchestration
+  - Free tier: 5,000 internal steps + 2,000 external HTTP calls/month
+  - Use for: Remediation approval chains, complex onboarding flows
+- **Cloud Logging** - Centralized logging
+  - Free tier: 50 GiB logs/month
+
 > [!NOTE]
 > Background services (task queues, schedulers, secret managers, caching) use **home cloud native services** and will differ based on where the platform is deployed. The architecture pattern remains the same across clouds.
 
@@ -296,7 +351,13 @@ Both UIs query the **same data sources** (BigQuery for metrics, Cloud SQL for me
   - Can be added later as needed
 
 ### Data Layer
-- **Relational Database (PostgreSQL)** - Operational data with Row-Level Security
+
+- **Config Store (MVP)**: Firestore - Configuration, budgets, preferences, real-time streaming
+  - **Persistent collections**: `users`, `config`, `policies`, `tasks`
+  - **Ephemeral collections with TTL**: `task_progress` (24h), `messages` (7d), `recommendations` (30d)
+  - **Real-time listeners**: Replace SSE for live UI updates (task progress, notifications, sync status)
+  - Multi-tenant: Upgrade to PostgreSQL with Row-Level Security (see [ADR-008](docs/adr/008-database-strategy-mvp.md))
+- **Relational Database (Multi-tenant)** - PostgreSQL for operational data with Row-Level Security
   - Currently: Cloud SQL PostgreSQL 16 (GCP)
   - AWS alternative: RDS PostgreSQL or Aurora PostgreSQL
   - Azure alternative: Azure Database for PostgreSQL
@@ -390,6 +451,7 @@ CopilotKit (progressive UI rendering)
 ### Key Features
 
 - **Real-Time Streaming**: Server-Sent Events (SSE) for one-way server-to-client updates
+- **Firestore Real-Time (Single-Owner)**: Alternative streaming via Firestore listeners for task progress and notifications
 - **Progressive Rendering**: UI updates as agents discover information
 - **Stateful Sessions**: Maintains conversation context across multiple queries
 - **Multi-Agent Coordination**: Single query triggers hierarchical agent execution
@@ -537,19 +599,40 @@ Key architectural decisions are documented in [docs/adr/](docs/adr/):
 
 ## 📊 Project Metrics
 
-| Metric | Value |
-|--------|-------|
-| **Total Agents** | 11 |
-| **Domain Agents** | 6 |
-| **Cloud Agents** | 4 |
-| **MCP Servers** | 8 |
-| **Cloud Providers Supported** | 4 (AWS, Azure, GCP, K8s) |
-| **RBAC Roles** | 5 |
-| **Estimated Development Timeline** | ~9 months |
+| Metric | 15-Day MVP | Full Platform |
+|--------|------------|---------------|
+| **Cloud Providers** | 3 (AWS, Azure, GCP) | 4 (+ Kubernetes) |
+| **AI Agents** | 1 (simple LLM) | 11 (multi-agent) |
+| **MCP Servers** | 0 | 8 |
+| **Dashboard** | Grafana | Grafana + AG-UI |
+| **Monthly Cost** | $0-20 | $50-150 (SaaS) |
+| **Development Time** | 15 days | ~9 months |
 
 ---
 
-## 🗓️ Development Phases
+## 🗓️ Development Options
+
+### Option A: 15-Day MVP (AI-Assisted)
+
+For teams wanting quick multi-cloud visibility with basic AI chat:
+
+| Week | Focus | Deliverables |
+|------|-------|--------------|
+| **Week 1** | Infrastructure + Connectors | GCP/AWS/Azure cost data flowing to BigQuery |
+| **Week 2** | Backend + Dashboard | FastAPI API, Grafana dashboards |
+| **Week 3** | LLM + Deploy | Simple chat interface, Cloud Run deployment |
+
+**What you get:** Multi-cloud cost visibility, Grafana dashboards, basic LLM chat (~60-70% of full vision)
+
+**What's excluded:** MCP servers, multi-agent orchestration, AG-UI streaming, anomaly detection, remediation workflows
+
+**Cost:** $0-20/month infrastructure + $5-55 development costs
+
+See [core/08-cost-model.md](core/08-cost-model.md#05-realistic-development-timeline-ai-assisted) for detailed breakdown.
+
+### Option B: Full Platform (36 weeks)
+
+For teams building the complete AI-agent architecture:
 
 | Phase | Duration | Focus |
 |-------|----------|-------|
@@ -568,7 +651,7 @@ Key architectural decisions are documented in [docs/adr/](docs/adr/):
 
 ### Deployment & Configuration
 - **[GCP Deployment Guide](GCP-DEPLOYMENT.md)** - Complete deployment instructions
-- **[Cloud Configuration](cloud-config.yaml)** - GCP project and service settings
+- **[Cloud Configuration](CLOUD_CONFIG.md)** - GCP project and service settings
 - **[Environment Variables](.env.example)** - Configuration template
 - **[Terraform Infrastructure](terraform/)** - Infrastructure as Code
 
@@ -607,7 +690,7 @@ This project is proprietary software developed by the USDA AI Innovation Hub.
 
 **Project:** AI Cloud Cost Monitoring  
 **Organization:** USDA AI Innovation Hub  
-**Repository:** [https://github.techtrend.us/USDA-AI-Innovation-Hub/AI-Cloud-Cost-Monitoring](https://github.techtrend.us/USDA-AI-Innovation-Hub/AI-Cloud-Cost-Monitoring)  
+**Repository:** [https://github.com/vladm3105/ai-cloud-monitoring](https://github.com/vladm3105/ai-cloud-monitoring)  
 **Version:** 1.0  
 **Last Updated:** February 2026
 

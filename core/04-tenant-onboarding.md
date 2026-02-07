@@ -18,13 +18,33 @@ Onboarding is the most critical user journey — it's the first experience a cus
 
 ### 1.1 Onboarding Stages
 
+> **Scope Note:** This document covers three deployment scenarios:
+> - **Single-Owner (Internal Team):** Cloud IAM authentication — no external auth provider
+> - **MVP (Single-Tenant SaaS):** Firebase Auth or Cloud IAM — simplified user management
+> - **Multi-Tenant Production:** Auth0 Organizations — full tenant isolation and SSO
+
+### Single-Owner Flow (Internal Team)
+
+```text
+Cloud IAM User → Connect Cloud Accounts → First Data Sync → Dashboard Ready
+       │                    │                      │               │
+       ▼                    ▼                      ▼               ▼
+   GCP IAM           Secret Manager +        Cloud Tasks      Interactive
+   (existing         Cloud Account          → MCP Servers     Mode Ready
+   identity)         verification           → BigQuery
 ```
+
+No sign-up required — users authenticate with existing GCP/Google Workspace credentials.
+
+### Multi-Tenant Flow (SaaS)
+
+```text
 Sign Up → Create Organization → Connect Cloud Accounts → First Data Sync → Dashboard Ready
    │              │                      │                      │               │
    ▼              ▼                      ▼                      ▼               ▼
- Auth0        PostgreSQL            OpenBao +              Celery Job       Interactive
- User +       tenant +              Cloud Account          → MCP Servers    Mode Ready
- Org          admin user            verification           → TimescaleDB
+ Auth0        Firestore            Secret Manager +        Cloud Tasks      Interactive
+ User +       tenant config +      Cloud Account          → MCP Servers     Mode Ready
+ Org          admin user           verification           → BigQuery
 ```
 
 ### 1.2 Time Targets
@@ -54,15 +74,26 @@ User clicks "Get Started"
 
 ### 2.2 What Gets Created
 
+**Single-Owner (Internal Team):**
+
+| System | Entity | Details |
+|--------|--------|---------|
+| GCP IAM | User | Existing Google/Workspace identity |
+| Firestore | config | Single tenant config (no tenant_id needed) |
+| Secret Manager | Credentials | `projects/{project}/secrets/{provider}-credentials` |
+
+**Multi-Tenant SaaS:**
+
 | System | Entity | Details |
 |--------|--------|---------|
 | Auth0 | User | Email, password (or SSO link) |
 | Auth0 | Organization | `org_{slug}`, display name |
 | Auth0 | Membership | User → Organization with `org_admin` role |
-| PostgreSQL | tenant | id, name, slug, auth0_org_id, plan=free, status=onboarding |
-| PostgreSQL | user | Synced from Auth0, role=org_admin |
-| OpenBao | Tenant path | `secret/tenants/{tenant_id}/` (empty, ready for credentials) |
-| Redis | Session | User session initialized |
+| Firestore (MVP) | tenant config | id, name, slug, auth0_org_id, plan=free, status=onboarding |
+| Firestore (MVP) | user | Synced from Auth0, role=org_admin |
+| Secret Manager | Tenant path | `projects/{project}/secrets/tenant-{tenant_id}-*` (ready for credentials) |
+
+> **Multi-Tenant Note:** For multi-tenant production, replace Firestore with PostgreSQL (with RLS) and add Redis for session management.
 
 ### 2.3 Business Rules
 
@@ -137,14 +168,16 @@ Step 6: Success → cloud_account created
 
 ### 3.2 Credential Storage
 
-All credentials go directly to OpenBao — never to PostgreSQL.
+All credentials go directly to cloud-native Secret Manager — never to the database.
 
-| Provider | OpenBao Path | Stored Data |
-|----------|-------------|-------------|
-| AWS | `secret/tenants/{id}/aws/{account_id}` | role_arn, external_id |
-| Azure | `secret/tenants/{id}/azure/{subscription_id}` | client_id, client_secret, azure_tenant_id |
-| GCP | `secret/tenants/{id}/gcp/{project_id}` | service_account_json |
-| K8s | `secret/tenants/{id}/k8s/{cluster_name}` | kubeconfig or token |
+| Provider | Secret Manager Path (GCP) | Stored Data |
+|----------|---------------------------|-------------|
+| AWS | `projects/{project}/secrets/tenant-{id}-aws-{account_id}` | role_arn, external_id |
+| Azure | `projects/{project}/secrets/tenant-{id}-azure-{subscription_id}` | client_id, client_secret, azure_tenant_id |
+| GCP | `projects/{project}/secrets/tenant-{id}-gcp-{project_id}` | service_account_json |
+| K8s | `projects/{project}/secrets/tenant-{id}-k8s-{cluster_name}` | kubeconfig or token |
+
+> **Note:** Path patterns vary by home cloud. AWS uses Secrets Manager (`tenant/{id}/{provider}`), Azure uses Key Vault (`tenant-{id}-{provider}`).
 
 ### 3.3 Validation & Error Handling
 
@@ -161,9 +194,9 @@ All credentials go directly to OpenBao — never to PostgreSQL.
 
 ### 4.1 Triggered Immediately After Account Connection
 
-```
+```text
 Cloud account created (status=active)
-  → Celery task triggered: initial_sync_{provider}
+  → Cloud Tasks job triggered: initial_sync_{provider}
     → Phase 1: Resource Inventory (discover all resources)
     → Phase 2: Cost Data (pull last 30 days of cost data)
     → Phase 3: Anomaly Detection (baseline establishment)
@@ -171,6 +204,8 @@ Cloud account created (status=active)
       → On completion: tenant status → active
         → Notification to user: "Your dashboard is ready!"
 ```
+
+> **Note:** Background jobs use cloud-native task queues: Cloud Tasks (GCP), SQS + Lambda (AWS), or Service Bus + Functions (Azure). See ADR-006.
 
 ### 4.2 Sync Progress Tracking
 
@@ -280,10 +315,10 @@ Settings → Team → "Invite Member"
 
 > **DEV-ONB-002:** Credential validation must happen server-side only. Never send cloud credentials to the frontend or store them in browser storage. The wizard submits credentials directly to the backend, which stores them in OpenBao and returns only a success/failure status.
 
-> **DEV-ONB-003:** First sync should be a dedicated Celery task (not the regular scheduled sync) with different timeout and retry settings. It should prioritize speed over completeness — pull the most important data first, backfill details in subsequent scheduled syncs.
+> **DEV-ONB-003:** First sync should be a dedicated Cloud Tasks job (not the regular scheduled sync) with different timeout and retry settings. It should prioritize speed over completeness — pull the most important data first, backfill details in subsequent scheduled syncs.
 
 > **DEV-ONB-004:** Track onboarding funnel metrics: sign-up → org created → account connected → first sync complete → first query. Identify where users drop off.
 
-> **DEV-ONB-005:** The "disconnect account" flow must: revoke OpenBao credentials, mark resources as terminated, stop scheduled syncs for that account, and archive (not delete) historical cost data. Data deletion requires a separate "delete data" action per compliance requirements.
+> **DEV-ONB-005:** The "disconnect account" flow must: delete Secret Manager credentials, mark resources as terminated, stop scheduled syncs for that account, and archive (not delete) historical cost data. Data deletion requires a separate "delete data" action per compliance requirements.
 
 > **DEV-ONB-006:** Consider a "demo mode" or "sandbox tenant" with pre-loaded sample data for users who want to explore the platform before connecting real cloud accounts. This reduces friction in the evaluation phase.

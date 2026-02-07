@@ -1,0 +1,116 @@
+# AI Cloud Cost Monitoring - MVP Configuration
+# See CLOUD_CONFIG.md for full documentation
+
+project:
+  id: "ai-cost-monitoring"
+  name: "AI Cloud Cost Monitoring"
+  region: "us-central1"
+
+deployment:
+  phase: "mvp"
+  tenant_mode: "single"
+
+services:
+  cost-monitor:
+    runtime: "python3.11"
+    memory: "512Mi"
+    cpu: 1
+    min_instances: 0
+    max_instances: 3
+    concurrency: 40
+    timeout: "300s"
+
+  ui-server:
+    runtime: "nodejs20"
+    memory: "256Mi"
+    cpu: 0.5
+    min_instances: 0
+    max_instances: 2
+    concurrency: 80
+    timeout: "60s"
+
+  mcp-server:
+    runtime: "python3.11"
+    memory: "512Mi"
+    cpu: 1
+    min_instances: 0
+    max_instances: 3
+    concurrency: 20
+    timeout: "300s"
+
+data:
+  bigquery:
+    dataset: "cost_monitoring"
+    location: "US"
+    tables:
+      - name: "cost_daily"
+        partition_by: "date"
+        cluster_by: ["provider", "account_id"]
+      - name: "cost_hourly"
+        partition_by: "timestamp"
+        cluster_by: ["provider"]
+
+  firestore:
+    mode: "native"
+    location: "us-central1"
+    collections:
+      - "config"
+      - "budgets"
+      - "cloud_accounts"
+      - "alerts"
+      - "preferences"
+
+  secrets:
+    - "aws-credentials"
+    - "azure-credentials"
+    - "gcp-service-account"
+    - "kubernetes-config"
+    - "llm-api-key"
+    - "notification-config"
+
+scheduler:
+  cost_sync:
+    schedule: "0 */4 * * *"
+    description: "Sync cost data every 4 hours"
+    target: "cost-monitor"
+    endpoint: "/api/sync/trigger"
+
+  threshold_check:
+    schedule: "*/15 * * * *"
+    description: "Check budget thresholds every 15 minutes"
+    target: "cost-monitor"
+    endpoint: "/api/alerts/check"
+
+monitoring:
+  alerts:
+    - name: "high-error-rate"
+      condition: "error_rate > 0.05"
+      duration: "5m"
+      severity: "warning"
+
+    - name: "budget-threshold-80"
+      condition: "monthly_spend > budget * 0.8"
+      severity: "warning"
+
+    - name: "budget-threshold-95"
+      condition: "monthly_spend > budget * 0.95"
+      severity: "critical"
+
+# APIs to enable
+apis:
+  required:
+    - "run.googleapis.com"
+    - "cloudbuild.googleapis.com"
+    - "secretmanager.googleapis.com"
+    - "bigquery.googleapis.com"
+    - "firestore.googleapis.com"
+    - "cloudscheduler.googleapis.com"
+    - "monitoring.googleapis.com"
+    - "logging.googleapis.com"
+    - "cloudbilling.googleapis.com"
+    - "cloudresourcemanager.googleapis.com"
+
+  deferred:  # For multi-tenant phase
+    - "sql.googleapis.com"
+    - "redis.googleapis.com"
+    - "compute.googleapis.com"

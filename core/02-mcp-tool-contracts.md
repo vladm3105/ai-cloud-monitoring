@@ -31,14 +31,19 @@ All four Cloud MCP servers expose the **same tool names** with identical input/o
 
 Every MCP tool call follows this credential path:
 
-```
+```text
 Agent receives tenant_id from Coordinator context
   → MCP Server receives tenant_id as tool parameter
-    → MCP Server calls Secret Manager: GET secret for tenant-{tenant_id}-{provider}
+    → MCP Server calls Home Cloud Secret Manager:
+        - GCP: Secret Manager → GET projects/{project}/secrets/tenant-{tenant_id}-{provider}
+        - AWS: Secrets Manager → GET tenant/{tenant_id}/{provider}
+        - Azure: Key Vault → GET tenant-{tenant_id}-{provider}
       → Secret Manager returns short-lived credentials
         → MCP Server uses credentials for cloud API call
           → Credentials never cached longer than the request
 ```
+
+> **Note:** The platform uses cloud-native secret managers (GCP Secret Manager, AWS Secrets Manager, Azure Key Vault) based on the home cloud. No self-hosted secret management (OpenBao/Vault) required.
 
 ### 1.4 Error Contract
 

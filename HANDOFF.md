@@ -161,9 +161,20 @@ The AI Cost Monitoring platform is fully documented and ready for implementation
 
 ## Technology Stack Summary
 
-**Backend:**
+**Single-Owner (Internal Team) Stack:**
 - Python 3.11+ (FastAPI, MCP servers, agents)
-- PostgreSQL 16 (metadata, RBAC)
+- GCP IAM (authentication via existing Google/Workspace identities)
+- Firestore (configuration, metadata, real-time UI streaming)
+- BigQuery (cost metrics from billing exports)
+- Secret Manager (cloud credentials)
+- Cloud Tasks + Cloud Scheduler (background sync jobs)
+- Cloud Logging (50 GiB free/month)
+- Cloud Pub/Sub (optional, 10 GiB free/month)
+- Workflows (optional, 5K steps free/month)
+
+**Multi-Tenant SaaS Stack:**
+- Python 3.11+ (FastAPI, MCP servers, agents)
+- PostgreSQL 16 (metadata, RBAC with RLS)
 - BigQuery (cost metrics analytics)
 - Redis (optional L2 cache)
 
@@ -194,15 +205,49 @@ The AI Cost Monitoring platform is fully documented and ready for implementation
 
 ## Cost Estimates
 
-**Development Environment:**
-- Cloud SQL (small instance): ~$25/month
-- BigQuery (query costs): ~$10/month
-- Cloud Run (dev services): ~$5/month
-- **Total:** ~$40/month
+**Single-Owner Deployment (Internal Team Use):**
+| Scenario | Monthly Cost |
+|----------|--------------|
+| GCP only | $0.60-5.60 |
+| AWS only | $1.10-6.10 |
+| Multi-cloud (GCP+AWS+Azure) | $1.50-11.50 |
 
-**Production (100 tenants):**
+Most costs are within GCP free tier. Primary cost driver is LLM inference (~$0.003/query).
+
+**Development Environment:**
+
+- Firestore: $0 (free tier: 1 GiB, 50K reads/day)
+- BigQuery: $0 (free tier: 1TB queries/month, 10GB storage)
+- Cloud Run: $0 (free tier: 2M requests/month)
+- Cloud Tasks: $0 (free tier: 1M operations/month)
+- Cloud Logging: $0 (free tier: 50 GiB/month)
+- Cloud Build: $0 (free tier: 2,500 build-minutes/month)
+- Artifact Registry: $0 (free tier: 0.5 GB/month)
+- **Total:** ~$0-10/month
+
+**Multi-Tenant SaaS (100 tenants):**
 - Serverless infrastructure: $570-690/month
 - See [core/08-cost-model.md](core/08-cost-model.md) for full breakdown
+
+---
+
+## Documentation Compliance Fixes (February 2026)
+
+Core documents were updated to align with PROJECT_DEFINITION.md architecture:
+
+| Document | Changes Made |
+|----------|--------------|
+| 01-database-schema.md | TimescaleDB → BigQuery, Celery → Cloud Tasks, added MVP scope notes |
+| 02-mcp-tool-contracts.md | OpenBao → cloud-native Secret Managers (GCP/AWS/Azure) |
+| 03-agent-routing-spec.md | OpenBao → Secret Manager, Redis noted as optional for MVP |
+| 04-tenant-onboarding.md | Celery → Cloud Tasks, OpenBao → Secret Manager, PostgreSQL → Firestore (MVP) |
+| 05-api-endpoint-spec.md | OpenBao → Secret Manager for webhook credentials |
+| 08-cost-model.md | Added single-owner cost model, clarified MVP vs multi-tenant |
+
+**Architecture alignment:**
+- MVP stack: Firestore + BigQuery + Cloud Tasks + Secret Manager (serverless)
+- Multi-tenant production: PostgreSQL + BigQuery + Cloud Tasks + Secret Manager (RLS isolation)
+- No legacy references (TimescaleDB, Celery, OpenBao/Vault) remain
 
 ---
 
