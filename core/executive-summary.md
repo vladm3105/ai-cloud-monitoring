@@ -90,11 +90,19 @@
 
 ### Phase 1: GCP as Home Cloud (Current)
 
-**Platform Infrastructure (runs on GCP):**
-- Frontend: Next.js on Cloud Run
+**15-Day MVP Infrastructure (runs on GCP):**
+- Backend: FastAPI on Cloud Run
+- Analytics DB: BigQuery (native billing export)
+- Config Store: Firestore (serverless, free tier)
+- Task Queue: Cloud Tasks + Cloud Scheduler
+- Dashboard: Grafana
+- AI Chat: Simple LLM (Gemini Flash or Claude Haiku)
+
+**Full Platform Infrastructure (optional, 9+ months):**
+- Frontend: Next.js on Cloud Run (AG-UI)
 - Backend: FastAPI on Cloud Run
 - Analytics DB: BigQuery
-- Relational DB: Cloud SQL PostgreSQL
+- Relational DB: Cloud SQL PostgreSQL (multi-tenant with RLS)
 - Task Queue: Cloud Tasks
 
 **Monitors All Clouds:**
@@ -154,20 +162,34 @@
 
 ## Infrastructure Cost
 
-### GCP (First Home Cloud)
+### Single-Owner MVP (15-Day Build)
 
-| Component | Monthly Cost |
-|-----------|--------------|
-| Cloud Run (frontend + backend + MCPs) | $50-200 |
-| Cloud SQL PostgreSQL | $100 |
-| BigQuery (billing export queries) | $5-20 |
-| Cloud Tasks + Scheduler | $1 |
-| Cloud Storage (reports) | $10 |
-| Cloud Memorystore Redis (optional) | $0-30 |
-| Monitoring/Logging | $50 |
-| **Total** | **$216-411/month** |
+| Component | Monthly Cost | Notes |
+|-----------|--------------|-------|
+| Cloud Run | $0-10 | Free tier: 2M requests/month |
+| BigQuery | $0 | Free tier: 1TB queries/month |
+| Firestore | $0 | Free tier: 1 GiB, 50K reads/day |
+| Cloud Tasks + Scheduler | $0 | Free tier covers sync jobs |
+| LLM inference | $0.60-3 | ~$0.003/query |
+| AWS Cost Explorer API | $0.50 | If monitoring AWS |
+| **Total** | **$0-20/month** | Mostly within free tier |
+
+**Development:** 15 days with AI assistant (Claude Code, Copilot)
 
 **ROI:** System pays for itself by preventing a single $500+ cost spike.
+
+### Multi-Tenant SaaS (Full Platform)
+
+| Component | Monthly Cost (100 tenants) |
+|-----------|---------------------------|
+| Cloud Run (all services) | $300-500 |
+| Cloud SQL PostgreSQL | $100 |
+| BigQuery | $10-30 |
+| Cloud Tasks + Scheduler | $10 |
+| Redis (optional) | $40 |
+| **Total** | **$570-690/month** |
+
+**Development:** 9 months (36 weeks)
 
 ### AWS / Azure Alternatives
 
@@ -213,14 +235,14 @@ Similar costs using ECS Fargate/Container Apps + RDS/Azure Database + Athena/Syn
 
 ## Summary
 
-| Metric | Value |
-|--------|-------|
-| **Problem** | Uncontrolled AI/ML cloud costs |
-| **Solution** | Intelligent circuit breaker with automatic actions |
-| **Cost** | $20-80/month |
-| **Savings Potential** | Thousands per incident prevented |
-| **Setup Time** | < 1 hour |
-| **Production Risk** | Zero (configurable protection) |
+| Metric | MVP (15-Day Build) | Full Platform (9 Months) |
+|--------|-------------------|--------------------------|
+| **Problem** | Uncontrolled AI/ML cloud costs | Uncontrolled AI/ML cloud costs |
+| **Solution** | Grafana dashboards + simple LLM chat | Multi-agent MCP with AG-UI |
+| **Infrastructure Cost** | $0-20/month | $570-690/month (100 tenants) |
+| **Development Time** | 15 days (AI-assisted) | 9 months (36 weeks) |
+| **Savings Potential** | Thousands per incident prevented | Thousands per incident prevented |
+| **Production Risk** | Zero (configurable protection) | Zero (configurable protection) |
 
 ---
 
