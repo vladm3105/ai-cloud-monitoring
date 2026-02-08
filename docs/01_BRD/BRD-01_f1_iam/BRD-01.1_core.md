@@ -34,7 +34,7 @@ custom_fields:
 | **Prepared By** | Antigravity AI |
 | **Status** | Draft |
 | **MVP Target Launch** | Phase 1 |
-| **PRD-Ready Score** | 92/100 (Target: >=90/100) |
+| **PRD-Ready Score** | 96/100 (Target: >=90/100) |
 
 ### Executive Summary (MVP)
 

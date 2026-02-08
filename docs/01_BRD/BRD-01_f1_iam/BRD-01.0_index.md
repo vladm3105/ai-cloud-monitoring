@@ -52,7 +52,7 @@ The F1 IAM Module provides enterprise-grade identity and access management for t
 | **Document Version** | 1.0 |
 | **Date** | 2026-01-14 |
 | **Status** | Draft |
-| **PRD-Ready Score** | 92/100 (Target: >=90/100) |
+| **PRD-Ready Score** | 96/100 (Target: >=90/100) |
 
 ---
 

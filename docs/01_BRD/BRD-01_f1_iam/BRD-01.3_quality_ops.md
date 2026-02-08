@@ -45,11 +45,16 @@ custom_fields:
 
 **Requirement**: Authentication and authorization operations must complete within latency targets.
 
-| Operation | Target Latency |
-|-----------|---------------|
-| Authentication | <100ms |
-| Authorization check | <10ms |
-| Token validation | <5ms |
+| Operation | p50 | p95 | p99 | Unit |
+|-----------|-----|-----|-----|------|
+| Authentication (Auth0 OIDC) | 50 | 80 | 100 | ms |
+| Authentication (fallback) | 30 | 60 | 80 | ms |
+| Authorization check (4D Matrix) | 3 | 8 | 10 | ms |
+| Token validation (JWT RS256) | 1 | 3 | 5 | ms |
+| Token refresh | 20 | 40 | 60 | ms |
+| Session revocation propagation | 100 | 500 | 1000 | ms |
+| MFA verification (TOTP) | 10 | 30 | 50 | ms |
+| MFA verification (WebAuthn) | 50 | 150 | 300 | ms |
 
 **Priority**: P1
 
@@ -89,13 +94,27 @@ custom_fields:
 
 ##### BRD.01.10.01: Session State Backend
 
-**Status**: [ ] Pending
+**Status**: [X] Selected
 
-**Business Driver**: Session persistence across service restarts
+**Business Driver**: Session persistence across service restarts with sub-second access latency
 
-**Options**: Redis, PostgreSQL, In-memory with replication
+**Options Evaluated**:
+| Option | Latency | Persistence | Scalability | Cost |
+|--------|---------|-------------|-------------|------|
+| Redis Cluster | <1ms | AOF + RDB | Horizontal | Medium |
+| PostgreSQL | 5-10ms | Full ACID | Vertical | Low |
+| In-memory + Replication | <0.5ms | None (volatile) | Limited | Low |
 
-**PRD Requirements**: Session replication strategy, failover behavior
+**Recommended Selection**: Redis Cluster with AOF persistence
+
+**Rationale**:
+- Meets p99 <5ms session lookup requirement
+- AOF persistence survives process restarts
+- Cluster mode enables horizontal scaling for 10K concurrent users
+- Native TTL support for session expiration
+- Pub/sub capability for session revocation broadcast
+
+**PRD Requirements**: Session replication strategy (Redis Sentinel), failover behavior (automatic promotion), cache invalidation pattern
 
 ---
 
@@ -157,13 +176,34 @@ custom_fields:
 
 ##### BRD.01.10.06: Authentication Audit Strategy
 
-**Status**: [ ] Pending
+**Status**: [X] Selected
 
 **Business Driver**: Security compliance and incident investigation
 
-**Options**: Cloud Logging, dedicated SIEM, hybrid approach
+**Options Evaluated**:
 
-**PRD Requirements**: Log retention policy, alerting thresholds
+| Option | Cost | Retention | Query Speed | Integration |
+|--------|------|-----------|-------------|-------------|
+| GCP Cloud Logging | Low | 30 days default | Fast | Native GCP |
+| Dedicated SIEM (Splunk/Datadog) | High | Custom | Very Fast | API-based |
+| Hybrid (Cloud Logging + BigQuery) | Medium | Custom | Fast | Native GCP |
+
+**Recommended Selection**: Hybrid approach (Cloud Logging + BigQuery export)
+
+**Rationale**:
+- Cloud Logging for real-time monitoring and alerting (30-day hot storage)
+- BigQuery export for long-term retention (5-year compliance requirement)
+- Cost-effective compared to dedicated SIEM
+- Native GCP integration with existing infrastructure
+
+**Audit Events Captured**:
+- auth.login.success, auth.login.failure
+- auth.logout, auth.session.revoked
+- authz.decision (allow/deny with context)
+- mfa.enrolled, mfa.verified, mfa.failed
+- token.issued, token.refreshed, token.revoked
+
+**PRD Requirements**: Log retention policy (30 days hot, 5 years cold), alerting thresholds (5 failed logins/5min triggers alert)
 
 ---
 
@@ -354,6 +394,52 @@ Query: Can user "alice" execute "protected_operation" on "own" resources in "liv
 ```
 
 **Note**: Skill names (e.g., `protected_operation`) are domain-injected at runtime. F1 IAM has no knowledge of specific business operations.
+
+### Appendix C: Threshold Registry (F1 IAM)
+
+**Purpose**: Centralized threshold definitions for PRD and downstream artifact references.
+
+**Reference Format**: `@threshold: BRD.01.{category}.{key}`
+
+#### Performance Thresholds
+
+| Key | Value | Unit | Context |
+|-----|-------|------|---------|
+| `perf.auth.p50` | 50 | ms | Authentication latency (Auth0) |
+| `perf.auth.p95` | 80 | ms | Authentication latency (Auth0) |
+| `perf.auth.p99` | 100 | ms | Authentication latency (Auth0) |
+| `perf.authz.p50` | 3 | ms | Authorization check (4D Matrix) |
+| `perf.authz.p95` | 8 | ms | Authorization check (4D Matrix) |
+| `perf.authz.p99` | 10 | ms | Authorization check (4D Matrix) |
+| `perf.token.p99` | 5 | ms | Token validation (JWT RS256) |
+| `perf.revoke.p99` | 1000 | ms | Session revocation propagation |
+
+#### Security Thresholds
+
+| Key | Value | Unit | Context |
+|-----|-------|------|---------|
+| `sec.lockout.attempts` | 5 | count | Failed attempts before lockout |
+| `sec.lockout.window` | 15 | min | Lockout evaluation window |
+| `sec.session.max` | 3 | count | Max concurrent sessions per user |
+| `sec.session.idle` | 30 | min | Idle timeout |
+| `sec.session.absolute` | 24 | hours | Absolute session timeout |
+| `sec.alert.failed_logins` | 5 | count/5min | Alert trigger threshold |
+
+#### Availability Thresholds
+
+| Key | Value | Unit | Context |
+|-----|-------|------|---------|
+| `avail.auth.uptime` | 99.9 | % | Auth service availability |
+| `avail.token.uptime` | 99.9 | % | Token service availability |
+| `avail.rto` | 5 | min | Recovery time objective |
+
+#### Scalability Thresholds
+
+| Key | Value | Unit | Context |
+|-----|-------|------|---------|
+| `scale.users.concurrent` | 10000 | count | Concurrent user capacity |
+| `scale.auth.rps` | 1000 | req/sec | Authentication requests |
+| `scale.token.rps` | 10000 | req/sec | Token validations |
 
 ---
 
