@@ -2,7 +2,7 @@
 
 **Project:** AI Cloud Cost Monitoring Platform
 **Layer:** 01_BRD (Business Requirements)
-**Status:** Foundation BRDs Complete
+**Status:** Complete (14 BRDs: 7 Foundation + 7 Domain)
 
 ---
 
@@ -36,6 +36,9 @@ The AI Cost Monitoring Platform uses a **Hybrid Structure** (adapted from Tradin
 | **BRD-09** | [D2 Cloud Cost Analytics](BRD-09_d2_cost_analytics.md) | D2 Analytics | BigQuery, cost analysis, recommendations | Draft |
 | **BRD-10** | [D3 User Experience](BRD-10_d3_user_experience.md) | D3 UX | Grafana + AG-UI hybrid interface | Draft |
 | **BRD-11** | [D4 Multi-Cloud Integration](BRD-11_d4_multi_cloud.md) | D4 Multi-Cloud | GCP, AWS, Azure, Kubernetes connectors | Draft |
+| **BRD-12** | [D5 Data Persistence & Storage](BRD-12_d5_data_persistence.md) | D5 Storage | Firestore/PostgreSQL, BigQuery, RLS | Draft |
+| **BRD-13** | [D6 REST APIs & Integrations](BRD-13_d6_rest_apis.md) | D6 APIs | AG-UI streaming, REST admin, webhooks | Draft |
+| **BRD-14** | [D7 Security Architecture](BRD-14_d7_security.md) | D7 Security | Defense-in-depth, RBAC, tenant isolation | Draft |
 
 ---
 

@@ -90,6 +90,7 @@ This document covers:
 | Cost Model Spec | [08-cost-model.md](../00_REF/domain/08-cost-model.md) | Cost calculation methodology |
 | Database Schema | [01-database-schema.md](../00_REF/domain/01-database-schema.md) | Data model definitions |
 | ADR-003 | [003-use-bigquery-not-timescaledb.md](../00_REF/domain/architecture/adr/003-use-bigquery-not-timescaledb.md) | BigQuery decision |
+| ADR-006 | [006-cloud-native-task-queues-not-celery.md](../00_REF/domain/architecture/adr/006-cloud-native-task-queues-not-celery.md) | Data pipeline scheduling |
 | ADR-008 | [008-database-strategy-mvp.md](../00_REF/domain/architecture/adr/008-database-strategy-mvp.md) | Database strategy |
 
 ---

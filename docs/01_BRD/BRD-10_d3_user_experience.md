@@ -87,6 +87,7 @@ This document covers:
 |----------|----------|---------|
 | ADR-007 | [007-grafana-plus-agui-hybrid.md](../00_REF/domain/architecture/adr/007-grafana-plus-agui-hybrid.md) | UI architecture decision |
 | Agent Routing Spec | [03-agent-routing-spec.md](../00_REF/domain/03-agent-routing-spec.md) | A2UI component selection |
+| UX Implementation Guide | [FINAL-implementation-guide.md](../00_REF/UX/FINAL-implementation-guide.md) | Two-phase implementation details |
 
 ---
 

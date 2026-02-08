@@ -89,6 +89,8 @@ This document covers:
 | Agent Routing Spec | [03-agent-routing-spec.md](../00_REF/domain/03-agent-routing-spec.md) | Agent communication patterns |
 | MCP Tool Contracts | [02-mcp-tool-contracts.md](../00_REF/domain/02-mcp-tool-contracts.md) | Tool interface definitions |
 | ADR-001 | [001-use-mcp-servers.md](../00_REF/domain/architecture/adr/001-use-mcp-servers.md) | MCP architecture decision |
+| ADR-004 | [004-cloud-run-not-kubernetes.md](../00_REF/domain/architecture/adr/004-cloud-run-not-kubernetes.md) | Cloud Run deployment decision |
+| ADR-005 | [005-use-litellm-for-llms.md](../00_REF/domain/architecture/adr/005-use-litellm-for-llms.md) | LLM abstraction layer |
 | ADR-009 | [009-hybrid-agent-registration-pattern.md](../00_REF/domain/architecture/adr/009-hybrid-agent-registration-pattern.md) | Agent registration |
 | ADR-010 | [010-agent-card-specification.md](../00_REF/domain/architecture/adr/010-agent-card-specification.md) | AgentCard specification |
 

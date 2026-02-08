@@ -2,7 +2,7 @@
 
 **Project:** AI Cloud Cost Monitoring Platform
 **Framework:** Document Flow Framework v2.0 (MVP Track)
-**Status:** Foundation BRDs Complete
+**Status:** Complete (14 BRDs: 7 Foundation + 7 Domain)
 
 ---
 
@@ -11,7 +11,7 @@
 | Layer | Folder | Status | Next Action |
 |-------|--------|--------|-------------|
 | L0 | [00_REF](00_REF/) | Complete | Reference documentation |
-| L1 | [01_BRD](01_BRD/) | **Complete (11 BRDs)** | Proceed to PRD |
+| L1 | [01_BRD](01_BRD/) | **Complete (14 BRDs)** | Proceed to PRD |
 | L2 | [02_PRD](02_PRD/) | Index Ready | Create PRD-01 |
 | L3 | [03_EARS](03_EARS/) | Index Ready | Awaiting PRD-01 |
 | L4 | [04_BDD](04_BDD/) | Index Ready | Awaiting EARS-01 |
@@ -68,6 +68,9 @@ Cost monitoring-specific business requirements:
 | [BRD-09](01_BRD/BRD-09_d2_cost_analytics.md) | D2 Cost Analytics | Draft |
 | [BRD-10](01_BRD/BRD-10_d3_user_experience.md) | D3 User Experience | Draft |
 | [BRD-11](01_BRD/BRD-11_d4_multi_cloud.md) | D4 Multi-Cloud | Draft |
+| [BRD-12](01_BRD/BRD-12_d5_data_persistence.md) | D5 Data Persistence | Draft |
+| [BRD-13](01_BRD/BRD-13_d6_rest_apis.md) | D6 REST APIs | Draft |
+| [BRD-14](01_BRD/BRD-14_d7_security.md) | D7 Security | Draft |
 
 ---
 

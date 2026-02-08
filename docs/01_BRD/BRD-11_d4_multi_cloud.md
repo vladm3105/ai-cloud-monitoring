@@ -88,6 +88,7 @@ This document covers:
 | Document | Location | Purpose |
 |----------|----------|---------|
 | Tenant Onboarding | [04-tenant-onboarding.md](../00_REF/domain/04-tenant-onboarding.md) | Connection flows |
+| Deployment Infrastructure | [07-deployment-infrastructure.md](../00_REF/domain/07-deployment-infrastructure.md) | Infrastructure patterns |
 | ADR-002 | [002-gcp-only-first.md](../00_REF/domain/architecture/adr/002-gcp-only-first.md) | GCP-first decision |
 | MCP Tool Contracts | [02-mcp-tool-contracts.md](../00_REF/domain/02-mcp-tool-contracts.md) | Cloud API interfaces |
 
