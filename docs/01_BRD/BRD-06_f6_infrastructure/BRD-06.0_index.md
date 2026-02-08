@@ -78,10 +78,10 @@ The F6 Infrastructure Module provides cloud-agnostic infrastructure abstraction 
 | Related BRD | Dependency Type | Integration Point |
 |-------------|-----------------|-------------------|
 | [BRD-01 (F1 IAM)](../BRD-01_f1_iam/BRD-01.0_index.md) | Downstream | PostgreSQL (user profiles), Secret Manager (credentials) |
-| [BRD-02 (F2 Session)](../BRD-02_f2_session.md) | Downstream | PostgreSQL (workspace storage), Redis (session cache) |
-| [BRD-03 (F3 Observability)](../BRD-03_f3_observability.md) | Downstream | Cloud Logging, Cloud Monitoring, Cloud Trace |
-| [BRD-04 (F4 SecOps)](../BRD-04_f4_secops.md) | Downstream | Cloud Armor WAF, VPC firewall rules |
-| [BRD-05 (F5 Self-Ops)](../BRD-05_f5_selfops.md) | Downstream | Cloud Run scaling APIs, health check infrastructure |
+| [BRD-02 (F2 Session)](../BRD-02_f2_session/BRD-02.0_index.md) | Downstream | PostgreSQL (workspace storage), Redis (session cache) |
+| [BRD-03 (F3 Observability)](../BRD-03_f3_observability/BRD-03.0_index.md) | Downstream | Cloud Logging, Cloud Monitoring, Cloud Trace |
+| [BRD-04 (F4 SecOps)](../BRD-04_f4_secops/BRD-04.0_index.md) | Downstream | Cloud Armor WAF, VPC firewall rules |
+| [BRD-05 (F5 Self-Ops)](../BRD-05_f5_selfops/BRD-05.0_index.md) | Downstream | Cloud Run scaling APIs, health check infrastructure |
 | [BRD-07 (F7 Config)](../BRD-07_f7_config/BRD-07.0_index.md) | Downstream | Configuration storage backend, Secret Manager |
 
 ---

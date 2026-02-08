@@ -340,10 +340,10 @@ custom_fields:
 | Related BRD | Dependency Type | Data Exchange |
 |-------------|-----------------|---------------|
 | [BRD-01 (F1 IAM)](../BRD-01_f1_iam/BRD-01.0_index.md) | Downstream | F6 provides: PostgreSQL (user profiles), Secret Manager (credentials), service account provisioning |
-| [BRD-02 (F2 Session)](../BRD-02_f2_session.md) | Downstream | F6 provides: PostgreSQL (workspace storage), Redis (session cache via Memorystore) |
-| [BRD-03 (F3 Observability)](../BRD-03_f3_observability.md) | Downstream | F6 provides: Cloud Logging, Cloud Monitoring, Cloud Trace infrastructure |
-| [BRD-04 (F4 SecOps)](../BRD-04_f4_secops.md) | Downstream | F6 provides: Cloud Armor WAF, VPC firewall rules, network isolation |
-| [BRD-05 (F5 Self-Ops)](../BRD-05_f5_selfops.md) | Downstream | F6 provides: Cloud Run scaling APIs, compute restart operations, health check infrastructure |
+| [BRD-02 (F2 Session)](../BRD-02_f2_session/BRD-02.0_index.md) | Downstream | F6 provides: PostgreSQL (workspace storage), Redis (session cache via Memorystore) |
+| [BRD-03 (F3 Observability)](../BRD-03_f3_observability/BRD-03.0_index.md) | Downstream | F6 provides: Cloud Logging, Cloud Monitoring, Cloud Trace infrastructure |
+| [BRD-04 (F4 SecOps)](../BRD-04_f4_secops/BRD-04.0_index.md) | Downstream | F6 provides: Cloud Armor WAF, VPC firewall rules, network isolation |
+| [BRD-05 (F5 Self-Ops)](../BRD-05_f5_selfops/BRD-05.0_index.md) | Downstream | F6 provides: Cloud Run scaling APIs, compute restart operations, health check infrastructure |
 | [BRD-07 (F7 Config)](../BRD-07_f7_config/BRD-07.0_index.md) | Downstream | F6 provides: Configuration storage backend, Secret Manager for sensitive configuration values |
 
 ### 13.4 Requirements Traceability Matrix

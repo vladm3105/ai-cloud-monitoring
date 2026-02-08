@@ -76,10 +76,10 @@ The F7 Configuration Manager Module provides centralized configuration managemen
 | Related BRD | Dependency Type | Integration Point |
 |-------------|-----------------|-------------------|
 | [BRD-01 (F1 IAM)](../BRD-01_f1_iam/BRD-01.0_index.md) | Downstream | oauth2_clients config, zone permissions, trust level policies |
-| [BRD-02 (F2 Session)](../BRD-02_f2_session.md) | Downstream | Session timeout settings, workspace config, cache TTL values |
-| [BRD-03 (F3 Observability)](../BRD-03_f3_observability.md) | Downstream | Logging levels, metrics endpoints, alert thresholds |
-| [BRD-04 (F4 SecOps)](../BRD-04_f4_secops.md) | Downstream | Security policy config, rate limits, compliance rules |
-| [BRD-05 (F5 Self-Ops)](../BRD-05_f5_selfops.md) | Upstream | Remediation playbook triggers for config changes |
+| [BRD-02 (F2 Session)](../BRD-02_f2_session/BRD-02.0_index.md) | Downstream | Session timeout settings, workspace config, cache TTL values |
+| [BRD-03 (F3 Observability)](../BRD-03_f3_observability/BRD-03.0_index.md) | Downstream | Logging levels, metrics endpoints, alert thresholds |
+| [BRD-04 (F4 SecOps)](../BRD-04_f4_secops/BRD-04.0_index.md) | Downstream | Security policy config, rate limits, compliance rules |
+| [BRD-05 (F5 Self-Ops)](../BRD-05_f5_selfops/BRD-05.0_index.md) | Upstream | Remediation playbook triggers for config changes |
 | [BRD-06 (F6 Infrastructure)](../BRD-06_f6_infrastructure/BRD-06.0_index.md) | Upstream | PostgreSQL (feature flags, snapshots), Secret Manager |
 
 ---

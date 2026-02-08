@@ -100,7 +100,7 @@ custom_fields:
 **Complexity**: 3/5 (YAML schema parsing with type coercion rules and multiple validation modes)
 
 **Related Requirements**:
-- Platform BRDs: [BRD-03 (F3 Observability)](../BRD-03_f3_observability.md) - validation error logging
+- Platform BRDs: [BRD-03 (F3 Observability)](../BRD-03_f3_observability/BRD-03.0_index.md) - validation error logging
 - Feature BRDs: N/A (Foundation module)
 
 **Priority**: P1
@@ -139,7 +139,7 @@ custom_fields:
 **Complexity**: 4/5 (Connection draining, callback management, and handling excluded keys require careful coordination)
 
 **Related Requirements**:
-- Platform BRDs: [BRD-05 (F5 Self-Ops)](../BRD-05_f5_selfops.md) - reload playbooks, [BRD-03 (F3 Observability)](../BRD-03_f3_observability.md) - reload events
+- Platform BRDs: [BRD-05 (F5 Self-Ops)](../BRD-05_f5_selfops/BRD-05.0_index.md) - reload playbooks, [BRD-03 (F3 Observability)](../BRD-03_f3_observability/BRD-03.0_index.md) - reload events
 - Feature BRDs: N/A (Foundation module)
 
 **Priority**: P1
@@ -321,7 +321,7 @@ custom_fields:
 **Complexity**: 3/5 (Scheduled comparisons with state management and alerting integration)
 
 **Related Requirements**:
-- Platform BRDs: [BRD-03 (F3 Observability)](../BRD-03_f3_observability.md) - drift alerts, [BRD-05 (F5 Self-Ops)](../BRD-05_f5_selfops.md) - drift remediation
+- Platform BRDs: [BRD-03 (F3 Observability)](../BRD-03_f3_observability/BRD-03.0_index.md) - drift alerts, [BRD-05 (F5 Self-Ops)](../BRD-05_f5_selfops/BRD-05.0_index.md) - drift remediation
 - Feature BRDs: N/A (Foundation module)
 
 **Priority**: P2
@@ -350,7 +350,7 @@ custom_fields:
 **Complexity**: 3/5 (Dry-run mode implementation with dependency checking and test integration)
 
 **Related Requirements**:
-- Platform BRDs: [BRD-03 (F3 Observability)](../BRD-03_f3_observability.md) - test result logging
+- Platform BRDs: [BRD-03 (F3 Observability)](../BRD-03_f3_observability/BRD-03.0_index.md) - test result logging
 - Feature BRDs: N/A (Foundation module)
 
 **Priority**: P1 (Gap remediation)
@@ -379,7 +379,7 @@ custom_fields:
 **Complexity**: 4/5 (Percentage distribution with instance coordination and error monitoring)
 
 **Related Requirements**:
-- Platform BRDs: [BRD-03 (F3 Observability)](../BRD-03_f3_observability.md) - rollout metrics, [BRD-05 (F5 Self-Ops)](../BRD-05_f5_selfops.md) - auto-rollback
+- Platform BRDs: [BRD-03 (F3 Observability)](../BRD-03_f3_observability/BRD-03.0_index.md) - rollout metrics, [BRD-05 (F5 Self-Ops)](../BRD-05_f5_selfops/BRD-05.0_index.md) - auto-rollback
 - Feature BRDs: N/A (Foundation module)
 
 **Priority**: P3
@@ -408,7 +408,7 @@ custom_fields:
 **Complexity**: 3/5 (API design with rate limiting, auth integration, and audit logging)
 
 **Related Requirements**:
-- Platform BRDs: [BRD-01 (F1 IAM)](../BRD-01_f1_iam/BRD-01.0_index.md) - API authentication, [BRD-04 (F4 SecOps)](../BRD-04_f4_secops.md) - rate limiting
+- Platform BRDs: [BRD-01 (F1 IAM)](../BRD-01_f1_iam/BRD-01.0_index.md) - API authentication, [BRD-04 (F4 SecOps)](../BRD-04_f4_secops/BRD-04.0_index.md) - rate limiting
 - Feature BRDs: N/A (Foundation module)
 
 **Priority**: P3

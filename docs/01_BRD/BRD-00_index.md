@@ -84,6 +84,43 @@ Foundation BRDs were adapted from Trading Nexus v4.2 with these domain replaceme
 
 ---
 
+## PRD-Ready Score Methodology
+
+Each domain BRD includes a PRD-Ready score (target: >=90/100) measuring completeness for downstream PRD creation.
+
+### Scoring Criteria
+
+| Category | Weight | Criteria |
+|----------|--------|----------|
+| Business Context | 15 | Problem statement, success criteria, stakeholder identification |
+| Requirements Completeness | 30 | All capabilities documented with acceptance criteria |
+| Technology Stack | 15 | MVP and production stack defined with rationale |
+| Dependencies | 10 | Upstream/downstream/peer dependencies mapped |
+| Risk Management | 10 | Risks identified with mitigations |
+| Traceability | 10 | Cross-references to source specs and related BRDs |
+| Quality Attributes | 10 | NFRs defined (performance, security, scalability) |
+
+### Current Scores
+
+| BRD | Module | Score | Gap |
+|-----|--------|-------|-----|
+| BRD-08 | D1 Agents | 88/100 | Downstream artifacts pending |
+| BRD-09 | D2 Analytics | 88/100 | Downstream artifacts pending |
+| BRD-10 | D3 UX | 88/100 | Downstream artifacts pending |
+| BRD-11 | D4 Multi-Cloud | 88/100 | Downstream artifacts pending |
+| BRD-12 | D5 Storage | 85/100 | MVP/Production RLS separation needs detail |
+| BRD-13 | D6 APIs | 88/100 | Downstream artifacts pending |
+| BRD-14 | D7 Security | 82/100 | Compliance mapping incomplete |
+
+### Remediation Path
+
+All domain BRDs will reach >=90/100 when:
+1. Downstream PRD artifacts are created (removes "pending" status)
+2. BRD-12: Add explicit MVP vs Production RLS requirements
+3. BRD-14: Complete compliance mapping (SOC2, GDPR, HIPAA)
+
+---
+
 ## Traceability
 
 - **Upstream:** Business stakeholder requirements

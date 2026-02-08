@@ -61,7 +61,7 @@ custom_fields:
 **Complexity**: 3/5 (Multi-provider adapter pattern requires careful abstraction design and testing across cloud platforms)
 
 **Related Requirements**:
-- Platform BRDs: [BRD-05 (F5 Self-Ops)](../BRD-05_f5_selfops.md) - scaling operations, health monitoring
+- Platform BRDs: [BRD-05 (F5 Self-Ops)](../BRD-05_f5_selfops/BRD-05.0_index.md) - scaling operations, health monitoring
 - Feature BRDs: N/A (Foundation module)
 
 **Priority**: P1
@@ -103,7 +103,7 @@ custom_fields:
 **Complexity**: 3/5 (PostgreSQL HA and connection pooling well-established; pgvector integration requires embedding pipeline coordination)
 
 **Related Requirements**:
-- Platform BRDs: [BRD-01 (F1 IAM)](../BRD-01_f1_iam/BRD-01.0_index.md) - user profile storage, [BRD-02 (F2 Session)](../BRD-02_f2_session.md) - workspace storage
+- Platform BRDs: [BRD-01 (F1 IAM)](../BRD-01_f1_iam/BRD-01.0_index.md) - user profile storage, [BRD-02 (F2 Session)](../BRD-02_f2_session/BRD-02.0_index.md) - workspace storage
 - Feature BRDs: N/A (Foundation module)
 
 **Priority**: P1
@@ -135,7 +135,7 @@ custom_fields:
 **Complexity**: 4/5 (Multi-model ensemble with voting requires careful coordination; provider adapter differences in token counting and rate limiting)
 
 **Related Requirements**:
-- Platform BRDs: [BRD-03 (F3 Observability)](../BRD-03_f3_observability.md) - LLM analytics, token tracking
+- Platform BRDs: [BRD-03 (F3 Observability)](../BRD-03_f3_observability/BRD-03.0_index.md) - LLM analytics, token tracking
 - Feature BRDs: N/A (Foundation module)
 
 **Priority**: P1
@@ -167,7 +167,7 @@ custom_fields:
 **Complexity**: 2/5 (Pub/Sub well-established; provider adapters require careful handling of delivery semantics differences)
 
 **Related Requirements**:
-- Platform BRDs: [BRD-03 (F3 Observability)](../BRD-03_f3_observability.md) - event logging, [BRD-05 (F5 Self-Ops)](../BRD-05_f5_selfops.md) - event-driven remediation
+- Platform BRDs: [BRD-03 (F3 Observability)](../BRD-03_f3_observability/BRD-03.0_index.md) - event logging, [BRD-05 (F5 Self-Ops)](../BRD-05_f5_selfops/BRD-05.0_index.md) - event-driven remediation
 - Feature BRDs: N/A (Foundation module)
 
 **Priority**: P1
@@ -232,7 +232,7 @@ custom_fields:
 **Complexity**: 3/5 (VPC and load balancing well-established; WAF rule tuning requires ongoing security analysis)
 
 **Related Requirements**:
-- Platform BRDs: [BRD-04 (F4 SecOps)](../BRD-04_f4_secops.md) - WAF configuration, firewall rules
+- Platform BRDs: [BRD-04 (F4 SecOps)](../BRD-04_f4_secops/BRD-04.0_index.md) - WAF configuration, firewall rules
 - Feature BRDs: N/A (Foundation module)
 
 **Priority**: P1
@@ -273,7 +273,7 @@ custom_fields:
 **Complexity**: 3/5 (Budget alerting straightforward; ML-based forecasting requires historical data and model tuning)
 
 **Related Requirements**:
-- Platform BRDs: [BRD-03 (F3 Observability)](../BRD-03_f3_observability.md) - cost metrics
+- Platform BRDs: [BRD-03 (F3 Observability)](../BRD-03_f3_observability/BRD-03.0_index.md) - cost metrics
 - Feature BRDs: N/A (Foundation module)
 
 **Priority**: P1
@@ -302,7 +302,7 @@ custom_fields:
 **Complexity**: 4/5 (Multi-region deployment requires careful data replication design and traffic management; significant infrastructure coordination)
 
 **Related Requirements**:
-- Platform BRDs: [BRD-02 (F2 Session)](../BRD-02_f2_session.md) - cross-region session sync, [BRD-05 (F5 Self-Ops)](../BRD-05_f5_selfops.md) - failover operations
+- Platform BRDs: [BRD-02 (F2 Session)](../BRD-02_f2_session/BRD-02.0_index.md) - cross-region session sync, [BRD-05 (F5 Self-Ops)](../BRD-05_f5_selfops/BRD-05.0_index.md) - failover operations
 - Feature BRDs: N/A (Foundation module)
 
 **Priority**: P1 (Gap remediation)
@@ -330,7 +330,7 @@ custom_fields:
 **Complexity**: 4/5 (Hybrid cloud requires significant network infrastructure and security coordination with enterprise IT)
 
 **Related Requirements**:
-- Platform BRDs: [BRD-04 (F4 SecOps)](../BRD-04_f4_secops.md) - hybrid security policies
+- Platform BRDs: [BRD-04 (F4 SecOps)](../BRD-04_f4_secops/BRD-04.0_index.md) - hybrid security policies
 - Feature BRDs: N/A (Foundation module)
 
 **Priority**: P3
@@ -359,7 +359,7 @@ custom_fields:
 **Complexity**: 3/5 (Dashboard development straightforward; optimization recommendation engine requires ML model training)
 
 **Related Requirements**:
-- Platform BRDs: [BRD-03 (F3 Observability)](../BRD-03_f3_observability.md) - metrics visualization
+- Platform BRDs: [BRD-03 (F3 Observability)](../BRD-03_f3_observability/BRD-03.0_index.md) - metrics visualization
 - Feature BRDs: N/A (Foundation module)
 
 **Priority**: P2
@@ -416,7 +416,7 @@ custom_fields:
 **Complexity**: 3/5 (Blue-green pattern well-established; health validation and traffic management require careful orchestration)
 
 **Related Requirements**:
-- Platform BRDs: [BRD-05 (F5 Self-Ops)](../BRD-05_f5_selfops.md) - deployment health checks
+- Platform BRDs: [BRD-05 (F5 Self-Ops)](../BRD-05_f5_selfops/BRD-05.0_index.md) - deployment health checks
 - Feature BRDs: N/A (Foundation module)
 
 **Priority**: P1 (Gap remediation)
@@ -445,7 +445,7 @@ custom_fields:
 **Complexity**: 5/5 (Database sharding significantly increases complexity; requires careful application design and query routing)
 
 **Related Requirements**:
-- Platform BRDs: [BRD-02 (F2 Session)](../BRD-02_f2_session.md) - workspace sharding
+- Platform BRDs: [BRD-02 (F2 Session)](../BRD-02_f2_session/BRD-02.0_index.md) - workspace sharding
 - Feature BRDs: N/A (Foundation module)
 
 **Priority**: P3

@@ -89,8 +89,8 @@ This document covers:
 | Document | Location | Purpose |
 |----------|----------|---------|
 | Security Auth Design | [06-security-auth-design.md](../00_REF/domain/06-security-auth-design.md) | Detailed security design |
-| BRD-01 F1 IAM | [BRD-01_f1_iam.md](BRD-01_f1_iam.md) | Foundation IAM |
-| BRD-04 F4 SecOps | [BRD-04_f4_secops.md](BRD-04_f4_secops.md) | Foundation SecOps |
+| BRD-01 F1 IAM | [BRD-01.0_index.md](BRD-01_f1_iam/BRD-01.0_index.md) | Foundation IAM |
+| BRD-04 F4 SecOps | [BRD-04.0_index.md](BRD-04_f4_secops/BRD-04.0_index.md) | Foundation SecOps |
 | ADR-009 | [009-hybrid-agent-registration-pattern.md](../00_REF/domain/architecture/adr/009-hybrid-agent-registration-pattern.md) | Agent security |
 
 ---

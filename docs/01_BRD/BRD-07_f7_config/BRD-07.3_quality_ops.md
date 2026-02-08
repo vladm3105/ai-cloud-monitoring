@@ -313,10 +313,10 @@ custom_fields:
 | Related BRD | Dependency Type | Data Exchange |
 |-------------|-----------------|---------------|
 | [BRD-01 (F1 IAM)](../BRD-01_f1_iam/BRD-01.0_index.md) | Downstream | F7 provides: oauth2_clients config, zone permissions, trust level policies, session timeout settings |
-| [BRD-02 (F2 Session)](../BRD-02_f2_session.md) | Downstream | F7 provides: session timeout settings, memory layer limits, workspace config, cache TTL values |
-| [BRD-03 (F3 Observability)](../BRD-03_f3_observability.md) | Downstream | F7 provides: logging levels, metrics endpoints, tracing sample rates, alert thresholds |
-| [BRD-04 (F4 SecOps)](../BRD-04_f4_secops.md) | Downstream | F7 provides: security policy config, rate limits, compliance rules, threat detection thresholds |
-| [BRD-05 (F5 Self-Ops)](../BRD-05_f5_selfops.md) | Upstream | F5 provides: remediation playbook triggers for config changes, health check thresholds |
+| [BRD-02 (F2 Session)](../BRD-02_f2_session/BRD-02.0_index.md) | Downstream | F7 provides: session timeout settings, memory layer limits, workspace config, cache TTL values |
+| [BRD-03 (F3 Observability)](../BRD-03_f3_observability/BRD-03.0_index.md) | Downstream | F7 provides: logging levels, metrics endpoints, tracing sample rates, alert thresholds |
+| [BRD-04 (F4 SecOps)](../BRD-04_f4_secops/BRD-04.0_index.md) | Downstream | F7 provides: security policy config, rate limits, compliance rules, threat detection thresholds |
+| [BRD-05 (F5 Self-Ops)](../BRD-05_f5_selfops/BRD-05.0_index.md) | Upstream | F5 provides: remediation playbook triggers for config changes, health check thresholds |
 | [BRD-06 (F6 Infrastructure)](../BRD-06_f6_infrastructure/BRD-06.0_index.md) | Upstream | F6 provides: PostgreSQL (feature flags, snapshots), Secret Manager (secrets backend), file storage paths |
 
 ### 13.4 Requirements Traceability Matrix
