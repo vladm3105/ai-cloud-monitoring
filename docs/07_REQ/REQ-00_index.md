@@ -18,8 +18,8 @@
 
 | Source | Location | Description |
 |--------|----------|-------------|
-| MCP Tool Contracts | [REF/core/02-mcp-tool-contracts.md](../../REF/core/02-mcp-tool-contracts.md) | Tool interface specifications |
-| API Endpoints | [REF/core/05-api-endpoint-spec.md](../../REF/core/05-api-endpoint-spec.md) | REST API design |
+| MCP Tool Contracts | [00_REF/core/02-mcp-tool-contracts.md](../00_REF/core/02-mcp-tool-contracts.md) | Tool interface specifications |
+| API Endpoints | [00_REF/core/05-api-endpoint-spec.md](../00_REF/core/05-api-endpoint-spec.md) | REST API design |
 
 ---
 

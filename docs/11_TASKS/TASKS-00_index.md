@@ -14,7 +14,7 @@
 
 ---
 
-## Implementation Phases (from REF/HANDOFF.md)
+## Implementation Phases (from 00_REF/HANDOFF.md)
 
 | Phase | Scope | Status |
 |-------|-------|--------|

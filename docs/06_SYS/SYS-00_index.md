@@ -18,10 +18,10 @@
 
 | Source | Location | Description |
 |--------|----------|-------------|
-| Architecture Diagram | [REF/architecture.svg](../../REF/architecture.svg) | Visual architecture overview |
-| Database Schema | [REF/core/01-database-schema.md](../../REF/core/01-database-schema.md) | Database design |
-| Security Design | [REF/core/06-security-auth-design.md](../../REF/core/06-security-auth-design.md) | Security architecture |
-| Deployment Infra | [REF/core/07-deployment-infrastructure.md](../../REF/core/07-deployment-infrastructure.md) | Infrastructure specs |
+| Architecture Diagram | [00_REF/architecture.svg](../00_REF/architecture.svg) | Visual architecture overview |
+| Database Schema | [00_REF/core/01-database-schema.md](../00_REF/core/01-database-schema.md) | Database design |
+| Security Design | [00_REF/core/06-security-auth-design.md](../00_REF/core/06-security-auth-design.md) | Security architecture |
+| Deployment Infra | [00_REF/core/07-deployment-infrastructure.md](../00_REF/core/07-deployment-infrastructure.md) | Infrastructure specs |
 
 ---
 

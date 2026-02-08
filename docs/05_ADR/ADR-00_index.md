@@ -6,9 +6,9 @@
 
 ---
 
-## Reference ADRs (in REF/docs/adr/)
+## Reference ADRs (in 00_REF/docs/adr/)
 
-Existing architectural decisions are maintained in [REF/docs/adr/](../../REF/docs/adr/):
+Existing architectural decisions are maintained in [00_REF/docs/adr/](../00_REF/docs/adr/):
 
 | ID | Title | Status |
 |----|-------|--------|
