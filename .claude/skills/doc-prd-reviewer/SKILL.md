@@ -84,9 +84,10 @@ flowchart TD
         J --> K[5. Traceability Tags]
         K --> L[6. Section Completeness]
         L --> M[7. Customer Content]
+        M --> M2[8. Naming Compliance]
     end
 
-    M --> N{Issues Found?}
+    M2 --> N{Issues Found?}
     N -->|Yes| O[Categorize Issues]
     O --> P{Auto-Fixable?}
     P -->|Yes| Q[Apply Auto-Fixes]
@@ -385,6 +386,52 @@ Reviewing customer-facing content (Section 10)...
 
 ---
 
+### 8. Naming Compliance
+
+Validates element IDs and threshold tags follow `doc-naming` standards.
+
+**Scope**:
+- Element IDs use `PRD.NN.TT.SS` format
+- Element type codes valid for PRD (01-09, 11, 22, 24)
+- Threshold tags use `@threshold: PRD.NN.key` format
+- No legacy patterns (US-NNN, FR-NNN, AC-NNN, F-NNN)
+
+**Detection**:
+```
+Validating naming compliance (per doc-naming skill)...
+├── Element IDs: 24 found
+│   ├── PRD.01.01.01 ✓ (valid format, code 01 valid for PRD)
+│   ├── PRD.01.09.05 ✓ (valid format, code 09 valid for PRD)
+│   ├── PRD.01.25.01 ✗ (code 25 not valid for PRD - EARS only)
+│   └── ...
+├── Threshold tags: 8 found
+│   ├── @threshold: PRD.01.perf.auth.p99 ✓
+│   ├── @threshold: perf.auth.p99 ✗ (missing PRD.NN prefix)
+│   └── ...
+├── Legacy patterns: 2 found
+│   ├── US-001 ✗ (deprecated - use PRD.NN.09.SS)
+│   └── FR-003 ✗ (deprecated - use PRD.NN.01.SS)
+└── Result: 3 naming violations
+```
+
+**Auto-Fix**:
+- Convert legacy patterns to unified format
+- Add missing `PRD.NN` prefix to threshold tags
+- Suggest correct element type codes
+
+**Error Codes**:
+| Code | Severity | Description |
+|------|----------|-------------|
+| REV-N001 | Error | Invalid element ID format |
+| REV-N002 | Error | Element type code not valid for PRD |
+| REV-N003 | Error | Legacy pattern detected (US-NNN, FR-NNN, etc.) |
+| REV-N004 | Error | Threshold tag missing document reference |
+| REV-N005 | Warning | Threshold key format non-standard |
+
+**Reference**: See `doc-naming` skill for complete naming rules.
+
+---
+
 ## Review Score Calculation
 
 **Scoring Formula**:
@@ -392,12 +439,13 @@ Reviewing customer-facing content (Section 10)...
 | Category | Weight | Calculation |
 |----------|--------|-------------|
 | Link Integrity | 15% | (valid_links / total_links) × 15 |
-| Threshold Consistency | 20% | (consistent_thresholds / total_thresholds) × 20 |
+| Threshold Consistency | 15% | (consistent_thresholds / total_thresholds) × 15 |
 | BRD Alignment | 25% | (aligned_requirements / total_requirements) × 25 |
-| Placeholder Detection | 15% | (no_placeholders ? 15 : 15 - (placeholder_count × 3)) |
+| Placeholder Detection | 10% | (no_placeholders ? 10 : 10 - (placeholder_count × 2)) |
 | Traceability Tags | 10% | (valid_tags / total_tags) × 10 |
 | Section Completeness | 10% | (complete_sections / total_sections) × 10 |
 | Customer Content | 5% | (exists && substantive ? 5 : 0) |
+| Naming Compliance | 10% | (valid_ids / total_ids) × 10 |
 
 **Total**: Sum of all categories (max 100)
 
@@ -663,6 +711,7 @@ review:
 
 | Skill | Relationship |
 |-------|--------------|
+| `doc-naming` | Naming standards for Check #8 |
 | `doc-prd-autopilot` | Invokes this skill in Phase 5 |
 | `doc-prd-validator` | Structural validation (Phase 4) |
 | `doc-prd` | PRD creation rules |
@@ -675,4 +724,5 @@ review:
 
 | Version | Date | Changes |
 |---------|------|---------|
+| 1.1 | 2026-02-08 | Added Check #8: Naming Compliance (doc-naming integration) |
 | 1.0 | 2026-02-08 | Initial skill creation with 7 review checks |
