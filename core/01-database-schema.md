@@ -386,16 +386,20 @@ The primary time-series table. Stores cost data points synced from cloud provide
 
 ### 3.11 a2a_agents
 
+> **Related:** See [ADR-010: AgentCard Specification](../docs/adr/010-agent-card-specification.md) for the AgentCard schema used by external A2A agents.
+
 | Field | Type | Description |
 |-------|------|-------------|
 | id | UUID | Primary key |
 | tenant_id | UUID | FK → tenants |
-| name | String | Agent display name |
+| name | String | Agent display name (maps to AgentCard.name) |
 | type | Enum | slackbot / compliance_auditor / vendor_advisor / security_scanner / custom |
+| version | String | Agent version (maps to AgentCard.version) |
+| endpoint | String | A2A endpoint URL (maps to AgentCard.endpoint) |
 | auth_method | Enum | mtls / api_key |
 | api_key_hash | String | Hashed API key (nullable) |
 | certificate_fingerprint | String | mTLS cert fingerprint (nullable) |
-| permissions | JSONB | Allowed tool scopes (e.g., ["read:costs", "read:recommendations"]) |
+| capabilities | JSONB | AgentCard.capabilities (tools, permissions_required) |
 | rate_limit | Integer | Requests per minute (default: 10) |
 | status | Enum | active / suspended / pending_approval |
 | registered_by | UUID | FK → users |
@@ -403,10 +407,12 @@ The primary time-series table. Stores cost data points synced from cloud provide
 | created_at | Timestamp | |
 
 **Business Rules:**
+
 - All external agents must be registered and approved by `org_admin`
 - Read-only by default; write permissions require explicit approval
 - Rate limit enforced at A2A Gateway level
 - Tenant context derived from registration — agent cannot request data for other tenants
+- External agents are loaded into `AgentRegistry` on startup from this table
 
 ### 3.12 audit_log
 

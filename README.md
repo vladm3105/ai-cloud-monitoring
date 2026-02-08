@@ -189,7 +189,31 @@ The platform is **cloud-agnostic in monitoring** but **cloud-specific in deploym
 | **Clean Separation** | Domain logic separated from cloud-specific implementation |
 | **Better Caching** | Per-cloud credential and response caching |
 | **Fault Isolation** | One cloud failure doesn't affect others |
-| **Scalability** | Add new cloud providers without changing domain logic |
+| **Easy Extensibility** | Add new cloud providers via AgentCard self-registration |
+
+### Agent Registration Pattern
+
+Agents use **AgentCard** for self-description and dynamic discovery ([ADR-009](docs/adr/009-hybrid-agent-registration-pattern.md), [ADR-010](docs/adr/010-agent-card-specification.md)):
+
+```python
+# Each agent declares its capabilities via AgentCard
+AgentCard(
+    name="aws",
+    type=AgentType.CLOUD_PROVIDER,
+    version="1.0.0",
+    capabilities=AgentCapability(
+        tools=["get_costs", "get_resources", "get_recommendations", ...],
+        providers=["aws"],
+        permissions_required=["read:costs", "read:resources"]
+    )
+)
+```
+
+**Adding a new cloud provider:**
+
+1. Create MCP Server (implements 6 standard tools)
+2. Create Cloud Agent with AgentCard (self-registers on startup)
+3. Deploy — no changes to Coordinator, Domain Agents, or frontend
 
 ---
 
@@ -213,9 +237,9 @@ AI-cost-monitoring/
 │   └── adr/                        # Architecture Decision Records
 │       ├── 001-use-mcp-servers.md
 │       ├── 002-gcp-only-first.md
-│       ├── 003-use-bigquery-not-timescaledb.md
-│       ├── 004-cloud-run-not-kubernetes.md
-│       └── 008-database-strategy-mvp.md
+│       ├── ...
+│       ├── 009-hybrid-agent-registration-pattern.md
+│       └── 010-agent-card-specification.md
 ├── terraform/                      # Infrastructure as Code
 │   ├── main.tf                    # Main Terraform configuration
 │   ├── variables.tf               # Variable declarations

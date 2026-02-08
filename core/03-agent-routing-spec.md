@@ -358,6 +358,107 @@ The Coordinator selects response components based on data type and user query:
 
 ---
 
+## 7. Agent Registration & Discovery
+
+> **Architecture Decisions:** See [ADR-009](../docs/adr/009-hybrid-agent-registration-pattern.md) (Hybrid Agent Registration) and [ADR-010](../docs/adr/010-agent-card-specification.md) (AgentCard Specification).
+
+### 7.1 AgentRegistry Pattern
+
+All agents (Cloud, Domain, External) register with a unified `AgentRegistry`. This enables dynamic discovery without hardcoded routing logic.
+
+| Agent Type | Registration Method | Discovery Method |
+|------------|---------------------|------------------|
+| Cloud Agents | Self-register on startup | `AgentRegistry.get_cloud_agents()` |
+| Domain Agents | Self-register on startup | `AgentRegistry.discover(type=DOMAIN)` |
+| External Agents (A2A) | Via Tenant Agent + `a2a_agents` table | `AgentRegistry.discover(type=EXTERNAL)` |
+
+### 7.2 AgentCard Schema
+
+Every agent declares its capabilities via an `AgentCard`:
+
+```python
+class AgentCard(BaseModel):
+    name: str                           # "aws", "cost", "slackbot"
+    type: AgentType                     # CLOUD_PROVIDER | DOMAIN | EXTERNAL
+    version: str                        # Semantic version
+    capabilities: AgentCapability       # Tools, providers, permissions
+    endpoint: Optional[str]             # For A2A external agents only
+    health_check: Optional[str]         # Health endpoint path
+```
+
+### 7.3 Cloud Agent Self-Registration
+
+Cloud Agents register themselves on instantiation:
+
+```python
+class AWSCloudAgent(BaseCloudAgent):
+    CARD = AgentCard(
+        name="aws",
+        type=AgentType.CLOUD_PROVIDER,
+        version="1.0.0",
+        capabilities=AgentCapability(
+            tools=["get_costs", "get_resources", "get_recommendations",
+                   "get_anomalies", "execute_action", "get_idle_resources"],
+            providers=["aws"],
+            permissions_required=["read:costs", "read:resources"]
+        )
+    )
+
+    def __init__(self, mcp_server: AWSMCPServer):
+        super().__init__()
+        self.mcp = mcp_server
+        AgentRegistry.register(self.CARD, self)  # Self-registration
+```
+
+### 7.4 Domain Agent Discovery
+
+Domain Agents discover Cloud Agents at runtime — no hardcoded provider lists:
+
+```python
+class CostAgent:
+    async def get_multi_cloud_costs(self, tenant_context, params):
+        # Dynamic discovery
+        cloud_agents = AgentRegistry.get_cloud_agents()
+
+        # Filter to tenant's connected providers
+        tenant_providers = {a.provider for a in tenant_context.cloud_accounts}
+        active_agents = [a for a in cloud_agents
+                        if a.CARD.capabilities.providers[0] in tenant_providers]
+
+        # Parallel fan-out
+        tasks = [agent.get_costs(tenant_context, params) for agent in active_agents]
+        results = await asyncio.gather(*tasks, return_exceptions=True)
+
+        return self._aggregate_costs(results)
+```
+
+### 7.5 Adding a New Cloud Provider
+
+To add support for a new cloud provider (e.g., Oracle Cloud):
+
+| Step | Action | Files Changed |
+|------|--------|---------------|
+| 1 | Create MCP Server | `src/mcp_servers/oracle_mcp.py` (new) |
+| 2 | Create Cloud Agent with `AgentCard` | `src/agents/cloud/oracle_agent.py` (new) |
+| 3 | Add credential schema | `src/credentials/schemas.py` (add `OracleCredentials`) |
+| 4 | Deploy | Agent self-registers on startup |
+
+**No changes required to:**
+- Coordinator Agent routing logic
+- Domain Agents (Cost, Optimization, Remediation, etc.)
+- Frontend or API endpoints
+
+### 7.6 Internal vs External Agent Communication
+
+| Communication | Transport | Latency | Use Case |
+|---------------|-----------|---------|----------|
+| Domain → Cloud Agent | Direct (in-process or RPC) | 1-5ms | Internal platform |
+| External → Coordinator | A2A Protocol | 20-50ms | SlackBot, Auditor, third-party |
+
+External A2A agents use the same `AgentCard` format but communicate via the A2A Gateway endpoint.
+
+---
+
 ## Developer Notes
 
 > **DEV-AGT-001:** The Coordinator's intent classifier should be tested with at least 200 sample queries covering all intent categories. Track classification accuracy and routing correctness as a metric.

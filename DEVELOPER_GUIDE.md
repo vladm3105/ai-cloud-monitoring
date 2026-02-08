@@ -572,6 +572,220 @@ See [GCP-DEPLOYMENT.md](GCP-DEPLOYMENT.md) for complete deployment guide.
 
 ---
 
+## Adding New Cloud Providers
+
+The platform uses a hybrid agent registration pattern that makes adding new cloud providers straightforward. See [ADR-009](docs/adr/009-hybrid-agent-registration-pattern.md) for the registration pattern and [ADR-010](docs/adr/010-agent-card-specification.md) for the AgentCard specification.
+
+### Overview
+
+Adding a new cloud provider requires:
+
+| Component | Description | Effort |
+|-----------|-------------|--------|
+| MCP Server | Wraps cloud provider APIs | 2-4 hours |
+| Cloud Agent | Self-registering agent with AgentCard | 1-2 hours |
+| Credential Schema | Pydantic model for credential validation | 30 min |
+| Tests | Unit tests for MCP tools | 1-2 hours |
+
+**No changes required to:** Coordinator Agent, Domain Agents, routing logic, or frontend.
+
+### Step 1: Create MCP Server
+
+Create a new MCP server that implements the 6 required tools:
+
+```python
+# src/mcp_servers/oracle_mcp.py
+from src.mcp_servers.base import BaseMCPServer, cloud_provider
+from src.models.responses import CostDataResponse, ResourceListResponse
+
+@cloud_provider("oracle", port=8090)
+class OracleMCPServer(BaseMCPServer):
+    """MCP Server for Oracle Cloud Infrastructure"""
+
+    async def get_costs(self, tenant_id: str, account_id: str, **params) -> CostDataResponse:
+        credentials = await self.get_credentials(tenant_id, account_id)
+        # Call Oracle Usage API
+        # Transform response to CostDataResponse
+        ...
+
+    async def get_resources(self, tenant_id: str, account_id: str, **params) -> ResourceListResponse:
+        # Call Oracle Resource Manager API
+        ...
+
+    async def get_recommendations(self, tenant_id: str, account_id: str, **params):
+        # Call Oracle Cloud Advisor API
+        ...
+
+    async def get_anomalies(self, tenant_id: str, account_id: str, **params):
+        # Implement anomaly detection
+        ...
+
+    async def execute_action(self, tenant_id: str, account_id: str, **params):
+        # Call Oracle compute/database APIs for remediation
+        ...
+
+    async def get_idle_resources(self, tenant_id: str, account_id: str, **params):
+        # Query Oracle Monitoring for idle resources
+        ...
+```
+
+### Step 2: Create Cloud Agent
+
+Create a self-registering Cloud Agent with an **AgentCard**. The AgentCard is a Pydantic model that declares the agent's capabilities for dynamic discovery:
+
+| AgentCard Field | Purpose | Example |
+|-----------------|---------|---------|
+| `name` | Unique identifier | `"oracle"` |
+| `type` | Agent category | `AgentType.CLOUD_PROVIDER` |
+| `version` | Semantic version | `"1.0.0"` |
+| `capabilities.tools` | Supported operations | `["get_costs", "get_resources", ...]` |
+| `capabilities.providers` | Cloud provider(s) | `["oracle"]` |
+| `capabilities.permissions_required` | RBAC permissions | `["read:costs"]` |
+
+Create a self-registering Cloud Agent:
+
+```python
+# src/agents/cloud/oracle_agent.py
+from src.agents.base import BaseCloudAgent
+from src.core.agent_registry import AgentRegistry, AgentCard, AgentType, AgentCapability
+from src.mcp_servers.oracle_mcp import OracleMCPServer
+
+class OracleCloudAgent(BaseCloudAgent):
+    """Oracle Cloud Agent - self-registers on instantiation"""
+
+    CARD = AgentCard(
+        name="oracle",
+        type=AgentType.CLOUD_PROVIDER,
+        version="1.0.0",
+        capabilities=AgentCapability(
+            tools=["get_costs", "get_resources", "get_recommendations",
+                   "get_anomalies", "execute_action", "get_idle_resources"],
+            providers=["oracle"],
+            permissions_required=["read:costs", "read:resources"]
+        )
+    )
+
+    def __init__(self, mcp_server: OracleMCPServer = None):
+        super().__init__()
+        self.mcp = mcp_server or OracleMCPServer()
+        AgentRegistry.register(self.CARD, self)  # Auto-registration
+
+    async def get_costs(self, tenant_context, params):
+        return await self.mcp.get_costs(
+            tenant_id=tenant_context.tenant_id,
+            account_id=params.get("account_id"),
+            **params
+        )
+
+    # Implement other methods...
+```
+
+### Step 3: Add Credential Schema
+
+Define the credential validation schema:
+
+```python
+# src/credentials/schemas.py (add to existing file)
+from pydantic import BaseModel, SecretStr
+
+class OracleCredentials(BaseModel):
+    """Oracle Cloud Infrastructure credentials"""
+    tenancy_ocid: str
+    user_ocid: str
+    fingerprint: str
+    private_key: SecretStr
+    region: str = "us-ashburn-1"
+
+# Add to registry
+CREDENTIAL_SCHEMAS["oracle"] = OracleCredentials
+```
+
+### Step 4: Add Provider Configuration
+
+Add provider metadata to config:
+
+```yaml
+# config/providers.yaml (add to existing file)
+providers:
+  oracle:
+    name: "Oracle Cloud Infrastructure"
+    mcp_port: 8090
+    credential_type: "api_key"
+    credential_fields:
+      - tenancy_ocid
+      - user_ocid
+      - fingerprint
+      - private_key
+    cost_api: "Usage API"
+    resource_api: "Resource Manager"
+    recommendation_api: "Cloud Advisor"
+    rate_limits:
+      requests_per_second: 10
+      burst: 20
+```
+
+### Step 5: Register on Startup
+
+Ensure the agent is instantiated on application startup:
+
+```python
+# src/main.py (add to startup)
+from src.agents.cloud.oracle_agent import OracleCloudAgent
+
+def initialize_agents():
+    # Existing agents...
+    OracleCloudAgent()  # Self-registers
+```
+
+### Step 6: Add Tests
+
+```python
+# tests/mcp_servers/test_oracle_mcp.py
+from tests.base import BaseMCPServerTest
+from src.mcp_servers.oracle_mcp import OracleMCPServer
+
+class TestOracleMCPServer(BaseMCPServerTest):
+    @pytest.fixture
+    def mcp_server(self):
+        return OracleMCPServer()
+
+    # Inherits standard tests from BaseMCPServerTest
+    # Add Oracle-specific tests below
+
+    async def test_oracle_specific_behavior(self, mcp_server):
+        # Test Oracle-specific functionality
+        ...
+```
+
+### Verification
+
+After deployment, the new provider is automatically discoverable:
+
+```python
+# Domain Agent automatically finds the new provider
+cloud_agents = AgentRegistry.get_cloud_agents()
+# Returns: [AWSAgent, AzureAgent, GCPAgent, K8sAgent, OracleAgent]
+
+# Tenant with Oracle account connected will include it in queries
+costs = await cost_agent.get_multi_cloud_costs(tenant_context, params)
+# Includes Oracle costs if tenant has oracle account
+```
+
+### Provider Checklist
+
+Before deploying a new provider:
+
+- [ ] MCP Server implements all 6 required tools
+- [ ] Cloud Agent has valid AgentCard with capabilities
+- [ ] Credential schema validates all required fields
+- [ ] Secret Manager path follows convention: `tenant-{id}-{provider}`
+- [ ] Unit tests pass for all MCP tools
+- [ ] Integration test with real cloud API (sandbox account)
+- [ ] Rate limits configured appropriately
+- [ ] Error handling returns standard MCPError format
+
+---
+
 ## Troubleshooting
 
 ### Common Issues

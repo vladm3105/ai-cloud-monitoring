@@ -18,20 +18,37 @@ ADRs are documents that capture important architectural decisions along with the
 | [002](002-gcp-only-first.md) | Start with GCP-Only, Not Multi-Cloud | Accepted | 2026-01-20 |
 | [003](003-use-bigquery-not-timescaledb.md) | Use BigQuery for Metrics, Not TimescaleDB | Accepted | 2026-01-22 |
 | [004](004-cloud-run-not-kubernetes.md) | Deploy to Cloud Run, Not Kubernetes | Accepted | 2026-01-25 |
+| [005](005-use-litellm-for-llms.md) | Use LiteLLM for Vendor-Neutral LLM Access | Accepted | 2026-01-28 |
+| [006](006-cloud-native-task-queues-not-celery.md) | Use Cloud-Native Task Queues, Not Celery | Accepted | 2026-01-30 |
+| [007](007-grafana-plus-agui-hybrid.md) | Grafana + AG-UI Hybrid Frontend | Accepted | 2026-02-01 |
+| [008](008-database-strategy-mvp.md) | Firestore for MVP, PostgreSQL for Production | Accepted | 2026-02-03 |
+| [009](009-hybrid-agent-registration-pattern.md) | Hybrid Agent Registration Pattern | Accepted | 2026-02-07 |
+| [010](010-agent-card-specification.md) | AgentCard Specification for Agent Discovery | Accepted | 2026-02-07 |
 
 ## Decision Categories
 
-### Integration & Architecture (ADR-001, 002)
+### Integration & Architecture (ADR-001, 002, 009)
+
 - How we integrate with cloud providers
 - Whether to support single or multiple clouds
+- Agent discovery and registration patterns
 
-### Data & Storage (ADR-003)
+### Data & Storage (ADR-003, 008)
+
 - Where we store cost metrics
 - Database and storage choices
+- MVP vs production storage strategy
 
-### Infrastructure & Deployment (ADR-004)
+### Infrastructure & Deployment (ADR-004, 006)
+
 - Where and how we deploy services
 - Container orchestration platform
+- Task queue and scheduling
+
+### AI & Frontend (ADR-005, 007)
+
+- LLM provider abstraction
+- User interface approach
 
 ## When to Create an ADR
 
