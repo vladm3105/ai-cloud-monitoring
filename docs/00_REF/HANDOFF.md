@@ -36,16 +36,16 @@ The AI Cost Monitoring platform is fully documented and ready for implementation
 
 | Decision | Choice | Reference |
 |----------|--------|-----------|
-| **Agent Framework** | MCP Servers | [ADR-001](docs/adr/001-use-mcp-servers.md) |
-| **Home Cloud** | GCP first, AWS/Azure later | [ADR-002](docs/adr/002-gcp-only-first.md) |
-| **Analytics Database** | BigQuery (not TimescaleDB) | [ADR-003](docs/adr/003-use-bigquery-not-timescaledb.md) |
-| **Container Platform** | Cloud Run (not Kubernetes) | [ADR-004](docs/adr/004-cloud-run-not-kubernetes.md) |
-| **LLM Provider** | LiteLLM (multi-provider) | [ADR-005](docs/adr/005-use-litellm-for-llms.md) |
-| **Task Queue** | Cloud Tasks (not Celery) | [ADR-006](docs/adr/006-cloud-native-task-queues-not-celery.md) |
-| **UI Approach** | Grafana + AG-UI Hybrid | [ADR-007](docs/adr/007-grafana-plus-agui-hybrid.md) |
-| **MVP Database** | Firestore (prod: PostgreSQL) | [ADR-008](docs/adr/008-database-strategy-mvp.md) |
-| **Agent Registration** | Hybrid pattern (direct + A2A) | [ADR-009](docs/adr/009-hybrid-agent-registration-pattern.md) |
-| **Agent Discovery** | AgentCard specification | [ADR-010](docs/adr/010-agent-card-specification.md) |
+| **Agent Framework** | MCP Servers | [ADR-001](domain/architecture/adr/001-use-mcp-servers.md) |
+| **Home Cloud** | GCP first, AWS/Azure later | [ADR-002](domain/architecture/adr/002-gcp-only-first.md) |
+| **Analytics Database** | BigQuery (not TimescaleDB) | [ADR-003](domain/architecture/adr/003-use-bigquery-not-timescaledb.md) |
+| **Container Platform** | Cloud Run (not Kubernetes) | [ADR-004](domain/architecture/adr/004-cloud-run-not-kubernetes.md) |
+| **LLM Provider** | LiteLLM (multi-provider) | [ADR-005](domain/architecture/adr/005-use-litellm-for-llms.md) |
+| **Task Queue** | Cloud Tasks (not Celery) | [ADR-006](domain/architecture/adr/006-cloud-native-task-queues-not-celery.md) |
+| **UI Approach** | Grafana + AG-UI Hybrid | [ADR-007](domain/architecture/adr/007-grafana-plus-agui-hybrid.md) |
+| **MVP Database** | Firestore (prod: PostgreSQL) | [ADR-008](domain/architecture/adr/008-database-strategy-mvp.md) |
+| **Agent Registration** | Hybrid pattern (direct + A2A) | [ADR-009](domain/architecture/adr/009-hybrid-agent-registration-pattern.md) |
+| **Agent Discovery** | AgentCard specification | [ADR-010](domain/architecture/adr/010-agent-card-specification.md) |
 
 ---
 
@@ -148,7 +148,7 @@ The AI Cost Monitoring platform is fully documented and ready for implementation
 ### Architecture References
 4. **[core/ai-cost-monitoring-description.md](core/ai-cost-monitoring-description.md)** - System overview
 5. **[core/executive-summary.md](core/executive-summary.md)** - High-level architecture
-6. **[docs/adr/](docs/adr/)** - All architectural decisions
+6. **[domain/](domain/)** - All architectural decisions
 
 ### Implementation Specs
 7. **[core/01-database-schema.md](core/01-database-schema.md)** - Database design
@@ -300,7 +300,7 @@ Core documents were updated to align with PROJECT_DEFINITION.md architecture:
 
 **Documentation Questions:**
 - All specs in `/core` directory
-- All decisions documented in `/docs/adr`
+- All decisions documented in `/domain`
 - Deployment guides have step-by-step instructions
 
 **Technical Questions:**
@@ -309,7 +309,7 @@ Core documents were updated to align with PROJECT_DEFINITION.md architecture:
 - Review `.env.example` for configuration
 
 **Architectural Questions:**
-- Review [ADRs](docs/adr/) first
+- Review [ADRs](domain/) first
 - Check [core/ai-cost-monitoring-description.md](core/ai-cost-monitoring-description.md)
 - Consult tech lead if changes needed
 
@@ -338,7 +338,7 @@ Core documents were updated to align with PROJECT_DEFINITION.md architecture:
 **Before Writing Code:**
 - [ ] Read [README.md](README.md)
 - [ ] Read [DEVELOPER_GUIDE.md](DEVELOPER_GUIDE.md)
-- [ ] Review all [ADRs](docs/adr/)
+- [ ] Review all [ADRs](domain/)
 - [ ] Read [core/ai-cost-monitoring-description.md](core/ai-cost-monitoring-description.md)
 - [ ] Review [database schema](core/01-database-schema.md)
 

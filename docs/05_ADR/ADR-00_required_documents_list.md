@@ -5,7 +5,7 @@
 
 ---
 
-## Existing ADRs (00_REF/docs/adr/)
+## Existing ADRs (00_REF/domain/architecture/adr/)
 
 10 ADRs already exist covering core architectural decisions.
 
@@ -21,5 +21,5 @@ Create new ADRs here as implementation decisions arise.
 
 ## Completion Criteria
 
-- [x] Reference existing ADRs in 00_REF/docs/adr/
+- [x] Reference existing ADRs in 00_REF/domain/architecture/adr/
 - [ ] Create new ADRs as needed during implementation

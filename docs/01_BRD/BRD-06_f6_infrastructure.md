@@ -77,7 +77,7 @@ This document covers:
 - Gap remediation for enterprise deployment readiness
 
 **Out of Scope**:
-- Domain-specific business logic (trading, cloud_accounts)
+- Domain-specific business logic (cloud_accounts, cost_analytics)
 - Application-level service definitions (injected by domain layers)
 - UI implementation details
 

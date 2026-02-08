@@ -19,9 +19,9 @@
 
 | Source | Location | Description |
 |--------|----------|-------------|
-| MCP Tool Contracts | [00_REF/core/02-mcp-tool-contracts.md](../00_REF/core/02-mcp-tool-contracts.md) | Existing tool contract definitions |
-| Agent Routing | [00_REF/core/03-agent-routing-spec.md](../00_REF/core/03-agent-routing-spec.md) | Agent communication patterns |
-| AgentCard Spec | [00_REF/docs/adr/010-agent-card-specification.md](../00_REF/docs/adr/010-agent-card-specification.md) | Agent discovery metadata |
+| MCP Tool Contracts | [00_REF/domain/02-mcp-tool-contracts.md](../00_REF/domain/02-mcp-tool-contracts.md) | Existing tool contract definitions |
+| Agent Routing | [00_REF/domain/03-agent-routing-spec.md](../00_REF/domain/03-agent-routing-spec.md) | Agent communication patterns |
+| AgentCard Spec | [00_REF/domain/architecture/adr/010-agent-card-specification.md](../00_REF/domain/architecture/adr/010-agent-card-specification.md) | Agent discovery metadata |
 
 ---
 

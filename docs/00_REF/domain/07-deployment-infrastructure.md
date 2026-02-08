@@ -434,7 +434,7 @@ VPC: finops-prod (10.0.0.0/16)
 ## Related ADRs
 
 
-- [ADR-002: GCP as First Home Cloud](../docs/adr/002-gcp-only-first.md)
-- [ADR-003: Use BigQuery, Not TimescaleDB](../docs/adr/003-use-bigquery-not-timescaledb.md)
-- [ADR-004: Serverless Containers, Not Kubernetes](../docs/adr/004-cloud-run-not-kubernetes.md)
-- [ADR-006: Cloud-Native Task Queues, Not Celery](../docs/adr/006-cloud-native-task-queues-not-celery.md)
+- [ADR-002: GCP as First Home Cloud](./architecture/adr/002-gcp-only-first.md)
+- [ADR-003: Use BigQuery, Not TimescaleDB](./architecture/adr/003-use-bigquery-not-timescaledb.md)
+- [ADR-004: Serverless Containers, Not Kubernetes](./architecture/adr/004-cloud-run-not-kubernetes.md)
+- [ADR-006: Cloud-Native Task Queues, Not Celery](./architecture/adr/006-cloud-native-task-queues-not-celery.md)

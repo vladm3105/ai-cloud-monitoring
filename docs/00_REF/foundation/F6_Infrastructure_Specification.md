@@ -280,7 +280,7 @@ tenants/
 
 ### 5.3 PostgreSQL Schema (Production)
 
-See `00_REF/core/01-database-schema.md` for full schema with RLS policies.
+See `00_REF/domain/01-database-schema.md` for full schema with RLS policies.
 
 ### 5.4 BigQuery Analytics
 
@@ -391,7 +391,7 @@ class CloudMCPServer:
 
 ### 7.2 MCP Tool Contracts
 
-See `00_REF/core/02-mcp-tool-contracts.md` for full tool specifications.
+See `00_REF/domain/02-mcp-tool-contracts.md` for full tool specifications.
 
 ---
 

@@ -593,5 +593,5 @@ External Agent sends A2A request
 - [03-agent-routing-spec.md](03-agent-routing-spec.md) - JWT validation, RBAC enforcement
 - [04-tenant-onboarding.md](04-tenant-onboarding.md) - Auth0 setup, credential storage
 - [05-api-endpoint-spec.md](05-api-endpoint-spec.md) - API authentication, webhooks
-- [ADR-009](../docs/adr/009-hybrid-agent-registration-pattern.md) - A2A agent registration
-- [ADR-010](../docs/adr/010-agent-card-specification.md) - AgentCard permissions
+- [ADR-009](./architecture/adr/009-hybrid-agent-registration-pattern.md) - A2A agent registration
+- [ADR-010](./architecture/adr/010-agent-card-specification.md) - AgentCard permissions

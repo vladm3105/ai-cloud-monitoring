@@ -20,8 +20,8 @@
 
 | Source | Location | Description |
 |--------|----------|-------------|
-| Database Schema | [00_REF/core/01-database-schema.md](../00_REF/core/01-database-schema.md) | Database design |
-| MCP Contracts | [00_REF/core/02-mcp-tool-contracts.md](../00_REF/core/02-mcp-tool-contracts.md) | Tool interfaces |
+| Database Schema | [00_REF/domain/01-database-schema.md](../00_REF/domain/01-database-schema.md) | Database design |
+| MCP Contracts | [00_REF/domain/02-mcp-tool-contracts.md](../00_REF/domain/02-mcp-tool-contracts.md) | Tool interfaces |
 | GCP Deployment | [00_REF/GCP-DEPLOYMENT.md](../00_REF/GCP-DEPLOYMENT.md) | GCP setup guide |
 
 ---

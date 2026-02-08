@@ -39,7 +39,7 @@ All cloud MCP servers implement unified tool contracts (`get_costs`, `get_recomm
 
 ## 🚀 Quick Start
 
-> **[View System Architecture Diagram](docs/architecture/README.md)** 📊
+> **[View System Architecture Diagram](domain/README.md)** 📊
 
 
 ### Deployment to GCP
@@ -63,9 +63,9 @@ Most infrastructure stays within GCP free tier. Primary cost is LLM inference (~
 
 **Monthly Cost (Multi-Tenant SaaS)**: ~$50-150 (Production at 100 tenants)
 
-> **📋 MVP Architecture**: See [MVP_ARCHITECTURE.md](docs/architecture/MVP_ARCHITECTURE.md) for the simplified single-tenant stack using Firestore + BigQuery (no PostgreSQL required for MVP).
+> **📋 MVP Architecture**: See [MVP_ARCHITECTURE.md](domain/architecture/MVP_ARCHITECTURE.md) for the simplified single-tenant stack using Firestore + BigQuery (no PostgreSQL required for MVP).
 
-**Note:** Currently optimized for GCP deployment (per [ADR-002](docs/adr/002-gcp-only-first.md)). Multi-cloud expansion planned for future phases.
+**Note:** Currently optimized for GCP deployment (per [ADR-002](domain/architecture/adr/002-gcp-only-first.md)). Multi-cloud expansion planned for future phases.
 
 ### For Developers
 
@@ -76,7 +76,7 @@ Most infrastructure stays within GCP free tier. Primary cost is LLM inference (~
 4. **[core/](core/)** - Complete technical specifications
 
 **Quick Links:**
-- [All Architecture Decisions (ADRs)](docs/adr/)
+- [All Architecture Decisions (ADRs)](domain/)
 - [Database Schema](core/01-database-schema.md)
 - [API Endpoints](core/05-api-endpoint-spec.md)
 - [GCP Deployment Guide](GCP-DEPLOYMENT.md)
@@ -106,7 +106,7 @@ Most infrastructure stays within GCP free tier. Primary cost is LLM inference (~
 - **Task Queue**: Cloud Tasks + Cloud Scheduler
 - **Secret Manager**: GCP Secret Manager
 
-See [ADR-008](docs/adr/008-database-strategy-mvp.md) for the database strategy decision.
+See [ADR-008](domain/architecture/adr/008-database-strategy-mvp.md) for the database strategy decision.
 
 **Why This Matters:**
 
@@ -193,7 +193,7 @@ The platform is **cloud-agnostic in monitoring** but **cloud-specific in deploym
 
 ### Agent Registration Pattern
 
-Agents use **AgentCard** for self-description and dynamic discovery ([ADR-009](docs/adr/009-hybrid-agent-registration-pattern.md), [ADR-010](docs/adr/010-agent-card-specification.md)):
+Agents use **AgentCard** for self-description and dynamic discovery ([ADR-009](domain/architecture/adr/009-hybrid-agent-registration-pattern.md), [ADR-010](domain/architecture/adr/010-agent-card-specification.md)):
 
 ```python
 # Each agent declares its capabilities via AgentCard
@@ -380,13 +380,13 @@ Both UIs query the **same data sources** (BigQuery for metrics, Cloud SQL for me
   - **Persistent collections**: `users`, `config`, `policies`, `tasks`
   - **Ephemeral collections with TTL**: `task_progress` (24h), `messages` (7d), `recommendations` (30d)
   - **Real-time listeners**: Replace SSE for live UI updates (task progress, notifications, sync status)
-  - Multi-tenant: Upgrade to PostgreSQL with Row-Level Security (see [ADR-008](docs/adr/008-database-strategy-mvp.md))
+  - Multi-tenant: Upgrade to PostgreSQL with Row-Level Security (see [ADR-008](domain/architecture/adr/008-database-strategy-mvp.md))
 - **Relational Database (Multi-tenant)** - PostgreSQL for operational data with Row-Level Security
   - Currently: Cloud SQL PostgreSQL 16 (GCP)
   - AWS alternative: RDS PostgreSQL or Aurora PostgreSQL
   - Azure alternative: Azure Database for PostgreSQL
   - Stores: Tenants, accounts, users, workflow state
-- **Analytics Database** - Time-series cost metrics (see [ADR-003](docs/adr/003-use-bigquery-not-timescaledb.md))
+- **Analytics Database** - Time-series cost metrics (see [ADR-003](domain/architecture/adr/003-use-bigquery-not-timescaledb.md))
   - Currently: BigQuery (GCP)
   - AWS alternative: Athena + S3 or Redshift
   - Azure alternative: Azure Synapse Analytics
@@ -403,7 +403,7 @@ Both UIs query the **same data sources** (BigQuery for metrics, Cloud SQL for me
 
 ### Infrastructure
 - **Serverless Containers** - Docker-based container execution
-  - Currently: GCP Cloud Run (see [ADR-004](docs/adr/004-cloud-run-not-kubernetes.md))
+  - Currently: GCP Cloud Run (see [ADR-004](domain/architecture/adr/004-cloud-run-not-kubernetes.md))
   - AWS alternative: ECS Fargate or AWS App Runner
   - Azure alternative: Azure Container Apps
   - Serverless scaling, pay-per-use
@@ -612,12 +612,12 @@ External AI agents initiate queries through the Google A2A Protocol gateway.
 
 ## 📋 Architecture Decision Records
 
-Key architectural decisions are documented in [docs/adr/](docs/adr/):
+Key architectural decisions are documented in [domain/](domain/):
 
-- **[ADR-001](docs/adr/001-use-mcp-servers.md)** - Use MCP Servers Instead of REST APIs
-- **[ADR-002](docs/adr/002-gcp-only-first.md)** - Start with GCP-Only, Not Multi-Cloud
-- **[ADR-003](docs/adr/003-use-bigquery-not-timescaledb.md)** - Use BigQuery for Metrics, Not TimescaleDB
-- **[ADR-004](docs/adr/004-cloud-run-not-kubernetes.md)** - Deploy to Cloud Run, Not Kubernetes
+- **[ADR-001](domain/architecture/adr/001-use-mcp-servers.md)** - Use MCP Servers Instead of REST APIs
+- **[ADR-002](domain/architecture/adr/002-gcp-only-first.md)** - Start with GCP-Only, Not Multi-Cloud
+- **[ADR-003](domain/architecture/adr/003-use-bigquery-not-timescaledb.md)** - Use BigQuery for Metrics, Not TimescaleDB
+- **[ADR-004](domain/architecture/adr/004-cloud-run-not-kubernetes.md)** - Deploy to Cloud Run, Not Kubernetes
 
 ---
 

@@ -14,7 +14,7 @@
 
 ## 1. Storage Strategy
 
-> **Scope Note:** This document describes the **multi-tenant production architecture**. For MVP (single-tenant), see [MVP_ARCHITECTURE.md](../docs/architecture/MVP_ARCHITECTURE.md) which uses Firestore + BigQuery only.
+> **Scope Note:** This document describes the **multi-tenant production architecture**. For MVP (single-tenant), see [MVP_ARCHITECTURE.md](./architecture/MVP_ARCHITECTURE.md) which uses Firestore + BigQuery only.
 
 AI Cost Monitoring uses a tiered storage strategy based on deployment phase:
 
@@ -386,7 +386,7 @@ The primary time-series table. Stores cost data points synced from cloud provide
 
 ### 3.11 a2a_agents
 
-> **Related:** See [ADR-010: AgentCard Specification](../docs/adr/010-agent-card-specification.md) for the AgentCard schema used by external A2A agents.
+> **Related:** See [ADR-010: AgentCard Specification](./architecture/adr/010-agent-card-specification.md) for the AgentCard schema used by external A2A agents.
 
 | Field | Type | Description |
 |-------|------|-------------|

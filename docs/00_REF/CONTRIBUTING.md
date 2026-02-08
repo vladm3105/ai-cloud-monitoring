@@ -284,14 +284,14 @@ describe('calculateTotalCost', () => {
 |------|-------------|
 | `README.md` | Adding major features |
 | `core/*.md` | Changing architecture/specs |
-| `docs/adr/*.md` | Making architectural decisions |
+| `domain/*.md` | Making architectural decisions |
 | `*-DEPLOYMENT.md` | Changing deployment process |
 
 ### Adding ADRs
 
 For significant architectural decisions:
 
-1. Create `docs/adr/NNN-title.md`
+1. Create `domain/NNN-title.md`
 2. Use template from existing ADRs
 3. Include: Context, Decision, Rationale, Consequences
 

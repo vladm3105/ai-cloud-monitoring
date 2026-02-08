@@ -71,7 +71,7 @@ This document covers:
 - Gap remediation for enterprise compliance
 
 **Out of Scope**:
-- Domain-specific business logic (trading, cloud_accounts)
+- Domain-specific business logic (cloud_accounts, cost_analytics)
 - Skill definitions (injected by domain layer)
 - UI implementation details
 

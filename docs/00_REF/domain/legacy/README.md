@@ -40,10 +40,10 @@ The project evolved from a **GCP-only, Kubernetes-based architecture** to a **cl
 ## Why We Changed
 
 See the following ADRs for architectural decisions:
-- [ADR-002: GCP as First Home Cloud](../../docs/adr/002-gcp-only-first.md) - Why GCP first, but not GCP-only
-- [ADR-003: Use BigQuery, Not TimescaleDB](../../docs/adr/003-use-bigquery-not-timescaledb.md) - Serverless analytics
-- [ADR-004: Serverless Containers, Not Kubernetes](../../docs/adr/004-cloud-run-not-kubernetes.md) - Simpler deployment
-- [ADR-006: Cloud-Native Task Queues, Not Celery](../../docs/adr/006-cloud-native-task-queues-not-celery.md) - Managed background jobs
+- [ADR-002: GCP as First Home Cloud](../domain/architecture/adr/002-gcp-only-first.md) - Why GCP first, but not GCP-only
+- [ADR-003: Use BigQuery, Not TimescaleDB](../domain/architecture/adr/003-use-bigquery-not-timescaledb.md) - Serverless analytics
+- [ADR-004: Serverless Containers, Not Kubernetes](../domain/architecture/adr/004-cloud-run-not-kubernetes.md) - Simpler deployment
+- [ADR-006: Cloud-Native Task Queues, Not Celery](../domain/architecture/adr/006-cloud-native-task-queues-not-celery.md) - Managed background jobs
 
 ## Active Documentation
 

@@ -520,8 +520,8 @@ User: "Why did our AWS costs increase 40% last month?"
 
 ## Related Documents
 
-- [MVP_ARCHITECTURE.md](docs/architecture/MVP_ARCHITECTURE.md) — Simplified MVP stack
-- [ADR-001](docs/adr/001-use-mcp-servers.md) — MCP over REST decision
-- [ADR-002](docs/adr/002-gcp-only-first.md) — GCP as home cloud
+- [MVP_ARCHITECTURE.md](domain/architecture/MVP_ARCHITECTURE.md) — Simplified MVP stack
+- [ADR-001](domain/architecture/adr/001-use-mcp-servers.md) — MCP over REST decision
+- [ADR-002](domain/architecture/adr/002-gcp-only-first.md) — GCP as home cloud
 - [core/02-mcp-tool-contracts.md](core/02-mcp-tool-contracts.md) — MCP tool specifications
 - [core/03-agent-routing-spec.md](core/03-agent-routing-spec.md) — Agent hierarchy

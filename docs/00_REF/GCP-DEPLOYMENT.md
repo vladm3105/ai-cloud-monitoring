@@ -439,7 +439,7 @@ jobs:
 ## Support & Resources
 
 - **Documentation**: [docs/](docs/)
-- **ADRs**: [docs/adr/](docs/adr/)
+- **ADRs**: [domain/](domain/)
 - **Cloud Run Docs**: https://cloud.google.com/run/docs
 - **Terraform Docs**: [terraform/README.md](terraform/README.md)
 

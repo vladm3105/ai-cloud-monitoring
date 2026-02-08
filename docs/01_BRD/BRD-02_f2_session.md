@@ -75,7 +75,7 @@ This document covers:
 
 **Out of Scope**:
 - Domain-specific workspace schemas (injected by domain layer)
-- Trading logic or business rules (domain layer responsibility)
+- Cost monitoring logic or business rules (domain layer responsibility)
 - UI implementation details
 
 ### 1.3 Intended Audience
@@ -423,10 +423,10 @@ sequenceDiagram
 
 | Type | Schema | Description |
 |------|--------|-------------|
-| watchlist | symbols[], alerts[], notes | Stock watchlist with price alerts |
-| strategy | config{}, backtest{}, live_status | Trading strategy definition |
-| analysis | ticker, data{}, predictions{} | Earnings/technical analysis |
-| portfolio | positions[], risk_params{}, zone | Portfolio configuration |
+| cloud_resources | resources[], alerts[], notes | Cloud resource tracking with cost alerts |
+| policy | config{}, simulation{}, active_status | Cost optimization policy definition |
+| analysis | account_id, data{}, forecasts{} | Cost analysis and forecasting |
+| cloud_account | resources[], budget_params{}, region | Cloud account configuration |
 
 **Business Requirements**:
 - Create, update, delete workspaces
@@ -1164,7 +1164,7 @@ sequenceDiagram
 │           ▼                                                         │
 │  ┌─────────────────┐                                                │
 │  │  PROFILE LAYER  │  Long-term • Permanent • External storage      │
-│  │                 │  Trading patterns, learned preferences          │
+│  │                 │  Cost patterns, learned preferences              │
 │  │  Storage: A2A   │                                                │
 │  └─────────────────┘                                                │
 │                                                                      │

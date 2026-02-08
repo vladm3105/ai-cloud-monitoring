@@ -360,7 +360,7 @@ The Coordinator selects response components based on data type and user query:
 
 ## 7. Agent Registration & Discovery
 
-> **Architecture Decisions:** See [ADR-009](../docs/adr/009-hybrid-agent-registration-pattern.md) (Hybrid Agent Registration) and [ADR-010](../docs/adr/010-agent-card-specification.md) (AgentCard Specification).
+> **Architecture Decisions:** See [ADR-009](./architecture/adr/009-hybrid-agent-registration-pattern.md) (Hybrid Agent Registration) and [ADR-010](./architecture/adr/010-agent-card-specification.md) (AgentCard Specification).
 
 ### 7.1 AgentRegistry Pattern
 

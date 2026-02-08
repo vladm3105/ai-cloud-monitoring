@@ -237,7 +237,7 @@ sequenceDiagram
 
     Note over Module,Schema: Initial Configuration Load
     Module->>F7_Config: get_config(key)
-    F7_Config->>EnvVars: Check NEXUS_* prefix
+    F7_Config->>EnvVars: Check COSTMON_* prefix
     EnvVars-->>F7_Config: Value (if exists)
     alt Not in Environment
         F7_Config->>SecretMgr: Check secret
@@ -351,14 +351,14 @@ sequenceDiagram
 @ref: [F7 Section 3](../00_init/F7_Config_Manager_Technical_Specification.md#3-configuration-sources)
 
 **Business Requirements**:
-- Environment variables with NEXUS_ prefix as highest priority
+- Environment variables with COSTMON_ prefix as highest priority
 - GCP Secret Manager integration for sensitive values
 - YAML configuration files with environment-specific overrides
 - Built-in defaults as fallback for all configuration values
 
 **Business Rules**:
 - Priority order: Environment (1) > Secrets (2) > Files (3) > Defaults (4)
-- Environment variable transform: NEXUS_DB_HOST becomes db.host
+- Environment variable transform: COSTMON_DB_HOST becomes db.host
 - Secret cache TTL: 300 seconds
 - Deep merge strategy for configuration files
 
@@ -1093,10 +1093,10 @@ sequenceDiagram
 
 ```
 Priority Resolution (highest to lowest):
-1. Environment Variables (NEXUS_*)
-   └── Example: NEXUS_DB_HOST=prod.db.example.com
+1. Environment Variables (COSTMON_*)
+   └── Example: COSTMON_DB_HOST=prod.db.example.com
 2. GCP Secret Manager
-   └── Example: nexus-db-password
+   └── Example: costmon-db-password
 3. Configuration Files (YAML)
    └── ./config/production.yaml
    └── ./config/base.yaml (merged)
@@ -1128,16 +1128,16 @@ database:
 database:
   host: postgres.example.com
   port: 5432
-  name: nexus_db
+  name: costmon_db
 ```
 
 ### Appendix C: Feature Flag Definition Example
 
 ```yaml
 feature_flags:
-  new_trading_ui:
+  new_monitoring_ui:
     enabled: true
-    description: "New trading interface"
+    description: "New cost monitoring interface"
     targeting:
       strategy: percentage
       percentage: 25

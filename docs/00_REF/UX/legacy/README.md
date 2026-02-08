@@ -63,7 +63,7 @@ The project evolved through extensive UX research exploring multiple interface a
 
 ## Why We Decided on Grafana + AG-UI Hybrid
 
-See **[ADR-007: Grafana + AG-UI Hybrid Interface](../../docs/adr/007-grafana-plus-agui-hybrid.md)** for the architectural decision.
+See **[ADR-007: Grafana + AG-UI Hybrid Interface](../domain/architecture/adr/007-grafana-plus-agui-hybrid.md)** for the architectural decision.
 
 **Key Reasons:**
 1. **Best of both worlds** - Grafana for speed, AG-UI for flexibility
@@ -76,7 +76,7 @@ See **[ADR-007: Grafana + AG-UI Hybrid Interface](../../docs/adr/007-grafana-plu
 For current UX specifications, see:
 - **[FINAL-implementation-guide.md](../FINAL-implementation-guide.md)** - Current two-phase implementation plan
 - **[FINAL-two-phase-implementation.md](../FINAL-two-phase-implementation.md)** - Current architecture details
-- **[ADR-007](../../docs/adr/007-grafana-plus-agui-hybrid.md)** - Architectural decision record
+- **[ADR-007](../domain/architecture/adr/007-grafana-plus-agui-hybrid.md)** - Architectural decision record
 
 ## Research Value
 

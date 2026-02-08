@@ -76,7 +76,7 @@ This document covers:
 - Gap remediation for enterprise observability
 
 **Out of Scope**:
-- Domain-specific business logic (trading, cloud_accounts)
+- Domain-specific business logic (cloud_accounts, cost_analytics)
 - Business metric definitions (injected by domain layer)
 - UI implementation details
 - SIEM integration (covered by F4 SecOps)
@@ -426,7 +426,7 @@ sequenceDiagram
 **Business Requirements**:
 - OpenTelemetry-compatible trace context propagation
 - Span creation with standard attributes (service.name, http.method, http.status_code)
-- Custom Nexus attributes (nexus.user_id, nexus.session_id, nexus.zone, llm.model)
+- Custom attributes (costmon.user_id, costmon.session_id, costmon.tenant, llm.model)
 - Configurable sampling policies (probabilistic, always-on for errors/slow)
 - Cloud Trace export
 
@@ -1122,7 +1122,7 @@ sequenceDiagram
   "span_id": "span789",
   "user_id": "user-uuid-001",
   "session_id": "session-uuid-002",
-  "module": "api.trading",
+  "module": "api.cost",
   "context": {
     "endpoint": "/api/v1/orders",
     "method": "POST",

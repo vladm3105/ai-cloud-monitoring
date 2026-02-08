@@ -574,7 +574,7 @@ See [GCP-DEPLOYMENT.md](GCP-DEPLOYMENT.md) for complete deployment guide.
 
 ## Adding New Cloud Providers
 
-The platform uses a hybrid agent registration pattern that makes adding new cloud providers straightforward. See [ADR-009](docs/adr/009-hybrid-agent-registration-pattern.md) for the registration pattern and [ADR-010](docs/adr/010-agent-card-specification.md) for the AgentCard specification.
+The platform uses a hybrid agent registration pattern that makes adding new cloud providers straightforward. See [ADR-009](domain/architecture/adr/009-hybrid-agent-registration-pattern.md) for the registration pattern and [ADR-010](domain/architecture/adr/010-agent-card-specification.md) for the AgentCard specification.
 
 ### Overview
 
@@ -914,7 +914,7 @@ Add endpoint to src/api/routes/costs.py."
 | `core/01-database-schema.md` | Data structure |
 | `core/05-api-endpoint-spec.md` | API design |
 | `core/08-cost-model.md` | Cost estimates, timeline |
-| `docs/adr/*.md` | Why decisions were made |
+| `domain/*.md` | Why decisions were made |
 
 ### AI-Assisted Timeline
 
@@ -972,7 +972,7 @@ claude "This error appears when querying BigQuery: [paste error]. Fix it."
 - **[CONTRIBUTING.md](./CONTRIBUTING.md)** - Contribution guidelines
 - **[GCP-DEPLOYMENT.md](./GCP-DEPLOYMENT.md)** - GCP deployment guide
 - **[core/](./core/)** - Technical specifications
-- **[docs/adr/](./docs/adr/)** - Architecture decisions
+- **[domain/](./domain/)** - Architecture decisions
 - **[core/08-cost-model.md](./core/08-cost-model.md)** - 15-day MVP timeline
 
 ---

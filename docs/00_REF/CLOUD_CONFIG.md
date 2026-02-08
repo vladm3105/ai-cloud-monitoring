@@ -4,7 +4,7 @@
 **Google Cloud Platform (GCP)**
 
 ## Architecture Phase
-**MVP (Single-Tenant)** — See [MVP_ARCHITECTURE.md](docs/architecture/MVP_ARCHITECTURE.md)
+**MVP (Single-Tenant)** — See [MVP_ARCHITECTURE.md](domain/architecture/MVP_ARCHITECTURE.md)
 
 ## Configuration
 
@@ -302,7 +302,7 @@ echo "  - compute.googleapis.com (VPC)"
 
 ## Related Documents
 
-- [MVP_ARCHITECTURE.md](docs/architecture/MVP_ARCHITECTURE.md) - Full MVP architecture
-- [ADR-008: Database Strategy](docs/adr/008-database-strategy-mvp.md) - Firestore vs PostgreSQL
+- [MVP_ARCHITECTURE.md](domain/architecture/MVP_ARCHITECTURE.md) - Full MVP architecture
+- [ADR-008: Database Strategy](domain/architecture/adr/008-database-strategy-mvp.md) - Firestore vs PostgreSQL
 - [GCP-DEPLOYMENT.md](GCP-DEPLOYMENT.md) - Deployment guide
 - [.env.example](.env.example) - Environment variables template

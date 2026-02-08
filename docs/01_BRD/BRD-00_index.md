@@ -45,8 +45,8 @@ The AI Cost Monitoring Platform uses a **Hybrid Structure** (adapted from Tradin
 |--------|----------|-------------|
 | PROJECT_DEFINITION | [00_REF/PROJECT_DEFINITION.md](../00_REF/PROJECT_DEFINITION.md) | Full project definition |
 | Foundation Specs | [00_REF/foundation/](../00_REF/foundation/) | F1-F7 technical specifications |
-| ADRs | [00_REF/docs/adr/](../00_REF/docs/adr/) | Architectural decisions |
-| Core Specs | [00_REF/core/](../00_REF/core/) | Implementation specifications |
+| ADRs | [00_REF/domain/architecture/adr/](../00_REF/domain/architecture/adr/) | Architectural decisions |
+| Core Specs | [00_REF/domain/](../00_REF/domain/) | Implementation specifications |
 
 ---
 

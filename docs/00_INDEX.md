@@ -15,7 +15,7 @@
 | L2 | [02_PRD](02_PRD/) | Index Ready | Awaiting BRDs |
 | L3 | [03_EARS](03_EARS/) | Index Ready | Awaiting PRD-01 |
 | L4 | [04_BDD](04_BDD/) | Index Ready | Awaiting EARS-01 |
-| L5 | [05_ADR](05_ADR/) | Index Ready | Reference 00_REF/docs/adr/ |
+| L5 | [05_ADR](05_ADR/) | Index Ready | Reference 00_REF/domain/architecture/adr/ |
 | L6 | [06_SYS](06_SYS/) | Index Ready | Awaiting ADRs |
 | L7 | [07_REQ](07_REQ/) | Index Ready | Awaiting PRD-01 |
 | L8 | [08_CTR](08_CTR/) | Index Ready | Awaiting REQ-01 |
@@ -33,8 +33,9 @@ Pre-existing architectural documentation:
 | Category | Location | Contents |
 |----------|----------|----------|
 | Foundation | [00_REF/foundation/](00_REF/foundation/) | F1-F7 technical specifications |
-| ADRs | [00_REF/docs/adr/](00_REF/docs/adr/) | 10 architectural decisions |
-| Core Specs | [00_REF/core/](00_REF/core/) | 8 specification documents |
+| ADRs | [00_REF/domain/architecture/adr/](00_REF/domain/architecture/adr/) | 10 architectural decisions |
+| Architecture | [00_REF/domain/architecture/](00_REF/domain/architecture/) | System diagrams, MVP architecture |
+| Domain Specs | [00_REF/domain/](00_REF/domain/) | 8 specification documents |
 | Deployment | [00_REF/GCP-DEPLOYMENT.md](00_REF/GCP-DEPLOYMENT.md) | GCP setup guide |
 | Project Def | [00_REF/PROJECT_DEFINITION.md](00_REF/PROJECT_DEFINITION.md) | Full project definition |
 | Handoff | [00_REF/HANDOFF.md](00_REF/HANDOFF.md) | Developer handoff document |

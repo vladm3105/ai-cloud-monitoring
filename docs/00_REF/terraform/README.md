@@ -188,5 +188,5 @@ gcloud services enable sqladmin.googleapis.com
 
 For issues or questions:
 - Check [GCP-DEPLOYMENT.md](../GCP-DEPLOYMENT.md)
-- Review [ADRs](../docs/adr/)
+- Review [ADRs](../domain/)
 - Open an issue in the repository
