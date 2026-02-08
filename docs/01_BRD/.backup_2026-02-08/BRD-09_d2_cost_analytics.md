@@ -39,7 +39,6 @@ custom_fields:
 | **Prepared By** | Antigravity AI |
 | **Status** | Draft |
 | **MVP Target Launch** | Phase 1 |
-| **PRD-Ready Score** | 88/100 (Target: >=90/100) |
 
 ### Executive Summary (MVP)
 
@@ -303,9 +302,9 @@ Organizations struggle to understand and optimize their cloud spending due to:
 - Architecture decisions (ADR-003, 008)
 
 ### 7.2 Downstream Artifacts
-- PRD: Analytics feature specifications (pending)
-- SPEC: Implementation specifications (pending)
-- TASKS: Implementation tasks (pending)
+- PRD-09: Analytics feature specifications
+- SPEC-09: Implementation specifications
+- TASKS-09: Implementation tasks
 
 ### 7.3 Cross-References
 

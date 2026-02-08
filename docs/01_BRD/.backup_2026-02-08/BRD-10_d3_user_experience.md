@@ -39,7 +39,6 @@ custom_fields:
 | **Prepared By** | Antigravity AI |
 | **Status** | Draft |
 | **MVP Target Launch** | Phase 1 (Grafana) / Phase 3 (AG-UI) |
-| **PRD-Ready Score** | 88/100 (Target: >=90/100) |
 
 ### Executive Summary (MVP)
 
@@ -265,9 +264,9 @@ FinOps practitioners need both detailed dashboards for monitoring and an intuiti
 - Agent routing spec (A2UI selection)
 
 ### 7.2 Downstream Artifacts
-- PRD: UX feature specifications (pending)
-- SPEC: Implementation specifications (pending)
-- TASKS: Implementation tasks (pending)
+- PRD-10: UX feature specifications
+- SPEC-10: Implementation specifications
+- TASKS-10: Implementation tasks
 
 ### 7.3 Cross-References
 

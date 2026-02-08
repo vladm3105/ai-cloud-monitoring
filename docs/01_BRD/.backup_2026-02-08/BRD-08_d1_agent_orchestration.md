@@ -39,7 +39,6 @@ custom_fields:
 | **Prepared By** | Antigravity AI |
 | **Status** | Draft |
 | **MVP Target Launch** | Phase 1 |
-| **PRD-Ready Score** | 88/100 (Target: >=90/100) |
 
 ### Executive Summary (MVP)
 
@@ -259,9 +258,9 @@ Cloud cost management requires analyzing data from multiple providers, understan
 - Architecture decisions (ADR-001, 009, 010)
 
 ### 7.2 Downstream Artifacts
-- PRD: Agent feature specifications (pending)
-- SPEC: Implementation specifications (pending)
-- TASKS: Implementation tasks (pending)
+- PRD-08: Agent feature specifications
+- SPEC-08: Implementation specifications
+- TASKS-08: Implementation tasks
 
 ### 7.3 Cross-References
 

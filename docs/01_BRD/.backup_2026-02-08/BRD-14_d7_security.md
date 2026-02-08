@@ -39,7 +39,6 @@ custom_fields:
 | **Prepared By** | Antigravity AI |
 | **Status** | Draft |
 | **MVP Target Launch** | Phase 1 |
-| **PRD-Ready Score** | 82/100 (Target: >=90/100) |
 
 ### Executive Summary (MVP)
 
@@ -465,9 +464,9 @@ User requests high-risk action
 - Foundation: BRD-01 (F1 IAM), BRD-04 (F4 SecOps)
 
 ### 7.2 Downstream Artifacts
-- PRD: Security feature specifications (pending)
-- SPEC: Security implementation specifications (pending)
-- TSPEC: Security test specifications (pending)
+- PRD-14: Security feature specifications
+- SPEC-14: Security implementation specifications
+- TSPEC-14: Security test specifications
 
 ### 7.3 Cross-References
 

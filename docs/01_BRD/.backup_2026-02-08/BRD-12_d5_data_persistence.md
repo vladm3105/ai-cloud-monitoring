@@ -39,7 +39,6 @@ custom_fields:
 | **Prepared By** | Antigravity AI |
 | **Status** | Draft |
 | **MVP Target Launch** | Phase 1 |
-| **PRD-Ready Score** | 85/100 (Target: >=90/100) |
 
 ### Executive Summary (MVP)
 
@@ -380,9 +379,9 @@ WHERE tenant_id = SESSION_USER();
 - Architecture decisions: ADR-003, ADR-008
 
 ### 7.2 Downstream Artifacts
-- PRD: Data persistence features (pending)
-- SPEC: Schema implementation (pending)
-- TASKS: Database setup tasks (pending)
+- PRD-12: Data persistence features
+- SPEC-12: Schema implementation
+- TASKS-12: Database setup tasks
 
 ### 7.3 Cross-References
 

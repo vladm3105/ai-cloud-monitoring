@@ -39,7 +39,6 @@ custom_fields:
 | **Prepared By** | Antigravity AI |
 | **Status** | Draft |
 | **MVP Target Launch** | Phase 1 |
-| **PRD-Ready Score** | 88/100 (Target: >=90/100) |
 
 ### Executive Summary (MVP)
 
@@ -481,9 +480,9 @@ Retry-After: 30
 - Security design: 06-security-auth-design.md
 
 ### 7.2 Downstream Artifacts
-- PRD: API feature specifications (pending)
-- CTR: OpenAPI contracts (pending)
-- SPEC: Implementation specifications (pending)
+- PRD-13: API feature specifications
+- CTR-13: OpenAPI contracts
+- SPEC-13: Implementation specifications
 
 ### 7.3 Cross-References
 

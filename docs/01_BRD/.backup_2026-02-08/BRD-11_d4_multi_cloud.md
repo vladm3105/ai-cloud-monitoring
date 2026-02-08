@@ -39,7 +39,6 @@ custom_fields:
 | **Prepared By** | Antigravity AI |
 | **Status** | Draft |
 | **MVP Target Launch** | Phase 1 (GCP) / Phase 2 (AWS, Azure, K8s) |
-| **PRD-Ready Score** | 88/100 (Target: >=90/100) |
 
 ### Executive Summary (MVP)
 
@@ -336,9 +335,9 @@ This fragmentation prevents unified cost visibility and optimization.
 - Architecture decisions (ADR-002)
 
 ### 7.2 Downstream Artifacts
-- PRD: Multi-cloud feature specifications (pending)
-- SPEC: Implementation specifications (pending)
-- TASKS: Implementation tasks (pending)
+- PRD-11: Multi-cloud feature specifications
+- SPEC-11: Implementation specifications
+- TASKS-11: Implementation tasks
 
 ### 7.3 Cross-References
 

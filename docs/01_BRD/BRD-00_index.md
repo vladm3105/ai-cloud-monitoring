@@ -1,3 +1,19 @@
+---
+title: "BRD-00: Index - AI Cloud Cost Monitoring"
+tags:
+  - brd-index
+  - layer-1-artifact
+  - shared-architecture
+custom_fields:
+  document_type: index
+  artifact_type: BRD
+  layer: 1
+  development_status: active
+  total_brds: 14
+  foundation_brds: 7
+  domain_brds: 7
+---
+
 # BRD Index - AI Cloud Cost Monitoring
 
 **Project:** AI Cloud Cost Monitoring Platform
@@ -9,26 +25,26 @@
 ## Hybrid BRD Structure
 
 The AI Cost Monitoring Platform uses a **Hybrid Structure** (adapted from Trading Nexus v4.2):
-- **7 Foundation BRDs (BRD-01 to BRD-07)**: Domain-agnostic, portable infrastructure modules
-- **Domain BRDs (BRD-08+)**: Project-specific cost monitoring capabilities
+- **7 Foundation BRDs (BRD-01 to BRD-07)**: Domain-agnostic, portable infrastructure modules (section-based)
+- **Domain BRDs (BRD-08+)**: Project-specific cost monitoring capabilities (monolithic)
 
 ---
 
-## Foundation BRDs (Portable, Domain-Agnostic)
+## Foundation BRDs (Section-Based Structure)
 
-| BRD ID | Title | Module | Source | Status |
-|:-------|:------|:-------|:-------|:-------|
-| **BRD-01** | [F1 Identity & Access Management](BRD-01_f1_iam.md) | F1 IAM | Adapted from Trading Nexus | Draft |
-| **BRD-02** | [F2 Session & Context Management](BRD-02_f2_session.md) | F2 Session | Adapted from Trading Nexus | Draft |
-| **BRD-03** | [F3 Observability](BRD-03_f3_observability.md) | F3 Observability | Adapted from Trading Nexus | Draft |
-| **BRD-04** | [F4 Security Operations](BRD-04_f4_secops.md) | F4 SecOps | Adapted from Trading Nexus | Draft |
-| **BRD-05** | [F5 Self-Sustaining Operations](BRD-05_f5_selfops.md) | F5 Self-Ops | Adapted from Trading Nexus | Draft |
-| **BRD-06** | [F6 Infrastructure](BRD-06_f6_infrastructure.md) | F6 Infrastructure | Adapted from Trading Nexus | Draft |
-| **BRD-07** | [F7 Configuration Manager](BRD-07_f7_config.md) | F7 Config | Adapted from Trading Nexus | Draft |
+| BRD ID | Title | Module | Sections | Status |
+|:-------|:------|:-------|:---------|:-------|
+| **BRD-01** | [F1 Identity & Access Management](BRD-01_f1_iam/BRD-01.0_index.md) | F1 IAM | [Core](BRD-01_f1_iam/BRD-01.1_core.md) \| [Reqs](BRD-01_f1_iam/BRD-01.2_requirements.md) \| [Ops](BRD-01_f1_iam/BRD-01.3_quality_ops.md) | Draft |
+| **BRD-02** | [F2 Session & Context Management](BRD-02_f2_session/BRD-02.0_index.md) | F2 Session | [Core](BRD-02_f2_session/BRD-02.1_core.md) \| [Reqs](BRD-02_f2_session/BRD-02.2_requirements.md) \| [Ops](BRD-02_f2_session/BRD-02.3_quality_ops.md) | Draft |
+| **BRD-03** | [F3 Observability](BRD-03_f3_observability/BRD-03.0_index.md) | F3 Observability | [Core](BRD-03_f3_observability/BRD-03.1_core.md) \| [Reqs](BRD-03_f3_observability/BRD-03.2_requirements.md) \| [Ops](BRD-03_f3_observability/BRD-03.3_quality_ops.md) | Draft |
+| **BRD-04** | [F4 Security Operations](BRD-04_f4_secops/BRD-04.0_index.md) | F4 SecOps | [Core](BRD-04_f4_secops/BRD-04.1_core.md) \| [Reqs](BRD-04_f4_secops/BRD-04.2_requirements.md) \| [Ops](BRD-04_f4_secops/BRD-04.3_quality_ops.md) | Draft |
+| **BRD-05** | [F5 Self-Sustaining Operations](BRD-05_f5_selfops/BRD-05.0_index.md) | F5 Self-Ops | [Core](BRD-05_f5_selfops/BRD-05.1_core.md) \| [Reqs](BRD-05_f5_selfops/BRD-05.2_requirements.md) \| [Ops](BRD-05_f5_selfops/BRD-05.3_quality_ops.md) | Draft |
+| **BRD-06** | [F6 Infrastructure](BRD-06_f6_infrastructure/BRD-06.0_index.md) | F6 Infrastructure | [Core](BRD-06_f6_infrastructure/BRD-06.1_core.md) \| [Reqs](BRD-06_f6_infrastructure/BRD-06.2_requirements.md) \| [Ops](BRD-06_f6_infrastructure/BRD-06.3_quality_ops.md) | Draft |
+| **BRD-07** | [F7 Configuration Manager](BRD-07_f7_config/BRD-07.0_index.md) | F7 Config | [Core](BRD-07_f7_config/BRD-07.1_core.md) \| [Reqs](BRD-07_f7_config/BRD-07.2_requirements.md) \| [Ops](BRD-07_f7_config/BRD-07.3_quality_ops.md) | Draft |
 
 ---
 
-## Domain BRDs (Cost Monitoring-Specific)
+## Domain BRDs (Monolithic Structure)
 
 | BRD ID | Title | Module | Scope | Status |
 |:-------|:------|:-------|:------|:-------|
@@ -71,4 +87,4 @@ Foundation BRDs were adapted from Trading Nexus v4.2 with these domain replaceme
 ## Traceability
 
 - **Upstream:** Business stakeholder requirements
-- **Downstream:** PRD layer (02_PRD)
+- **Downstream:** PRD layer (pending)
