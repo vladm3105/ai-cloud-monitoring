@@ -15,12 +15,13 @@ The AI Cost Monitoring platform is fully documented and ready for implementation
 ## What's Complete ✅
 
 ### 1. Architecture & Design
-- [x] All architectural decisions documented (7 ADRs)
+- [x] All architectural decisions documented (10 ADRs)
 - [x] Database schema fully specified
 - [x] API endpoints defined
 - [x] Multi-cloud deployment strategy
 - [x] Cost model and pricing tiers
 - [x] Security and authentication design
+- [x] Agent registration and discovery pattern (ADR-009, ADR-010)
 
 ### 2. Documentation
 - [x] **README.md** - Project overview
@@ -35,13 +36,16 @@ The AI Cost Monitoring platform is fully documented and ready for implementation
 
 | Decision | Choice | Reference |
 |----------|--------|-----------|
+| **Agent Framework** | MCP Servers | [ADR-001](docs/adr/001-use-mcp-servers.md) |
 | **Home Cloud** | GCP first, AWS/Azure later | [ADR-002](docs/adr/002-gcp-only-first.md) |
 | **Analytics Database** | BigQuery (not TimescaleDB) | [ADR-003](docs/adr/003-use-bigquery-not-timescaledb.md) |
 | **Container Platform** | Cloud Run (not Kubernetes) | [ADR-004](docs/adr/004-cloud-run-not-kubernetes.md) |
+| **LLM Provider** | LiteLLM (multi-provider) | [ADR-005](docs/adr/005-use-litellm-for-llms.md) |
 | **Task Queue** | Cloud Tasks (not Celery) | [ADR-006](docs/adr/006-cloud-native-task-queues-not-celery.md) |
 | **UI Approach** | Grafana + AG-UI Hybrid | [ADR-007](docs/adr/007-grafana-plus-agui-hybrid.md) |
-| **LLM Provider** | LiteLLM (multi-provider) | [ADR-005](docs/adr/005-use-litellm-for-llms.md) |
-| **Agent Framework** | MCP Servers | [ADR-001](docs/adr/001-use-mcp-servers.md) |
+| **MVP Database** | Firestore (prod: PostgreSQL) | [ADR-008](docs/adr/008-database-strategy-mvp.md) |
+| **Agent Registration** | Hybrid pattern (direct + A2A) | [ADR-009](docs/adr/009-hybrid-agent-registration-pattern.md) |
+| **Agent Discovery** | AgentCard specification | [ADR-010](docs/adr/010-agent-card-specification.md) |
 
 ---
 
@@ -151,11 +155,12 @@ The AI Cost Monitoring platform is fully documented and ready for implementation
 8. **[core/02-mcp-tool-contracts.md](core/02-mcp-tool-contracts.md)** - MCP interfaces
 9. **[core/03-agent-routing-spec.md](core/03-agent-routing-spec.md)** - Agent behavior
 10. **[core/05-api-endpoint-spec.md](core/05-api-endpoint-spec.md)** - REST API design
+11. **[core/06-security-auth-design.md](core/06-security-auth-design.md)** - Security & authentication
 
 ### Deployment
-11. **[GCP-DEPLOYMENT.md](GCP-DEPLOYMENT.md)** - GCP setup (start here)
-12. **[AWS-DEPLOYMENT.md](AWS-DEPLOYMENT.md)** - AWS alternative
-13. **[AZURE-DEPLOYMENT.md](AZURE-DEPLOYMENT.md)** - Azure alternative
+12. **[GCP-DEPLOYMENT.md](GCP-DEPLOYMENT.md)** - GCP setup (start here)
+13. **[AWS-DEPLOYMENT.md](AWS-DEPLOYMENT.md)** - AWS alternative
+14. **[AZURE-DEPLOYMENT.md](AZURE-DEPLOYMENT.md)** - Azure alternative
 
 ---
 
@@ -237,16 +242,25 @@ Core documents were updated to align with PROJECT_DEFINITION.md architecture:
 
 | Document | Changes Made |
 |----------|--------------|
-| 01-database-schema.md | TimescaleDB → BigQuery, Celery → Cloud Tasks, added MVP scope notes |
+| 01-database-schema.md | TimescaleDB → BigQuery, Celery → Cloud Tasks, added MVP scope notes, AgentCard fields for a2a_agents |
 | 02-mcp-tool-contracts.md | OpenBao → cloud-native Secret Managers (GCP/AWS/Azure) |
-| 03-agent-routing-spec.md | OpenBao → Secret Manager, Redis noted as optional for MVP |
+| 03-agent-routing-spec.md | OpenBao → Secret Manager, Redis noted as optional for MVP, added Section 7 (Agent Registration) |
 | 04-tenant-onboarding.md | Celery → Cloud Tasks, OpenBao → Secret Manager, PostgreSQL → Firestore (MVP) |
 | 05-api-endpoint-spec.md | OpenBao → Secret Manager for webhook credentials |
 | 08-cost-model.md | Added single-owner cost model, clarified MVP vs multi-tenant |
+| README.md | Added Agent Registration Pattern section with AgentCard example |
+| DEVELOPER_GUIDE.md | Added "Adding New Cloud Providers" section with AgentCard documentation |
+
+**New ADRs added (February 7, 2026):**
+
+- **ADR-009**: Hybrid Agent Registration Pattern - direct communication for internal agents, A2A for external
+- **ADR-010**: AgentCard Specification - self-describing agent metadata for discovery
 
 **Architecture alignment:**
+
 - MVP stack: Firestore + BigQuery + Cloud Tasks + Secret Manager (serverless)
 - Multi-tenant production: PostgreSQL + BigQuery + Cloud Tasks + Secret Manager (RLS isolation)
+- Agent extensibility: AgentCard + AgentRegistry pattern for easy cloud provider addition
 - No legacy references (TimescaleDB, Celery, OpenBao/Vault) remain
 
 ---
