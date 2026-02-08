@@ -11,8 +11,8 @@
 | Layer | Folder | Status | Next Action |
 |-------|--------|--------|-------------|
 | L0 | [00_REF](00_REF/) | Complete | Reference documentation |
-| L1 | [01_BRD](01_BRD/) | **7 Foundation BRDs** | Create Domain BRDs (08-11) |
-| L2 | [02_PRD](02_PRD/) | Index Ready | Awaiting BRDs |
+| L1 | [01_BRD](01_BRD/) | **Complete (11 BRDs)** | Proceed to PRD |
+| L2 | [02_PRD](02_PRD/) | Index Ready | Create PRD-01 |
 | L3 | [03_EARS](03_EARS/) | Index Ready | Awaiting PRD-01 |
 | L4 | [04_BDD](04_BDD/) | Index Ready | Awaiting EARS-01 |
 | L5 | [05_ADR](05_ADR/) | Index Ready | Reference 00_REF/domain/architecture/adr/ |
@@ -58,11 +58,24 @@ Adapted from Trading Nexus v4.2:
 
 ---
 
+## Domain BRDs (Complete)
+
+Cost monitoring-specific business requirements:
+
+| BRD | Module | Status |
+|-----|--------|--------|
+| [BRD-08](01_BRD/BRD-08_d1_agent_orchestration.md) | D1 Agent Orchestration | Draft |
+| [BRD-09](01_BRD/BRD-09_d2_cost_analytics.md) | D2 Cost Analytics | Draft |
+| [BRD-10](01_BRD/BRD-10_d3_user_experience.md) | D3 User Experience | Draft |
+| [BRD-11](01_BRD/BRD-11_d4_multi_cloud.md) | D4 Multi-Cloud | Draft |
+
+---
+
 ## Next Steps
 
-1. **Review Foundation BRDs** for domain-specific accuracy
-2. **Create Domain BRDs** (BRD-08 to BRD-11)
-3. **Proceed to PRD layer** for feature specifications
+1. **Proceed to PRD layer** - Create PRD-01 for MVP feature specifications
+2. **Review BRDs** - Stakeholder review of Foundation and Domain BRDs
+3. **Continue document flow** - EARS, BDD, ADR layers as needed
 
 ---
 

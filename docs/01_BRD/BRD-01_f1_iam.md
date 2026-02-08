@@ -59,7 +59,7 @@ The F1 IAM Module provides enterprise-grade identity and access management for t
 
 This Business Requirements Document (BRD) defines the business requirements for the F1 Identity & Access Management Module. The F1 IAM Module handles all authentication and authorization for the platform using a Zero-Trust security model with multi-provider support and fine-grained access control.
 
-@ref: [F1 IAM Technical Specification](../00_init/F1_IAM_Technical_Specification.md#1-executive-summary)
+@ref: [F1 IAM Technical Specification](../00_REF/foundation/F1_IAM_Technical_Specification.md#1-executive-summary)
 
 ### 1.2 Document Scope
 
@@ -135,7 +135,7 @@ This document covers:
 
 **Business Driver**: Autonomous AI agents and financial operations require defense-in-depth security to prevent unauthorized access and data breaches.
 
-@ref: [F1 §1](../00_init/F1_IAM_Technical_Specification.md#1-executive-summary)
+@ref: [F1 §1](../00_REF/foundation/F1_IAM_Technical_Specification.md#1-executive-summary)
 
 ---
 
@@ -145,7 +145,7 @@ This document covers:
 
 **Business Driver**: Current implementation lacks session revocation, SCIM provisioning, and passwordless authentication capabilities required for enterprise deployments.
 
-@ref: [GAP_Foundation_Module_Gap_Analysis §2.2](../00_init/GAP_Foundation_Module_Gap_Analysis.md#22-identified-gaps)
+@ref: [GAP_Foundation_Module_Gap_Analysis §2.2](../00_REF/foundation/GAP_Foundation_Module_Gap_Analysis.md#22-identified-gaps)
 
 ---
 
@@ -265,14 +265,16 @@ sequenceDiagram
 
 ### 3.5 Technology Stack
 
-| Component | Technology | Reference |
-|-----------|------------|-----------|
-| Primary IdP | Auth0 | ADR-00 |
-| Token Format | JWT (RS256) | F1 §3.5 |
-| Password Hashing | bcrypt (cost 12) | F1 §3.3 |
-| MFA | TOTP (RFC 6238), WebAuthn | F1 §3.4 |
-| Secrets | GCP Secret Manager | F6 |
-| Database | PostgreSQL (users table) | F6 |
+> **Note:** MVP uses Firebase Auth for simplicity. Production upgrades to Auth0 for enterprise features (SSO, MFA policies, organization management). See [ADR-008](../00_REF/domain/architecture/adr/008-database-strategy-mvp.md).
+
+| Component | MVP | Production | Reference |
+|-----------|-----|------------|-----------|
+| Primary IdP | Firebase Auth | Auth0 | ADR-008 |
+| Token Format | JWT (RS256) | JWT (RS256) | F1 §3.5 |
+| Password Hashing | Firebase managed | bcrypt (cost 12) | F1 §3.3 |
+| MFA | Firebase (optional) | TOTP + WebAuthn | F1 §3.4 |
+| Secrets | GCP Secret Manager | GCP Secret Manager | F6 |
+| Database | Firestore | PostgreSQL (users) | ADR-008 |
 
 ---
 
@@ -312,7 +314,7 @@ sequenceDiagram
 | BRD.01.09.07 | Service | Authenticate via API key | Machine-to-machine integration | P1 |
 | BRD.01.09.08 | Admin | View audit logs | Compliance and security monitoring | P1 |
 
-@ref: [F1 §3.1-3.4](../00_init/F1_IAM_Technical_Specification.md#3-authentication-system), [F1 §6](../00_init/F1_IAM_Technical_Specification.md#6-event-system)
+@ref: [F1 §3.1-3.4](../00_REF/foundation/F1_IAM_Technical_Specification.md#3-authentication-system), [F1 §6](../00_REF/foundation/F1_IAM_Technical_Specification.md#6-event-system)
 
 ### 5.2 User Story Summary
 
@@ -336,7 +338,7 @@ sequenceDiagram
 
 **Business Capability**: Support multiple authentication providers with Auth0 as primary identity provider.
 
-@ref: [F1 §3.1-3.3](../00_init/F1_IAM_Technical_Specification.md#3-authentication-system)
+@ref: [F1 §3.1-3.3](../00_REF/foundation/F1_IAM_Technical_Specification.md#3-authentication-system)
 
 **Business Requirements**:
 - Auth0 Universal Login as primary authentication method
@@ -370,7 +372,7 @@ sequenceDiagram
 
 **Business Capability**: Fine-grained access control using ACTION × SKILL × RESOURCE × ZONE dimensions.
 
-@ref: [F1 §4.1-4.2](../00_init/F1_IAM_Technical_Specification.md#4-authorization-system)
+@ref: [F1 §4.1-4.2](../00_REF/foundation/F1_IAM_Technical_Specification.md#4-authorization-system)
 
 **Business Requirements**:
 - Authorization decision based on four dimensions
@@ -407,7 +409,7 @@ sequenceDiagram
 
 **Business Capability**: 4-tier trust hierarchy with progressive access rights.
 
-@ref: [F1 §4.3](../00_init/F1_IAM_Technical_Specification.md#43-trust-levels)
+@ref: [F1 §4.3](../00_REF/foundation/F1_IAM_Technical_Specification.md#43-trust-levels)
 
 **Trust Level Definitions**:
 
@@ -439,7 +441,7 @@ sequenceDiagram
 
 **Business Capability**: Multi-factor authentication with TOTP and WebAuthn support.
 
-@ref: [F1 §3.4](../00_init/F1_IAM_Technical_Specification.md#35-multi-factor-authentication-mfa)
+@ref: [F1 §3.4](../00_REF/foundation/F1_IAM_Technical_Specification.md#35-multi-factor-authentication-mfa)
 
 **Business Requirements**:
 - MFA mandatory for Trust Levels 3 and 4
@@ -467,7 +469,7 @@ sequenceDiagram
 
 **Business Capability**: JWT-based access tokens with secure refresh rotation.
 
-@ref: [F1 §3.5](../00_init/F1_IAM_Technical_Specification.md#36-token-management)
+@ref: [F1 §3.5](../00_REF/foundation/F1_IAM_Technical_Specification.md#36-token-management)
 
 **Token Configuration**:
 
@@ -502,7 +504,7 @@ sequenceDiagram
 
 **Business Capability**: User profile storage with encrypted credential management.
 
-@ref: [F1 §5](../00_init/F1_IAM_Technical_Specification.md#5-user-profile-system)
+@ref: [F1 §5](../00_REF/foundation/F1_IAM_Technical_Specification.md#5-user-profile-system)
 
 **Core Schema**: user_id, email, name, avatar, timezone, locale, trust_level
 **Encrypted Storage**: Broker credentials, TOTP secrets in GCP Secret Manager
@@ -528,7 +530,7 @@ sequenceDiagram
 
 **Business Capability**: Centralized session termination for compromised accounts.
 
-@ref: [GAP-F1-01: Session Revocation](../00_init/GAP_Foundation_Module_Gap_Analysis.md#f1-iam-gaps)
+@ref: [GAP-F1-01: Session Revocation](../00_REF/foundation/GAP_Foundation_Module_Gap_Analysis.md#f1-iam-gaps)
 
 **Business Requirements**:
 - Bulk session termination by user ID
@@ -557,7 +559,7 @@ sequenceDiagram
 
 **Business Capability**: Automated user lifecycle management from enterprise IdP.
 
-@ref: [GAP-F1-02: SCIM Provisioning](../00_init/GAP_Foundation_Module_Gap_Analysis.md#f1-iam-gaps)
+@ref: [GAP-F1-02: SCIM Provisioning](../00_REF/foundation/GAP_Foundation_Module_Gap_Analysis.md#f1-iam-gaps)
 
 **Business Requirements**:
 - SCIM 2.0 server endpoint
@@ -586,7 +588,7 @@ sequenceDiagram
 
 **Business Capability**: WebAuthn as primary authentication method.
 
-@ref: [GAP-F1-03: Passwordless Authentication](../00_init/GAP_Foundation_Module_Gap_Analysis.md#f1-iam-gaps)
+@ref: [GAP-F1-03: Passwordless Authentication](../00_REF/foundation/GAP_Foundation_Module_Gap_Analysis.md#f1-iam-gaps)
 
 **Business Requirements**:
 - WebAuthn resident key support
@@ -614,7 +616,7 @@ sequenceDiagram
 
 **Business Capability**: Managed device checks via MDM integration.
 
-@ref: [GAP-F1-04: Device Trust](../00_init/GAP_Foundation_Module_Gap_Analysis.md#f1-iam-gaps)
+@ref: [GAP-F1-04: Device Trust](../00_REF/foundation/GAP_Foundation_Module_Gap_Analysis.md#f1-iam-gaps)
 
 **Business Requirements**:
 - MDM provider integration (Intune, Jamf)
@@ -700,7 +702,7 @@ sequenceDiagram
 
 **Requirement**: Implement Zero-Trust security model with defense-in-depth.
 
-@ref: [F1 §10](../00_init/F1_IAM_Technical_Specification.md#10-security-considerations)
+@ref: [F1 §10](../00_REF/foundation/F1_IAM_Technical_Specification.md#10-security-considerations)
 
 **Measures**:
 - Default deny authorization
@@ -946,8 +948,8 @@ sequenceDiagram
 
 | Upstream Artifact | Reference | Relevance |
 |-------------------|-----------|-----------|
-| F1 IAM Technical Specification | [F1 Spec](../00_init/F1_IAM_Technical_Specification.md) | Technical requirements source |
-| Gap Analysis | [GAP Analysis](../00_init/GAP_Foundation_Module_Gap_Analysis.md) | 6 F1 gaps identified |
+| F1 IAM Technical Specification | [F1 Spec](../00_REF/foundation/F1_IAM_Technical_Specification.md) | Technical requirements source |
+| Gap Analysis | [GAP Analysis](../00_REF/foundation/GAP_Foundation_Module_Gap_Analysis.md) | 6 F1 gaps identified |
 
 ### 13.2 Downstream Artifacts
 

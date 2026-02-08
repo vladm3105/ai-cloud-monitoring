@@ -199,7 +199,7 @@ We'll know we need to pivot if:
 ## Related Decisions
 
 - [ADR-001: Use MCP Servers](001-use-mcp-servers.md) - Makes multi-cloud expansion easier
-- [ADR-003: Use BigQuery, Not TimescaleDB](003-no-custom-database.md) - GCP-specific decision
+- [ADR-003: Use BigQuery, Not TimescaleDB](003-use-bigquery-not-timescaledb.md) - GCP-specific decision
 - [ADR-004: Cloud Run Deployment](004-cloud-run-not-kubernetes.md) - GCP-specific deployment
 
 ## References

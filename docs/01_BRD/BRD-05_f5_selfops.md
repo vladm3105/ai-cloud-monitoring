@@ -62,7 +62,7 @@ The F5 Self-Sustaining Operations Module provides autonomous platform operations
 
 This Business Requirements Document (BRD) defines the business requirements for the F5 Self-Sustaining Operations Module. The F5 Self-Ops Module handles all autonomous operations for the platform including health monitoring, auto-remediation, incident learning, and AI-assisted development using a self-healing architecture.
 
-@ref: [F5 Self-Ops Technical Specification](../00_init/F5_SelfOps_Technical_Specification.md#1-executive-summary)
+@ref: [F5 Self-Ops Technical Specification](../00_REF/foundation/F5_SelfOps_Technical_Specification.md#1-executive-summary)
 
 ### 1.2 Document Scope
 
@@ -139,7 +139,7 @@ This document covers:
 
 **Business Driver**: Autonomous AI agents and financial operations require high availability with minimal human intervention to prevent revenue loss and user impact.
 
-@ref: [F5 Section 1](../00_init/F5_SelfOps_Technical_Specification.md#1-executive-summary)
+@ref: [F5 Section 1](../00_REF/foundation/F5_SelfOps_Technical_Specification.md#1-executive-summary)
 
 ---
 
@@ -149,7 +149,7 @@ This document covers:
 
 **Business Driver**: Current implementation lacks auto-scaling, chaos engineering, and predictive maintenance capabilities required for enterprise deployments.
 
-@ref: [GAP_Foundation_Module_Gap_Analysis Section 6.2](../00_init/GAP_Foundation_Module_Gap_Analysis.md#62-identified-gaps)
+@ref: [GAP_Foundation_Module_Gap_Analysis Section 6.2](../00_REF/foundation/GAP_Foundation_Module_Gap_Analysis.md#62-identified-gaps)
 
 ---
 
@@ -323,7 +323,7 @@ sequenceDiagram
 | BRD.05.09.09 | SRE | Access health history and metrics | Trend analysis for capacity planning | P2 |
 | BRD.05.09.10 | System | Scale components based on demand | Handle traffic spikes automatically | P2 |
 
-@ref: [F5 Sections 3-10](../00_init/F5_SelfOps_Technical_Specification.md#3-health-monitoring)
+@ref: [F5 Sections 3-10](../00_REF/foundation/F5_SelfOps_Technical_Specification.md#3-health-monitoring)
 
 ### 5.2 User Story Summary
 
@@ -347,7 +347,7 @@ sequenceDiagram
 
 **Business Capability**: Continuous health monitoring with component registration, state tracking, and status aggregation.
 
-@ref: [F5 Section 3](../00_init/F5_SelfOps_Technical_Specification.md#3-health-monitoring)
+@ref: [F5 Section 3](../00_REF/foundation/F5_SelfOps_Technical_Specification.md#3-health-monitoring)
 
 **Business Requirements**:
 - Domain-injected component registration (name, type, check interval)
@@ -382,7 +382,7 @@ sequenceDiagram
 
 **Business Capability**: Automated recovery via configurable playbooks with restart, failover, and scale actions.
 
-@ref: [F5 Section 4](../00_init/F5_SelfOps_Technical_Specification.md#4-auto-remediation)
+@ref: [F5 Section 4](../00_REF/foundation/F5_SelfOps_Technical_Specification.md#4-auto-remediation)
 
 **Business Requirements**:
 - YAML-based playbook definition (name, trigger, steps, on_failure)
@@ -417,7 +417,7 @@ sequenceDiagram
 
 **Business Capability**: AI-powered incident analysis with root cause detection and similar incident search.
 
-@ref: [F5 Section 5](../00_init/F5_SelfOps_Technical_Specification.md#5-incident-learning)
+@ref: [F5 Section 5](../00_REF/foundation/F5_SelfOps_Technical_Specification.md#5-incident-learning)
 
 **Business Requirements**:
 - Data capture: logs (+-5 min), metrics (+-10 min), traces (related), context (current)
@@ -452,7 +452,7 @@ sequenceDiagram
 
 **Business Capability**: Code generation, documentation, test generation, and code review via aidoc-flow.
 
-@ref: [F5 Section 6](../00_init/F5_SelfOps_Technical_Specification.md#6-ai-assisted-development-aidoc-flow)
+@ref: [F5 Section 6](../00_REF/foundation/F5_SelfOps_Technical_Specification.md#6-ai-assisted-development-aidoc-flow)
 
 **Business Requirements**:
 - Code generation from specifications
@@ -487,7 +487,7 @@ sequenceDiagram
 
 **Business Capability**: Continuous autonomous cycle of Monitor -> Detect -> Analyze -> Remediate -> Learn.
 
-@ref: [F5 Section 7](../00_init/F5_SelfOps_Technical_Specification.md#7-self-healing-loop)
+@ref: [F5 Section 7](../00_REF/foundation/F5_SelfOps_Technical_Specification.md#7-self-healing-loop)
 
 **Business Requirements**:
 - Automated progression through all loop stages
@@ -522,7 +522,7 @@ sequenceDiagram
 
 **Business Capability**: Event emission for health changes, remediation actions, and incident lifecycle.
 
-@ref: [F5 Section 10](../00_init/F5_SelfOps_Technical_Specification.md#10-events-emitted)
+@ref: [F5 Section 10](../00_REF/foundation/F5_SelfOps_Technical_Specification.md#10-events-emitted)
 
 **Business Requirements**:
 - Health events: health.degraded, health.recovered
@@ -556,7 +556,7 @@ sequenceDiagram
 
 **Business Capability**: Horizontal scaling of components based on demand.
 
-@ref: [GAP-F5-01: Auto-Scaling](../00_init/GAP_Foundation_Module_Gap_Analysis.md#62-identified-gaps)
+@ref: [GAP-F5-01: Auto-Scaling](../00_REF/foundation/GAP_Foundation_Module_Gap_Analysis.md#62-identified-gaps)
 
 **Business Requirements**:
 - Demand-based horizontal scaling
@@ -591,7 +591,7 @@ sequenceDiagram
 
 **Business Capability**: Controlled failure injection for resilience testing.
 
-@ref: [GAP-F5-02: Chaos Engineering](../00_init/GAP_Foundation_Module_Gap_Analysis.md#62-identified-gaps)
+@ref: [GAP-F5-02: Chaos Engineering](../00_REF/foundation/GAP_Foundation_Module_Gap_Analysis.md#62-identified-gaps)
 
 **Business Requirements**:
 - Controlled failure injection framework
@@ -626,7 +626,7 @@ sequenceDiagram
 
 **Business Capability**: Proactive failure prevention through pattern analysis and prediction.
 
-@ref: [GAP-F5-03: Predictive Maintenance](../00_init/GAP_Foundation_Module_Gap_Analysis.md#62-identified-gaps)
+@ref: [GAP-F5-03: Predictive Maintenance](../00_REF/foundation/GAP_Foundation_Module_Gap_Analysis.md#62-identified-gaps)
 
 **Business Requirements**:
 - Historical pattern analysis for failure prediction
@@ -661,7 +661,7 @@ sequenceDiagram
 
 **Business Capability**: External service and dependency health tracking.
 
-@ref: [GAP-F5-04: Dependency Health](../00_init/GAP_Foundation_Module_Gap_Analysis.md#62-identified-gaps)
+@ref: [GAP-F5-04: Dependency Health](../00_REF/foundation/GAP_Foundation_Module_Gap_Analysis.md#62-identified-gaps)
 
 **Business Requirements**:
 - External service health monitoring (APIs, databases, third-party services)
@@ -696,7 +696,7 @@ sequenceDiagram
 
 **Business Capability**: Pre-built remediation playbooks for common failure scenarios.
 
-@ref: [GAP-F5-05: Runbook Library](../00_init/GAP_Foundation_Module_Gap_Analysis.md#62-identified-gaps)
+@ref: [GAP-F5-05: Runbook Library](../00_REF/foundation/GAP_Foundation_Module_Gap_Analysis.md#62-identified-gaps)
 
 **Business Requirements**:
 - Library of pre-built playbooks for common scenarios
@@ -731,7 +731,7 @@ sequenceDiagram
 
 **Business Capability**: Automated blameless post-incident review generation.
 
-@ref: [GAP-F5-06: Post-Incident Reviews](../00_init/GAP_Foundation_Module_Gap_Analysis.md#62-identified-gaps)
+@ref: [GAP-F5-06: Post-Incident Reviews](../00_REF/foundation/GAP_Foundation_Module_Gap_Analysis.md#62-identified-gaps)
 
 **Business Requirements**:
 - Automated PIR document generation
@@ -768,7 +768,7 @@ sequenceDiagram
 
 **Requirement**: Implement highly available self-ops services that continue operating during partial failures.
 
-@ref: [F5 Section 8](../00_init/F5_SelfOps_Technical_Specification.md#8-operational-metrics)
+@ref: [F5 Section 8](../00_REF/foundation/F5_SelfOps_Technical_Specification.md#8-operational-metrics)
 
 **Measures**:
 - Service availability target: 99.9%
@@ -1059,8 +1059,8 @@ sequenceDiagram
 
 | Upstream Artifact | Reference | Relevance |
 |-------------------|-----------|-----------|
-| F5 Self-Ops Technical Specification | [F5 Spec](../00_init/F5_SelfOps_Technical_Specification.md) | Technical requirements source |
-| Gap Analysis | [GAP Analysis](../00_init/GAP_Foundation_Module_Gap_Analysis.md) | 6 F5 gaps identified |
+| F5 Self-Ops Technical Specification | [F5 Spec](../00_REF/foundation/F5_SelfOps_Technical_Specification.md) | Technical requirements source |
+| Gap Analysis | [GAP Analysis](../00_REF/foundation/GAP_Foundation_Module_Gap_Analysis.md) | 6 F5 gaps identified |
 
 ### 13.2 Downstream Artifacts
 

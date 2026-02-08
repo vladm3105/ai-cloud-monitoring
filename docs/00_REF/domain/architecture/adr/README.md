@@ -18,10 +18,10 @@ ADRs are documents that capture important architectural decisions along with the
 | [002](002-gcp-only-first.md) | Start with GCP-Only, Not Multi-Cloud | Accepted | 2026-01-20 |
 | [003](003-use-bigquery-not-timescaledb.md) | Use BigQuery for Metrics, Not TimescaleDB | Accepted | 2026-01-22 |
 | [004](004-cloud-run-not-kubernetes.md) | Deploy to Cloud Run, Not Kubernetes | Accepted | 2026-01-25 |
-| [005](005-use-litellm-for-llms.md) | Use LiteLLM for Vendor-Neutral LLM Access | Accepted | 2026-01-28 |
-| [006](006-cloud-native-task-queues-not-celery.md) | Use Cloud-Native Task Queues, Not Celery | Accepted | 2026-01-30 |
-| [007](007-grafana-plus-agui-hybrid.md) | Grafana + AG-UI Hybrid Frontend | Accepted | 2026-02-01 |
-| [008](008-database-strategy-mvp.md) | Firestore for MVP, PostgreSQL for Production | Accepted | 2026-02-03 |
+| [005](005-use-litellm-for-llms.md) | Use LiteLLM for Vendor-Neutral LLM Access | Accepted | 2026-02-06 |
+| [006](006-cloud-native-task-queues-not-celery.md) | Use Cloud-Native Task Queues, Not Celery | Accepted | 2026-02-06 |
+| [007](007-grafana-plus-agui-hybrid.md) | Grafana + AG-UI Hybrid Frontend | Accepted | 2026-02-06 |
+| [008](008-database-strategy-mvp.md) | Firestore for MVP, PostgreSQL for Production | Accepted | 2026-02-07 |
 | [009](009-hybrid-agent-registration-pattern.md) | Hybrid Agent Registration Pattern | Accepted | 2026-02-07 |
 | [010](010-agent-card-specification.md) | AgentCard Specification for Agent Discovery | Accepted | 2026-02-07 |
 

@@ -62,7 +62,7 @@ The F3 Observability Module provides comprehensive monitoring, logging, tracing,
 
 This Business Requirements Document (BRD) defines the business requirements for the F3 Observability Module. The F3 Observability Module handles all monitoring, logging, distributed tracing, alerting, and analytics for the platform, providing comprehensive operational visibility without domain-specific knowledge.
 
-@ref: [F3 Observability Technical Specification](../00_init/F3_Observability_Technical_Specification.md#1-executive-summary)
+@ref: [F3 Observability Technical Specification](../00_REF/foundation/F3_Observability_Technical_Specification.md#1-executive-summary)
 
 ### 1.2 Document Scope
 
@@ -143,7 +143,7 @@ This document covers:
 
 **Business Driver**: Distributed microservices and AI agent operations require unified visibility to diagnose issues, measure performance, and ensure reliability.
 
-@ref: [F3 Section 1](../00_init/F3_Observability_Technical_Specification.md#1-executive-summary)
+@ref: [F3 Section 1](../00_REF/foundation/F3_Observability_Technical_Specification.md#1-executive-summary)
 
 ---
 
@@ -153,7 +153,7 @@ This document covers:
 
 **Business Driver**: Current implementation lacks log analytics, SLO tracking, ML anomaly detection, and alert fatigue management required for enterprise deployments.
 
-@ref: [GAP_Foundation_Module_Gap_Analysis Section 4.2](../00_init/GAP_Foundation_Module_Gap_Analysis.md#42-identified-gaps)
+@ref: [GAP_Foundation_Module_Gap_Analysis Section 4.2](../00_REF/foundation/GAP_Foundation_Module_Gap_Analysis.md#42-identified-gaps)
 
 ---
 
@@ -327,7 +327,7 @@ sequenceDiagram
 | BRD.03.09.09 | SRE | Receive ML-based anomaly alerts | Detect unknown-unknown failures | P2 |
 | BRD.03.09.10 | Admin | Create custom dashboards | Role-specific monitoring views | P2 |
 
-@ref: [F3 Sections 3-8](../00_init/F3_Observability_Technical_Specification.md#3-logging-system)
+@ref: [F3 Sections 3-8](../00_REF/foundation/F3_Observability_Technical_Specification.md#3-logging-system)
 
 ### 5.2 User Story Summary
 
@@ -351,7 +351,7 @@ sequenceDiagram
 
 **Business Capability**: Provide consistent, structured JSON logging with trace correlation across all platform services.
 
-@ref: [F3 Section 3](../00_init/F3_Observability_Technical_Specification.md#3-logging-system)
+@ref: [F3 Section 3](../00_REF/foundation/F3_Observability_Technical_Specification.md#3-logging-system)
 
 **Business Requirements**:
 - JSON-formatted logs with mandatory fields (timestamp, level, message, module)
@@ -386,7 +386,7 @@ sequenceDiagram
 
 **Business Capability**: Collect and export system, application, and LLM metrics for operational visibility.
 
-@ref: [F3 Section 4](../00_init/F3_Observability_Technical_Specification.md#4-metrics-system)
+@ref: [F3 Section 4](../00_REF/foundation/F3_Observability_Technical_Specification.md#4-metrics-system)
 
 **Business Requirements**:
 - Three metric types: Counter (monotonic), Gauge (point-in-time), Histogram (distribution)
@@ -421,7 +421,7 @@ sequenceDiagram
 
 **Business Capability**: Enable end-to-end request tracing across distributed services using OpenTelemetry.
 
-@ref: [F3 Section 5](../00_init/F3_Observability_Technical_Specification.md#5-distributed-tracing)
+@ref: [F3 Section 5](../00_REF/foundation/F3_Observability_Technical_Specification.md#5-distributed-tracing)
 
 **Business Requirements**:
 - OpenTelemetry-compatible trace context propagation
@@ -459,7 +459,7 @@ sequenceDiagram
 
 **Business Capability**: Provide multi-severity alerting with configurable notification channels.
 
-@ref: [F3 Section 6](../00_init/F3_Observability_Technical_Specification.md#6-alerting-system)
+@ref: [F3 Section 6](../00_REF/foundation/F3_Observability_Technical_Specification.md#6-alerting-system)
 
 **Business Requirements**:
 - 4 severity levels: CRITICAL (P1), HIGH (P2), MEDIUM (P3), LOW (P4)
@@ -497,7 +497,7 @@ sequenceDiagram
 
 **Business Capability**: Provide built-in tracking for LLM token usage, latency, and cost across all models.
 
-@ref: [F3 Section 7](../00_init/F3_Observability_Technical_Specification.md#7-llm-analytics)
+@ref: [F3 Section 7](../00_REF/foundation/F3_Observability_Technical_Specification.md#7-llm-analytics)
 
 **Business Requirements**:
 - Token tracking: Input tokens, output tokens, total per request
@@ -527,7 +527,7 @@ sequenceDiagram
 
 **Business Capability**: Provide auto-generated Grafana dashboards for operational visibility.
 
-@ref: [F3 Section 8](../00_init/F3_Observability_Technical_Specification.md#8-dashboards)
+@ref: [F3 Section 8](../00_REF/foundation/F3_Observability_Technical_Specification.md#8-dashboards)
 
 **Business Requirements**:
 - Auto-generated dashboards: System Health, LLM Performance, Cost Tracking
@@ -564,7 +564,7 @@ sequenceDiagram
 
 **Business Capability**: Enable historical log analysis and trend detection via BigQuery integration.
 
-@ref: [GAP-F3-01: No Log Analytics](../00_init/GAP_Foundation_Module_Gap_Analysis.md#42-identified-gaps)
+@ref: [GAP-F3-01: No Log Analytics](../00_REF/foundation/GAP_Foundation_Module_Gap_Analysis.md#42-identified-gaps)
 
 **Business Requirements**:
 - Log export to BigQuery for long-term storage
@@ -593,7 +593,7 @@ sequenceDiagram
 
 **Business Capability**: Enable users to create role-specific monitoring views.
 
-@ref: [GAP-F3-02: No Custom Dashboards](../00_init/GAP_Foundation_Module_Gap_Analysis.md#42-identified-gaps)
+@ref: [GAP-F3-02: No Custom Dashboards](../00_REF/foundation/GAP_Foundation_Module_Gap_Analysis.md#42-identified-gaps)
 
 **Business Requirements**:
 - User-defined dashboard creation
@@ -622,7 +622,7 @@ sequenceDiagram
 
 **Business Capability**: Define and track Service Level Objectives and Indicators for reliability measurement.
 
-@ref: [GAP-F3-03: No SLO/SLI Tracking](../00_init/GAP_Foundation_Module_Gap_Analysis.md#42-identified-gaps)
+@ref: [GAP-F3-03: No SLO/SLI Tracking](../00_REF/foundation/GAP_Foundation_Module_Gap_Analysis.md#42-identified-gaps)
 
 **Business Requirements**:
 - SLI definition: Availability, latency, error rate, throughput
@@ -652,7 +652,7 @@ sequenceDiagram
 
 **Business Capability**: Detect anomalies using machine learning instead of static thresholds.
 
-@ref: [GAP-F3-04: No ML Anomaly Detection](../00_init/GAP_Foundation_Module_Gap_Analysis.md#42-identified-gaps)
+@ref: [GAP-F3-04: No ML Anomaly Detection](../00_REF/foundation/GAP_Foundation_Module_Gap_Analysis.md#42-identified-gaps)
 
 **Business Requirements**:
 - Baseline learning from historical metrics
@@ -682,7 +682,7 @@ sequenceDiagram
 
 **Business Capability**: Visualize end-to-end request flows across distributed services.
 
-@ref: [GAP-F3-05: No Trace Journey Visualization](../00_init/GAP_Foundation_Module_Gap_Analysis.md#42-identified-gaps)
+@ref: [GAP-F3-05: No Trace Journey Visualization](../00_REF/foundation/GAP_Foundation_Module_Gap_Analysis.md#42-identified-gaps)
 
 **Business Requirements**:
 - Service dependency graph generation
@@ -712,7 +712,7 @@ sequenceDiagram
 
 **Business Capability**: Integrate CPU/memory profiling for performance bottleneck identification.
 
-@ref: [GAP-F3-06: No Profiling Integration](../00_init/GAP_Foundation_Module_Gap_Analysis.md#42-identified-gaps)
+@ref: [GAP-F3-06: No Profiling Integration](../00_REF/foundation/GAP_Foundation_Module_Gap_Analysis.md#42-identified-gaps)
 
 **Business Requirements**:
 - Cloud Profiler integration
@@ -742,7 +742,7 @@ sequenceDiagram
 
 **Business Capability**: Reduce alert noise through deduplication, grouping, and intelligent routing.
 
-@ref: [GAP-F3-07: No Alert Fatigue Management](../00_init/GAP_Foundation_Module_Gap_Analysis.md#42-identified-gaps)
+@ref: [GAP-F3-07: No Alert Fatigue Management](../00_REF/foundation/GAP_Foundation_Module_Gap_Analysis.md#42-identified-gaps)
 
 **Business Requirements**:
 - Alert deduplication (suppress duplicate alerts within window)
@@ -774,7 +774,7 @@ sequenceDiagram
 
 **Requirement**: Observability operations must complete within latency targets to minimize application impact.
 
-@ref: [F3 Section 12](../00_init/F3_Observability_Technical_Specification.md#12-performance)
+@ref: [F3 Section 12](../00_REF/foundation/F3_Observability_Technical_Specification.md#12-performance)
 
 | Operation | Target Latency |
 |-----------|---------------|
@@ -819,7 +819,7 @@ sequenceDiagram
 
 **Requirement**: Protect observability data with appropriate access controls and encryption.
 
-@ref: [F3 Section 11](../00_init/F3_Observability_Technical_Specification.md#11-security)
+@ref: [F3 Section 11](../00_REF/foundation/F3_Observability_Technical_Specification.md#11-security)
 
 **Measures**:
 - Encryption at rest (GCP-managed keys)
@@ -1051,8 +1051,8 @@ sequenceDiagram
 
 | Upstream Artifact | Reference | Relevance |
 |-------------------|-----------|-----------|
-| F3 Observability Technical Specification | [F3 Spec](../00_init/F3_Observability_Technical_Specification.md) | Technical requirements source |
-| Gap Analysis | [GAP Analysis Section 4](../00_init/GAP_Foundation_Module_Gap_Analysis.md#4-f3-observability) | 7 F3 gaps identified |
+| F3 Observability Technical Specification | [F3 Spec](../00_REF/foundation/F3_Observability_Technical_Specification.md) | Technical requirements source |
+| Gap Analysis | [GAP Analysis Section 4](../00_REF/foundation/GAP_Foundation_Module_Gap_Analysis.md#4-f3-observability) | 7 F3 gaps identified |
 
 ### 13.2 Downstream Artifacts
 

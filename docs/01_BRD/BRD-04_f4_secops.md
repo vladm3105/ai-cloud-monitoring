@@ -62,7 +62,7 @@ The F4 Security Operations Module provides runtime security for the AI Cost Moni
 
 This Business Requirements Document (BRD) defines the business requirements for the F4 Security Operations Module. The F4 SecOps Module provides runtime security including input validation, compliance enforcement, audit logging, and threat detection for the platform using a Zero-Trust security model with defense-in-depth.
 
-@ref: [F4 SecOps Technical Specification](../00_init/F4_SecOps_Technical_Specification.md#1-executive-summary)
+@ref: [F4 SecOps Technical Specification](../00_REF/foundation/F4_SecOps_Technical_Specification.md#1-executive-summary)
 
 ### 1.2 Document Scope
 
@@ -140,7 +140,7 @@ This document covers:
 
 **Business Driver**: Autonomous AI agents and financial operations require comprehensive runtime security to prevent injection attacks, data breaches, and compliance violations.
 
-@ref: [F4 Section 1](../00_init/F4_SecOps_Technical_Specification.md#1-executive-summary)
+@ref: [F4 Section 1](../00_REF/foundation/F4_SecOps_Technical_Specification.md#1-executive-summary)
 
 ---
 
@@ -150,7 +150,7 @@ This document covers:
 
 **Business Driver**: Current implementation lacks SIEM integration, WAF synchronization, automated pen testing, and threat intelligence capabilities required for enterprise deployments.
 
-@ref: [GAP_Foundation_Module_Gap_Analysis Section 5](../00_init/GAP_Foundation_Module_Gap_Analysis.md#5-f4-security-operations)
+@ref: [GAP_Foundation_Module_Gap_Analysis Section 5](../00_REF/foundation/GAP_Foundation_Module_Gap_Analysis.md#5-f4-security-operations)
 
 ---
 
@@ -321,7 +321,7 @@ sequenceDiagram
 | BRD.04.09.09 | Admin | Receive threat intelligence alerts | Proactive threat awareness | P2 |
 | BRD.04.09.10 | Agent | Receive LLM-safe sanitized context | AI security protection | P1 |
 
-@ref: [F4 Sections 3-9](../00_init/F4_SecOps_Technical_Specification.md#3-input-validation)
+@ref: [F4 Sections 3-9](../00_REF/foundation/F4_SecOps_Technical_Specification.md#3-input-validation)
 
 ### 5.2 User Story Summary
 
@@ -345,7 +345,7 @@ sequenceDiagram
 
 **Business Capability**: Detect and block injection attacks including prompt injection, SQL injection, and cross-site scripting.
 
-@ref: [F4 Section 3](../00_init/F4_SecOps_Technical_Specification.md#3-input-validation)
+@ref: [F4 Section 3](../00_REF/foundation/F4_SecOps_Technical_Specification.md#3-input-validation)
 
 **Business Requirements**:
 - Prompt injection detection with pattern matching and heuristics
@@ -380,7 +380,7 @@ sequenceDiagram
 
 **Business Capability**: Enforce OWASP ASVS 5.0 Level 2 and OWASP LLM Top 10 2025 security standards.
 
-@ref: [F4 Section 4](../00_init/F4_SecOps_Technical_Specification.md#4-compliance-enforcement)
+@ref: [F4 Section 4](../00_REF/foundation/F4_SecOps_Technical_Specification.md#4-compliance-enforcement)
 
 **Business Requirements**:
 - OWASP ASVS 5.0 Level 2 compliance (149 controls)
@@ -417,7 +417,7 @@ sequenceDiagram
 
 **Business Capability**: Provide immutable, cryptographically-chained audit trail with 7-year retention.
 
-@ref: [F4 Section 5](../00_init/F4_SecOps_Technical_Specification.md#5-audit-logging)
+@ref: [F4 Section 5](../00_REF/foundation/F4_SecOps_Technical_Specification.md#5-audit-logging)
 
 **Business Requirements**:
 - Immutable audit log with SHA-256 hash chain
@@ -453,7 +453,7 @@ sequenceDiagram
 
 **Business Capability**: Detect and respond to security threats including brute force, anomalies, and suspicious patterns.
 
-@ref: [F4 Section 6](../00_init/F4_SecOps_Technical_Specification.md#6-threat-detection)
+@ref: [F4 Section 6](../00_REF/foundation/F4_SecOps_Technical_Specification.md#6-threat-detection)
 
 **Business Requirements**:
 - Brute force detection (5 failed attempts in 5 minutes)
@@ -491,7 +491,7 @@ sequenceDiagram
 
 **Business Capability**: Defense-in-depth security for LLM interactions including prompt injection prevention, PII redaction, and context isolation.
 
-@ref: [F4 Section 7](../00_init/F4_SecOps_Technical_Specification.md#7-llm-security)
+@ref: [F4 Section 7](../00_REF/foundation/F4_SecOps_Technical_Specification.md#7-llm-security)
 
 **Business Requirements**:
 - Input layer: Prompt injection detection, input sanitization, rate limiting, token limits
@@ -529,7 +529,7 @@ sequenceDiagram
 
 **Business Capability**: Provide hooks for domain layers to register custom audit events, threat patterns, and event handlers.
 
-@ref: [F4 Section 9.6](../00_init/F4_SecOps_Technical_Specification.md#96-extensibility-hooks)
+@ref: [F4 Section 9.6](../00_REF/foundation/F4_SecOps_Technical_Specification.md#96-extensibility-hooks)
 
 **Business Requirements**:
 - on_threat_detected hook for custom response and escalation
@@ -560,7 +560,7 @@ sequenceDiagram
 
 **Business Capability**: Export security events to external SIEM platforms (Splunk, Microsoft Sentinel) for unified security visibility.
 
-@ref: [GAP-F4-01: SIEM Integration](../00_init/GAP_Foundation_Module_Gap_Analysis.md#52-identified-gaps)
+@ref: [GAP-F4-01: SIEM Integration](../00_REF/foundation/GAP_Foundation_Module_Gap_Analysis.md#52-identified-gaps)
 
 **Business Requirements**:
 - Real-time event streaming to SIEM
@@ -589,7 +589,7 @@ sequenceDiagram
 
 **Business Capability**: Synchronize threat detection rules with Cloud Armor Web Application Firewall for automated protection.
 
-@ref: [GAP-F4-02: WAF Integration](../00_init/GAP_Foundation_Module_Gap_Analysis.md#52-identified-gaps)
+@ref: [GAP-F4-02: WAF Integration](../00_REF/foundation/GAP_Foundation_Module_Gap_Analysis.md#52-identified-gaps)
 
 **Business Requirements**:
 - Automated Cloud Armor rule updates from threat detection
@@ -618,7 +618,7 @@ sequenceDiagram
 
 **Business Capability**: Scheduled automated security scans to identify vulnerabilities proactively.
 
-@ref: [GAP-F4-03: Automated Pen Testing](../00_init/GAP_Foundation_Module_Gap_Analysis.md#52-identified-gaps)
+@ref: [GAP-F4-03: Automated Pen Testing](../00_REF/foundation/GAP_Foundation_Module_Gap_Analysis.md#52-identified-gaps)
 
 **Business Requirements**:
 - Scheduled security scans (weekly minimum)
@@ -647,7 +647,7 @@ sequenceDiagram
 
 **Business Capability**: Integrate external threat intelligence feeds to proactively detect emerging attack patterns.
 
-@ref: [GAP-F4-04: Threat Intelligence](../00_init/GAP_Foundation_Module_Gap_Analysis.md#52-identified-gaps)
+@ref: [GAP-F4-04: Threat Intelligence](../00_REF/foundation/GAP_Foundation_Module_Gap_Analysis.md#52-identified-gaps)
 
 **Business Requirements**:
 - Integration with threat intelligence providers
@@ -676,7 +676,7 @@ sequenceDiagram
 
 **Business Capability**: Calculate risk scores per user and action to prioritize security response.
 
-@ref: [GAP-F4-05: Security Scoring](../00_init/GAP_Foundation_Module_Gap_Analysis.md#52-identified-gaps)
+@ref: [GAP-F4-05: Security Scoring](../00_REF/foundation/GAP_Foundation_Module_Gap_Analysis.md#52-identified-gaps)
 
 **Business Requirements**:
 - User risk score based on behavior patterns
@@ -705,7 +705,7 @@ sequenceDiagram
 
 **Business Capability**: Documented and automated incident response procedures for consistent handling.
 
-@ref: [GAP-F4-06: Incident Response Runbooks](../00_init/GAP_Foundation_Module_Gap_Analysis.md#52-identified-gaps)
+@ref: [GAP-F4-06: Incident Response Runbooks](../00_REF/foundation/GAP_Foundation_Module_Gap_Analysis.md#52-identified-gaps)
 
 **Business Requirements**:
 - Pre-built runbooks for common incident types
@@ -736,7 +736,7 @@ sequenceDiagram
 
 **Requirement**: Implement defense-in-depth security model with multiple validation layers.
 
-@ref: [F4 Section 2.2](../00_init/F4_SecOps_Technical_Specification.md#22-design-principles)
+@ref: [F4 Section 2.2](../00_REF/foundation/F4_SecOps_Technical_Specification.md#22-design-principles)
 
 **Measures**:
 - Defense in Depth: Multiple security layers, no single point of failure
@@ -997,8 +997,8 @@ sequenceDiagram
 
 | Upstream Artifact | Reference | Relevance |
 |-------------------|-----------|-----------|
-| F4 SecOps Technical Specification | [F4 Spec](../00_init/F4_SecOps_Technical_Specification.md) | Technical requirements source |
-| Gap Analysis | [GAP Analysis](../00_init/GAP_Foundation_Module_Gap_Analysis.md) | 6 F4 gaps identified |
+| F4 SecOps Technical Specification | [F4 Spec](../00_REF/foundation/F4_SecOps_Technical_Specification.md) | Technical requirements source |
+| Gap Analysis | [GAP Analysis](../00_REF/foundation/GAP_Foundation_Module_Gap_Analysis.md) | 6 F4 gaps identified |
 
 ### 13.2 Downstream Artifacts
 

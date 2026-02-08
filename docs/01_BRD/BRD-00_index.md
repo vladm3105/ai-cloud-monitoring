@@ -30,12 +30,12 @@ The AI Cost Monitoring Platform uses a **Hybrid Structure** (adapted from Tradin
 
 ## Domain BRDs (Cost Monitoring-Specific)
 
-| BRD ID | Title | Scope | Status |
-|:-------|:------|:------|:-------|
-| **BRD-08** | Agent Orchestration & MCP | D1: Coordinator, domain agents, MCP servers | Planned |
-| **BRD-09** | Cloud Cost Analytics | D2: BigQuery, cost analysis, recommendations | Planned |
-| **BRD-10** | User Experience | D3: Grafana + AG-UI hybrid interface | Planned |
-| **BRD-11** | Multi-Cloud Integration | D4: GCP, AWS, Azure, Kubernetes connectors | Planned |
+| BRD ID | Title | Module | Scope | Status |
+|:-------|:------|:-------|:------|:-------|
+| **BRD-08** | [D1 Agent Orchestration & MCP](BRD-08_d1_agent_orchestration.md) | D1 Agents | Coordinator, domain agents, MCP servers | Draft |
+| **BRD-09** | [D2 Cloud Cost Analytics](BRD-09_d2_cost_analytics.md) | D2 Analytics | BigQuery, cost analysis, recommendations | Draft |
+| **BRD-10** | [D3 User Experience](BRD-10_d3_user_experience.md) | D3 UX | Grafana + AG-UI hybrid interface | Draft |
+| **BRD-11** | [D4 Multi-Cloud Integration](BRD-11_d4_multi_cloud.md) | D4 Multi-Cloud | GCP, AWS, Azure, Kubernetes connectors | Draft |
 
 ---
 

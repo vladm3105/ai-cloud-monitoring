@@ -62,7 +62,7 @@ The F2 Session & Context Management Module provides stateful session handling, m
 
 This Business Requirements Document (BRD) defines the business requirements for the F2 Session & Context Management Module. The F2 Module handles session lifecycle, multi-layer memory, workspace persistence, and context injection for all domain layers.
 
-@ref: [F2 Session Technical Specification](../00_init/F2_Session_Technical_Specification.md#1-executive-summary)
+@ref: [F2 Session Technical Specification](../00_REF/foundation/F2_Session_Technical_Specification.md#1-executive-summary)
 
 ### 1.2 Document Scope
 
@@ -139,7 +139,7 @@ This document covers:
 
 **Business Driver**: AI agents and user interfaces require consistent context across requests to deliver personalized experiences without requiring users to re-establish state.
 
-@ref: [F2 Section 3](../00_init/F2_Session_Technical_Specification.md#3-session-management)
+@ref: [F2 Section 3](../00_REF/foundation/F2_Session_Technical_Specification.md#3-session-management)
 
 ---
 
@@ -149,7 +149,7 @@ This document covers:
 
 **Business Driver**: Current implementation lacks Redis persistence, cross-device sync, and memory expiration alerts required for production deployments.
 
-@ref: [GAP_Foundation_Module_Gap_Analysis Section 3.2](../00_init/GAP_Foundation_Module_Gap_Analysis.md#32-identified-gaps)
+@ref: [GAP_Foundation_Module_Gap_Analysis Section 3.2](../00_REF/foundation/GAP_Foundation_Module_Gap_Analysis.md#32-identified-gaps)
 
 ---
 
@@ -316,7 +316,7 @@ sequenceDiagram
 | BRD.02.09.09 | User | Share workspace with team | Collaborative analysis | P2 |
 | BRD.02.09.10 | Service | Access session via API | Machine-to-machine context | P1 |
 
-@ref: [F2 Sections 3-8](../00_init/F2_Session_Technical_Specification.md#3-session-management)
+@ref: [F2 Sections 3-8](../00_REF/foundation/F2_Session_Technical_Specification.md#3-session-management)
 
 ### 5.2 User Story Summary
 
@@ -340,7 +340,7 @@ sequenceDiagram
 
 **Business Capability**: Manage session states from creation through termination with device tracking and timeout enforcement.
 
-@ref: [F2 Section 3](../00_init/F2_Session_Technical_Specification.md#3-session-management)
+@ref: [F2 Section 3](../00_REF/foundation/F2_Session_Technical_Specification.md#3-session-management)
 
 **Business Requirements**:
 - Session creation after successful F1 authentication
@@ -380,7 +380,7 @@ sequenceDiagram
 
 **Business Capability**: Three-tier memory architecture with explicit promotion between layers.
 
-@ref: [F2 Section 4](../00_init/F2_Session_Technical_Specification.md#4-multi-layer-memory-system)
+@ref: [F2 Section 4](../00_REF/foundation/F2_Session_Technical_Specification.md#4-multi-layer-memory-system)
 
 **Memory Layer Definitions**:
 
@@ -417,7 +417,7 @@ sequenceDiagram
 
 **Business Capability**: Persistent, typed containers for user work with sharing capabilities.
 
-@ref: [F2 Section 5](../00_init/F2_Session_Technical_Specification.md#5-workspace-system)
+@ref: [F2 Section 5](../00_REF/foundation/F2_Session_Technical_Specification.md#5-workspace-system)
 
 **Workspace Types (Domain-Injected)**:
 
@@ -455,7 +455,7 @@ sequenceDiagram
 
 **Business Capability**: Automatic context assembly and injection for agents, UI, and events.
 
-@ref: [F2 Section 6](../00_init/F2_Session_Technical_Specification.md#6-context-injection-system)
+@ref: [F2 Section 6](../00_REF/foundation/F2_Session_Technical_Specification.md#6-context-injection-system)
 
 **Context Assembly Sources**:
 
@@ -496,7 +496,7 @@ sequenceDiagram
 
 **Business Capability**: Track device information for security and anomaly detection.
 
-@ref: [F2 Section 3.5](../00_init/F2_Session_Technical_Specification.md#35-device-tracking)
+@ref: [F2 Section 3.5](../00_REF/foundation/F2_Session_Technical_Specification.md#35-device-tracking)
 
 **Tracked Information**:
 
@@ -539,7 +539,7 @@ sequenceDiagram
 
 **Business Capability**: Emit events for all session, memory, workspace, and context state changes.
 
-@ref: [F2 Section 7](../00_init/F2_Session_Technical_Specification.md#7-event-system)
+@ref: [F2 Section 7](../00_REF/foundation/F2_Session_Technical_Specification.md#7-event-system)
 
 **Events Emitted**:
 
@@ -571,7 +571,7 @@ sequenceDiagram
 
 **Business Capability**: Support multiple storage backends for different deployment environments.
 
-@ref: [F2 Section 3.6](../00_init/F2_Session_Technical_Specification.md#36-storage-backends)
+@ref: [F2 Section 3.6](../00_REF/foundation/F2_Session_Technical_Specification.md#36-storage-backends)
 
 **Backend Configuration**:
 
@@ -603,7 +603,7 @@ sequenceDiagram
 
 **Business Capability**: Lifecycle hooks for domain layers to customize session behavior.
 
-@ref: [F2 Section 8.5](../00_init/F2_Session_Technical_Specification.md#85-extensibility-hooks)
+@ref: [F2 Section 8.5](../00_REF/foundation/F2_Session_Technical_Specification.md#85-extensibility-hooks)
 
 **Available Hooks**:
 
@@ -635,7 +635,7 @@ sequenceDiagram
 
 **Business Capability**: Persistent session storage with high-performance caching.
 
-@ref: [GAP-F2-01: Redis Backend](../00_init/GAP_Foundation_Module_Gap_Analysis.md#32-identified-gaps)
+@ref: [GAP-F2-01: Redis Backend](../00_REF/foundation/GAP_Foundation_Module_Gap_Analysis.md#32-identified-gaps)
 
 **Business Requirements**:
 - Redis 7+ as primary session storage
@@ -664,7 +664,7 @@ sequenceDiagram
 
 **Business Capability**: Real-time session state synchronization across user devices.
 
-@ref: [GAP-F2-02: Cross-Session Sync](../00_init/GAP_Foundation_Module_Gap_Analysis.md#32-identified-gaps)
+@ref: [GAP-F2-02: Cross-Session Sync](../00_REF/foundation/GAP_Foundation_Module_Gap_Analysis.md#32-identified-gaps)
 
 **Business Requirements**:
 - Workspace changes synced across active sessions
@@ -693,7 +693,7 @@ sequenceDiagram
 
 **Business Capability**: Compress large memory blobs to maintain query performance.
 
-@ref: [GAP-F2-03: Memory Compression](../00_init/GAP_Foundation_Module_Gap_Analysis.md#32-identified-gaps)
+@ref: [GAP-F2-03: Memory Compression](../00_REF/foundation/GAP_Foundation_Module_Gap_Analysis.md#32-identified-gaps)
 
 **Business Requirements**:
 - Automatic compression for memory entries >10KB
@@ -721,7 +721,7 @@ sequenceDiagram
 
 **Business Capability**: Pre-built workspace configurations for common use cases.
 
-@ref: [GAP-F2-04: Workspace Templates](../00_init/GAP_Foundation_Module_Gap_Analysis.md#32-identified-gaps)
+@ref: [GAP-F2-04: Workspace Templates](../00_REF/foundation/GAP_Foundation_Module_Gap_Analysis.md#32-identified-gaps)
 
 **Business Requirements**:
 - System-defined templates for each workspace type
@@ -750,7 +750,7 @@ sequenceDiagram
 
 **Business Capability**: Track workspace changes with undo/history capability.
 
-@ref: [GAP-F2-05: Workspace Versioning](../00_init/GAP_Foundation_Module_Gap_Analysis.md#32-identified-gaps)
+@ref: [GAP-F2-05: Workspace Versioning](../00_REF/foundation/GAP_Foundation_Module_Gap_Analysis.md#32-identified-gaps)
 
 **Business Requirements**:
 - Automatic version snapshots on significant changes
@@ -779,7 +779,7 @@ sequenceDiagram
 
 **Business Capability**: Warn users before session memory expires to prevent data loss.
 
-@ref: [GAP-F2-06: Memory Expiration Alerts](../00_init/GAP_Foundation_Module_Gap_Analysis.md#32-identified-gaps)
+@ref: [GAP-F2-06: Memory Expiration Alerts](../00_REF/foundation/GAP_Foundation_Module_Gap_Analysis.md#32-identified-gaps)
 
 **Business Requirements**:
 - Alert at 5 minutes before session expiration
@@ -810,7 +810,7 @@ sequenceDiagram
 
 **Requirement**: Implement strict data isolation between users and sessions.
 
-@ref: [F2 Section 10](../00_init/F2_Session_Technical_Specification.md#10-security-considerations)
+@ref: [F2 Section 10](../00_REF/foundation/F2_Session_Technical_Specification.md#10-security-considerations)
 
 **Measures**:
 - Session tokens cryptographically random and hashed
@@ -1082,8 +1082,8 @@ sequenceDiagram
 
 | Upstream Artifact | Reference | Relevance |
 |-------------------|-----------|-----------|
-| F2 Session Technical Specification | [F2 Spec](../00_init/F2_Session_Technical_Specification.md) | Technical requirements source |
-| Gap Analysis | [GAP Analysis](../00_init/GAP_Foundation_Module_Gap_Analysis.md) | 6 F2 gaps identified |
+| F2 Session Technical Specification | [F2 Spec](../00_REF/foundation/F2_Session_Technical_Specification.md) | Technical requirements source |
+| Gap Analysis | [GAP Analysis](../00_REF/foundation/GAP_Foundation_Module_Gap_Analysis.md) | 6 F2 gaps identified |
 
 ### 13.2 Downstream Artifacts
 

@@ -62,7 +62,7 @@ The F7 Configuration Manager Module provides centralized configuration managemen
 
 This Business Requirements Document (BRD) defines the business requirements for the F7 Configuration Manager Module. The F7 Configuration Manager handles all configuration loading, validation, hot-reload, feature flags, and version control for the platform using a schema-first approach with fail-safe defaults.
 
-@ref: [F7 Configuration Manager Technical Specification](../00_init/F7_Config_Manager_Technical_Specification.md#1-executive-summary)
+@ref: [F7 Configuration Manager Technical Specification](../00_REF/foundation/F7_Config_Manager_Technical_Specification.md#1-executive-summary)
 
 ### 1.2 Document Scope
 
@@ -139,7 +139,7 @@ This document covers:
 
 **Business Driver**: Consistent configuration handling across all Foundation and Domain modules reduces operational complexity and enables uniform hot-reload, validation, and auditing.
 
-@ref: [F7 Section 1](../00_init/F7_Config_Manager_Technical_Specification.md#1-executive-summary)
+@ref: [F7 Section 1](../00_REF/foundation/F7_Config_Manager_Technical_Specification.md#1-executive-summary)
 
 ---
 
@@ -149,7 +149,7 @@ This document covers:
 
 **Business Driver**: Current implementation lacks config testing framework, drift detection, and schema registry capabilities required for enterprise deployments.
 
-@ref: [GAP_Foundation_Module_Gap_Analysis Section 8.2](../00_init/GAP_Foundation_Module_Gap_Analysis.md#82-identified-gaps)
+@ref: [GAP_Foundation_Module_Gap_Analysis Section 8.2](../00_REF/foundation/GAP_Foundation_Module_Gap_Analysis.md#82-identified-gaps)
 
 ---
 
@@ -324,7 +324,7 @@ sequenceDiagram
 | BRD.07.09.09 | Admin | Test configuration before deployment | Validate configs in staging environment | P2 |
 | BRD.07.09.10 | Service | Get AI-powered config recommendations | Optimize configuration for performance | P3 |
 
-@ref: [F7 Sections 3-8](../00_init/F7_Config_Manager_Technical_Specification.md#3-configuration-sources)
+@ref: [F7 Sections 3-8](../00_REF/foundation/F7_Config_Manager_Technical_Specification.md#3-configuration-sources)
 
 ### 5.2 User Story Summary
 
@@ -348,7 +348,7 @@ sequenceDiagram
 
 **Business Capability**: Load configuration from multiple sources with deterministic priority ordering.
 
-@ref: [F7 Section 3](../00_init/F7_Config_Manager_Technical_Specification.md#3-configuration-sources)
+@ref: [F7 Section 3](../00_REF/foundation/F7_Config_Manager_Technical_Specification.md#3-configuration-sources)
 
 **Business Requirements**:
 - Environment variables with COSTMON_ prefix as highest priority
@@ -383,7 +383,7 @@ sequenceDiagram
 
 **Business Capability**: Validate all configuration against YAML schemas with automatic type coercion.
 
-@ref: [F7 Section 4](../00_init/F7_Config_Manager_Technical_Specification.md#4-schema-validation)
+@ref: [F7 Section 4](../00_REF/foundation/F7_Config_Manager_Technical_Specification.md#4-schema-validation)
 
 **Business Requirements**:
 - Type checking against expected data types
@@ -421,7 +421,7 @@ sequenceDiagram
 
 **Business Capability**: Apply configuration changes without service restarts using graceful reload policies.
 
-@ref: [F7 Section 5](../00_init/F7_Config_Manager_Technical_Specification.md#5-hot-reload)
+@ref: [F7 Section 5](../00_REF/foundation/F7_Config_Manager_Technical_Specification.md#5-hot-reload)
 
 **Business Requirements**:
 - Graceful reload with connection draining (default)
@@ -460,7 +460,7 @@ sequenceDiagram
 
 **Business Capability**: Control feature availability using targeted rollout policies.
 
-@ref: [F7 Section 6](../00_init/F7_Config_Manager_Technical_Specification.md#6-feature-flags)
+@ref: [F7 Section 6](../00_REF/foundation/F7_Config_Manager_Technical_Specification.md#6-feature-flags)
 
 **Business Requirements**:
 - Percentage-based rollouts (random sample of users)
@@ -498,7 +498,7 @@ sequenceDiagram
 
 **Business Capability**: Provide AI-powered configuration analysis, recommendations, and natural language to YAML generation.
 
-@ref: [F7 Section 7](../00_init/F7_Config_Manager_Technical_Specification.md#7-ai-powered-features)
+@ref: [F7 Section 7](../00_REF/foundation/F7_Config_Manager_Technical_Specification.md#7-ai-powered-features)
 
 **Business Requirements**:
 - Natural language to YAML schema generation
@@ -538,7 +538,7 @@ sequenceDiagram
 
 **Business Capability**: Maintain configuration history with snapshots, rollback, and change audit.
 
-@ref: [F7 Section 8](../00_init/F7_Config_Manager_Technical_Specification.md#8-version-control)
+@ref: [F7 Section 8](../00_REF/foundation/F7_Config_Manager_Technical_Specification.md#8-version-control)
 
 **Business Requirements**:
 - Automatic snapshots before every reload
@@ -576,7 +576,7 @@ sequenceDiagram
 
 **Business Capability**: Integrate with external feature flag services (LaunchDarkly, Split) for enterprise environments.
 
-@ref: [GAP-F7-01: External Flag Service](../00_init/GAP_Foundation_Module_Gap_Analysis.md#82-identified-gaps)
+@ref: [GAP-F7-01: External Flag Service](../00_REF/foundation/GAP_Foundation_Module_Gap_Analysis.md#82-identified-gaps)
 
 **Business Requirements**:
 - Adapter pattern for external flag services
@@ -605,7 +605,7 @@ sequenceDiagram
 
 **Business Capability**: Detect and alert on configuration drift between environments and running state.
 
-@ref: [GAP-F7-02: Config Drift Detection](../00_init/GAP_Foundation_Module_Gap_Analysis.md#82-identified-gaps)
+@ref: [GAP-F7-02: Config Drift Detection](../00_REF/foundation/GAP_Foundation_Module_Gap_Analysis.md#82-identified-gaps)
 
 **Business Requirements**:
 - File vs running configuration comparison on reload
@@ -642,7 +642,7 @@ sequenceDiagram
 
 **Business Capability**: Validate configuration changes before deployment in staging or dry-run mode.
 
-@ref: [GAP-F7-03: Config Testing](../00_init/GAP_Foundation_Module_Gap_Analysis.md#82-identified-gaps)
+@ref: [GAP-F7-03: Config Testing](../00_REF/foundation/GAP_Foundation_Module_Gap_Analysis.md#82-identified-gaps)
 
 **Business Requirements**:
 - Dry-run validation without applying changes
@@ -671,7 +671,7 @@ sequenceDiagram
 
 **Business Capability**: Progressive configuration changes across percentage of instances or users.
 
-@ref: [GAP-F7-04: Staged Rollouts](../00_init/GAP_Foundation_Module_Gap_Analysis.md#82-identified-gaps)
+@ref: [GAP-F7-04: Staged Rollouts](../00_REF/foundation/GAP_Foundation_Module_Gap_Analysis.md#82-identified-gaps)
 
 **Business Requirements**:
 - Percentage-based config rollout (10%, 25%, 50%, 100%)
@@ -700,7 +700,7 @@ sequenceDiagram
 
 **Business Capability**: Centralized API for all configuration access with rate limiting and audit logging.
 
-@ref: [GAP-F7-05: Config API Gateway](../00_init/GAP_Foundation_Module_Gap_Analysis.md#82-identified-gaps)
+@ref: [GAP-F7-05: Config API Gateway](../00_REF/foundation/GAP_Foundation_Module_Gap_Analysis.md#82-identified-gaps)
 
 **Business Requirements**:
 - RESTful API for configuration CRUD operations
@@ -729,7 +729,7 @@ sequenceDiagram
 
 **Business Capability**: Central repository for versioned configuration schemas with evolution support.
 
-@ref: [GAP-F7-06: Schema Registry](../00_init/GAP_Foundation_Module_Gap_Analysis.md#82-identified-gaps)
+@ref: [GAP-F7-06: Schema Registry](../00_REF/foundation/GAP_Foundation_Module_Gap_Analysis.md#82-identified-gaps)
 
 **Business Requirements**:
 - Versioned schema storage with semantic versioning
@@ -760,7 +760,7 @@ sequenceDiagram
 
 **Requirement**: Implement automatic encryption for sensitive configuration values.
 
-@ref: [F7 Section 9](../00_init/F7_Config_Manager_Technical_Specification.md#9-encryption)
+@ref: [F7 Section 9](../00_REF/foundation/F7_Config_Manager_Technical_Specification.md#9-encryption)
 
 **Measures**:
 - AES-256-GCM encryption for sensitive values
@@ -1030,8 +1030,8 @@ sequenceDiagram
 
 | Upstream Artifact | Reference | Relevance |
 |-------------------|-----------|-----------|
-| F7 Config Manager Technical Specification | [F7 Spec](../00_init/F7_Config_Manager_Technical_Specification.md) | Technical requirements source |
-| Gap Analysis | [GAP Analysis](../00_init/GAP_Foundation_Module_Gap_Analysis.md) | 6 F7 gaps identified |
+| F7 Config Manager Technical Specification | [F7 Spec](../00_REF/foundation/F7_Config_Manager_Technical_Specification.md) | Technical requirements source |
+| Gap Analysis | [GAP Analysis](../00_REF/foundation/GAP_Foundation_Module_Gap_Analysis.md) | 6 F7 gaps identified |
 
 ### 13.2 Downstream Artifacts
 

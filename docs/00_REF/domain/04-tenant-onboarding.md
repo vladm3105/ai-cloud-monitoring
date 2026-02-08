@@ -118,7 +118,7 @@ Step 2: Platform displays a CloudFormation template URL
         (creates IAM Role with specific permissions + External ID)
 Step 3: User deploys the template in their AWS console
 Step 4: User copies the Role ARN back into the wizard
-Step 5: Platform stores Role ARN + External ID in OpenBao
+Step 5: Platform stores Role ARN + External ID in Secret Manager
 Step 6: Platform tests: AssumeRole → GetCallerIdentity
 Step 7: Success → cloud_account created with status=active
 ```
@@ -138,7 +138,7 @@ Step 1: User selects "Connect Azure Subscription"
 Step 2: Platform displays instructions to create a Service Principal
         (App Registration with Reader + Cost Management Reader roles)
 Step 3: User provides: Client ID, Client Secret, Azure Tenant ID, Subscription ID
-Step 4: Platform stores credentials in OpenBao
+Step 4: Platform stores credentials in Secret Manager
 Step 5: Platform tests: authenticate → list subscriptions
 Step 6: Success → cloud_account created
 ```
@@ -150,7 +150,7 @@ Step 1: User selects "Connect GCP Project"
 Step 2: Platform displays instructions to create a Service Account
         (with Viewer + Billing Account Viewer roles)
 Step 3: User uploads Service Account JSON key file
-Step 4: Platform stores JSON key in OpenBao
+Step 4: Platform stores JSON key in Secret Manager
 Step 5: Platform tests: authenticate → list projects
 Step 6: Success → cloud_account created
 ```
@@ -161,7 +161,7 @@ Step 6: Success → cloud_account created
 Step 1: User selects "Connect Kubernetes Cluster"
 Step 2: User provides: Cluster API endpoint + kubeconfig or service account token
 Step 3: Platform verifies OpenCost is installed (required)
-Step 4: Platform stores credentials in OpenBao
+Step 4: Platform stores credentials in Secret Manager
 Step 5: Platform tests: list namespaces → check OpenCost endpoint
 Step 6: Success → cloud_account created
 ```
@@ -313,7 +313,7 @@ Settings → Team → "Invite Member"
 
 > **DEV-ONB-001:** The CloudFormation template for AWS should be hosted on our S3 bucket and versioned. Users click a "Launch Stack" button that opens AWS CloudFormation with the template pre-loaded. The External ID must be unique per tenant to prevent confused deputy attacks.
 
-> **DEV-ONB-002:** Credential validation must happen server-side only. Never send cloud credentials to the frontend or store them in browser storage. The wizard submits credentials directly to the backend, which stores them in OpenBao and returns only a success/failure status.
+> **DEV-ONB-002:** Credential validation must happen server-side only. Never send cloud credentials to the frontend or store them in browser storage. The wizard submits credentials directly to the backend, which stores them in Secret Manager and returns only a success/failure status.
 
 > **DEV-ONB-003:** First sync should be a dedicated Cloud Tasks job (not the regular scheduled sync) with different timeout and retry settings. It should prioritize speed over completeness — pull the most important data first, backfill details in subsequent scheduled syncs.
 

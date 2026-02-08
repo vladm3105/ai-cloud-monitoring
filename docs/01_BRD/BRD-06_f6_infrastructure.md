@@ -62,7 +62,7 @@ The F6 Infrastructure Module provides cloud-agnostic infrastructure abstraction 
 
 This Business Requirements Document (BRD) defines the business requirements for the F6 Infrastructure Module. The F6 Infrastructure Module provides cloud-agnostic infrastructure abstraction enabling seamless multi-cloud deployment through standardized provider adapters for compute, database, AI, messaging, storage, networking, and cost management services.
 
-@ref: [F6 Infrastructure Technical Specification](../00_init/F6_Infrastructure_Technical_Specification.md#1-executive-summary)
+@ref: [F6 Infrastructure Technical Specification](../00_REF/foundation/F6_Infrastructure_Technical_Specification.md#1-executive-summary)
 
 ### 1.2 Document Scope
 
@@ -142,7 +142,7 @@ This document covers:
 
 **Business Driver**: Multi-cloud portability reduces vendor lock-in risk and enables deployment flexibility based on cost, compliance, or performance requirements.
 
-@ref: [F6 SS2](../00_init/F6_Infrastructure_Technical_Specification.md#2-architecture-overview)
+@ref: [F6 SS2](../00_REF/foundation/F6_Infrastructure_Technical_Specification.md#2-architecture-overview)
 
 ---
 
@@ -152,7 +152,7 @@ This document covers:
 
 **Business Driver**: Current implementation lacks multi-region deployment, blue-green releases, and advanced cost analytics required for production enterprise deployments.
 
-@ref: [GAP_Foundation_Module_Gap_Analysis SS7.2](../00_init/GAP_Foundation_Module_Gap_Analysis.md#72-identified-gaps)
+@ref: [GAP_Foundation_Module_Gap_Analysis SS7.2](../00_REF/foundation/GAP_Foundation_Module_Gap_Analysis.md#72-identified-gaps)
 
 ---
 
@@ -162,7 +162,7 @@ This document covers:
 
 **Business Driver**: Cloud cost unpredictability threatens budget compliance; proactive cost management prevents overspend and enables informed resource decisions.
 
-@ref: [F6 SS9](../00_init/F6_Infrastructure_Technical_Specification.md#9-cost-management)
+@ref: [F6 SS9](../00_REF/foundation/F6_Infrastructure_Technical_Specification.md#9-cost-management)
 
 ---
 
@@ -327,7 +327,7 @@ sequenceDiagram
 | BRD.06.09.09 | Developer | Upload files to object storage | Durable file storage with lifecycle management | P2 |
 | BRD.06.09.10 | Admin | Configure network security rules | VPC isolation and firewall management | P1 |
 
-@ref: [F6 SS3-SS9](../00_init/F6_Infrastructure_Technical_Specification.md#3-compute-services)
+@ref: [F6 SS3-SS9](../00_REF/foundation/F6_Infrastructure_Technical_Specification.md#3-compute-services)
 
 ### 5.2 User Story Summary
 
@@ -351,7 +351,7 @@ sequenceDiagram
 
 **Business Capability**: Cloud-agnostic compute abstraction with auto-scaling and multi-provider support.
 
-@ref: [F6 SS3](../00_init/F6_Infrastructure_Technical_Specification.md#3-compute-services)
+@ref: [F6 SS3](../00_REF/foundation/F6_Infrastructure_Technical_Specification.md#3-compute-services)
 
 **Business Requirements**:
 - Cloud Run as primary compute with configurable scaling (1-10 instances)
@@ -385,7 +385,7 @@ sequenceDiagram
 
 **Business Capability**: Managed PostgreSQL with HA, connection pooling, and vector storage support.
 
-@ref: [F6 SS4](../00_init/F6_Infrastructure_Technical_Specification.md#4-database-services)
+@ref: [F6 SS4](../00_REF/foundation/F6_Infrastructure_Technical_Specification.md#4-database-services)
 
 **Business Requirements**:
 - Cloud SQL PostgreSQL with regional failover (HA enabled)
@@ -427,7 +427,7 @@ sequenceDiagram
 
 **Business Capability**: Unified LLM gateway with ensemble voting, auto-fallback, and multi-provider support.
 
-@ref: [F6 SS5](../00_init/F6_Infrastructure_Technical_Specification.md#5-ai-services)
+@ref: [F6 SS5](../00_REF/foundation/F6_Infrastructure_Technical_Specification.md#5-ai-services)
 
 **Business Requirements**:
 - Vertex AI as primary with gemini-1.5-pro (2M context, multimodal)
@@ -459,7 +459,7 @@ sequenceDiagram
 
 **Business Capability**: Event-driven architecture with Pub/Sub messaging and dead-letter support.
 
-@ref: [F6 SS6](../00_init/F6_Infrastructure_Technical_Specification.md#6-messaging-services)
+@ref: [F6 SS6](../00_REF/foundation/F6_Infrastructure_Technical_Specification.md#6-messaging-services)
 
 **Business Requirements**:
 - At-least-once delivery guarantee
@@ -491,7 +491,7 @@ sequenceDiagram
 
 **Business Capability**: Object storage and secret management with encryption and lifecycle policies.
 
-@ref: [F6 SS7](../00_init/F6_Infrastructure_Technical_Specification.md#7-storage-services)
+@ref: [F6 SS7](../00_REF/foundation/F6_Infrastructure_Technical_Specification.md#7-storage-services)
 
 **Business Requirements**:
 - Cloud Storage for object storage with Standard/Nearline classes
@@ -523,7 +523,7 @@ sequenceDiagram
 
 **Business Capability**: VPC isolation with load balancing, DNS, and WAF protection.
 
-@ref: [F6 SS8](../00_init/F6_Infrastructure_Technical_Specification.md#8-networking)
+@ref: [F6 SS8](../00_REF/foundation/F6_Infrastructure_Technical_Specification.md#8-networking)
 
 **Business Requirements**:
 - VPC with 10.0.0.0/16 CIDR and auto-managed subnets
@@ -556,7 +556,7 @@ sequenceDiagram
 
 **Business Capability**: Budget controls with threshold alerts and cost optimization recommendations.
 
-@ref: [F6 SS9](../00_init/F6_Infrastructure_Technical_Specification.md#9-cost-management)
+@ref: [F6 SS9](../00_REF/foundation/F6_Infrastructure_Technical_Specification.md#9-cost-management)
 
 **Business Requirements**:
 - Monthly budget limit with configurable threshold alerts
@@ -597,7 +597,7 @@ sequenceDiagram
 
 **Business Capability**: Active-active deployment across multiple regions for high availability.
 
-@ref: [GAP-F6-01: Multi-Region Deployment](../00_init/GAP_Foundation_Module_Gap_Analysis.md#72-identified-gaps)
+@ref: [GAP-F6-01: Multi-Region Deployment](../00_REF/foundation/GAP_Foundation_Module_Gap_Analysis.md#72-identified-gaps)
 
 **Business Requirements**:
 - Active-active deployment across two or more regions
@@ -626,7 +626,7 @@ sequenceDiagram
 
 **Business Capability**: On-premises integration for hybrid cloud deployments.
 
-@ref: [GAP-F6-02: Hybrid Cloud](../00_init/GAP_Foundation_Module_Gap_Analysis.md#72-identified-gaps)
+@ref: [GAP-F6-02: Hybrid Cloud](../00_REF/foundation/GAP_Foundation_Module_Gap_Analysis.md#72-identified-gaps)
 
 **Business Requirements**:
 - VPN or dedicated interconnect to on-premises infrastructure
@@ -654,7 +654,7 @@ sequenceDiagram
 
 **Business Capability**: Advanced cost analytics with visualization and optimization insights.
 
-@ref: [GAP-F6-03: FinOps Dashboard](../00_init/GAP_Foundation_Module_Gap_Analysis.md#72-identified-gaps)
+@ref: [GAP-F6-03: FinOps Dashboard](../00_REF/foundation/GAP_Foundation_Module_Gap_Analysis.md#72-identified-gaps)
 
 **Business Requirements**:
 - Interactive cost visualization by service, team, and project
@@ -683,7 +683,7 @@ sequenceDiagram
 
 **Business Capability**: Infrastructure-as-Code export for reproducible deployments.
 
-@ref: [GAP-F6-04: Terraform Export](../00_init/GAP_Foundation_Module_Gap_Analysis.md#72-identified-gaps)
+@ref: [GAP-F6-04: Terraform Export](../00_REF/foundation/GAP_Foundation_Module_Gap_Analysis.md#72-identified-gaps)
 
 **Business Requirements**:
 - Export current infrastructure configuration to Terraform HCL
@@ -711,7 +711,7 @@ sequenceDiagram
 
 **Business Capability**: Zero-downtime releases through blue-green deployment pattern.
 
-@ref: [GAP-F6-05: Blue-Green Deployments](../00_init/GAP_Foundation_Module_Gap_Analysis.md#72-identified-gaps)
+@ref: [GAP-F6-05: Blue-Green Deployments](../00_REF/foundation/GAP_Foundation_Module_Gap_Analysis.md#72-identified-gaps)
 
 **Business Requirements**:
 - Parallel deployment of new version alongside current
@@ -740,7 +740,7 @@ sequenceDiagram
 
 **Business Capability**: Horizontal database scaling through sharding.
 
-@ref: [GAP-F6-06: Database Sharding](../00_init/GAP_Foundation_Module_Gap_Analysis.md#72-identified-gaps)
+@ref: [GAP-F6-06: Database Sharding](../00_REF/foundation/GAP_Foundation_Module_Gap_Analysis.md#72-identified-gaps)
 
 **Business Requirements**:
 - Transparent sharding for large datasets
@@ -771,7 +771,7 @@ sequenceDiagram
 
 **Requirement**: Implement defense-in-depth security model for all infrastructure resources.
 
-@ref: [F6 SS15](../00_init/F6_Infrastructure_Technical_Specification.md#15-security-considerations)
+@ref: [F6 SS15](../00_REF/foundation/F6_Infrastructure_Technical_Specification.md#15-security-considerations)
 
 **Measures**:
 - VPC isolation with private subnets
@@ -1068,8 +1068,8 @@ sequenceDiagram
 
 | Upstream Artifact | Reference | Relevance |
 |-------------------|-----------|-----------|
-| F6 Infrastructure Technical Specification | [F6 Spec](../00_init/F6_Infrastructure_Technical_Specification.md) | Technical requirements source |
-| Gap Analysis | [GAP Analysis](../00_init/GAP_Foundation_Module_Gap_Analysis.md) | 6 F6 gaps identified |
+| F6 Infrastructure Technical Specification | [F6 Spec](../00_REF/foundation/F6_Infrastructure_Technical_Specification.md) | Technical requirements source |
+| Gap Analysis | [GAP Analysis](../00_REF/foundation/GAP_Foundation_Module_Gap_Analysis.md) | 6 F6 gaps identified |
 
 ### 13.2 Downstream Artifacts
 

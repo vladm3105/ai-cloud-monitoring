@@ -84,39 +84,40 @@ The platform uses a hierarchical multi-agent architecture built on Google ADK (A
 
 ## Technology Stack
 
+> **Note:** This describes the full production architecture. For MVP, see [MVP_ARCHITECTURE.md](architecture/MVP_ARCHITECTURE.md) which uses simplified components (Firestore, Firebase Auth, GCP Secret Manager).
+
 ### Frontend
 - **Next.js 14** - React framework
 - **CopilotKit** - AI chat interface with AG-UI protocol
 - **A2UI Components** - Real-time streaming UI components
 - **Tailwind CSS + shadcn/ui** - Styling
-- **Auth0 React SDK** - Authentication
+- **Firebase Auth** (MVP) / **Auth0** (Production) - Authentication
 
 ### Agent Layer
 - **Google ADK** - Agent Development Kit
 - **Google A2A Protocol** - Agent-to-Agent communication
-- **Gemini 2.0 / Claude** - LLM backbone
+- **Gemini 2.0 / Claude via LiteLLM** - LLM backbone (see [ADR-005](architecture/adr/005-use-litellm-for-llms.md))
 - **AG-UI Protocol** - Agent-to-UI streaming
 
-### Backend Infrastructure:
-- **Serverless Containers (Cloud Run / ECS Fargate / Azure Container Apps)** - All services
-- **Cloud-native Task Queues (Cloud Tasks / SQS / Service Bus)** - Background jobs
-- **Cloud Scheduler (GCP) / EventBridge (AWS) / Azure Functions** - Job scheduling
-
-**Backend Data:**
-- **PostgreSQL** - Relational data (tenants, users, accounts, policies)
-- **BigQuery / Athena / Synapse** - Time-series cost metrics (billing export)
-- **Redis** (optional) - L2 query cacheage for reports
-
-### Authentication & Security
-- **Auth0** - Identity provider (OAuth 2.0/OIDC, SSO, MFA)
-- **OpenBao** - Secrets management (HashiCorp Vault fork)
-- **JWT/OIDC** - Token-based authentication
-- **RBAC** - Role-based access control
+### Backend Infrastructure
+- **Cloud Run** (GCP) - Serverless containers (see [ADR-004](architecture/adr/004-cloud-run-not-kubernetes.md))
+- **Cloud Tasks** (GCP) - Background jobs (see [ADR-006](architecture/adr/006-cloud-native-task-queues-not-celery.md))
+- **Cloud Scheduler** (GCP) - Job scheduling
 
 ### Data Layer
-- **PostgreSQL 16** - Relational data with Row-Level Security
-- **TimescaleDB** - Time-series metrics
-- **Redis 7** - Caching and message queue
+| Component | MVP | Production |
+|-----------|-----|------------|
+| Config/Users | Firestore | PostgreSQL 16 + RLS |
+| Cost Metrics | BigQuery | BigQuery |
+| Caching | None | Redis (optional) |
+
+See [ADR-008](architecture/adr/008-database-strategy-mvp.md) for database strategy.
+
+### Authentication & Security
+- **Firebase Auth** (MVP) / **Auth0** (Production) - Identity provider
+- **GCP Secret Manager** - Secrets management (no self-hosted vault)
+- **JWT/OIDC** - Token-based authentication
+- **RBAC** - Role-based access control
 - **S3/GCS/Blob** - Object storage for reports
 
 ### Infrastructure
@@ -164,13 +165,13 @@ Automated data pipeline that runs continuously, keeping the local database fresh
 | Recommendation Refresh | Daily at 2 AM | Recalculate optimization suggestions |
 | Forecast Update | Daily at 3 AM | Re-run ML spend prediction models |
 | Report Generation | Weekly / Monthly | Executive summaries, chargeback reports |
-| Credential Rotation Check | Daily at midnight | Verify OpenBao credential health |
+| Credential Rotation Check | Daily at midnight | Verify Secret Manager credential health |
 | Data Rollup / Compress | Daily at 4 AM | Aggregate old data, refresh BigQuery materialized views |
 
 **Characteristics:**
 - Trigger: Cron schedule (Cloud Scheduler / EventBridge)
 - Runs 24/7 per tenant, no user action needed
-- Credentials from OpenBao
+- Credentials from Secret Manager
 - Results feed all other modes
 
 ### Mode 3: Event-Driven (Reactive, Real-Time)
@@ -244,7 +245,7 @@ A real-world example demonstrating all four modes:
 
 ┌─────────────────────────────────────────────────────────────┐
 │  CREDENTIAL ISOLATION                                        │
-│  • OpenBao paths: secret/tenants/{id}/aws|azure|gcp|k8s      │
+│  • Secret Manager paths: tenant-{id}-aws|azure|gcp|k8s       │
 │  • Per-tenant cloud credentials                              │
 │  • Dynamic credential injection per request                  │
 │  • 90-day automatic rotation                                 │
@@ -252,7 +253,7 @@ A real-world example demonstrating all four modes:
 
 ┌─────────────────────────────────────────────────────────────┐
 │  ACCESS CONTROL                                              │
-│  • Auth0 Organizations for tenant management                 │
+│  • Firebase Auth (MVP) / Auth0 (Prod) for tenant management  │
 │  • RBAC with 5 roles: Super Admin → Org Admin → Operator     │
 │    → Analyst → Viewer                                        │
 │  • Permission-based tool access                              │
@@ -276,7 +277,7 @@ A real-world example demonstrating all four modes:
 ### Data Protection
 - **Encryption at Rest** - AES-256 for all stored data
 - **Encryption in Transit** - TLS 1.3 for all communications
-- **Secrets Management** - OpenBao with auto-rotation
+- **Secrets Management** - Cloud-native Secret Manager with auto-rotation
 
 ### Compliance
 - **Audit Logging** - Immutable 7-year retention
@@ -379,16 +380,14 @@ AI Cost Monitoring:
 
 ## Development Phases
 
-| Phase | Duration | Focus |
-|-------|----------|-------|
-| **Phase 1** | 5 weeks | Foundation (Auth0, OpenBao, PostgreSQL, Redis) |
-| **Phase 2** | 5 weeks | MCP Servers (AWS, Azure, GCP, OpenCost) |
-| **Phase 3** | 5 weeks | Cloud Agents (AWS, Azure, GCP, K8s) |
-| **Phase 4** | 5 weeks | Domain Agents (Cost, Optimization, Remediation) |
-| **Phase 5** | 4 weeks | AG-UI/A2UI Integration |
-| **Phase 6** | 4 weeks | Multi-Tenant & A2A Gateway |
-| **Phase 7** | 4 weeks | Security Hardening |
-| **Phase 8** | 4 weeks | Testing & Documentation |
+> See [HANDOFF.md](../HANDOFF.md) for current implementation plan.
+
+| Phase | Scope | Key Components |
+|-------|-------|----------------|
+| **MVP** | GCP cost monitoring + Grafana | Firestore, BigQuery, Firebase Auth, MCP Server |
+| **Phase 2** | Multi-Cloud | AWS + Azure connectors |
+| **Phase 3** | AG-UI | Conversational interface |
+| **Phase 4** | Production | Auth0, PostgreSQL, Multi-tenancy |
 
 ---
 
