@@ -5,6 +5,9 @@
 		},
 		{
 			"path": "../docs_flow_framework"
+		},
+		{
+			"path": "../trading_nexus_v4.2/Nexus_Platform_v4.2"
 		}
 	],
 	"settings": {}
