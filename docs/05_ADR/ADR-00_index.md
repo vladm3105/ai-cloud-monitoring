@@ -31,7 +31,15 @@ New architectural decisions during implementation will be created here.
 
 | ID | Title | Status |
 |----|-------|--------|
-| - | - | - |
+| ADR-02 | [F2 Session & Context Management](ADR-02_f2_session.md) | Accepted |
+| ADR-03 | F3 Observability Architecture Decisions | Accepted |
+| ADR-04 | F4 Security Operations Architecture Decisions | Accepted |
+| ADR-06 | F6 Infrastructure Platform Architecture Decisions | Accepted |
+| ADR-07 | [F7 Configuration Manager Architecture Decisions](ADR-07_f7_config.md) | Accepted |
+| ADR-08 | D1 Agent Orchestration Architecture | Accepted |
+| ADR-10 | D3 User Experience Architecture | Accepted |
+| ADR-12 | [D5 Data Persistence & Storage Architecture](ADR-12_d5_data_persistence.md) | Proposed |
+| ADR-14 | [D7 Security Architecture](ADR-14_d7_security.md) | Accepted |
 
 ---
 

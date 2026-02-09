@@ -1,30 +1,108 @@
 # BDD Index - AI Cloud Cost Monitoring
 
-**Project:** AI Cloud Cost Monitoring Platform
+**Project:** AI Cloud Cost Monitoring Platform v4.2
 **Layer:** 04_BDD (Behavior-Driven Development)
-**Status:** Planning
+**Status:** Active
+**Generated:** 2026-02-09
 
 ---
 
-## Documents
+## Generation Summary
 
-| ID | Title | Status | Description |
-|----|-------|--------|-------------|
-| BDD-01 | MVP Critical Scenarios | Planned | Gherkin scenarios for MVP features |
+| Metric | Value |
+|--------|-------|
+| Total Documents | 14 |
+| Foundation Modules (F1-F7) | 7 |
+| Domain Modules (D1-D7) | 7 |
+| Average ADR-Ready Score | 90.6/100 |
+| Total Scenarios | 506 |
+| Total Scenario Outlines | 33 |
+| Status | READY FOR ADR GENERATION |
 
 ---
 
-## Feature Areas
+## Foundation Modules (F1-F7)
 
-| Area | Description |
-|------|-------------|
-| Cost Query | Query GCP costs via natural language |
-| Dashboard | Grafana dashboard data population |
-| Agent Routing | Coordinator to domain agent routing |
+| ID | Module | Title | ADR-Ready | Scenarios | Description |
+|----|--------|-------|-----------|-----------|-------------|
+| [BDD-01](BDD-01_f1_iam.feature) | F1 IAM | Identity & Access Management | 92/100 | 32 | Authentication, authorization, JWT, MFA, 4D Matrix |
+| [BDD-02](BDD-02_f2_session.feature) | F2 Session | Session & Context Management | 92/100 | 37 | Workspace sessions, context propagation, state management |
+| [BDD-03](BDD-03_f3_observability.feature) | F3 Observability | Observability Scenarios | 92/100 | 45 | Logging, metrics, tracing, alerting, LLM analytics |
+| [BDD-04](BDD-04_f4_secops.feature) | F4 SecOps | Security Operations | 90/100 | 28 | Threat detection, vulnerability scanning, compliance |
+| [BDD-05](BDD-05_f5_selfops.feature) | F5 Self-Ops | Self-Sustaining Operations | 90/100 | 42 | Health monitoring, auto-remediation, incident management |
+| [BDD-06](BDD-06_f6_infrastructure.feature) | F6 Infrastructure | Infrastructure Platform | 90/100 | 48 | Cloud Run, PostgreSQL, AI Gateway, multi-region |
+| [BDD-07](BDD-07_f7_config.feature) | F7 Config | Configuration Management | 90/100 | 43 | Feature flags, tenant config, environment management |
+
+---
+
+## Domain Modules (D1-D7)
+
+| ID | Module | Title | ADR-Ready | Scenarios | Description |
+|----|--------|-------|-----------|-----------|-------------|
+| [BDD-08](BDD-08_d1_agent_orchestration.feature) | D1 Agents | AI Agent Orchestration | 90/100 | 39 | CoPilotKit AG-UI, A2A, cost analyst agent |
+| [BDD-09](BDD-09_d2_cost_analytics.feature) | D2 Analytics | Cloud Cost Analytics | 90/100 | 41 | Cost ingestion, aggregation, anomaly detection, forecasting |
+| [BDD-10](BDD-10_d3_user_experience.feature) | D3 UX | User Experience | 90/100 | 37 | Dashboard, AG-UI streaming, A2UI components |
+| [BDD-11](BDD-11_d4_multi_cloud.feature) | D4 Multi-Cloud | Multi-Cloud Integration | 90/100 | 37 | GCP connection, credential security, schema normalization |
+| [BDD-12](BDD-12_d5_data_persistence.feature) | D5 Data | Data Persistence | 90/100 | 41 | BigQuery, Firestore, tenant isolation, audit logging |
+| [BDD-13](BDD-13_d6_rest_apis.feature) | D6 REST APIs | REST API Layer | 90/100 | 35 | AG-UI streaming, Admin API, rate limiting, webhooks |
+| [BDD-14](BDD-14_d7_security.feature) | D7 Security | Security Architecture | 92/100 | 34 | Defense-in-depth, RBAC, credential management, audit |
+
+---
+
+## Scenario Categories
+
+| Category | Tag | Count | Description |
+|----------|-----|-------|-------------|
+| Primary Success Paths | @primary | ~140 | Happy path scenarios |
+| Negative/Error Handling | @negative | ~100 | Error scenarios |
+| Quality Attributes | @quality_attribute | ~70 | Performance, security |
+| Integration | @integration | ~40 | Cross-module tests |
+| Failure Recovery | @failure_recovery | ~40 | Resilience tests |
+| Data-Driven | @data_driven | 33 | Scenario Outlines |
+| Edge Cases | @edge_case | ~30 | Boundary conditions |
+| Alternative Flows | @alternative | ~50 | Alternate paths |
 
 ---
 
 ## Traceability
 
-- **Upstream:** EARS-01
-- **Downstream:** TSPEC-01
+### Upstream
+- EARS-01 through EARS-14 (all 14 EARS documents)
+- PRD-01 through PRD-14 (all 14 PRDs)
+- BRD-01 through BRD-14 (all 14 BRDs)
+
+### Downstream
+- ADR-01 through ADR-14 (Architecture Decisions - Pending)
+- SYS-01 through SYS-14 (System Requirements - Pending)
+
+---
+
+## Threshold Tags Summary
+
+All BDD documents include `@threshold:` tags referencing quantified constraints:
+
+| Category | Example Threshold | Typical Values |
+|----------|-------------------|----------------|
+| Performance | `@threshold:BRD.XX.perf.*` | Latency p95/p99, throughput |
+| Security | `@threshold:BRD.XX.sec.*` | Rotation periods, session timeouts |
+| Reliability | `@threshold:BRD.XX.rel.*` | Uptime, recovery times |
+| Capacity | `@threshold:BRD.XX.cap.*` | Concurrent users, storage limits |
+
+---
+
+## Related Documents
+
+- [BDD-00_VALIDATION_REPORT.md](BDD-00_VALIDATION_REPORT.md) - Detailed validation results
+- [BDD-00_required_documents_list.md](BDD-00_required_documents_list.md) - Generation checklist
+
+---
+
+## Version History
+
+| Version | Date | Changes |
+|---------|------|---------|
+| 1.0 | 2026-02-09 | Initial generation of all 14 BDD documents using BDD Autopilot |
+
+---
+
+*Generated by BDD Autopilot (doc-bdd-autopilot) | AI Cloud Cost Monitoring Platform v4.2*
