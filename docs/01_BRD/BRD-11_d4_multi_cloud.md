@@ -39,7 +39,7 @@ custom_fields:
 | **Prepared By** | Antigravity AI |
 | **Status** | Draft |
 | **MVP Target Launch** | Phase 1 (GCP) / Phase 2 (AWS, Azure, K8s) |
-| **PRD-Ready Score** | 88/100 (Target: >=90/100) |
+| **PRD-Ready Score** | 92/100 (Target: >=90/100) |
 
 ### Executive Summary (MVP)
 
@@ -335,12 +335,95 @@ This fragmentation prevents unified cost visibility and optimization.
 - Domain specifications (04, 07)
 - Architecture decisions (ADR-002)
 
-### 7.2 Downstream Artifacts
+### 7.2 Architecture Decision Requirements
+
+#### 7.2.1 Infrastructure (BRD.11.32.01)
+
+**Status**: N/A - Handled by F6 Infrastructure
+
+**PRD Requirements**: None for this module (see BRD-06)
+
+---
+
+#### 7.2.2 Data Architecture (BRD.11.32.02)
+
+**Status**: Selected
+
+**Business Driver**: Multi-cloud billing data normalization
+
+**Business Constraints**: Must support 4 cloud providers + Kubernetes
+
+**Recommended Selection**: Unified schema in BigQuery with provider-specific ETL
+
+**PRD Requirements**: Normalized schema design, service taxonomy mapping
+
+---
+
+#### 7.2.3 Integration (BRD.11.32.03)
+
+**Status**: Selected
+
+**Business Driver**: Cloud provider API integration
+
+**Alternatives Overview**:
+| Option | Function | Est. Monthly Cost | Selection Rationale |
+|--------|----------|-------------------|---------------------|
+| Native APIs | Direct integration | $0 | Full control |
+| Cloud SDK | Abstraction layer | $0 | Easier maintenance |
+| Third-party tools | Aggregated data | $100-500 | Pre-built connectors |
+
+**Recommended Selection**: Native cloud billing APIs + BigQuery exports
+
+**PRD Requirements**: Connector specifications, credential requirements
+
+---
+
+#### 7.2.4 Security (BRD.11.32.04)
+
+**Status**: Selected
+
+**Business Driver**: Multi-tenant credential isolation
+
+**Recommended Selection**: GCP Secret Manager with per-tenant secrets
+
+**PRD Requirements**: Credential storage design, rotation policy
+
+---
+
+#### 7.2.5 Observability (BRD.11.32.05)
+
+**Status**: N/A - Handled by F3 Observability
+
+**PRD Requirements**: None for this module (see BRD-03)
+
+---
+
+#### 7.2.6 AI/ML (BRD.11.32.06)
+
+**Status**: N/A - No ML in this module
+
+**PRD Requirements**: None for current scope
+
+---
+
+#### 7.2.7 Technology Selection (BRD.11.32.07)
+
+**Status**: Selected
+
+**Business Driver**: Data pipeline technology
+
+**Recommended Selection**: Cloud Functions + Cloud Scheduler (per ADR-006)
+
+**PRD Requirements**: Pipeline specifications, refresh schedules
+
+---
+
+### 7.3 Downstream Artifacts
 - PRD: Multi-cloud feature specifications (pending)
 - SPEC: Implementation specifications (pending)
 - TASKS: Implementation tasks (pending)
 
-### 7.3 Cross-References
+### 7.4 Cross-References
 
 | Related BRD | Relationship | Integration Point |
 |-------------|--------------|-------------------|

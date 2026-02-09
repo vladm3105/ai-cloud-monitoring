@@ -1,4 +1,18 @@
-# BRD Required Documents List
+---
+tags:
+  - brd
+  - layer-1-artifact
+  - index
+custom_fields:
+  document_type: brd-index
+  artifact_type: BRD
+  layer: 1
+  architecture_approaches: [ai-agent-based, traditional]
+  priority: shared
+  development_status: active
+---
+
+# BRD-00: Required Documents List
 
 **Project:** AI Cloud Cost Monitoring Platform
 **Layer:** 01_BRD

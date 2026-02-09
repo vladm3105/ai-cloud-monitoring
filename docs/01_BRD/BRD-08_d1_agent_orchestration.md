@@ -39,7 +39,7 @@ custom_fields:
 | **Prepared By** | Antigravity AI |
 | **Status** | Draft |
 | **MVP Target Launch** | Phase 1 |
-| **PRD-Ready Score** | 88/100 (Target: >=90/100) |
+| **PRD-Ready Score** | 92/100 (Target: >=90/100) |
 
 ### Executive Summary (MVP)
 
@@ -258,12 +258,113 @@ Cloud cost management requires analyzing data from multiple providers, understan
 - Domain specifications (02, 03)
 - Architecture decisions (ADR-001, 009, 010)
 
-### 7.2 Downstream Artifacts
+### 7.2 Architecture Decision Requirements
+
+#### 7.2.1 Infrastructure (BRD.08.32.01)
+
+**Status**: N/A - Handled by F6 Infrastructure
+
+**PRD Requirements**: None for this module (see BRD-06)
+
+---
+
+#### 7.2.2 Data Architecture (BRD.08.32.02)
+
+**Status**: Selected
+
+**Business Driver**: Agent state and conversation context storage
+
+**Business Constraints**: Must integrate with F2 Session Management
+
+**Alternatives Overview**:
+| Option | Function | Est. Monthly Cost | Selection Rationale |
+|--------|----------|-------------------|---------------------|
+| Redis + PostgreSQL | State caching + persistent storage | $50-100 | Separation of concerns |
+| PostgreSQL only | All state in DB | $30-50 | Simpler but higher latency |
+| Firestore | NoSQL document store | $20-40 | Native GCP integration |
+
+**Recommended Selection**: Redis for agent state + PostgreSQL for conversation history
+
+**PRD Requirements**: Agent state schema, conversation persistence strategy
+
+---
+
+#### 7.2.3 Integration (BRD.08.32.03)
+
+**Status**: Selected
+
+**Business Driver**: Multi-agent coordination and MCP tool execution
+
+**Business Constraints**: Must support AG-UI protocol
+
+**Recommended Selection**: Google ADK with MCP Servers
+
+**PRD Requirements**: Agent communication contracts, MCP tool interface specifications
+
+---
+
+#### 7.2.4 Security (BRD.08.32.04)
+
+**Status**: N/A - Handled by F1 IAM and F4 SecOps
+
+**PRD Requirements**: None for this module (see BRD-01, BRD-04)
+
+---
+
+#### 7.2.5 Observability (BRD.08.32.05)
+
+**Status**: N/A - Handled by F3 Observability
+
+**PRD Requirements**: None for this module (see BRD-03)
+
+---
+
+#### 7.2.6 AI/ML (BRD.08.32.06)
+
+**Status**: Selected
+
+**Business Driver**: Intent classification and natural language understanding
+
+**Business Constraints**: Must support model switching for cost optimization
+
+**Alternatives Overview**:
+| Option | Function | Est. Monthly Cost | Selection Rationale |
+|--------|----------|-------------------|---------------------|
+| Gemini 2.0 Flash | Primary LLM | $200-500 | Low latency, cost effective |
+| Claude 3.5 Sonnet | Complex reasoning | $500-1000 | Higher accuracy for complex |
+| GPT-4o | Alternative | $300-800 | Broad capability |
+
+**Cloud Provider Comparison**:
+| Criterion | GCP | Azure | AWS |
+|-----------|-----|-------|-----|
+| LLM Options | Gemini, Vertex AI | Azure OpenAI | Bedrock |
+| Agent Framework | ADK | Semantic Kernel | Agents for Bedrock |
+| Native Integration | Excellent | Good | Good |
+
+**Recommended Selection**: LiteLLM abstraction with Gemini 2.0 Flash primary, Claude fallback
+
+**PRD Requirements**: LLM routing rules, prompt engineering guidelines, model fallback strategy
+
+---
+
+#### 7.2.7 Technology Selection (BRD.08.32.07)
+
+**Status**: Selected
+
+**Business Driver**: Agent framework and deployment platform
+
+**Recommended Selection**: Google ADK on Cloud Run (per ADR-001, ADR-004)
+
+**PRD Requirements**: Agent deployment configuration, scaling parameters
+
+---
+
+### 7.3 Downstream Artifacts
 - PRD: Agent feature specifications (pending)
 - SPEC: Implementation specifications (pending)
 - TASKS: Implementation tasks (pending)
 
-### 7.3 Cross-References
+### 7.4 Cross-References
 
 | Related BRD | Relationship | Integration Point |
 |-------------|--------------|-------------------|

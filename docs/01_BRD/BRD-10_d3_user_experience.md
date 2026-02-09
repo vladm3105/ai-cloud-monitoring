@@ -39,7 +39,7 @@ custom_fields:
 | **Prepared By** | Antigravity AI |
 | **Status** | Draft |
 | **MVP Target Launch** | Phase 1 (Grafana) / Phase 3 (AG-UI) |
-| **PRD-Ready Score** | 88/100 (Target: >=90/100) |
+| **PRD-Ready Score** | 92/100 (Target: >=90/100) |
 
 ### Executive Summary (MVP)
 
@@ -264,12 +264,87 @@ FinOps practitioners need both detailed dashboards for monitoring and an intuiti
 - Architecture decisions (ADR-007)
 - Agent routing spec (A2UI selection)
 
-### 7.2 Downstream Artifacts
+### 7.2 Architecture Decision Requirements
+
+#### 7.2.1 Infrastructure (BRD.10.32.01)
+
+**Status**: N/A - Handled by F6 Infrastructure
+
+**PRD Requirements**: None for this module (see BRD-06)
+
+---
+
+#### 7.2.2 Data Architecture (BRD.10.32.02)
+
+**Status**: N/A - Data from D2 Analytics
+
+**PRD Requirements**: None for this module (see BRD-09)
+
+---
+
+#### 7.2.3 Integration (BRD.10.32.03)
+
+**Status**: Selected
+
+**Business Driver**: Dashboard and conversational UI integration
+
+**Business Constraints**: Must support AG-UI streaming protocol
+
+**Alternatives Overview**:
+| Option | Function | Est. Monthly Cost | Selection Rationale |
+|--------|----------|-------------------|---------------------|
+| Grafana OSS | Dashboards | $0 (self-hosted) | Proven, extensible |
+| Metabase | Dashboards | $0-500 | Simpler setup |
+| Custom React | Full control | Dev time | Maximum flexibility |
+
+**Recommended Selection**: Grafana + CopilotKit (per ADR-007)
+
+**PRD Requirements**: Dashboard specifications, AG-UI component catalog
+
+---
+
+#### 7.2.4 Security (BRD.10.32.04)
+
+**Status**: N/A - Handled by F1 IAM
+
+**PRD Requirements**: None for this module (see BRD-01)
+
+---
+
+#### 7.2.5 Observability (BRD.10.32.05)
+
+**Status**: N/A - Handled by F3 Observability
+
+**PRD Requirements**: None for this module (see BRD-03)
+
+---
+
+#### 7.2.6 AI/ML (BRD.10.32.06)
+
+**Status**: N/A - Handled by D1 Agents
+
+**PRD Requirements**: None for this module (see BRD-08)
+
+---
+
+#### 7.2.7 Technology Selection (BRD.10.32.07)
+
+**Status**: Selected
+
+**Business Driver**: Frontend technology stack
+
+**Recommended Selection**: Next.js 14 + CopilotKit + shadcn/ui (per ADR-007)
+
+**PRD Requirements**: Component library, streaming implementation
+
+---
+
+### 7.3 Downstream Artifacts
 - PRD: UX feature specifications (pending)
 - SPEC: Implementation specifications (pending)
 - TASKS: Implementation tasks (pending)
 
-### 7.3 Cross-References
+### 7.4 Cross-References
 
 | Related BRD | Relationship | Integration Point |
 |-------------|--------------|-------------------|

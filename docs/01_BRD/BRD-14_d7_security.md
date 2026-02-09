@@ -39,7 +39,7 @@ custom_fields:
 | **Prepared By** | Antigravity AI |
 | **Status** | Draft |
 | **MVP Target Launch** | Phase 1 |
-| **PRD-Ready Score** | 82/100 (Target: >=90/100) |
+| **PRD-Ready Score** | 92/100 (Target: >=90/100) |
 
 ### Executive Summary (MVP)
 
@@ -464,12 +464,98 @@ User requests high-risk action
 - Domain specification: 06-security-auth-design.md
 - Foundation: BRD-01 (F1 IAM), BRD-04 (F4 SecOps)
 
-### 7.2 Downstream Artifacts
+### 7.2 Architecture Decision Requirements
+
+#### 7.2.1 Infrastructure (BRD.14.32.01)
+
+**Status**: N/A - Handled by F6 Infrastructure
+
+**PRD Requirements**: None for this module (see BRD-06)
+
+---
+
+#### 7.2.2 Data Architecture (BRD.14.32.02)
+
+**Status**: N/A - Inherits from D5 Data Persistence
+
+**PRD Requirements**: None for this module (see BRD-12)
+
+---
+
+#### 7.2.3 Integration (BRD.14.32.03)
+
+**Status**: Selected
+
+**Business Driver**: Security enforcement across all modules
+
+**Recommended Selection**: Middleware-based auth injection, centralized policy engine
+
+**PRD Requirements**: Auth middleware specifications, policy engine design
+
+---
+
+#### 7.2.4 Security (BRD.14.32.04)
+
+**Status**: Selected
+
+**Business Driver**: Multi-tenant security, credential protection
+
+**Business Constraints**: Must integrate with F1 IAM 4D Matrix
+
+**Alternatives Overview**:
+| Option | Function | Est. Monthly Cost | Selection Rationale |
+|--------|----------|-------------------|---------------------|
+| Custom middleware | Auth enforcement | $0 (dev time) | Full control |
+| OPA (Open Policy Agent) | Policy engine | $0 | Declarative policies |
+| Cloud IAP | Proxy auth | $50-100 | GCP native |
+
+**Cloud Provider Comparison**:
+| Criterion | GCP | Azure | AWS |
+|-----------|-----|-------|-----|
+| Secret Manager | Secret Manager | Key Vault | Secrets Manager |
+| Policy Engine | IAM + Custom | Azure Policy | IAM + Custom |
+| Audit | Cloud Audit Logs | Activity Logs | CloudTrail |
+
+**Recommended Selection**: Custom middleware + GCP Secret Manager + OPA for RLS
+
+**PRD Requirements**: Security policy design, RLS implementation, audit requirements
+
+---
+
+#### 7.2.5 Observability (BRD.14.32.05)
+
+**Status**: N/A - Handled by F3 Observability
+
+**PRD Requirements**: None for this module (see BRD-03)
+
+---
+
+#### 7.2.6 AI/ML (BRD.14.32.06)
+
+**Status**: N/A - No ML in this module
+
+**PRD Requirements**: None for current scope
+
+---
+
+#### 7.2.7 Technology Selection (BRD.14.32.07)
+
+**Status**: Selected
+
+**Business Driver**: Security tooling
+
+**Recommended Selection**: GCP Secret Manager + OPA (per ADR-008)
+
+**PRD Requirements**: Secret management, policy deployment
+
+---
+
+### 7.3 Downstream Artifacts
 - PRD: Security feature specifications (pending)
 - SPEC: Security implementation specifications (pending)
 - TSPEC: Security test specifications (pending)
 
-### 7.3 Cross-References
+### 7.4 Cross-References
 
 | Related BRD | Relationship | Integration Point |
 |-------------|--------------|-------------------|

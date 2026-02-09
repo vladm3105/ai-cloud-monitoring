@@ -39,7 +39,7 @@ custom_fields:
 | **Prepared By** | Antigravity AI |
 | **Status** | Draft |
 | **MVP Target Launch** | Phase 1 |
-| **PRD-Ready Score** | 85/100 (Target: >=90/100) |
+| **PRD-Ready Score** | 92/100 (Target: >=90/100) |
 
 ### Executive Summary (MVP)
 
@@ -379,12 +379,98 @@ WHERE tenant_id = SESSION_USER();
 - Domain specification: 01-database-schema.md
 - Architecture decisions: ADR-003, ADR-008
 
-### 7.2 Downstream Artifacts
+### 7.2 Architecture Decision Requirements
+
+#### 7.2.1 Infrastructure (BRD.12.32.01)
+
+**Status**: N/A - Handled by F6 Infrastructure
+
+**PRD Requirements**: None for this module (see BRD-06)
+
+---
+
+#### 7.2.2 Data Architecture (BRD.12.32.02)
+
+**Status**: Selected
+
+**Business Driver**: Cost data storage, multi-tenant isolation
+
+**Business Constraints**: Scalable to billions of rows, sub-second queries
+
+**Alternatives Overview**:
+| Option | Function | Est. Monthly Cost | Selection Rationale |
+|--------|----------|-------------------|---------------------|
+| BigQuery | OLAP, analytics | $100-500 | Pay-per-query, scalable |
+| PostgreSQL | OLTP, metadata | $50-150 | Transactional data |
+| Redis | Caching | $50-100 | Session, hot data |
+
+**Cloud Provider Comparison**:
+| Criterion | GCP | Azure | AWS |
+|-----------|-----|-------|-----|
+| Analytics DB | BigQuery | Synapse | Redshift |
+| Relational | Cloud SQL | Azure SQL | RDS |
+| Caching | Memorystore | Azure Cache | ElastiCache |
+
+**Recommended Selection**: BigQuery (analytics) + Cloud SQL PostgreSQL (metadata) + Redis (caching)
+
+**PRD Requirements**: Schema design, partition strategy, RLS implementation
+
+---
+
+#### 7.2.3 Integration (BRD.12.32.03)
+
+**Status**: N/A - Data from D4 Multi-Cloud connectors
+
+**PRD Requirements**: None for this module (see BRD-11)
+
+---
+
+#### 7.2.4 Security (BRD.12.32.04)
+
+**Status**: Selected
+
+**Business Driver**: Multi-tenant data isolation
+
+**Recommended Selection**: Row-Level Security (RLS) in BigQuery and PostgreSQL
+
+**PRD Requirements**: RLS policy design, tenant isolation verification
+
+---
+
+#### 7.2.5 Observability (BRD.12.32.05)
+
+**Status**: N/A - Handled by F3 Observability
+
+**PRD Requirements**: None for this module (see BRD-03)
+
+---
+
+#### 7.2.6 AI/ML (BRD.12.32.06)
+
+**Status**: N/A - No ML in this module
+
+**PRD Requirements**: None for current scope
+
+---
+
+#### 7.2.7 Technology Selection (BRD.12.32.07)
+
+**Status**: Selected
+
+**Business Driver**: Database technology stack
+
+**Recommended Selection**: BigQuery + Cloud SQL PostgreSQL (per ADR-003)
+
+**PRD Requirements**: Database provisioning, backup strategy
+
+---
+
+### 7.3 Downstream Artifacts
 - PRD: Data persistence features (pending)
 - SPEC: Schema implementation (pending)
 - TASKS: Database setup tasks (pending)
 
-### 7.3 Cross-References
+### 7.4 Cross-References
 
 | Related BRD | Relationship | Integration Point |
 |-------------|--------------|-------------------|

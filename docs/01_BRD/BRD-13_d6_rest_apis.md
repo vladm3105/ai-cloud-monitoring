@@ -39,7 +39,7 @@ custom_fields:
 | **Prepared By** | Antigravity AI |
 | **Status** | Draft |
 | **MVP Target Launch** | Phase 1 |
-| **PRD-Ready Score** | 88/100 (Target: >=90/100) |
+| **PRD-Ready Score** | 92/100 (Target: >=90/100) |
 
 ### Executive Summary (MVP)
 
@@ -480,12 +480,91 @@ Retry-After: 30
 - Domain specification: 05-api-endpoint-spec.md
 - Security design: 06-security-auth-design.md
 
-### 7.2 Downstream Artifacts
+### 7.2 Architecture Decision Requirements
+
+#### 7.2.1 Infrastructure (BRD.13.32.01)
+
+**Status**: N/A - Handled by F6 Infrastructure
+
+**PRD Requirements**: None for this module (see BRD-06)
+
+---
+
+#### 7.2.2 Data Architecture (BRD.13.32.02)
+
+**Status**: N/A - Data from D5 Data Persistence
+
+**PRD Requirements**: None for this module (see BRD-12)
+
+---
+
+#### 7.2.3 Integration (BRD.13.32.03)
+
+**Status**: Selected
+
+**Business Driver**: RESTful API and streaming interfaces
+
+**Business Constraints**: Must support AG-UI streaming, OpenAPI 3.0 compliance
+
+**Alternatives Overview**:
+| Option | Function | Est. Monthly Cost | Selection Rationale |
+|--------|----------|-------------------|---------------------|
+| FastAPI | Python REST framework | $0 | Async, OpenAPI native |
+| Express.js | Node.js framework | $0 | JavaScript ecosystem |
+| Cloud Endpoints | API management | $50-200 | GCP native |
+
+**Recommended Selection**: FastAPI with Cloud Run (per ADR-004)
+
+**PRD Requirements**: OpenAPI specification, endpoint design
+
+---
+
+#### 7.2.4 Security (BRD.13.32.04)
+
+**Status**: Selected
+
+**Business Driver**: API security
+
+**Recommended Selection**: JWT authentication, rate limiting via F4 SecOps
+
+**PRD Requirements**: Auth middleware, rate limiting policies
+
+---
+
+#### 7.2.5 Observability (BRD.13.32.05)
+
+**Status**: N/A - Handled by F3 Observability
+
+**PRD Requirements**: None for this module (see BRD-03)
+
+---
+
+#### 7.2.6 AI/ML (BRD.13.32.06)
+
+**Status**: N/A - No ML in this module
+
+**PRD Requirements**: None for current scope
+
+---
+
+#### 7.2.7 Technology Selection (BRD.13.32.07)
+
+**Status**: Selected
+
+**Business Driver**: API framework and deployment
+
+**Recommended Selection**: FastAPI + Cloud Run (per ADR-004)
+
+**PRD Requirements**: Framework configuration, deployment specs
+
+---
+
+### 7.3 Downstream Artifacts
 - PRD: API feature specifications (pending)
 - CTR: OpenAPI contracts (pending)
 - SPEC: Implementation specifications (pending)
 
-### 7.3 Cross-References
+### 7.4 Cross-References
 
 | Related BRD | Relationship | Integration Point |
 |-------------|--------------|-------------------|

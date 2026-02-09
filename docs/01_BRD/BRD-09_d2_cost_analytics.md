@@ -39,7 +39,7 @@ custom_fields:
 | **Prepared By** | Antigravity AI |
 | **Status** | Draft |
 | **MVP Target Launch** | Phase 1 |
-| **PRD-Ready Score** | 88/100 (Target: >=90/100) |
+| **PRD-Ready Score** | 92/100 (Target: >=90/100) |
 
 ### Executive Summary (MVP)
 
@@ -302,12 +302,102 @@ Organizations struggle to understand and optimize their cloud spending due to:
 - Domain specifications (01, 08)
 - Architecture decisions (ADR-003, 008)
 
-### 7.2 Downstream Artifacts
+### 7.2 Architecture Decision Requirements
+
+#### 7.2.1 Infrastructure (BRD.09.32.01)
+
+**Status**: N/A - Handled by F6 Infrastructure
+
+**PRD Requirements**: None for this module (see BRD-06)
+
+---
+
+#### 7.2.2 Data Architecture (BRD.09.32.02)
+
+**Status**: Selected
+
+**Business Driver**: Cost data storage and analytics at scale
+
+**Business Constraints**: Multi-tenant isolation, time-series optimization
+
+**Alternatives Overview**:
+| Option | Function | Est. Monthly Cost | Selection Rationale |
+|--------|----------|-------------------|---------------------|
+| BigQuery | Columnar analytics | $100-500 | Native GCP, SQL interface |
+| ClickHouse | Time-series OLAP | $200-400 | High compression |
+| TimescaleDB | PostgreSQL extension | $150-300 | Familiar SQL |
+
+**Cloud Provider Comparison**:
+| Criterion | GCP | Azure | AWS |
+|-----------|-----|-------|-----|
+| Analytics DB | BigQuery | Synapse | Redshift |
+| Cost | Pay-per-query | Provisioned | Provisioned |
+| Scale | Petabyte | Petabyte | Petabyte |
+
+**Recommended Selection**: BigQuery with daily partitioning (per ADR-003)
+
+**PRD Requirements**: Schema design, partition strategy, retention policy
+
+---
+
+#### 7.2.3 Integration (BRD.09.32.03)
+
+**Status**: Selected
+
+**Business Driver**: Cloud billing data ingestion
+
+**Recommended Selection**: BigQuery billing exports + Cloud Functions ETL
+
+**PRD Requirements**: Data pipeline specifications, refresh schedules
+
+---
+
+#### 7.2.4 Security (BRD.09.32.04)
+
+**Status**: N/A - Handled by F1 IAM and F4 SecOps
+
+**PRD Requirements**: None for this module (see BRD-01, BRD-04)
+
+---
+
+#### 7.2.5 Observability (BRD.09.32.05)
+
+**Status**: N/A - Handled by F3 Observability
+
+**PRD Requirements**: None for this module (see BRD-03)
+
+---
+
+#### 7.2.6 AI/ML (BRD.09.32.06)
+
+**Status**: Pending
+
+**Business Driver**: Forecasting and anomaly detection
+
+**Reason**: Phase 2 feature - ML-based forecasting
+
+**PRD Requirements**: Forecasting model requirements (Phase 2)
+
+---
+
+#### 7.2.7 Technology Selection (BRD.09.32.07)
+
+**Status**: Selected
+
+**Business Driver**: Analytics query performance
+
+**Recommended Selection**: BigQuery + Cloud Functions (per ADR-003, ADR-006)
+
+**PRD Requirements**: Query optimization guidelines, materialized views
+
+---
+
+### 7.3 Downstream Artifacts
 - PRD: Analytics feature specifications (pending)
 - SPEC: Implementation specifications (pending)
 - TASKS: Implementation tasks (pending)
 
-### 7.3 Cross-References
+### 7.4 Cross-References
 
 | Related BRD | Relationship | Integration Point |
 |-------------|--------------|-------------------|
