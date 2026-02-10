@@ -39,7 +39,7 @@ custom_fields:
 | Item | Details |
 |------|---------|
 | **Status** | Proposed |
-| **Date** | 2026-02-09 |
+| **Date** | 2026-02-09T00:00:00 |
 | **Decision Makers** | Chief Architect, Platform Team |
 | **Author** | Architecture Team |
 | **Version** | 1.0 |
@@ -537,7 +537,7 @@ This ADR should migrate to full template when:
 
 **Document Version**: 1.0
 **Template Version**: ADR-MVP-TEMPLATE 1.0
-**Last Updated**: 2026-02-09
+**Last Updated**: 2026-02-09T00:00:00
 
 ---
 

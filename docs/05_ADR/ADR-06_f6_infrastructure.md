@@ -30,7 +30,7 @@ custom_fields:
 | Item | Details |
 |------|---------|
 | **Status** | Accepted |
-| **Date** | 2026-02-09 |
+| **Date** | 2026-02-09T00:00:00 |
 | **Decision Makers** | Chief Architect, Platform Lead |
 | **Author** | Coder Agent (Claude) |
 | **Version** | 1.0 |
@@ -520,7 +520,7 @@ Feature file: `docs/04_BDD/BDD-06_f6_infrastructure.feature`
 
 **Document Version**: 1.0
 **Template Version**: ADR-MVP-TEMPLATE 1.0
-**Last Updated**: 2026-02-09
+**Last Updated**: 2026-02-09T00:00:00
 
 ---
 

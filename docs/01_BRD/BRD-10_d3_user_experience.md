@@ -34,7 +34,7 @@ custom_fields:
 |------|---------|
 | **Project Name** | AI Cost Monitoring Platform v4.2 - D3 User Experience |
 | **Document Version** | 1.0 |
-| **Date** | 2026-02-08 |
+| **Date** | 2026-02-08T00:00:00 |
 | **Document Owner** | Chief Architect |
 | **Prepared By** | Antigravity AI |
 | **Status** | Draft |
@@ -49,7 +49,7 @@ The D3 User Experience Module provides a hybrid interface combining Grafana dash
 
 | Version | Date | Author | Changes Made | Approver |
 |---------|------|--------|--------------|----------|
-| 1.0 | 2026-02-08 | Antigravity AI | Initial BRD creation from domain specs | |
+| 1.0 | 2026-02-08T00:00:00 | Antigravity AI | Initial BRD creation from domain specs | |
 
 ---
 

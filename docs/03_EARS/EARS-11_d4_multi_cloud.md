@@ -38,8 +38,8 @@ custom_fields:
 |------|---------|
 | **Version** | 1.0 |
 | **Status** | Draft |
-| **Date Created** | 2026-02-09 |
-| **Last Updated** | 2026-02-09 |
+| **Date Created** | 2026-02-09T00:00:00 |
+| **Last Updated** | 2026-02-09T00:00:00 |
 | **Author** | EARS Autopilot (Claude) |
 | **Source PRD** | @prd: PRD-11 |
 | **BDD-Ready Score** | 90/100 (Target: >=90) |
@@ -730,4 +730,4 @@ Status: READY FOR BDD GENERATION
 
 ---
 
-*Generated: 2026-02-09 | EARS Autopilot | BDD-Ready Score: 90/100*
+*Generated: 2026-02-09T00:00:00 | EARS Autopilot | BDD-Ready Score: 90/100*

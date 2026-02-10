@@ -26,7 +26,7 @@ custom_fields:
 > **Layer**: 5 (Architecture Decision Record)
 > **Module**: F4 Security Operations
 > **Status**: Accepted
-> **Date**: 2026-02-09
+> **Date**: 2026-02-09T00:00:00
 
 **Traceability**: @brd:BRD-04 @prd:PRD-04 @ears:EARS-04 @bdd:BDD-04
 
@@ -41,13 +41,13 @@ custom_fields:
 | Status | Accepted |
 | Author | Architecture Team |
 | Reviewers | Security Team, Platform Team |
-| Approval Date | 2026-02-09 |
+| Approval Date | 2026-02-09T00:00:00 |
 
 ### 1.1 Revision History
 
 | Version | Date | Author | Changes |
 |---------|------|--------|---------|
-| 1.0 | 2026-02-09 | Architecture Team | Initial creation |
+| 1.0 | 2026-02-09T00:00:00 | Architecture Team | Initial creation |
 
 ---
 

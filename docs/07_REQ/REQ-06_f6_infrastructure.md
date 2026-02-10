@@ -27,8 +27,8 @@ custom_fields:
 |------|---------|
 | **Status** | Draft |
 | **Version** | 1.0.0 |
-| **Date Created** | 2026-02-09 |
-| **Last Updated** | 2026-02-09 |
+| **Date Created** | 2026-02-09T00:00:00 |
+| **Last Updated** | 2026-02-09T00:00:00 |
 | **Author** | Platform Infrastructure Team |
 | **Priority** | P1 (Critical) |
 | **Category** | Infra |
@@ -446,4 +446,4 @@ Use Terraform with GCS backend for state management. Implement LiteLLM as proxy 
 
 **Document Version**: 1.0.0
 **Template Version**: 1.1 (MVP)
-**Last Updated**: 2026-02-09
+**Last Updated**: 2026-02-09T00:00:00

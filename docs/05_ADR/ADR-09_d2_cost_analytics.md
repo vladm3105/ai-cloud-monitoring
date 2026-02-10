@@ -37,7 +37,7 @@ custom_fields:
 | Item | Details |
 |------|---------|
 | **Status** | Accepted |
-| **Date** | 2026-02-09 |
+| **Date** | 2026-02-09T00:00:00 |
 | **Decision Makers** | Chief Architect, Platform Lead |
 | **Author** | Antigravity AI |
 | **Version** | 1.0 |
@@ -459,9 +459,9 @@ Migrate to full ADR template when:
 
 **Document Version**: 1.0
 **Template Version**: 1.0 (MVP)
-**Last Updated**: 2026-02-09
+**Last Updated**: 2026-02-09T00:00:00
 
 ---
 
 *ADR-09: D2 Cloud Cost Analytics Architecture - AI Cost Monitoring Platform v4.2*
-*Generated: 2026-02-09 | SYS-Ready Score: 90/100*
+*Generated: 2026-02-09T00:00:00 | SYS-Ready Score: 90/100*

@@ -29,8 +29,8 @@ custom_fields:
 |------|---------|
 | **Status** | Draft |
 | **Version** | 1.0.0 |
-| **Date Created** | 2026-02-10 |
-| **Last Updated** | 2026-02-10 |
+| **Date Created** | 2026-02-10T00:00:00 |
+| **Last Updated** | 2026-02-10T00:00:00 |
 | **Author** | Coder Agent (Claude) |
 | **Priority** | P1 (Critical) |
 | **TASKS-Ready Score** | ✅ 92% (Target: ≥90%) |
@@ -644,7 +644,7 @@ Scenario: PII is filtered from events
 
 | Date | Version | Change | Author |
 |------|---------|--------|--------|
-| 2026-02-10 | 1.0.0 | Initial specification | Coder Agent |
+| 2026-02-10T00:00:00 | 1.0.0 | Initial specification | Coder Agent |
 
 ---
 

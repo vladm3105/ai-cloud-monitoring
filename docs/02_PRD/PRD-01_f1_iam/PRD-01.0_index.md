@@ -65,7 +65,7 @@ The F1 IAM Module PRD defines product requirements for enterprise-grade identity
 |------|---------|
 | **Project Name** | AI Cost Monitoring Platform v4.2 - F1 IAM Module |
 | **Document Version** | 1.0 |
-| **Date** | 2026-02-08 |
+| **Date** | 2026-02-08T00:00:00 |
 | **Status** | Draft |
 | **EARS-Ready Score** | 94/100 (Target: >=85/100) |
 

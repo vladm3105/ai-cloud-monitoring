@@ -24,8 +24,8 @@ custom_fields:
 |------|---------|
 | **Status** | Draft |
 | **Version** | 1.0.0 |
-| **Date Created** | 2026-02-09 |
-| **Last Updated** | 2026-02-09 |
+| **Date Created** | 2026-02-09T00:00:00 |
+| **Last Updated** | 2026-02-09T00:00:00 |
 | **Author** | Frontend Team |
 | **Owner** | Frontend Team |
 | **Priority** | High |
@@ -221,4 +221,4 @@ interface StreamEvent {
 
 | Date | Version | Change | Author |
 |------|---------|--------|--------|
-| 2026-02-09 | 1.0.0 | Initial system requirements | Frontend Team |
+| 2026-02-09T00:00:00 | 1.0.0 | Initial system requirements | Frontend Team |

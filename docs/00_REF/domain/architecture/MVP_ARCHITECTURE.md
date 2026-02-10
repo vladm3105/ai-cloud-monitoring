@@ -2,7 +2,7 @@
 
 **Document:** MVP_ARCHITECTURE.md
 **Version:** 1.0.0
-**Date:** 2026-02-07
+**Date:** 2026-02-07T00:00:00
 **Status:** Approved
 **Scope:** Single-tenant MVP with multi-tenant readiness
 

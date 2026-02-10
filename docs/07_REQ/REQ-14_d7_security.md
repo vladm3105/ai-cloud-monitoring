@@ -26,8 +26,8 @@ custom_fields:
 |------|---------|
 | **Status** | Draft |
 | **Version** | 1.0.0 |
-| **Date Created** | 2026-02-09 |
-| **Last Updated** | 2026-02-09 |
+| **Date Created** | 2026-02-09T00:00:00 |
+| **Last Updated** | 2026-02-09T00:00:00 |
 | **Author** | Security Team |
 | **Priority** | P1 (Critical) |
 | **Category** | Security |
@@ -431,4 +431,4 @@ Implement as FastAPI middleware chain. Use PyJWT for JWT validation with JWKS su
 
 **Document Version**: 1.0.0
 **Template Version**: 1.1 (MVP)
-**Last Updated**: 2026-02-09
+**Last Updated**: 2026-02-09T00:00:00

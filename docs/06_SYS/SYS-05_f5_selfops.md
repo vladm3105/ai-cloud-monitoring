@@ -25,8 +25,8 @@ custom_fields:
 |------|---------|
 | **Status** | Draft |
 | **Version** | 1.0.0 |
-| **Date Created** | 2026-02-09 |
-| **Last Updated** | 2026-02-09 |
+| **Date Created** | 2026-02-09T00:00:00 |
+| **Last Updated** | 2026-02-09T00:00:00 |
 | **Author** | Platform Operations Team |
 | **Owner** | Platform Operations Team |
 | **Priority** | High |
@@ -199,4 +199,4 @@ playbook:
 
 | Date | Version | Change | Author |
 |------|---------|--------|--------|
-| 2026-02-09 | 1.0.0 | Initial system requirements | Platform Operations Team |
+| 2026-02-09T00:00:00 | 1.0.0 | Initial system requirements | Platform Operations Team |

@@ -50,7 +50,7 @@ The F1 IAM Module provides enterprise-grade identity and access management for t
 |------|---------|
 | **Project Name** | AI Cost Monitoring Platform v4.2 - F1 IAM Module |
 | **Document Version** | 1.0 |
-| **Date** | 2026-01-14 |
+| **Date** | 2026-01-14T00:00:00 |
 | **Status** | Draft |
 | **PRD-Ready Score** | 96/100 (Target: >=90/100) |
 

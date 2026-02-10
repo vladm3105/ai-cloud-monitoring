@@ -30,8 +30,8 @@ custom_fields:
 |------|---------|
 | **Status** | Draft |
 | **Version** | 1.0.0 |
-| **Date Created** | 2026-02-09 |
-| **Last Updated** | 2026-02-09 |
+| **Date Created** | 2026-02-09T00:00:00 |
+| **Last Updated** | 2026-02-09T00:00:00 |
 | **Author** | Platform Architecture Team |
 | **Reviewers** | Platform Team, AI Team |
 | **Owner** | Platform Architecture Team |
@@ -420,10 +420,10 @@ def promote(
 
 | Date | Version | Change | Author |
 |------|---------|--------|--------|
-| 2026-02-09 | 1.0.0 | Initial system requirements | Platform Architecture Team |
+| 2026-02-09T00:00:00 | 1.0.0 | Initial system requirements | Platform Architecture Team |
 
 ---
 
 **Template Version**: 1.0
-**Next Review Date**: 2026-05-09
+**Next Review Date**: 2026-05-09T00:00:00
 **Technical Authority**: Platform Team

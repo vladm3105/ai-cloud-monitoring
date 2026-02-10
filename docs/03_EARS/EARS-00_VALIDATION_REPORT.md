@@ -1,7 +1,7 @@
 # EARS Validation Report
 ## AI Cloud Cost Monitoring Platform v4.2
 
-**Validation Date**: 2026-02-09
+**Validation Date**: 2026-02-09T00:00:00
 **Validator**: doc-ears-validator (Claude)
 **Schema Version**: 1.0
 
@@ -228,6 +228,6 @@ The EARS layer is complete and ready for downstream processing.
 
 ---
 
-**Report Generated**: 2026-02-09
+**Report Generated**: 2026-02-09T00:00:00
 **Validator Version**: doc-ears-validator 1.0
 **Next Recommended Action**: `/doc-bdd-autopilot --all`

@@ -33,7 +33,7 @@ custom_fields:
 |------|---------|
 | **Project Name** | AI Cloud Cost Monitoring Platform |
 | **Document Version** | 1.0 |
-| **Date** | 2026-02-09 |
+| **Date** | 2026-02-09T00:00:00 |
 | **Document Owner** | Platform Architecture Team |
 | **Prepared By** | Coder Agent (Claude) |
 | **Status** | Accepted |
@@ -43,7 +43,7 @@ custom_fields:
 
 | Version | Date | Author | Changes |
 |---------|------|--------|---------|
-| 1.0 | 2026-02-09 | Coder Agent | Initial creation covering 7 architecture decision categories |
+| 1.0 | 2026-02-09T00:00:00 | Coder Agent | Initial creation covering 7 architecture decision categories |
 
 ---
 

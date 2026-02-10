@@ -27,8 +27,8 @@ custom_fields:
 |------|---------|
 | **Status** | Draft |
 | **Version** | 1.0.0 |
-| **Date Created** | 2026-02-09 |
-| **Last Updated** | 2026-02-09 |
+| **Date Created** | 2026-02-09T00:00:00 |
+| **Last Updated** | 2026-02-09T00:00:00 |
 | **Author** | Platform Operations Team |
 | **Priority** | P2 (High) |
 | **Category** | Reliability |
@@ -455,4 +455,4 @@ Implement using Cloud Run Jobs for scheduled health checks. Use Vertex AI Claude
 
 **Document Version**: 1.0.0
 **Template Version**: 1.1 (MVP)
-**Last Updated**: 2026-02-09
+**Last Updated**: 2026-02-09T00:00:00

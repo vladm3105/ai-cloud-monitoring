@@ -37,7 +37,7 @@ custom_fields:
 | Item | Details |
 |------|---------|
 | **Status** | Accepted |
-| **Date** | 2026-02-09 |
+| **Date** | 2026-02-09T00:00:00 |
 | **Decision Makers** | Chief Security Officer, Platform Architect |
 | **Author** | Coder Agent (Claude) |
 | **Version** | 1.0 |
@@ -449,9 +449,9 @@ Reference to BDD scenarios that validate this decision:
 
 **Document Version**: 1.0
 **Template Version**: 1.0 (MVP)
-**Last Updated**: 2026-02-09
+**Last Updated**: 2026-02-09T00:00:00
 
 ---
 
 *ADR-14: D7 Security Architecture - AI Cloud Cost Monitoring Platform v4.2*
-*Generated: 2026-02-09 | SYS-Ready Score: 94/100*
+*Generated: 2026-02-09T00:00:00 | SYS-Ready Score: 94/100*

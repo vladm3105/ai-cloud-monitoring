@@ -16,7 +16,7 @@ custom_fields:
 
 **Project:** AI Cloud Cost Monitoring Platform
 **Layer:** 01_BRD
-**Last Updated:** 2026-02-08
+**Last Updated:** 2026-02-08T00:00:00
 
 ---
 
@@ -82,5 +82,5 @@ Each foundation BRD contains:
 
 | Date | Change | Author |
 |------|--------|--------|
-| 2026-02-08 | Updated inventory to reflect actual 14 BRDs | System |
-| 2026-02-08 | Fixed cross-reference paths for foundation BRDs | System |
+| 2026-02-08T00:00:00 | Updated inventory to reflect actual 14 BRDs | System |
+| 2026-02-08T00:00:00 | Fixed cross-reference paths for foundation BRDs | System |

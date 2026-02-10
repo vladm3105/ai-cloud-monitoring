@@ -28,8 +28,8 @@ custom_fields:
 |------|---------|
 | **Status** | Draft |
 | **Version** | 1.0 |
-| **Date Created** | 2026-02-08 |
-| **Last Updated** | 2026-02-08 |
+| **Date Created** | 2026-02-08T00:00:00 |
+| **Last Updated** | 2026-02-08T00:00:00 |
 | **Author** | PRD Autopilot (Claude) |
 | **Reviewer** | Technical Lead |
 | **Approver** | Chief Architect |
@@ -45,7 +45,7 @@ custom_fields:
 
 | Version | Date | Author | Changes Made |
 |---------|------|--------|--------------|
-| 1.0 | 2026-02-08 | PRD Autopilot | Initial PRD generation from BRD-01 |
+| 1.0 | 2026-02-08T00:00:00 | PRD Autopilot | Initial PRD generation from BRD-01 |
 
 ---
 

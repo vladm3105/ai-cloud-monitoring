@@ -24,8 +24,8 @@ custom_fields:
 |------|---------|
 | **Status** | Draft |
 | **Version** | 1.0.0 |
-| **Date Created** | 2026-02-09 |
-| **Last Updated** | 2026-02-09 |
+| **Date Created** | 2026-02-09T00:00:00 |
+| **Last Updated** | 2026-02-09T00:00:00 |
 | **Author** | Data Platform Team |
 | **Owner** | Data Platform Team |
 | **Priority** | High |
@@ -234,4 +234,4 @@ audit_entry:
 
 | Date | Version | Change | Author |
 |------|---------|--------|--------|
-| 2026-02-09 | 1.0.0 | Initial system requirements | Data Platform Team |
+| 2026-02-09T00:00:00 | 1.0.0 | Initial system requirements | Data Platform Team |

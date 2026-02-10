@@ -29,7 +29,7 @@ custom_fields:
 |------|---------|
 | **Project Name** | AI Cost Monitoring Platform v4.2 - F2 Session Module |
 | **Document Version** | 1.0 |
-| **Date** | 2026-01-14 |
+| **Date** | 2026-01-14T00:00:00 |
 | **Document Owner** | Chief Architect |
 | **Prepared By** | Antigravity AI |
 | **Status** | Draft |
@@ -44,7 +44,7 @@ The F2 Session & Context Management Module provides stateful session handling, m
 
 | Version | Date | Author | Changes Made | Approver |
 |---------|------|--------|--------------|----------|
-| 1.0 | 2026-01-14 | Antigravity AI | Initial BRD creation from F2 Spec and Gap Analysis | |
+| 1.0 | 2026-01-14T00:00:00 | Antigravity AI | Initial BRD creation from F2 Spec and Gap Analysis | |
 
 ---
 

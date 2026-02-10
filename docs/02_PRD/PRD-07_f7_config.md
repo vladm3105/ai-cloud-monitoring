@@ -16,7 +16,7 @@ custom_fields:
   priority: shared
   development_status: draft
   version: "1.0"
-  last_updated: "2026-02-08"
+  last_updated: "2026-02-08T00:00:00"
 ---
 
 # PRD-07: F7 Configuration Manager
@@ -31,8 +31,8 @@ custom_fields:
 |------|---------|
 | **Status** | Draft |
 | **Version** | 1.0.0 |
-| **Date Created** | 2026-02-08 |
-| **Last Updated** | 2026-02-08 |
+| **Date Created** | 2026-02-08T00:00:00 |
+| **Last Updated** | 2026-02-08T00:00:00 |
 | **Author** | AI Assistant |
 | **Reviewer** | Technical Lead |
 | **Approver** | Chief Architect |
@@ -47,7 +47,7 @@ custom_fields:
 
 | Version | Date | Author | Changes Made |
 |---------|------|--------|--------------|
-| 1.0.0 | 2026-02-08 | AI Assistant | Initial PRD generated from BRD-07 |
+| 1.0.0 | 2026-02-08T00:00:00 | AI Assistant | Initial PRD generated from BRD-07 |
 
 ---
 
@@ -762,7 +762,7 @@ Priority Resolution (highest to lowest):
 
 **Document Version**: 1.0.0
 **Template Version**: MVP 1.0
-**Last Updated**: 2026-02-08
+**Last Updated**: 2026-02-08T00:00:00
 **Maintained By**: AI Assistant
 
 ---

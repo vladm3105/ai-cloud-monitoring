@@ -8,7 +8,7 @@ custom_fields:
   document_type: gap-analysis
   status: active
   created_by: doc-brd-fixer
-  created_date: "2026-02-10"
+  created_date: "2026-02-10T00:00:00"
   modules_covered: [F1, F2, F3, F4, F5, F6, F7]
 ---
 
@@ -208,4 +208,4 @@ The F1 IAM module provides authentication via Auth0 and basic authorization. Cur
 ---
 
 *GAP Analysis for AI Cost Monitoring Platform v4.2*
-*Created by doc-brd-fixer v1.0 | 2026-02-10*
+*Created by doc-brd-fixer v1.0 | 2026-02-10T00:00:00*

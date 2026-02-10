@@ -34,7 +34,7 @@ custom_fields:
 |------|---------|
 | **Project Name** | AI Cloud Cost Monitoring Platform |
 | **Document Version** | 1.0.0 |
-| **Date** | 2026-02-09 |
+| **Date** | 2026-02-09T00:00:00 |
 | **Document Owner** | Platform Architecture Team |
 | **Prepared By** | ADR Skill (Claude) |
 | **Status** | Accepted |
@@ -44,7 +44,7 @@ custom_fields:
 
 | Version | Date | Author | Changes Made |
 |---------|------|--------|--------------|
-| 1.0.0 | 2026-02-09 | ADR Skill (Claude) | Initial ADR generated from BRD-02, PRD-02, EARS-02, BDD-02 |
+| 1.0.0 | 2026-02-09T00:00:00 | ADR Skill (Claude) | Initial ADR generated from BRD-02, PRD-02, EARS-02, BDD-02 |
 
 ---
 
@@ -659,4 +659,4 @@ flowchart LR
 ---
 
 *ADR-02: F2 Session & Context Management Architecture - AI Cost Monitoring Platform v4.2*
-*Generated: 2026-02-09 | SYS-Ready Score: 90%*
+*Generated: 2026-02-09T00:00:00 | SYS-Ready Score: 90%*

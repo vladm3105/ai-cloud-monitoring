@@ -38,8 +38,8 @@ custom_fields:
 |------|---------|
 | **Status** | Accepted |
 | **Version** | 1.0 |
-| **Date Created** | 2026-02-10 |
-| **Last Updated** | 2026-02-10 |
+| **Date Created** | 2026-02-10T00:00:00 |
+| **Last Updated** | 2026-02-10T00:00:00 |
 | **Author** | Coder Agent (Claude) |
 | **Reviewer** | Chief Architect |
 | **Source BRD** | @brd: BRD-03.3 Section 7.2 |
@@ -50,7 +50,7 @@ custom_fields:
 
 | Version | Date | Author | Changes Made |
 |---------|------|--------|--------------|
-| 1.0 | 2026-02-10 | Coder Agent | Initial ADR for OTEL Gen-AI Semantic Conventions |
+| 1.0 | 2026-02-10T00:00:00 | Coder Agent | Initial ADR for OTEL Gen-AI Semantic Conventions |
 
 ---
 

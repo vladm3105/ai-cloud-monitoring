@@ -39,7 +39,7 @@ custom_fields:
 | Item | Details |
 |------|---------|
 | **Status** | Accepted |
-| **Date** | 2026-02-09 |
+| **Date** | 2026-02-09T00:00:00 |
 | **Decision Makers** | Chief Architect, Platform Engineering Lead |
 | **Author** | Coder Agent (Claude) |
 | **Version** | 1.0 |
@@ -446,10 +446,10 @@ Reference to BDD scenarios that validate this decision:
 
 **Document Version**: 1.0
 **Template Version**: ADR-MVP-TEMPLATE v1.0
-**Last Updated**: 2026-02-09
+**Last Updated**: 2026-02-09T00:00:00
 **SYS-Ready Score**: 90/100
 
 ---
 
 *ADR-13: D6 REST APIs & Integrations - AI Cloud Cost Monitoring Platform v4.2*
-*Generated: 2026-02-09 | SYS-Ready: 90/100*
+*Generated: 2026-02-09T00:00:00 | SYS-Ready: 90/100*

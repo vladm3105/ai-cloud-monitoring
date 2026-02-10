@@ -27,8 +27,8 @@ custom_fields:
 |------|---------|
 | **Status** | Draft |
 | **Version** | 1.0.0 |
-| **Date Created** | 2026-02-09 |
-| **Last Updated** | 2026-02-09 |
+| **Date Created** | 2026-02-09T00:00:00 |
+| **Last Updated** | 2026-02-09T00:00:00 |
 | **Author** | Platform Architecture Team |
 | **Priority** | P1 (Critical) |
 | **Category** | Observability |
@@ -484,4 +484,4 @@ Use Python structlog for structured logging with GCP Cloud Logging integration. 
 
 **Document Version**: 1.0.0
 **Template Version**: 1.1 (MVP)
-**Last Updated**: 2026-02-09
+**Last Updated**: 2026-02-09T00:00:00

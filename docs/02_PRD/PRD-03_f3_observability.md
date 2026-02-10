@@ -37,8 +37,8 @@ custom_fields:
 |------|---------|
 | **Status** | Draft |
 | **Version** | 1.0.0 |
-| **Date Created** | 2026-02-08 |
-| **Last Updated** | 2026-02-08 |
+| **Date Created** | 2026-02-08T00:00:00 |
+| **Last Updated** | 2026-02-08T00:00:00 |
 | **Author** | Antigravity AI |
 | **Reviewer** | Chief Architect |
 | **Approver** | Executive Sponsor |
@@ -53,7 +53,7 @@ custom_fields:
 
 | Version | Date | Author | Changes Made |
 |---------|------|--------|--------------|
-| 1.0.0 | 2026-02-08 | Antigravity AI | Initial PRD creation from BRD-03 |
+| 1.0.0 | 2026-02-08T00:00:00 | Antigravity AI | Initial PRD creation from BRD-03 |
 
 ---
 
@@ -762,7 +762,7 @@ stateDiagram-v2
 
 **Document Version**: 1.0.0
 **Template Version**: 1.0 (MVP)
-**Last Updated**: 2026-02-08
+**Last Updated**: 2026-02-08T00:00:00
 **Maintained By**: Antigravity AI
 
 ---

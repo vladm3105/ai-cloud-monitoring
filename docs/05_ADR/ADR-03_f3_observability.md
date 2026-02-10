@@ -35,8 +35,8 @@ custom_fields:
 |------|---------|
 | **Status** | Accepted |
 | **Version** | 1.0 |
-| **Date Created** | 2026-02-09 |
-| **Last Updated** | 2026-02-09 |
+| **Date Created** | 2026-02-09T00:00:00 |
+| **Last Updated** | 2026-02-09T00:00:00 |
 | **Author** | Coder Agent (Claude) |
 | **Reviewer** | Chief Architect |
 | **Source BRD** | @brd: BRD-03.3 Section 7.2 |
@@ -47,7 +47,7 @@ custom_fields:
 
 | Version | Date | Author | Changes Made |
 |---------|------|--------|--------------|
-| 1.0 | 2026-02-09 | Coder Agent | Initial ADR creation from BRD-03.3 and BDD-03 |
+| 1.0 | 2026-02-09T00:00:00 | Coder Agent | Initial ADR creation from BRD-03.3 and BDD-03 |
 
 ---
 
@@ -709,7 +709,7 @@ Revisit this ADR if:
 
 **Document Version**: 1.0
 **Template Version**: MVP
-**Last Updated**: 2026-02-09
+**Last Updated**: 2026-02-09T00:00:00
 **Maintained By**: Coder Agent
 
 ---

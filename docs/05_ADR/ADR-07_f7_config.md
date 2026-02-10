@@ -34,7 +34,7 @@ custom_fields:
 |------|---------|
 | **Project Name** | AI Cost Monitoring Platform v4.2 - F7 Configuration Manager |
 | **Document Version** | 1.0 |
-| **Date** | 2026-02-09 |
+| **Date** | 2026-02-09T00:00:00 |
 | **Document Owner** | Architecture Team |
 | **Prepared By** | ADR Autopilot (Claude) |
 | **Status** | Accepted |
@@ -44,7 +44,7 @@ custom_fields:
 
 | Version | Date | Author | Changes Made |
 |---------|------|--------|--------------|
-| 1.0 | 2026-02-09 | ADR Autopilot | Initial ADR generated from BRD-07, PRD-07, EARS-07, BDD-07 |
+| 1.0 | 2026-02-09T00:00:00 | ADR Autopilot | Initial ADR generated from BRD-07, PRD-07, EARS-07, BDD-07 |
 
 ---
 
@@ -973,4 +973,4 @@ Status: READY FOR SYS GENERATION
 ---
 
 *ADR-07: F7 Configuration Manager Architecture Decisions - AI Cost Monitoring Platform v4.2*
-*Generated: 2026-02-09 | Layer 5 Artifact | SYS-Ready Score: 90%*
+*Generated: 2026-02-09T00:00:00 | Layer 5 Artifact | SYS-Ready Score: 90%*

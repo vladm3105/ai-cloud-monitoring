@@ -6,7 +6,7 @@
 |-------|-------|
 | **Document** | 05 — API Endpoint Specification |
 | **Version** | 1.0 |
-| **Date** | February 2026 |
+| **Date** | 2026-02-10T15:00:00 |
 | **Status** | Architecture |
 | **Audience** | Architects, Frontend Developers, Backend Developers |
 

@@ -34,7 +34,7 @@ custom_fields:
 |------|---------|
 | **Project Name** | AI Cost Monitoring Platform v4.2 - D7 Security |
 | **Document Version** | 1.0 |
-| **Date** | 2026-02-08 |
+| **Date** | 2026-02-08T00:00:00 |
 | **Document Owner** | Chief Architect |
 | **Prepared By** | Antigravity AI |
 | **Status** | Draft |
@@ -51,7 +51,7 @@ The D7 Security Module defines the security architecture for the AI Cost Monitor
 
 | Version | Date | Author | Changes Made | Approver |
 |---------|------|--------|--------------|----------|
-| 1.0 | 2026-02-08 | Antigravity AI | Initial BRD creation from security design spec | |
+| 1.0 | 2026-02-08T00:00:00 | Antigravity AI | Initial BRD creation from security design spec | |
 
 ---
 

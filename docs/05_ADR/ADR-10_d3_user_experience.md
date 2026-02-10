@@ -36,7 +36,7 @@ custom_fields:
 | Item | Details |
 |------|---------|
 | **Status** | Accepted |
-| **Date** | 2026-02-09 |
+| **Date** | 2026-02-09T00:00:00 |
 | **Decision Makers** | Chief Architect, Platform Engineering Lead |
 | **Author** | Coder Agent (Claude) |
 | **Version** | 1.0 |
@@ -450,7 +450,7 @@ Reference BDD-10 scenarios that validate this architecture:
 
 **Document Version**: 1.0
 **Template Version**: 1.0 (MVP)
-**Last Updated**: 2026-02-09
+**Last Updated**: 2026-02-09T00:00:00
 
 ---
 

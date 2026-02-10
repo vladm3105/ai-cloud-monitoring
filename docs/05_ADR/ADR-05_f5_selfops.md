@@ -29,7 +29,7 @@ custom_fields:
 | Item | Details |
 |------|---------|
 | **Status** | Accepted |
-| **Date** | 2026-02-09 |
+| **Date** | 2026-02-09T00:00:00 |
 | **Decision Makers** | Platform Architecture Team, SRE Lead |
 | **Author** | AI Architecture Agent |
 | **Version** | 1.0 |
@@ -670,7 +670,7 @@ This ADR covers multiple architecture decisions for the F5 module. Migration to 
 
 **Document Version**: 1.0
 **Template Version**: 1.0 (MVP)
-**Last Updated**: 2026-02-09
+**Last Updated**: 2026-02-09T00:00:00
 
 ---
 

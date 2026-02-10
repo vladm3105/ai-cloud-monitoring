@@ -3,7 +3,7 @@
 **Project:** AI Cloud Cost Monitoring Platform v4.2
 **Layer:** 04_BDD (Behavior-Driven Development)
 **Status:** Active
-**Generated:** 2026-02-09
+**Generated:** 2026-02-09T00:00:00
 
 ---
 
@@ -101,7 +101,7 @@ All BDD documents include `@threshold:` tags referencing quantified constraints:
 
 | Version | Date | Changes |
 |---------|------|---------|
-| 1.0 | 2026-02-09 | Initial generation of all 14 BDD documents using BDD Autopilot |
+| 1.0 | 2026-02-09T00:00:00 | Initial generation of all 14 BDD documents using BDD Autopilot |
 
 ---
 

@@ -34,7 +34,7 @@ custom_fields:
 |------|---------|
 | **Project Name** | AI Cost Monitoring Platform v4.2 - D5 Data Persistence |
 | **Document Version** | 1.0 |
-| **Date** | 2026-02-08 |
+| **Date** | 2026-02-08T00:00:00 |
 | **Document Owner** | Chief Architect |
 | **Prepared By** | Antigravity AI |
 | **Status** | Draft |
@@ -52,7 +52,7 @@ The D5 Data Persistence Module defines the database architecture for the AI Cost
 
 | Version | Date | Author | Changes Made | Approver |
 |---------|------|--------|--------------|----------|
-| 1.0 | 2026-02-08 | Antigravity AI | Initial BRD creation from database schema spec | |
+| 1.0 | 2026-02-08T00:00:00 | Antigravity AI | Initial BRD creation from database schema spec | |
 
 ---
 

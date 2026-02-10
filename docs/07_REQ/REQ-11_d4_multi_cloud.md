@@ -26,8 +26,8 @@ custom_fields:
 |------|---------|
 | **Status** | Draft |
 | **Version** | 1.0.0 |
-| **Date Created** | 2026-02-09 |
-| **Last Updated** | 2026-02-09 |
+| **Date Created** | 2026-02-09T00:00:00 |
+| **Last Updated** | 2026-02-09T00:00:00 |
 | **Author** | Integration Team |
 | **Priority** | P2 (High) |
 | **Category** | Functional |
@@ -415,4 +415,4 @@ Use Google Cloud Client Libraries for GCP API access. Implement provider abstrac
 
 **Document Version**: 1.0.0
 **Template Version**: 1.1 (MVP)
-**Last Updated**: 2026-02-09
+**Last Updated**: 2026-02-09T00:00:00

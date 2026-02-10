@@ -25,8 +25,8 @@ custom_fields:
 |------|---------|
 | **Status** | Draft |
 | **Version** | 1.0.0 |
-| **Date Created** | 2026-02-09 |
-| **Last Updated** | 2026-02-09 |
+| **Date Created** | 2026-02-09T00:00:00 |
+| **Last Updated** | 2026-02-09T00:00:00 |
 | **Author** | Platform Architecture Team |
 | **Owner** | Platform Architecture Team |
 | **Priority** | High |
@@ -270,5 +270,5 @@ F3 Observability provides unified logging, metrics, tracing, and alerting for th
 
 | Date | Version | Change | Author |
 |------|---------|--------|--------|
-| 2026-02-09 | 1.0.0 | Initial system requirements | Platform Architecture Team |
-| 2026-02-10 | 1.1.0 | Add OTEL Gen-AI requirements (SYS.03.01.20-24) | Coder Agent |
+| 2026-02-09T00:00:00 | 1.0.0 | Initial system requirements | Platform Architecture Team |
+| 2026-02-10T00:00:00 | 1.1.0 | Add OTEL Gen-AI requirements (SYS.03.01.20-24) | Coder Agent |

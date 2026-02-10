@@ -35,7 +35,7 @@ custom_fields:
 | Item | Details |
 |------|---------|
 | **Status** | Accepted |
-| **Date** | 2026-02-09 |
+| **Date** | 2026-02-09T00:00:00 |
 | **Decision Makers** | Chief Architect, AI/ML Lead, Platform Lead |
 | **Author** | Antigravity AI |
 | **Version** | 1.0 |
@@ -432,9 +432,9 @@ Reference BDD scenarios validating this architecture decision:
 
 **Document Version**: 1.0
 **Template Version**: 1.0 (MVP)
-**Last Updated**: 2026-02-09
+**Last Updated**: 2026-02-09T00:00:00
 
 ---
 
 *ADR-08: D1 Agent Orchestration Architecture - AI Cost Monitoring Platform v4.2*
-*Generated: 2026-02-09 | SYS-Ready Score: 92/100*
+*Generated: 2026-02-09T00:00:00 | SYS-Ready Score: 92/100*

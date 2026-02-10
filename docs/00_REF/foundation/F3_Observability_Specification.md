@@ -5,7 +5,7 @@
 **Version**: 1.0.0
 **Status**: Draft
 **Source**: Trading Nexus F3 v1.3.0 (adapted)
-**Date**: February 2026
+**Date**: 2026-02-10T15:00:00
 
 ---
 

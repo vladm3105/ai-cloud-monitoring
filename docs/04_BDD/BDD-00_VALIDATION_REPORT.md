@@ -1,7 +1,7 @@
 # BDD Validation Report
 ## AI Cloud Cost Monitoring Platform v4.2
 
-**Validation Date**: 2026-02-09
+**Validation Date**: 2026-02-09T00:00:00
 **Validator**: doc-bdd-autopilot (Claude)
 **Schema Version**: 1.0
 
@@ -209,6 +209,6 @@ The BDD layer is complete and ready for downstream processing.
 
 ---
 
-**Report Generated**: 2026-02-09
+**Report Generated**: 2026-02-09T00:00:00
 **Validator Version**: doc-bdd-autopilot 1.0
 **Next Recommended Action**: `/doc-adr-autopilot --all`

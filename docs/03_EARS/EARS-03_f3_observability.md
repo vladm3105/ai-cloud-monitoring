@@ -38,8 +38,8 @@ custom_fields:
 |------|---------|
 | **Version** | 1.0 |
 | **Status** | Draft |
-| **Date Created** | 2026-02-09 |
-| **Last Updated** | 2026-02-09 |
+| **Date Created** | 2026-02-09T00:00:00 |
+| **Last Updated** | 2026-02-09T00:00:00 |
 | **Author** | Coder Agent (Claude) |
 | **Source PRD** | @prd: PRD-03 |
 | **BDD-Ready Score** | 90/100 (Target: >=90) |
@@ -915,4 +915,4 @@ stateDiagram-v2
 
 ---
 
-*Generated: 2026-02-09 | Coder Agent | BDD-Ready Score: 90/100*
+*Generated: 2026-02-09T00:00:00 | Coder Agent | BDD-Ready Score: 90/100*
