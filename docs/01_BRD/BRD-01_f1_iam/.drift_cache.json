@@ -1,0 +1,46 @@
+{
+  "schema_version": "1.0",
+  "document_id": "BRD-01",
+  "document_version": "1.0",
+  "last_reviewed": "2026-02-10T16:30:00",
+  "reviewer_version": "1.4",
+  "upstream_documents": {
+    "../../00_REF/foundation/F1_IAM_Technical_Specification.md": {
+      "hash": "sha256:25450a36e71eddfd7a676af1d276c0b851548a339e50b26d7edc1d25fab719d5",
+      "last_modified": "2026-02-10T15:34:26",
+      "file_size": 50781,
+      "version": "1.0",
+      "sections_tracked": [
+        "#1-executive-summary",
+        "#3-authentication-system",
+        "#4-authorization-system",
+        "#5-user-profile-system",
+        "#6-event-system",
+        "#10-security-considerations"
+      ]
+    },
+    "../../00_REF/foundation/GAP_Foundation_Module_Gap_Analysis.md": {
+      "hash": "sha256:921c5c4ac90feefa28a7fa044879c63ca961a1c748d2a3784e8d48e51f5b90de",
+      "last_modified": "2026-02-10T15:34:21",
+      "file_size": 4730,
+      "version": "1.0",
+      "sections_tracked": [
+        "#f1-iam-gaps"
+      ]
+    }
+  },
+  "review_history": [
+    {
+      "date": "2026-02-10T14:20:05",
+      "score": 92,
+      "drift_detected": false,
+      "report_version": "v001"
+    },
+    {
+      "date": "2026-02-10T16:30:00",
+      "score": 97,
+      "drift_detected": false,
+      "report_version": "v002"
+    }
+  ]
+}
