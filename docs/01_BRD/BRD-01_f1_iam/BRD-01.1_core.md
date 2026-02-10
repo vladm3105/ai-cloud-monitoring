@@ -168,9 +168,9 @@ This document covers:
 
 | Benefit ID | Benefit Statement | Baseline | Target | Measurement |
 |------------|-------------------|----------|--------|-------------|
-| BRD.01.25.01 | Reduce security incident response time | Hours (manual) | <1 second | Session revocation latency |
-| BRD.01.25.02 | Enterprise compliance readiness | 0/6 gaps addressed | 6/6 addressed | Gap remediation tracking |
-| BRD.01.25.03 | Integration efficiency | Multiple auth points | Single IAM integration | Domain layer integrations |
+| BRD.01.33.01 | Reduce security incident response time | Hours (manual) | <1 second | Session revocation latency |
+| BRD.01.33.02 | Enterprise compliance readiness | 0/6 gaps addressed | 6/6 addressed | Gap remediation tracking |
+| BRD.01.33.03 | Integration efficiency | Multiple auth points | Single IAM integration | Domain layer integrations |
 
 **Qualitative Benefits**:
 - Consistent security posture across all platform components

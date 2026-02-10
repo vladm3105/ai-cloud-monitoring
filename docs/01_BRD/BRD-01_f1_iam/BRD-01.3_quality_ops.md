@@ -355,7 +355,7 @@ custom_fields:
 
 ## 14. Glossary
 
-**Master Glossary**: See [BRD-00_GLOSSARY.md](../../BRD-00_GLOSSARY.md)
+**Master Glossary**: See [BRD-00_GLOSSARY.md](../BRD-00_GLOSSARY.md)
 
 ### F1-Specific Terms
 
