@@ -331,7 +331,71 @@ All domain layers (D1-D5) emit logs, metrics, and traces to F3.
 
 ---
 
-## 13. Version History
+## 13. Gen-AI Semantic Conventions (v1.4.0)
+
+**Reference**: [ADR-15: OTEL Gen-AI Semantic Conventions](../../05_ADR/ADR-15_otel_genai_semantic_conventions.md)
+
+### 13.1 OTEL Gen-AI Standard Attributes (v1.37+)
+
+All LLM/GenAI operations MUST emit the following span attributes per OpenTelemetry Semantic Conventions:
+
+| Attribute | Type | Requirement | Description |
+|-----------|------|-------------|-------------|
+| `gen_ai.operation.name` | string | Required | chat, embeddings, text_completion, generate_content |
+| `gen_ai.provider.name` | string | Required | openai, anthropic, gcp.vertex_ai, aws.bedrock |
+| `gen_ai.request.model` | string | Cond. Required | Requested model name |
+| `gen_ai.response.model` | string | Recommended | Actual responding model |
+| `gen_ai.usage.input_tokens` | int | Recommended | Input token count |
+| `gen_ai.usage.output_tokens` | int | Recommended | Output token count |
+| `gen_ai.response.id` | string | Recommended | Provider response ID |
+| `gen_ai.response.finish_reasons` | string[] | Recommended | stop, length, tool_calls |
+| `gen_ai.conversation.id` | string | Cond. Required | Session/conversation tracking |
+
+### 13.2 Custom Cost Extension Attributes
+
+Platform-specific cost tracking (not in OTEL standard):
+
+| Attribute | Type | Description |
+|-----------|------|-------------|
+| `gen_ai.cost.input_usd` | float | Input token cost in USD |
+| `gen_ai.cost.output_usd` | float | Output token cost in USD |
+| `gen_ai.cost.total_usd` | float | Total request cost in USD |
+
+### 13.3 Gen-AI Metrics
+
+| Metric | Type | Unit | Description |
+|--------|------|------|-------------|
+| `gen_ai.client.token.usage` | Histogram | {token} | Token consumption by type (input/output) |
+| `gen_ai.client.operation.duration` | Histogram | s | LLM operation latency |
+
+**Required Labels**: gen_ai.operation.name, gen_ai.provider.name, gen_ai.request.model
+
+### 13.4 Provider Name Values
+
+| Provider | gen_ai.provider.name |
+|----------|---------------------|
+| Google Vertex AI | `gcp.vertex_ai` |
+| Google AI Studio | `google.generative_ai` |
+| OpenAI | `openai` |
+| Azure OpenAI | `azure.ai.openai` |
+| Anthropic | `anthropic` |
+| AWS Bedrock | `aws.bedrock` |
+
+### 13.5 Event Capture (Opt-In)
+
+Prompt/response capture is disabled by default. Enable via configuration with mandatory PII filtering:
+
+```yaml
+gen_ai_events:
+  enabled: false  # Opt-in only
+  pii_filtering:
+    enabled: true  # MUST remain true
+    patterns: [credit_card, ssn, email, api_key]
+```
+
+---
+
+## 14. Version History
 
 | Version | Date | Changes |
 |---------|------|---------|
@@ -339,17 +403,18 @@ All domain layers (D1-D5) emit logs, metrics, and traces to F3.
 | 1.1.0 | Dec 2025 | OpenTelemetry tracing |
 | 1.2.0 | Jan 2026 | LLM-specific metrics |
 | 1.3.0 | Jan 2026 | Alerting, dashboards, retention |
+| 1.4.0 | Feb 2026 | OTEL Gen-AI Semantic Conventions (ADR-15) |
 
 ---
 
-## 14. Roadmap
+## 15. Roadmap
 
 | Feature | Version |
 |---------|---------|
-| Log Analytics (BigQuery) | 1.4.0 |
-| Custom Dashboards | 1.4.0 |
-| SLO/SLI Tracking | 1.5.0 |
-| ML Anomaly Detection | 1.5.0 |
+| Log Analytics (BigQuery) | 1.5.0 |
+| Custom Dashboards | 1.5.0 |
+| SLO/SLI Tracking | 1.6.0 |
+| ML Anomaly Detection | 1.6.0 |
 
 ---
 

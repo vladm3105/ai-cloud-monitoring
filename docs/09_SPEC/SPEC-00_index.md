@@ -13,6 +13,7 @@
 | SPEC-01 | GCP MCP Server Specification | Planned | Implementation spec for GCP MCP server |
 | SPEC-02 | Cost Agent Specification | Planned | Implementation spec for Cost Agent |
 | SPEC-03 | Grafana Integration Specification | Planned | Dashboard and data source setup |
+| [SPEC-03-GENAI](SPEC-03-GENAI_genai_telemetry.md) | Gen-AI Telemetry Specification | Draft | OTEL Gen-AI semantic conventions implementation |
 
 ---
 

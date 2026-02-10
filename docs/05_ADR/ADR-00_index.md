@@ -53,6 +53,12 @@ Architecture decisions for each module derived from BRD Architecture Decision Re
 | ADR-13 | D6 | [REST APIs & Integrations Architecture](ADR-13_d6_rest_apis.md) | Accepted |
 | ADR-14 | D7 | [Security Architecture](ADR-14_d7_security.md) | Accepted |
 
+### Cross-Cutting Enhancements
+
+| ID | Module | Title | Status |
+|----|--------|-------|--------|
+| ADR-15 | F3 | [OTEL Gen-AI Semantic Conventions](ADR-15_otel_genai_semantic_conventions.md) | Accepted |
+
 ---
 
 ## Traceability

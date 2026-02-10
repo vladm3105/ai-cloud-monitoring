@@ -107,7 +107,55 @@ F3 Observability provides platform-wide visibility into system health, performan
 | trace_id | string | W3C trace identifier |
 | alert_id | string | Alert notification ID |
 
-### 3.4 Interface Protocol
+### 3.4 OTEL Gen-AI Requirements (ADR-15)
+
+**Reference**: [ADR-15: OTEL Gen-AI Semantic Conventions](../05_ADR/ADR-15_otel_genai_semantic_conventions.md)
+
+#### REQ.03.01.20: Gen-AI Span Attributes
+
+**The system SHALL** emit OTEL Gen-AI standard span attributes for all LLM operations:
+
+| Attribute | Type | Requirement | Description |
+|-----------|------|-------------|-------------|
+| `gen_ai.operation.name` | string | Required | Operation: chat, embeddings, text_completion |
+| `gen_ai.provider.name` | string | Required | Provider: openai, anthropic, gcp.vertex_ai |
+| `gen_ai.request.model` | string | Cond. Required | Requested model name |
+| `gen_ai.usage.input_tokens` | int | Recommended | Input token count |
+| `gen_ai.usage.output_tokens` | int | Recommended | Output token count |
+
+#### REQ.03.01.21: Gen-AI Metrics
+
+**The system SHALL** record OTEL Gen-AI standard metrics:
+
+| Metric | Type | Unit | Labels |
+|--------|------|------|--------|
+| `gen_ai.client.token.usage` | Histogram | {token} | operation.name, provider.name, token.type, request.model |
+| `gen_ai.client.operation.duration` | Histogram | s | operation.name, provider.name, request.model |
+
+#### REQ.03.01.22: Gen-AI Cost Extensions
+
+**The system SHALL** emit custom cost tracking attributes:
+
+| Attribute | Type | Description |
+|-----------|------|-------------|
+| `gen_ai.cost.input_usd` | float | Input token cost in USD |
+| `gen_ai.cost.output_usd` | float | Output token cost in USD |
+| `gen_ai.cost.total_usd` | float | Total request cost in USD |
+
+#### REQ.03.01.23: Gen-AI Event Capture
+
+**The system MAY** emit prompt/response events when enabled via configuration:
+
+- Default: Disabled (opt-in)
+- PII filtering: Mandatory when enabled
+- Event type: `gen_ai.client.inference.operation.details`
+
+#### REQ.03.21.10: Gen-AI Provider Validation
+
+**IF** LLM span emitted **THEN** validate `gen_ai.provider.name` matches allowed values:
+- `openai`, `anthropic`, `gcp.vertex_ai`, `google.generative_ai`, `azure.ai.openai`, `aws.bedrock`, `cohere`
+
+### 3.5 Interface Protocol
 
 ```python
 from typing import Protocol, Dict, Any, Literal
@@ -399,7 +447,7 @@ f3_config:
 @prd: PRD-03
 @ears: EARS-03
 @bdd: BDD-03
-@adr: ADR-03
+@adr: ADR-03, ADR-15
 @sys: SYS-03
 ```
 
