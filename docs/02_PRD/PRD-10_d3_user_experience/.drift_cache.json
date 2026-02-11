@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0",
+  "document_id": "PRD-10",
+  "document_version": "1.0.0",
+  "last_reviewed": "2026-02-11T20:18:55",
+  "reviewer_version": "1.6",
+  "upstream_documents": {
+    "../../01_BRD/BRD-10_d3_user_experience/BRD-10_d3_user_experience.md": {
+      "hash": "sha256:95f134de14d2d532c5bb09d7ba2c2f77c5c65b30540f78b264ecc5f1946fb311",
+      "last_modified": "2026-02-11T14:13:24",
+      "file_size": 13388,
+      "version": "1.0.1",
+      "sections_tracked": ["#3-business-requirements", "#7-traceability"]
+    }
+  },
+  "review_history": [
+    {
+      "date": "2026-02-11T09:59:00",
+      "score": 90,
+      "drift_detected": false,
+      "report_version": "v001"
+    },
+    {
+      "date": "2026-02-11T20:18:55",
+      "score": 94,
+      "drift_detected": true,
+      "drift_type": "timestamp",
+      "report_version": "v002"
+    }
+  ]
+}

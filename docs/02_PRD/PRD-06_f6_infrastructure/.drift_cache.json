@@ -1,0 +1,53 @@
+{
+  "schema_version": "1.0",
+  "document_id": "PRD-06",
+  "document_version": "1.0",
+  "last_reviewed": "2026-02-11T10:30:00",
+  "reviewer_version": "1.6",
+  "upstream_documents": {
+    "../../01_BRD/BRD-06_f6_infrastructure/BRD-06.0_index.md": {
+      "hash": "sha256:b54a712a2977f34be824d25ffbe2083a1a45ac1682d4eefb6a2054ee664952b6",
+      "last_modified": "2026-02-10T15:33:53",
+      "file_size": 3067,
+      "version": "1.0",
+      "sections_tracked": ["#executive-summary", "#key-capabilities", "#cross-brd-references"]
+    },
+    "../../01_BRD/BRD-06_f6_infrastructure/BRD-06.1_core.md": {
+      "hash": "sha256:778609ab7672d3778c98971f665f28e7d012ac770d1bbc2e4da27f580d4ff8c7",
+      "last_modified": "2026-02-10T20:27:49",
+      "file_size": 10486,
+      "version": "1.0",
+      "sections_tracked": ["#business-objectives", "#project-scope", "#user-stories"]
+    },
+    "../../01_BRD/BRD-06_f6_infrastructure/BRD-06.2_requirements.md": {
+      "hash": "sha256:84a2df12384e7a6838d2e2d53c29cccef23391af8bd6bb61d6559038c6d82292",
+      "last_modified": "2026-02-08T14:13:19",
+      "file_size": 14262,
+      "version": "1.0",
+      "sections_tracked": ["#functional-requirements"]
+    },
+    "../../01_BRD/BRD-06_f6_infrastructure/BRD-06.3_quality_ops.md": {
+      "hash": "sha256:6a4fa86288f859880e1e5c79d0cb7d04ccec47372bb79751e7bafc38916e7151",
+      "last_modified": "2026-02-10T20:27:54",
+      "file_size": 14627,
+      "version": "1.0",
+      "sections_tracked": ["#quality-attributes", "#business-constraints", "#traceability"]
+    }
+  },
+  "review_history": [
+    {
+      "date": "2026-02-11T09:51:46",
+      "score": 90,
+      "drift_detected": false,
+      "report_version": "v001",
+      "notes": "Initial structural review"
+    },
+    {
+      "date": "2026-02-11T10:30:00",
+      "score": 92,
+      "drift_detected": false,
+      "report_version": "v002",
+      "notes": "Full 10-check review with drift cache creation"
+    }
+  ]
+}

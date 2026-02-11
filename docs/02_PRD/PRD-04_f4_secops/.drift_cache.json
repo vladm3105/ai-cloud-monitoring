@@ -1,0 +1,47 @@
+{
+  "schema_version": "1.0",
+  "document_id": "PRD-04",
+  "document_version": "1.0",
+  "last_reviewed": "2026-02-11T17:00:00",
+  "reviewer_version": "1.6",
+  "upstream_documents": {
+    "../../01_BRD/BRD-04_f4_secops/BRD-04.0_index.md": {
+      "hash": "sha256:e25b7c1440c56691a6cd0b9d32223d5b8fafc81b3bc80e4d2e65e46ae9863330",
+      "last_modified": "2026-02-10T15:33:53",
+      "file_size": 4279,
+      "version": "1.0"
+    },
+    "../../01_BRD/BRD-04_f4_secops/BRD-04.1_core.md": {
+      "hash": "sha256:aa9e75eca5a36a1528d803436c2cbd372de19ad6a077e7d4a3ef4f8e91e24743",
+      "last_modified": "2026-02-10T20:22:28",
+      "file_size": 13586,
+      "version": "1.0"
+    },
+    "../../01_BRD/BRD-04_f4_secops/BRD-04.2_requirements.md": {
+      "hash": "sha256:eb97f40b1b375e54ce5d531f66252e6d2df415c41c96c3904adb7acd83fb8fa7",
+      "last_modified": "2026-02-08T13:49:25",
+      "file_size": 15603,
+      "version": "1.0"
+    },
+    "../../01_BRD/BRD-04_f4_secops/BRD-04.3_quality_ops.md": {
+      "hash": "sha256:3c073c1da6e5f5a5fe07b18dc224ab7dacfd92467315c52b755bd018f4cc2206",
+      "last_modified": "2026-02-10T20:22:30",
+      "file_size": 12779,
+      "version": "1.0"
+    }
+  },
+  "review_history": [
+    {
+      "date": "2026-02-11T09:50:00",
+      "score": 90,
+      "drift_detected": false,
+      "report_version": "v001"
+    },
+    {
+      "date": "2026-02-11T17:00:00",
+      "score": 94,
+      "drift_detected": false,
+      "report_version": "v002"
+    }
+  ]
+}

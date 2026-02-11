@@ -1,0 +1,79 @@
+{
+  "schema_version": "1.0",
+  "document_id": "PRD-05",
+  "document_version": "1.0",
+  "last_reviewed": "2026-02-11T00:00:00-05:00",
+  "reviewer_version": "2.3",
+  "upstream_documents": {
+    "../../01_BRD/BRD-05_f5_selfops/BRD-05.0_index.md": {
+      "hash": "sha256:a04e7834bdfecc3fe35412e22cfe115532f56ca0a2cdfa26f34290c2ff0d3de6",
+      "last_modified": "2026-02-10T15:33:53-05:00",
+      "file_size": 4161,
+      "version": "1.0",
+      "sections_tracked": ["#executive-summary", "#key-capabilities", "#cross-brd-references"]
+    },
+    "../../01_BRD/BRD-05_f5_selfops/BRD-05.1_core.md": {
+      "hash": "sha256:210f90c35274dd3f0d656c785cc08004bd7e8a08be30ee96f8415c7f867d6616",
+      "last_modified": "2026-02-10T20:22:33-05:00",
+      "file_size": 13841,
+      "version": "1.0",
+      "sections_tracked": ["#document-control", "#business-objectives", "#project-scope", "#stakeholders", "#user-stories"]
+    },
+    "../../01_BRD/BRD-05_f5_selfops/BRD-05.2_requirements.md": {
+      "hash": "sha256:0fca0c4dd212de872bb054a56075eda44c3607172e20dd250e2264172f07697f",
+      "last_modified": "2026-02-08T13:53:51-05:00",
+      "file_size": 16637,
+      "version": "1.0",
+      "sections_tracked": ["#functional-requirements", "#brd050101-health-monitoring", "#brd050102-auto-remediation", "#brd050103-incident-learning", "#brd050104-ai-assisted-development", "#brd050105-self-healing-loop", "#brd050106-event-system", "#brd050107-auto-scaling", "#brd050108-chaos-engineering", "#brd050109-predictive-maintenance", "#brd050110-dependency-health-monitoring", "#brd050111-runbook-library", "#brd050112-post-incident-review-automation"]
+    },
+    "../../01_BRD/BRD-05_f5_selfops/BRD-05.3_quality_ops.md": {
+      "hash": "sha256:e4583377399ade150c469a4912ce25e5881e855bccb1350cf83b5caa8e4f1e6d",
+      "last_modified": "2026-02-10T20:22:35-05:00",
+      "file_size": 14835,
+      "version": "1.0",
+      "sections_tracked": ["#quality-attributes", "#business-constraints-and-assumptions", "#acceptance-criteria", "#business-risk-management", "#implementation-approach", "#traceability", "#glossary"]
+    }
+  },
+  "cross_references": {
+    "depends": [
+      {
+        "target": "PRD-06",
+        "path": "../PRD-06_f6_infrastructure/PRD-06_f6_infrastructure.md",
+        "status": "exists"
+      },
+      {
+        "target": "PRD-03",
+        "path": "../PRD-03_f3_observability/PRD-03_f3_observability.md",
+        "status": "exists"
+      }
+    ],
+    "discoverability": [
+      {
+        "target": "PRD-04",
+        "path": "../PRD-04_f4_secops/PRD-04_f4_secops.md",
+        "status": "exists"
+      },
+      {
+        "target": "PRD-07",
+        "path": "../PRD-07_f7_config/PRD-07_f7_config.md",
+        "status": "exists"
+      }
+    ]
+  },
+  "review_history": [
+    {
+      "date": "2026-02-11T00:00:00-05:00",
+      "score": 90,
+      "drift_detected": false,
+      "report_version": "v001",
+      "notes": "Initial review with structure fixes applied"
+    },
+    {
+      "date": "2026-02-11T00:00:00-05:00",
+      "score": 92,
+      "drift_detected": false,
+      "report_version": "v002",
+      "notes": "Full 10-check review with drift cache creation"
+    }
+  ]
+}

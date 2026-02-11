@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0",
+  "document_id": "PRD-07",
+  "document_version": "1.0",
+  "last_reviewed": "2026-02-11T16:30:00",
+  "reviewer_version": "1.6",
+  "upstream_documents": {
+    "../../01_BRD/BRD-07_f7_config/BRD-07.0_index.md": {
+      "hash": "sha256:a57b6472efec10990dcac66d8e015fc5d48cd0835c4e441af6f00fc8d399c678",
+      "last_modified": "2026-02-10T15:33:53",
+      "file_size": 4579,
+      "version": "1.0"
+    },
+    "../../01_BRD/BRD-07_f7_config/BRD-07.1_core.md": {
+      "hash": "sha256:88370eefa1885194302aa1de299e95bd2de80bc8401cd007e86ac0e7d6a16986",
+      "last_modified": "2026-02-10T20:27:52",
+      "file_size": 13765,
+      "version": "1.0"
+    },
+    "../../01_BRD/BRD-07_f7_config/BRD-07.2_requirements.md": {
+      "hash": "sha256:901e18775d9c4fa72ef8e18e78eefb94c00abccadbef2b5893773c3ae70affc0",
+      "last_modified": "2026-02-08T14:13:03",
+      "file_size": 15405,
+      "version": "1.0"
+    },
+    "../../01_BRD/BRD-07_f7_config/BRD-07.3_quality_ops.md": {
+      "hash": "sha256:5dfb1d929ac7a83fdaa951f0f8cfe55b0b409ed7d9aa68ee4b94324281730284",
+      "last_modified": "2026-02-10T20:27:55",
+      "file_size": 13876,
+      "version": "1.0"
+    }
+  },
+  "review_history": [
+    {
+      "date": "2026-02-11T16:30:00",
+      "score": 94,
+      "drift_detected": false,
+      "report_version": "v002"
+    }
+  ]
+}

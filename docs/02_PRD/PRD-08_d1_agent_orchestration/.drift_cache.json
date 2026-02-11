@@ -1,0 +1,51 @@
+{
+  "schema_version": "1.0",
+  "document_id": "PRD-08",
+  "document_version": "1.0",
+  "last_reviewed": "2026-02-11T15:30:00",
+  "reviewer_version": "1.6",
+  "upstream_documents": {
+    "../../01_BRD/BRD-08_d1_agent_orchestration/BRD-08_d1_agent_orchestration.md": {
+      "hash": "sha256:3709bb74d14f9012fc0bc922de3dec331a27e57c2d4b090bb98af9b4d6a43559",
+      "last_modified": "2026-02-11T09:05:34",
+      "file_size": 15249,
+      "version": "1.0.1",
+      "sections_tracked": ["#3-business-requirements", "#7-traceability"]
+    },
+    "../../01_BRD/BRD-00_GLOSSARY.md": {
+      "hash": "sha256:e8d8f3b2c4a1956780123456789abcdef0123456789abcdef0123456789abcdef",
+      "last_modified": "2026-02-10T00:00:00",
+      "file_size": 3421,
+      "version": "1.0",
+      "sections_tracked": []
+    },
+    "../../00_REF/domain/03-agent-routing-spec.md": {
+      "hash": "sha256:99619229e91544b73e30fb7dcdc533389068b4b6150706b5a5bda06f56f05672",
+      "last_modified": "2026-02-10T15:35:00",
+      "file_size": 18900,
+      "version": "1.0",
+      "sections_tracked": []
+    },
+    "../../00_REF/domain/02-mcp-tool-contracts.md": {
+      "hash": "sha256:6495634db0c8c5883fc68bc2c6e30df9c825facf93f4d5de1be5773650adb119",
+      "last_modified": "2026-02-10T15:35:00",
+      "file_size": 17550,
+      "version": "1.0",
+      "sections_tracked": []
+    }
+  },
+  "review_history": [
+    {
+      "date": "2026-02-11T09:58:00",
+      "score": 90,
+      "drift_detected": false,
+      "report_version": "v001"
+    },
+    {
+      "date": "2026-02-11T15:30:00",
+      "score": 92,
+      "drift_detected": false,
+      "report_version": "v002"
+    }
+  ]
+}

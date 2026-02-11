@@ -1,0 +1,58 @@
+{
+  "schema_version": "1.0",
+  "document_id": "PRD-12",
+  "document_version": "1.0.0",
+  "document_title": "D5 Data Persistence & Storage",
+  "last_reviewed": "2026-02-11T20:22:37",
+  "reviewer_version": "2.4",
+  "upstream_documents": {
+    "../../01_BRD/BRD-12_d5_data_persistence/BRD-12_d5_data_persistence.md": {
+      "hash": "sha256:1e97848e69fab997e677d499493b5db1c6f39378cd1966637378574945f1086d",
+      "last_modified": "2026-02-11T09:13:28",
+      "file_size": 16975,
+      "version": "1.0.1",
+      "sections_tracked": [
+        "#3-business-requirements",
+        "#7-traceability"
+      ]
+    },
+    "../../01_BRD/BRD-00_GLOSSARY.md": {
+      "hash": "sha256:40a24bf9af94a050adc0c0b6ded3f5e1562e2bc66ce75acdde72efb085e91f3f",
+      "last_modified": "2026-02-10T15:33:53",
+      "file_size": 3696,
+      "version": "1.0",
+      "sections_tracked": [
+        "#business-terms",
+        "#technical-terms"
+      ]
+    }
+  },
+  "prd_metadata": {
+    "file_path": "PRD-12_d5_data_persistence.md",
+    "last_modified": "2026-02-11T09:58:29",
+    "file_size": 20897,
+    "word_count": 3255
+  },
+  "review_history": [
+    {
+      "date": "2026-02-11T09:59:00",
+      "score": 90,
+      "drift_detected": false,
+      "report_version": "v001",
+      "fixes_applied": 2,
+      "notes": "Initial review - structure fix applied"
+    },
+    {
+      "date": "2026-02-11T20:22:37",
+      "score": 95,
+      "drift_detected": false,
+      "report_version": "v002",
+      "fixes_applied": 0,
+      "notes": "Full 10-check review - no drift detected"
+    }
+  ],
+  "drift_thresholds": {
+    "warning_days": 7,
+    "critical_change_pct": 20
+  }
+}

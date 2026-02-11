@@ -1,0 +1,44 @@
+{
+  "schema_version": "1.0",
+  "document_id": "PRD-09",
+  "document_version": "1.0.0",
+  "last_reviewed": "2026-02-11T14:30:00",
+  "reviewer_version": "1.6",
+  "upstream_documents": {
+    "../../01_BRD/BRD-09_d2_cost_analytics/BRD-09_d2_cost_analytics.md": {
+      "hash": "sha256:166e1ea27acc742ecbc6dede07b317d19c87d864abc46855591617eb570897d8",
+      "last_modified": "2026-02-11T17:06:42",
+      "file_size": 14182,
+      "version": "1.0.1",
+      "sections_tracked": ["#3-business-requirements", "#7-traceability"]
+    },
+    "../../00_REF/domain/08-cost-model.md": {
+      "hash": "sha256:034844ff5cb9908816da4fcdff56b41c42fe79a4a90e5b074d365a9a0ab4e7cb",
+      "last_modified": "2026-02-10T15:00:00",
+      "file_size": 18858,
+      "version": "1.0",
+      "sections_tracked": ["#cost-categories", "#per-tenant-cost-model"]
+    },
+    "../../00_REF/domain/01-database-schema.md": {
+      "hash": "sha256:43e2c090ad74a2ba3f938d1f717306dba80198704445fd28d227a29346ea3a40",
+      "last_modified": "2026-02-10T15:00:00",
+      "file_size": 24619,
+      "version": "1.0",
+      "sections_tracked": ["#cost-metrics", "#pre-computed-aggregates"]
+    }
+  },
+  "review_history": [
+    {
+      "date": "2026-02-11T00:00:00",
+      "score": 90,
+      "drift_detected": false,
+      "report_version": "v001"
+    },
+    {
+      "date": "2026-02-11T14:30:00",
+      "score": 92,
+      "drift_detected": false,
+      "report_version": "v002"
+    }
+  ]
+}

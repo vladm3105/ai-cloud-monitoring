@@ -1,0 +1,51 @@
+{
+  "schema_version": "1.0",
+  "document_id": "PRD-02",
+  "document_version": "1.0",
+  "last_reviewed": "2026-02-11T17:00:00",
+  "reviewer_version": "1.6",
+  "upstream_documents": {
+    "../../01_BRD/BRD-02_f2_session/BRD-02.0_index.md": {
+      "hash": "sha256:592bd98799161667dfb66b313fe34097fa4ead6f10e6b6391f4f77b5a5b13ffd",
+      "last_modified": "2026-02-11T15:13:53",
+      "file_size": 4218,
+      "version": "1.0",
+      "sections_tracked": ["#key-capabilities", "#executive-summary"]
+    },
+    "../../01_BRD/BRD-02_f2_session/BRD-02.1_core.md": {
+      "hash": "sha256:6a165b9ec1166a67429b93e0efaa9afc37fe069928060efed0897a8c5af4abe3",
+      "last_modified": "2026-02-11T19:41:41",
+      "file_size": 9234,
+      "version": "1.0",
+      "sections_tracked": ["#business-objectives", "#user-stories"]
+    },
+    "../../01_BRD/BRD-02_f2_session/BRD-02.2_requirements.md": {
+      "hash": "sha256:4dd6b2d00c0999ddc566cec66f1b53594abe3196dcf8b22a08fb8f6660de36c7",
+      "last_modified": "2026-02-09T18:29:32",
+      "file_size": 12456,
+      "version": "1.0",
+      "sections_tracked": ["#functional-requirements"]
+    },
+    "../../01_BRD/BRD-02_f2_session/BRD-02.3_quality_ops.md": {
+      "hash": "sha256:c7a7402a4c508af6b8946267cac6ba5a6e66915593b5cdf27de2146a9da54281",
+      "last_modified": "2026-02-11T19:41:42",
+      "file_size": 15678,
+      "version": "1.0",
+      "sections_tracked": ["#quality-attributes", "#architecture-decision-requirements"]
+    }
+  },
+  "review_history": [
+    {
+      "date": "2026-02-11T00:00:00",
+      "score": 90,
+      "drift_detected": false,
+      "report_version": "v001"
+    },
+    {
+      "date": "2026-02-11T17:00:00",
+      "score": 93,
+      "drift_detected": false,
+      "report_version": "v002"
+    }
+  ]
+}

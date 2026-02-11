@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.0",
+  "document_id": "PRD-14",
+  "document_version": "2.0",
+  "last_reviewed": "2026-02-11T15:26:32",
+  "reviewer_version": "1.6",
+  "upstream_documents": {
+    "../../01_BRD/BRD-14_d7_security/BRD-14_d7_security.md": {
+      "hash": "sha256:924a500795f25d2f4699ff7e36f50a108021b0eee6a7cf939ba577524c927baa",
+      "last_modified": "2026-02-11T09:13:33",
+      "file_size": 20072,
+      "version": "1.0.1",
+      "sections_tracked": [
+        "#3-business-requirements",
+        "#7-traceability"
+      ]
+    }
+  },
+  "review_history": [
+    {
+      "date": "2026-02-11T09:59:00",
+      "score": 92,
+      "drift_detected": false,
+      "report_version": "v001"
+    },
+    {
+      "date": "2026-02-11T15:26:32",
+      "score": 94,
+      "drift_detected": false,
+      "report_version": "v002"
+    }
+  ]
+}
