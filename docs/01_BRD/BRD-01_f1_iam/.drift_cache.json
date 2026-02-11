@@ -2,7 +2,7 @@
   "schema_version": "1.0",
   "document_id": "BRD-01",
   "document_version": "1.0",
-  "last_reviewed": "2026-02-10T16:30:00",
+  "last_reviewed": "2026-02-10T22:10:19",
   "reviewer_version": "1.4",
   "upstream_documents": {
     "../../00_REF/foundation/F1_IAM_Technical_Specification.md": {
@@ -41,6 +41,12 @@
       "score": 97,
       "drift_detected": false,
       "report_version": "v002"
+    },
+    {
+      "date": "2026-02-10T22:10:19",
+      "score": 97,
+      "drift_detected": false,
+      "report_version": "v003"
     }
   ]
 }
