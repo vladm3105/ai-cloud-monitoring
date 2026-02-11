@@ -169,9 +169,9 @@ This document covers:
 
 | Benefit ID | Benefit Statement | Baseline | Target | Measurement |
 |------------|-------------------|----------|--------|-------------|
-| BRD.02.25.01 | Reduce context assembly latency | Manual assembly | <50ms automated | Context injection timing |
-| BRD.02.25.02 | Enterprise session readiness | 0/6 gaps addressed | 6/6 addressed | Gap remediation tracking |
-| BRD.02.25.03 | Integration efficiency | Multiple session points | Single F2 integration | Domain layer integrations |
+| BRD.02.33.01 | Reduce context assembly latency | Manual assembly | <50ms automated | Context injection timing |
+| BRD.02.33.02 | Enterprise session readiness | 0/6 gaps addressed | 6/6 addressed | Gap remediation tracking |
+| BRD.02.33.03 | Integration efficiency | Multiple session points | Single F2 integration | Domain layer integrations |
 
 **Qualitative Benefits**:
 - Consistent session state across all platform components

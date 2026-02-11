@@ -174,9 +174,9 @@ This document covers:
 
 | Benefit ID | Benefit Statement | Baseline | Target | Measurement |
 |------------|-------------------|----------|--------|-------------|
-| BRD.06.25.01 | Reduce cloud migration effort | Weeks (full rewrite) | Days (adapter swap) | Migration time tracking |
-| BRD.06.25.02 | Enterprise deployment readiness | 0/6 gaps addressed | 6/6 addressed | Gap remediation tracking |
-| BRD.06.25.03 | Cost predictability | Reactive (bill surprise) | Proactive (alerts before overspend) | Budget alert accuracy |
+| BRD.06.33.01 | Reduce cloud migration effort | Weeks (full rewrite) | Days (adapter swap) | Migration time tracking |
+| BRD.06.33.02 | Enterprise deployment readiness | 0/6 gaps addressed | 6/6 addressed | Gap remediation tracking |
+| BRD.06.33.03 | Cost predictability | Reactive (bill surprise) | Proactive (alerts before overspend) | Budget alert accuracy |
 
 **Qualitative Benefits**:
 - Consistent infrastructure patterns across all platform components

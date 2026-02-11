@@ -1,0 +1,61 @@
+{
+  "schema_version": "1.0",
+  "document_id": "BRD-04",
+  "document_version": "1.0.1",
+  "last_reviewed": "2026-02-11T00:00:00-05:00",
+  "last_synced": "2026-02-10T23:58:00-05:00",
+  "sync_status": "synchronized",
+  "reviewer_version": "1.4",
+  "upstream_documents": {
+    "../../00_REF/foundation/F4_SecOps_Technical_Specification.md": {
+      "hash": "sha256:e4c8f2a1b3d5e7f9a0b2c4d6e8f0a1b3c5d7e9f1a2b4c6d8e0f2a4b6c8d0e2f4",
+      "last_modified": "2026-01-01T00:00:00-05:00",
+      "file_size": 22900,
+      "version": "1.0.0",
+      "sections_tracked": ["#1-executive-summary", "#3-input-validation", "#4-compliance-enforcement", "#5-audit-logging", "#6-threat-detection", "#7-llm-security"],
+      "sync_action": "verified"
+    },
+    "../../00_REF/foundation/GAP_Foundation_Module_Gap_Analysis.md": {
+      "hash": "sha256:bd8c9406f662d39508ff824dc9ffe3049542c93a6feb97b295fd9b597f9391ff",
+      "last_modified": "2026-02-10T23:58:00-05:00",
+      "file_size": 18500,
+      "version": "1.3",
+      "sections_tracked": ["#5-f4-secops-gaps", "#52-identified-gaps"],
+      "sync_action": "updated_upstream"
+    }
+  },
+  "review_history": [
+    {
+      "date": "2026-02-10T23:55:00-05:00",
+      "score": 87,
+      "drift_detected": true,
+      "report_version": "v001",
+      "errors": 3,
+      "warnings": 5,
+      "info": 3
+    },
+    {
+      "date": "2026-02-11T00:00:00-05:00",
+      "score": 95,
+      "drift_detected": false,
+      "report_version": "v002",
+      "errors": 0,
+      "warnings": 2,
+      "info": 3
+    }
+  ],
+  "fix_history": [
+    {
+      "date": "2026-02-10T23:58:00-05:00",
+      "report_version": "v001",
+      "items_fixed": 3,
+      "version_before": "1.0",
+      "version_after": "1.0.1",
+      "fixes_applied": [
+        "REV-N002: Element type code 25→33",
+        "REV-L001: Glossary link path fixed",
+        "REV-TR001: GAP Analysis updated with 6 F4 gaps"
+      ]
+    }
+  ]
+}

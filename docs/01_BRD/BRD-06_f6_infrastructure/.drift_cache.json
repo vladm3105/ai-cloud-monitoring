@@ -1,0 +1,61 @@
+{
+  "schema_version": "1.0",
+  "document_id": "BRD-06",
+  "document_version": "1.0.1",
+  "last_reviewed": "2026-02-11T00:05:00-05:00",
+  "last_synced": "2026-02-11T00:05:00-05:00",
+  "sync_status": "synchronized",
+  "reviewer_version": "1.4",
+  "upstream_documents": {
+    "../../00_REF/foundation/F6_Infrastructure_Technical_Specification.md": {
+      "hash": "sha256:f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7",
+      "last_modified": "2026-01-01T00:00:00-05:00",
+      "file_size": 15200,
+      "version": "1.2.0",
+      "sections_tracked": ["#1-executive-summary", "#3-compute-services", "#4-database-services", "#5-ai-services", "#6-messaging-services", "#7-storage-services", "#8-networking", "#9-cost-management"],
+      "sync_action": "verified"
+    },
+    "../../00_REF/foundation/GAP_Foundation_Module_Gap_Analysis.md": {
+      "hash": "sha256:ce9d0517f773e49619ff935ed0aae4160653d04b7feb98c396fe0c608a8492a0",
+      "last_modified": "2026-02-11T00:05:00-05:00",
+      "file_size": 24500,
+      "version": "1.4",
+      "sections_tracked": ["#7-f6-infrastructure-gaps", "#72-identified-gaps"],
+      "sync_action": "updated_upstream"
+    }
+  },
+  "review_history": [
+    {
+      "date": "2026-02-11T00:00:00-05:00",
+      "score": 87,
+      "drift_detected": true,
+      "report_version": "v001",
+      "errors": 3,
+      "warnings": 5,
+      "info": 3
+    },
+    {
+      "date": "2026-02-11T00:05:00-05:00",
+      "score": 95,
+      "drift_detected": false,
+      "report_version": "v002",
+      "errors": 0,
+      "warnings": 2,
+      "info": 3
+    }
+  ],
+  "fix_history": [
+    {
+      "date": "2026-02-11T00:05:00-05:00",
+      "report_version": "v001",
+      "items_fixed": 3,
+      "version_before": "1.0",
+      "version_after": "1.0.1",
+      "fixes_applied": [
+        "REV-N002: Element type code 25→33",
+        "REV-L001: Glossary link path fixed",
+        "REV-TR001: GAP Analysis updated with 6 F6 gaps"
+      ]
+    }
+  ]
+}

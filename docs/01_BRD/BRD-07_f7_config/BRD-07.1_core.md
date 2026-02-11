@@ -169,9 +169,9 @@ This document covers:
 
 | Benefit ID | Benefit Statement | Baseline | Target | Measurement |
 |------------|-------------------|----------|--------|-------------|
-| BRD.07.25.01 | Reduce configuration change downtime | Minutes (restart) | <5 seconds | Hot-reload completion time |
-| BRD.07.25.02 | Enterprise compliance readiness | 0/6 gaps addressed | 6/6 addressed | Gap remediation tracking |
-| BRD.07.25.03 | Configuration validation coverage | Manual review | 100% schema-validated | Validation pass rate |
+| BRD.07.33.01 | Reduce configuration change downtime | Minutes (restart) | <5 seconds | Hot-reload completion time |
+| BRD.07.33.02 | Enterprise compliance readiness | 0/6 gaps addressed | 6/6 addressed | Gap remediation tracking |
+| BRD.07.33.03 | Configuration validation coverage | Manual review | 100% schema-validated | Validation pass rate |
 
 **Qualitative Benefits**:
 - Consistent configuration patterns across all platform modules

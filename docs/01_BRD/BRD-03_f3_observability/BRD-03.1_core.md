@@ -173,9 +173,9 @@ This document covers:
 
 | Benefit ID | Benefit Statement | Baseline | Target | Measurement |
 |------------|-------------------|----------|--------|-------------|
-| BRD.03.25.01 | Reduce mean time to resolution (MTTR) | Hours (manual correlation) | <15 minutes | Incident resolution tracking |
-| BRD.03.25.02 | Enterprise compliance readiness | 0/7 gaps addressed | 7/7 addressed | Gap remediation tracking |
-| BRD.03.25.03 | Operational visibility coverage | Partial instrumentation | 100% services | Service telemetry audit |
+| BRD.03.33.01 | Reduce mean time to resolution (MTTR) | Hours (manual correlation) | <15 minutes | Incident resolution tracking |
+| BRD.03.33.02 | Enterprise compliance readiness | 0/7 gaps addressed | 7/7 addressed | Gap remediation tracking |
+| BRD.03.33.03 | Operational visibility coverage | Partial instrumentation | 100% services | Service telemetry audit |
 
 **Qualitative Benefits**:
 - Consistent telemetry format across all platform components

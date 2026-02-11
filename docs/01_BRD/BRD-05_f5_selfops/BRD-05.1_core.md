@@ -169,9 +169,9 @@ This document covers:
 
 | Benefit ID | Benefit Statement | Baseline | Target | Measurement |
 |------------|-------------------|----------|--------|-------------|
-| BRD.05.25.01 | Reduce Mean Time to Recovery (MTTR) | Manual (>15 min) | <5 minutes | Incident resolution time |
-| BRD.05.25.02 | Reduce Mean Time to Detect (MTTD) | Minutes | <1 minute | Health check detection latency |
-| BRD.05.25.03 | Enterprise SRE readiness | 0/6 gaps addressed | 6/6 addressed | Gap remediation tracking |
+| BRD.05.33.01 | Reduce Mean Time to Recovery (MTTR) | Manual (>15 min) | <5 minutes | Incident resolution time |
+| BRD.05.33.02 | Reduce Mean Time to Detect (MTTD) | Minutes | <1 minute | Health check detection latency |
+| BRD.05.33.03 | Enterprise SRE readiness | 0/6 gaps addressed | 6/6 addressed | Gap remediation tracking |
 
 **Qualitative Benefits**:
 - Consistent operational posture across all platform components

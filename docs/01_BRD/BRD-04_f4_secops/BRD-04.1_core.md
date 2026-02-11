@@ -170,9 +170,9 @@ This document covers:
 
 | Benefit ID | Benefit Statement | Baseline | Target | Measurement |
 |------------|-------------------|----------|--------|-------------|
-| BRD.04.25.01 | Reduce security incident response time | Hours (manual) | <5 minutes | SIEM alert to response |
-| BRD.04.25.02 | Enterprise compliance readiness | 0/6 gaps addressed | 6/6 addressed | Gap remediation tracking |
-| BRD.04.25.03 | Audit log integrity | No chain verification | 100% tamper-proof | Daily chain validation |
+| BRD.04.33.01 | Reduce security incident response time | Hours (manual) | <5 minutes | SIEM alert to response |
+| BRD.04.33.02 | Enterprise compliance readiness | 0/6 gaps addressed | 6/6 addressed | Gap remediation tracking |
+| BRD.04.33.03 | Audit log integrity | No chain verification | 100% tamper-proof | Daily chain validation |
 
 **Qualitative Benefits**:
 - Consistent security posture across all platform components
