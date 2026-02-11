@@ -33,8 +33,8 @@ custom_fields:
 | Item | Details |
 |------|---------|
 | **Project Name** | AI Cost Monitoring Platform v4.2 - D4 Multi-Cloud Integration |
-| **Document Version** | 1.0 |
-| **Date** | 2026-02-08T00:00:00 |
+| **Document Version** | 1.0.1 |
+| **Date** | 2026-02-11T12:30:00 |
 | **Document Owner** | Chief Architect |
 | **Prepared By** | Antigravity AI |
 | **Status** | Draft |
@@ -49,6 +49,7 @@ The D4 Multi-Cloud Integration Module provides the connectors and abstraction la
 
 | Version | Date | Author | Changes Made | Approver |
 |---------|------|--------|--------------|----------|
+| 1.0.1 | 2026-02-11T12:30:00 | doc-brd-fixer | Fixed 7 broken links (nested folder path correction) | |
 | 1.0 | 2026-02-08T00:00:00 | Antigravity AI | Initial BRD creation from domain specs | |
 
 ---
@@ -59,9 +60,9 @@ The D4 Multi-Cloud Integration Module provides the connectors and abstraction la
 
 This Business Requirements Document (BRD) defines the business requirements for the D4 Multi-Cloud Integration Module. This module handles cloud provider connections, credential management, data ingestion, and cross-provider data normalization.
 
-@ref: [Tenant Onboarding Specification](../00_REF/domain/04-tenant-onboarding.md)
-@ref: [Deployment Infrastructure](../00_REF/domain/07-deployment-infrastructure.md)
-@ref: [ADR-002: GCP-Only First](../00_REF/domain/architecture/adr/002-gcp-only-first.md)
+@ref: [Tenant Onboarding Specification](../../00_REF/domain/04-tenant-onboarding.md)
+@ref: [Deployment Infrastructure](../../00_REF/domain/07-deployment-infrastructure.md)
+@ref: [ADR-002: GCP-Only First](../../00_REF/domain/architecture/adr/002-gcp-only-first.md)
 
 ### 1.2 Document Scope
 
@@ -88,10 +89,10 @@ This document covers:
 
 | Document | Location | Purpose |
 |----------|----------|---------|
-| Tenant Onboarding | [04-tenant-onboarding.md](../00_REF/domain/04-tenant-onboarding.md) | Connection flows |
-| Deployment Infrastructure | [07-deployment-infrastructure.md](../00_REF/domain/07-deployment-infrastructure.md) | Infrastructure patterns |
-| ADR-002 | [002-gcp-only-first.md](../00_REF/domain/architecture/adr/002-gcp-only-first.md) | GCP-first decision |
-| MCP Tool Contracts | [02-mcp-tool-contracts.md](../00_REF/domain/02-mcp-tool-contracts.md) | Cloud API interfaces |
+| Tenant Onboarding | [04-tenant-onboarding.md](../../00_REF/domain/04-tenant-onboarding.md) | Connection flows |
+| Deployment Infrastructure | [07-deployment-infrastructure.md](../../00_REF/domain/07-deployment-infrastructure.md) | Infrastructure patterns |
+| ADR-002 | [002-gcp-only-first.md](../../00_REF/domain/architecture/adr/002-gcp-only-first.md) | GCP-first decision |
+| MCP Tool Contracts | [02-mcp-tool-contracts.md](../../00_REF/domain/02-mcp-tool-contracts.md) | Cloud API interfaces |
 
 ---
 

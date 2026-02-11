@@ -568,7 +568,7 @@ Unified observability foundation enables proactive incident detection, reliabili
 | MTTR | Mean Time To Resolution - Average time to fix incidents |
 | TTFB | Time To First Byte - Initial response latency for LLM calls |
 
-**Master Glossary Reference**: See [BRD-00_GLOSSARY.md](../01_BRD/BRD-00_GLOSSARY.md)
+**Master Glossary Reference**: See [BRD-00_GLOSSARY.md](../../01_BRD/BRD-00_GLOSSARY.md)
 
 ---
 

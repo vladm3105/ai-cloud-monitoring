@@ -33,8 +33,8 @@ custom_fields:
 | Item | Details |
 |------|---------|
 | **Project Name** | AI Cost Monitoring Platform v4.2 - D3 User Experience |
-| **Document Version** | 1.0 |
-| **Date** | 2026-02-08T00:00:00 |
+| **Document Version** | 1.0.1 |
+| **Date** | 2026-02-11T12:30:00 |
 | **Document Owner** | Chief Architect |
 | **Prepared By** | Antigravity AI |
 | **Status** | Draft |
@@ -49,6 +49,7 @@ The D3 User Experience Module provides a hybrid interface combining Grafana dash
 
 | Version | Date | Author | Changes Made | Approver |
 |---------|------|--------|--------------|----------|
+| 1.0.1 | 2026-02-11T12:30:00 | doc-brd-fixer | Fixed 4 broken links (nested folder path correction) | |
 | 1.0 | 2026-02-08T00:00:00 | Antigravity AI | Initial BRD creation from domain specs | |
 
 ---
@@ -59,7 +60,7 @@ The D3 User Experience Module provides a hybrid interface combining Grafana dash
 
 This Business Requirements Document (BRD) defines the business requirements for the D3 User Experience Module. This module delivers the user interface layer combining traditional dashboards with AI-powered conversational interactions.
 
-@ref: [ADR-007: Grafana + AG-UI Hybrid](../00_REF/domain/architecture/adr/007-grafana-plus-agui-hybrid.md)
+@ref: [ADR-007: Grafana + AG-UI Hybrid](../../00_REF/domain/architecture/adr/007-grafana-plus-agui-hybrid.md)
 
 ### 1.2 Document Scope
 
@@ -86,9 +87,9 @@ This document covers:
 
 | Document | Location | Purpose |
 |----------|----------|---------|
-| ADR-007 | [007-grafana-plus-agui-hybrid.md](../00_REF/domain/architecture/adr/007-grafana-plus-agui-hybrid.md) | UI architecture decision |
-| Agent Routing Spec | [03-agent-routing-spec.md](../00_REF/domain/03-agent-routing-spec.md) | A2UI component selection |
-| UX Implementation Guide | [FINAL-implementation-guide.md](../00_REF/UX/FINAL-implementation-guide.md) | Two-phase implementation details |
+| ADR-007 | [007-grafana-plus-agui-hybrid.md](../../00_REF/domain/architecture/adr/007-grafana-plus-agui-hybrid.md) | UI architecture decision |
+| Agent Routing Spec | [03-agent-routing-spec.md](../../00_REF/domain/03-agent-routing-spec.md) | A2UI component selection |
+| UX Implementation Guide | [FINAL-implementation-guide.md](../../00_REF/UX/FINAL-implementation-guide.md) | Two-phase implementation details |
 
 ---
 

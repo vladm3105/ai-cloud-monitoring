@@ -622,7 +622,7 @@ sequenceDiagram
 | Snapshot | Point-in-time capture of configuration state for rollback capability |
 | Targeting | Rules for determining which users/contexts receive a feature flag value |
 
-**Master Glossary Reference**: See [BRD-00_GLOSSARY.md](../01_BRD/BRD-00_GLOSSARY.md)
+**Master Glossary Reference**: See [BRD-00_GLOSSARY.md](../../01_BRD/BRD-00_GLOSSARY.md)
 
 ---
 

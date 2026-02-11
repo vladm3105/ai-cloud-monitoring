@@ -598,7 +598,7 @@ sequenceDiagram
 | PIR | Post-Incident Review - blameless incident analysis document |
 | Chaos Engineering | Controlled failure injection for resilience testing |
 
-**Master Glossary Reference**: See [BRD-00_GLOSSARY.md](../01_BRD/BRD-00_GLOSSARY.md)
+**Master Glossary Reference**: See [BRD-00_GLOSSARY.md](../../01_BRD/BRD-00_GLOSSARY.md)
 
 ---
 

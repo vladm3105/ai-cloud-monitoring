@@ -33,8 +33,8 @@ custom_fields:
 | Item | Details |
 |------|---------|
 | **Project Name** | AI Cost Monitoring Platform v4.2 - D5 Data Persistence |
-| **Document Version** | 1.0 |
-| **Date** | 2026-02-08T00:00:00 |
+| **Document Version** | 1.0.1 |
+| **Date** | 2026-02-11T12:30:00 |
 | **Document Owner** | Chief Architect |
 | **Prepared By** | Antigravity AI |
 | **Status** | Draft |
@@ -45,13 +45,14 @@ custom_fields:
 
 The D5 Data Persistence Module defines the database architecture for the AI Cost Monitoring Platform. MVP uses Firestore for operational data and BigQuery for cost analytics (per ADR-008). Production upgrades to PostgreSQL with Row-Level Security for multi-tenant isolation. This module covers schema design, tenant isolation patterns, data partitioning strategies, audit logging requirements, and data lifecycle management.
 
-@ref: [Database Schema Specification](../00_REF/domain/01-database-schema.md)
-@ref: [ADR-008: Database Strategy](../00_REF/domain/architecture/adr/008-database-strategy-mvp.md)
+@ref: [Database Schema Specification](../../00_REF/domain/01-database-schema.md)
+@ref: [ADR-008: Database Strategy](../../00_REF/domain/architecture/adr/008-database-strategy-mvp.md)
 
 ### Document Revision History
 
 | Version | Date | Author | Changes Made | Approver |
 |---------|------|--------|--------------|----------|
+| 1.0.1 | 2026-02-11T12:30:00 | doc-brd-fixer | Fixed 5 broken links (nested folder path correction) | |
 | 1.0 | 2026-02-08T00:00:00 | Antigravity AI | Initial BRD creation from database schema spec | |
 
 ---
@@ -89,9 +90,9 @@ This document covers:
 
 | Document | Location | Purpose |
 |----------|----------|---------|
-| Database Schema Spec | [01-database-schema.md](../00_REF/domain/01-database-schema.md) | Detailed schema definitions |
-| ADR-008 | [008-database-strategy-mvp.md](../00_REF/domain/architecture/adr/008-database-strategy-mvp.md) | Database strategy decision |
-| ADR-003 | [003-use-bigquery-not-timescaledb.md](../00_REF/domain/architecture/adr/003-use-bigquery-not-timescaledb.md) | Analytics database decision |
+| Database Schema Spec | [01-database-schema.md](../../00_REF/domain/01-database-schema.md) | Detailed schema definitions |
+| ADR-008 | [008-database-strategy-mvp.md](../../00_REF/domain/architecture/adr/008-database-strategy-mvp.md) | Database strategy decision |
+| ADR-003 | [003-use-bigquery-not-timescaledb.md](../../00_REF/domain/architecture/adr/003-use-bigquery-not-timescaledb.md) | Analytics database decision |
 
 ---
 

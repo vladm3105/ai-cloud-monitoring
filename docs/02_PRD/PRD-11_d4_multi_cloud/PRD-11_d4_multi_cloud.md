@@ -594,7 +594,7 @@ Unified multi-cloud integration with automated data normalization enables real-t
 | IAM Role | AWS cross-account access mechanism |
 | Service Principal | Azure identity for programmatic access |
 
-**Master Glossary Reference**: See [BRD-00_GLOSSARY.md](../01_BRD/BRD-00_GLOSSARY.md)
+**Master Glossary Reference**: See [BRD-00_GLOSSARY.md](../../01_BRD/BRD-00_GLOSSARY.md)
 
 ---
 

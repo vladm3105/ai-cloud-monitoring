@@ -578,7 +578,7 @@ Centralized cost analytics with automated anomaly detection and optimization rec
 | Forecast | Prediction of future cost values |
 | Threshold Alert | Alert triggered when metric exceeds defined limit |
 
-**Master Glossary Reference**: See [BRD-00_GLOSSARY.md](../01_BRD/BRD-00_GLOSSARY.md)
+**Master Glossary Reference**: See [BRD-00_GLOSSARY.md](../../01_BRD/BRD-00_GLOSSARY.md)
 
 ---
 

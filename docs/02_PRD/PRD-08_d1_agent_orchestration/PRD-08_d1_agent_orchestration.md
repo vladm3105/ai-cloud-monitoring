@@ -581,7 +581,7 @@ sequenceDiagram
 | LiteLLM | LLM abstraction layer for model switching |
 | MCP | Model Context Protocol for uniform tool interface |
 
-**Master Glossary Reference**: See [BRD-00_GLOSSARY.md](../01_BRD/BRD-00_GLOSSARY.md)
+**Master Glossary Reference**: See [BRD-00_GLOSSARY.md](../../01_BRD/BRD-00_GLOSSARY.md)
 
 ---
 

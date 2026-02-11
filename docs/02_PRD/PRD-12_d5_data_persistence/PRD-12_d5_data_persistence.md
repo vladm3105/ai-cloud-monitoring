@@ -570,7 +570,7 @@ Enterprise-grade data persistence with RLS, partitioning, and automated lifecycl
 | Clustering | Organizing data by columns for query performance |
 | PITR | Point-in-Time Recovery for database backup |
 
-**Master Glossary Reference**: See [BRD-00_GLOSSARY.md](../01_BRD/BRD-00_GLOSSARY.md)
+**Master Glossary Reference**: See [BRD-00_GLOSSARY.md](../../01_BRD/BRD-00_GLOSSARY.md)
 
 ---
 

@@ -1,0 +1,84 @@
+{
+  "schema_version": "1.0",
+  "document_id": "BRD-08",
+  "document_version": "1.0.1",
+  "last_reviewed": "2026-02-11T10:31:11",
+  "reviewer_version": "1.4",
+  "upstream_documents": {
+    "../../00_REF/domain/03-agent-routing-spec.md": {
+      "hash": "sha256:99619229e91544b73e30fb7dcdc533389068b4b6150706b5a5bda06f56f05672",
+      "last_modified": "2026-02-10T20:55:59",
+      "file_size": 0,
+      "version": "1.0",
+      "sections_tracked": []
+    },
+    "../../00_REF/domain/02-mcp-tool-contracts.md": {
+      "hash": "sha256:6495634db0c8c5883fc68bc2c6e30df9c825facf93f4d5de1be5773650adb119",
+      "last_modified": "2026-02-10T20:55:58",
+      "file_size": 0,
+      "version": "1.0",
+      "sections_tracked": []
+    },
+    "../../00_REF/domain/architecture/adr/001-use-mcp-servers.md": {
+      "hash": "sha256:ed5603dafb921171d60225575966f2914724b788e7ec66bc953c60c89ae935a6",
+      "last_modified": "2026-02-10T20:55:09",
+      "file_size": 0,
+      "version": "1.0",
+      "sections_tracked": []
+    },
+    "../../00_REF/domain/architecture/adr/004-cloud-run-not-kubernetes.md": {
+      "hash": "sha256:dee962eda7e9325c82712c18c34e567980ce715b6adfe0bf67e214e0ccc57b26",
+      "last_modified": "2026-02-10T20:55:26",
+      "file_size": 0,
+      "version": "1.0",
+      "sections_tracked": []
+    },
+    "../../00_REF/domain/architecture/adr/005-use-litellm-for-llms.md": {
+      "hash": "sha256:bc7905aacf67c7064eeb242cc9805c96089561152f024b188dcbb0bba826bb96",
+      "last_modified": "2026-02-10T20:55:27",
+      "file_size": 0,
+      "version": "1.0",
+      "sections_tracked": []
+    },
+    "../../00_REF/domain/architecture/adr/009-hybrid-agent-registration-pattern.md": {
+      "hash": "sha256:9bb05f0435c478caa221d22abf2bbeca4994051173a93577528aa8556ba1adc1",
+      "last_modified": "2026-02-10T20:55:40",
+      "file_size": 0,
+      "version": "1.0",
+      "sections_tracked": []
+    },
+    "../../00_REF/domain/architecture/adr/010-agent-card-specification.md": {
+      "hash": "sha256:5abfb10cc05cc24679e64f227b485c245a655255143e6666f05824e0d2e7dda6",
+      "last_modified": "2026-02-10T20:55:41",
+      "file_size": 0,
+      "version": "1.0",
+      "sections_tracked": []
+    }
+  },
+  "review_history": [
+    {
+      "date": "2026-02-11T12:00:00",
+      "score": 85,
+      "drift_detected": false,
+      "report_version": "v001"
+    },
+    {
+      "date": "2026-02-11T12:15:00",
+      "score": 97,
+      "drift_detected": false,
+      "report_version": "v002"
+    },
+    {
+      "date": "2026-02-11T13:00:00",
+      "score": 97,
+      "drift_detected": false,
+      "report_version": "v002-revalidate"
+    },
+    {
+      "date": "2026-02-11T10:31:11",
+      "score": 97,
+      "drift_detected": false,
+      "report_version": "v003"
+    }
+  ]
+}

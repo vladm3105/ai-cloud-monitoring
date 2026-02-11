@@ -33,8 +33,8 @@ custom_fields:
 | Item | Details |
 |------|---------|
 | **Project Name** | AI Cost Monitoring Platform v4.2 - D7 Security |
-| **Document Version** | 1.0 |
-| **Date** | 2026-02-08T00:00:00 |
+| **Document Version** | 1.0.1 |
+| **Date** | 2026-02-11T12:30:00 |
 | **Document Owner** | Chief Architect |
 | **Prepared By** | Antigravity AI |
 | **Status** | Draft |
@@ -45,12 +45,13 @@ custom_fields:
 
 The D7 Security Module defines the security architecture for the AI Cost Monitoring Platform, implementing a defense-in-depth strategy across six layers: API Gateway, Authentication, Authorization, Data Isolation, Credential Management, and Audit Logging. The module extends Foundation F1 (IAM) and F4 (SecOps) with domain-specific security controls for multi-tenant cost monitoring, including cloud credential protection and remediation action approval workflows.
 
-@ref: [Security Auth Design](../00_REF/domain/06-security-auth-design.md)
+@ref: [Security Auth Design](../../00_REF/domain/06-security-auth-design.md)
 
 ### Document Revision History
 
 | Version | Date | Author | Changes Made | Approver |
 |---------|------|--------|--------------|----------|
+| 1.0.1 | 2026-02-11T12:30:00 | doc-brd-fixer | Fixed 3 broken links (nested folder path correction) | |
 | 1.0 | 2026-02-08T00:00:00 | Antigravity AI | Initial BRD creation from security design spec | |
 
 ---
@@ -88,10 +89,10 @@ This document covers:
 
 | Document | Location | Purpose |
 |----------|----------|---------|
-| Security Auth Design | [06-security-auth-design.md](../00_REF/domain/06-security-auth-design.md) | Detailed security design |
+| Security Auth Design | [06-security-auth-design.md](../../00_REF/domain/06-security-auth-design.md) | Detailed security design |
 | BRD-01 F1 IAM | [BRD-01.0_index.md](BRD-01_f1_iam/BRD-01.0_index.md) | Foundation IAM |
 | BRD-04 F4 SecOps | [BRD-04.0_index.md](BRD-04_f4_secops/BRD-04.0_index.md) | Foundation SecOps |
-| ADR-009 | [009-hybrid-agent-registration-pattern.md](../00_REF/domain/architecture/adr/009-hybrid-agent-registration-pattern.md) | Agent security |
+| ADR-009 | [009-hybrid-agent-registration-pattern.md](../../00_REF/domain/architecture/adr/009-hybrid-agent-registration-pattern.md) | Agent security |
 
 ---
 

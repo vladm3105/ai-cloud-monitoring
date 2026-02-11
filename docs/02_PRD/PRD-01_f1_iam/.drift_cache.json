@@ -1,0 +1,46 @@
+{
+  "schema_version": "1.0",
+  "document_id": "PRD-01",
+  "document_version": "1.0",
+  "last_reviewed": "2026-02-11T12:45:00",
+  "reviewer_version": "2.3",
+  "upstream_documents": {
+    "../../00_REF/foundation/F1_IAM_Technical_Specification.md": {
+      "hash": "sha256:25450a36e71eddfd7a676af1d276c0b851548a339e50b26d7edc1d25fab719d5",
+      "last_modified": "2026-02-10T15:34:26",
+      "file_size": 50781,
+      "version": "1.0",
+      "sections_tracked": ["#authentication", "#authorization", "#token-management"]
+    },
+    "../../00_REF/foundation/GAP_Foundation_Module_Gap_Analysis.md": {
+      "hash": "sha256:116261e7aa02debf21de83ddfa89ebe59365d05d05ed0d6d7519874d6e255ed5",
+      "last_modified": "2026-02-10T20:28:53",
+      "file_size": 22268,
+      "version": "1.0",
+      "sections_tracked": ["#f1-iam-gaps"]
+    },
+    "../../01_BRD/BRD-01_f1_iam/BRD-01.1_core.md": {
+      "hash": "sha256:4f26509c55fa84b85f20039f282cf1e54138aec5a6ae19681f31fa614abef4ce",
+      "last_modified": "2026-02-10T15:33:53",
+      "file_size": 13350,
+      "version": "1.0.1",
+      "sections_tracked": ["#business-objectives", "#stakeholders"]
+    },
+    "../../01_BRD/BRD-01_f1_iam/BRD-01.2_requirements.md": {
+      "hash": "sha256:37653bf2b43dd2adb9b4ac3a799aad68e016027a5ac4d1cf1ae0cc2b2f05f823",
+      "last_modified": "2026-02-08T13:44:26",
+      "file_size": 12815,
+      "version": "1.0.1",
+      "sections_tracked": ["#functional-requirements"]
+    }
+  },
+  "review_history": [
+    {
+      "date": "2026-02-11T12:45:00",
+      "score": 94,
+      "drift_detected": false,
+      "report_version": "v001"
+    }
+  ],
+  "deprecated_items": []
+}

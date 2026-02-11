@@ -33,8 +33,8 @@ custom_fields:
 | Item | Details |
 |------|---------|
 | **Project Name** | AI Cost Monitoring Platform v4.2 - D1 Agent Orchestration |
-| **Document Version** | 1.0 |
-| **Date** | 2026-02-08T00:00:00 |
+| **Document Version** | 1.0.1 |
+| **Date** | 2026-02-11T12:00:00 |
 | **Document Owner** | Chief Architect |
 | **Prepared By** | Antigravity AI |
 | **Status** | Draft |
@@ -49,6 +49,7 @@ The D1 Agent Orchestration Module implements a multi-agent AI architecture for i
 
 | Version | Date | Author | Changes Made | Approver |
 |---------|------|--------|--------------|----------|
+| 1.0.1 | 2026-02-11T12:00:00 | doc-brd-fixer | Fixed 7 broken links (nested folder path correction) | |
 | 1.0 | 2026-02-08T00:00:00 | Antigravity AI | Initial BRD creation from domain specs | |
 
 ---
@@ -59,8 +60,8 @@ The D1 Agent Orchestration Module implements a multi-agent AI architecture for i
 
 This Business Requirements Document (BRD) defines the business requirements for the D1 Agent Orchestration & MCP Module. This module handles AI agent coordination, intent routing, multi-cloud orchestration, and tool execution for the cost monitoring platform.
 
-@ref: [Agent Routing Specification](../00_REF/domain/03-agent-routing-spec.md)
-@ref: [MCP Tool Contracts](../00_REF/domain/02-mcp-tool-contracts.md)
+@ref: [Agent Routing Specification](../../00_REF/domain/03-agent-routing-spec.md)
+@ref: [MCP Tool Contracts](../../00_REF/domain/02-mcp-tool-contracts.md)
 
 ### 1.2 Document Scope
 
@@ -87,13 +88,13 @@ This document covers:
 
 | Document | Location | Purpose |
 |----------|----------|---------|
-| Agent Routing Spec | [03-agent-routing-spec.md](../00_REF/domain/03-agent-routing-spec.md) | Agent communication patterns |
-| MCP Tool Contracts | [02-mcp-tool-contracts.md](../00_REF/domain/02-mcp-tool-contracts.md) | Tool interface definitions |
-| ADR-001 | [001-use-mcp-servers.md](../00_REF/domain/architecture/adr/001-use-mcp-servers.md) | MCP architecture decision |
-| ADR-004 | [004-cloud-run-not-kubernetes.md](../00_REF/domain/architecture/adr/004-cloud-run-not-kubernetes.md) | Cloud Run deployment decision |
-| ADR-005 | [005-use-litellm-for-llms.md](../00_REF/domain/architecture/adr/005-use-litellm-for-llms.md) | LLM abstraction layer |
-| ADR-009 | [009-hybrid-agent-registration-pattern.md](../00_REF/domain/architecture/adr/009-hybrid-agent-registration-pattern.md) | Agent registration |
-| ADR-010 | [010-agent-card-specification.md](../00_REF/domain/architecture/adr/010-agent-card-specification.md) | AgentCard specification |
+| Agent Routing Spec | [03-agent-routing-spec.md](../../00_REF/domain/03-agent-routing-spec.md) | Agent communication patterns |
+| MCP Tool Contracts | [02-mcp-tool-contracts.md](../../00_REF/domain/02-mcp-tool-contracts.md) | Tool interface definitions |
+| ADR-001 | [001-use-mcp-servers.md](../../00_REF/domain/architecture/adr/001-use-mcp-servers.md) | MCP architecture decision |
+| ADR-004 | [004-cloud-run-not-kubernetes.md](../../00_REF/domain/architecture/adr/004-cloud-run-not-kubernetes.md) | Cloud Run deployment decision |
+| ADR-005 | [005-use-litellm-for-llms.md](../../00_REF/domain/architecture/adr/005-use-litellm-for-llms.md) | LLM abstraction layer |
+| ADR-009 | [009-hybrid-agent-registration-pattern.md](../../00_REF/domain/architecture/adr/009-hybrid-agent-registration-pattern.md) | Agent registration |
+| ADR-010 | [010-agent-card-specification.md](../../00_REF/domain/architecture/adr/010-agent-card-specification.md) | AgentCard specification |
 
 ---
 

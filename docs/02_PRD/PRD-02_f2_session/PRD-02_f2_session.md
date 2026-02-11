@@ -603,7 +603,7 @@ sequenceDiagram
 | Context Injection | Automatic assembly and delivery of enriched context to consumers |
 | Device Fingerprint | Browser/device identification for security tracking |
 
-**Master Glossary Reference**: See [BRD-00_GLOSSARY.md](../01_BRD/BRD-00_GLOSSARY.md)
+**Master Glossary Reference**: See [BRD-00_GLOSSARY.md](../../01_BRD/BRD-00_GLOSSARY.md)
 
 ---
 

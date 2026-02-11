@@ -33,8 +33,8 @@ custom_fields:
 | Item | Details |
 |------|---------|
 | **Project Name** | AI Cost Monitoring Platform v4.2 - D6 REST APIs |
-| **Document Version** | 1.0 |
-| **Date** | 2026-02-08T00:00:00 |
+| **Document Version** | 1.0.1 |
+| **Date** | 2026-02-11T12:30:00 |
 | **Document Owner** | Chief Architect |
 | **Prepared By** | Antigravity AI |
 | **Status** | Draft |
@@ -45,12 +45,13 @@ custom_fields:
 
 The D6 REST APIs Module defines the HTTP API surfaces for the AI Cost Monitoring Platform. The platform exposes four distinct API surfaces: (1) AG-UI Streaming API for conversational AI, (2) REST Admin API for dashboard and management, (3) Webhook Ingestion API for cloud provider events, and (4) A2A Gateway API for external agent integration. Each surface has specific authentication, rate limiting, and response format requirements.
 
-@ref: [API Endpoint Specification](../00_REF/domain/05-api-endpoint-spec.md)
+@ref: [API Endpoint Specification](../../00_REF/domain/05-api-endpoint-spec.md)
 
 ### Document Revision History
 
 | Version | Date | Author | Changes Made | Approver |
 |---------|------|--------|--------------|----------|
+| 1.0.1 | 2026-02-11T12:30:00 | doc-brd-fixer | Fixed 4 broken links (nested folder path correction) | |
 | 1.0 | 2026-02-08T00:00:00 | Antigravity AI | Initial BRD creation from API endpoint spec | |
 
 ---
@@ -88,9 +89,9 @@ This document covers:
 
 | Document | Location | Purpose |
 |----------|----------|---------|
-| API Endpoint Spec | [05-api-endpoint-spec.md](../00_REF/domain/05-api-endpoint-spec.md) | Detailed endpoint definitions |
-| Agent Routing Spec | [03-agent-routing-spec.md](../00_REF/domain/03-agent-routing-spec.md) | AG-UI protocol |
-| Security Auth Design | [06-security-auth-design.md](../00_REF/domain/06-security-auth-design.md) | Authentication methods |
+| API Endpoint Spec | [05-api-endpoint-spec.md](../../00_REF/domain/05-api-endpoint-spec.md) | Detailed endpoint definitions |
+| Agent Routing Spec | [03-agent-routing-spec.md](../../00_REF/domain/03-agent-routing-spec.md) | AG-UI protocol |
+| Security Auth Design | [06-security-auth-design.md](../../00_REF/domain/06-security-auth-design.md) | Authentication methods |
 
 ---
 

@@ -659,7 +659,7 @@ sequenceDiagram
 | WAF | Web Application Firewall with OWASP rule sets |
 | Cloud Armor | GCP-managed WAF and DDoS protection service |
 
-**Master Glossary Reference**: See [BRD-00_GLOSSARY.md](../01_BRD/BRD-00_GLOSSARY.md)
+**Master Glossary Reference**: See [BRD-00_GLOSSARY.md](../../01_BRD/BRD-00_GLOSSARY.md)
 
 ---
 

@@ -591,7 +591,7 @@ sequenceDiagram
 | WAF | Web Application Firewall for HTTP traffic filtering |
 | Zero Trust | Security model that validates every request, assumes breach |
 
-**Master Glossary Reference**: See [BRD-00_GLOSSARY.md](../01_BRD/BRD-00_GLOSSARY.md)
+**Master Glossary Reference**: See [BRD-00_GLOSSARY.md](../../01_BRD/BRD-00_GLOSSARY.md)
 
 ---
 

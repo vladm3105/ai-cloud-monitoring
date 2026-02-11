@@ -558,7 +558,7 @@ Hybrid interface combining pre-built dashboards with conversational AI enables b
 | SSE | Server-Sent Events for real-time streaming |
 | shadcn/ui | React component library built on Radix UI |
 
-**Master Glossary Reference**: See [BRD-00_GLOSSARY.md](../01_BRD/BRD-00_GLOSSARY.md)
+**Master Glossary Reference**: See [BRD-00_GLOSSARY.md](../../01_BRD/BRD-00_GLOSSARY.md)
 
 ---
 

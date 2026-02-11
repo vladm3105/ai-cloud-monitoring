@@ -33,8 +33,8 @@ custom_fields:
 | Item | Details |
 |------|---------|
 | **Project Name** | AI Cost Monitoring Platform v4.2 - D2 Cost Analytics |
-| **Document Version** | 1.0 |
-| **Date** | 2026-02-08T00:00:00 |
+| **Document Version** | 1.0.1 |
+| **Date** | 2026-02-11T12:30:00 |
 | **Document Owner** | Chief Architect |
 | **Prepared By** | Antigravity AI |
 | **Status** | Draft |
@@ -49,6 +49,7 @@ The D2 Cloud Cost Analytics Module provides the data foundation for intelligent 
 
 | Version | Date | Author | Changes Made | Approver |
 |---------|------|--------|--------------|----------|
+| 1.0.1 | 2026-02-11T12:30:00 | doc-brd-fixer | Fixed 7 broken links (nested folder path correction) | |
 | 1.0 | 2026-02-08T00:00:00 | Antigravity AI | Initial BRD creation from domain specs | |
 
 ---
@@ -59,8 +60,8 @@ The D2 Cloud Cost Analytics Module provides the data foundation for intelligent 
 
 This Business Requirements Document (BRD) defines the business requirements for the D2 Cloud Cost Analytics Module. This module handles cost data ingestion, storage, analysis, and optimization recommendations for multi-cloud environments.
 
-@ref: [Cost Model Specification](../00_REF/domain/08-cost-model.md)
-@ref: [Database Schema](../00_REF/domain/01-database-schema.md)
+@ref: [Cost Model Specification](../../00_REF/domain/08-cost-model.md)
+@ref: [Database Schema](../../00_REF/domain/01-database-schema.md)
 
 ### 1.2 Document Scope
 
@@ -88,11 +89,11 @@ This document covers:
 
 | Document | Location | Purpose |
 |----------|----------|---------|
-| Cost Model Spec | [08-cost-model.md](../00_REF/domain/08-cost-model.md) | Cost calculation methodology |
-| Database Schema | [01-database-schema.md](../00_REF/domain/01-database-schema.md) | Data model definitions |
-| ADR-003 | [003-use-bigquery-not-timescaledb.md](../00_REF/domain/architecture/adr/003-use-bigquery-not-timescaledb.md) | BigQuery decision |
-| ADR-006 | [006-cloud-native-task-queues-not-celery.md](../00_REF/domain/architecture/adr/006-cloud-native-task-queues-not-celery.md) | Data pipeline scheduling |
-| ADR-008 | [008-database-strategy-mvp.md](../00_REF/domain/architecture/adr/008-database-strategy-mvp.md) | Database strategy |
+| Cost Model Spec | [08-cost-model.md](../../00_REF/domain/08-cost-model.md) | Cost calculation methodology |
+| Database Schema | [01-database-schema.md](../../00_REF/domain/01-database-schema.md) | Data model definitions |
+| ADR-003 | [003-use-bigquery-not-timescaledb.md](../../00_REF/domain/architecture/adr/003-use-bigquery-not-timescaledb.md) | BigQuery decision |
+| ADR-006 | [006-cloud-native-task-queues-not-celery.md](../../00_REF/domain/architecture/adr/006-cloud-native-task-queues-not-celery.md) | Data pipeline scheduling |
+| ADR-008 | [008-database-strategy-mvp.md](../../00_REF/domain/architecture/adr/008-database-strategy-mvp.md) | Database strategy |
 
 ---
 
