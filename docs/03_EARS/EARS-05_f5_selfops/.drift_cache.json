@@ -1,0 +1,130 @@
+{
+  "schema_version": "1.0",
+  "document_id": "EARS-05",
+  "document_path": "docs/03_EARS/EARS-05_f5_selfops/EARS-05_f5_selfops.md",
+  "last_reviewed": "2026-02-11T16:00:00",
+  "review_report": "docs/03_EARS/EARS-05_f5_selfops/EARS-05.R_review_report_v001.md",
+  "document_hash": null,
+  "upstream_dependencies": {
+    "brd": {
+      "document_id": "BRD-05",
+      "references": [
+        "BRD.05.01.01",
+        "BRD.05.01.02",
+        "BRD.05.01.03",
+        "BRD.05.01.05",
+        "BRD.05.01.06",
+        "BRD.05.01.07",
+        "BRD.05.02.01",
+        "BRD.05.02.02",
+        "BRD.05.02.03",
+        "BRD.05.02.04",
+        "BRD.05.07.01",
+        "BRD.05.07.03",
+        "BRD.05.07.04",
+        "BRD.05.07.05"
+      ],
+      "last_verified": "2026-02-11T16:00:00"
+    },
+    "prd": {
+      "document_id": "PRD-05",
+      "references": [
+        "PRD.05.01.01",
+        "PRD.05.01.02",
+        "PRD.05.01.03",
+        "PRD.05.01.04",
+        "PRD.05.01.05",
+        "PRD.05.01.06"
+      ],
+      "last_verified": "2026-02-11T16:00:00"
+    }
+  },
+  "downstream_artifacts": {
+    "bdd": {
+      "document_id": "BDD-05",
+      "status": "Pending"
+    },
+    "adr": {
+      "document_id": "ADR-05",
+      "status": "Pending"
+    },
+    "sys": {
+      "document_id": "SYS-05",
+      "status": "Pending"
+    }
+  },
+  "ears_requirements": {
+    "event_driven": {
+      "range": "001-099",
+      "count": 18
+    },
+    "state_driven": {
+      "range": "101-199",
+      "count": 7
+    },
+    "unwanted_behavior": {
+      "range": "201-299",
+      "count": 10
+    },
+    "ubiquitous": {
+      "range": "401-499",
+      "count": 6
+    },
+    "total": 41
+  },
+  "quality_attributes": {
+    "performance": 7,
+    "security": 4,
+    "reliability": 6,
+    "scalability": 4
+  },
+  "thresholds_referenced": 17,
+  "bdd_ready_score": {
+    "total": 90,
+    "target": 90,
+    "status": "PASS",
+    "breakdown": {
+      "requirements_clarity": {
+        "score": 36,
+        "max": 40,
+        "components": {
+          "ears_syntax_compliance": 20,
+          "statement_atomicity": 12,
+          "quantifiable_constraints": 4
+        }
+      },
+      "testability": {
+        "score": 32,
+        "max": 35,
+        "components": {
+          "bdd_translation_ready": 15,
+          "observable_verification": 10,
+          "edge_cases_specified": 7
+        }
+      },
+      "quality_attributes": {
+        "score": 14,
+        "max": 15,
+        "components": {
+          "performance_targets": 5,
+          "security_requirements": 5,
+          "reliability_targets": 4
+        }
+      },
+      "strategic_alignment": {
+        "score": 8,
+        "max": 10,
+        "components": {
+          "business_objective_links": 5,
+          "implementation_paths": 3
+        }
+      }
+    }
+  },
+  "validation_issues": [],
+  "review_metadata": {
+    "reviewer": "Claude Opus 4.5 (Coder Agent)",
+    "review_type": "automated",
+    "review_date": "2026-02-11T16:00:00"
+  }
+}

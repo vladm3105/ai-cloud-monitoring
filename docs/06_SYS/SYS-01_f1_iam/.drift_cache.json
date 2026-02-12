@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0",
+  "document_id": "SYS-01",
+  "document_version": "1.0",
+  "last_reviewed": "2026-02-11T17:30:00",
+  "reviewer_version": "2.1",
+  "upstream_documents": {
+    "../../05_ADR/ADR-01_f1_iam/ADR-01_f1_iam.md": {
+      "hash": "sha256:7fe2655d104f7305e2b0a9f5cb6db2377e84b689e252940a0bc641be7b163405",
+      "last_modified": "2026-02-10T15:34:00",
+      "file_size": 24527,
+      "version": "1.0"
+    }
+  },
+  "review_history": [{"date": "2026-02-11T17:30:00", "score": 90, "drift_detected": false, "report_version": "v001"}]
+}

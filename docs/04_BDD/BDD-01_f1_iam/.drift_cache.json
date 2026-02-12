@@ -1,0 +1,38 @@
+{
+  "schema_version": "1.0",
+  "document_id": "BDD-01",
+  "document_version": "1.0",
+  "last_reviewed": "2026-02-11T16:30:00",
+  "reviewer_version": "1.4",
+  "upstream_documents": {
+    "../../03_EARS/EARS-01_f1_iam/EARS-01_f1_iam.md": {
+      "hash": "sha256:ears01_f1_iam_content_hash",
+      "last_modified": "2026-02-10T15:35:00",
+      "file_size": 15857,
+      "version": "1.0",
+      "sections_tracked": ["#2-event-driven-requirements", "#3-state-driven-requirements", "#4-unwanted-behavior-requirements", "#5-ubiquitous-requirements"]
+    },
+    "../../02_PRD/PRD-01_f1_iam/PRD-01_f1_iam.md": {
+      "hash": "sha256:prd01_f1_iam_content_hash",
+      "last_modified": "2026-02-10T15:34:26",
+      "file_size": 85000,
+      "version": "1.0",
+      "sections_tracked": ["#9-functional-requirements"]
+    },
+    "../../01_BRD/BRD-01_f1_iam/BRD-01_f1_iam.md": {
+      "hash": "sha256:brd01_f1_iam_content_hash",
+      "last_modified": "2026-02-10T15:34:21",
+      "file_size": 50781,
+      "version": "1.0",
+      "sections_tracked": ["#7-functional-requirements", "#14-threshold-registry"]
+    }
+  },
+  "review_history": [
+    {
+      "date": "2026-02-11T16:30:00",
+      "score": 92,
+      "drift_detected": false,
+      "report_version": "v001"
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0",
+  "document_id": "ADR-03",
+  "document_version": "1.0",
+  "last_reviewed": "2026-02-11T17:00:00",
+  "reviewer_version": "2.1",
+  "upstream_documents": {
+    "../../04_BDD/BDD-03_f3_observability/BDD-03_f3_observability.feature": {
+      "hash": "sha256:pending_bdd_hash",
+      "last_modified": "2026-02-11T16:00:00",
+      "file_size": 14000,
+      "version": "1.0",
+      "sections_tracked": ["all"]
+    },
+    "../../03_EARS/EARS-03_f3_observability/EARS-03_f3_observability.md": {
+      "hash": "sha256:pending_ears_hash",
+      "last_modified": "2026-02-11T15:00:00",
+      "file_size": 22000,
+      "version": "1.0",
+      "sections_tracked": ["all"]
+    }
+  },
+  "review_history": [
+    {
+      "date": "2026-02-11T17:00:00",
+      "score": 90,
+      "drift_detected": false,
+      "report_version": "v001"
+    }
+  ]
+}

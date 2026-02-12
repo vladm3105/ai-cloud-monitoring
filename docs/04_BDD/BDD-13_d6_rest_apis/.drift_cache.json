@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0",
+  "document_id": "BDD-13",
+  "document_version": "1.0",
+  "last_reviewed": "2026-02-11T16:50:00",
+  "reviewer_version": "2.1",
+  "upstream_documents": {
+    "../../03_EARS/EARS-13_d6_rest_apis/EARS-13_d6_rest_apis.md": {
+      "hash": "sha256:ears13_d6_rest_apis_content_hash",
+      "last_modified": "2026-02-10T15:35:00",
+      "file_size": 23573,
+      "version": "1.0",
+      "sections_tracked": ["#2-event-driven-requirements", "#3-state-driven-requirements"]
+    },
+    "../../02_PRD/PRD-13_d6_rest_apis/PRD-13_d6_rest_apis.md": {
+      "hash": "sha256:prd13_d6_rest_apis_content_hash",
+      "last_modified": "2026-02-10T15:34:26",
+      "file_size": 41000,
+      "version": "1.0",
+      "sections_tracked": ["#9-functional-requirements"]
+    }
+  },
+  "review_history": [
+    {
+      "date": "2026-02-11T16:50:00",
+      "score": 90,
+      "drift_detected": false,
+      "report_version": "v001"
+    }
+  ]
+}

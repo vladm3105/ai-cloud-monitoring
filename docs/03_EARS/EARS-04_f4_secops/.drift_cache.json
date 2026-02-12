@@ -1,0 +1,53 @@
+{
+  "schema_version": "1.0",
+  "document_id": "EARS-04",
+  "document_path": "docs/03_EARS/EARS-04_f4_secops/EARS-04_f4_secops.md",
+  "last_reviewed": "2026-02-11T16:00:00",
+  "review_version": "v001",
+  "document_metadata": {
+    "title": "EARS-04: F4 Security Operations Requirements",
+    "module_id": "F4",
+    "module_name": "Security Operations (SecOps)",
+    "layer": 3,
+    "artifact_type": "EARS",
+    "development_status": "draft",
+    "bdd_ready_score": 90
+  },
+  "traceability": {
+    "upstream": {
+      "brd": ["BRD-04"],
+      "prd": ["PRD-04"]
+    },
+    "downstream": ["BDD-04", "ADR-04", "SYS-04"]
+  },
+  "requirements_summary": {
+    "total_count": 51,
+    "event_driven": 21,
+    "state_driven": 7,
+    "unwanted_behavior": 13,
+    "ubiquitous": 10,
+    "quality_attributes": 24
+  },
+  "ears_patterns": {
+    "WHEN-THE-SHALL": 21,
+    "WHILE-THE-SHALL": 7,
+    "IF-THEN-SHALL": 13,
+    "THE-SHALL": 10
+  },
+  "validation_status": {
+    "ears_syntax_compliant": true,
+    "metadata_present": true,
+    "traceability_tags_present": true,
+    "bdd_ready_score": 90,
+    "overall_status": "PASS"
+  },
+  "review_history": [
+    {
+      "version": "v001",
+      "date": "2026-02-11T16:00:00",
+      "reviewer": "Coder Agent (Claude)",
+      "status": "PASS",
+      "bdd_ready_score": 90
+    }
+  ]
+}

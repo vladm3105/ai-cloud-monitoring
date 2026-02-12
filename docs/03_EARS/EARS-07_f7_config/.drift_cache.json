@@ -1,0 +1,67 @@
+{
+  "schema_version": "1.0",
+  "document_id": "EARS-07",
+  "document_path": "docs/03_EARS/EARS-07_f7_config/EARS-07_f7_config.md",
+  "last_reviewed": "2026-02-11T16:00:00",
+  "review_metadata": {
+    "reviewer": "Claude Opus 4.5 (Coder Agent)",
+    "review_type": "comprehensive",
+    "review_version": "v001"
+  },
+  "document_hash": {
+    "algorithm": "content_fingerprint",
+    "sections_count": 9,
+    "requirements_count": 42,
+    "quality_attributes_count": 21
+  },
+  "ears_patterns": {
+    "event_driven": {
+      "pattern": "WHEN...SHALL",
+      "count": 17,
+      "range": "001-017"
+    },
+    "state_driven": {
+      "pattern": "WHILE...SHALL",
+      "count": 7,
+      "range": "101-107"
+    },
+    "unwanted_behavior": {
+      "pattern": "IF...SHALL",
+      "count": 11,
+      "range": "201-211"
+    },
+    "ubiquitous": {
+      "pattern": "THE...SHALL",
+      "count": 7,
+      "range": "401-407"
+    }
+  },
+  "traceability_tags": {
+    "brd_reference": "BRD-07",
+    "prd_reference": "PRD-07",
+    "depends": ["PRD-06"],
+    "discoverability": ["EARS-01", "EARS-02", "EARS-03", "EARS-04", "EARS-05"]
+  },
+  "bdd_ready_score": {
+    "total": 90,
+    "target": 90,
+    "status": "PASS",
+    "breakdown": {
+      "requirements_clarity": 36,
+      "testability": 32,
+      "quality_attributes": 14,
+      "strategic_alignment": 8
+    }
+  },
+  "validation_results": {
+    "syntax_compliance": "PASS",
+    "metadata_compliance": "PASS",
+    "traceability_compliance": "PASS",
+    "overall_status": "PASS"
+  },
+  "downstream_artifacts": {
+    "BDD-07": "Pending",
+    "ADR-07": "Pending",
+    "SYS-07": "Pending"
+  }
+}

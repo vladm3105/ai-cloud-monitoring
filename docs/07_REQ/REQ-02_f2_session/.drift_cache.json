@@ -1,0 +1,9 @@
+{
+  "schema_version": "1.0",
+  "document_id": "REQ-02",
+  "document_version": "1.0",
+  "last_reviewed": "2026-02-11T18:00:00",
+  "reviewer_version": "2.1",
+  "upstream_documents": {"../../06_SYS/SYS-02_f2_session/SYS-02_f2_session.md": {"hash": "sha256:pending", "version": "1.0"}},
+  "review_history": [{"date": "2026-02-11T18:00:00", "score": 90, "report_version": "v001"}]
+}

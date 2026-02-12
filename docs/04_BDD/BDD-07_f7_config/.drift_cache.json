@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0",
+  "document_id": "BDD-07",
+  "document_version": "1.0",
+  "last_reviewed": "2026-02-11T16:40:00",
+  "reviewer_version": "2.1",
+  "upstream_documents": {
+    "../../03_EARS/EARS-07_f7_config/EARS-07_f7_config.md": {
+      "hash": "sha256:59037b33d3ae13ce3b9a962c877685cc4dbb89f8ab9cd5b741ada56e747d3701",
+      "last_modified": "2026-02-10T15:35:00",
+      "file_size": 27934,
+      "version": "1.0",
+      "sections_tracked": ["#2-event-driven-requirements", "#3-state-driven-requirements"]
+    },
+    "../../02_PRD/PRD-07_f7_config/PRD-07_f7_config.md": {
+      "hash": "sha256:1077fb99a42cff5d89ab81647a0fda6d4fa5b1ac2fab0934d6a62e28abe14a24",
+      "last_modified": "2026-02-10T15:34:26",
+      "file_size": 31978,
+      "version": "1.0",
+      "sections_tracked": ["#9-functional-requirements"]
+    }
+  },
+  "review_history": [
+    {
+      "date": "2026-02-11T16:40:00",
+      "score": 90,
+      "drift_detected": false,
+      "report_version": "v001"
+    }
+  ]
+}

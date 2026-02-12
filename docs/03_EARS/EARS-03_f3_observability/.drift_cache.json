@@ -1,0 +1,38 @@
+{
+  "schema_version": "1.0",
+  "document_id": "EARS-03",
+  "last_reviewed": "2026-02-11T16:00:00",
+  "document_path": "/opt/data/ai-cloud_cost-monitoring/docs/03_EARS/EARS-03_f3_observability/EARS-03_f3_observability.md",
+  "module_id": "F3",
+  "module_name": "Observability",
+  "validation_summary": {
+    "ears_syntax_compliance": true,
+    "metadata_present": true,
+    "traceability_tags_present": true,
+    "bdd_ready_score": 90,
+    "bdd_ready_threshold": 90,
+    "overall_status": "PASS"
+  },
+  "ears_pattern_counts": {
+    "when_the_shall": 15,
+    "while_the_shall": 8,
+    "if_then_shall": 12,
+    "the_shall": 8,
+    "total_requirements": 43
+  },
+  "quality_attribute_counts": {
+    "performance": 6,
+    "security": 5,
+    "reliability": 5,
+    "scalability": 3,
+    "total": 19
+  },
+  "threshold_references": 18,
+  "upstream_references": {
+    "brd_count": 15,
+    "prd_count": 19
+  },
+  "checksums": {
+    "content_hash": "sha256:ears03_f3_observability_v1.0"
+  }
+}

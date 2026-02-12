@@ -1,0 +1,47 @@
+{
+  "schema_version": "1.0",
+  "document_id": "EARS-02",
+  "document_path": "/opt/data/ai-cloud_cost-monitoring/docs/03_EARS/EARS-02_f2_session/EARS-02_f2_session.md",
+  "last_reviewed": "2026-02-11T16:00:00",
+  "review_status": "PASS",
+  "bdd_ready_score": 90,
+  "bdd_ready_target": 90,
+  "ears_pattern_counts": {
+    "when_the_shall": 23,
+    "while_the_shall": 7,
+    "if_then_shall": 10,
+    "the_shall": 7
+  },
+  "total_requirements": {
+    "behavioral": 47,
+    "quality_attributes": 27,
+    "total": 74
+  },
+  "traceability": {
+    "brd_tags_present": true,
+    "prd_tags_present": true,
+    "upstream_brd": "BRD-02",
+    "upstream_prd": "PRD-02"
+  },
+  "validation_checks": {
+    "ears_syntax_compliance": {
+      "score": 100,
+      "status": "PASS"
+    },
+    "metadata_present": {
+      "score": 100,
+      "status": "PASS"
+    },
+    "traceability_tags": {
+      "score": 100,
+      "status": "PASS"
+    },
+    "bdd_ready_score": {
+      "score": 90,
+      "target": 90,
+      "status": "PASS"
+    }
+  },
+  "reviewer": "Coder Agent",
+  "review_version": "v001"
+}

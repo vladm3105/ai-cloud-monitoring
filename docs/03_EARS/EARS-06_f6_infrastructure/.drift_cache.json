@@ -1,0 +1,60 @@
+{
+  "schema_version": "1.0",
+  "document_id": "EARS-06",
+  "document_path": "docs/03_EARS/EARS-06_f6_infrastructure/EARS-06_f6_infrastructure.md",
+  "last_reviewed": "2026-02-11T16:00:00",
+  "reviewer": "Coder Agent (Claude)",
+  "document_metadata": {
+    "title": "EARS-06: F6 Infrastructure Requirements",
+    "module_id": "F6",
+    "module_name": "Infrastructure",
+    "module_type": "Foundation",
+    "layer": 3,
+    "artifact_type": "EARS",
+    "status": "Draft",
+    "version": "1.0",
+    "bdd_ready_score": 90
+  },
+  "upstream_references": {
+    "brd": ["BRD-06"],
+    "prd": ["PRD-06"]
+  },
+  "downstream_artifacts": {
+    "bdd": ["BDD-06"],
+    "adr": ["ADR-06"],
+    "sys": ["SYS-06"]
+  },
+  "ears_pattern_counts": {
+    "event_driven": 22,
+    "state_driven": 10,
+    "unwanted_behavior": 15,
+    "ubiquitous": 8,
+    "total": 55
+  },
+  "traceability_validation": {
+    "brd_tag_present": true,
+    "prd_tag_present": true,
+    "depends_tag_present": true,
+    "discoverability_tag_present": true,
+    "threshold_references": 18
+  },
+  "quality_attributes": {
+    "performance_requirements": 10,
+    "security_requirements": 6,
+    "reliability_requirements": 6,
+    "scalability_requirements": 5
+  },
+  "validation_status": {
+    "ears_syntax_compliance": "PASS",
+    "metadata_compliance": "PASS",
+    "traceability_compliance": "PASS",
+    "bdd_ready_threshold_met": true,
+    "overall_status": "PASS"
+  },
+  "drift_indicators": {
+    "content_hash": "ears06_f6_infra_v1.0_20260211",
+    "last_modification_check": "2026-02-11T16:00:00",
+    "upstream_sync_status": "synchronized",
+    "downstream_generation_pending": ["BDD-06", "ADR-06", "SYS-06"]
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "schema_version": "1.0",
+  "document_id": "ADR-10",
+  "document_version": "1.0",
+  "last_reviewed": "2026-02-11T17:15:00",
+  "reviewer_version": "2.1",
+  "upstream_documents": {"../../04_BDD/BDD-10_d3_user_experience/BDD-10_d3_user_experience.feature": {"hash": "sha256:pending", "version": "1.0"}},
+  "review_history": [{"date": "2026-02-11T17:15:00", "score": 90, "report_version": "v001"}]
+}

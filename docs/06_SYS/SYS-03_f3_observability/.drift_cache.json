@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0",
+  "document_id": "SYS-03",
+  "document_version": "1.0",
+  "last_reviewed": "2026-02-11T17:30:00",
+  "reviewer_version": "2.1",
+  "upstream_documents": {
+    "../../05_ADR/ADR-03_f3_observability/ADR-03_f3_observability.md": {
+      "hash": "sha256:2b9164a9d31c7a48c74feb24072a54d8badf46746257458dc5d57e13fd9442c7",
+      "last_modified": "2026-02-10T15:35:00",
+      "file_size": 23422,
+      "version": "1.0"
+    }
+  },
+  "review_history": [{"date": "2026-02-11T17:30:00", "score": 90, "drift_detected": false, "report_version": "v001"}]
+}

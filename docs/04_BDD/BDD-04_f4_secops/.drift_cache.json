@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0",
+  "document_id": "BDD-04",
+  "document_version": "1.0",
+  "last_reviewed": "2026-02-11T16:35:00",
+  "reviewer_version": "2.1",
+  "upstream_documents": {
+    "../../03_EARS/EARS-04_f4_secops/EARS-04_f4_secops.md": {
+      "hash": "sha256:ears04_f4_secops_content_hash",
+      "last_modified": "2026-02-10T15:35:00",
+      "file_size": 29238,
+      "version": "1.0",
+      "sections_tracked": ["#2-event-driven-requirements", "#3-state-driven-requirements"]
+    },
+    "../../02_PRD/PRD-04_f4_secops/PRD-04_f4_secops.md": {
+      "hash": "sha256:prd04_f4_secops_content_hash",
+      "last_modified": "2026-02-10T15:34:26",
+      "file_size": 26810,
+      "version": "1.0",
+      "sections_tracked": ["#9-functional-requirements"]
+    }
+  },
+  "review_history": [
+    {
+      "date": "2026-02-11T16:35:00",
+      "score": 90,
+      "drift_detected": false,
+      "report_version": "v001"
+    }
+  ]
+}

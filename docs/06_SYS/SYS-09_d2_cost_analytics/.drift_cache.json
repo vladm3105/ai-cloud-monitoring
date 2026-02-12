@@ -1,0 +1,9 @@
+{
+  "schema_version": "1.0",
+  "document_id": "SYS-09",
+  "document_version": "1.0",
+  "last_reviewed": "2026-02-11T17:40:00",
+  "reviewer_version": "2.1",
+  "upstream_documents": {"../../05_ADR/ADR-09_d2_cost_analytics/ADR-09_d2_cost_analytics.md": {"hash": "sha256:pending", "version": "1.0"}},
+  "review_history": [{"date": "2026-02-11T17:40:00", "score": 90, "report_version": "v001"}]
+}

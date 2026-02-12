@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0",
+  "document_id": "ADR-04",
+  "document_version": "1.0",
+  "last_reviewed": "2026-02-11T17:05:00",
+  "reviewer_version": "2.1",
+  "upstream_documents": {
+    "../../04_BDD/BDD-04_f4_secops/BDD-04_f4_secops.feature": {
+      "hash": "sha256:pending_bdd_hash",
+      "last_modified": "2026-02-11T16:00:00",
+      "file_size": 13000,
+      "version": "1.0"
+    }
+  },
+  "review_history": [
+    {
+      "date": "2026-02-11T17:05:00",
+      "score": 90,
+      "drift_detected": false,
+      "report_version": "v001"
+    }
+  ]
+}

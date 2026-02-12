@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0",
+  "document_id": "EARS-10",
+  "document_version": "1.0",
+  "last_reviewed": "2026-02-11T16:21:00",
+  "reviewer_version": "1.4",
+  "upstream_documents": {
+    "../../02_PRD/PRD-10_d3_user_experience/PRD-10_d3_user_experience.md": {
+      "hash": "sha256:prd10_d3_user_experience_content_hash",
+      "last_modified": "2026-02-10T15:34:26",
+      "file_size": 45000,
+      "version": "1.0",
+      "sections_tracked": ["#9-functional-requirements", "#11-acceptance-criteria"]
+    },
+    "../../01_BRD/BRD-10_d3_user_experience/BRD-10_d3_user_experience.md": {
+      "hash": "sha256:brd10_d3_user_experience_content_hash",
+      "last_modified": "2026-02-10T15:34:21",
+      "file_size": 35000,
+      "version": "1.0",
+      "sections_tracked": ["#7-functional-requirements", "#8-non-functional-requirements"]
+    }
+  },
+  "review_history": [
+    {
+      "date": "2026-02-11T16:21:00",
+      "score": 90,
+      "drift_detected": false,
+      "report_version": "v001"
+    }
+  ]
+}
