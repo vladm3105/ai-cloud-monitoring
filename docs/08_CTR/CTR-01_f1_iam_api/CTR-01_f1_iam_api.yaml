@@ -1,0 +1,643 @@
+openapi: "3.0.3"
+info:
+  title: "F1 Identity & Access Management API"
+  version: "1.0.0"
+  description: |
+    API contract for F1 Identity & Access Management module.
+    Provides authentication, authorization, token management, and session management.
+
+    ## Authentication Methods
+    - Email/Password with optional MFA
+    - Auth0 OIDC (federated identity)
+
+    ## Authorization Model
+    4D Matrix: Action → Skill → Resource → Zone
+  contact:
+    name: Platform Security Team
+    email: security@example.com
+  license:
+    name: Proprietary
+    url: https://example.com/license
+
+servers:
+  - url: "https://api.example.com/v1"
+    description: Production
+  - url: "https://api.staging.example.com/v1"
+    description: Staging
+
+tags:
+  - name: Authentication
+    description: User authentication endpoints
+  - name: Authorization
+    description: Permission checking endpoints
+  - name: Session
+    description: Session management endpoints
+
+paths:
+  /api/v1/auth/login:
+    post:
+      operationId: loginUser
+      summary: Authenticate user with email/password
+      description: |
+        Authenticates a user using email and password credentials.
+        Returns JWT tokens for subsequent API calls.
+
+        Rate limit: 5 requests per 5 minutes per IP
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+            examples:
+              standard:
+                summary: Standard login
+                value:
+                  email: "user@example.com"
+                  password: "securePassword123"
+              withMfa:
+                summary: Login with MFA
+                value:
+                  email: "user@example.com"
+                  password: "securePassword123"
+                  mfa_code: "123456"
+      responses:
+        '200':
+          description: Authentication successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /api/v1/auth/oidc/callback:
+    post:
+      operationId: oidcCallback
+      summary: Auth0 OIDC callback handler
+      description: |
+        Handles the callback from Auth0 OIDC flow.
+        Exchanges authorization code for tokens.
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OIDCCallbackRequest'
+      responses:
+        '200':
+          description: OIDC authentication successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /api/v1/auth/refresh:
+    post:
+      operationId: refreshToken
+      summary: Refresh access token
+      description: |
+        Refreshes an expired access token using a valid refresh token.
+        Issues new access and refresh tokens.
+
+        Rate limit: 30 requests per minute per user
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RefreshTokenRequest'
+      responses:
+        '200':
+          description: Token refresh successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /api/v1/auth/logout:
+    post:
+      operationId: logoutUser
+      summary: Logout and invalidate session
+      description: |
+        Invalidates the current session and revokes tokens.
+
+        Rate limit: 10 requests per minute per user
+      tags:
+        - Authentication
+      security:
+        - bearerAuth: []
+      responses:
+        '204':
+          description: Logout successful
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /api/v1/auth/mfa/verify:
+    post:
+      operationId: verifyMfa
+      summary: Verify MFA TOTP code
+      description: |
+        Verifies a TOTP code for multi-factor authentication.
+        Requires a partial session token from initial login.
+
+        Rate limit: 5 requests per 5 minutes per user
+      tags:
+        - Authentication
+      security:
+        - partialSessionAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MfaVerifyRequest'
+      responses:
+        '200':
+          description: MFA verification successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /api/v1/authz/check:
+    post:
+      operationId: checkAuthorization
+      summary: Check 4D Matrix authorization
+      description: |
+        Evaluates authorization using the 4D Matrix model.
+        Checks if the current user can perform the specified action.
+
+        Rate limit: 1000 requests per minute (internal use)
+      tags:
+        - Authorization
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthzCheckRequest'
+      responses:
+        '200':
+          description: Authorization check completed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthzDecision'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /api/v1/session/status:
+    get:
+      operationId: getSessionStatus
+      summary: Get current session status
+      description: |
+        Returns information about the current session.
+
+        Rate limit: 60 requests per minute per user
+      tags:
+        - Session
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Session information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionInfo'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /api/v1/session/list:
+    get:
+      operationId: listSessions
+      summary: List all active sessions
+      description: |
+        Returns a list of all active sessions for the current user.
+
+        Rate limit: 10 requests per minute per user
+      tags:
+        - Session
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: List of active sessions
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  sessions:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/SessionInfo'
+                  total:
+                    type: integer
+                    description: Total number of active sessions
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /api/v1/session/{session_id}:
+    delete:
+      operationId: revokeSession
+      summary: Revoke specific session
+      description: |
+        Revokes a specific session by ID. Can revoke own sessions
+        or other sessions if admin privileges.
+
+        Rate limit: 10 requests per minute per user
+      tags:
+        - Session
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: session_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Session identifier to revoke
+      responses:
+        '204':
+          description: Session revoked successfully
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: JWT access token
+    partialSessionAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Partial session token for MFA flow
+
+  schemas:
+    LoginRequest:
+      type: object
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+          format: email
+          maxLength: 255
+          description: User email address
+          example: "user@example.com"
+        password:
+          type: string
+          minLength: 12
+          maxLength: 128
+          description: User password
+          example: "securePassword123"
+        mfa_code:
+          type: string
+          pattern: "^[0-9]{6}$"
+          description: TOTP code if MFA enabled
+          example: "123456"
+
+    OIDCCallbackRequest:
+      type: object
+      required:
+        - code
+        - state
+      properties:
+        code:
+          type: string
+          description: Authorization code from Auth0
+          example: "abc123def456"
+        state:
+          type: string
+          description: CSRF state token
+          example: "xyz789state"
+
+    RefreshTokenRequest:
+      type: object
+      required:
+        - refresh_token
+      properties:
+        refresh_token:
+          type: string
+          description: Valid refresh token
+          example: "dGhpcyBpcyBhIHJlZnJlc2ggdG9rZW4..."
+
+    MfaVerifyRequest:
+      type: object
+      required:
+        - mfa_code
+      properties:
+        mfa_code:
+          type: string
+          pattern: "^[0-9]{6}$"
+          description: TOTP verification code
+          example: "123456"
+
+    AuthzCheckRequest:
+      type: object
+      required:
+        - action
+        - skill
+        - resource
+        - zone
+      properties:
+        action:
+          type: string
+          description: Action being performed
+          example: "read"
+        skill:
+          type: string
+          description: Skill context
+          example: "cost_analysis"
+        resource:
+          type: string
+          description: Resource identifier
+          example: "costs/report/monthly"
+        zone:
+          type: string
+          description: Zone identifier
+          example: "production"
+
+    TokenResponse:
+      type: object
+      required:
+        - access_token
+        - refresh_token
+        - token_type
+        - expires_in
+        - session_id
+      properties:
+        access_token:
+          type: string
+          description: JWT (RS256) with 15-minute expiry
+          example: "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9..."
+        refresh_token:
+          type: string
+          description: Opaque token with 7-day expiry
+          example: "dGhpcyBpcyBhIHJlZnJlc2ggdG9rZW4..."
+        token_type:
+          type: string
+          enum: ["Bearer"]
+          description: Token type
+          example: "Bearer"
+        expires_in:
+          type: integer
+          description: Seconds until access token expiry
+          example: 900
+        session_id:
+          type: string
+          description: Redis session identifier
+          example: "sess_abc123"
+
+    AuthzDecision:
+      type: object
+      required:
+        - allowed
+      properties:
+        allowed:
+          type: boolean
+          description: Authorization decision
+          example: true
+        reason:
+          type: string
+          description: Explanation for decision
+          example: "User has read permission for cost_analysis in production zone"
+        trust_level:
+          type: integer
+          minimum: 1
+          maximum: 4
+          description: Required trust level
+          example: 2
+
+    SessionInfo:
+      type: object
+      required:
+        - session_id
+        - user_id
+        - created_at
+        - expires_at
+      properties:
+        session_id:
+          type: string
+          description: Session identifier
+          example: "sess_abc123"
+        user_id:
+          type: string
+          description: User identifier
+          example: "user_123"
+        created_at:
+          type: string
+          format: date-time
+          description: Session creation timestamp
+          example: "2026-02-11T10:00:00Z"
+        expires_at:
+          type: string
+          format: date-time
+          description: Session expiration timestamp
+          example: "2026-02-11T10:30:00Z"
+        last_activity:
+          type: string
+          format: date-time
+          description: Last activity timestamp
+          example: "2026-02-11T10:15:00Z"
+        device_info:
+          type: object
+          description: Device metadata
+          properties:
+            user_agent:
+              type: string
+              example: "Mozilla/5.0..."
+            ip_address:
+              type: string
+              example: "192.168.1.1"
+
+    JWTClaims:
+      type: object
+      required:
+        - sub
+        - trust_level
+        - zones
+        - exp
+        - iat
+        - jti
+      properties:
+        sub:
+          type: string
+          description: User ID
+          example: "user_123"
+        trust_level:
+          type: integer
+          minimum: 1
+          maximum: 4
+          description: Trust level (1-4)
+          example: 2
+        zones:
+          type: array
+          items:
+            type: string
+          description: Accessible zones
+          example: ["production", "staging"]
+        exp:
+          type: integer
+          description: Expiration timestamp (Unix)
+          example: 1707660000
+        iat:
+          type: integer
+          description: Issued at timestamp (Unix)
+          example: 1707659100
+        jti:
+          type: string
+          format: uuid
+          description: Unique token identifier
+          example: "550e8400-e29b-41d4-a716-446655440000"
+
+    ProblemDetails:
+      type: object
+      required:
+        - type
+        - title
+        - status
+      properties:
+        type:
+          type: string
+          format: uri
+          description: Error type URI
+          example: "https://api.example.com/errors/authentication"
+        title:
+          type: string
+          description: Human-readable title
+          example: "Authentication Failed"
+        status:
+          type: integer
+          description: HTTP status code
+          example: 401
+        detail:
+          type: string
+          description: Detailed error message
+          example: "Invalid email or password"
+        instance:
+          type: string
+          description: Request path
+          example: "/api/v1/auth/login"
+
+  responses:
+    Unauthorized:
+      description: Authentication required or failed
+      headers:
+        WWW-Authenticate:
+          schema:
+            type: string
+          description: Authentication method
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetails'
+          example:
+            type: "https://api.example.com/errors/authentication"
+            title: "Authentication Failed"
+            status: 401
+            detail: "Invalid email or password"
+            instance: "/api/v1/auth/login"
+
+    Forbidden:
+      description: Insufficient permissions
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetails'
+          example:
+            type: "https://api.example.com/errors/authorization"
+            title: "Access Denied"
+            status: 403
+            detail: "Insufficient permissions for this action"
+            instance: "/api/v1/session/abc123"
+
+    NotFound:
+      description: Resource not found
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetails'
+          example:
+            type: "https://api.example.com/errors/not-found"
+            title: "Not Found"
+            status: 404
+            detail: "Session not found"
+            instance: "/api/v1/session/abc123"
+
+    TooManyRequests:
+      description: Rate limit exceeded
+      headers:
+        Retry-After:
+          schema:
+            type: integer
+          description: Seconds until retry allowed
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetails'
+          example:
+            type: "https://api.example.com/errors/rate-limit"
+            title: "Rate Limit Exceeded"
+            status: 429
+            detail: "Too many login attempts. Try again in 900 seconds."
+            instance: "/api/v1/auth/login"
+
+    InternalError:
+      description: Internal server error
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetails'
+          example:
+            type: "https://api.example.com/errors/internal"
+            title: "Internal Server Error"
+            status: 500
+            detail: "An unexpected error occurred"
+            instance: "/api/v1/auth/login"

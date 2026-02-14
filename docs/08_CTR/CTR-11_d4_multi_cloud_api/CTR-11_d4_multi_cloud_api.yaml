@@ -1,0 +1,367 @@
+openapi: "3.0.3"
+info:
+  title: "D4 Multi-Cloud Provider API"
+  version: "1.0.0"
+  description: |
+    API contract for D4 Multi-Cloud Provider module.
+    Provides cloud provider management, credential handling, and data synchronization.
+  contact:
+    name: Cloud Integration Team
+    email: cloud@example.com
+
+servers:
+  - url: "https://api.example.com/v1"
+    description: Production
+
+tags:
+  - name: Providers
+    description: Cloud provider management
+  - name: Sync
+    description: Data synchronization
+
+paths:
+  /api/v1/providers:
+    get:
+      operationId: listProviders
+      summary: List connected cloud providers
+      tags:
+        - Providers
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: List of providers
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  providers:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Provider'
+                  total:
+                    type: integer
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /api/v1/providers/{provider_id}:
+    get:
+      operationId: getProvider
+      summary: Get provider details
+      tags:
+        - Providers
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: provider_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Provider details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Provider'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /api/v1/providers/{provider_id}/health:
+    get:
+      operationId: getProviderHealth
+      summary: Check provider connectivity
+      tags:
+        - Providers
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: provider_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Provider health status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProviderHealth'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /api/v1/providers/{provider_id}/sync:
+    post:
+      operationId: triggerSync
+      summary: Trigger data synchronization
+      tags:
+        - Sync
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: provider_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SyncRequest'
+      responses:
+        '202':
+          description: Sync job started
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyncStatus'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /api/v1/providers/{provider_id}/credentials:
+    put:
+      operationId: updateCredentials
+      summary: Update provider credentials
+      tags:
+        - Providers
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: provider_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CredentialsUpdate'
+      responses:
+        '200':
+          description: Credentials updated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  updated:
+                    type: boolean
+                  provider_id:
+                    type: string
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    Provider:
+      type: object
+      properties:
+        provider_id:
+          type: string
+          example: "prov_gcp_123"
+        provider_type:
+          type: string
+          enum: [gcp, aws, azure]
+          example: "gcp"
+        account_id:
+          type: string
+          example: "my-project-123"
+        display_name:
+          type: string
+          example: "Production GCP"
+        status:
+          type: string
+          enum: [active, inactive, error]
+          example: "active"
+        last_sync:
+          type: string
+          format: date-time
+        created_at:
+          type: string
+          format: date-time
+
+    ProviderHealth:
+      type: object
+      properties:
+        provider_id:
+          type: string
+        status:
+          type: string
+          enum: [healthy, degraded, unhealthy]
+        latency_ms:
+          type: integer
+          example: 150
+        last_check:
+          type: string
+          format: date-time
+        errors:
+          type: array
+          items:
+            type: string
+
+    SyncRequest:
+      type: object
+      properties:
+        start_date:
+          type: string
+          format: date
+        end_date:
+          type: string
+          format: date
+        full_sync:
+          type: boolean
+          default: false
+
+    SyncStatus:
+      type: object
+      properties:
+        sync_id:
+          type: string
+          example: "sync_abc123"
+        provider_id:
+          type: string
+        status:
+          type: string
+          enum: [pending, running, completed, failed]
+        started_at:
+          type: string
+          format: date-time
+        completed_at:
+          type: string
+          format: date-time
+        records_synced:
+          type: integer
+        errors:
+          type: array
+          items:
+            type: string
+
+    CredentialsUpdate:
+      type: object
+      required:
+        - credentials
+      properties:
+        credentials:
+          type: object
+          description: Provider-specific credentials
+          additionalProperties: true
+
+    UnifiedCostRecord:
+      type: object
+      properties:
+        provider:
+          type: string
+          enum: [gcp, aws, azure]
+        account_id:
+          type: string
+        service:
+          type: string
+        region:
+          type: string
+        resource_id:
+          type: string
+        usage_date:
+          type: string
+          format: date
+        usage_amount:
+          type: number
+          format: float
+        usage_unit:
+          type: string
+        cost:
+          type: number
+          format: float
+        currency:
+          type: string
+          default: "USD"
+        labels:
+          type: object
+          additionalProperties:
+            type: string
+        source_record_id:
+          type: string
+
+    ProblemDetails:
+      type: object
+      required:
+        - type
+        - title
+        - status
+      properties:
+        type:
+          type: string
+          format: uri
+        title:
+          type: string
+        status:
+          type: integer
+        detail:
+          type: string
+        instance:
+          type: string
+
+  responses:
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetails'
+
+    NotFound:
+      description: Resource not found
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetails'
+
+    TooManyRequests:
+      description: Rate limit exceeded
+      headers:
+        Retry-After:
+          schema:
+            type: integer
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetails'
+
+    InternalError:
+      description: Internal server error
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetails'

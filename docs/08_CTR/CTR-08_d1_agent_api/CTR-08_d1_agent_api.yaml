@@ -1,0 +1,350 @@
+openapi: "3.0.3"
+info:
+  title: "D1 Agent Orchestration API"
+  version: "1.0.0"
+  description: |
+    AG-UI (Agent-User Interface) streaming API for conversational AI interactions.
+    Primary protocol: Server-Sent Events (SSE) for real-time streaming responses.
+  contact:
+    name: AI Platform Team
+    email: ai-platform@example.com
+
+servers:
+  - url: "https://api.example.com/v1"
+    description: Production
+
+tags:
+  - name: Chat
+    description: Streaming chat endpoints
+  - name: Conversations
+    description: Conversation management
+
+paths:
+  /api/v1/chat:
+    post:
+      operationId: createChatStream
+      summary: Initiate streaming chat conversation
+      description: |
+        Initiates a streaming chat conversation using Server-Sent Events.
+        The response is delivered as a stream of SSE events.
+      tags:
+        - Chat
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChatRequest'
+      responses:
+        '200':
+          description: SSE stream initiated
+          content:
+            text/event-stream:
+              schema:
+                type: string
+                description: |
+                  SSE stream with events:
+                  - status: Processing state updates
+                  - message: Text content delivery
+                  - tool_call: Tool execution updates
+                  - error: Error notifications
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /api/v1/chat/{conversation_id}/history:
+    get:
+      operationId: getChatHistory
+      summary: Get conversation history
+      tags:
+        - Chat
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: conversation_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 50
+            maximum: 100
+        - name: before
+          in: query
+          schema:
+            type: string
+            format: date-time
+      responses:
+        '200':
+          description: Conversation history
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConversationHistory'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /api/v1/conversations:
+    get:
+      operationId: listConversations
+      summary: List user conversations
+      tags:
+        - Conversations
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 20
+            maximum: 100
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            default: 0
+      responses:
+        '200':
+          description: List of conversations
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  conversations:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ConversationSummary'
+                  total:
+                    type: integer
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /api/v1/conversations/{conversation_id}:
+    delete:
+      operationId: deleteConversation
+      summary: Delete conversation
+      tags:
+        - Conversations
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: conversation_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Conversation deleted
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    ChatRequest:
+      type: object
+      required:
+        - message
+        - session_id
+      properties:
+        message:
+          type: string
+          minLength: 1
+          maxLength: 4000
+          description: User message
+          example: "What were my top cloud costs last month?"
+        session_id:
+          type: string
+          description: Session identifier
+          example: "sess_abc123"
+        conversation_id:
+          type: string
+          format: uuid
+          description: Existing conversation (optional)
+          example: "conv_xyz789"
+
+    StreamEvent:
+      type: object
+      description: SSE event payload
+      properties:
+        type:
+          type: string
+          enum: [text, tool_call, status, error]
+          description: Event type
+        content:
+          type: string
+          description: Text content (for text events)
+        tool_name:
+          type: string
+          description: Tool name (for tool_call events)
+        tool_result:
+          type: object
+          description: Tool execution result
+          additionalProperties: true
+        status:
+          type: string
+          enum: [thinking, executing, complete]
+          description: Processing status
+        code:
+          type: string
+          description: Error code (for error events)
+        message:
+          type: string
+          description: Error message (for error events)
+
+    IntentResult:
+      type: object
+      properties:
+        category:
+          type: string
+          enum:
+            - cost_query
+            - cost_forecast
+            - optimization
+            - anomaly_detection
+            - general
+          description: Intent category
+        confidence:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 1
+          description: Confidence score
+        entities:
+          type: object
+          description: Extracted entities
+          additionalProperties: true
+        suggested_tools:
+          type: array
+          items:
+            type: string
+          description: Tools to execute
+
+    ConversationHistory:
+      type: object
+      properties:
+        conversation_id:
+          type: string
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChatMessage'
+
+    ChatMessage:
+      type: object
+      properties:
+        role:
+          type: string
+          enum: [user, assistant, system]
+        content:
+          type: string
+        timestamp:
+          type: string
+          format: date-time
+        tool_calls:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              result:
+                type: object
+                additionalProperties: true
+
+    ConversationSummary:
+      type: object
+      properties:
+        conversation_id:
+          type: string
+          example: "conv_xyz789"
+        title:
+          type: string
+          example: "Cloud costs analysis"
+        created_at:
+          type: string
+          format: date-time
+        last_message_at:
+          type: string
+          format: date-time
+        message_count:
+          type: integer
+          example: 5
+
+    ProblemDetails:
+      type: object
+      required:
+        - type
+        - title
+        - status
+      properties:
+        type:
+          type: string
+          format: uri
+        title:
+          type: string
+        status:
+          type: integer
+        detail:
+          type: string
+        instance:
+          type: string
+
+  responses:
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetails'
+
+    NotFound:
+      description: Resource not found
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetails'
+
+    TooManyRequests:
+      description: Rate limit exceeded
+      headers:
+        Retry-After:
+          schema:
+            type: integer
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetails'
+
+    InternalError:
+      description: Internal server error
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetails'

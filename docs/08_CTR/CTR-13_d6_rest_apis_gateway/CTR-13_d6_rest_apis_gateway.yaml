@@ -1,0 +1,609 @@
+openapi: "3.0.3"
+info:
+  title: "D6 REST APIs Gateway"
+  version: "1.0.0"
+  description: |
+    Unified API Gateway for AI Cloud Cost Monitoring Platform.
+    Aggregates endpoints from all modules with consistent authentication,
+    rate limiting, and error handling.
+
+    ## API Surfaces
+    - AG-UI: SSE streaming for agent chat
+    - REST: CRUD operations
+    - Webhooks: Event notifications
+    - A2A: Agent-to-agent communication
+  contact:
+    name: Platform Team
+    email: platform@example.com
+  license:
+    name: Proprietary
+
+servers:
+  - url: "https://api.costmonitor.io/v1"
+    description: Production
+  - url: "https://api.staging.costmonitor.io/v1"
+    description: Staging
+
+tags:
+  - name: Costs
+    description: Cost query and analysis
+  - name: Alerts
+    description: Cost alert management
+  - name: Reports
+    description: Report generation
+  - name: Workspaces
+    description: Workspace management
+  - name: Chat
+    description: Agent streaming chat
+
+paths:
+  /api/v1/costs:
+    get:
+      operationId: queryCosts
+      summary: Query cost data
+      tags:
+        - Costs
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/startDate'
+        - $ref: '#/components/parameters/endDate'
+        - name: group_by
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: Cost data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CostResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /api/v1/costs/breakdown:
+    get:
+      operationId: getCostBreakdown
+      summary: Cost breakdown by dimension
+      tags:
+        - Costs
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/startDate'
+        - $ref: '#/components/parameters/endDate'
+        - name: dimensions
+          in: query
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: Cost breakdown
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BreakdownResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /api/v1/alerts:
+    get:
+      operationId: listAlerts
+      summary: List user alerts
+      tags:
+        - Alerts
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: List of alerts
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  alerts:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Alert'
+                  total:
+                    type: integer
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+    post:
+      operationId: createAlert
+      summary: Create cost alert
+      tags:
+        - Alerts
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAlertRequest'
+      responses:
+        '201':
+          description: Alert created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Alert'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /api/v1/alerts/{alert_id}:
+    get:
+      operationId: getAlert
+      summary: Get alert details
+      tags:
+        - Alerts
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: alert_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Alert details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Alert'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+    put:
+      operationId: updateAlert
+      summary: Update alert
+      tags:
+        - Alerts
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: alert_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateAlertRequest'
+      responses:
+        '200':
+          description: Alert updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Alert'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+    delete:
+      operationId: deleteAlert
+      summary: Delete alert
+      tags:
+        - Alerts
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: alert_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Alert deleted
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /api/v1/reports:
+    get:
+      operationId: listReports
+      summary: List saved reports
+      tags:
+        - Reports
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: List of reports
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reports:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Report'
+                  total:
+                    type: integer
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+    post:
+      operationId: createReport
+      summary: Create scheduled report
+      tags:
+        - Reports
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateReportRequest'
+      responses:
+        '201':
+          description: Report created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Report'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /api/v1/workspaces:
+    get:
+      operationId: listWorkspaces
+      summary: List user workspaces
+      tags:
+        - Workspaces
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: List of workspaces
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  workspaces:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Workspace'
+                  total:
+                    type: integer
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+    post:
+      operationId: createWorkspace
+      summary: Create workspace
+      tags:
+        - Workspaces
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateWorkspaceRequest'
+      responses:
+        '201':
+          description: Workspace created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Workspace'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /api/v1/chat:
+    post:
+      operationId: createChatStream
+      summary: AG-UI streaming chat
+      description: SSE streaming endpoint for agent chat
+      tags:
+        - Chat
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChatRequest'
+      responses:
+        '200':
+          description: SSE stream
+          content:
+            text/event-stream:
+              schema:
+                type: string
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  parameters:
+    startDate:
+      name: start_date
+      in: query
+      required: true
+      schema:
+        type: string
+        format: date
+    endDate:
+      name: end_date
+      in: query
+      required: true
+      schema:
+        type: string
+        format: date
+
+  schemas:
+    CostResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+        total:
+          type: object
+        metadata:
+          type: object
+
+    BreakdownResponse:
+      type: object
+      properties:
+        breakdown:
+          type: object
+        total:
+          type: number
+
+    Alert:
+      type: object
+      properties:
+        alert_id:
+          type: string
+        name:
+          type: string
+        condition_type:
+          type: string
+          enum: [threshold, anomaly, budget]
+        threshold:
+          type: number
+        channels:
+          type: array
+          items:
+            type: string
+        enabled:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+
+    CreateAlertRequest:
+      type: object
+      required:
+        - name
+        - condition_type
+        - channels
+      properties:
+        name:
+          type: string
+        condition_type:
+          type: string
+          enum: [threshold, anomaly, budget]
+        threshold:
+          type: number
+        channels:
+          type: array
+          items:
+            type: string
+
+    UpdateAlertRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        threshold:
+          type: number
+        channels:
+          type: array
+          items:
+            type: string
+        enabled:
+          type: boolean
+
+    Report:
+      type: object
+      properties:
+        report_id:
+          type: string
+        name:
+          type: string
+        schedule:
+          type: string
+        filters:
+          type: object
+        format:
+          type: string
+          enum: [pdf, csv, json]
+        last_run:
+          type: string
+          format: date-time
+
+    CreateReportRequest:
+      type: object
+      required:
+        - name
+        - schedule
+      properties:
+        name:
+          type: string
+        schedule:
+          type: string
+        filters:
+          type: object
+        format:
+          type: string
+          enum: [pdf, csv, json]
+          default: pdf
+
+    Workspace:
+      type: object
+      properties:
+        workspace_id:
+          type: string
+        name:
+          type: string
+        filters:
+          type: object
+        default_view:
+          type: string
+        shared_with:
+          type: array
+          items:
+            type: string
+        created_at:
+          type: string
+          format: date-time
+
+    CreateWorkspaceRequest:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+        filters:
+          type: object
+        default_view:
+          type: string
+
+    ChatRequest:
+      type: object
+      required:
+        - message
+        - session_id
+      properties:
+        message:
+          type: string
+        session_id:
+          type: string
+        conversation_id:
+          type: string
+
+    ProblemDetails:
+      type: object
+      required:
+        - type
+        - title
+        - status
+      properties:
+        type:
+          type: string
+          format: uri
+        title:
+          type: string
+        status:
+          type: integer
+        detail:
+          type: string
+        instance:
+          type: string
+
+  responses:
+    BadRequest:
+      description: Invalid request
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetails'
+
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetails'
+
+    NotFound:
+      description: Resource not found
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetails'
+
+    TooManyRequests:
+      description: Rate limit exceeded
+      headers:
+        Retry-After:
+          schema:
+            type: integer
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetails'
+
+    InternalError:
+      description: Internal server error
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetails'

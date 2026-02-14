@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0",
+  "document_id": "SPEC-01",
+  "document_version": "1.0.0",
+  "last_reviewed": "2026-02-11T19:30:00",
+  "reviewer_version": "2.2",
+  "upstream_documents": {
+    "../../07_REQ/REQ-01_f1_iam/REQ-01_f1_iam.md": {
+      "hash": "sha256:spec01_req01_initial_hash",
+      "last_modified": "2026-02-09T00:00:00",
+      "file_size": 15200,
+      "version": "1.0.0",
+      "sections_tracked": ["#3-functional-specification", "#4-interface-definition", "#5-error-handling"]
+    },
+    "../../08_CTR/CTR-01_f1_iam_api/CTR-01_f1_iam_api.yaml": {
+      "hash": "sha256:spec01_ctr01_initial_hash",
+      "last_modified": "2026-02-11T18:30:00",
+      "file_size": 17900,
+      "version": "1.0.0",
+      "sections_tracked": ["paths", "components"]
+    }
+  },
+  "review_history": [
+    {
+      "date": "2026-02-11T19:30:00",
+      "score": 94,
+      "drift_detected": false,
+      "report_version": "v001"
+    }
+  ]
+}

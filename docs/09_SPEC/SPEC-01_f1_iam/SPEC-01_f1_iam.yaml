@@ -1,0 +1,1392 @@
+# SPEC-01: F1 Identity & Access Management Technical Specification
+# Layer 9 implementation-ready specification
+# Generated from REQ-01 and CTR-01
+
+metadata:
+  spec_id: SPEC-01
+  title: "F1 Identity & Access Management Technical Specification"
+  version: "1.0.0"
+  status: "draft"
+  created_date: "2026-02-11T19:30:00"
+  last_updated: "2026-02-11T19:30:00"
+  tasks_ready_score: "✅ 94% (Target: ≥90%)"
+  authors:
+    - name: "Platform Architecture Team"
+      email: "platform@example.com"
+      role: "Specification Author"
+  reviewers:
+    - name: "Platform Security Team"
+      email: "security@example.com"
+      role: "Security Review"
+
+traceability:
+  upstream_sources:
+    business_requirements:
+      - id: "BRD.01.07.02"
+        link: "../../01_BRD/BRD-01_f1_iam/BRD-01_f1_iam.md#BRD.01.07.02"
+        relationship: "Business driver for authentication"
+    product_requirements:
+      - id: "PRD.01.08.01"
+        link: "../../02_PRD/PRD-01_f1_iam/PRD-01_f1_iam.md#PRD.01.08.01"
+        relationship: "Product authentication feature"
+    atomic_requirements:
+      - id: "REQ.01.01.01"
+        link: "../../07_REQ/REQ-01_f1_iam/REQ-01_f1_iam.md#REQ.01.01.01"
+        relationship: "Authentication implementation"
+      - id: "REQ.01.01.02"
+        link: "../../07_REQ/REQ-01_f1_iam/REQ-01_f1_iam.md#REQ.01.01.02"
+        relationship: "Authorization implementation"
+      - id: "REQ.01.01.03"
+        link: "../../07_REQ/REQ-01_f1_iam/REQ-01_f1_iam.md#REQ.01.01.03"
+        relationship: "Token management implementation"
+      - id: "REQ.01.01.04"
+        link: "../../07_REQ/REQ-01_f1_iam/REQ-01_f1_iam.md#REQ.01.01.04"
+        relationship: "Session management implementation"
+    contracts:
+      - id: "CTR.01.16.01"
+        link: "../../08_CTR/CTR-01_f1_iam_api/CTR-01_f1_iam_api.md#CTR.01.16.01"
+        relationship: "Login API contract"
+      - id: "CTR.01.16.02"
+        link: "../../08_CTR/CTR-01_f1_iam_api/CTR-01_f1_iam_api.md#CTR.01.16.02"
+        relationship: "OIDC callback contract"
+  cumulative_tags:
+    brd: ["BRD.01.07.02", "BRD.01.01.01"]
+    prd: ["PRD.01.08.01", "PRD.01.07.01"]
+    ears: ["EARS.01.25.01", "EARS.01.25.02"]
+    bdd: ["BDD.01.14.01", "BDD.01.14.02"]
+    adr: ["ADR-01"]
+    sys: ["SYS.01.26.01", "SYS.01.26.02"]
+    req: ["REQ.01.01.01", "REQ.01.01.02", "REQ.01.01.03", "REQ.01.01.04"]
+    ctr: ["CTR.01.16.01", "CTR.01.16.02", "CTR.01.16.03", "CTR.01.16.04"]
+    threshold:
+      - "perf.auth.p99_latency"
+      - "perf.authz.p99_latency"
+      - "perf.token.p99_latency"
+      - "sla.uptime.target"
+      - "reliability.error_rate"
+
+interfaces:
+  # Level 1: External APIs (REST)
+  external_apis:
+    - endpoint: "POST /api/v1/auth/login"
+      operation_id: "loginUser"
+      method: "POST"
+      auth: "None"
+      rate_limit: "5 req/5 min per IP"
+      request_schema:
+        type: "object"
+        required: ["email", "password"]
+        properties:
+          email:
+            type: "string"
+            format: "email"
+            maxLength: 255
+          password:
+            type: "string"
+            minLength: 12
+            maxLength: 128
+          mfa_code:
+            type: "string"
+            pattern: "^[0-9]{6}$"
+      response_schema:
+        type: "object"
+        required: ["access_token", "refresh_token", "token_type", "expires_in", "session_id"]
+        properties:
+          access_token:
+            type: "string"
+            description: "JWT RS256 with 15-minute expiry"
+          refresh_token:
+            type: "string"
+            description: "Opaque token with 7-day expiry"
+          token_type:
+            type: "string"
+            enum: ["Bearer"]
+          expires_in:
+            type: "integer"
+            example: 900
+          session_id:
+            type: "string"
+      latency_target_ms: "@threshold:perf.auth.p99_latency"
+      error_responses:
+        - status: 401
+          code: "AUTH_001"
+          title: "Authentication Failed"
+        - status: 429
+          code: "AUTH_004"
+          title: "Rate Limit Exceeded"
+
+    - endpoint: "POST /api/v1/auth/oidc/callback"
+      operation_id: "oidcCallback"
+      method: "POST"
+      auth: "None"
+      rate_limit: "10 req/min per IP"
+      request_schema:
+        type: "object"
+        required: ["code", "state"]
+        properties:
+          code:
+            type: "string"
+            description: "Authorization code from Auth0"
+          state:
+            type: "string"
+            description: "CSRF state token"
+      response_schema:
+        $ref: "#/interfaces/external_apis/0/response_schema"
+      latency_target_ms: "@threshold:perf.auth.p99_latency"
+
+    - endpoint: "POST /api/v1/auth/refresh"
+      operation_id: "refreshToken"
+      method: "POST"
+      auth: "refresh_token"
+      rate_limit: "30 req/min per user"
+      request_schema:
+        type: "object"
+        required: ["refresh_token"]
+        properties:
+          refresh_token:
+            type: "string"
+      response_schema:
+        $ref: "#/interfaces/external_apis/0/response_schema"
+      latency_target_ms: "@threshold:perf.token.p99_latency"
+
+    - endpoint: "POST /api/v1/auth/logout"
+      operation_id: "logoutUser"
+      method: "POST"
+      auth: "bearerAuth"
+      rate_limit: "10 req/min per user"
+      response_status: 204
+      latency_target_ms: 50
+
+    - endpoint: "POST /api/v1/auth/mfa/verify"
+      operation_id: "verifyMfa"
+      method: "POST"
+      auth: "partialSessionAuth"
+      rate_limit: "5 req/5 min per user"
+      request_schema:
+        type: "object"
+        required: ["mfa_code"]
+        properties:
+          mfa_code:
+            type: "string"
+            pattern: "^[0-9]{6}$"
+      response_schema:
+        $ref: "#/interfaces/external_apis/0/response_schema"
+      latency_target_ms: "@threshold:perf.auth.p99_latency"
+
+    - endpoint: "POST /api/v1/authz/check"
+      operation_id: "checkAuthorization"
+      method: "POST"
+      auth: "bearerAuth"
+      rate_limit: "1000 req/min (internal)"
+      request_schema:
+        type: "object"
+        required: ["action", "skill", "resource", "zone"]
+        properties:
+          action:
+            type: "string"
+          skill:
+            type: "string"
+          resource:
+            type: "string"
+          zone:
+            type: "string"
+      response_schema:
+        type: "object"
+        required: ["allowed"]
+        properties:
+          allowed:
+            type: "boolean"
+          reason:
+            type: "string"
+          trust_level:
+            type: "integer"
+            minimum: 1
+            maximum: 4
+      latency_target_ms: "@threshold:perf.authz.p99_latency"
+
+    - endpoint: "GET /api/v1/session/status"
+      operation_id: "getSessionStatus"
+      method: "GET"
+      auth: "bearerAuth"
+      rate_limit: "60 req/min per user"
+      response_schema:
+        $ref: "#/data_models/4/json_schema"
+      latency_target_ms: 20
+
+    - endpoint: "GET /api/v1/session/list"
+      operation_id: "listSessions"
+      method: "GET"
+      auth: "bearerAuth"
+      rate_limit: "10 req/min per user"
+      response_schema:
+        type: "object"
+        properties:
+          sessions:
+            type: "array"
+            items:
+              $ref: "#/data_models/4/json_schema"
+          total:
+            type: "integer"
+      latency_target_ms: 30
+
+    - endpoint: "DELETE /api/v1/session/{session_id}"
+      operation_id: "revokeSession"
+      method: "DELETE"
+      auth: "bearerAuth"
+      rate_limit: "10 req/min per user"
+      response_status: 204
+      latency_target_ms: 20
+
+  # Level 2: Internal APIs (Service signatures)
+  internal_apis:
+    - interface: "AuthenticationService"
+      module: "src.foundation.f1_iam.services.authentication"
+      methods:
+        - name: "authenticate"
+          signature: "async def authenticate(email: str, password: Optional[str] = None, oidc_token: Optional[str] = None) -> AuthResult"
+          purpose: |
+            1. Validate input parameters (email format, password complexity)
+            2. Check rate limit for IP address
+            3. If oidc_token: validate with Auth0, extract claims
+            4. If password: fetch user from store, verify with Argon2id
+            5. Check if MFA required (trust_level >= 3)
+            6. Issue JWT token pair (access + refresh)
+            7. Create Redis session with 30-min idle TTL
+          raises:
+            - "AuthenticationError: Invalid credentials"
+            - "RateLimitError: Too many attempts"
+            - "MfaRequiredError: MFA verification needed"
+
+        - name: "refresh_tokens"
+          signature: "async def refresh_tokens(refresh_token: str) -> AuthResult"
+          purpose: |
+            1. Validate refresh token format and signature
+            2. Check token not revoked in Redis
+            3. Fetch session, verify not expired
+            4. Issue new access token with same claims
+            5. Optionally rotate refresh token
+          raises:
+            - "TokenExpiredError: Refresh token expired"
+            - "TokenRevokedError: Token has been revoked"
+
+        - name: "logout"
+          signature: "async def logout(session_id: str, access_token: str) -> None"
+          purpose: |
+            1. Validate access token
+            2. Add token to revocation list (Redis)
+            3. Delete session from Redis
+            4. Emit logout event for audit
+
+    - interface: "AuthorizationService"
+      module: "src.foundation.f1_iam.services.authorization"
+      methods:
+        - name: "check_permission"
+          signature: "async def check_permission(token: str, action: str, skill: str, resource: str, zone: str) -> AuthzDecision"
+          purpose: |
+            1. Validate and decode JWT token
+            2. Extract user claims (trust_level, zones)
+            3. Evaluate 4D Matrix policy:
+               - Action: allowed actions for role
+               - Skill: allowed skills for user
+               - Resource: resource pattern matching
+               - Zone: zone membership check
+            4. Apply default deny policy
+            5. Log authorization decision
+          raises:
+            - "TokenExpiredError: JWT has expired"
+            - "AuthorizationError: Access denied"
+
+    - interface: "SessionService"
+      module: "src.foundation.f1_iam.services.session"
+      methods:
+        - name: "create_session"
+          signature: "async def create_session(user_id: str, device_info: DeviceInfo) -> Session"
+          purpose: |
+            1. Check concurrent session limit (max 3)
+            2. If limit exceeded, invalidate oldest session
+            3. Generate session ID (UUID v4)
+            4. Store in Redis with TTL
+            5. Store backup in PostgreSQL
+          raises:
+            - "SessionLimitError: Too many sessions"
+
+        - name: "get_session"
+          signature: "async def get_session(session_id: str) -> Optional[Session]"
+          purpose: |
+            1. Fetch from Redis (primary)
+            2. If Redis miss, check PostgreSQL (fallback)
+            3. Refresh Redis cache if PostgreSQL hit
+            4. Update last_activity timestamp
+
+        - name: "revoke_session"
+          signature: "async def revoke_session(session_id: str, revoked_by: str) -> bool"
+          purpose: |
+            1. Validate session exists and belongs to user (or admin)
+            2. Delete from Redis
+            3. Mark revoked in PostgreSQL
+            4. Add associated tokens to revocation list
+            5. Emit session_revoked event
+
+    - interface: "TokenService"
+      module: "src.foundation.f1_iam.services.token"
+      methods:
+        - name: "issue_tokens"
+          signature: "async def issue_tokens(user: User, session_id: str) -> TokenPair"
+          purpose: |
+            1. Build JWT claims (sub, trust_level, zones, exp, iat, jti)
+            2. Sign access token with RS256 private key
+            3. Generate opaque refresh token
+            4. Store refresh token metadata in Redis
+          returns: "TokenPair(access_token, refresh_token, expires_in)"
+
+        - name: "validate_token"
+          signature: "async def validate_token(token: str) -> TokenClaims"
+          purpose: |
+            1. Parse JWT header, verify RS256 signature
+            2. Check exp claim not in past
+            3. Check jti not in revocation list
+            4. Return validated claims
+          raises:
+            - "TokenExpiredError: Token has expired"
+            - "TokenInvalidError: Invalid signature or format"
+            - "TokenRevokedError: Token was revoked"
+
+  # Level 3: Classes (OOP structure)
+  classes:
+    - name: "IAMFacade"
+      module: "src.foundation.f1_iam.facade"
+      description: "Unified facade combining auth, token, and session services"
+      constructor:
+        params:
+          config:
+            type: "IAMConfig"
+            required: true
+          auth_service:
+            type: "AuthenticationService"
+            required: true
+          authz_service:
+            type: "AuthorizationService"
+            required: true
+          session_service:
+            type: "SessionService"
+            required: true
+          token_service:
+            type: "TokenService"
+            required: true
+      methods:
+        - name: "login"
+          input:
+            email: { type: "str", required: true }
+            password: { type: "str", required: false }
+            oidc_token: { type: "str", required: false }
+            mfa_code: { type: "str", required: false }
+          output:
+            type: "LoginResult"
+            fields: ["access_token", "refresh_token", "session_id", "expires_in"]
+        - name: "authorize"
+          input:
+            token: { type: "str", required: true }
+            request: { type: "AuthzRequest", required: true }
+          output:
+            type: "AuthzDecision"
+        - name: "get_session_info"
+          input:
+            token: { type: "str", required: true }
+          output:
+            type: "SessionInfo"
+
+    - name: "Auth0Client"
+      module: "src.foundation.f1_iam.clients.auth0"
+      description: "Client for Auth0 OIDC integration"
+      constructor:
+        params:
+          domain:
+            type: "str"
+            required: true
+          client_id:
+            type: "str"
+            required: true
+          client_secret:
+            type: "str"
+            required: true
+      methods:
+        - name: "exchange_code"
+          input:
+            code: { type: "str", required: true }
+            redirect_uri: { type: "str", required: true }
+          output:
+            type: "Auth0TokenResponse"
+        - name: "validate_id_token"
+          input:
+            id_token: { type: "str", required: true }
+          output:
+            type: "Auth0Claims"
+        - name: "get_userinfo"
+          input:
+            access_token: { type: "str", required: true }
+          output:
+            type: "Auth0UserInfo"
+
+    - name: "RedisSessionStore"
+      module: "src.foundation.f1_iam.stores.redis_session"
+      description: "Redis-based session storage with PostgreSQL fallback"
+      constructor:
+        params:
+          redis_client:
+            type: "Redis"
+            required: true
+          postgres_pool:
+            type: "AsyncPool"
+            required: true
+          config:
+            type: "SessionConfig"
+            required: true
+      methods:
+        - name: "store"
+          input:
+            session: { type: "Session", required: true }
+          output:
+            type: "bool"
+        - name: "get"
+          input:
+            session_id: { type: "str", required: true }
+          output:
+            type: "Optional[Session]"
+        - name: "delete"
+          input:
+            session_id: { type: "str", required: true }
+          output:
+            type: "bool"
+        - name: "list_by_user"
+          input:
+            user_id: { type: "str", required: true }
+          output:
+            type: "List[Session]"
+
+data_models:
+  - id: "SPEC.01.17.01"
+    name: "LoginRequest"
+    description: "Request payload for user login"
+    json_schema:
+      type: "object"
+      required: ["email", "password"]
+      properties:
+        email:
+          type: "string"
+          format: "email"
+          maxLength: 255
+        password:
+          type: "string"
+          minLength: 12
+          maxLength: 128
+        mfa_code:
+          type: "string"
+          pattern: "^[0-9]{6}$"
+    pydantic_code: |
+      from pydantic import BaseModel, Field, EmailStr
+      from typing import Optional
+
+      class LoginRequest(BaseModel):
+          email: EmailStr
+          password: str = Field(..., min_length=12, max_length=128)
+          mfa_code: Optional[str] = Field(None, pattern=r'^[0-9]{6}$')
+
+  - id: "SPEC.01.17.02"
+    name: "TokenResponse"
+    description: "Response containing JWT tokens"
+    json_schema:
+      type: "object"
+      required: ["access_token", "refresh_token", "token_type", "expires_in", "session_id"]
+      properties:
+        access_token:
+          type: "string"
+        refresh_token:
+          type: "string"
+        token_type:
+          type: "string"
+          enum: ["Bearer"]
+        expires_in:
+          type: "integer"
+        session_id:
+          type: "string"
+    pydantic_code: |
+      from pydantic import BaseModel
+      from typing import Literal
+
+      class TokenResponse(BaseModel):
+          access_token: str
+          refresh_token: str
+          token_type: Literal["Bearer"] = "Bearer"
+          expires_in: int
+          session_id: str
+
+  - id: "SPEC.01.17.03"
+    name: "JWTClaims"
+    description: "JWT token claims structure"
+    json_schema:
+      type: "object"
+      required: ["sub", "trust_level", "zones", "exp", "iat", "jti"]
+      properties:
+        sub:
+          type: "string"
+        trust_level:
+          type: "integer"
+          minimum: 1
+          maximum: 4
+        zones:
+          type: "array"
+          items:
+            type: "string"
+        exp:
+          type: "integer"
+        iat:
+          type: "integer"
+        jti:
+          type: "string"
+          format: "uuid"
+    pydantic_code: |
+      from pydantic import BaseModel, Field
+      from typing import List
+      from uuid import UUID
+
+      class JWTClaims(BaseModel):
+          sub: str
+          trust_level: int = Field(..., ge=1, le=4)
+          zones: List[str]
+          exp: int
+          iat: int
+          jti: UUID
+
+  - id: "SPEC.01.17.04"
+    name: "AuthzDecision"
+    description: "Authorization decision result"
+    json_schema:
+      type: "object"
+      required: ["allowed"]
+      properties:
+        allowed:
+          type: "boolean"
+        reason:
+          type: "string"
+        trust_level:
+          type: "integer"
+          minimum: 1
+          maximum: 4
+    pydantic_code: |
+      from pydantic import BaseModel, Field
+      from typing import Optional
+
+      class AuthzDecision(BaseModel):
+          allowed: bool
+          reason: Optional[str] = None
+          trust_level: Optional[int] = Field(None, ge=1, le=4)
+
+  - id: "SPEC.01.17.05"
+    name: "SessionInfo"
+    description: "Session information structure"
+    json_schema:
+      type: "object"
+      required: ["session_id", "user_id", "created_at", "expires_at"]
+      properties:
+        session_id:
+          type: "string"
+        user_id:
+          type: "string"
+        created_at:
+          type: "string"
+          format: "date-time"
+        expires_at:
+          type: "string"
+          format: "date-time"
+        last_activity:
+          type: "string"
+          format: "date-time"
+        device_info:
+          type: "object"
+          properties:
+            user_agent:
+              type: "string"
+            ip_address:
+              type: "string"
+    pydantic_code: |
+      from pydantic import BaseModel
+      from datetime import datetime
+      from typing import Optional
+
+      class DeviceInfo(BaseModel):
+          user_agent: Optional[str] = None
+          ip_address: Optional[str] = None
+
+      class SessionInfo(BaseModel):
+          session_id: str
+          user_id: str
+          created_at: datetime
+          expires_at: datetime
+          last_activity: Optional[datetime] = None
+          device_info: Optional[DeviceInfo] = None
+
+  - id: "SPEC.01.17.06"
+    name: "AuthzRequest"
+    description: "4D Matrix authorization request"
+    json_schema:
+      type: "object"
+      required: ["action", "skill", "resource", "zone"]
+      properties:
+        action:
+          type: "string"
+        skill:
+          type: "string"
+        resource:
+          type: "string"
+        zone:
+          type: "string"
+    pydantic_code: |
+      from pydantic import BaseModel
+
+      class AuthzRequest(BaseModel):
+          action: str
+          skill: str
+          resource: str
+          zone: str
+
+validation_rules:
+  - id: "SPEC.01.21.01"
+    rule: "Email format validation"
+    field: "email"
+    implementation: |
+      Use EmailStr from pydantic for RFC 5322 compliant email validation.
+      Maximum length: 255 characters.
+    error_code: "VALIDATION_001"
+    error_message: "Invalid email format"
+
+  - id: "SPEC.01.21.02"
+    rule: "Password complexity validation"
+    field: "password"
+    implementation: |
+      Minimum 12 characters, maximum 128 characters.
+      Must contain: uppercase, lowercase, digit, special character.
+      Use pydantic Field with regex pattern validation.
+    error_code: "VALIDATION_002"
+    error_message: "Password does not meet complexity requirements"
+
+  - id: "SPEC.01.21.03"
+    rule: "MFA code format validation"
+    field: "mfa_code"
+    implementation: |
+      Exactly 6 digits (TOTP format).
+      Regex pattern: ^[0-9]{6}$
+    error_code: "VALIDATION_003"
+    error_message: "MFA code must be 6 digits"
+
+  - id: "SPEC.01.21.04"
+    rule: "Rate limit enforcement"
+    field: "request"
+    implementation: |
+      Use Redis sliding window rate limiter.
+      Key format: rate_limit:{endpoint}:{identifier}
+      Login: 5 requests per 5 minutes per IP
+      General: 60 requests per minute per user
+    error_code: "AUTH_004"
+    error_message: "Rate limit exceeded"
+
+  - id: "SPEC.01.21.05"
+    rule: "Trust level enforcement"
+    field: "trust_level"
+    implementation: |
+      Trust levels 1-4:
+      - Level 1: Email verified
+      - Level 2: Password + email
+      - Level 3: MFA enabled
+      - Level 4: Hardware key
+      Operations requiring trust_level >= 3 must prompt MFA.
+    error_code: "AUTH_003"
+    error_message: "Insufficient trust level, MFA required"
+
+error_handling:
+  catalog:
+    AUTH_001:
+      http_status: 401
+      title: "Authentication Failed"
+      message: "Invalid email or password"
+      retry: false
+      log_level: "warning"
+
+    AUTH_002:
+      http_status: 401
+      title: "Token Expired"
+      message: "Session expired, please login"
+      retry: true
+      retry_action: "silent_refresh"
+      log_level: "info"
+
+    AUTH_003:
+      http_status: 403
+      title: "Insufficient Trust Level"
+      message: "Additional verification required"
+      retry: false
+      action: "prompt_mfa"
+      log_level: "info"
+
+    AUTH_004:
+      http_status: 429
+      title: "Rate Limit Exceeded"
+      message: "Too many attempts, try again later"
+      retry: true
+      retry_header: "Retry-After"
+      log_level: "warning"
+
+    AUTH_005:
+      http_status: 503
+      title: "Service Unavailable"
+      message: "Auth service temporarily unavailable"
+      retry: true
+      retry_strategy: "exponential"
+      max_retries: 3
+      log_level: "error"
+
+    AUTHZ_001:
+      http_status: 403
+      title: "Access Denied"
+      message: "Insufficient permissions for this action"
+      retry: false
+      log_level: "warning"
+
+    SESS_001:
+      http_status: 401
+      title: "Session Not Found"
+      message: "Session does not exist or expired"
+      retry: false
+      log_level: "info"
+
+    SESS_002:
+      http_status: 403
+      title: "Session Limit Exceeded"
+      message: "Maximum concurrent sessions reached"
+      retry: false
+      action: "invalidate_oldest"
+      log_level: "info"
+
+  exception_hierarchy: |
+    class AuthError(Exception):
+        """Base exception for F1 authentication errors."""
+        def __init__(self, code: str, message: str, status: int = 401):
+            self.code = code
+            self.message = message
+            self.status = status
+
+    class AuthenticationError(AuthError):
+        """Raised when authentication fails."""
+        pass
+
+    class AuthorizationError(AuthError):
+        """Raised when authorization denied."""
+        def __init__(self, message: str):
+            super().__init__("AUTHZ_001", message, status=403)
+
+    class TokenExpiredError(AuthError):
+        """Raised when JWT has expired."""
+        def __init__(self):
+            super().__init__("AUTH_002", "Session expired", status=401)
+
+    class TokenRevokedError(AuthError):
+        """Raised when token has been revoked."""
+        def __init__(self):
+            super().__init__("AUTH_002", "Token revoked", status=401)
+
+    class RateLimitError(AuthError):
+        """Raised when rate limit exceeded."""
+        def __init__(self, retry_after: int):
+            super().__init__("AUTH_004", "Rate limit exceeded", status=429)
+            self.retry_after = retry_after
+
+    class MfaRequiredError(AuthError):
+        """Raised when MFA verification needed."""
+        def __init__(self, partial_token: str):
+            super().__init__("AUTH_003", "MFA required", status=403)
+            self.partial_token = partial_token
+
+configuration:
+  environment_variables:
+    - name: "AUTH0_DOMAIN"
+      required: true
+      description: "Auth0 tenant domain (e.g., tenant.auth0.com)"
+      example: "myapp.auth0.com"
+
+    - name: "AUTH0_CLIENT_ID"
+      required: true
+      description: "Auth0 application client ID"
+      sensitive: false
+
+    - name: "AUTH0_CLIENT_SECRET"
+      required: true
+      description: "Auth0 application client secret"
+      sensitive: true
+
+    - name: "JWT_PRIVATE_KEY"
+      required: true
+      description: "RSA private key for JWT signing (PEM format)"
+      sensitive: true
+
+    - name: "JWT_PUBLIC_KEY"
+      required: true
+      description: "RSA public key for JWT verification (PEM format)"
+      sensitive: false
+
+    - name: "REDIS_URL"
+      required: true
+      description: "Redis connection URL for sessions"
+      example: "redis://localhost:6379/0"
+
+    - name: "DATABASE_URL"
+      required: true
+      description: "PostgreSQL connection URL for fallback"
+      sensitive: true
+
+  feature_flags:
+    - name: "F1_MFA_REQUIRED"
+      default: false
+      description: "Force MFA for all users regardless of trust level"
+
+    - name: "F1_FALLBACK_AUTH"
+      default: true
+      description: "Enable local auth fallback when Auth0 unavailable"
+
+    - name: "F1_AUDIT_VERBOSE"
+      default: false
+      description: "Enable verbose audit logging for all auth events"
+
+    - name: "F1_SESSION_ENCRYPTION"
+      default: true
+      description: "Encrypt session data in Redis"
+
+  config_schema: |
+    from pydantic import BaseSettings, Field
+    from typing import Optional
+
+    class IAMConfig(BaseSettings):
+        # JWT Configuration
+        jwt_access_ttl: int = Field(900, description="Access token TTL in seconds")
+        jwt_refresh_ttl: int = Field(604800, description="Refresh token TTL in seconds")
+        jwt_algorithm: str = "RS256"
+
+        # Session Configuration
+        session_idle_ttl: int = Field(1800, description="Session idle timeout in seconds")
+        session_absolute_ttl: int = Field(86400, description="Session absolute timeout")
+        max_concurrent_sessions: int = Field(3, description="Max sessions per user")
+
+        # Rate Limiting
+        rate_limit_login_attempts: int = Field(5, description="Login attempts per window")
+        rate_limit_window_seconds: int = Field(300, description="Rate limit window")
+        rate_limit_block_duration: int = Field(900, description="Block duration in seconds")
+
+        # Auth0
+        auth0_domain: str
+        auth0_client_id: str
+        auth0_client_secret: str
+
+        class Config:
+            env_prefix = "F1_"
+
+performance:
+  latency_targets:
+    authentication_p99_ms: "@threshold:perf.auth.p99_latency"
+    authorization_p99_ms: "@threshold:perf.authz.p99_latency"
+    token_validation_p99_ms: "@threshold:perf.token.p99_latency"
+    session_lookup_p99_ms: 10
+    logout_p99_ms: 50
+
+  throughput_targets:
+    concurrent_users: "@threshold:perf.throughput.concurrent_users"
+    auth_requests_per_second: 100
+    authz_requests_per_second: 1000
+
+  resource_limits:
+    redis_connection_pool: 50
+    postgres_connection_pool: 20
+    max_token_size_bytes: 4096
+
+behavior:
+  authentication_flow:
+    description: "User authentication with email/password or OIDC"
+    pseudocode: |
+      async def login(request: LoginRequest) -> TokenResponse:
+          # 1. Rate limit check
+          if not rate_limiter.allow(request.client_ip, "login"):
+              raise RateLimitError(retry_after=900)
+
+          # 2. Fetch user
+          user = await user_store.get_by_email(request.email)
+          if not user:
+              await audit_log.record("login_failed", email=request.email)
+              raise AuthenticationError("AUTH_001", "Invalid credentials")
+
+          # 3. Verify password
+          if not password_hasher.verify(request.password, user.password_hash):
+              await rate_limiter.record_failure(request.client_ip)
+              raise AuthenticationError("AUTH_001", "Invalid credentials")
+
+          # 4. Check MFA requirement
+          if user.trust_level >= 3 and not request.mfa_code:
+              partial_token = await token_service.issue_partial(user)
+              raise MfaRequiredError(partial_token)
+
+          if request.mfa_code:
+              if not totp.verify(user.mfa_secret, request.mfa_code):
+                  raise AuthenticationError("AUTH_001", "Invalid MFA code")
+
+          # 5. Create session
+          device_info = DeviceInfo(
+              user_agent=request.headers.get("User-Agent"),
+              ip_address=request.client_ip
+          )
+          session = await session_service.create_session(user.id, device_info)
+
+          # 6. Issue tokens
+          tokens = await token_service.issue_tokens(user, session.session_id)
+
+          # 7. Audit log
+          await audit_log.record("login_success", user_id=user.id, session_id=session.session_id)
+
+          return TokenResponse(
+              access_token=tokens.access_token,
+              refresh_token=tokens.refresh_token,
+              token_type="Bearer",
+              expires_in=900,
+              session_id=session.session_id
+          )
+
+  authorization_flow:
+    description: "4D Matrix authorization evaluation"
+    pseudocode: |
+      async def authorize(token: str, request: AuthzRequest) -> AuthzDecision:
+          # 1. Validate token
+          claims = await token_service.validate_token(token)
+
+          # 2. Check zone membership
+          if request.zone not in claims.zones:
+              return AuthzDecision(allowed=False, reason="Zone not accessible")
+
+          # 3. Evaluate 4D Matrix
+          policy = await policy_store.get_policy(claims.sub)
+
+          # Action check
+          if request.action not in policy.allowed_actions:
+              return AuthzDecision(allowed=False, reason="Action not permitted")
+
+          # Skill check
+          if request.skill not in policy.allowed_skills:
+              return AuthzDecision(allowed=False, reason="Skill not permitted")
+
+          # Resource pattern match
+          if not policy.matches_resource(request.resource):
+              return AuthzDecision(allowed=False, reason="Resource not accessible")
+
+          # 4. Log decision
+          await audit_log.record("authz_check",
+              user_id=claims.sub,
+              action=request.action,
+              resource=request.resource,
+              allowed=True
+          )
+
+          return AuthzDecision(
+              allowed=True,
+              reason=f"Access granted via policy {policy.id}",
+              trust_level=claims.trust_level
+          )
+
+behavioral_examples:
+  login_success:
+    description: "Successful email/password login"
+    request:
+      endpoint: "POST /api/v1/auth/login"
+      headers:
+        Content-Type: "application/json"
+      payload:
+        email: "user@example.com"
+        password: "SecureP@ssword123"
+    response:
+      status: 200
+      body:
+        access_token: "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9..."
+        refresh_token: "dGhpcyBpcyBhIHJlZnJlc2ggdG9rZW4..."
+        token_type: "Bearer"
+        expires_in: 900
+        session_id: "sess_abc123"
+
+  login_mfa_required:
+    description: "Login requires MFA verification"
+    request:
+      endpoint: "POST /api/v1/auth/login"
+      payload:
+        email: "admin@example.com"
+        password: "SecureP@ssword123"
+    response:
+      status: 403
+      body:
+        type: "https://api.example.com/errors/mfa-required"
+        title: "MFA Required"
+        status: 403
+        detail: "Multi-factor authentication required"
+        partial_token: "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9..."
+
+  login_rate_limited:
+    description: "Login blocked due to rate limiting"
+    request:
+      endpoint: "POST /api/v1/auth/login"
+      payload:
+        email: "user@example.com"
+        password: "WrongPassword"
+    response:
+      status: 429
+      headers:
+        Retry-After: "900"
+      body:
+        type: "https://api.example.com/errors/rate-limit"
+        title: "Rate Limit Exceeded"
+        status: 429
+        detail: "Too many login attempts. Try again in 900 seconds."
+
+  authorization_allowed:
+    description: "Authorization check passes"
+    request:
+      endpoint: "POST /api/v1/authz/check"
+      headers:
+        Authorization: "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9..."
+      payload:
+        action: "read"
+        skill: "cost_analysis"
+        resource: "costs/report/monthly"
+        zone: "production"
+    response:
+      status: 200
+      body:
+        allowed: true
+        reason: "User has read permission for cost_analysis in production zone"
+        trust_level: 2
+
+  authorization_denied:
+    description: "Authorization check fails"
+    request:
+      endpoint: "POST /api/v1/authz/check"
+      headers:
+        Authorization: "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9..."
+      payload:
+        action: "delete"
+        skill: "cost_analysis"
+        resource: "costs/report/monthly"
+        zone: "production"
+    response:
+      status: 200
+      body:
+        allowed: false
+        reason: "Action 'delete' not permitted for role 'analyst'"
+        trust_level: 2
+
+architecture:
+  component_structure:
+    - name: "IAMFacade"
+      layer: "Application"
+      responsibility: "Entry point for all IAM operations"
+      dependencies:
+        - "AuthenticationService"
+        - "AuthorizationService"
+        - "SessionService"
+        - "TokenService"
+
+    - name: "AuthenticationService"
+      layer: "Domain"
+      responsibility: "User identity verification"
+      dependencies:
+        - "Auth0Client"
+        - "PasswordHasher"
+        - "UserRepository"
+
+    - name: "AuthorizationService"
+      layer: "Domain"
+      responsibility: "4D Matrix permission evaluation"
+      dependencies:
+        - "PolicyRepository"
+        - "TokenService"
+
+    - name: "SessionService"
+      layer: "Domain"
+      responsibility: "Session lifecycle management"
+      dependencies:
+        - "RedisSessionStore"
+        - "PostgresSessionStore"
+
+    - name: "TokenService"
+      layer: "Domain"
+      responsibility: "JWT issuance and validation"
+      dependencies:
+        - "JWTSigner"
+        - "TokenRevocationStore"
+
+  external_dependencies:
+    - name: "Auth0"
+      type: "Identity Provider"
+      purpose: "OIDC authentication"
+      fallback: "Local password authentication"
+      circuit_breaker:
+        enabled: true
+        failure_threshold: 5
+        recovery_timeout_seconds: 30
+
+    - name: "Redis"
+      type: "Cache/Session Store"
+      purpose: "Session storage, token revocation list, rate limiting"
+      fallback: "PostgreSQL"
+      circuit_breaker:
+        enabled: true
+        failure_threshold: 3
+        recovery_timeout_seconds: 10
+
+    - name: "PostgreSQL"
+      type: "Database"
+      purpose: "User data, session backup, audit logs"
+      fallback: null
+      connection_pool:
+        min_size: 5
+        max_size: 20
+
+  resilience:
+    circuit_breaker_enabled: true
+    retry_policy:
+      max_attempts: 3
+      backoff_strategy: "exponential"
+      initial_delay_ms: 100
+      max_delay_ms: 5000
+
+    fallback_chain:
+      - primary: "Auth0"
+        fallback: "Local auth"
+        condition: "Auth0 unavailable"
+      - primary: "Redis"
+        fallback: "PostgreSQL"
+        condition: "Redis unavailable"
+
+operations:
+  slo:
+    uptime: "@threshold:sla.uptime.target"
+    error_rate: "@threshold:reliability.error_rate"
+    latency_p99: "@threshold:perf.auth.p99_latency"
+
+  monitoring_metrics:
+    counters:
+      - "f1_auth_login_total"
+      - "f1_auth_login_failed_total"
+      - "f1_auth_logout_total"
+      - "f1_authz_check_total"
+      - "f1_authz_denied_total"
+      - "f1_session_created_total"
+      - "f1_session_revoked_total"
+      - "f1_rate_limit_exceeded_total"
+
+    histograms:
+      - "f1_auth_login_duration_seconds"
+      - "f1_authz_check_duration_seconds"
+      - "f1_token_validation_duration_seconds"
+      - "f1_session_lookup_duration_seconds"
+
+    gauges:
+      - "f1_active_sessions"
+      - "f1_redis_connection_pool_size"
+      - "f1_postgres_connection_pool_size"
+
+  alerting:
+    - name: "HighAuthFailureRate"
+      condition: "rate(f1_auth_login_failed_total[5m]) / rate(f1_auth_login_total[5m]) > 0.1"
+      severity: "warning"
+      runbook: "Check for credential stuffing or system issues"
+
+    - name: "AuthLatencyHigh"
+      condition: "histogram_quantile(0.99, f1_auth_login_duration_seconds) > 0.1"
+      severity: "warning"
+      runbook: "Check Auth0 and Redis connectivity"
+
+    - name: "Auth0Unavailable"
+      condition: "f1_auth0_health_check == 0 for 1m"
+      severity: "critical"
+      runbook: "Verify Auth0 status, consider activating fallback"
+
+  logging:
+    format: "structured_json"
+    levels:
+      default: "info"
+      authentication: "info"
+      authorization: "debug"
+      security_events: "warning"
+    required_fields:
+      - "timestamp"
+      - "level"
+      - "service"
+      - "trace_id"
+      - "user_id"
+      - "action"
+
+req_implementations:
+  - req_id: "REQ.01.01.01"
+    req_link: "../../07_REQ/REQ-01_f1_iam/REQ-01_f1_iam.md#REQ.01.01.01"
+    title: "Authentication"
+    implementation:
+      interfaces:
+        - class: "AuthenticationService"
+          method: "authenticate"
+          signature: "async def authenticate(email: str, password: Optional[str], oidc_token: Optional[str]) -> AuthResult"
+        - class: "Auth0Client"
+          method: "exchange_code"
+          signature: "async def exchange_code(code: str, redirect_uri: str) -> Auth0TokenResponse"
+      data_models:
+        - name: "LoginRequest"
+          fields: ["email", "password", "mfa_code"]
+        - name: "TokenResponse"
+          fields: ["access_token", "refresh_token", "token_type", "expires_in", "session_id"]
+      validation_rules:
+        - rule: "Email format validation"
+          implementation: "EmailStr from pydantic"
+        - rule: "Password complexity"
+          implementation: "Min 12 chars, complexity regex"
+      error_handling:
+        - error_code: "AUTH_001"
+          http_status: 401
+          condition: "Invalid credentials"
+        - error_code: "AUTH_004"
+          http_status: 429
+          condition: "Rate limit exceeded"
+      test_approach:
+        unit_tests:
+          - "Test password verification rejects wrong password"
+          - "Test rate limiter blocks after 5 attempts"
+          - "Test MFA requirement for trust level 3+"
+        integration_tests:
+          - "Auth0 OIDC flow returns valid tokens"
+          - "Login with email/password creates session"
+
+  - req_id: "REQ.01.01.02"
+    req_link: "../../07_REQ/REQ-01_f1_iam/REQ-01_f1_iam.md#REQ.01.01.02"
+    title: "Authorization"
+    implementation:
+      interfaces:
+        - class: "AuthorizationService"
+          method: "check_permission"
+          signature: "async def check_permission(token: str, action: str, skill: str, resource: str, zone: str) -> AuthzDecision"
+      data_models:
+        - name: "AuthzRequest"
+          fields: ["action", "skill", "resource", "zone"]
+        - name: "AuthzDecision"
+          fields: ["allowed", "reason", "trust_level"]
+      validation_rules:
+        - rule: "4D Matrix evaluation"
+          implementation: "Check action, skill, resource, zone in order"
+        - rule: "Default deny"
+          implementation: "Deny if no matching policy found"
+      error_handling:
+        - error_code: "AUTHZ_001"
+          http_status: 403
+          condition: "Permission denied"
+      test_approach:
+        unit_tests:
+          - "Test 4D Matrix allows valid action-skill-resource-zone"
+          - "Test default deny when no policy matches"
+          - "Test zone membership check"
+        integration_tests:
+          - "Authorization check against policy store"
+
+  - req_id: "REQ.01.01.03"
+    req_link: "../../07_REQ/REQ-01_f1_iam/REQ-01_f1_iam.md#REQ.01.01.03"
+    title: "Token Management"
+    implementation:
+      interfaces:
+        - class: "TokenService"
+          method: "issue_tokens"
+          signature: "async def issue_tokens(user: User, session_id: str) -> TokenPair"
+        - class: "TokenService"
+          method: "validate_token"
+          signature: "async def validate_token(token: str) -> TokenClaims"
+      data_models:
+        - name: "JWTClaims"
+          fields: ["sub", "trust_level", "zones", "exp", "iat", "jti"]
+        - name: "TokenPair"
+          fields: ["access_token", "refresh_token", "expires_in"]
+      validation_rules:
+        - rule: "RS256 signature verification"
+          implementation: "PyJWT with RSA public key"
+        - rule: "Token expiry check"
+          implementation: "Compare exp claim with current time"
+      error_handling:
+        - error_code: "AUTH_002"
+          http_status: 401
+          condition: "Token expired"
+      test_approach:
+        unit_tests:
+          - "Test JWT generation with correct claims"
+          - "Test token validation rejects expired tokens"
+          - "Test token revocation check"
+        integration_tests:
+          - "Token refresh flow issues new tokens"
+
+  - req_id: "REQ.01.01.04"
+    req_link: "../../07_REQ/REQ-01_f1_iam/REQ-01_f1_iam.md#REQ.01.01.04"
+    title: "Session Management"
+    implementation:
+      interfaces:
+        - class: "SessionService"
+          method: "create_session"
+          signature: "async def create_session(user_id: str, device_info: DeviceInfo) -> Session"
+        - class: "SessionService"
+          method: "revoke_session"
+          signature: "async def revoke_session(session_id: str, revoked_by: str) -> bool"
+        - class: "RedisSessionStore"
+          method: "store"
+          signature: "async def store(session: Session) -> bool"
+      data_models:
+        - name: "SessionInfo"
+          fields: ["session_id", "user_id", "created_at", "expires_at", "device_info"]
+        - name: "DeviceInfo"
+          fields: ["user_agent", "ip_address"]
+      validation_rules:
+        - rule: "Concurrent session limit"
+          implementation: "Max 3 sessions per user"
+        - rule: "Session idle timeout"
+          implementation: "30 minutes idle TTL in Redis"
+      error_handling:
+        - error_code: "SESS_001"
+          http_status: 401
+          condition: "Session not found"
+        - error_code: "SESS_002"
+          http_status: 403
+          condition: "Session limit exceeded"
+      test_approach:
+        unit_tests:
+          - "Test session creation stores in Redis"
+          - "Test concurrent session limit invalidates oldest"
+          - "Test session revocation deletes from Redis"
+        integration_tests:
+          - "Session fallback to PostgreSQL when Redis unavailable"
+          - "Session revocation propagates to all instances"
+
+threshold_references:
+  registry_document: "PRD-01_thresholds"
+  keys_used:
+    performance:
+      - key: "perf.auth.p99_latency"
+        value: "100ms"
+        usage: "performance.latency_targets.authentication_p99_ms"
+      - key: "perf.authz.p99_latency"
+        value: "10ms"
+        usage: "performance.latency_targets.authorization_p99_ms"
+      - key: "perf.token.p99_latency"
+        value: "5ms"
+        usage: "performance.latency_targets.token_validation_p99_ms"
+      - key: "perf.throughput.concurrent_users"
+        value: "10000"
+        usage: "performance.throughput_targets.concurrent_users"
+    reliability:
+      - key: "reliability.error_rate"
+        value: "0.1%"
+        usage: "operations.slo.error_rate"
+    sla:
+      - key: "sla.uptime.target"
+        value: "99.9%"
+        usage: "operations.slo.uptime"

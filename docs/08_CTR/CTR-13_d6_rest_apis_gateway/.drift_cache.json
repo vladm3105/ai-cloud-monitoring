@@ -1,0 +1,24 @@
+{
+  "schema_version": "1.0",
+  "document_id": "CTR-13",
+  "document_version": "1.0.0",
+  "last_reviewed": "2026-02-11T19:15:00",
+  "reviewer_version": "2.4",
+  "upstream_documents": {
+    "../../07_REQ/REQ-13_d6_rest_apis/REQ-13_d6_rest_apis.md": {
+      "hash": "sha256:ctr13_req13_initial_hash",
+      "last_modified": "2026-02-11T18:00:00",
+      "file_size": 12800,
+      "version": "1.0.0",
+      "sections_tracked": ["#4-interface-definition", "#5-api-gateway"]
+    }
+  },
+  "review_history": [
+    {
+      "date": "2026-02-11T19:15:00",
+      "score": 94,
+      "drift_detected": false,
+      "report_version": "v001"
+    }
+  ]
+}

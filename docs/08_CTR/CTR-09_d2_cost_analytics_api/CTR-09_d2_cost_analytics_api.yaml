@@ -1,0 +1,499 @@
+openapi: "3.0.3"
+info:
+  title: "D2 Cost Analytics API"
+  version: "1.0.0"
+  description: |
+    API contract for D2 Cost Analytics module.
+    Provides cost querying, breakdown analysis, forecasting, and anomaly detection.
+  contact:
+    name: Data Analytics Team
+    email: analytics@example.com
+
+servers:
+  - url: "https://api.example.com/v1"
+    description: Production
+
+tags:
+  - name: Costs
+    description: Cost query endpoints
+  - name: Analysis
+    description: Cost analysis and forecasting
+  - name: Reports
+    description: Report generation
+
+paths:
+  /api/v1/costs:
+    get:
+      operationId: queryCosts
+      summary: Query historical cost data
+      tags:
+        - Costs
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: start_date
+          in: query
+          required: true
+          schema:
+            type: string
+            format: date
+        - name: end_date
+          in: query
+          required: true
+          schema:
+            type: string
+            format: date
+        - name: group_by
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+              enum: [service, project, region, sku, label]
+        - name: granularity
+          in: query
+          schema:
+            type: string
+            enum: [daily, weekly, monthly]
+            default: daily
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 1000
+            maximum: 10000
+      responses:
+        '200':
+          description: Cost data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CostSummary'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /api/v1/costs/breakdown:
+    get:
+      operationId: getCostBreakdown
+      summary: Multi-dimensional cost breakdown
+      tags:
+        - Analysis
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: start_date
+          in: query
+          required: true
+          schema:
+            type: string
+            format: date
+        - name: end_date
+          in: query
+          required: true
+          schema:
+            type: string
+            format: date
+        - name: dimensions
+          in: query
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+              enum: [service, project, region, label]
+      responses:
+        '200':
+          description: Cost breakdown
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BreakdownResult'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /api/v1/costs/forecast:
+    get:
+      operationId: getForecast
+      summary: Predict future costs
+      tags:
+        - Analysis
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: horizon
+          in: query
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 90
+          description: Days to forecast
+        - name: granularity
+          in: query
+          schema:
+            type: string
+            enum: [daily, weekly]
+            default: daily
+        - name: service
+          in: query
+          schema:
+            type: string
+          description: Filter by service
+      responses:
+        '200':
+          description: Forecast results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForecastResult'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /api/v1/costs/anomalies:
+    get:
+      operationId: getAnomalies
+      summary: Detect cost anomalies
+      tags:
+        - Analysis
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: start_date
+          in: query
+          required: true
+          schema:
+            type: string
+            format: date
+        - name: end_date
+          in: query
+          required: true
+          schema:
+            type: string
+            format: date
+        - name: sensitivity
+          in: query
+          schema:
+            type: number
+            format: float
+            minimum: 0.1
+            maximum: 3.0
+            default: 2.0
+          description: Standard deviations threshold
+      responses:
+        '200':
+          description: Anomaly results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnomalyResult'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /api/v1/costs/report:
+    post:
+      operationId: generateReport
+      summary: Generate cost report
+      tags:
+        - Reports
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReportRequest'
+      responses:
+        '202':
+          description: Report generation started
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  report_id:
+                    type: string
+                  status:
+                    type: string
+                    enum: [pending, processing, completed]
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /api/v1/costs/export:
+    get:
+      operationId: exportCosts
+      summary: Export cost data
+      tags:
+        - Reports
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: start_date
+          in: query
+          required: true
+          schema:
+            type: string
+            format: date
+        - name: end_date
+          in: query
+          required: true
+          schema:
+            type: string
+            format: date
+        - name: format
+          in: query
+          schema:
+            type: string
+            enum: [csv, json]
+            default: csv
+      responses:
+        '200':
+          description: Exported data
+          content:
+            text/csv:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CostRecord'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    CostRecord:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date
+        service:
+          type: string
+        project:
+          type: string
+        region:
+          type: string
+        sku:
+          type: string
+        usage_amount:
+          type: number
+          format: float
+        cost:
+          type: number
+          format: float
+        currency:
+          type: string
+          default: "USD"
+
+    CostSummary:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CostRecord'
+        total:
+          type: object
+          properties:
+            cost:
+              type: number
+              format: float
+            currency:
+              type: string
+        metadata:
+          type: object
+          properties:
+            rows:
+              type: integer
+            freshness:
+              type: string
+              format: date-time
+            query_time_ms:
+              type: integer
+
+    BreakdownResult:
+      type: object
+      properties:
+        breakdown:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              properties:
+                name:
+                  type: string
+                cost:
+                  type: number
+                  format: float
+                percentage:
+                  type: number
+                  format: float
+        total:
+          type: number
+          format: float
+
+    ForecastResult:
+      type: object
+      properties:
+        predictions:
+          type: array
+          items:
+            type: object
+            properties:
+              date:
+                type: string
+                format: date
+              cost:
+                type: number
+                format: float
+              lower:
+                type: number
+                format: float
+              upper:
+                type: number
+                format: float
+        confidence:
+          type: object
+          properties:
+            level:
+              type: number
+              format: float
+            method:
+              type: string
+        model_version:
+          type: string
+
+    AnomalyResult:
+      type: object
+      properties:
+        anomalies:
+          type: array
+          items:
+            type: object
+            properties:
+              date:
+                type: string
+                format: date
+              service:
+                type: string
+              actual_cost:
+                type: number
+                format: float
+              expected_cost:
+                type: number
+                format: float
+              deviation:
+                type: number
+                format: float
+              severity:
+                type: string
+                enum: [low, medium, high]
+        baseline:
+          type: object
+          properties:
+            mean:
+              type: number
+              format: float
+            std:
+              type: number
+              format: float
+        sensitivity:
+          type: number
+          format: float
+
+    ReportRequest:
+      type: object
+      required:
+        - start_date
+        - end_date
+        - report_type
+      properties:
+        start_date:
+          type: string
+          format: date
+        end_date:
+          type: string
+          format: date
+        report_type:
+          type: string
+          enum: [summary, detailed, executive]
+        include_forecast:
+          type: boolean
+          default: false
+        include_recommendations:
+          type: boolean
+          default: true
+
+    ProblemDetails:
+      type: object
+      required:
+        - type
+        - title
+        - status
+      properties:
+        type:
+          type: string
+          format: uri
+        title:
+          type: string
+        status:
+          type: integer
+        detail:
+          type: string
+        instance:
+          type: string
+
+  responses:
+    BadRequest:
+      description: Invalid request
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetails'
+
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetails'
+
+    InternalError:
+      description: Internal server error
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetails'

@@ -1,0 +1,381 @@
+openapi: "3.0.3"
+info:
+  title: "F2 Session Management API"
+  version: "1.0.0"
+  description: |
+    API contract for F2 Session Management module.
+    Provides session lifecycle management, context assembly, and memory persistence.
+  contact:
+    name: Platform Team
+    email: platform@example.com
+
+servers:
+  - url: "https://api.example.com/v1"
+    description: Production
+
+tags:
+  - name: Session
+    description: Session lifecycle management
+  - name: Context
+    description: Context assembly and memory
+
+paths:
+  /api/v1/session:
+    post:
+      operationId: createSession
+      summary: Create new user session
+      tags:
+        - Session
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSessionRequest'
+      responses:
+        '201':
+          description: Session created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Session'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /api/v1/session/{session_id}:
+    get:
+      operationId: getSession
+      summary: Get session details
+      tags:
+        - Session
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: session_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Session details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Session'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+    delete:
+      operationId: deleteSession
+      summary: Invalidate session
+      tags:
+        - Session
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: session_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Session invalidated
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /api/v1/session/{session_id}/extend:
+    put:
+      operationId: extendSession
+      summary: Extend session TTL
+      tags:
+        - Session
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: session_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Session extended
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Session'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /api/v1/session/{session_id}/context:
+    get:
+      operationId: getContext
+      summary: Get assembled context
+      tags:
+        - Context
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: session_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Assembled context
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Context'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /api/v1/session/{session_id}/memory:
+    put:
+      operationId: updateMemory
+      summary: Update session memory
+      tags:
+        - Context
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: session_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateMemoryRequest'
+      responses:
+        '200':
+          description: Memory updated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  updated:
+                    type: boolean
+                  key:
+                    type: string
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    CreateSessionRequest:
+      type: object
+      required:
+        - user_id
+        - trust_level
+        - device_fingerprint
+      properties:
+        user_id:
+          type: string
+          description: User identifier
+          example: "usr_abc123"
+        trust_level:
+          type: integer
+          minimum: 1
+          maximum: 4
+          description: Trust level from auth
+          example: 2
+        device_fingerprint:
+          type: string
+          description: Device identifier
+          example: "fp_hash_xyz"
+        workspace_id:
+          type: string
+          format: uuid
+          description: Optional workspace
+          example: "ws_123"
+
+    UpdateMemoryRequest:
+      type: object
+      required:
+        - key
+        - value
+      properties:
+        key:
+          type: string
+          maxLength: 255
+          description: Memory key
+          example: "last_query"
+        value:
+          description: Memory value (any JSON)
+          example: "monthly costs"
+        ttl_seconds:
+          type: integer
+          minimum: 60
+          maximum: 86400
+          description: Optional TTL
+          example: 3600
+
+    Session:
+      type: object
+      required:
+        - session_id
+        - user_id
+        - trust_level
+        - created_at
+        - expires_at
+      properties:
+        session_id:
+          type: string
+          description: Unique session identifier
+          example: "sess_def456"
+        user_id:
+          type: string
+          description: User identifier
+          example: "usr_abc123"
+        trust_level:
+          type: integer
+          minimum: 1
+          maximum: 4
+          description: Trust level
+          example: 2
+        device_fingerprint:
+          type: string
+          description: Device identifier
+          example: "fp_hash_xyz"
+        created_at:
+          type: string
+          format: date-time
+          description: Creation timestamp
+          example: "2026-02-11T10:30:00Z"
+        last_accessed:
+          type: string
+          format: date-time
+          description: Last access timestamp
+          example: "2026-02-11T10:45:00Z"
+        expires_at:
+          type: string
+          format: date-time
+          description: Expiration timestamp
+          example: "2026-02-11T11:00:00Z"
+        idle_timeout:
+          type: integer
+          description: Idle timeout in seconds
+          example: 1800
+
+    Context:
+      type: object
+      properties:
+        user:
+          type: object
+          description: User profile data
+          properties:
+            id:
+              type: string
+            email:
+              type: string
+            trust_level:
+              type: integer
+        session:
+          type: object
+          description: Session metadata
+          properties:
+            session_id:
+              type: string
+            created_at:
+              type: string
+              format: date-time
+        workspace:
+          type: object
+          description: Active workspace
+          properties:
+            id:
+              type: string
+            name:
+              type: string
+        memory:
+          type: object
+          description: Session memory
+          additionalProperties: true
+
+    ProblemDetails:
+      type: object
+      required:
+        - type
+        - title
+        - status
+      properties:
+        type:
+          type: string
+          format: uri
+        title:
+          type: string
+        status:
+          type: integer
+        detail:
+          type: string
+        instance:
+          type: string
+
+  responses:
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetails'
+
+    NotFound:
+      description: Resource not found
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetails'
+
+    Conflict:
+      description: Resource conflict (e.g., session limit)
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetails'
+
+    InternalError:
+      description: Internal server error
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetails'
